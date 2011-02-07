@@ -52,6 +52,10 @@ You have probably entered a wrong App Secret.
 
 You have probably entered a wrong URL in the Facebook application setting 'Web Site > Site URL'.
 
+= I get 'The user hasn't authorized the application to perform this action' =
+
+You have probably revoked the permissions of the Facebook application. You have to re-authorize the plugin.
+
 = Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
