@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall
-Version: 0.2
+Version: 0.3
 Author: Marcel Bokhorst
 Author URI: http://blog.bokhorst.biz/about/
 */
@@ -24,15 +24,6 @@ Author URI: http://blog.bokhorst.biz/about/
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-
-/*
-	Acknowledgments
-
-	jQuery JavaScript Library
-	This library is published under both the GNU General Public License and MIT License
-
-	All licenses are GPL compatible (see http://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses)
 */
 
 #error_reporting(E_ALL);

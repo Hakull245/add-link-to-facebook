@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.2
+Stable tag: 0.3
 
 Automatically add links to published posts to your Facebook wall
 
@@ -13,6 +13,8 @@ Automatically add links to published posts to your Facebook wall
 Automatically add links to posts that are being published to your Facebook wall. Simple one time setup and forget.
 
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically. It is possible to exclude individual post links from being added to your wall by ticking a check box just above the publish button. There is support for multi user and network sites and shortcodes will be processed.
+
+**This plugin requires PHP 5 and WordPress 3.0 or better**
 
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it. If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
 
@@ -81,6 +83,11 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.3 =
+* Added Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Logging Facebook errors when adding link
+* Improved styling of administration area
+
 = 0.2 =
 * Bugfix: strip html tags from message text
 * Bugfix: check for access token before adding link
@@ -92,6 +99,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.3 =
+Added Dutch and Flemisch translations
 
 = 0.2 =
 Bugfixes

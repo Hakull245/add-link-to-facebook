@@ -22,6 +22,7 @@ define('c_al2fb_meta_picture', 'al2fb_picture');
 
 define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
+define('c_al2fb_meta_error', 'al2fb_facebook_error');
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -214,13 +215,21 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="al2fb_options">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
 
-			<span><?php _e('To get an App ID and Secret you have to create a Facebook application', c_al2fb_text_domain); ?></span><br />
+			<div class="al2fb_instructions">
+			<h4><?php _e('To get an App ID and Secret you have to create a Facebook application', c_al2fb_text_domain); ?></h4>
 			<span><a href="http://www.facebook.com/developers/createapp.php" target="_blank">
 			<?php _e('Click here to create', c_al2fb_text_domain); ?></a></span><br />
-			<span><strong><?php _e('App Name', c_al2fb_text_domain); ?></strong>:
-			<em><?php _e('Anything you like, will appear as "via ..." below the message', c_al2fb_text_domain); ?></em></span><br />
-			<span><strong><?php _e('Web Site > Site URL', c_al2fb_text_domain); ?></strong>:
-			<em><?php echo htmlspecialchars(get_site_url(null, '/', 'http')); ?></em></span><br />
+			<table>
+				<tr>
+					<td><span class="al2fb_label"><strong><?php _e('App Name:', c_al2fb_text_domain); ?></span></td>
+					<td><span class="al2fb_data"><?php _e('Anything you like, will appear as "via ..." below the message', c_al2fb_text_domain); ?></span></td>
+				</tr>
+				<tr>
+					<td><span class="al2fb_label"><strong><?php _e('Web Site > Site URL:', c_al2fb_text_domain); ?></span></td>
+					<td><span class="al2fb_data"><?php echo htmlspecialchars(get_site_url(null, '/', 'http')); ?></span></td>
+				</tr>
+			</table>
+			</div>
 
 			<form method="post" action="">
 			<input type="hidden" name="action" value="config">
@@ -464,6 +473,7 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 					catch (Exception $e) {
 						// Do not disturb WordPress
+						add_post_meta($post_ID, c_al2fb_meta_error, $e->getMessage());
 					}
 				}
 			}
