@@ -6,11 +6,11 @@ Requires at least: 3.0
 Tested up to: 3.1
 Stable tag: 0.5
 
-Automatically add links to published posts to your Facebook wall
+Automatically add links to published posts to your Facebook wall or pages
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall. Simple one time setup and forget. Just two fields to fill in.
+Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in.
 
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall by ticking a check box just above the publish button.
@@ -99,7 +99,7 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
 
 = 0.4 =
-* Added support for remote publishing via XML-RPC ([Android](http://android.wordpress.org/ "Android"), [iOS](http://ios.wordpress.org/ "iOS"), etc)
+* New feature: support for remote publishing via XML-RPC ([Android](http://android.wordpress.org/ "Android"), [iOS](http://ios.wordpress.org/ "iOS"), etc)
 * Bugfix: domains with path, including networks with sub-directories install
 * Bugfix: activation hook
 * Bugfix: some PHP notices
@@ -136,3 +136,4 @@ Bugfixes
 
 = 0.1 =
 Initial version
+
