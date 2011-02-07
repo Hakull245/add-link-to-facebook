@@ -46,8 +46,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$this->plugin_url = str_replace('http://', 'https://', $this->plugin_url);
 
 			// register activation actions
-			register_activation_hook($file, array(&$this, 'Activate'));
-			register_deactivation_hook($file, array(&$this, 'Deactivate'));
+			register_activation_hook($this->main_file, array(&$this, 'Activate'));
+			register_deactivation_hook($this->main_file, array(&$this, 'Deactivate'));
 
 			// Register actions
 			add_action('init', array(&$this, 'Init'), 0);
@@ -58,6 +58,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('publish_post', array(&$this, 'Publish_post'));
 				add_action('post_submitbox_start', array(&$this, 'Post_submitbox'));
 			}
+			add_action('xmlrpc_publish_post', array(&$this, 'Publish_post'));
+			//add_action('app_publish_post', array(&$this, 'Publish_post'));
 		}
 
 		// Handle plugin activation
@@ -104,13 +106,14 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Handle Facebook authorization
+			$uri = $_SERVER['REQUEST_URI'];
 			if (strpos($_SERVER['HTTP_REFERER'], 'facebook.com/connect') &&
-				strpos($_SERVER['REQUEST_URI'], basename(dirname($this->main_file))) === false &&
-				(strpos($_SERVER['REQUEST_URI'], 'code=') || strpos($_SERVER['REQUEST_URI'], 'error='))) {
+				strpos($uri, basename(dirname($this->main_file))) === false &&
+				(strpos($uri, 'code=') || strpos($uri, 'error='))) {
 				// http://www.facebook.com/connect/uiserver.php?...
 				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 				header('HTTP/1.1 302 Found');
-				header('Location: ' . $url . '&action=authorize&' . substr($_SERVER['REQUEST_URI'], 2));
+				header('Location: ' . $url . '&action=authorize&' . substr($uri, strpos($uri, '?') + 1));
 				exit();
 			}
 		}
@@ -132,6 +135,13 @@ if (!class_exists('WPAL2Facebook')) {
 					if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) != $_POST[c_al2fb_meta_client_id] ||
 						get_user_meta($user_ID, c_al2fb_meta_app_secret, true) != $_POST[c_al2fb_meta_app_secret])
 						delete_user_meta($user_ID, c_al2fb_meta_access_token);
+
+					if (empty($_POST[c_al2fb_meta_picture_type]))
+						$_POST[c_al2fb_meta_picture_type] = null;
+					if (empty($_POST[c_al2fb_option_clean]))
+						$_POST[c_al2fb_option_clean] = null;
+					if (empty($_POST[c_al2fb_option_donated]))
+						$_POST[c_al2fb_option_donated] = null;
 
 					// Update options
 					update_user_meta($user_ID, c_al2fb_meta_client_id, $_POST[c_al2fb_meta_client_id]);
@@ -173,7 +183,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$msg = __('needs configuration', c_al2fb_text_domain);
 			else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true))
 				$msg = __('needs authorization', c_al2fb_text_domain);
-			if ($msg) {
+			if (!empty($msg)) {
 				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 				echo '<div class="error fade al2fb_error"><p>';
 				_e('Add Link to Facebook', c_al2fb_text_domain);
@@ -413,7 +423,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Handle save post
 		function Save_post($post_ID, $post) {
 			// Process exclude flag
-			$exclude = $_POST[c_al2fb_meta_exclude];
+			$exclude = (empty($_POST[c_al2fb_meta_exclude]) ? null : $_POST[c_al2fb_meta_exclude]);
 			if ($exclude)
 				update_post_meta($post_ID, c_al2fb_meta_exclude, $exclude);
 			else

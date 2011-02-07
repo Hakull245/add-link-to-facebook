@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.3
+Stable tag: 0.4
 
 Automatically add links to published posts to your Facebook wall
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall. Simple one time setup and forget.
+Automatically add links to posts that are being published to your Facebook wall. Simple one time setup and forget. Just two fields to fill in.
 
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically. It is possible to exclude individual post links from being added to your wall by ticking a check box just above the publish button. There is support for multi user and network sites and shortcodes will be processed.
 
@@ -77,11 +77,22 @@ Don't worry, no links to private posts will be added.
 
 Yes, shortcodes in the excerpt, or if absent in the text, are being processed.
 
+= Is remote publishing via XML-RPC supported? =
+
+Yes.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
 
 == Changelog ==
+
+= 0.4 =
+* Added support for remote publishing via XML-RPC ([Android](http://android.wordpress.org/ "Android"), [iOS](http://ios.wordpress.org/ "iOS"), etc)
+* Bugfix: domains with path, including networks with sub-directories install
+* Bugfix: activation hook
+* Bugfix: some PHP notices
+* Updated description and FAQ
 
 = 0.3 =
 * Added Dutch (nl\_NL) and Flemisch (nl\_BE) translations
@@ -99,6 +110,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.4 =
+Support for remote publishing, bugfixes
 
 = 0.3 =
 Added Dutch and Flemisch translations
