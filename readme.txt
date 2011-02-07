@@ -12,6 +12,8 @@ Automatically add links to published posts to your Facebook wall
 
 Automatically add links to posts that are being published to your Facebook wall. Simple one time setup and forget.
 
+It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically. It is possible to exclude individual post links from being added to your wall by ticking a checkbox just above the publish button. There is support for multi user and network sites.
+
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it. If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
 
 See my [other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
