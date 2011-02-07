@@ -19,6 +19,7 @@ define('c_al2fb_meta_app_secret', 'al2fb_app_secret');
 define('c_al2fb_meta_access_token', 'al2fb_access_token');
 define('c_al2fb_meta_picture_type', 'al2fb_picture_type');
 define('c_al2fb_meta_picture', 'al2fb_picture');
+define('c_al2fb_meta_page', 'al2fb_page');
 
 define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
@@ -106,8 +107,9 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Handle Facebook authorization
+			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']);
 			$uri = $_SERVER['REQUEST_URI'];
-			if (strpos($_SERVER['HTTP_REFERER'], 'facebook.com/connect') &&
+			if (strpos($ref, 'facebook.com/connect') &&
 				strpos($uri, basename(dirname($this->main_file))) === false &&
 				(strpos($uri, 'code=') || strpos($uri, 'error='))) {
 				// http://www.facebook.com/connect/uiserver.php?...
@@ -138,6 +140,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 					if (empty($_POST[c_al2fb_meta_picture_type]))
 						$_POST[c_al2fb_meta_picture_type] = null;
+					if (empty($_POST[c_al2fb_meta_page]))
+						$_POST[c_al2fb_meta_page] = null;
+
 					if (empty($_POST[c_al2fb_option_clean]))
 						$_POST[c_al2fb_option_clean] = null;
 					if (empty($_POST[c_al2fb_option_donated]))
@@ -148,6 +153,7 @@ if (!class_exists('WPAL2Facebook')) {
 					update_user_meta($user_ID, c_al2fb_meta_app_secret, $_POST[c_al2fb_meta_app_secret]);
 					update_user_meta($user_ID, c_al2fb_meta_picture_type, $_POST[c_al2fb_meta_picture_type]);
 					update_user_meta($user_ID, c_al2fb_meta_picture, $_POST[c_al2fb_meta_picture]);
+					update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
 
 					if (current_user_can('manage_options')) {
 						update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
@@ -221,7 +227,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 ?>
 			<div class="wrap">
-<?php		self::Resources(); ?>
+			<?php self::Resources(); ?>
 			<div class="al2fb_options">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
 
@@ -274,23 +280,48 @@ if (!class_exists('WPAL2Facebook')) {
 				<br /><span><?php _e('At least 50 x 50 pixels', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
+<?php
+			if (get_user_meta($user_ID, c_al2fb_meta_access_token, true))
+				try {
+					$me = self::Get_me(true);
+					$pages = self::Get_pages();
+					$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
+?>
+					<tr valign="top"><th scope="row">
+						<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
+					</th><td>
+						<select id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
+<?php
+						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name) . '</option>';
+						foreach ($pages->data as $page) {
+							echo '<option value="' . $page->id . '"';
+							if ($page->id == $selected_page)
+								echo ' selected';
+							echo '>' . htmlspecialchars($page->name) . ' - ' . htmlspecialchars($page->category) . '</option>';
+						}
+?>
+						</select>
+					</td></tr>
+<?php
+				}
+				catch (Exception $e) {
+					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+				}
+?>
 <?php		if (current_user_can('manage_options')) { ?>
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_clean" name="<?php echo c_al2fb_option_clean; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_clean)) echo ' checked="checked"'; ?> />
+					<br /><span><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
+				</td></tr>
 
-			<tr valign="top"><th scope="row">
-				<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_clean" name="<?php echo c_al2fb_option_clean; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_clean)) echo ' checked="checked"'; ?> />
-				<br /><span><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
-			</td></tr>
-
-			<tr valign="top"><th scope="row">
-				<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_donated" name="<?php echo c_al2fb_option_donated; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_donated)) echo ' checked="checked"'; ?> />
-			</td></tr>
-
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_donated" name="<?php echo c_al2fb_option_donated; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_donated)) echo ' checked="checked"'; ?> />
+				</td></tr>
 <?php		} ?>
-
 			</table>
 
 			<p class="submit">
@@ -299,24 +330,22 @@ if (!class_exists('WPAL2Facebook')) {
 
 			</form>
 
-<?php		if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) &&
-				get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
-				if (get_user_meta($user_ID, c_al2fb_meta_access_token, true))
-					try {
-						$me = self::Get_me();
-						_e('Links will be added to', c_al2fb_text_domain);
-						echo ' <a href="' . $me->link . '" target="_blank">' . $me->name . '</a>';
-					}
-					catch (Exception $e) {
-						echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
-					}
+<?php
+			if (get_user_meta($user_ID, c_al2fb_meta_access_token, true))
+				try {
+					$me = self::Get_me(false);
+					_e('Links will be added to', c_al2fb_text_domain);
+					echo ' <a href="' . $me->link . '" target="_blank">' . $me->name . '</a>';
+				}
+				catch (Exception $e) {
+					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+				}
 ?>
-				<form method="get" action="<?php echo self::Authorize_url(); ?>">
-				<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
-				</p>
-				</form>
-<?php		} ?>
+			<form method="get" action="<?php echo self::Authorize_url(); ?>">
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
+			</p>
+			</form>
 
 			</div>
 			</div>
@@ -393,18 +422,35 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get profile data
-		function Get_me() {
+		function Get_me($self) {
 			// Get current user
 			global $user_ID;
 			get_currentuserinfo();
 
-			$url = 'https://graph.facebook.com/me';
+			$page = get_user_meta($user_ID, c_al2fb_meta_page, true);
+			if ($self | empty($page))
+				$page = 'me';
+			$url = 'https://graph.facebook.com/' . $page;
 			$query = http_build_query(array(
 				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
 			));
 			$response = self::Request($url, $query, 'GET');
 			$me = json_decode($response);
 			return $me;
+		}
+
+		function Get_pages() {
+			// Get current user
+			global $user_ID;
+			get_currentuserinfo();
+
+			$url = 'https://graph.facebook.com/me/accounts';
+			$query = http_build_query(array(
+				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
+			));
+			$response = self::Request($url, $query, 'GET');
+			$pages = json_decode($response);
+			return $pages;
 		}
 
 		// Add exclude checkbox
@@ -462,7 +508,10 @@ if (!class_exists('WPAL2Facebook')) {
 					// Add link
 					try {
 						// http://developers.facebook.com/docs/reference/api
-						$url = 'https://graph.facebook.com/me/feed';
+						$page = get_user_meta($user_ID, c_al2fb_meta_page, true);
+						if (empty($page))
+							$page = 'me';
+						$url = 'https://graph.facebook.com/' . $page . '/feed';
 						$excerpt = do_shortcode($post->post_excerpt ? $post->post_excerpt : $post->post_content);
 						$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
 						$query = http_build_query(array(

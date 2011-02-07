@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.4
+Stable tag: 0.5
 
 Automatically add links to published posts to your Facebook wall
 
@@ -91,6 +91,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.5 =
+* New feature: add to page
+
 = 0.4 =
 * Added support for remote publishing via XML-RPC ([Android](http://android.wordpress.org/ "Android"), [iOS](http://ios.wordpress.org/ "iOS"), etc)
 * Bugfix: domains with path, including networks with sub-directories install
@@ -114,6 +117,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.5 =
+New feature: add to page
 
 = 0.4 =
 Support for remote publishing, bugfixes
