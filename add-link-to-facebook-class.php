@@ -418,7 +418,8 @@ if (!class_exists('WPAL2Facebook')) {
 			get_currentuserinfo();
 
 			// Check if not added
-			if (!get_post_meta($post_ID, c_al2fb_meta_link_id, true) &&
+			if (get_user_meta($user_ID, c_al2fb_meta_access_token, true) &&
+				!get_post_meta($post_ID, c_al2fb_meta_link_id, true) &&
 				!get_post_meta($post_ID, c_al2fb_meta_exclude, true)) {
 				$post = get_post($post_ID);
 
@@ -444,6 +445,7 @@ if (!class_exists('WPAL2Facebook')) {
 						// http://developers.facebook.com/docs/reference/api
 						$url = 'https://graph.facebook.com/me/feed';
 						$excerpt = do_shortcode($post->post_excerpt ? $post->post_excerpt : $post->post_content);
+						$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
 						$query = http_build_query(array(
 							'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true),
 							'link' => get_permalink($post_ID),
