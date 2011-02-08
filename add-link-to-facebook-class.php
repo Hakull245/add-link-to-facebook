@@ -281,7 +281,22 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_app_secret" class="al2fb_app_secret" name="<?php echo c_al2fb_meta_app_secret; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_app_secret, true); ?>" />
 			</td></tr>
-
+<?php
+			if (get_user_meta($user_ID, c_al2fb_meta_access_token, true))
+				try {
+					$app = self::Get_application();
+?>
+					<tr valign="top"><th scope="row">
+						<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
+					</th><td>
+						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo $app->name; ?></a>
+					</td></tr>
+<?php
+				}
+				catch (Exception $e) {
+					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+				}
+?>
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_picture_type"><?php _e('Link picture:', c_al2fb_text_domain); ?></label>
 			</th><td>
@@ -450,6 +465,21 @@ if (!class_exists('WPAL2Facebook')) {
 			$access_token = explode('&', $access_token);
 			$access_token = $access_token[0];
 			return $access_token;
+		}
+
+		function Get_application() {
+			// Get current user
+			global $user_ID;
+			get_currentuserinfo();
+
+			$app_id = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+			$url = 'https://graph.facebook.com/' . $app_id;
+			$query = http_build_query(array(
+				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
+			));
+			$response = self::Request($url, $query, 'GET');
+			$app = json_decode($response);
+			return $app;
 		}
 
 		// Get profile data

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.8
+Stable tag: 0.9
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -110,6 +110,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.9 =
+* Improvement: display application name
+
 = 0.8 =
 * Improvement: No 'Do not add link to Facebook' for subscribers
 * Updated description and FAQ
@@ -151,6 +154,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.9 =
+Small improvement
 
 = 0.8 =
 Small improvement
