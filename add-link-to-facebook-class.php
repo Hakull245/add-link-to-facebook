@@ -11,8 +11,6 @@ define('c_al2fb_nonce_form', 'al2fb-nonce-form');
 
 define('c_al2fb_option_version', 'al2fb_version');
 define('c_al2fb_option_timeout', 'al2fb_timeout');
-define('c_al2fb_option_donated', 'al2fb_donated');
-define('c_al2fb_option_clean', 'al2fb_clean');
 
 define('c_al2fb_meta_client_id', 'al2fb_client_id');
 define('c_al2fb_meta_app_secret', 'al2fb_app_secret');
@@ -20,6 +18,8 @@ define('c_al2fb_meta_access_token', 'al2fb_access_token');
 define('c_al2fb_meta_picture_type', 'al2fb_picture_type');
 define('c_al2fb_meta_picture', 'al2fb_picture');
 define('c_al2fb_meta_page', 'al2fb_page');
+define('c_al2fb_meta_donated', 'al2fb_donated');
+define('c_al2fb_meta_clean', 'al2fb_clean');
 
 define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
@@ -65,27 +65,35 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin activation
 		function Activate() {
-			if (!get_option(c_al2fb_option_version)) {
-				// Set version
-				update_option(c_al2fb_option_version, 1);
+			$version = get_option(c_al2fb_option_version);
+			if ($version == 1) {
+				delete_option(c_al2fb_meta_client_id);
+				delete_option(c_al2fb_meta_app_secret);
+				delete_option(c_al2fb_meta_access_token);
+				delete_option(c_al2fb_meta_picture_type);
+				delete_option(c_al2fb_meta_picture);
+				delete_option(c_al2fb_meta_page);
+				delete_option(c_al2fb_meta_donated);
+				delete_option(c_al2fb_meta_clean);
 			}
+			update_option(c_al2fb_option_version, 2);
 		}
 
 		// Handle plugin deactivation
 		function Deactivate() {
-			// Cleanup if requested
-			if (get_option(c_al2fb_option_clean)) {
-				// Delete options
-				delete_option(c_al2fb_option_version);
-				delete_option(c_al2fb_option_timeout);
-				delete_option(c_al2fb_option_donated);
-				delete_option(c_al2fb_option_clean);
+			global $user_ID;
+			get_currentuserinfo();
 
-				// Delete user meta values
-				global $wpdb;
-				$rows = $wpdb->get_results("SELECT user_id, meta_key FROM " . $wpdb->usermeta . " WHERE meta_key LIKE 'al2fb_%'");
-				foreach ($rows as $row)
-					delete_usermeta($row->user_id, $row->meta_key);
+			// Cleanup if requested
+			if (get_user_meta($user_ID, c_al2fb_meta_clean, true)) {
+				delete_user_meta($user_ID, c_al2fb_meta_client_id);
+				delete_user_meta($user_ID, c_al2fb_meta_app_secret);
+				delete_user_meta($user_ID, c_al2fb_meta_access_token);
+				delete_user_meta($user_ID, c_al2fb_meta_picture_type);
+				delete_user_meta($user_ID, c_al2fb_meta_picture);
+				delete_user_meta($user_ID, c_al2fb_meta_page);
+				delete_user_meta($user_ID, c_al2fb_meta_donated);
+				delete_user_meta($user_ID, c_al2fb_meta_clean);
 			}
 		}
 
@@ -143,10 +151,10 @@ if (!class_exists('WPAL2Facebook')) {
 					if (empty($_POST[c_al2fb_meta_page]))
 						$_POST[c_al2fb_meta_page] = null;
 
-					if (empty($_POST[c_al2fb_option_clean]))
-						$_POST[c_al2fb_option_clean] = null;
-					if (empty($_POST[c_al2fb_option_donated]))
-						$_POST[c_al2fb_option_donated] = null;
+					if (empty($_POST[c_al2fb_meta_clean]))
+						$_POST[c_al2fb_meta_clean] = null;
+					if (empty($_POST[c_al2fb_meta_donated]))
+						$_POST[c_al2fb_meta_donated] = null;
 
 					// Update options
 					update_user_meta($user_ID, c_al2fb_meta_client_id, $_POST[c_al2fb_meta_client_id]);
@@ -154,11 +162,8 @@ if (!class_exists('WPAL2Facebook')) {
 					update_user_meta($user_ID, c_al2fb_meta_picture_type, $_POST[c_al2fb_meta_picture_type]);
 					update_user_meta($user_ID, c_al2fb_meta_picture, $_POST[c_al2fb_meta_picture]);
 					update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
-
-					if (current_user_can('manage_options')) {
-						update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
-						update_option(c_al2fb_option_donated, $_POST[c_al2fb_option_donated]);
-					}
+					update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
+					update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 
 					// Show result
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
@@ -185,12 +190,16 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Check config/authorization
-			if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) || !get_user_meta($user_ID, c_al2fb_meta_app_secret, true))
+			if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) || !get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
 				$msg = __('needs configuration', c_al2fb_text_domain);
-			else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true))
+				$anchor = 'configure';
+			}
+			else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true)) {
 				$msg = __('needs authorization', c_al2fb_text_domain);
+				$anchor = 'authorize';
+			}
 			if (!empty($msg)) {
-				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file)) . '#' . $anchor;
 				echo '<div class="error fade al2fb_error"><p>';
 				_e('Add Link to Facebook', c_al2fb_text_domain);
 				echo ' <a href="' . $url . '">' . $msg . '</a></p></div>';
@@ -228,11 +237,13 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 			<div class="wrap">
 			<?php self::Resources(); ?>
+
+			<a name="configure"></a>
 			<div class="al2fb_options">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
 
 			<div class="al2fb_instructions">
-			<h4><?php _e('To get an App ID and Secret you have to create a Facebook application', c_al2fb_text_domain); ?></h4>
+			<h4><?php _e('To get an App ID and App Secret you have to create a Facebook application', c_al2fb_text_domain); ?></h4>
 			<span><a href="http://www.facebook.com/developers/createapp.php" target="_blank">
 			<?php _e('Click here to create', c_al2fb_text_domain); ?></a></span><br />
 			<table>
@@ -308,30 +319,30 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
 				}
 ?>
-<?php		if (current_user_can('manage_options')) { ?>
-				<tr valign="top"><th scope="row">
-					<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
-				</th><td>
-					<input id="al2fb_clean" name="<?php echo c_al2fb_option_clean; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_clean)) echo ' checked="checked"'; ?> />
-					<br /><span><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
-				</td></tr>
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_clean" name="<?php echo c_al2fb_meta_clean; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_clean, true)) echo ' checked="checked"'; ?> />
+				<br /><span><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
+			</td></tr>
 
-				<tr valign="top"><th scope="row">
-					<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
-				</th><td>
-					<input id="al2fb_donated" name="<?php echo c_al2fb_option_donated; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_donated)) echo ' checked="checked"'; ?> />
-				</td></tr>
-<?php		} ?>
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
 			</table>
 
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
-
 			</form>
 
+			<hr />
+			<a name="authorize"></a>
 <?php
-			if (get_user_meta($user_ID, c_al2fb_meta_access_token, true))
+			if (get_user_meta($user_ID, c_al2fb_meta_access_token, true)) {
+				// Get page name
 				try {
 					$me = self::Get_me(false);
 					_e('Links will be added to', c_al2fb_text_domain);
@@ -340,6 +351,7 @@ if (!class_exists('WPAL2Facebook')) {
 				catch (Exception $e) {
 					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
 				}
+			}
 ?>
 			<form method="get" action="<?php echo self::Authorize_url(); ?>">
 			<p class="submit">
@@ -353,7 +365,9 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Sponsorship() {
-			if (!get_option(c_al2fb_option_donated)) {
+			global $user_ID;
+			get_currentuserinfo();
+			if (!get_user_meta($userID, c_al2fb_meta_donated, true)) {
 ?>
 				<script type="text/javascript">
 				var psHost = (("https:" == document.location.protocol) ? "https://" : "http://");
@@ -366,6 +380,8 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Resources() {
+			global $user_ID;
+			get_currentuserinfo();
 ?>
 			<div class="al2fb_resources">
 			<h3><?php _e('Resources', c_al2fb_text_domain); ?></h3>
@@ -375,7 +391,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
 			</ul>
-<?php		if (!get_option(c_al2fb_option_donated)) { ?>
+<?php		if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">

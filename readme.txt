@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.5
+Stable tag: 0.6
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -19,7 +19,8 @@ It works for remote publishing from [Android](http://android.wordpress.org/ "And
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
-Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it. If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
+Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
+If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
 
 See my [other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -45,7 +46,7 @@ See my [other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 = I get 'Error validating application' =
 
-You have probably entered a wrong App ID.
+You have probably entered a wrong App ID or the application may be deleted.
 
 = I get 'Error validating client secret' =
 
@@ -57,7 +58,14 @@ You have probably entered a wrong URL in the Facebook application setting 'Web S
 
 = I get 'The user hasn't authorized the application to perform this action' =
 
-You have probably revoked the permissions of the Facebook application. You have to re-authorize the plugin.
+You have probably revoked the publishing permissions of the Facebook application.
+If you did this by accident, you can simply re-authorize the plugin.
+If you did this deliberately, you should remove the App ID and App Secret from the plugin settings.
+If you are the only user of the website, you could also disable the plugin.
+
+= I get 'Invalid access token signature' =
+
+You have probably reset the App Secret. You have to enter the new App Secret.
 
 = Which link picture will Facebook select? =
 
@@ -74,7 +82,7 @@ If you remove it, the link will be added again.
 
 = Is there support for multi user sites? =
 
-Yes, each user can configure his own wall.
+Yes, each user can configure his/her own wall or page.
 
 = How about private / password protected posts? =
 
@@ -88,11 +96,21 @@ Yes, shortcodes in the excerpt, or if absent in the text, are being processed.
 
 Yes.
 
+= Which users can use this plugin? =
+
+Users with the 'edit_posts' capability: all user roles, except subscriber.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
 
 == Changelog ==
+
+= 0.6 =
+* New feature: user settings for donated and clean option
+* Admin notices jump to anchors
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
 
 = 0.5 =
 * New feature: add to page
@@ -121,6 +139,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.6 =
+User settings for donated and clean option
 
 = 0.5 =
 New feature: add to page
