@@ -57,3 +57,7 @@
 .al2fb_picture {
 	width: 350px;
 }
+
+.al2fb_explanation {
+	font-size: smaller;
+}

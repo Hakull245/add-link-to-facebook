@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.6
+Stable tag: 0.7
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -106,6 +106,10 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.7 =
+* New feature: add link as page owner
+* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+
 = 0.6 =
 * New feature: user settings for donated and clean option
 * Admin notices jump to anchors
@@ -139,6 +143,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.7 =
+New feature: add link as page owner
 
 = 0.6 =
 User settings for donated and clean option
