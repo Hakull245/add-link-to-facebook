@@ -203,7 +203,7 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 						catch (Exception $e) {
 							delete_user_meta($user_ID, c_al2fb_meta_access_token);
-							echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
+							echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES) . '</p></div>';
 						}
 					}
 					else if (isset($_REQUEST['error'])) {
@@ -281,7 +281,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</tr>
 				<tr>
 					<td><span class="al2fb_label"><strong><?php _e('Web Site > Site URL:', c_al2fb_text_domain); ?></span></td>
-					<td><span class="al2fb_data"><?php echo htmlspecialchars(get_site_url(null, '/', 'http')); ?></span></td>
+					<td><span class="al2fb_data"><?php echo htmlspecialchars(get_site_url(null, '/', 'http'), ENT_QUOTES); ?></span></td>
 				</tr>
 			</table>
 			</div>
@@ -310,12 +310,12 @@ if (!class_exists('WPAL2Facebook')) {
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
 					</th><td>
-						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name); ?></a>
+						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name, ENT_QUOTES); ?></a>
 					</td></tr>
 <?php
 				}
 				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES) . '</p></div>';
 				}
 ?>
 			<tr valign="top"><th scope="row">
@@ -346,12 +346,12 @@ if (!class_exists('WPAL2Facebook')) {
 					</th><td>
 						<select id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
-						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name) . '</option>';
+						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES) . '</option>';
 						foreach ($pages->data as $page) {
 							echo '<option value="' . $page->id . '"';
 							if ($page->id == $selected_page)
 								echo ' selected';
-							echo '>' . htmlspecialchars($page->name) . ' - ' . htmlspecialchars($page->category) . '</option>';
+							echo '>' . htmlspecialchars($page->name, ENT_QUOTES) . ' - ' . htmlspecialchars($page->category, ENT_QUOTES) . '</option>';
 						}
 ?>
 						</select>
@@ -365,7 +365,7 @@ if (!class_exists('WPAL2Facebook')) {
 <?php
 				}
 				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES) . '</p></div>';
 				}
 ?>
 			<tr valign="top"><th scope="row">
@@ -430,13 +430,13 @@ if (!class_exists('WPAL2Facebook')) {
 				try {
 					$me = self::Get_me(false);
 					_e('Links will be added to', c_al2fb_text_domain);
-					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name);
+					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES);
 					if (!empty($me->category))
-						echo ' - ' . htmlspecialchars($me->category);
+						echo ' - ' . htmlspecialchars($me->category, ENT_QUOTES);
 					echo '</a>';
 				}
 				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES) . '</p></div>';
 				}
 			}
 ?>
