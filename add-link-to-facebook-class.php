@@ -186,7 +186,7 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 						catch (Exception $e) {
 							delete_user_meta($user_ID, c_al2fb_meta_access_token);
-							echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+							echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
 						}
 					}
 					else if (isset($_REQUEST['error'])) {
@@ -289,12 +289,12 @@ if (!class_exists('WPAL2Facebook')) {
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
 					</th><td>
-						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo $app->name; ?></a>
+						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name); ?></a>
 					</td></tr>
 <?php
 				}
 				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
 				}
 ?>
 			<tr valign="top"><th scope="row">
@@ -344,7 +344,7 @@ if (!class_exists('WPAL2Facebook')) {
 <?php
 				}
 				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
 				}
 ?>
 			<tr valign="top"><th scope="row">
@@ -374,10 +374,13 @@ if (!class_exists('WPAL2Facebook')) {
 				try {
 					$me = self::Get_me(false);
 					_e('Links will be added to', c_al2fb_text_domain);
-					echo ' <a href="' . $me->link . '" target="_blank">' . $me->name . '</a>';
+					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name);
+					if (!empty($me->category))
+						echo ' - ' . htmlspecialchars($me->category);
+					echo '</a>';
 				}
 				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . $e->getMessage() . '</p></div>';
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage()) . '</p></div>';
 				}
 			}
 ?>
@@ -690,7 +693,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Check_prerequisites() {
 			// Check PHP version
 			if (version_compare(PHP_VERSION, '5.0.0', '<'))
-				die('Add Link to Facebook requires at least PHP 5.0.0');
+				die('Add Link to Facebook requires at least PHP 5');
 
 			// Check WordPress version
 			global $wp_version;
