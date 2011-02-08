@@ -110,6 +110,10 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.11 =
+* New feature: suppress admin notices
+* New feature: select which users can use the plugin
+
 = 0.10 =
 * Improvement: display category if available
 * Added some htmlspecialchars calls
@@ -158,6 +162,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.11 =
+New features: suppress admin notices, select which users can use the plugin
 
 = 0.10 =
 Small improvements

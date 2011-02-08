@@ -11,6 +11,8 @@ define('c_al2fb_nonce_form', 'al2fb-nonce-form');
 
 define('c_al2fb_option_version', 'al2fb_version');
 define('c_al2fb_option_timeout', 'al2fb_timeout');
+define('c_al2fb_option_min_cap', 'al2fb_min_cap');
+define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 
 define('c_al2fb_meta_client_id', 'al2fb_client_id');
 define('c_al2fb_meta_app_secret', 'al2fb_app_secret');
@@ -117,8 +119,8 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Handle Facebook authorization
-			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']);
-			$uri = $_SERVER['REQUEST_URI'];
+			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : strtolower($_SERVER['HTTP_REFERER']));
+			$uri = strtolower($_SERVER['REQUEST_URI']);
 			if (strpos($ref, 'facebook.com/connect') &&
 				strpos($uri, basename(dirname($this->main_file))) === false &&
 				(strpos($uri, 'code=') || strpos($uri, 'error='))) {
@@ -128,6 +130,10 @@ if (!class_exists('WPAL2Facebook')) {
 				header('Location: ' . $url . '&action=authorize&' . substr($uri, strpos($uri, '?') + 1));
 				exit();
 			}
+
+			// Set default capability
+			if (!get_option(c_al2fb_option_min_cap))
+				update_option(c_al2fb_option_min_cap, 'edit_posts');
 		}
 
 		// Display admin messages
@@ -162,7 +168,7 @@ if (!class_exists('WPAL2Facebook')) {
 					if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
 						delete_user_meta($user_ID, c_al2fb_meta_access_token);
 
-					// Update options
+					// Update user options
 					update_user_meta($user_ID, c_al2fb_meta_client_id, $_POST[c_al2fb_meta_client_id]);
 					update_user_meta($user_ID, c_al2fb_meta_app_secret, $_POST[c_al2fb_meta_app_secret]);
 					update_user_meta($user_ID, c_al2fb_meta_picture_type, $_POST[c_al2fb_meta_picture_type]);
@@ -171,6 +177,17 @@ if (!class_exists('WPAL2Facebook')) {
 					update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
 					update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 					update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
+
+					// Update admin options
+					if (current_user_can('manage_options')) {
+						if (empty($_POST[c_al2fb_option_nonotice]))
+							$_POST[c_al2fb_option_nonotice] = null;
+						if (empty($_POST[c_al2fb_option_min_cap]))
+							$_POST[c_al2fb_option_min_cap] = null;
+
+						update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
+						update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
+					}
 
 					// Show result
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
@@ -197,19 +214,23 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Check config/authorization
-			if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) || !get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
-				$msg = __('needs configuration', c_al2fb_text_domain);
-				$anchor = 'configure';
-			}
-			else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true)) {
-				$msg = __('needs authorization', c_al2fb_text_domain);
-				$anchor = 'authorize';
-			}
-			if (!empty($msg)) {
-				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file)) . '#' . $anchor;
-				echo '<div class="error fade al2fb_error"><p>';
-				_e('Add Link to Facebook', c_al2fb_text_domain);
-				echo ' <a href="' . $url . '">' . $msg . '</a></p></div>';
+			$uri = strtolower($_SERVER['REQUEST_URI']);
+			$url = 'tools.php?page=' . plugin_basename($this->main_file);
+			if (get_option(c_al2fb_option_nonotice) ? strpos($uri, $url) !== false : true) {
+				if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) || !get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
+					$msg = __('needs configuration', c_al2fb_text_domain);
+					$anchor = 'configure';
+				}
+				else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true)) {
+					$msg = __('needs authorization', c_al2fb_text_domain);
+					$anchor = 'authorize';
+				}
+				if (!empty($msg)) {
+					$url .= '#' . $anchor;
+					echo '<div class="error fade al2fb_error"><p>';
+					_e('Add Link to Facebook', c_al2fb_text_domain);
+					echo ' <a href="' . $url . '">' . $msg . '</a></p></div>';
+				}
 			}
 		}
 
@@ -219,7 +240,7 @@ if (!class_exists('WPAL2Facebook')) {
 				add_management_page(
 					__('Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
 					__('Add Link to Facebook', c_al2fb_text_domain),
-					'edit_posts',
+					get_option(c_al2fb_option_min_cap),
 					$this->main_file,
 					array(&$this, 'Administration'));
 		}
@@ -227,7 +248,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Handle option page
 		function Administration() {
 			// Security check
-			if (!current_user_can('edit_posts'))
+			if (!current_user_can(get_option(c_al2fb_option_min_cap)))
 				die('Unauthorized');
 
 			// Get current user
@@ -359,6 +380,41 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
+
+<?php		if (current_user_can('manage_options')) { ?>
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_nonotice"><?php _e('Do not display notices:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_nonotice" name="<?php echo c_al2fb_option_nonotice; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_nonotice)) echo ' checked="checked"'; ?> />
+				<br /><span class="al2fb_explanation"><?php _e('Except on this page', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_min_cap"><?php _e('Required capability to use plugin:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<select id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
+<?php
+					// Get list of capabilities
+					global $wp_roles;
+					$capabilities = array();
+					foreach ($wp_roles->role_objects as $key => $role)
+						if (is_array($role->capabilities))
+							foreach ($role->capabilities as $cap => $grant)
+								$capabilities[$cap] = $cap;
+					sort($capabilities);
+
+					// List capabilities and select current
+					$min_cap = get_option(c_al2fb_option_min_cap);
+					foreach ($capabilities as $cap) {
+						echo '<option value="' . $cap . '"';
+						if ($cap == $min_cap)
+							echo ' selected';
+						echo '>' . $cap . '</option>';
+					}
+?>
+					</select>
+				</td></tr>
+<?php		} ?>
 			</table>
 
 			<p class="submit">
@@ -519,7 +575,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add exclude checkbox
 		function Post_submitbox() {
-			if (current_user_can('edit_posts')) {
+			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
 				global $post;
 				$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
 				$chk_exclude = $exclude ? 'checked' : '';
