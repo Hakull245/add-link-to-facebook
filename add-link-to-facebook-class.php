@@ -486,15 +486,17 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add exclude checkbox
 		function Post_submitbox() {
-			global $post;
-			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
-			$chk_exclude = $exclude ? 'checked' : '';
+			if (current_user_can('edit_posts')) {
+				global $post;
+				$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
+				$chk_exclude = $exclude ? 'checked' : '';
 ?>
-			<div class="al2fb_post_submit">
-			<input type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
-			<span><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></span>
-			</div>
+				<div class="al2fb_post_submit">
+				<input type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
+				<span><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></span>
+				</div>
 <?php
+			}
 		}
 
 		// Handle save post

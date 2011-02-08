@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.7
+Stable tag: 0.8
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -75,6 +75,10 @@ Mostly the first picture in the post, but it depends on the theme and layout of 
 
 Maybe because it is smaller than 50 x 50 pixels.
 
+= What happens when I update a post? =
+If the link to the post was added already to your wall or page nothing,
+else a new link will be added. See also the next question.
+
 = What is the custom field 'al2fb_facebook_link_id' for? =
 
 This is the Facebook identification of the added link.
@@ -106,18 +110,22 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.8 =
+* Improvement: No 'Do not add link to Facebook' for subscribers
+* Updated description and FAQ
+
 = 0.7 =
-* New feature: add link as page owner
+* New feature: add links as page owner (requires extra permission)
 * Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
 
 = 0.6 =
-* New feature: user settings for donated and clean option
+* New feature: user settings for donated and clean options
 * Admin notices jump to anchors
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
 
 = 0.5 =
-* New feature: add to page
+* New feature: add links to page
 * Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
 
 = 0.4 =
@@ -129,12 +137,12 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 = 0.3 =
 * Added Dutch (nl\_NL) and Flemisch (nl\_BE) translations
-* Logging Facebook errors when adding link
+* Logging Facebook errors when adding links
 * Improved styling of administration area
 
 = 0.2 =
-* Bugfix: strip html tags from message text
-* Bugfix: check for access token before adding link
+* Bugfix: strip html tags from excerpt or message text
+* Bugfix: check for access token before adding links
 
 = 0.1 =
 * Initial release
@@ -144,14 +152,17 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Upgrade Notice ==
 
+= 0.8 =
+Small improvement
+
 = 0.7 =
-New feature: add link as page owner
+New feature: add links as page owner
 
 = 0.6 =
-User settings for donated and clean option
+User settings for donated and clean options
 
 = 0.5 =
-New feature: add to page
+New feature: add links to page
 
 = 0.4 =
 Support for remote publishing, bugfixes
