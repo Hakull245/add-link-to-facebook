@@ -47,30 +47,33 @@ See my [other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 = I get 'Error validating application' =
 
-You have probably entered a wrong App ID or the application may be deleted.
+You have probably entered a wrong *App ID* or the application may be deleted.
 
 = I get 'Error validating client secret' =
 
-You have probably entered a wrong App Secret.
+You have probably entered a wrong *App Secret*.
 
 = I get 'Given URL is not allowed by the Application configuration' =
 
-You have probably entered a wrong URL in the Facebook application setting 'Web Site > Site URL'.
+You have probably entered a wrong URL in the Facebook application setting *Web Site > Site URL*.
 
 = I get 'The user hasn't authorized the application to perform this action' =
 
 You have probably revoked the publishing permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
-If you did this deliberately, you should remove the App ID and App Secret from the plugin settings.
+If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you could also disable the plugin.
 
 = I get 'Invalid access token signature' =
 
-You have probably reset the App Secret. You have to enter the new App Secret.
+You have probably reset the *App Secret*. You should re-enter it.
 
 = I get 'Error validating verification code' =
 
-Please go to the plugin page, add '&debug=true' to the URL and send me the debug information using the contact form on the support page.
+Please go to the plugin page (via the *Tools* menu),
+add **&debug** at the end of the URL in the address bar, press enter and
+send me the debug output at the top of the page using the contact page on the support page
+(do not post the output on the support page, because it contains sensitive information about your Facebook application).
 
 = Which link picture will Facebook select? =
 
@@ -81,6 +84,7 @@ Mostly the first picture in the post, but it depends on the theme and layout of 
 Maybe because it is smaller than 50 x 50 pixels.
 
 = What happens when I update a post? =
+
 If the link to the post was added already to your wall or page nothing,
 else a new link will be added. See also the next question.
 
@@ -88,6 +92,16 @@ else a new link will be added. See also the next question.
 
 This is the Facebook identification of the added link.
 If you remove it, the link will be added again.
+
+= What is the custom field 'al2fb_facebook_exclude' for? =
+
+This is to remember you ticked the check box *Do not add link to Facebook*.
+
+= What is the custom field 'al2fb_facebook_error' for? =
+
+If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
+You can try to add the link again by updating the post.
+Please send me the message and follow the steps of the question *I get 'Error validating verification code'* above.
 
 = Is there support for multi user sites? =
 
@@ -99,15 +113,17 @@ Don't worry, no links to private posts will be added.
 
 = Will shortcodes be processed? =
 
-Yes, shortcodes in the excerpt, or if absent in the text, are being processed.
+Yes, shortcodes in the excerpt, or if none in the text, will be processed.
 
 = Is remote publishing via XML-RPC supported? =
 
-Yes.
+Yes, so you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device to published posts and
+still have links added to your wall or page automatically.
 
 = Which users can use this plugin? =
 
-Users with the 'edit_posts' capability: all user roles, except subscriber.
+Users with the *edit_posts* capability: all user roles, except subscriber.
+Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
 
 = Where can I ask questions, report bugs and request features? =
 
@@ -116,12 +132,12 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 == Changelog ==
 
 = 0.13 =
-* Fix for 'Error validating verification code'
+* Fix for *Error validating verification code*
 * Added debug option
-* Updated FAQ
+* Updated description and FAQ
 
 = 0.12 =
-* Added ENT_QUOTES to htmlspecialchars calls
+* Added *ENT_QUOTES* to *htmlspecialchars* calls
 * Updated description
 
 = 0.11 =
@@ -131,13 +147,13 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 = 0.10 =
 * Improvement: display category if available
-* Added some htmlspecialchars calls
+* Added some *htmlspecialchars* calls
 
 = 0.9 =
 * Improvement: display application name
 
 = 0.8 =
-* Improvement: No 'Do not add link to Facebook' for subscribers
+* Improvement: No *Do not add link to Facebook* for subscribers
 * Updated description and FAQ
 
 = 0.7 =
@@ -155,7 +171,7 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
 
 = 0.4 =
-* New feature: support for remote publishing via XML-RPC ([Android](http://android.wordpress.org/ "Android"), [iOS](http://ios.wordpress.org/ "iOS"), etc)
+* New feature: support for remote publishing via XML-RPC
 * Bugfix: domains with path, including networks with sub-directories install
 * Bugfix: activation hook
 * Bugfix: some PHP notices
@@ -216,3 +232,4 @@ Bugfixes
 
 = 0.1 =
 Initial version
+
