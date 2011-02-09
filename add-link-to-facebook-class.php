@@ -321,13 +321,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 			<table class="form-table">
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_client_id"><?php _e('App ID:', c_al2fb_text_domain); ?></label>
+				<label for="al2fb_client_id"><strong><?php _e('App ID:', c_al2fb_text_domain); ?></strong></label>
 			</th><td>
 				<input id="al2fb_client_id" class="al2fb_client_id" name="<?php echo c_al2fb_meta_client_id; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_client_id, true); ?>" />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_app_secret"><?php _e('App Secret:', c_al2fb_text_domain); ?></label>
+				<label for="al2fb_app_secret"><strong><?php _e('App Secret:', c_al2fb_text_domain); ?></strong></label>
 			</th><td>
 				<input id="al2fb_app_secret" class="al2fb_app_secret" name="<?php echo c_al2fb_meta_app_secret; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_app_secret, true); ?>" />
 			</td></tr>
