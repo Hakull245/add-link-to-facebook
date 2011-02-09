@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-08 17:09+0100\n"
+"PO-Revision-Date: 2011-02-09 10:10+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -38,9 +38,6 @@ msgstr "Voor een Toepassings-ID en App Secret moet u een Facebook applicatie mak
 msgid "Click here to create"
 msgstr "Klik hier om te creëren"
 
-msgid "App Name"
-msgstr "Toepassingsnaam"
-
 msgid "Anything you like, will appear as \"via ...\" below the message"
 msgstr "Alles wat u wilt, verschijnt als \"via ... \" onder het bericht"
 
@@ -48,10 +45,13 @@ msgid "Web Site > Site URL"
 msgstr "Website > Site URL"
 
 msgid "App ID:"
-msgstr "Toepassings-ID"
+msgstr "Toepassings-ID:"
 
 msgid "App Secret:"
 msgstr "App Secret:"
+
+msgid "App Name"
+msgstr "Toepassingsnaam"
 
 msgid "Link picture:"
 msgstr "Koppelingsafbeelding:"
