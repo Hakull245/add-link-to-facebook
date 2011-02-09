@@ -28,6 +28,10 @@ define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
 
+define('c_al2fb_log_redir_ref', 'al2fb_redir_ref');
+define('c_al2fb_log_redir_from', 'al2fb_redir_from');
+define('c_al2fb_log_redir_to', 'al2fb_redir_to');
+
 // Define class
 if (!class_exists('WPAL2Facebook')) {
 	class WPAL2Facebook {
@@ -119,15 +123,23 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Handle Facebook authorization
-			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : strtolower($_SERVER['HTTP_REFERER']));
-			$uri = strtolower($_SERVER['REQUEST_URI']);
+			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']);
+			$uri = $_SERVER['REQUEST_URI'];
 			if (strpos($ref, 'facebook.com/connect') &&
 				strpos($uri, basename(dirname($this->main_file))) === false &&
 				(strpos($uri, 'code=') || strpos($uri, 'error='))) {
-				// http://www.facebook.com/connect/uiserver.php?...
+				// Build new url
 				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+				$url .= '&action=authorize&' . substr($uri, strpos($uri, '?') + 1);
+
+				// Debug info
+				update_option(c_al2fb_log_redir_ref, $ref);
+				update_option(c_al2fb_log_redir_from, $uri);
+				update_option(c_al2fb_log_redir_to, $url);
+
+				// Redirect
 				header('HTTP/1.1 302 Found');
-				header('Location: ' . $url . '&action=authorize&' . substr($uri, strpos($uri, '?') + 1));
+				header('Location: ' . $url);
 				exit();
 			}
 
@@ -214,7 +226,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Check config/authorization
-			$uri = strtolower($_SERVER['REQUEST_URI']);
+			$uri = $_SERVER['REQUEST_URI'];
 			$url = 'tools.php?page=' . plugin_basename($this->main_file);
 			if (get_option(c_al2fb_option_nonotice) ? strpos($uri, $url) !== false : true) {
 				if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) || !get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
@@ -264,12 +276,29 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 ?>
 			<div class="wrap">
+<?php
+			if (isset($_REQUEST['debug'])) {
+				global $wp_version;
+				echo '<div class="al2fb_debug"><table>';
+				echo '<tr><td>Time:</td><td>' . date('r') . '</td></tr>';
+				echo '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
+				echo '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
+				echo '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
+				echo '<tr><td>Blog address:</td><td>' . htmlspecialchars(get_home_url(), ENT_QUOTES) . '</td></tr>';
+				echo '<tr><td>WordPress address:</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES) . '</td></tr>';
+				echo '<tr><td>Redirect URI:</td><td>' . htmlspecialchars(get_site_url(null, '/', 'http'), ENT_QUOTES) . '</td></tr>';
+				echo '<tr><td>Authorize URL:</td><td>' . htmlspecialchars(self::Authorize_url()) . '</td></tr>';
+				echo '<tr><td>Redirect referer:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</td></tr>';
+				echo '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
+				echo '<tr><td>Redirect to:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</td></tr>';
+				echo '</table></div>';
+			}
+?>
 			<?php self::Resources(); ?>
 
 			<a name="configure"></a>
 			<div class="al2fb_options">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
-
 			<div class="al2fb_instructions">
 			<h4><?php _e('To get an App ID and App Secret you have to create a Facebook application', c_al2fb_text_domain); ?></h4>
 			<span><a href="http://www.facebook.com/developers/createapp.php" target="_blank">

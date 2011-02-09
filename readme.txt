@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.12
+Stable tag: 0.13
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -12,11 +12,9 @@ Automatically add links to published posts to your Facebook wall or pages
 
 Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in.
 
-**Error 400: Error validating verification code**: Facebook has changed something. If this problem is still there tomorrow, I will search for a workaround or fix.
-
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
-It is possible to exclude individual post links from being added to your wall by ticking a check box just above the publish button.
+It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
 There is support for multi user and network sites and shortcodes will be processed.
 It works for remote publishing from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") too.
 
@@ -70,6 +68,10 @@ If you are the only user of the website, you could also disable the plugin.
 
 You have probably reset the App Secret. You have to enter the new App Secret.
 
+= I get 'Error validating verification code' =
+
+Please go to the plugin page, add '&debug=true' to the URL and send me the debug information using the contact form on the support page.
+
 = Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
@@ -112,6 +114,11 @@ Users with the 'edit_posts' capability: all user roles, except subscriber.
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
 
 == Changelog ==
+
+= 0.13 =
+* Fix for 'Error validating verification code'
+* Added debug option
+* Updated FAQ
 
 = 0.12 =
 * Added ENT_QUOTES to htmlspecialchars calls
@@ -170,6 +177,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.13 =
+* Fix for 'Error validating verification code'
 
 = 0.12 =
 Small improvements
