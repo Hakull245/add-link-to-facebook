@@ -131,6 +131,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Changelog ==
 
+= 0.14 =
+* Improvement: check PHP version outside class
+
 = 0.13 =
 * Fix for *Error validating verification code*
 * Added debug option
@@ -194,8 +197,11 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Upgrade Notice ==
 
+= 0.14 =
+Compatibility
+
 = 0.13 =
-* Fix for 'Error validating verification code'
+Fix for 'Error validating verification code'
 
 = 0.12 =
 Small improvements

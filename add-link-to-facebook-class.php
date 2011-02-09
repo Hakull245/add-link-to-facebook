@@ -776,10 +776,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Check environment
 		function Check_prerequisites() {
-			// Check PHP version
-			if (version_compare(PHP_VERSION, '5.0.0', '<'))
-				die('Add Link to Facebook requires at least PHP 5');
-
 			// Check WordPress version
 			global $wp_version;
 			if (version_compare($wp_version, '3.0') < 0)
