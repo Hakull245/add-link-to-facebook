@@ -141,7 +141,7 @@ Since version 0.11 administrators can change this using the setting *Required ca
 You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/add-link-to-facebook-nl_NL.po "Dutch") as basis.
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
 
 = Where can I ask questions, report bugs and request features? =
 
