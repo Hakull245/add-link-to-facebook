@@ -156,6 +156,7 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Improvement: using blog charset
 * Improvement: extended debug option
 * Improvement: enabled Atom Publishing Protocol
+* Improvement: option to use blog title as caption
 * Bugfix: handle *Do not add link* when publishing without draft
 * Bugfix: use settings of post author in stead of post editor
 * Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
