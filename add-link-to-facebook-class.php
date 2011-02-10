@@ -299,9 +299,9 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
 				echo '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
 				echo '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
-				echo '<tr><td>Blog address:</td><td>' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</td></tr>';
-				echo '<tr><td>WordPress address:</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</td></tr>';
-				echo '<tr><td>Redirect URI:</td><td>' . htmlspecialchars(get_site_url(null, '/', 'http'), ENT_QUOTES, $charset) . '</td></tr>';
+				echo '<tr><td>Blog address (home):</td><td>' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</td></tr>';
+				echo '<tr><td>WordPress address (site):</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</td></tr>';
+				echo '<tr><td>Redirect URI:</td><td>' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</td></tr>';
 				echo '<tr><td>Authorize URL:</td><td>' . htmlspecialchars(self::Authorize_url()) . '</td></tr>';
 				echo '<tr><td>Redirect referer:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</td></tr>';
 				echo '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
@@ -326,7 +326,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</tr>
 				<tr>
 					<td><span class="al2fb_label"><strong><?php _e('Web Site > Site URL:', c_al2fb_text_domain); ?></span></td>
-					<td><span class="al2fb_data"><?php echo htmlspecialchars(get_site_url(null, '/', 'http'), ENT_QUOTES, $charset); ?></span></td>
+					<td><span class="al2fb_data"><?php echo htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset); ?></span></td>
 				</tr>
 			</table>
 			</div>
@@ -564,11 +564,21 @@ if (!class_exists('WPAL2Facebook')) {
 			// http://developers.facebook.com/docs/authentication/permissions
 			$url = 'https://graph.facebook.com/oauth/authorize';
 			$url .= '&client_id=' . get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$url .= '&redirect_uri=' . urlencode(get_site_url(null, '/', 'http'));
+			$url .= '&redirect_uri=' . urlencode(self::Redirect_uri());
 			$url .= '&scope=publish_stream,offline_access';
 			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
 				$url .= ',manage_pages';
 			return $url;
+		}
+
+		// Temporary workaround
+		function Redirect_uri() {
+			// WordPress Address -> get_site_url() -> directory with WordPress files
+			// Blog Address -> get_home_url() -> home page
+			if (strlen(get_site_url()) < strlen(get_home_url()))
+				return get_site_url(null, '/');
+			else
+				return get_home_url(null, '/');
 		}
 
 		// Request token
@@ -580,7 +590,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$url = 'https://graph.facebook.com/oauth/access_token';
 			$query = http_build_query(array(
 				'client_id' => get_user_meta($user_ID, c_al2fb_meta_client_id, true),
-				'redirect_uri' => get_site_url(null, '/', 'http'),
+				'redirect_uri' => self::Redirect_uri(),
 				'client_secret' => get_user_meta($user_ID, c_al2fb_meta_app_secret, true),
 				'code' => $_REQUEST['code']
 			));
