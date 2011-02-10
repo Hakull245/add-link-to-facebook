@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.14
+Stable tag: 0.15
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -16,14 +16,22 @@ The link title will be the post title. The link description will be the excerpt,
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
 There is support for multi user and network sites and shortcodes will be processed.
-It works for remote publishing from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") too.
+It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered devices
+or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer").
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
+
+Translations are welcome, see [FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
+
+* English (en\_US): built-in, corrections are welcome
+* Dutch (nl\_NL): [Marcel Bokhorst](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
+* Flemisch (nl\_BE): [Marcel Bokhorst](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
+* ...
 
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
 
-See my [other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
@@ -62,7 +70,7 @@ You have probably entered a wrong URL in the Facebook application setting *Web S
 You have probably revoked the publishing permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
-If you are the only user of the website, you could also disable the plugin.
+If you are the only user of the website, you can also disable the plugin.
 
 = I get 'Invalid access token signature' =
 
@@ -70,10 +78,10 @@ You have probably reset the *App Secret*. You should re-enter it.
 
 = I get 'Error validating verification code' =
 
-Please go to the plugin page (via the *Tools* menu),
-add **&debug** at the end of the URL in the address bar, press enter and
-send me the debug output at the top of the page using the contact page on the support page
-(do not post the output on the support page, because it contains sensitive information about your Facebook application).
+Please go to the plugin page (via the *Tools* menu), click on the link *Debug info* at the bottom of the page and
+send me the debug output that appears at the top of the page using the [contact form](http://blog.bokhorst.biz/contact/ "contact form").
+**Do not** post the output on the support page, because it contains some sensitive information about your Facebook application
+(but not your App Secret and access token).
 
 = Which link picture will Facebook select? =
 
@@ -115,21 +123,43 @@ Don't worry, no links to private posts will be added.
 
 Yes, shortcodes in the excerpt, or if none in the text, will be processed.
 
-= Is remote publishing via XML-RPC supported? =
+= Is remote publishing supported? =
 
-Yes, so you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device to published posts and
+Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
+So you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device
+or [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer") to publish posts and
 still have links added to your wall or page automatically.
+Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
 
 = Which users can use this plugin? =
 
 Users with the *edit_posts* capability: all user roles, except subscriber.
 Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
 
+= How can I translate the plugin? =
+
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
+Please use [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
 
 == Changelog ==
+
+= 0.15 =
+* Improvement: add links for newly published posts only
+* Improvement: register time of adding link
+* Improvement: better layout admin area
+* Improvement: using blog charset
+* Improvement: extended debug option
+* Improvement: enabled Atom Publishing Protocol
+* Bugfix: handle *Do not add link* when publishing without draft
+* Bugfix: use settings of post author in stead of post editor
+* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Updated description and FAQ
 
 = 0.14 =
 * Improvement: check PHP version outside class
@@ -197,6 +227,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 == Upgrade Notice ==
 
+= 0.15 =
+Improvements and bugfixes
+
 = 0.14 =
 Compatibility
 
@@ -238,4 +271,3 @@ Bugfixes
 
 = 0.1 =
 Initial version
-

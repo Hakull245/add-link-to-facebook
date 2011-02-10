@@ -10,8 +10,12 @@
 .al2fb_notice {
 }
 
+.al2fb_debug {
+	font-size: smaller;
+}
+
 .al2fb_sponsorship {
-	font-size: 9px;
+	font-size: smaller;
 }
 
 .al2fb_resources {
@@ -71,7 +75,7 @@
 	border-style: outset;
 	border-color: gray;
 	border-collapse: collapse;
-	margin-top: 20px;
+	margin: 20px 0;
 }
 
 .al2fb_debug th, .al2fb_debug td {
