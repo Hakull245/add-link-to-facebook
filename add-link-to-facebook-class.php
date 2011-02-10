@@ -767,6 +767,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (version_compare(PHP_VERSION, '5.2.1') < 0)
 				ini_set('default_socket_timeout', $timeout);
 
+			$this->php_error = '';
 			set_error_handler(array(&$this, 'PHP_error_handler'));
 			if ($type == 'GET') {
 				$context = stream_context_create(array(
@@ -792,12 +793,16 @@ if (!class_exists('WPAL2Facebook')) {
 			restore_error_handler();
 
 			// Check for errors
-			$status = explode(' ', $http_response_header[0]);
-			$status = intval($status[1]);
+			$status = false;
+			foreach ($http_response_header as $h)
+				if (strpos($h, 'HTTP/') === 0) {
+					$status = explode(' ', $h);
+					$status = intval($status[1]);
+				}
 			if ($status == 200)
 				return $content;
 			else
-				throw new Exception('Error ' . $status . ': ' . $this->php_error);
+				throw new Exception('Error ' . $status . ': ' . $this->php_error . ' ' . print_r($http_response_header, true));
 		}
 
 		// Persist PHP errors
@@ -826,7 +831,7 @@ if (!class_exists('WPAL2Facebook')) {
 			else {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
-				throw new Exception('Error ' . $status . ': ' . $error);
+				throw new Exception('cURL error ' . $status . ': ' . $error);
 			}
 		}
 
