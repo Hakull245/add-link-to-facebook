@@ -78,7 +78,7 @@ You have probably reset the *App Secret*. You should re-enter it.
 
 = I get 'Error validating verification code' =
 
-Please go to the plugin page (via the *Tools* menu), click on the link *Debug info* at the bottom of the page and
+This should not happen. Please go to the plugin page (via the *Tools* menu), click on the link *Debug info* at the bottom of the page and
 send me the debug output that appears at the top of the page using the [contact form](http://blog.bokhorst.biz/contact/ "contact form").
 **Do not** post the output on the support page, because it contains some sensitive information about your Facebook application
 (but not your App Secret and access token).

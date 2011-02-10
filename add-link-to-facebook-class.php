@@ -37,6 +37,7 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 // To Do
 // - description?
 // - target="_blank"?
+// - Add as page owner -> extra permission
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
