@@ -55,7 +55,7 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 = What is a caption, message, etc? =
 
-Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea what is what.
+Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea of what is what.
 
 = Which link picture will Facebook select? =
 
