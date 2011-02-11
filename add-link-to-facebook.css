@@ -1,0 +1,89 @@
+
+/*
+	Style sheet Add Link to Facebook WordPress Plugin
+*/
+
+.al2fb_error {
+	font-weight: bold;
+}
+
+.al2fb_notice {
+	font-weight: bold;
+}
+
+.al2fb_debug {
+	font-size: smaller;
+	float: right;
+}
+
+.al2fb_sponsorship {
+	font-size: smaller;
+}
+
+.al2fb_resources {
+	float: right;
+	padding: 10px;
+	width: 180px;
+	margin-top: 30px;
+	border: 1px solid #CCCCCC;
+	background-color: #FFFEEB;
+}
+
+.al2fb_instructions {
+	padding: 10px;
+	border: 1px solid #CCCCCC;
+	background-color: #FFFEEB;
+}
+
+.al2fb_instructions table {
+	margin-left: 20px;
+}
+
+.al2fb_label {
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+.al2fb_data {
+	text-decoration: italic;
+}
+
+.al2fb_options {
+	float: left;
+}
+
+.al2fb_client_id {
+	width: 200px;
+}
+
+.al2fb_app_secret {
+	width: 300px;
+}
+
+.al2fb_picture {
+	width: 350px;
+}
+
+.al2fb_explanation {
+	font-size: smaller;
+}
+
+.al2fb_debug {
+}
+
+.al2fb_debug table {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+
+.al2fb_debug th, .al2fb_debug td {
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	font-size: smaller;
+}
