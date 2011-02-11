@@ -60,6 +60,7 @@ Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to
 = Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
+It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
 
 = Why doesn't Facebook display my custom link picture? =
 
@@ -172,6 +173,7 @@ send me the debug output that appears at the top of the page using the [contact 
 * New feature: column in post list
 * Change: reduced request time-out to 30 seconds
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated FAQ
 
 = 0.18 =
 * New feature: use excerpt as message
