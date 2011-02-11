@@ -8,10 +8,12 @@
 }
 
 .al2fb_notice {
+	font-weight: bold;
 }
 
 .al2fb_debug {
 	font-size: smaller;
+	float: right;
 }
 
 .al2fb_sponsorship {
