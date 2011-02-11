@@ -1,7 +1,7 @@
 ﻿=== Add Link to Facebook ===
-Contributors: Marcel Bokhorst
+Contributors: M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
-Tags: post, posts, facebook, social, link, links, permalink, wpmu, admin
+Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
 Stable tag: 0.19
@@ -55,7 +55,7 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 = What is a caption, message, etc? =
 
-Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea what ends up where.
+Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea what is what.
 
 = Which link picture will Facebook select? =
 
