@@ -70,7 +70,7 @@ Maybe because it is smaller than 50 x 50 pixels.
 If the link to the post was added already to your wall or page nothing,
 else a new link will be added. See also the next question.
 
-= How can a add a link for an existing post? =
+= How can I add a link to an existing post? =
 
 Change the post status temporarily to draft and publish the post again.
 
