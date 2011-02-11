@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.17
+Stable tag: 0.18
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -24,8 +24,8 @@ or using [Window Live Writer](http://explore.live.com/windows-live-writer "Windo
 Translations are welcome, see [FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
 * English (en\_US): built-in, corrections are welcome
-* Dutch (nl\_NL): [Marcel Bokhorst](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
-* Flemisch (nl\_BE): [Marcel Bokhorst](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
+* Dutch (nl\_NL): [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
+* Flemish (nl\_BE): [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * ...
 
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
@@ -53,6 +53,74 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 == Frequently Asked Questions ==
 
+= What is a caption, message, etc? =
+
+Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea what ends up where.
+
+= Which link picture will Facebook select? =
+
+Mostly the first picture in the post, but it depends on the theme and layout of your website.
+
+= Why doesn't Facebook display my custom link picture? =
+
+Maybe because it is smaller than 50 x 50 pixels.
+
+= What happens when I update a post? =
+
+If the link to the post was added already to your wall or page nothing,
+else a new link will be added. See also the next question.
+
+= How can a add a link for an existing post? =
+
+Change the post status temporarily to draft and publish the post again.
+
+= How about private / password protected posts? =
+
+Don't worry, no links to private posts will be added.
+
+= Are shortcodes being processed? =
+
+Yes, both in the excerpt and the post text.
+
+= Are multi-user and network sites supported? =
+
+Yes, each user can configure his/her own wall or page.
+
+= Is remote publishing supported? =
+
+Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
+So you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device (XML-RPC)
+or [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer") (Atom) to publish posts and
+still have links added to your wall or page automatically.
+Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
+
+= Which users can use this plugin? =
+
+Users with the *edit_posts* capability: all user roles, except subscriber.
+Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
+
+= How can I translate the plugin? =
+
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+= What is the custom field 'al2fb_facebook_link_id' for? =
+
+This is the Facebook identification of the added link.
+If you remove it, the link will be added again.
+
+= What is the custom field 'al2fb_facebook_exclude' for? =
+
+This is to remember you ticked the check box *Do not add link to Facebook*.
+
+= What is the custom field 'al2fb_facebook_error' for? =
+
+If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
+You can try to add the link again by updating the post.
+Please send me the message and follow the instruction in the last question.
+
 = I get 'Error validating application' =
 
 You have probably entered a wrong *App ID* or the application may be deleted.
@@ -78,76 +146,35 @@ You have probably reset the *App Secret*. You should re-enter it.
 
 = I get 'Error validating verification code' =
 
-This should not happen. Please go to the plugin page (via the *Tools* menu), click on the link *Debug info* at the bottom of the page and
-send me the debug output that appears at the top of the page using the [contact form](http://blog.bokhorst.biz/contact/ "contact form").
-**Do not** post the output on the support page, because it contains some sensitive information about your Facebook application
-(but not your App Secret and access token).
-
-= Which link picture will Facebook select? =
-
-Mostly the first picture in the post, but it depends on the theme and layout of your website.
-
-= Why doesn't Facebook display my custom link picture? =
-
-Maybe because it is smaller than 50 x 50 pixels.
-
-= What happens when I update a post? =
-
-If the link to the post was added already to your wall or page nothing,
-else a new link will be added. See also the next question.
-
-= What is the custom field 'al2fb_facebook_link_id' for? =
-
-This is the Facebook identification of the added link.
-If you remove it, the link will be added again.
-
-= What is the custom field 'al2fb_facebook_exclude' for? =
-
-This is to remember you ticked the check box *Do not add link to Facebook*.
-
-= What is the custom field 'al2fb_facebook_error' for? =
-
-If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
-You can try to add the link again by updating the post.
-Please send me the message and follow the steps of the question *I get 'Error validating verification code'* above.
-
-= Is there support for multi user sites? =
-
-Yes, each user can configure his/her own wall or page.
-
-= How about private / password protected posts? =
-
-Don't worry, no links to private posts will be added.
-
-= Will shortcodes be processed? =
-
-Yes, shortcodes in the excerpt, or if none in the text, will be processed.
-
-= Is remote publishing supported? =
-
-Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
-So you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device
-or [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer") to publish posts and
-still have links added to your wall or page automatically.
-Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
-
-= Which users can use this plugin? =
-
-Users with the *edit_posts* capability: all user roles, except subscriber.
-Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
-
-= How can I translate the plugin? =
-
-You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/add-link-to-facebook-nl_NL.po "Dutch") as basis.
-After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
-Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+You have probably deleted the Facebook application.
+You should delete the *App ID* and *App Secret* from the plugin settings and create a new Facebook application.
+This should not happen if you didn't delete the application.
+In that case please send me the debug information, see the last question for instructions.
 
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
 
+= How can I send the debug information? =
+
+Please go to the plugin page (via the *Tools* menu), click on the link *Debug information* at the bottom of the page and
+send me the debug output that appears at the top of the page using the [contact form](http://blog.bokhorst.biz/contact/ "contact form").
+**Do not** post the output on the support page, because it contains some sensitive information about your Facebook application
+(but not your App Secret and access token).
+
+== Screenshots ==
+
+1. Added Link on Facebook
+
 == Changelog ==
+
+= 0.18 =
+* New feature: use excerpt as message
+* Improvement: extended debug option
+* Added screen shot
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Removed blog/site URI workaround
 
 = 0.17 =
 * Workaround: blog/site URI
@@ -165,7 +192,7 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Improvement: option to use blog title as caption
 * Bugfix: handle *Do not add link* when publishing without draft
 * Bugfix: use settings of post author in stead of post editor
-* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated description and FAQ
 
 = 0.14 =
@@ -183,7 +210,7 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 = 0.11 =
 * New feature: suppress admin notices
 * New feature: select which users can use the plugin
-* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.10 =
 * Improvement: display category if available
@@ -198,17 +225,17 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 = 0.7 =
 * New feature: add links as page owner (requires extra permission)
-* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.6 =
 * New feature: user settings for donated and clean options
 * Admin notices jump to anchors
 * Updated FAQ
-* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.5 =
 * New feature: add links to page
-* Updated Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.4 =
 * New feature: support for remote publishing via XML-RPC
@@ -218,7 +245,7 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Updated description and FAQ
 
 = 0.3 =
-* Added Dutch (nl\_NL) and Flemisch (nl\_BE) translations
+* Added Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Logging Facebook errors when adding links
 * Improved styling of administration area
 
@@ -233,6 +260,9 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 * Development version
 
 == Upgrade Notice ==
+
+= 0.18 =
+New feature: use excerpt as message
 
 = 0.17 =
 Fix for blog/site URI
@@ -277,7 +307,7 @@ New feature: add links to page
 Support for remote publishing, bugfixes
 
 = 0.3 =
-Added Dutch and Flemisch translations
+Added Dutch and Flemish translations
 
 = 0.2 =
 Bugfixes

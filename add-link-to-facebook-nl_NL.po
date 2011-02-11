@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-10 11:05+0100\n"
+"PO-Revision-Date: 2011-02-11 10:26+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -86,8 +86,14 @@ msgstr "Voeg toe aan pagina:"
 msgid "Add as page owner:"
 msgstr "Voeg toe als pagina-eigenaar:"
 
-msgid "Use blog title as caption:"
-msgstr "Gebruik blog titel als onderschrift:"
+msgid "Requires manage pages permission"
+msgstr "Vereist manage pages toestemming"
+
+msgid "Use site title as caption:"
+msgstr "Gebruik site titel als onderschrift:"
+
+msgid "Use excerpt as message:"
+msgstr "Gebruik samenvatting als bericht:"
 
 msgid "Clean on deactivate:"
 msgstr "Opschonen bij deactiveren:"
@@ -97,6 +103,9 @@ msgstr "Alle gegevens, behalve link id's"
 
 msgid "I have donated to this plugin:"
 msgstr "Ik heb gedoneerd voor deze plugin:"
+
+msgid "Administrator options"
+msgstr "Administrator opties"
 
 msgid "Do not display notices:"
 msgstr "Toon geen meldingen:"
@@ -139,4 +148,7 @@ msgstr "Andere plugins"
 
 msgid "Do not add link to Facebook"
 msgstr "Voeg geen koppeling aan Facebook toe"
+
+msgid "Debug information"
+msgstr "Debug informatie"
 

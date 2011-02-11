@@ -11,8 +11,9 @@ define('c_al2fb_nonce_form', 'al2fb-nonce-form');
 
 define('c_al2fb_option_version', 'al2fb_version');
 define('c_al2fb_option_timeout', 'al2fb_timeout');
-define('c_al2fb_option_min_cap', 'al2fb_min_cap');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
+define('c_al2fb_option_min_cap', 'al2fb_min_cap');
+define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 
 define('c_al2fb_meta_client_id', 'al2fb_client_id');
 define('c_al2fb_meta_app_secret', 'al2fb_app_secret');
@@ -22,6 +23,7 @@ define('c_al2fb_meta_picture', 'al2fb_picture');
 define('c_al2fb_meta_page', 'al2fb_page');
 define('c_al2fb_meta_page_owner', 'al2fb_page_owner');
 define('c_al2fb_meta_caption', 'al2fb_caption');
+define('c_al2fb_meta_msg', 'al2fb_msg');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 
@@ -107,6 +109,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_page);
 				delete_user_meta($user_ID, c_al2fb_meta_page_owner);
 				delete_user_meta($user_ID, c_al2fb_meta_caption);
+				delete_user_meta($user_ID, c_al2fb_meta_msg);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 			}
@@ -177,6 +180,8 @@ if (!class_exists('WPAL2Facebook')) {
 						$_POST[c_al2fb_meta_page_owner] = null;
 					if (empty($_POST[c_al2fb_meta_caption]))
 						$_POST[c_al2fb_meta_caption] = null;
+					if (empty($_POST[c_al2fb_meta_msg]))
+						$_POST[c_al2fb_meta_msg] = null;
 					if (empty($_POST[c_al2fb_meta_clean]))
 						$_POST[c_al2fb_meta_clean] = null;
 					if (empty($_POST[c_al2fb_meta_donated]))
@@ -197,6 +202,7 @@ if (!class_exists('WPAL2Facebook')) {
 					update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
 					update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
 					update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
+					update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 					update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 					update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 
@@ -209,6 +215,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 						update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 						update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
+
+						if (isset($_REQUEST['debug']))
+							update_option(c_al2fb_option_siteurl, $_POST[c_al2fb_option_siteurl]);
 					}
 
 					// Show result
@@ -294,10 +303,15 @@ if (!class_exists('WPAL2Facebook')) {
 <?php
 			if (isset($_REQUEST['debug'])) {
 				global $wp_version;
+
+				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
+				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
+
 				echo '<div class="al2fb_debug"><table>';
 				echo '<tr><td>Time:</td><td>' . date('r') . '</td></tr>';
 				echo '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
 				echo '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
+				echo '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 				echo '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
 				echo '<tr><td>Blog address (home):</td><td>' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</td></tr>';
 				echo '<tr><td>WordPress address (site):</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</td></tr>';
@@ -416,6 +430,7 @@ if (!class_exists('WPAL2Facebook')) {
 						<label for="al2fb_page_owner"><?php _e('Add as page owner:', c_al2fb_text_domain); ?></label>
 					</th><td>
 						<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
+						<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
 					</td></tr>
 <?php
 				}
@@ -424,10 +439,16 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 ?>
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_caption"><?php _e('Use blog title as caption:', c_al2fb_text_domain); ?></label>
+				<label for="al2fb_caption"><?php _e('Use site title as caption:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_caption" name="<?php echo c_al2fb_meta_caption; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) echo ' checked="checked"'; ?> />
 				<br /><span class="al2fb_explanation"><?php echo htmlspecialchars(html_entity_decode(get_bloginfo('title'), ENT_QUOTES, $charset)); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_msg"><?php _e('Use excerpt as message:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_msg" name="<?php echo c_al2fb_meta_msg; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_msg, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -442,8 +463,12 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
+			</table>
 
 <?php		if (current_user_can('manage_options')) { ?>
+				<h3><?php _e('Administrator options', c_al2fb_text_domain); ?></h3>
+
+				<table class="form-table">
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_nonotice"><?php _e('Do not display notices:', c_al2fb_text_domain); ?></label>
 				</th><td>
@@ -476,8 +501,16 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 					</select>
 				</td></tr>
+
+<?php			if (isset($_REQUEST['debug'])) { ?>
+					<tr valign="top"><th scope="row">
+						<label for="al2fb_siteurl"><?php _e('Use site URL as request URI:', c_al2fb_text_domain); ?></label>
+					</th><td>
+						<input id="al2fb_siteurl" name="<?php echo c_al2fb_option_siteurl; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_siteurl)) echo ' checked="checked"'; ?> />
+					</td></tr>
+<?php			} ?>
+				</table>
 <?php		} ?>
-			</table>
 
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -510,7 +543,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</form>
 
 			<hr />
-			<a class="al2fb_debug" href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug'; ?>"><?php _e('Debug info', c_al2fb_text_domain); ?></a>
+			<a class="al2fb_debug" href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a>
 
 			</div>
 			</div>
@@ -573,9 +606,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Temporary workaround
 		function Redirect_uri() {
-			// WordPress Address -> get_site_url() -> directory with WordPress files
-			// Blog Address -> get_home_url() -> home page
-			if (strlen(get_site_url()) < strlen(get_home_url()))
+			// WordPress Address -> get_site_url() -> WordPress folder
+			// Blog Address -> get_home_url() -> Home page
+			if (get_option(c_al2fb_option_siteurl))
 				return get_site_url(null, '/');
 			else
 				return get_home_url(null, '/');
@@ -699,6 +732,22 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Add_link($post) {
+			// Get plain texts
+			$excerpt = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_excerpt));
+			$content = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_content));
+
+			// Get caption
+			$caption = '';
+			if (get_user_meta($post->post_author, c_al2fb_meta_caption, true))
+				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+
+			// Get body
+			$description = '';
+			if (get_user_meta($post->post_author, c_al2fb_meta_msg, true))
+				$description = $content;
+			else
+				$description = ($excerpt ? $excerpt : $content);
+
 			// Get link picture
 			$picture = '';	// Facebook selects
 			$picture_type = get_user_meta($post->post_author, c_al2fb_meta_picture_type, true);
@@ -714,9 +763,10 @@ if (!class_exists('WPAL2Facebook')) {
 			else if ($picture_type == 'custom')
 				$picture = get_user_meta($post->post_author, c_al2fb_meta_picture, true);
 
-			$caption = '';
-			if (get_user_meta($post->post_author, c_al2fb_meta_caption, true))
-				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+			// Get user note
+			$message = '';
+			if (get_user_meta($post->post_author, c_al2fb_meta_msg, true))
+				$message = $excerpt;
 
 			// Do not disturb WordPress
 			try {
@@ -737,15 +787,14 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build rquest
 				// http://developers.facebook.com/docs/reference/api/link/
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
-				$excerpt = do_shortcode($post->post_excerpt ? $post->post_excerpt : $post->post_content);
-				$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
 				$query = http_build_query(array(
 					'access_token' => $access_token,
 					'link' => get_permalink($post->ID),
 					'name' => $post->post_title,
 					'caption' => $caption,
-					'description' => $excerpt,
-					'picture' => $picture
+					'description' => $description,
+					'picture' => $picture,
+					'message' => $message
 				));
 
 				// Execute request
