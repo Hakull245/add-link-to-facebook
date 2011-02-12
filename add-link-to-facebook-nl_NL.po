@@ -1,0 +1,166 @@
+# Copyright (C) 2010 Marcel Bokhorst
+# This file is distributed under the same license as the Add Link to Facebook package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Add Link to Facebook\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
+"POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2011-02-12 11:42+0100\n"
+"Last-Translator: Marcel Bokhorst\n"
+"Language-Team: Marcel Bokhorst\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Settings updated"
+msgstr "Instellingen bijgewerkt"
+
+msgid "Authorized, go posting!"
+msgstr "Geautoriseerd, ga berichten schrijven!"
+
+msgid "needs configuration"
+msgstr "moet geconfigureerd worden"
+
+msgid "needs authorization"
+msgstr "moet geautoriseerd worden"
+
+msgid "Add Link to Facebook"
+msgstr "Add Link to Facebook"
+
+msgid "Administration"
+msgstr "Administratie"
+
+msgid "Easy setup"
+msgstr "Makkelijke instelling"
+
+msgid "To get an App ID and App Secret you have to create a Facebook application"
+msgstr "Voor een Toepassings-ID en App Secret moet u een Facebook applicatie maken"
+
+msgid "Click here to create"
+msgstr "Klik hier om te creëren"
+
+msgid "Anything you like, will appear as \"via ...\" below the message"
+msgstr "Alles wat u wilt, verschijnt als \"via ... \" onder het bericht"
+
+msgid "Web Site > Site URL:"
+msgstr "Website > Site URL:"
+
+msgid "App ID:"
+msgstr "Toepassings-ID:"
+
+msgid "App Secret:"
+msgstr "App Secret:"
+
+msgid "App Name:"
+msgstr "Toepassingsnaam:"
+
+msgid "Additional settings"
+msgstr "Aanvullende instellingen"
+
+msgid "Link picture:"
+msgstr "Koppelingsafbeelding:"
+
+msgid "WordPress logo"
+msgstr "WordPress logo"
+
+msgid "Featured post image"
+msgstr "Featured post image"
+
+msgid "Let Facebook select"
+msgstr "Laat Facebook kiezen"
+
+msgid "Custom picture below"
+msgstr "Eigen afbeelding onder"
+
+msgid "Custom picture URL:"
+msgstr "URL eigen afbeelding:"
+
+msgid "At least 50 x 50 pixels"
+msgstr "Minstens 50 x 50 pixels"
+
+msgid "Add to page:"
+msgstr "Voeg toe aan pagina:"
+
+msgid "Add as page owner:"
+msgstr "Voeg toe als pagina-eigenaar:"
+
+msgid "Requires manage pages permission"
+msgstr "Vereist manage pages toestemming"
+
+msgid "Use site title as caption:"
+msgstr "Gebruik blog titel als onderschrift:"
+
+msgid "Use excerpt as message:"
+msgstr "Gebruik samenvatting als bericht:"
+
+msgid "Clean on deactivate:"
+msgstr "Opschonen bij deactiveren:"
+
+msgid "All data, except link id's"
+msgstr "Alle gegevens, behalve link id's"
+
+msgid "I have donated to this plugin:"
+msgstr "Ik heb gedoneerd voor deze plugin:"
+
+msgid "Administrator options"
+msgstr "Administrator opties"
+
+msgid "Do not display notices:"
+msgstr "Toon geen meldingen:"
+
+msgid "Except on this page"
+msgstr "Behalve op deze pagina"
+
+msgid "Required capability to use plugin:"
+msgstr "Benodigde capability om deze plugin te gebruiken:"
+
+msgid "Use site URL as request URI:"
+msgstr "Gebruik blog URL als request URI:"
+
+msgid "Do not use cURL:"
+msgstr "Gebruik geen cURL:"
+
+msgid "Save"
+msgstr "Bewaar"
+
+msgid "Authorization"
+msgstr "Autorisatie"
+
+msgid "Links will be added to"
+msgstr "Koppelingen worden toegevoegd aan"
+
+msgid "Authorize"
+msgstr "Autoriseren"
+
+msgid "Privacy in the Sustainable Plugins Sponsorship Network"
+msgstr "Privacy in het Sustainable Plugins Sponsorship Network"
+
+msgid "Resources"
+msgstr "Bronnen"
+
+msgid "Frequently asked questions"
+msgstr "Vaak gestelde vragen"
+
+msgid "Support page"
+msgstr "Ondersteuningspagina"
+
+msgid "About the author"
+msgstr "Over de auteur"
+
+msgid "Other plugins"
+msgstr "Andere plugins"
+
+msgid "Do not add link to Facebook"
+msgstr "Voeg geen koppeling aan Facebook toe"
+
+msgid "Debug information"
+msgstr "Debug informatie"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
