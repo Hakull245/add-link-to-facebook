@@ -176,6 +176,7 @@ send me the debug output that appears at the top of the page using the [contact 
 
 = 0.21 =
 * Improvement: check for connectivity
+* Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.20 =
