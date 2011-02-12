@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.20
+Stable tag: 0.21
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -152,6 +152,11 @@ You should delete the *App ID* and *App Secret* from the plugin settings and cre
 This should not happen if you didn't delete the application.
 In that case please send me the debug information, see the last question for instructions.
 
+= I get 'Your server may not allow external connections' =
+
+This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
+and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available too. You may have to ask your hosting provider to enable at least one of the two.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
@@ -169,11 +174,16 @@ send me the debug output that appears at the top of the page using the [contact 
 
 == Changelog ==
 
+= 0.21 =
+* Improvement: check for connectivity
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 0.20 =
 * Improvement: WordPress logo if no featured or custom image
 * Improvement: moved authorization to top of page
 * Improvement: authorization only possible after configuration
 * Added debug option *Do not use cURL*
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.19 =
 * New feature: column in post list
@@ -273,6 +283,9 @@ send me the debug output that appears at the top of the page using the [contact 
 * Development version
 
 == Upgrade Notice ==
+
+= 0.21 =
+Check for connectivity
 
 = 0.20 =
 WordPress logo if no featured or custom image

@@ -42,6 +42,8 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 // - target="_blank"?
 // - Request app settings?
 // - Authorize: through plugin + log init
+// - debug info mail
+// - image post box
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -307,6 +309,10 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
 <?php
+			// Check connectivity
+			if (!ini_get('allow_url_fopen') && !function_exists('curl_init'))
+				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
+
 			if (isset($_REQUEST['debug'])) {
 				global $wp_version;
 
@@ -329,6 +335,8 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
 				echo '<tr><td>Redirect to:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</td></tr>';
 				echo '<tr><td>Authorized:</td><td>' . ($access_token ? 'Yes' : 'No') . '</td></tr>';
+				echo '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
+				echo '<tr><td>cURL</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
 				echo '</table></div>';
 			}
 ?>
@@ -906,11 +914,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check for errors
 			$status = false;
-			foreach ($http_response_header as $h)
-				if (strpos($h, 'HTTP/') === 0) {
-					$status = explode(' ', $h);
-					$status = intval($status[1]);
-				}
+			if (!empty($http_response_header))
+				foreach ($http_response_header as $h)
+					if (strpos($h, 'HTTP/') === 0) {
+						$status = explode(' ', $h);
+						$status = intval($status[1]);
+					}
 			if ($status == 200)
 				return $content;
 			else
