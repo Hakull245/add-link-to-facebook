@@ -41,6 +41,7 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 // - icon?
 // - target="_blank"?
 // - Request app settings?
+// - Check app permission
 // - Authorize: through plugin + log init
 // - debug info mail
 // - image post box
@@ -140,13 +141,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Handle Facebook authorization
 			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']);
+			$ref = parse_url($ref, PHP_URL_HOST);
 			$uri = $_SERVER['REQUEST_URI'];
-			if (strpos($ref, 'facebook.com/connect') &&
-				strpos($uri, basename(dirname($this->main_file))) === false &&
-				(strpos($uri, 'code=') || strpos($uri, 'error='))) {
+			if (strpos($ref, 'facebook') !== false && !isset($_REQUEST['al2fb_action'])) {
 				// Build new url
 				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
-				$url .= '&action=authorize&' . substr($uri, strpos($uri, '?') + 1);
+				$url .= '&al2fb_action=authorize&' . substr($uri, strpos($uri, '?') + 1);
 
 				// Debug info
 				update_option(c_al2fb_log_redir_ref, $ref);
@@ -171,9 +171,9 @@ if (!class_exists('WPAL2Facebook')) {
 			get_currentuserinfo();
 
 			// Check if action
-			if (isset($_REQUEST['action'])) {
+			if (isset($_REQUEST['al2fb_action'])) {
 				// Configuration
-				if ($_REQUEST['action'] == 'config') {
+				if ($_REQUEST['al2fb_action'] == 'config') {
 					// Check security
 					check_admin_referer(c_al2fb_nonce_form);
 
@@ -233,7 +233,7 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Authorization
-				else if ($_REQUEST['action'] == 'authorize') {
+				else if ($_REQUEST['al2fb_action'] == 'authorize') {
 					if (isset($_REQUEST['code'])) {
 						try {
 							$access_token = self::Get_token();
@@ -336,7 +336,7 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<tr><td>Redirect to:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</td></tr>';
 				echo '<tr><td>Authorized:</td><td>' . ($access_token ? 'Yes' : 'No') . '</td></tr>';
 				echo '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
-				echo '<tr><td>cURL</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
+				echo '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
 				echo '</table></div>';
 			}
 ?>
@@ -407,8 +407,8 @@ if (!class_exists('WPAL2Facebook')) {
 			</table>
 			</div>
 
-			<form method="post" action="">
-			<input type="hidden" name="action" value="config">
+			<form method="post" action="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)); ?>">
+			<input type="hidden" name="al2fb_action" value="config">
 			<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 
 			<table class="form-table">
