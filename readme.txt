@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.19
+Stable tag: 0.20
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -169,6 +169,12 @@ send me the debug output that appears at the top of the page using the [contact 
 
 == Changelog ==
 
+= 0.20 =
+* Improvement: WordPress logo if no featured or custom image
+* Improvement: moved authorization to top of page
+* Improvement: authorization only possible after configuration
+* Added debug option *Do not use cURL*
+
 = 0.19 =
 * New feature: column in post list
 * Change: reduced request time-out to 30 seconds
@@ -267,6 +273,9 @@ send me the debug output that appears at the top of the page using the [contact 
 * Development version
 
 == Upgrade Notice ==
+
+= 0.20 =
+WordPress logo if no featured or custom image
 
 = 0.19 =
 New feature: column in post list
