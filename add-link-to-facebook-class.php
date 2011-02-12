@@ -32,7 +32,10 @@ define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
 define('c_al2fb_meta_link_time', 'al2fb_facebook_link_time');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
+define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
 
+define('c_al2fb_log_redir_init', 'al2fb_redir_init');
+define('c_al2fb_log_redir_time', 'al2fb_redir_time');
 define('c_al2fb_log_redir_ref', 'al2fb_redir_ref');
 define('c_al2fb_log_redir_from', 'al2fb_redir_from');
 define('c_al2fb_log_redir_to', 'al2fb_redir_to');
@@ -40,11 +43,8 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 // To Do
 // - icon?
 // - target="_blank"?
-// - Request app settings?
-// - Check app permission
-// - Authorize: through plugin + log init
+// - Check app permissions
 // - debug info mail
-// - image post box
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -80,6 +80,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('transition_post_status', array(&$this, 'Transition_post_status'), 10, 3);
 				add_filter('manage_posts_columns', array(&$this, 'Manage_posts_columns'));
 				add_action('manage_posts_custom_column', array(&$this, 'Manage_posts_custom_column'), 10, 2);
+				add_action('add_meta_boxes', array(&$this, 'Add_meta_boxes'));
+				add_action('save_post', array(&$this, 'Save_post'));
 			}
 			add_action('xmlrpc_publish_post', array(&$this, 'Publish_post'));
 			add_action('app_publish_post', array(&$this, 'Publish_post'));
@@ -139,23 +141,34 @@ if (!class_exists('WPAL2Facebook')) {
 				wp_enqueue_style('al2fb_style');
 			}
 
+			// Initiate Facebook authorization
+			if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'init') {
+				// Debug info
+				update_option(c_al2fb_log_redir_init, date('r'));
+
+				// Redirect
+				wp_redirect(self::Authorize_url());
+				exit();
+			}
+
 			// Handle Facebook authorization
 			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']);
-			$ref = parse_url($ref, PHP_URL_HOST);
 			$uri = $_SERVER['REQUEST_URI'];
-			if (strpos($ref, 'facebook') !== false && !isset($_REQUEST['al2fb_action'])) {
+			if (strpos(parse_url($ref, PHP_URL_HOST), 'facebook') !== false &&
+				!isset($_REQUEST['al2fb_action']) &&
+				(strpos($uri, 'code=') !== false || strpos($uri, 'error=') !== false)) {
 				// Build new url
 				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 				$url .= '&al2fb_action=authorize&' . substr($uri, strpos($uri, '?') + 1);
 
 				// Debug info
+				update_option(c_al2fb_log_redir_time, date('r'));
 				update_option(c_al2fb_log_redir_ref, $ref);
 				update_option(c_al2fb_log_redir_from, $uri);
 				update_option(c_al2fb_log_redir_to, $url);
 
 				// Redirect
-				header('HTTP/1.1 302 Found');
-				header('Location: ' . $url);
+				wp_redirect($url);
 				exit();
 			}
 
@@ -323,6 +336,8 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<h3>' . __('Debug information', c_al2fb_text_domain) . '</h3>';
 				echo '<div class="al2fb_debug"><table>';
 				echo '<tr><td>Time:</td><td>' . date('r') . '</td></tr>';
+				echo '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . '</td></tr>';
+				echo '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name()) . '</td></tr>';
 				echo '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
 				echo '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
 				echo '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
@@ -331,6 +346,8 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<tr><td>WordPress address (site):</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</td></tr>';
 				echo '<tr><td>Redirect URI:</td><td>' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</td></tr>';
 				echo '<tr><td>Authorize URL:</td><td>' . htmlspecialchars(self::Authorize_url()) . '</td></tr>';
+				echo '<tr><td>Authorization start:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_init)) . '</td></tr>';
+				echo '<tr><td>Redirect time:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_time)) . '</td></tr>';
 				echo '<tr><td>Redirect referer:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</td></tr>';
 				echo '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
 				echo '<tr><td>Redirect to:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</td></tr>';
@@ -344,7 +361,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			<div class="al2fb_options">
 
-<?php		if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) &&
+<?php	   if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) &&
 				get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
 ?>
 				<hr />
@@ -368,14 +385,15 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 				<table>
 				<tr><td>
-				<form method="get" action="<?php echo self::Authorize_url(); ?>">
+				<form method="get" action="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)); ?>">
+				<input type="hidden" name="al2fb_action" value="init">
 				<p class="submit">
 				<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
 				</p>
 				</form>
 				</td>
 
-<?php			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
+<?php		   if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
 				<td>
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 				<input type="hidden" name="cmd" value="_s-xclick">
@@ -383,10 +401,10 @@ if (!class_exists('WPAL2Facebook')) {
 				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 				</form>
 				</td>
-<?php			} ?>
+<?php		   } ?>
 				</tr>
 				</table>
-<?php		} ?>
+<?php	   } ?>
 
 			<hr />
 			<a name="configure"></a>
@@ -527,7 +545,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 			</table>
 
-<?php		if (current_user_can('manage_options')) { ?>
+<?php	   if (current_user_can('manage_options')) { ?>
 				<h3><?php _e('Administrator options', c_al2fb_text_domain); ?></h3>
 
 				<table class="form-table">
@@ -564,7 +582,7 @@ if (!class_exists('WPAL2Facebook')) {
 					</select>
 				</td></tr>
 
-<?php			if (isset($_REQUEST['debug'])) { ?>
+<?php		   if (isset($_REQUEST['debug'])) { ?>
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_siteurl"><?php _e('Use site URL as request URI:', c_al2fb_text_domain); ?></label>
 					</th><td>
@@ -576,9 +594,9 @@ if (!class_exists('WPAL2Facebook')) {
 					</th><td>
 						<input id="al2fb_nocurl" name="<?php echo c_al2fb_option_nocurl; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_nocurl)) echo ' checked="checked"'; ?> />
 					</td></tr>
-<?php			} ?>
+<?php		   } ?>
 				</table>
-<?php		} ?>
+<?php	   } ?>
 
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -620,13 +638,13 @@ if (!class_exists('WPAL2Facebook')) {
 			<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
 			</ul>
-<?php		if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
+<?php	   if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
 			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 			</form>
-<?php		} ?>
+<?php	   } ?>
 			</div>
 <?php
 		}
@@ -755,6 +773,69 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
+		// Add post meta box
+		function Add_meta_boxes() {
+			add_meta_box(
+				'al2fb_meta',
+				__('Add Link to Facebook', c_al2fb_text_domain),
+				array(&$this,  'Generate_meta_box'),
+				'post');
+		}
+
+		// Display attached image selector
+		function Generate_meta_box() {
+			// Security
+			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+
+			// Get attached images
+			global $post;
+			$images = &get_children('post_type=attachment&post_mime_type=image&post_parent=' . $post->ID);
+			if (empty($images))
+				echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span>';
+			else {
+				// Display image selector
+				$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+
+				echo '<h4>' . __('Select link image:', c_al2fb_text_domain) . '</h4>';
+
+				echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_0"';
+				if (empty($image_id))
+					echo ' checked';
+				echo ' value="0">';
+				echo '<label for="al2fb_image_0">';
+				echo __('None', c_al2fb_text_domain) . '</label>';
+
+				foreach ($images as $attachment_id => $attachment) {
+					echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
+					if ($attachment_id == $image_id)
+						echo ' checked';
+					echo ' value="' . $attachment_id . '">';
+					echo '<label for="al2fb_image_' . $attachment_id . '">';
+					echo '<img src="' . wp_get_attachment_thumb_url($attachment_id) . '" alt="al2fb"></label>';
+				}
+			}
+		}
+
+		// Save selected attached image
+		function Save_post($post_id) {
+			// Security checks
+			if (!wp_verify_nonce($_POST[c_al2fb_nonce_form], plugin_basename(__FILE__)))
+				return $post_id;
+			if (!current_user_can('edit_post', $post_id))
+				return $post_id;
+
+			// Skip auto save
+			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+				return $post_id;
+
+			// Persist data
+			$image_id = $_POST['al2fb_image_id'];
+			if (empty($image_id))
+				delete_post_meta($post_id, c_al2fb_meta_image_id);
+			else
+				update_post_meta($post_id, c_al2fb_meta_image_id, $image_id);
+		}
+
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
 			// Process exclude flag
@@ -806,22 +887,27 @@ if (!class_exists('WPAL2Facebook')) {
 				$description = ($excerpt ? $excerpt : $content);
 
 			// Get link picture
-			$picture = 'http://s.wordpress.org/about/images/logo-blue/blue-s.png';
-			$picture_type = get_user_meta($post->post_author, c_al2fb_meta_picture_type, true);
-			if ($picture_type == 'featured') {
-				$picture_id = get_post_thumbnail_id($post->ID);
-				if ($picture_id) {
-					$picture = wp_get_attachment_image_src($picture_id, 'medium');
-					if ($picture && $picture[0])
-						$picture = $picture[0];
+			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+			if (!empty($image_id))
+				$picture = wp_get_attachment_thumb_url($image_id);
+			if (empty($picture)) {
+				$picture = 'http://s.wordpress.org/about/images/logo-blue/blue-s.png';
+				$picture_type = get_user_meta($post->post_author, c_al2fb_meta_picture_type, true);
+				if ($picture_type == 'featured' && function_exists('get_post_thumbnail_id')) {
+					$picture_id = get_post_thumbnail_id($post->ID);
+					if ($picture_id) {
+						$picture = wp_get_attachment_image_src($picture_id, 'medium');
+						if ($picture && $picture[0])
+							$picture = $picture[0];
+					}
 				}
-			}
-			else if ($picture_type == 'facebook')
-				$picture = '';
-			else if ($picture_type == 'custom') {
-				$custom = get_user_meta($post->post_author, c_al2fb_meta_picture, true);
-				if ($custom)
-					$picture = $custom;
+				else if ($picture_type == 'facebook')
+					$picture = '';
+				else if ($picture_type == 'custom') {
+					$custom = get_user_meta($post->post_author, c_al2fb_meta_picture, true);
+					if ($custom)
+						$picture = $custom;
+				}
 			}
 
 			// Get user note
