@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.25
+Stable tag: 0.26
 
 Automatically add links to published posts to your Facebook wall or pages
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in.
+Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
@@ -27,6 +27,7 @@ Translations are welcome, see the [FAQ](http://wordpress.org/extend/plugins/add-
 * Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
+* Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Your translation ...
 
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
@@ -58,18 +59,33 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea of what is what.
 
+= Why is the option 'Featured post image' grayed out? =
+
+Because your current WordPress theme doesn't support featured images.
+
+= How can I display featured images as Facebook link pictures? =
+
+1. Configure the plugin to use featured images
+1. Select a featured image in the WordPress post screen
+
+A few notes:
+
+* Not all Wordpress themes support featured images
+* You have to select a featured image before published a post
+* If there is no featured image set, the WordPress icon will be used
+
+As an alternate to feature images, you can use the Add Link to Facebook post meta box (since version 0.23).
+In this box you can select one of the images attached to the post.
+Selecting an image this way takes precedence over the other settings.
+
 = Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
 It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
 
-= Why doesn't Facebook display my custom link picture? =
+= Why doesn't Facebook display my link picture? =
 
 Maybe because it is smaller than 50 x 50 pixels.
-
-= Why is the option 'Featured post image' grayed out? =
-
-Because your current theme doesn't support featured images.
 
 = What happens when I update a post? =
 
@@ -157,6 +173,11 @@ You should delete the *App ID* and *App Secret* from the plugin settings and cre
 This should not happen if you didn't delete the application.
 In that case please send me the debug information, see the last question for instructions.
 
+= I get 'This API call requires a valid app_id' =
+
+You could try to re-authorize to fix this, but it should not happen.
+Please send me the debug information, see the last question for instructions.
+
 = I get 'Your server may not allow external connections' =
 
 This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
@@ -178,6 +199,16 @@ send me the debug output that appears at the top of the page using the [contact 
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.26 =
+* Improvement: styling of post meta box
+* Improvement: displaying posts with errors
+* Improvement: always showing post meta box
+* Improvement: change page and post as owner: re-authorize
+* Improvement: check if page still exists
+* Bug fix: request manage pages permission if needed
+* Updated description and FAQ
+* Added Afrikaans (afr\_AFR) translation by [Jeremy](http://www.primeimage.co.za/ "Jeremy")
 
 = 0.25 =
 * Improvement: workaround for Internet Explorer authorization problem
@@ -310,6 +341,9 @@ send me the debug output that appears at the top of the page using the [contact 
 * Development version
 
 == Upgrade Notice ==
+
+= 0.26 =
+Translation, style, display more errors, bugfix
 
 = 0.25 =
 Compatibility

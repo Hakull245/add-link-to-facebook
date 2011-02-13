@@ -87,3 +87,22 @@
 	border-color: gray;
 	font-size: smaller;
 }
+
+.al2fb_images {
+}
+
+.al2fb_image {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid gray;
+	margin-left: 10px;
+	padding: 5px;
+}
+
+.al2fb_image input {
+	margin: 0 0 5px 0;
+}
+
+.al2fb_image label {
+}

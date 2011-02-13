@@ -41,11 +41,13 @@ define('c_al2fb_log_redir_from', 'al2fb_redir_from');
 define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 
 // To Do
-// - icon?
+// - Icon?
 // - target="_blank"?
 // - Check app permissions
-// - debug info mail
-// - display post errors
+// - Embed WordPress icon
+// - WLW featured image
+// - Mail debug info
+// - Debug info: last/post errors?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -212,6 +214,13 @@ if (!class_exists('WPAL2Facebook')) {
 					if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) != $_POST[c_al2fb_meta_client_id] ||
 						get_user_meta($user_ID, c_al2fb_meta_app_secret, true) != $_POST[c_al2fb_meta_app_secret])
 						delete_user_meta($user_ID, c_al2fb_meta_access_token);
+
+					// Page changed
+					if ($_POST[c_al2fb_meta_page_owner] && !empty($_POST[c_al2fb_meta_page]) &&
+						$_POST[c_al2fb_meta_page] != get_user_meta($user_ID, c_al2fb_meta_page, true))
+						delete_user_meta($user_ID, c_al2fb_meta_access_token);
+
+					// Page owner changed
 					if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
 						delete_user_meta($user_ID, c_al2fb_meta_access_token);
 
@@ -285,6 +294,19 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<div class="error fade al2fb_error"><p>';
 					_e('Add Link to Facebook', c_al2fb_text_domain);
 					echo ' <a href="' . $url . '">' . $msg . '</a></p></div>';
+				}
+			}
+
+			// Check for errors
+			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 5));
+			while ($posts->have_posts()) {
+				$posts->next_post();
+				$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
+				if (!empty($error)) {
+					echo '<div id="message" class="error fade al2fb_error"><p>';
+					echo __('Add Link to Facebook', c_al2fb_text_domain) . ' - ';
+					edit_post_link($posts->post->post_title, null, null, $posts->post->ID);
+					echo ': ' . htmlspecialchars($error) . '</p></div>';
 				}
 			}
 		}
@@ -665,9 +687,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$url .= '&client_id=' . get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$url .= '&redirect_uri=' . urlencode(self::Redirect_uri());
 			$url .= '&scope=publish_stream,offline_access';
-			$url .= '&state=al2fb_authorize';
 			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
 				$url .= ',manage_pages';
+			$url .= '&state=al2fb_authorize';
 			return $url;
 		}
 
@@ -781,12 +803,11 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add post meta box
 		function Add_meta_boxes() {
-			if (function_exists('wp_get_attachment_thumb_url'))
-				add_meta_box(
-					'al2fb_meta',
-					__('Add Link to Facebook', c_al2fb_text_domain),
-					array(&$this,  'Generate_meta_box'),
-					'post');
+			add_meta_box(
+				'al2fb_meta',
+				__('Add Link to Facebook', c_al2fb_text_domain),
+				array(&$this,  'Generate_meta_box'),
+				'post');
 		}
 
 		// Display attached image selector
@@ -794,33 +815,48 @@ if (!class_exists('WPAL2Facebook')) {
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
-			// Get attached images
-			global $post;
-			$images = &get_children('post_type=attachment&post_mime_type=image&post_parent=' . $post->ID);
-			if (empty($images))
-				echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span>';
-			else {
-				// Display image selector
-				$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+			if (function_exists('wp_get_attachment_thumb_url')) {
+				// Get attached images
+				global $post;
+				$images = &get_children('post_type=attachment&post_mime_type=image&post_parent=' . $post->ID);
+				if (empty($images))
+					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span>';
+				else {
+					// Display image selector
+					$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
 
-				echo '<h4>' . __('Select link image:', c_al2fb_text_domain) . '</h4>';
+					// Header
+					echo '<h4>' . __('Select link image:', c_al2fb_text_domain) . '</h4>';
+					echo '<div class="al2fb_images">';
 
-				echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_0"';
-				if (empty($image_id))
-					echo ' checked';
-				echo ' value="0">';
-				echo '<label for="al2fb_image_0">';
-				echo __('None', c_al2fb_text_domain) . '</label>';
-
-				foreach ($images as $attachment_id => $attachment) {
-					echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
-					if ($attachment_id == $image_id)
+					// None
+					echo '<div class="al2fb_image">';
+					echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_0"';
+					if (empty($image_id))
 						echo ' checked';
-					echo ' value="' . $attachment_id . '">';
-					echo '<label for="al2fb_image_' . $attachment_id . '">';
-					echo '<img src="' . wp_get_attachment_thumb_url($attachment_id) . '" alt="al2fb"></label>';
+					echo ' value="0">';
+					echo '<br />';
+					echo '<label for="al2fb_image_0">';
+					echo __('None', c_al2fb_text_domain) . '</label>';
+					echo '</div>';
+
+					// Images
+					foreach ($images as $attachment_id => $attachment) {
+						echo '<div class="al2fb_image">';
+						echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
+						if ($attachment_id == $image_id)
+							echo ' checked';
+						echo ' value="' . $attachment_id . '">';
+						echo '<br />';
+						echo '<label for="al2fb_image_' . $attachment_id . '">';
+						echo '<img src="' . wp_get_attachment_thumb_url($attachment_id) . '" alt="al2fb"></label>';
+						echo '</div>';
+					}
+					echo '</div>';
 				}
 			}
+			else
+				echo '<span><em>wp_get_attachment_thumb_url</em> not available</span>';
 		}
 
 		// Save selected attached image
@@ -939,10 +975,15 @@ if (!class_exists('WPAL2Facebook')) {
 				// Get access token
 				$access_token = get_user_meta($post->post_author, c_al2fb_meta_access_token, true);
 				if ($page_id != 'me' && get_user_meta($post->post_author, c_al2fb_meta_page_owner, true)) {
+					$found = false;
 					$pages = self::Get_pages();
 					foreach ($pages->data as $page)
-					   if($page->id == $page_id)
-						  $access_token = $page->access_token;
+						if ($page->id == $page_id) {
+							$found = true;
+							$access_token = $page->access_token;
+						}
+					if (!$found)
+						throw new Exception('Page token not found id=' . $page_id);
 				}
 
 				// Build rquest
