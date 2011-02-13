@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.24
+Stable tag: 0.25
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -179,6 +179,9 @@ send me the debug output that appears at the top of the page using the [contact 
 
 == Changelog ==
 
+= 0.25 =
+* Improvement: workaround for Internet Explorer authorization problem
+
 = 0.24 =
 * Improvement: changed detecting Facebook redirect
 * Improvement: check if theme supports featured images
@@ -307,6 +310,9 @@ send me the debug output that appears at the top of the page using the [contact 
 * Development version
 
 == Upgrade Notice ==
+
+= 0.25 =
+Compatibility
 
 = 0.24 =
 Translation, compatibility

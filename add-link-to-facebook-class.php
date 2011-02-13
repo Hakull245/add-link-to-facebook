@@ -45,6 +45,7 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 // - target="_blank"?
 // - Check app permissions
 // - debug info mail
+// - display post errors
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -154,7 +155,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Handle Facebook authorization
 			parse_str($_SERVER['QUERY_STRING'], $query);
-			if (isset($query['state']) && $query['state'] == 'al2fb_authorize') {
+			if (isset($query['state']) &&
+				strpos($query['state'], 'al2fb_authorize') !== false) {
 				// Build new url
 				$query['state'] = '';
 				$query['al2fb_action'] = 'authorize';
