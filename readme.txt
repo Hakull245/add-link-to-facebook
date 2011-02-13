@@ -26,7 +26,7 @@ Translations are welcome, see the [FAQ](http://wordpress.org/extend/plugins/add-
 * English (en\_US), built-in, corrections are welcome
 * Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
-* Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Your translation ...
 
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
