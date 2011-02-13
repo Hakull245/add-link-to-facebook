@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.23
+Stable tag: 0.24
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -26,6 +26,7 @@ Translations are welcome, see the [FAQ](http://wordpress.org/extend/plugins/add-
 * English (en\_US), built-in, corrections are welcome
 * Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
+* Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Your translation ...
 
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
@@ -65,6 +66,10 @@ It also depends on support for the [Open Graph protocol](http://developers.faceb
 = Why doesn't Facebook display my custom link picture? =
 
 Maybe because it is smaller than 50 x 50 pixels.
+
+= Why is the option 'Featured post image' grayed out? =
+
+Because your current theme doesn't support featured images.
 
 = What happens when I update a post? =
 
@@ -173,6 +178,13 @@ send me the debug output that appears at the top of the page using the [contact 
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.24 =
+* Improvement: changed detecting Facebook redirect
+* Improvement: check if theme supports featured images
+* Improvement: extended debug information
+* Updated FAQ
+* Added Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.23 =
 * New feature: image select in post meta box
@@ -295,6 +307,9 @@ send me the debug output that appears at the top of the page using the [contact 
 * Development version
 
 == Upgrade Notice ==
+
+= 0.24 =
+Translation, compatibility
 
 = 0.23 =
 Image select in post meta box, compatibility

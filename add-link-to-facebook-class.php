@@ -151,20 +151,20 @@ if (!class_exists('WPAL2Facebook')) {
 				exit();
 			}
 
+
 			// Handle Facebook authorization
-			$ref = (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']);
-			$uri = $_SERVER['REQUEST_URI'];
-			if (strpos(parse_url($ref, PHP_URL_HOST), 'facebook') !== false &&
-				!isset($_REQUEST['al2fb_action']) &&
-				(strpos($uri, 'code=') !== false || strpos($uri, 'error=') !== false)) {
+			parse_str($_SERVER['QUERY_STRING'], $query);
+			if (isset($query['state']) && $query['state'] == 'al2fb_authorize') {
 				// Build new url
+				$query['state'] = '';
+				$query['al2fb_action'] = 'authorize';
 				$url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
-				$url .= '&al2fb_action=authorize&' . substr($uri, strpos($uri, '?') + 1);
+				$url .= '&' . http_build_query($query);
 
 				// Debug info
 				update_option(c_al2fb_log_redir_time, date('r'));
-				update_option(c_al2fb_log_redir_ref, $ref);
-				update_option(c_al2fb_log_redir_from, $uri);
+				update_option(c_al2fb_log_redir_ref, (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']));
+				update_option(c_al2fb_log_redir_from, $_SERVER['REQUEST_URI']);
 				update_option(c_al2fb_log_redir_to, $url);
 
 				// Redirect
@@ -318,6 +318,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
+			if (!current_theme_supports('post-thumbnails'))
+				$pic_featured .= ' disabled';
 ?>
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
@@ -339,6 +341,7 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . '</td></tr>';
 				echo '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name()) . '</td></tr>';
 				echo '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
+				echo '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT']) . '</td></tr>';
 				echo '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
 				echo '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 				echo '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
@@ -660,6 +663,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$url .= '&client_id=' . get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$url .= '&redirect_uri=' . urlencode(self::Redirect_uri());
 			$url .= '&scope=publish_stream,offline_access';
+			$url .= '&state=al2fb_authorize';
 			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
 				$url .= ',manage_pages';
 			return $url;
@@ -775,11 +779,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add post meta box
 		function Add_meta_boxes() {
-			add_meta_box(
-				'al2fb_meta',
-				__('Add Link to Facebook', c_al2fb_text_domain),
-				array(&$this,  'Generate_meta_box'),
-				'post');
+			if (function_exists('wp_get_attachment_thumb_url'))
+				add_meta_box(
+					'al2fb_meta',
+					__('Add Link to Facebook', c_al2fb_text_domain),
+					array(&$this,  'Generate_meta_box'),
+					'post');
 		}
 
 		// Display attached image selector
@@ -888,17 +893,24 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get link picture
 			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-			if (!empty($image_id))
+			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url'))
 				$picture = wp_get_attachment_thumb_url($image_id);
+
 			if (empty($picture)) {
+				// Default picture
 				$picture = 'http://s.wordpress.org/about/images/logo-blue/blue-s.png';
+
+				// Check picture type
 				$picture_type = get_user_meta($post->post_author, c_al2fb_meta_picture_type, true);
-				if ($picture_type == 'featured' && function_exists('get_post_thumbnail_id')) {
-					$picture_id = get_post_thumbnail_id($post->ID);
-					if ($picture_id) {
-						$picture = wp_get_attachment_image_src($picture_id, 'medium');
-						if ($picture && $picture[0])
-							$picture = $picture[0];
+				if ($picture_type == 'featured') {
+					if (current_theme_supports('post-thumbnails') &&
+						function_exists('get_post_thumbnail_id')) {
+						$picture_id = get_post_thumbnail_id($post->ID);
+						if ($picture_id) {
+							$picture = wp_get_attachment_image_src($picture_id, 'medium');
+							if ($picture && $picture[0])
+								$picture = $picture[0];
+						}
 					}
 				}
 				else if ($picture_type == 'facebook')
