@@ -186,6 +186,10 @@ Please send me the debug information, see the last question for instructions.
 This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
 and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available too. You may have to ask your hosting provider to enable at least one of the two.
 
+= I get 'cURL error ...' =
+
+Please help me to found out the cause by sending me the debug information, see the last question for instructions.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
@@ -207,7 +211,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Solved some PHP notices
 
 = 0.29 =
-* Added Italian (it\_IT) translation by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+* Added Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Moved language files to sub-folder
 * Updated description
