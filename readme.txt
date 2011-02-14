@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.28
+Stable tag: 0.29
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -16,7 +16,7 @@ The link title will be the post title. The link description will be the excerpt,
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
 There is support for multi user and network sites and shortcodes will be processed.
-It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered devices
+It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer").
 
 If you find this plugin useful, please rate it accordingly.
@@ -32,6 +32,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
+* Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -199,6 +200,19 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.29 =
+* Added Italian (it\_IT) translation by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Moved language files to sub-folder
+* Updated description
+* Hardened security
+* Reorganized source code
+* Improvement: notices only with minimum capability
+* Improvement: post list column only with minimum capability
+* Improvement: post meta box only with minimum capability
+* Improvement: using current user for debug info form
+* Improvement: post meta box disabled if link added
+
 = 0.28 =
 * New feature: first attached image as link picture
 * Updated description
@@ -352,6 +366,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.29 =
+Translation, security, usability
 
 = 0.28 =
 New feature: first attached image as link picture
