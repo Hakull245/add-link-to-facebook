@@ -137,6 +137,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Initialization
 		function Init() {
+			// Set default capability
+			if (!get_option(c_al2fb_option_min_cap))
+				update_option(c_al2fb_option_min_cap, 'edit_posts');
+
 			// Check user capability
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
 				if (is_admin()) {
@@ -153,10 +157,6 @@ if (!class_exists('WPAL2Facebook')) {
 						$css_url = $this->plugin_url . '/' . $css_name;
 					wp_register_style('al2fb_style', $css_url);
 					wp_enqueue_style('al2fb_style');
-
-					// Set default capability
-					if (!get_option(c_al2fb_option_min_cap))
-						update_option(c_al2fb_option_min_cap, 'edit_posts');
 
 					// Initiate Facebook authorization
 					if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'init') {
