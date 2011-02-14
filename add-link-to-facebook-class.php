@@ -49,9 +49,9 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // To Do
 // - Icon?
 // - target="_blank"?
-// - Check app permissions
+// - Check app permissions?
 // - Embed WordPress icon
-// - WLW featured image
+// - Update meta box after pdate media gallery?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -365,6 +365,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$pic_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
 			$pic_wordpress = ($pic_type == 'wordpress' ? ' checked' : '');
+			$pic_media = ($pic_type == 'media' ? ' checked' : '');
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
@@ -391,19 +392,19 @@ if (!class_exists('WPAL2Facebook')) {
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_debug_name"><strong><?php _e('Name:', c_al2fb_text_domain); ?></strong></label>
 				</th><td>
-					<input id="al2fb_debug_name" class="" name="al2fb_debug_name" type="text" value="" />
+					<input id="al2fb_debug_name" class="" name="<?php echo c_al2fb_mail_name; ?>" type="text" value="" />
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_debug_email"><strong><?php _e('E-mail:', c_al2fb_text_domain); ?></strong></label>
 				</th><td>
-					<input id="al2fb_debug_email" class="" name="al2fb_debug_email" type="text" value="<?php echo get_bloginfo('admin_email') ?>" />
+					<input id="al2fb_debug_email" class="" name="<?php echo c_al2fb_mail_email; ?>" type="text" value="<?php echo get_bloginfo('admin_email') ?>" />
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_debug_msg"><strong><?php _e('Message:', c_al2fb_text_domain); ?></strong></label>
 				</th><td>
-					<textarea id="al2fb_debug_msg" name="al2fb_debug_msg" rows="10" cols="50"></textarea>
+					<textarea id="al2fb_debug_msg" name="<?php echo c_al2fb_mail_msg; ?>" rows="10" cols="50"></textarea>
 				</td></tr>
 				</table>
 
@@ -528,6 +529,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_picture_type"><?php _e('Link picture:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="wordpress"<?php echo $pic_wordpress; ?>><?php _e('WordPress logo', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="media"<?php echo $pic_media; ?>><?php _e('First attached image', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br>
@@ -834,19 +836,19 @@ if (!class_exists('WPAL2Facebook')) {
 			add_meta_box(
 				'al2fb_meta',
 				__('Add Link to Facebook', c_al2fb_text_domain),
-				array(&$this,  'Generate_meta_box'),
+				array(&$this,  'Meta_box'),
 				'post');
 		}
 
 		// Display attached image selector
-		function Generate_meta_box() {
+		function Meta_box() {
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
 			if (function_exists('wp_get_attachment_thumb_url')) {
 				// Get attached images
 				global $post;
-				$images = &get_children('post_type=attachment&post_mime_type=image&post_parent=' . $post->ID);
+				$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
 				if (empty($images))
 					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span>';
 				else {
@@ -968,7 +970,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Check picture type
 				$picture_type = get_user_meta($post->post_author, c_al2fb_meta_picture_type, true);
-				if ($picture_type == 'featured') {
+				if ($picture_type == 'media') {
+					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
+					if (!empty($images))
+						$picture = wp_get_attachment_thumb_url($images[0]->ID);
+				}
+				else if ($picture_type == 'featured') {
 					if (current_theme_supports('post-thumbnails') &&
 						function_exists('get_post_thumbnail_id')) {
 						$picture_id = get_post_thumbnail_id($post->ID);
