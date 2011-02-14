@@ -968,11 +968,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Persist data
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
-				$image_id = $_POST['al2fb_image_id'];
-				if (empty($image_id))
-					delete_post_meta($post_id, c_al2fb_meta_image_id);
+				if (isset($_POST['al2fb_image_id']) && $_POST['al2fb_image_id'])
+					update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
 				else
-					update_post_meta($post_id, c_al2fb_meta_image_id, $image_id);
+					delete_post_meta($post_id, c_al2fb_meta_image_id);
 			}
 		}
 
@@ -1130,7 +1129,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Use cURL if available
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl))
-				return self::curl_file_get_contents($url, $query, $type, $timeout);
+				return self::Request_cURL($url, $query, $type, $timeout);
 
 			if (version_compare(PHP_VERSION, '5.2.1') < 0)
 				ini_set('default_socket_timeout', $timeout);
@@ -1184,7 +1183,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// cURL http request
-		function curl_file_get_contents($url, $query, $type, $timeout) {
+		function Request_cURL($url, $query, $type, $timeout) {
 			$c = curl_init();
 			curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
@@ -1196,15 +1195,16 @@ if (!class_exists('WPAL2Facebook')) {
 				curl_setopt($c, CURLOPT_POSTFIELDS, $query);
 			}
 			$content = curl_exec($c);
-			$status = curl_getinfo($c, CURLINFO_HTTP_CODE);
+			$errno = curl_errno($c);
+			$info = curl_getinfo($c);
 			curl_close($c);
 
-			if ($status == 200)
+			if ($errno === 0 && $info['http_code'] == 200)
 				return $content;
 			else {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
-				$msg = 'cURL error ' . $status . ': ' . $error;
+				$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
 				update_option(c_al2fb_last_error, $msg);
 				update_option(c_al2fb_last_error_time, date('c'));
 				throw new Exception($msg);
@@ -1213,9 +1213,18 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Generate debug info
 		function Debug_info() {
+			// Get current user
+			global $user_ID;
+			get_currentuserinfo();
+
+			// Get versions
 			global $wp_version;
 			$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 			$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
+
+			// Get charset, token
+			$charset = get_bloginfo('charset');
+			$access_token = get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 
 			$info = '<div class="al2fb_debug"><table border="1">';
 			$info .= '<tr><td>Time:</td><td>' . date('c') . '</td></tr>';
@@ -1238,6 +1247,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Authorized:</td><td>' . ($access_token ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>SSL:</td><td>' . (function_exists('openssl_sign') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option('c_al2fb_option_nocurl') ? 'Yes' : 'No') . '</td></tr>';
 
 			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 5));
