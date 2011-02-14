@@ -17,7 +17,8 @@ It is possible to configure a link image (WordPress icon, featured image or cust
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
 There is support for multi user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
-or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer").
+or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
+or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
