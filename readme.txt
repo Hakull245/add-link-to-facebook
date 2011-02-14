@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.26
+Stable tag: 0.27
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -189,16 +189,21 @@ You can write a comment on the [support page](http://blog.bokhorst.biz/5018/comp
 
 = How can I send the debug information? =
 
-Please go to the plugin page (via the *Tools* menu), click on the link *Debug information* at the bottom of the page and
-send me the debug output that appears at the top of the page using the [contact form](http://blog.bokhorst.biz/contact/ "contact form").
-**Do not** post the output on the support page, because it contains some sensitive information about your Facebook application
-(but not your App Secret and access token).
+Please go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
+Optionally fill in your name and describe the problem as accurate as possible and press the *Send* button.
 
 == Screenshots ==
 
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.27 =
+* Improvement: extended debug information
+* Improvement: option to e-mail debug information
+* Improvement: move debug information to resources
+* Improvement: removed re-authorize on change page
+* Updated FAQ
 
 = 0.26 =
 * Improvement: styling of post meta box
@@ -216,7 +221,7 @@ send me the debug output that appears at the top of the page using the [contact 
 = 0.24 =
 * Improvement: changed detecting Facebook redirect
 * Improvement: check if theme supports featured images
-* Improvement: extended debug information
+* Improvement: extended debug option
 * Updated FAQ
 * Added Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -224,7 +229,7 @@ send me the debug output that appears at the top of the page using the [contact 
 * New feature: image select in post meta box
 * Improvement: init authorization through plugin
 * Improvement: using *wp_redirect*
-* Improvement: extended debug option
+* Improvement: extended debug information
 * Bugfix: only calling *get_post_thumbnail_id* if supported
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
@@ -341,6 +346,9 @@ send me the debug output that appears at the top of the page using the [contact 
 * Development version
 
 == Upgrade Notice ==
+
+= 0.27 =
+Option to e-mail debug information
 
 = 0.26 =
 Translation, style, display more errors, bugfix

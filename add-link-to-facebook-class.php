@@ -39,6 +39,12 @@ define('c_al2fb_log_redir_time', 'al2fb_redir_time');
 define('c_al2fb_log_redir_ref', 'al2fb_redir_ref');
 define('c_al2fb_log_redir_from', 'al2fb_redir_from');
 define('c_al2fb_log_redir_to', 'al2fb_redir_to');
+define('c_al2fb_last_error', 'al2fb_last_error');
+define('c_al2fb_last_error_time', 'al2fb_last_error_time');
+
+define('c_al2fb_mail_name', 'al2fb_debug_name');
+define('c_al2fb_mail_email', 'al2fb_debug_email');
+define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // To Do
 // - Icon?
@@ -46,8 +52,6 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 // - Check app permissions
 // - Embed WordPress icon
 // - WLW featured image
-// - Mail debug info
-// - Debug info: last/post errors?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -147,7 +151,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Initiate Facebook authorization
 			if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'init') {
 				// Debug info
-				update_option(c_al2fb_log_redir_init, date('r'));
+				update_option(c_al2fb_log_redir_init, date('c'));
 
 				// Redirect
 				wp_redirect(self::Authorize_url());
@@ -166,7 +170,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$url .= '&' . http_build_query($query);
 
 				// Debug info
-				update_option(c_al2fb_log_redir_time, date('r'));
+				update_option(c_al2fb_log_redir_time, date('c'));
 				update_option(c_al2fb_log_redir_ref, (empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER']));
 				update_option(c_al2fb_log_redir_from, $_SERVER['REQUEST_URI']);
 				update_option(c_al2fb_log_redir_to, $url);
@@ -213,11 +217,6 @@ if (!class_exists('WPAL2Facebook')) {
 					// Invalidate access token
 					if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) != $_POST[c_al2fb_meta_client_id] ||
 						get_user_meta($user_ID, c_al2fb_meta_app_secret, true) != $_POST[c_al2fb_meta_app_secret])
-						delete_user_meta($user_ID, c_al2fb_meta_access_token);
-
-					// Page changed
-					if ($_POST[c_al2fb_meta_page_owner] && !empty($_POST[c_al2fb_meta_page]) &&
-						$_POST[c_al2fb_meta_page] != get_user_meta($user_ID, c_al2fb_meta_page, true))
 						delete_user_meta($user_ID, c_al2fb_meta_access_token);
 
 					// Page owner changed
@@ -270,9 +269,36 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 					}
 					else if (isset($_REQUEST['error'])) {
-						// error_reason, error, error_description
+						$msg = $_REQUEST['error_description'];
+						$msg .= ' reason=' . $_REQUEST['error_reason'];
+						$msg .= ' error=' . $_REQUEST['error'];
+						update_option(c_al2fb_last_error, $msg);
+						update_option(c_al2fb_last_error_time, date('c'));
 						echo '<div id="message" class="error fade al2fb_error"><p>' . $_REQUEST['error_description'] . '</p></div>';
 					}
+				}
+
+				// Mail debug info
+				else if ($_REQUEST['al2fb_action'] == 'mail') {
+					// Check security
+					check_admin_referer(c_al2fb_nonce_form);
+
+					// Build headers
+					$headers = 'From: ' . $_POST[c_al2fb_mail_name] . '<' . $_POST[c_al2fb_mail_email] . '>' . "\r\n";
+					$headers .= 'X-Mailer: AL2FB' . "\r\n";
+					$headers .= 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
+
+					// Build message
+					$message = '<html><head><title>AL2FB</title></head><body>';
+					$message .= '<p>' . nl2br(htmlspecialchars($_POST[c_al2fb_mail_msg])) . '</p>';
+					$message .= '<hr />';
+					$message .= self::Debug_info();
+					$message .= '</body></html>';
+					if (mail('marcel@bokhorst.biz', '[AL2FB] Debug information', $message, $headers))
+						echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
+					else
+						echo '<div id="message" class="error fade al2fb_error"><p>' . __('Sending debug information failed', c_al2fb_text_domain) . '</p></div>';
 				}
 			}
 
@@ -282,18 +308,18 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_option(c_al2fb_option_nonotice) ? strpos($uri, $url) !== false : true) {
 				if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) ||
 					!get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
-					$msg = __('needs configuration', c_al2fb_text_domain);
+					$notice = __('needs configuration', c_al2fb_text_domain);
 					$anchor = 'configure';
 				}
 				else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true)) {
-					$msg = __('needs authorization', c_al2fb_text_domain);
+					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
 				}
-				if (!empty($msg)) {
+				if (!empty($notice)) {
 					$url .= '#' . $anchor;
 					echo '<div class="error fade al2fb_error"><p>';
 					_e('Add Link to Facebook', c_al2fb_text_domain);
-					echo ' <a href="' . $url . '">' . $msg . '</a></p></div>';
+					echo ' <a href="' . $url . '">' . $notice . '</a></p></div>';
 				}
 			}
 
@@ -352,36 +378,40 @@ if (!class_exists('WPAL2Facebook')) {
 			if (!ini_get('allow_url_fopen') && !function_exists('curl_init'))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
 
+			// Debug information
 			if (isset($_REQUEST['debug'])) {
-				global $wp_version;
-
-				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
-				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
-
 				echo '<hr />';
-				echo '<h3>' . __('Debug information', c_al2fb_text_domain) . '</h3>';
-				echo '<div class="al2fb_debug"><table>';
-				echo '<tr><td>Time:</td><td>' . date('r') . '</td></tr>';
-				echo '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . '</td></tr>';
-				echo '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name()) . '</td></tr>';
-				echo '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
-				echo '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT']) . '</td></tr>';
-				echo '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
-				echo '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
-				echo '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
-				echo '<tr><td>Blog address (home):</td><td>' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</td></tr>';
-				echo '<tr><td>WordPress address (site):</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</td></tr>';
-				echo '<tr><td>Redirect URI:</td><td>' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</td></tr>';
-				echo '<tr><td>Authorize URL:</td><td>' . htmlspecialchars(self::Authorize_url()) . '</td></tr>';
-				echo '<tr><td>Authorization start:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_init)) . '</td></tr>';
-				echo '<tr><td>Redirect time:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_time)) . '</td></tr>';
-				echo '<tr><td>Redirect referer:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</td></tr>';
-				echo '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
-				echo '<tr><td>Redirect to:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</td></tr>';
-				echo '<tr><td>Authorized:</td><td>' . ($access_token ? 'Yes' : 'No') . '</td></tr>';
-				echo '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
-				echo '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
-				echo '</table></div>';
+				echo self::Debug_info();
+?>
+				<form method="post" action="">
+				<input type="hidden" name="al2fb_action" value="mail">
+				<?php wp_nonce_field(c_al2fb_nonce_form); ?>
+
+				<table class="form-table">
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_debug_name"><strong><?php _e('Name:', c_al2fb_text_domain); ?></strong></label>
+				</th><td>
+					<input id="al2fb_debug_name" class="" name="al2fb_debug_name" type="text" value="" />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_debug_email"><strong><?php _e('E-mail:', c_al2fb_text_domain); ?></strong></label>
+				</th><td>
+					<input id="al2fb_debug_email" class="" name="al2fb_debug_email" type="text" value="<?php echo get_bloginfo('admin_email') ?>" />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_debug_msg"><strong><?php _e('Message:', c_al2fb_text_domain); ?></strong></label>
+				</th><td>
+					<textarea id="al2fb_debug_msg" name="al2fb_debug_msg" rows="10" cols="50"></textarea>
+				</td></tr>
+				</table>
+
+				<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
+				</p>
+				</form>
+<?php
 			}
 ?>
 			<?php self::Resources(); ?>
@@ -630,9 +660,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</form>
 
-			<hr />
-			<a class="al2fb_debug" href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a>
-
 			</div>
 			</div>
 <?php
@@ -662,6 +689,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<ul>
 			<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
+			<li><a href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
 			</ul>
@@ -1063,8 +1091,12 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 			if ($status == 200)
 				return $content;
-			else
-				throw new Exception('Error ' . $status . ': ' . $this->php_error . ' ' . print_r($http_response_header, true));
+			else {
+				$msg = 'Error ' . $status . ': ' . $this->php_error . ' ' . print_r($http_response_header, true);
+				update_option(c_al2fb_last_error, $msg);
+				update_option(c_al2fb_last_error_time, date('c'));
+				throw new Exception($msg);
+			}
 		}
 
 		// Persist PHP errors
@@ -1093,8 +1125,58 @@ if (!class_exists('WPAL2Facebook')) {
 			else {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
-				throw new Exception('cURL error ' . $status . ': ' . $error);
+				$msg = 'cURL error ' . $status . ': ' . $error;
+				update_option(c_al2fb_last_error, $msg);
+				update_option(c_al2fb_last_error_time, date('c'));
+				throw new Exception($msg);
 			}
+		}
+
+		function Debug_info() {
+			global $wp_version;
+			$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
+			$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
+
+			$info = '<h3>' . __('Debug information', c_al2fb_text_domain) . '</h3>';
+			$info .= '<div class="al2fb_debug"><table>';
+			$info .= '<tr><td>Time:</td><td>' . date('c') . '</td></tr>';
+			$info .= '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . '</td></tr>';
+			$info .= '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name()) . '</td></tr>';
+			$info .= '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
+			$info .= '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT']) . '</td></tr>';
+			$info .= '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
+			$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
+			$info .= '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Blog address (home):</td><td>' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>WordPress address (site):</td><td>' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Redirect URI:</td><td>' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Authorize URL:</td><td>' . htmlspecialchars(self::Authorize_url()) . '</td></tr>';
+			$info .= '<tr><td>Authorization start:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_init)) . '</td></tr>';
+			$info .= '<tr><td>Redirect time:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_time)) . '</td></tr>';
+			$info .= '<tr><td>Redirect referer:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</td></tr>';
+			$info .= '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
+			$info .= '<tr><td>Redirect to:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</td></tr>';
+			$info .= '<tr><td>Authorized:</td><td>' . ($access_token ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option('c_al2fb_option_nocurl') ? 'Yes' : 'No') . '</td></tr>';
+
+			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 5));
+			while ($posts->have_posts()) {
+				$posts->next_post();
+				$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
+				if (!empty($error)) {
+					$info .= '<tr><td>Error:</td>';
+					$info .= '<td>' . htmlspecialchars($error) . '</td></tr>';
+					$info .= '<tr><td>Error time:</td>';
+					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_link_time, true)) . '</td></tr>';
+				}
+			}
+
+			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error)) . '</td></tr>';
+			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time)) . '</td></tr>';
+			$info .= '</table></div>';
+			return $info;
 		}
 
 		// Check environment
