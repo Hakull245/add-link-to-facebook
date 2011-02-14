@@ -1,0 +1,429 @@
+﻿=== Add Link to Facebook ===
+Contributors: Marcel Bokhorst, M66B
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
+Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
+Requires at least: 3.0
+Tested up to: 3.1
+Stable tag: 0.27
+
+Automatically add links to published posts to your Facebook wall or pages
+
+== Description ==
+
+Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in. The way links appear on Facebook can be customized.
+
+The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
+It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
+It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
+There is support for multi user and network sites and shortcodes will be processed.
+It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered devices
+or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer").
+
+**This plugin requires PHP 5 and WordPress 3.0 or better**
+
+Translations are welcome, see the [FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
+
+* English (en\_US), built-in, corrections are welcome
+* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
+* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
+* Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
+* Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
+* Your translation ...
+
+Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
+If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
+
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+
+== Installation ==
+
+*Using the WordPress dashboard*
+
+1. Login to your weblog
+1. Go to Plugins
+1. Select Add New
+1. Search for *Add Link to Facebook*
+1. Select Install
+1. Select Install Now
+1. Select Activate Plugin
+
+*Manual*
+
+1. Download and unzip the plugin
+1. Upload the entire add-link-to-facebook/ directory to the /wp-content/plugins/ directory
+1. Activate the plugin through the Plugins menu in WordPress
+
+== Frequently Asked Questions ==
+
+= What is a caption, message, etc? =
+
+Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea of what is what.
+
+= Why is the option 'Featured post image' grayed out? =
+
+Because your current WordPress theme doesn't support featured images.
+
+= How can I display featured images as Facebook link pictures? =
+
+1. Configure the plugin to use featured images
+1. Select a featured image in the WordPress post screen
+
+A few notes:
+
+* Not all Wordpress themes support featured images
+* You have to select a featured image before published a post
+* If there is no featured image set, the WordPress icon will be used
+
+As an alternate to feature images, you can use the Add Link to Facebook post meta box (since version 0.23).
+In this box you can select one of the images attached to the post.
+Selecting an image this way takes precedence over the other settings.
+
+= Which link picture will Facebook select? =
+
+Mostly the first picture in the post, but it depends on the theme and layout of your website.
+It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
+
+= Why doesn't Facebook display my link picture? =
+
+Maybe because it is smaller than 50 x 50 pixels.
+
+= What happens when I update a post? =
+
+If the link to the post was added already to your wall or page nothing,
+else a new link will be added. See also the next question.
+
+= How can I add a link to an existing post? =
+
+Change the post status temporarily to draft and publish the post again.
+
+= How about private / password protected posts? =
+
+Don't worry, no links to private posts will be added.
+
+= Are shortcodes being processed? =
+
+Yes, both in the excerpt and the post text.
+
+= Are multi-user and network sites supported? =
+
+Yes, each user can configure his/her own wall or page.
+
+= Is remote publishing supported? =
+
+Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
+So you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device (XML-RPC)
+or [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer") (Atom) to publish posts and
+still have links added to your wall or page automatically.
+Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
+
+= Which users can use this plugin? =
+
+Users with the *edit_posts* capability: all user roles, except subscriber.
+Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
+
+= How can I translate the plugin? =
+
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+= What is the custom field 'al2fb_facebook_link_id' for? =
+
+This is the Facebook identification of the added link.
+If you remove it, the link will be added again.
+
+= What is the custom field 'al2fb_facebook_exclude' for? =
+
+This is to remember you ticked the check box *Do not add link to Facebook*.
+
+= What is the custom field 'al2fb_facebook_error' for? =
+
+If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
+You can try to add the link again by updating the post.
+Please send me the message and follow the instruction in the last question.
+
+= I get 'Error validating application' =
+
+You have probably entered a wrong *App ID* or the application may be deleted.
+
+= I get 'Error validating client secret' =
+
+You have probably entered a wrong *App Secret*.
+
+= I get 'Given URL is not allowed by the Application configuration' =
+
+You have probably entered a wrong URL in the Facebook application setting *Web Site > Site URL*.
+
+= I get 'The user hasn't authorized the application to perform this action' =
+
+You have probably revoked the publishing permissions of the Facebook application.
+If you did this by accident, you can simply re-authorize the plugin.
+If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
+If you are the only user of the website, you can also disable the plugin.
+
+= I get 'Invalid access token signature' =
+
+You have probably reset the *App Secret*. You should re-enter it.
+
+= I get 'Error validating verification code' =
+
+You have probably deleted the Facebook application.
+You should delete the *App ID* and *App Secret* from the plugin settings and create a new Facebook application.
+This should not happen if you didn't delete the application.
+In that case please send me the debug information, see the last question for instructions.
+
+= I get 'This API call requires a valid app_id' =
+
+You could try to re-authorize to fix this, but it should not happen.
+Please send me the debug information, see the last question for instructions.
+
+= I get 'Your server may not allow external connections' =
+
+This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
+and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available too. You may have to ask your hosting provider to enable at least one of the two.
+
+= Where can I ask questions, report bugs and request features? =
+
+You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
+
+= How can I send the debug information? =
+
+Please go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
+Optionally fill in your name and describe the problem as accurate as possible and press the *Send* button.
+
+== Screenshots ==
+
+1. Added Link on Facebook
+
+== Changelog ==
+
+= 0.27 =
+* Improvement: extended debug information
+* Improvement: option to e-mail debug information
+* Improvement: move debug information to resources
+* Improvement: removed re-authorize on change page
+* Updated FAQ
+
+= 0.26 =
+* Improvement: styling of post meta box
+* Improvement: displaying posts with errors
+* Improvement: always showing post meta box
+* Improvement: change page and post as owner: re-authorize
+* Improvement: check if page still exists
+* Bug fix: request manage pages permission if needed
+* Updated description and FAQ
+* Added Afrikaans (afr\_AFR) translation by [Jeremy](http://www.primeimage.co.za/ "Jeremy")
+
+= 0.25 =
+* Improvement: workaround for Internet Explorer authorization problem
+
+= 0.24 =
+* Improvement: changed detecting Facebook redirect
+* Improvement: check if theme supports featured images
+* Improvement: extended debug option
+* Updated FAQ
+* Added Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.23 =
+* New feature: image select in post meta box
+* Improvement: init authorization through plugin
+* Improvement: using *wp_redirect*
+* Improvement: extended debug information
+* Bugfix: only calling *get_post_thumbnail_id* if supported
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.22 =
+* Improvement: better Facebook referer check
+
+= 0.21 =
+* Improvement: check for connectivity
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.20 =
+* Improvement: WordPress logo if no featured or custom image
+* Improvement: moved authorization to top of page
+* Improvement: authorization only possible after configuration
+* Added debug option *Do not use cURL*
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.19 =
+* New feature: column in post list
+* Change: reduced request time-out to 30 seconds
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated FAQ
+
+= 0.18 =
+* New feature: use excerpt as message
+* Improvement: extended debug option
+* Added screen shot
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Removed blog/site URI workaround
+
+= 0.17 =
+* Workaround: blog/site URI
+
+= 0.16 =
+* Improvement: better error handling
+
+= 0.15 =
+* Improvement: add links for newly published posts only
+* Improvement: register time of adding link
+* Improvement: better layout admin area
+* Improvement: using blog charset
+* Improvement: extended debug option
+* Improvement: enabled Atom Publishing Protocol
+* Improvement: option to use blog title as caption
+* Bugfix: handle *Do not add link* when publishing without draft
+* Bugfix: use settings of post author in stead of post editor
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated description and FAQ
+
+= 0.14 =
+* Improvement: check PHP version outside class
+
+= 0.13 =
+* Fix for *Error validating verification code*
+* Added debug option
+* Updated description and FAQ
+
+= 0.12 =
+* Added *ENT_QUOTES* to *htmlspecialchars* calls
+* Updated description
+
+= 0.11 =
+* New feature: suppress admin notices
+* New feature: select which users can use the plugin
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.10 =
+* Improvement: display category if available
+* Added some *htmlspecialchars* calls
+
+= 0.9 =
+* Improvement: display application name
+
+= 0.8 =
+* Improvement: No *Do not add link to Facebook* for subscribers
+* Updated description and FAQ
+
+= 0.7 =
+* New feature: add links as page owner (requires extra permission)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.6 =
+* New feature: user settings for donated and clean options
+* Admin notices jump to anchors
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.5 =
+* New feature: add links to page
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.4 =
+* New feature: support for remote publishing via XML-RPC
+* Bugfix: domains with path, including networks with sub-directories install
+* Bugfix: activation hook
+* Bugfix: some PHP notices
+* Updated description and FAQ
+
+= 0.3 =
+* Added Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Logging Facebook errors when adding links
+* Improved styling of administration area
+
+= 0.2 =
+* Bugfix: strip html tags from excerpt or message text
+* Bugfix: check for access token before adding links
+
+= 0.1 =
+* Initial release
+
+= 0.0 =
+* Development version
+
+== Upgrade Notice ==
+
+= 0.27 =
+Option to e-mail debug information
+
+= 0.26 =
+Translation, style, display more errors, bugfix
+
+= 0.25 =
+Compatibility
+
+= 0.24 =
+Translation, compatibility
+
+= 0.23 =
+Image select in post meta box, compatibility
+
+= 0.22 =
+Compatibility
+
+= 0.21 =
+Check for connectivity
+
+= 0.20 =
+WordPress logo if no featured or custom image
+
+= 0.19 =
+New feature: column in post list
+
+= 0.18 =
+New feature: use excerpt as message
+
+= 0.17 =
+Fix for blog/site URI
+
+= 0.16 =
+Better error handling
+
+= 0.15 =
+Improvements and bugfixes
+
+= 0.14 =
+Compatibility
+
+= 0.13 =
+Fix for 'Error validating verification code'
+
+= 0.12 =
+Small improvements
+
+= 0.11 =
+New features: suppress admin notices, select which users can use the plugin
+
+= 0.10 =
+Small improvements
+
+= 0.9 =
+Small improvement
+
+= 0.8 =
+Small improvement
+
+= 0.7 =
+New feature: add links as page owner
+
+= 0.6 =
+User settings for donated and clean options
+
+= 0.5 =
+New feature: add links to page
+
+= 0.4 =
+Support for remote publishing, bugfixes
+
+= 0.3 =
+Added Dutch and Flemish translations
+
+= 0.2 =
+Bugfixes
+
+= 0.1 =
+Initial version
