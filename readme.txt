@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.29
+Stable tag: 0.30
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -17,7 +17,8 @@ It is possible to configure a link image (WordPress icon, featured image or cust
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
 There is support for multi user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
-or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer").
+or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
+or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -200,6 +201,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.30 =
+* More informative cURL error messages
+* Improvement: extended debug information
+* Solved some PHP notices
+
 = 0.29 =
 * Added Italian (it\_IT) translation by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -366,6 +372,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.30 =
+More informative cURL error messages
 
 = 0.29 =
 Translation, security, usability
