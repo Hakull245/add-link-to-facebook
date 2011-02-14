@@ -55,6 +55,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Update meta box after update media gallery?
 // - Admin dashboard? how to get links to messages?
 // - get_post_thumbnail_id, wp_get_attachment_thumb_url, wp_get_attachment_image_src
+// - Delete links?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
