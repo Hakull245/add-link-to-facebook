@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.31
+Stable tag: 0.32
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -15,7 +15,7 @@ Automatically add links to posts that are being published to your Facebook wall 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
-There is support for multi user and network sites and shortcodes will be processed.
+There is support for multi-user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
 or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
@@ -34,6 +34,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
+* Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -98,10 +99,21 @@ else a new link will be added. See also the next question.
 = How can I add a link to an existing post? =
 
 Change the post status temporarily to draft and publish the post again.
+If you want to add a link again, you should remove the custom field *al2fb_facebook_link_id* first.
 
 = How about private / password protected posts? =
 
 Don't worry, no links to private posts will be added.
+
+= How can I use short URL's as Facebook link? =
+
+* Install and configure an URL shortener plugin. [URL Shortener](http://wordpress.org/extend/plugins/url-shortener/ "URL Shortener") is known to work.
+* Enable the option *Use short URL* (available since version 0.32)
+* You probably want to enable the option *Use site title as caption* too
+
+= I don't like the gear wheel application icon =
+
+You can change it in the Facebook application settings.
 
 = Are shortcodes being processed? =
 
@@ -115,8 +127,9 @@ Yes, each user can configure his/her own wall or page.
 
 Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
 So you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device (XML-RPC)
-or [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer") (Atom) to publish posts and
-still have links added to your wall or page automatically.
+or [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer") (Atom)
+or [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo") for Linux
+to publish posts and still have links added to your wall or page automatically.
 Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
 
 = Which users can use this plugin? =
@@ -148,7 +161,8 @@ Please send me the message and follow the instruction in the last question.
 
 = I get 'Error validating application' =
 
-You have probably entered a wrong *App ID* or the application may be deleted.
+You have probably entered a wrong *App ID* or the Facebook application may be deleted.
+If you didn't create a Facebook application yet, you should follow the instructions in the yellow box on the plugin page.
 
 = I get 'Error validating client secret' =
 
@@ -157,6 +171,17 @@ You have probably entered a wrong *App Secret*.
 = I get 'Given URL is not allowed by the Application configuration' =
 
 You have probably entered a wrong URL in the Facebook application setting *Web Site > Site URL*.
+
+Assuming you created a Facebook application successfully:
+
+* Go to the plugin page through the WordPress *Tools* menu
+* Copy the link after *Web Site > Site URL:*
+* Click on the *Click here to create* link
+* Do not fill anything in, but instead click on the *Back to My Apps* link
+* Click on the *Edit Settings* link and select the tab *Web Site*
+* Paste into the field *Site URL* and press *Save Changes*
+
+Now try to authorize again.
 
 = I get 'The user hasn't authorized the application to perform this action' =
 
@@ -204,6 +229,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.32 =
+* Added Turkish (tr\_TR) translation by [laztrix](http://www.diviksfilm.com/blog "laztrix")
+* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated description and FAQ
+* Improvement: less verbose error if no cURL error
+* New feature: use short URL, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
 
 = 0.31 =
 * Bugfix: enable menu for new instalations
@@ -379,6 +412,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.32 =
+New feature: use short URL, translations
 
 = 0.31 =
 Bugfix: enable menu for new instalations
