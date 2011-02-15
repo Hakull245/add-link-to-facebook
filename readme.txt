@@ -106,6 +106,13 @@ If you want to add a link again, you should remove the custom field *al2fb_faceb
 
 Don't worry, no links to private posts will be added.
 
+= I want to add links to my community/business page =
+
+Just go to the plugin settings through the WordPress *Tools* menu and
+select the page you want the links to be added to using the option *Add to page*.
+Maybe you want to check the option *Add as page owner* too. 
+If you do that, you have to re-authorize one time more, because extra Facebook permissions are needed for that.
+
 = How can I use short URL's as Facebook link? =
 
 * Install and configure an URL shortener plugin
@@ -217,6 +224,7 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 = I get 'cURL error ...' =
 
 Please help me to found out the cause by sending me the debug information, see the last question for instructions.
+You can find the cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
 
 = Where can I ask questions, report bugs and request features? =
 
