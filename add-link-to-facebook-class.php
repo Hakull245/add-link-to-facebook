@@ -25,6 +25,7 @@ define('c_al2fb_meta_page', 'al2fb_page');
 define('c_al2fb_meta_page_owner', 'al2fb_page_owner');
 define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
+define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 
@@ -47,7 +48,6 @@ define('c_al2fb_mail_email', 'al2fb_debug_email');
 define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // To Do
-// - Icon? how does it work?
 // - target="_blank"? how to do?
 // - Check app permissions? not possible :-(
 // - Check min image size
@@ -56,6 +56,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Admin dashboard? how to get links to messages?
 // - get_post_thumbnail_id, wp_get_attachment_thumb_url, wp_get_attachment_image_src
 // - Delete links?
+// - Use tage line
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -130,6 +131,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_page_owner);
 				delete_user_meta($user_ID, c_al2fb_meta_caption);
 				delete_user_meta($user_ID, c_al2fb_meta_msg);
+				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 			}
@@ -221,6 +223,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_caption] = null;
 			if (empty($_POST[c_al2fb_meta_msg]))
 				$_POST[c_al2fb_meta_msg] = null;
+			if (empty($_POST[c_al2fb_meta_shortlink]))
+				$_POST[c_al2fb_meta_shortlink] = null;
 			if (empty($_POST[c_al2fb_meta_clean]))
 				$_POST[c_al2fb_meta_clean] = null;
 			if (empty($_POST[c_al2fb_meta_donated]))
@@ -244,6 +248,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
+			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 
@@ -582,6 +587,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_shortlink"><?php _e('Use short URL:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
+				<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_clean" name="<?php echo c_al2fb_meta_clean; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_clean, true)) echo ' checked="checked"'; ?> />
@@ -871,8 +883,18 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 				<div class="al2fb_post_submit">
 				<input type="hidden" name="<?php echo c_al2fb_meta_exclude . '_prev'; ?>" value="<?php echo $exclude; ?>" />
-				<input type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
-				<span><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></span>
+				<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
+				<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
+<?php
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				if (!empty($link_id)) {
+?>
+					<br />
+					<input id="al2fb_delete" type="checkbox" name="al2fb_delete"/>
+					<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+<?php
+				}
+?>
 				</div>
 <?php
 			}
@@ -979,19 +1001,28 @@ if (!class_exists('WPAL2Facebook')) {
 		function Transition_post_status($new_status, $old_status, $post) {
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
 				// Process exclude flag
-				$prev_exclude = $_POST[c_al2fb_meta_exclude . '_prev'];
+				$prev_exclude = (empty($_POST[c_al2fb_meta_exclude . '_prev']) ? null : $_POST[c_al2fb_meta_exclude . '_prev']);
 				$exclude = (empty($_POST[c_al2fb_meta_exclude]) ? null : $_POST[c_al2fb_meta_exclude]);
 				if ($exclude)
 					update_post_meta($post->ID, c_al2fb_meta_exclude, $exclude);
 				else
 					delete_post_meta($post->ID, c_al2fb_meta_exclude);
 
-				// Check post status
-				if ($new_status == 'publish' &&
-					($new_status != $old_status ||
-					(!$exclude && $prev_exclude) ||
-					get_post_meta($post->ID, c_al2fb_meta_error, true)))
-					self::Publish_post($post->ID);
+				// Add or delete link
+				if (empty($_POST['al2fb_delete']) || !$_POST['al2fb_delete']) {
+					// Check post status
+					if ($new_status == 'publish' &&
+						($new_status != $old_status ||
+						(!$exclude && $prev_exclude) ||
+						get_post_meta($post->ID, c_al2fb_meta_error, true)))
+						self::Publish_post($post->ID);
+				}
+				else {
+					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+					if (!empty($link_id) &&
+						get_user_meta($post->post_author, c_al2fb_meta_access_token, true))
+						self::Delete_link($post);
+				}
 			}
 		}
 
@@ -1014,6 +1045,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add Link to Facebook
 		function Add_link($post) {
+			// Get url
+			if (get_user_meta($post->post_author, c_al2fb_meta_shortlink, true))
+				$link = wp_get_shortlink($post->ID);
+			if (empty($link))
+				$link = get_permalink($post->ID);
+
 			// Get plain texts
 			$excerpt = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_excerpt));
 			$content = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_content));
@@ -1073,31 +1110,15 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Do not disturb WordPress
 			try {
-				// Select page
+				// Build request
+				// http://developers.facebook.com/docs/reference/api/link/
 				$page_id = get_user_meta($post->post_author, c_al2fb_meta_page, true);
 				if (empty($page_id))
 					$page_id = 'me';
-
-				// Get access token
-				$access_token = get_user_meta($post->post_author, c_al2fb_meta_access_token, true);
-				if ($page_id != 'me' && get_user_meta($post->post_author, c_al2fb_meta_page_owner, true)) {
-					$found = false;
-					$pages = self::Get_pages();
-					foreach ($pages->data as $page)
-						if ($page->id == $page_id) {
-							$found = true;
-							$access_token = $page->access_token;
-						}
-					if (!$found)
-						throw new Exception('Page token not found id=' . $page_id);
-				}
-
-				// Build rquest
-				// http://developers.facebook.com/docs/reference/api/link/
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 				$query = http_build_query(array(
-					'access_token' => $access_token,
-					'link' => get_permalink($post->ID),
+					'access_token' => self::Get_access_token($post),
+					'link' => $link,
 					'name' => $post->post_title,
 					'caption' => $caption,
 					'description' => $description,
@@ -1107,10 +1128,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
-				$link = json_decode($response);
+				$fb_link = json_decode($response);
 
 				// Register link/date
-				add_post_meta($post->ID, c_al2fb_meta_link_id, $link->id);
+				add_post_meta($post->ID, c_al2fb_meta_link_id, $fb_link->id);
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				delete_post_meta($post->ID, c_al2fb_meta_error);
 			}
@@ -1118,6 +1139,54 @@ if (!class_exists('WPAL2Facebook')) {
 				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 			}
+		}
+
+		// Add Link to Facebook
+		function Delete_link($post) {
+			// Do not disturb WordPress
+			try {
+				// Build request
+				// http://developers.facebook.com/docs/reference/api/link/
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				$url = 'https://graph.facebook.com/' . $link_id;
+				$query = http_build_query(array(
+					'access_token' => self::Get_access_token($post),
+					'method' => 'delete'
+				));
+
+				// Execute request
+				$response = self::Request($url, $query, 'POST');
+				if ($response) {
+					// Delete meta data
+					delete_post_meta($post->ID, c_al2fb_meta_link_id);
+					delete_post_meta($post->ID, c_al2fb_meta_link_time);
+					delete_post_meta($post->ID, c_al2fb_meta_error);
+				}
+			}
+			catch (Exception $e) {
+				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage() . '?');
+				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+			}
+		}
+
+		// Get correct access token
+		function Get_access_token($post) {
+			$page_id = get_user_meta($post->post_author, c_al2fb_meta_page, true);
+			$access_token = get_user_meta($post->post_author, c_al2fb_meta_access_token, true);
+			if ($page_id &&
+				get_user_meta($post->post_author, c_al2fb_meta_page_owner, true)) {
+				$found = false;
+				$pages = self::Get_pages();
+				foreach ($pages->data as $page)
+					if ($page->id == $page_id) {
+						$found = true;
+						$access_token = $page->access_token;
+					}
+				if (!$found)
+					throw new Exception('Page token not found id=' . $page_id);
+			}
+
+			return $access_token;
 		}
 
 		// Generic http request
@@ -1204,7 +1273,10 @@ if (!class_exists('WPAL2Facebook')) {
 			else {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
-				$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
+				if ($errno || !$error)
+					$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
+				else
+					$msg = $error;
 				update_option(c_al2fb_last_error, $msg);
 				update_option(c_al2fb_last_error_time, date('c'));
 				throw new Exception($msg);
