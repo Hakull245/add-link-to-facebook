@@ -260,7 +260,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: use short URL, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
 
 = 0.31 =
-* Bugfix: enable menu for new instalations
+* Bugfix: enable menu for new installations
 
 = 0.30 =
 * More informative cURL error messages
@@ -441,7 +441,7 @@ New feature: delete existing Facebook link
 New feature: use short URL, translations
 
 = 0.31 =
-Bugfix: enable menu for new instalations
+Bugfix: enable menu for new installations
 
 = 0.30 =
 More informative cURL error messages
