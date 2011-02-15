@@ -223,7 +223,7 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 
 = I get 'cURL error ...' =
 
-Please help me to found out the cause by sending me the debug information, see the last question for instructions.
+Please help me to find out the cause by sending me the debug information, see the last question for instructions.
 You can find the cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
 
 = Where can I ask questions, report bugs and request features? =
