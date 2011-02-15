@@ -883,8 +883,18 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 				<div class="al2fb_post_submit">
 				<input type="hidden" name="<?php echo c_al2fb_meta_exclude . '_prev'; ?>" value="<?php echo $exclude; ?>" />
-				<input type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
-				<span><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></span>
+				<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
+				<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
+<?php
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				if (!empty($link_id)) {
+?>
+					<br />
+					<input id="al2fb_delete" type="checkbox" name="al2fb_delete"/>
+					<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+<?php
+				}
+?>
 				</div>
 <?php
 			}
@@ -969,8 +979,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Save selected attached image
 		function Save_post($post_id) {
 			// Security checks
-			if (!isset($_POST[c_al2fb_nonce_form]) ||
-				!wp_verify_nonce($_POST[c_al2fb_nonce_form], plugin_basename(__FILE__)))
+			if (!wp_verify_nonce($_POST[c_al2fb_nonce_form], plugin_basename(__FILE__)))
 				return $post_id;
 			if (!current_user_can('edit_post', $post_id))
 				return $post_id;
@@ -999,12 +1008,21 @@ if (!class_exists('WPAL2Facebook')) {
 				else
 					delete_post_meta($post->ID, c_al2fb_meta_exclude);
 
-				// Check post status
-				if ($new_status == 'publish' &&
-					($new_status != $old_status ||
-					(!$exclude && $prev_exclude) ||
-					get_post_meta($post->ID, c_al2fb_meta_error, true)))
-					self::Publish_post($post->ID);
+				// Add or delete link
+				if (empty($_POST['al2fb_delete']) || !$_POST['al2fb_delete']) {
+					// Check post status
+					if ($new_status == 'publish' &&
+						($new_status != $old_status ||
+						(!$exclude && $prev_exclude) ||
+						get_post_meta($post->ID, c_al2fb_meta_error, true)))
+						self::Publish_post($post->ID);
+				}
+				else {
+					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+					if (!empty($link_id) &&
+						get_user_meta($post->post_author, c_al2fb_meta_access_token, true))
+						self::Delete_link($post);
+				}
 			}
 		}
 
@@ -1092,30 +1110,14 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Do not disturb WordPress
 			try {
-				// Select page
+				// Build request
+				// http://developers.facebook.com/docs/reference/api/link/
 				$page_id = get_user_meta($post->post_author, c_al2fb_meta_page, true);
 				if (empty($page_id))
 					$page_id = 'me';
-
-				// Get access token
-				$access_token = get_user_meta($post->post_author, c_al2fb_meta_access_token, true);
-				if ($page_id != 'me' && get_user_meta($post->post_author, c_al2fb_meta_page_owner, true)) {
-					$found = false;
-					$pages = self::Get_pages();
-					foreach ($pages->data as $page)
-						if ($page->id == $page_id) {
-							$found = true;
-							$access_token = $page->access_token;
-						}
-					if (!$found)
-						throw new Exception('Page token not found id=' . $page_id);
-				}
-
-				// Build rquest
-				// http://developers.facebook.com/docs/reference/api/link/
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 				$query = http_build_query(array(
-					'access_token' => $access_token,
+					'access_token' => self::Get_access_token($post),
 					'link' => $link,
 					'name' => $post->post_title,
 					'caption' => $caption,
@@ -1137,6 +1139,54 @@ if (!class_exists('WPAL2Facebook')) {
 				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 			}
+		}
+
+		// Add Link to Facebook
+		function Delete_link($post) {
+			// Do not disturb WordPress
+			try {
+				// Build request
+				// http://developers.facebook.com/docs/reference/api/link/
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				$url = 'https://graph.facebook.com/' . $link_id;
+				$query = http_build_query(array(
+					'access_token' => self::Get_access_token($post),
+					'method' => 'delete'
+				));
+
+				// Execute request
+				$response = self::Request($url, $query, 'POST');
+				if ($response) {
+					// Delete meta data
+					delete_post_meta($post->ID, c_al2fb_meta_link_id);
+					delete_post_meta($post->ID, c_al2fb_meta_link_time);
+					delete_post_meta($post->ID, c_al2fb_meta_error);
+				}
+			}
+			catch (Exception $e) {
+				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage() . '?');
+				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+			}
+		}
+
+		// Get correct access token
+		function Get_access_token($post) {
+			$page_id = get_user_meta($post->post_author, c_al2fb_meta_page, true);
+			$access_token = get_user_meta($post->post_author, c_al2fb_meta_access_token, true);
+			if ($page_id &&
+				get_user_meta($post->post_author, c_al2fb_meta_page_owner, true)) {
+				$found = false;
+				$pages = self::Get_pages();
+				foreach ($pages->data as $page)
+					if ($page->id == $page_id) {
+						$found = true;
+						$access_token = $page->access_token;
+					}
+				if (!$found)
+					throw new Exception('Page token not found id=' . $page_id);
+			}
+
+			return $access_token;
 		}
 
 		// Generic http request
