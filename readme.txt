@@ -107,7 +107,9 @@ Don't worry, no links to private posts will be added.
 
 = How can I use short URL's as Facebook link? =
 
-* Install and configure an URL shortener plugin. [URL Shortener](http://wordpress.org/extend/plugins/url-shortener/ "URL Shortener") is known to work.
+* Install and configure an URL shortener plugin
+* [URL Shortener](http://wordpress.org/extend/plugins/url-shortener/ "URL Shortener") is known to work
+* Any short URL plugin that supports the filter *pre_get_shortlink* or *get_shortlink* will work
 * Enable the option *Use short URL* (available since version 0.32)
 * You probably want to enable the option *Use site title as caption* too
 
