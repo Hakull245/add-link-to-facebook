@@ -25,6 +25,7 @@ define('c_al2fb_meta_page', 'al2fb_page');
 define('c_al2fb_meta_page_owner', 'al2fb_page_owner');
 define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
+define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 
@@ -47,7 +48,6 @@ define('c_al2fb_mail_email', 'al2fb_debug_email');
 define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // To Do
-// - Icon? how does it work?
 // - target="_blank"? how to do?
 // - Check app permissions? not possible :-(
 // - Check min image size
@@ -56,6 +56,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Admin dashboard? how to get links to messages?
 // - get_post_thumbnail_id, wp_get_attachment_thumb_url, wp_get_attachment_image_src
 // - Delete links?
+// - Use tage line
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -130,6 +131,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_page_owner);
 				delete_user_meta($user_ID, c_al2fb_meta_caption);
 				delete_user_meta($user_ID, c_al2fb_meta_msg);
+				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 			}
@@ -221,6 +223,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_caption] = null;
 			if (empty($_POST[c_al2fb_meta_msg]))
 				$_POST[c_al2fb_meta_msg] = null;
+			if (empty($_POST[c_al2fb_meta_shortlink]))
+				$_POST[c_al2fb_meta_shortlink] = null;
 			if (empty($_POST[c_al2fb_meta_clean]))
 				$_POST[c_al2fb_meta_clean] = null;
 			if (empty($_POST[c_al2fb_meta_donated]))
@@ -244,6 +248,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
+			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 
@@ -579,6 +584,13 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_msg"><?php _e('Use excerpt as message:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_msg" name="<?php echo c_al2fb_meta_msg; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_msg, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_shortlink"><?php _e('Use short URL:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
+				<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -957,7 +969,8 @@ if (!class_exists('WPAL2Facebook')) {
 		// Save selected attached image
 		function Save_post($post_id) {
 			// Security checks
-			if (!wp_verify_nonce($_POST[c_al2fb_nonce_form], plugin_basename(__FILE__)))
+			if (!isset($_POST[c_al2fb_nonce_form]) ||
+				!wp_verify_nonce($_POST[c_al2fb_nonce_form], plugin_basename(__FILE__)))
 				return $post_id;
 			if (!current_user_can('edit_post', $post_id))
 				return $post_id;
@@ -979,7 +992,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Transition_post_status($new_status, $old_status, $post) {
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
 				// Process exclude flag
-				$prev_exclude = $_POST[c_al2fb_meta_exclude . '_prev'];
+				$prev_exclude = (empty($_POST[c_al2fb_meta_exclude . '_prev']) ? null : $_POST[c_al2fb_meta_exclude . '_prev']);
 				$exclude = (empty($_POST[c_al2fb_meta_exclude]) ? null : $_POST[c_al2fb_meta_exclude]);
 				if ($exclude)
 					update_post_meta($post->ID, c_al2fb_meta_exclude, $exclude);
@@ -1014,6 +1027,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add Link to Facebook
 		function Add_link($post) {
+			// Get url
+			if (get_user_meta($post->post_author, c_al2fb_meta_shortlink, true))
+				$link = wp_get_shortlink($post->ID);
+			if (empty($link))
+				$link = get_permalink($post->ID);
+
 			// Get plain texts
 			$excerpt = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_excerpt));
 			$content = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_content));
@@ -1097,7 +1116,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 				$query = http_build_query(array(
 					'access_token' => $access_token,
-					'link' => get_permalink($post->ID),
+					'link' => $link,
 					'name' => $post->post_title,
 					'caption' => $caption,
 					'description' => $description,
@@ -1107,10 +1126,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
-				$link = json_decode($response);
+				$fb_link = json_decode($response);
 
 				// Register link/date
-				add_post_meta($post->ID, c_al2fb_meta_link_id, $link->id);
+				add_post_meta($post->ID, c_al2fb_meta_link_id, $fb_link->id);
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				delete_post_meta($post->ID, c_al2fb_meta_error);
 			}
@@ -1204,7 +1223,10 @@ if (!class_exists('WPAL2Facebook')) {
 			else {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
-				$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
+				if ($errno || !$error)
+					$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
+				else
+					$msg = $error;
 				update_option(c_al2fb_last_error, $msg);
 				update_option(c_al2fb_last_error_time, date('c'));
 				throw new Exception($msg);
