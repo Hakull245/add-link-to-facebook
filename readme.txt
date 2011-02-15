@@ -91,6 +91,7 @@ It also depends on support for the [Open Graph protocol](http://developers.faceb
 = Why doesn't Facebook display my link picture? =
 
 Maybe because it is smaller than 50 x 50 pixels.
+Facebook might also have had trouble accessing the image.
 
 = What happens when I update a post? =
 
@@ -225,6 +226,11 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 
 Please help me to find out the cause by sending me the debug information, see the last question for instructions.
 You can find the cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
+
+cURL errors encountered so far:
+
+* Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
+* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
 
 = Where can I ask questions, report bugs and request features? =
 
