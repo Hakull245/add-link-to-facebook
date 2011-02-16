@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.33
+Stable tag: 0.34
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -111,7 +111,7 @@ Don't worry, no links to private posts will be added.
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
-Maybe you want to check the option *Add as page owner* too. 
+Maybe you want to check the option *Add as page owner* too.
 If you do that, you have to re-authorize one time more, because extra Facebook permissions are needed for that.
 
 = How can I use short URL's as Facebook link? =
@@ -232,6 +232,8 @@ cURL errors encountered so far:
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
 
+For both errors you need to contact your hosting provider.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
@@ -246,6 +248,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.34 =
+* New feature: select number of sentences to use
+* Improvement: more consequent image handling
+* Improvement: security hardened again
+* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.33 =
 * New feature: delete existing Facebook link from post screen
@@ -433,6 +442,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.34 =
+New feature: select number of sentences to use
 
 = 0.33 =
 New feature: delete existing Facebook link
