@@ -26,6 +26,7 @@ define('c_al2fb_meta_page_owner', 'al2fb_page_owner');
 define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
 define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
+define('c_al2fb_meta_sentences', 'al2fb_sentences');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 
@@ -54,9 +55,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Embed WordPress icon
 // - Update meta box after update media gallery?
 // - Admin dashboard? how to get links to messages?
-// - get_post_thumbnail_id, wp_get_attachment_thumb_url, wp_get_attachment_image_src
-// - Delete links?
-// - Use tage line
+// - Use tage line?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -132,6 +131,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_caption);
 				delete_user_meta($user_ID, c_al2fb_meta_msg);
 				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
+				delete_user_meta($user_ID, c_al2fb_meta_sentences);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 			}
@@ -225,6 +225,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_msg] = null;
 			if (empty($_POST[c_al2fb_meta_shortlink]))
 				$_POST[c_al2fb_meta_shortlink] = null;
+			if (empty($_POST[c_al2fb_meta_sentences]))
+				$_POST[c_al2fb_meta_sentences] = null;
 			if (empty($_POST[c_al2fb_meta_clean]))
 				$_POST[c_al2fb_meta_clean] = null;
 			if (empty($_POST[c_al2fb_meta_donated]))
@@ -249,6 +251,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
+			update_user_meta($user_ID, c_al2fb_meta_sentences, $_POST[c_al2fb_meta_sentences]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 
@@ -400,7 +403,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
-			if (!current_theme_supports('post-thumbnails'))
+			if (!current_theme_supports('post-thumbnails') ||
+				!function_exists('get_post_thumbnail_id') ||
+				!function_exists('wp_get_attachment_image_src'))
 				$pic_featured .= ' disabled';
 ?>
 			<div class="wrap">
@@ -591,6 +596,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
 				<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_sentence"><?php _e('Number of sentences to use:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_sentence" name="<?php echo c_al2fb_meta_sentences; ?>" text="text" value="<?php  echo get_user_meta($user_ID, c_al2fb_meta_sentences, true); ?>" />
+				<br /><span class="al2fb_explanation"><?php _e('Leave blank to let Facebook choose', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -930,7 +942,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
-			if (function_exists('wp_get_attachment_thumb_url')) {
+			if (function_exists('wp_get_attachment_image_src')) {
 				// Get attached images
 				global $post;
 				$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
@@ -960,6 +972,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Images
 					foreach ($images as $attachment_id => $attachment) {
+						$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+
 						echo '<div class="al2fb_image">';
 						echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
 						if ($attachment_id == $image_id)
@@ -968,20 +982,27 @@ if (!class_exists('WPAL2Facebook')) {
 						echo ' value="' . $attachment_id . '">';
 						echo '<br />';
 						echo '<label for="al2fb_image_' . $attachment_id . '">';
-						echo '<img src="' . wp_get_attachment_thumb_url($attachment_id) . '" alt="al2fb"></label>';
+						echo '<img src="' . $picture[0] . '" alt=""></label>';
+						echo '<br />';
+						echo '<span>' . $picture[1] . ' x ' . $picture[2] . '</span>';
 						echo '</div>';
 					}
 					echo '</div>';
 				}
 			}
+			else
+				echo 'wp_get_attachment_image_src does not exist';
 		}
 
 		// Save selected attached image
 		function Save_post($post_id) {
 			// Security checks
-			if (!wp_verify_nonce($_POST[c_al2fb_nonce_form], plugin_basename(__FILE__)))
+			$nonce = (isset($_POST[c_al2fb_nonce_form]) ? $_POST[c_al2fb_nonce_form] : null);
+			if (!wp_verify_nonce($nonce, plugin_basename(__FILE__)))
 				return $post_id;
 			if (!current_user_can('edit_post', $post_id))
+				return $post_id;
+			if (!current_user_can(get_option(c_al2fb_option_min_cap)))
 				return $post_id;
 
 			// Skip auto save
@@ -1055,6 +1076,25 @@ if (!class_exists('WPAL2Facebook')) {
 			$excerpt = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_excerpt));
 			$content = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_content));
 
+			// Get number of configured sentences
+			$sentences = intval(get_user_meta($post->post_author, c_al2fb_meta_sentences, true));
+			if ($sentences) {
+				$lines = explode('.', $content);
+				if ($lines) {
+					$count = 0;
+					$content = '';
+					foreach ($lines as $sentence) {
+						$content .= $sentence;
+						if ($count + 1 < count($lines))
+							$content .= '.';
+						if ($sentence)
+							$count++;
+						if ($count >= $sentences)
+							break;
+					}
+				}
+			}
+
 			// Get caption
 			$caption = '';
 			if (get_user_meta($post->post_author, c_al2fb_meta_caption, true))
@@ -1080,15 +1120,16 @@ if (!class_exists('WPAL2Facebook')) {
 				$picture_type = get_user_meta($post->post_author, c_al2fb_meta_picture_type, true);
 				if ($picture_type == 'media') {
 					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
-					if (!empty($images))
-						$picture = wp_get_attachment_thumb_url($images[0]->ID);
+					if (!empty($images) && function_exists('wp_get_attachment_image_src'))
+						$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
 				}
 				else if ($picture_type == 'featured') {
 					if (current_theme_supports('post-thumbnails') &&
-						function_exists('get_post_thumbnail_id')) {
+						function_exists('get_post_thumbnail_id') &&
+						function_exists('wp_get_attachment_image_src')) {
 						$picture_id = get_post_thumbnail_id($post->ID);
 						if ($picture_id) {
-							$picture = wp_get_attachment_image_src($picture_id, 'medium');
+							$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
 							if ($picture && $picture[0])
 								$picture = $picture[0];
 						}
