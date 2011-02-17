@@ -48,15 +48,20 @@
 }
 
 .al2fb_client_id {
-	width: 300px;
+	width: 350px;
 }
 
 .al2fb_app_secret {
-	width: 300px;
+	width: 350px;
 }
 
 .al2fb_picture {
 	width: 350px;
+}
+
+.al2fb_numeric {
+	width: 50px;
+	text-align: right;
 }
 
 .al2fb_explanation {

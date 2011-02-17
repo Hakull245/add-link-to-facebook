@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.33
+Stable tag: 0.36
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -83,6 +83,26 @@ As an alternate to feature images, you can use the Add Link to Facebook post met
 In this box you can select one of the images attached to the post.
 Selecting an image this way takes precedence over the other settings.
 
+= Is this plugin compatible with my theme? =
+
+This plugin is compatible with any theme, but featured images can only be used as link picture when your theme supports featured images.
+
+= Is this plugin compatible with plugin xxx? =
+
+Probably yes, but it all depends on how the plugin works.
+
+Auto posting plugins will work if one of the following actions is used:
+
+* <em>transition_post_status</em>
+* <em>xmlrpc_publish_post</em>
+* <em>app_publish_post</em>
+
+This plugin is known to be incompatible with:
+
+* [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+
+If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+
 = Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
@@ -100,7 +120,7 @@ else a new link will be added. See also the next question.
 
 = How can I add a link to an existing post? =
 
-Change the post status temporarily to draft and publish the post again.
+Change the post status temporarily to draft, update the post and publish the post again.
 If you want to add a link again, you should remove the custom field *al2fb_facebook_link_id* first.
 
 = How about private / password protected posts? =
@@ -111,7 +131,7 @@ Don't worry, no links to private posts will be added.
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
-Maybe you want to check the option *Add as page owner* too. 
+Maybe you want to check the option *Add as page owner* too.
 If you do that, you have to re-authorize one time more, because extra Facebook permissions are needed for that.
 
 = How can I use short URL's as Facebook link? =
@@ -158,11 +178,18 @@ Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact for
 = What is the custom field 'al2fb_facebook_link_id' for? =
 
 This is the Facebook identification of the added link.
-If you remove it, the link will be added again.
+
+= What is the custom field 'al2fb_facebook_link_time' for? =
+
+This is the time (UTC) the link was added to Facebook or the time of the last error.
 
 = What is the custom field 'al2fb_facebook_exclude' for? =
 
 This is to remember you ticked the check box *Do not add link to Facebook*.
+
+= What is the custom field 'al2fb_facebook_image_id' for? =
+
+This is to remember the image you have selected as link picture.
 
 = What is the custom field 'al2fb_facebook_error' for? =
 
@@ -230,7 +257,10 @@ You can find the cURL error codes on the [libcurl error page](http://curl.haxx.s
 cURL errors encountered so far:
 
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
+* Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
+
+For these errors you need to contact your hosting provider.
 
 = Where can I ask questions, report bugs and request features? =
 
@@ -246,6 +276,28 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.36 =
+* Bugfix: pre-authorization check only when safe mode off
+* Improvement: extended debug information
+* Improvement: trimming input fields
+
+= 0.35 =
+* New feature: integrate comments from Facebook (beta!)
+* Improvement: better layout of description to create application
+* Improvement: pre-authorization check
+* Improvement: added a few *stripslashes*
+* Improvement: assume delete succeeded
+* Bugfix: site wide options can be set again
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.34 =
+* New feature: select number of sentences to use
+* Improvement: more consequent image handling
+* Improvement: security hardened again
+* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.33 =
 * New feature: delete existing Facebook link from post screen
@@ -433,6 +485,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.36 =
+Bugfix, improvements
+
+= 0.35 =
+New feature: integrate comments from Facebook, improvements, bugfix
+
+= 0.34 =
+New feature: select number of sentences to use
 
 = 0.33 =
 New feature: delete existing Facebook link
