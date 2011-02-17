@@ -174,8 +174,12 @@ if (!class_exists('WPAL2Facebook')) {
 						$auth_url = self::Authorize_url();
 						try {
 							// Check
-							$response = self::Request($auth_url, '', 'GET');
-							update_option(c_al2fb_log_redir_check, date('c'));
+							if (ini_get('safe_mode') || ini_get('open_basedir'))
+								update_option(c_al2fb_log_redir_check, 'No');
+							else {
+								$response = self::Request($auth_url, '', 'GET');
+								update_option(c_al2fb_log_redir_check, date('c'));
+							}
 							// Redirect
 							wp_redirect($auth_url);
 							exit();
@@ -256,7 +260,10 @@ if (!class_exists('WPAL2Facebook')) {
 			if (empty($_POST[c_al2fb_meta_donated]))
 				$_POST[c_al2fb_meta_donated] = null;
 
-			$_POST[c_al2fb_meta_picture] = stripslashes($_POST[c_al2fb_meta_picture]);
+			$_POST[c_al2fb_meta_client_id] = trim($_POST[c_al2fb_meta_client_id]);
+			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
+			$_POST[c_al2fb_meta_picture] = trim(stripslashes($_POST[c_al2fb_meta_picture]));
+			$_POST[c_al2fb_meta_sentences] = trim($_POST[c_al2fb_meta_sentences]);
 
 			// Invalidate access token
 			if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) != $_POST[c_al2fb_meta_client_id] ||
@@ -1432,8 +1439,12 @@ if (!class_exists('WPAL2Facebook')) {
 			$c = curl_init();
 			curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
-			curl_setopt($c, CURLOPT_MAXREDIRS, 10);
-			curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
+
+			if (!ini_get('safe_mode') && !ini_get('open_basedir')) {
+				curl_setopt($c, CURLOPT_MAXREDIRS, 10);
+				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
+			}
+
 			if ($type == 'GET')
 				curl_setopt($c, CURLOPT_URL, $url . ($query ? '?' . $query : ''));
 			else {
@@ -1481,6 +1492,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . '</td></tr>';
 			$info .= '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name()) . '</td></tr>';
 			$info .= '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
+			$info .= '<tr><td>safe_mode:</td><td>' . (ini_get('safe_mode') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>open_basedir:</td><td>' . ini_get('open_basedir') . '</td></tr>';
 			$info .= '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT']) . '</td></tr>';
 			$info .= '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
 			$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
