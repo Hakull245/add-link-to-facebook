@@ -1012,6 +1012,8 @@ if (!class_exists('WPAL2Facebook')) {
 			// Todo: security
 			// Todo: cache time
 			// Todo: post age
+			// Todo: post count
+			// Todo: recent comments
 			$post = get_post($post_ID);
 
 			// Check if enabled
@@ -1052,6 +1054,7 @@ if (!class_exists('WPAL2Facebook')) {
 									$new->comment_parent = 0;
 									$new->user_id = 0;
 									$comments[] = $new;
+									$post->comment_count++;
 								}
 
 								// Sort comments by time
