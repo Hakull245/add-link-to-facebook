@@ -12,7 +12,7 @@ Automatically add links to published posts to your Facebook wall or pages
 
 Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in. The way links appear on Facebook can be customized.
 
-**Beta:** import Facebook comments on added links to Wordpress.
+**Beta:** integrate Facebook comments on added links into Wordpress.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
