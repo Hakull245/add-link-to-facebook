@@ -103,6 +103,11 @@ This plugin is known to be incompatible with:
 
 If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
+= To which wall will a link be added? =
+
+Always to the wall of the post author, if configured.
+Even if somebody else is editting the post.
+
 = Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
