@@ -825,7 +825,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// http://developers.facebook.com/docs/authentication/permissions
 			$url = 'https://graph.facebook.com/oauth/authorize';
-			$url .= '&client_id=' . get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+			$url .= '?client_id=' . get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$url .= '&redirect_uri=' . urlencode(self::Redirect_uri());
 			$url .= '&scope=publish_stream,offline_access';
 			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
