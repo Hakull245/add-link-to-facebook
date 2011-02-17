@@ -262,6 +262,15 @@ cURL errors encountered so far:
 
 For these errors you need to contact your hosting provider.
 
+= I get 'HTTP 400 Bad Request' =
+
+You are probably using Microsoft Internet Explorer.
+This browser has the bad habbit not to display the content
+if there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
+Actually you are most probably having one of the above errors, but you cannot see which one.
+You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
+if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
+
 = Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
