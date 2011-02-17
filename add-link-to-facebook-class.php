@@ -1438,12 +1438,12 @@ if (!class_exists('WPAL2Facebook')) {
 		function Request_cURL($url, $query, $type, $timeout) {
 			$c = curl_init();
 			curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 
 			if (!ini_get('safe_mode') && !ini_get('open_basedir')) {
+				curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 				curl_setopt($c, CURLOPT_MAXREDIRS, 10);
-				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
 			}
+			curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
 
 			if ($type == 'GET')
 				curl_setopt($c, CURLOPT_URL, $url . ($query ? '?' . $query : ''));
