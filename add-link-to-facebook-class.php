@@ -10,7 +10,7 @@ define('c_al2fb_text_domain', 'add-link-to-facebook');
 define('c_al2fb_nonce_form', 'al2fb-nonce-form');
 
 // Shared app
-define('c_al2fb_app_id', '190307754334008');
+define('c_al2fb_app_id', '191927664162191');
 define('c_al2fb_app_url', 'http://wp-al2fb.appspot.com/');
 define('c_al2fb_app_version', '1');
 
