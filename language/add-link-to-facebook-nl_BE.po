@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-17 12:21+0100\n"
+"PO-Revision-Date: 2011-02-18 17:11+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -37,6 +37,12 @@ msgstr "Uw server staat wellicht geen externe verbindingen toe"
 
 msgid "Easy setup"
 msgstr "Makkelijke instelling"
+
+msgid "Use shared Facebook application:"
+msgstr "Gebruik gedeelde Facebook applicatie:"
+
+msgid "Simple, but less secure"
+msgstr "Simpel, maar minder veilig"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
 msgstr "Voor een Toepassings-ID en App Secret moet u een Facebook applicatie maken"
@@ -223,4 +229,13 @@ msgstr "Integreer berichten van Facebook:"
 
 msgid "on Facebook"
 msgstr "op Facebook"
+
+msgid "Refresh Facebook comments every:"
+msgstr "Ververs Facebook berichten elke:"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Default every 10 minutes"
+msgstr "Standaard elke 10 minuten"
 

@@ -25,9 +25,14 @@
 }
 
 .al2fb_instructions {
+	margin-top: 20px;
 	padding: 10px;
 	border: 1px solid #CCCCCC;
 	background-color: #FFFEEB;
+}
+
+.al2fb_instructions h4 {
+	text-decoration: underline;
 }
 
 .al2fb_instructions table {

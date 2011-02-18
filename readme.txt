@@ -12,8 +12,6 @@ Automatically add links to published posts to your Facebook wall or pages
 
 Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in. The way links appear on Facebook can be customized.
 
-**Beta:** integrate Facebook comments on added links into Wordpress.
-
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
@@ -21,6 +19,11 @@ There is support for multi-user and network sites and shortcodes will be process
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
 or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
+
+**Beta features:**
+
+* Really simple setup using a shared Facebook application
+* Integrate Facebook comments on added links into Wordpress
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -38,6 +41,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
+* German (de\_DE) translation by *Dirk*, thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -62,6 +66,8 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 == Frequently Asked Questions ==
 
+**--- Usability ---**
+
 = What is a caption, message, etc? =
 
 Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea of what is what.
@@ -84,26 +90,6 @@ A few notes:
 As an alternate to feature images, you can use the Add Link to Facebook post meta box (since version 0.23).
 In this box you can select one of the images attached to the post.
 Selecting an image this way takes precedence over the other settings.
-
-= Is this plugin compatible with my theme? =
-
-This plugin is compatible with any theme, but featured images can only be used as link picture when your theme supports featured images.
-
-= Is this plugin compatible with plugin xxx? =
-
-Probably yes, but it all depends on how the plugin works.
-
-Auto posting plugins will work if one of the following actions is used:
-
-* <em>transition_post_status</em>
-* <em>xmlrpc_publish_post</em>
-* <em>app_publish_post</em>
-
-This plugin is known to be incompatible with:
-
-* [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
-
-If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
 = To which wall will a link be added? =
 
@@ -151,7 +137,42 @@ If you do that, you have to re-authorize one time more, because extra Facebook p
 
 = I don't like the gear wheel application icon =
 
-You can change it in the Facebook application settings.
+If you use a private Facebook application, you can change it in the application settings.
+The application icon of the shared application cannot be changed.
+
+= Which users can use this plugin? =
+
+Users with the *edit_posts* capability: all user roles, except subscriber.
+Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
+
+= How can I translate the plugin? =
+
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+**--- Compatibility ---**
+
+= Is this plugin compatible with my theme? =
+
+This plugin is compatible with any theme, but featured images can only be used as link picture when your theme supports featured images.
+
+= Is this plugin compatible with plugin xxx? =
+
+Probably yes, but it all depends on how the plugin works.
+
+Auto posting plugins will work if one of the following actions is used:
+
+* <em>transition_post_status</em>
+* <em>xmlrpc_publish_post</em>
+* <em>app_publish_post</em>
+
+This plugin is known to be incompatible with:
+
+* [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+
+If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
 = Are shortcodes being processed? =
 
@@ -170,17 +191,7 @@ or [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.g
 to publish posts and still have links added to your wall or page automatically.
 Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
 
-= Which users can use this plugin? =
-
-Users with the *edit_posts* capability: all user roles, except subscriber.
-Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
-
-= How can I translate the plugin? =
-
-You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
-After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
-Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+**--- Custom values ---**
 
 = What is the custom field 'al2fb_facebook_link_id' for? =
 
@@ -189,6 +200,10 @@ This is the Facebook identification of the added link.
 = What is the custom field 'al2fb_facebook_link_time' for? =
 
 This is the time (UTC) the link was added to Facebook or the time of the last error.
+
+= What is the custom field 'al2fb_facebook_link_picture' for? =
+
+This is the picture type and URL of the link as added to Facebook.
 
 = What is the custom field 'al2fb_facebook_exclude' for? =
 
@@ -203,6 +218,8 @@ This is to remember the image you have selected as link picture.
 If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
 You can try to add the link again by updating the post.
 Please send me the message and follow the instruction in the last question.
+
+**--- Error messages ---**
 
 = I get 'Error validating application' =
 
@@ -266,8 +283,9 @@ cURL errors encountered so far:
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
+* Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
-For these errors you need to contact your hosting provider.
+For all these errors you need to contact your hosting provider.
 
 = I get 'HTTP 400 Bad Request' =
 
@@ -277,6 +295,13 @@ if there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "
 Actually you are most probably having one of the above errors, but you cannot see which one.
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
 if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
+
+= I get 'Javascript not enabled?' =
+
+You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
+You can either enable JavaScript or try to use a private Facebook application.
+
+**--- Support ---**
 
 = Where can I ask questions, report bugs and request features? =
 
@@ -292,6 +317,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.39 =
+* Added option to set refresh time of Facebook comments
+* Improvement: save changes: no re-authorize
+* Improvement: registering link picture
+* Bugfix: *First attached image* is working again
+* Updated German (de\_DE) translation by *Dirk*
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.38 =
 * Bugfix: correct authorize URL
@@ -510,6 +544,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.39 =
+New feature: really simple setup, translation
+
 = 0.38 =
 Bugfix
 
@@ -623,3 +660,9 @@ Bugfixes
 
 = 0.1 =
 Initial version
+
+== Acknowledgments ==
+
+This plugin uses:
+
+* [jQuery JavaScript Library](http://jquery.com/ "jQuery") published under both the GNU General Public License and MIT License
