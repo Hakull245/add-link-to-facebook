@@ -145,6 +145,12 @@ The application icon of the shared application cannot be changed.
 Users with the *edit_posts* capability: all user roles, except subscriber.
 Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
 
+= Why is the shared application less secure? =
+
+Because the Facebook authorization token is sent to you via a [Google App Engine application](http://code.google.com/appengine/ "Google App Engine application") that I manage.
+I theory I could collect your token and manipulate your Facebook wall.
+You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=true "wp-al2fb") of this application.
+
 = How can I translate the plugin? =
 
 You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
