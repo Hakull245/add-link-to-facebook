@@ -41,7 +41,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) translation by *Dirk*, thanks!
+* German (de\_DE) translation by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -325,11 +325,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.39 =
-* Added option to set refresh time of Facebook comments
+* New feature: really simple setup (beta)
+* Improvement: option to set refresh time of Facebook comments
 * Improvement: save changes: no re-authorize
 * Improvement: registering link picture
 * Bugfix: *First attached image* is working again
-* Updated German (de\_DE) translation by *Dirk*
+* Added German (de\_DE) translation by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner")
 * Updated description and FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
