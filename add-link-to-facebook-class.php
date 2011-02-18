@@ -74,6 +74,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Check auto (future) posting
 // - Custom post types
 // - Read more
+// - Links in text
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
