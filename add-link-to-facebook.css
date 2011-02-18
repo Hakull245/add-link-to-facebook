@@ -25,9 +25,14 @@
 }
 
 .al2fb_instructions {
+	margin-top: 20px;
 	padding: 10px;
 	border: 1px solid #CCCCCC;
 	background-color: #FFFEEB;
+}
+
+.al2fb_instructions h4 {
+	text-decoration: underline;
 }
 
 .al2fb_instructions table {
@@ -48,15 +53,20 @@
 }
 
 .al2fb_client_id {
-	width: 300px;
+	width: 350px;
 }
 
 .al2fb_app_secret {
-	width: 300px;
+	width: 350px;
 }
 
 .al2fb_picture {
 	width: 350px;
+}
+
+.al2fb_numeric {
+	width: 50px;
+	text-align: right;
 }
 
 .al2fb_explanation {
@@ -92,6 +102,7 @@
 	vertical-align: top;
 	border: 1px solid gray;
 	margin-left: 10px;
+	margin-bottom: 10px;
 	padding: 5px;
 }
 
