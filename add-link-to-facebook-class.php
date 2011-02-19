@@ -40,6 +40,7 @@ define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
 define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_sentences', 'al2fb_sentences');
+define('c_al2fb_meta_hyperlink', 'al2fb_hyperlink');
 define('c_al2fb_meta_integrate', 'al2fb_integrate');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
@@ -70,16 +71,15 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // To Do
 // - Check app permissions? not possible :-(
 // - target="_blank"? how to do?
-// - Update meta box after update media gallery?
 // - Admin dashboard? how to get links to messages?
+
+// - Update meta box after update media gallery?
+// - Use tage line?
+
 // - Check min image size
 // - Embed WordPress icon
-// - Use tage line?
-// - Future posts
 // - Custom post types
 // - Read more
-// - Links in text
-// - JavaScript WP-add-link service
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -160,6 +160,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_msg);
 				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
 				delete_user_meta($user_ID, c_al2fb_meta_sentences);
+				delete_user_meta($user_ID, c_al2fb_meta_hyperlink);
 				delete_user_meta($user_ID, c_al2fb_meta_integrate);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
@@ -289,6 +290,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_shortlink] = null;
 			if (empty($_POST[c_al2fb_meta_sentences]))
 				$_POST[c_al2fb_meta_sentences] = null;
+			if (empty($_POST[c_al2fb_meta_hyperlink]))
+				$_POST[c_al2fb_meta_hyperlink] = null;
 			if (empty($_POST[c_al2fb_meta_integrate]))
 				$_POST[c_al2fb_meta_integrate] = null;
 			if (empty($_POST[c_al2fb_meta_clean]))
@@ -327,6 +330,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_sentences, $_POST[c_al2fb_meta_sentences]);
+			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_integrate, $_POST[c_al2fb_meta_integrate]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
@@ -575,8 +579,8 @@ if (!class_exists('WPAL2Facebook')) {
 			<input type="hidden" name="al2fb_action" value="config">
 			<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 
-<?php		if (get_user_meta($user_ID, c_al2fb_meta_shared, true) ||
-				self::Client_side_flow_available()) { ?>
+<?php		if (self::Client_side_flow_available() ||
+				get_user_meta($user_ID, c_al2fb_meta_shared, true)) { ?>
 				<table class="form-table">
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_app_shared"><strong><?php _e('Use shared Facebook application:', c_al2fb_text_domain); ?></strong></label>
@@ -740,6 +744,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input class="al2fb_numeric" id="al2fb_sentence" name="<?php echo c_al2fb_meta_sentences; ?>" text="text" value="<?php  echo get_user_meta($user_ID, c_al2fb_meta_sentences, true); ?>" />
 				<br /><span class="al2fb_explanation"><?php _e('Leave blank to let Facebook choose', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_hyperlink"><?php _e('Keep hyperlinks:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_hyperlink" name="<?php echo c_al2fb_meta_hyperlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_hyperlink, true)) echo ' checked="checked"'; ?> />
+				<br /><span class="al2fb_explanation"><?php _e('The hyperlink title will be removed', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -922,7 +933,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$available = get_transient(c_al2fb_transient_available);
 			if (!$available)
 				try {
-					$available = self::Request(c_al2fb_app_url, 'available=' . c_al2fb_app_version, 'GET');
+					$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
+					$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
+					$available = self::Request(c_al2fb_app_url, 'available=' . c_al2fb_app_version . '&plugin=' . $plugin_version, 'GET');
 					set_transient(c_al2fb_transient_available, $available, 60 * 60);
 				}
 				catch (Exception $e) {
@@ -1262,9 +1275,19 @@ if (!class_exists('WPAL2Facebook')) {
 			if (empty($link))
 				$link = get_permalink($post->ID);
 
+			// Exceute shortcodes
+			$excerpt = do_shortcode($post->post_excerpt);
+			$content = do_shortcode($post->post_content);
+
+			// Replace hyperlinks
+			if (get_user_meta($post->post_author, c_al2fb_meta_hyperlink, true)) {
+				$excerpt = preg_replace('/<a.*href.*=.*[\"\'](.*)[\"\'].*>.*.*<\/a>/', '$1', $excerpt);
+				$content = preg_replace('/<a.*href.*=.*[\"\'](.*)[\"\'].*>.*.*<\/a>/', '$1', $content);
+			}
+
 			// Get plain texts
-			$excerpt = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_excerpt));
-			$content = preg_replace('/<[^>]*>/', '', do_shortcode($post->post_content));
+			$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
+			$content = preg_replace('/<[^>]*>/', '', $content);
 
 			// Get number of configured sentences
 			$sentences = intval(get_user_meta($post->post_author, c_al2fb_meta_sentences, true));

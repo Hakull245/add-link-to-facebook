@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.42
+Stable tag: 0.43
 
 Automatically add links to published posts to your Facebook wall or pages
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in. The way links appear on Facebook can be customized.
+Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
@@ -328,6 +328,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.43 =
+* New feature: support for keeping hyperlinks
+* Improvement: include plugin version in availability check
+* Updated description
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 0.42 =
 * New feature: support for future posts
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
@@ -571,6 +577,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.43 =
+New feature: support for keeping hyperlinks
+
 = 0.42 =
 New feature: support for future posts
 
@@ -699,7 +708,6 @@ Initial version
 
 == Planned features ==
 
-* Support for hyperlinks
 * Support for custom post types
 * Support for fixed custom texts like 'Read more ...'
 
