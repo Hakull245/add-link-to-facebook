@@ -68,17 +68,18 @@ define('c_al2fb_mail_email', 'al2fb_debug_email');
 define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // To Do
-// - target="_blank"? how to do?
 // - Check app permissions? not possible :-(
-// - Check min image size
-// - Embed WordPress icon
+// - target="_blank"? how to do?
 // - Update meta box after update media gallery?
 // - Admin dashboard? how to get links to messages?
+// - Check min image size
+// - Embed WordPress icon
 // - Use tage line?
-// - Check auto (future) posting
+// - Future posts
 // - Custom post types
 // - Read more
 // - Links in text
+// - JavaScript WP-add-link service
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {

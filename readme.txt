@@ -677,6 +677,38 @@ Bugfixes
 = 0.1 =
 Initial version
 
+== Planned features ==
+
+* Support for custom post types
+* Support for future posts
+* Support for hyperlinks
+* Support for fixed custom texts like 'Read more ...'
+
+== Facebook Authorization ==
+
+*Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+* Authorize button posts to server
+* Server checks for Facebook error when safe mode off
+* Server redirects to Facebook or to self when error
+* Facebook login (if needed)
+* Facebook authorization (if needed)
+* Facebook redirects to plugin
+* Plugin stores access token
+
+*Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+* Authorize button posts to server
+* Server checks for Facebook error when safe mode off
+* Server redirect to Facebook or to self when error
+* Facebook login (if needed)
+* Facebook authorization (if needed)
+* Facebook redirects to [WP-add-link service](http://wp-al2fb.appspot.com/ "WP-add-link")
+* WP-add-link redirects to self with JavaScript
+* WP-add-link checks authorization secret with plugin
+* WP-add-link redirects to plugin
+* Plugin stores access token
+
 == Acknowledgments ==
 
 This plugin uses:
