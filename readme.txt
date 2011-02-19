@@ -44,7 +44,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * German (de\_DE) translation by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Your translation ...
 
-If you want to make a better [Facebook application icon](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application icon"), please let me know.
+If you want to contribute a better [Facebook application icon](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application icon"), please let me know.
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
