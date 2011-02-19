@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.39
+Stable tag: 0.40
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -177,6 +177,7 @@ Auto posting plugins will work if one of the following actions is used:
 This plugin is known to be incompatible with:
 
 * [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+* WordPress future posts: links will not be added
 
 If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
@@ -323,6 +324,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.40 =
+* Improvement: cache availability wp-add-link service
+* Updated FAQ
+* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.39 =
 * New feature: really simple setup (beta)
@@ -550,6 +556,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.40 =
+Caching
 
 = 0.39 =
 New feature: really simple setup, translation, bugfix
