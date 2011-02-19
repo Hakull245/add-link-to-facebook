@@ -80,6 +80,9 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Embed WordPress icon
 // - Custom post types
 // - Read more
+// - meta boxes if authorized?
+// - tags, categories?
+// - site config
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -504,6 +507,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_media = ($pic_type == 'media' ? ' checked' : '');
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
+			$pic_post = ($pic_type == 'post' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 			if (!current_theme_supports('post-thumbnails') ||
 				!function_exists('get_post_thumbnail_id') ||
@@ -674,6 +678,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="media"<?php echo $pic_media; ?>><?php _e('First attached image', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_facebook; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br>
 			</td></tr>
 
@@ -1281,8 +1286,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Replace hyperlinks
 			if (get_user_meta($post->post_author, c_al2fb_meta_hyperlink, true)) {
-				$excerpt = preg_replace('/<a.*href.*=.*[\"\'](.*)[\"\'].*>.*.*<\/a>/', '$1', $excerpt);
-				$content = preg_replace('/<a.*href.*=.*[\"\'](.*)[\"\'].*>.*.*<\/a>/', '$1', $content);
+				$excerpt = preg_replace('/<a\shref=\"([^\"]*)\"[^\<]*/', '$1<a>', $excerpt);
+				$content = preg_replace('/<a\shref=\"([^\"]*)\"[^\<]*/', '$1<a>', $content);
 			}
 
 			// Get plain texts
@@ -1355,6 +1360,10 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 				else if ($picture_type == 'facebook')
 					$picture = '';
+				else if ($picture_type == 'post') {
+					if (preg_match('/<img\ssrc=\"([^\"]*)\"/', $post->post_content, $matches))
+						$picture = $matches[1];
+				}
 				else if ($picture_type == 'custom') {
 					$custom = get_user_meta($post->post_author, c_al2fb_meta_picture, true);
 					if ($custom)

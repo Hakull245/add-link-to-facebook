@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.43
+Stable tag: 0.44
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -328,6 +328,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.44 =
+* New feature: link picture: first image in the post
+* Bugfix: keeping hyperlinks should work correct now
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 0.43 =
 * New feature: support for keeping hyperlinks
 * Improvement: include plugin version in availability check
@@ -577,6 +582,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.44 =
+New feature: link picture: first image in the post, bugfix
+
 = 0.43 =
 New feature: support for keeping hyperlinks
 
@@ -710,6 +718,7 @@ Initial version
 
 * Support for custom post types
 * Support for fixed custom texts like 'Read more ...'
+* Support for Facebook wall/page per network site/user
 
 == Facebook Authorization ==
 
