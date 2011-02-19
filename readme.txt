@@ -142,6 +142,15 @@ If you do that, you have to re-authorize one time more, because extra Facebook p
 If you use a private Facebook application, you can change it in the application settings.
 The application icon of the shared application cannot be changed.
 
+= How can I translate the plugin? =
+
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+**--- Security ---**
+
 = Which users can use this plugin? =
 
 Users with the *edit_posts* capability: all user roles, except subscriber.
@@ -152,13 +161,6 @@ Since version 0.11 administrators can change this using the setting *Required ca
 Because the Facebook authorization token is sent to you via a [Google App Engine application](http://code.google.com/appengine/ "Google App Engine application") that I manage.
 I theory I could collect your token and manipulate your Facebook wall.
 You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=true "wp-al2fb") of this application.
-
-= How can I translate the plugin? =
-
-You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
-After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
-Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
 
 **--- Compatibility ---**
 
@@ -305,7 +307,7 @@ Actually you are most probably having one of the above errors, but you cannot se
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
 if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
 
-= I get 'Javascript not enabled?' =
+= I get 'Javascript not enabled' =
 
 You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
 You can either enable JavaScript or try to use a private Facebook application.
