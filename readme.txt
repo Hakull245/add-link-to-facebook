@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.39
+Stable tag: 0.41
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -43,6 +43,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
 * German (de\_DE) translation by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Your translation ...
+
+If you want to make a better [Facebook application icon](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application icon"), please let me know.
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -177,6 +179,7 @@ Auto posting plugins will work if one of the following actions is used:
 This plugin is known to be incompatible with:
 
 * [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+* WordPress future posts: links will not be added
 
 If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
@@ -323,6 +326,18 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.41 =
+* Added link to security considerations shared application
+* Added link to [Facebook application wall](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application wall")
+* Improvement: debug information links
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.40 =
+* Improvement: cache availability *wp-al2fb* service
+* Updated FAQ
+* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.39 =
 * New feature: really simple setup (beta)
@@ -551,6 +566,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.41 =
+Usability
+
+= 0.40 =
+Caching
+
 = 0.39 =
 New feature: really simple setup, translation, bugfix
 
@@ -667,6 +688,42 @@ Bugfixes
 
 = 0.1 =
 Initial version
+
+== Planned features ==
+
+* Support for custom post types
+* Support for future posts
+* Support for hyperlinks
+* Support for fixed custom texts like 'Read more ...'
+
+== Facebook Authorization ==
+
+*Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+* Authorize button posts to server
+* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
+* Server redirects to Facebook or to self when error
+* Facebook login (if needed)
+* Facebook authorization (if needed)
+* Facebook redirects to plugin
+* Plugin stores Facebook access token
+
+*Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+* Authorize button posts to server
+* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
+* Server redirects to Facebook or to self when error
+* Facebook login (if needed)
+* Facebook authorization (if needed)
+* Facebook redirects to [wp-al2fb service](http://wp-al2fb.appspot.com/ "wp-al2fb")
+* wp-al2fb redirects to self with JavaScript (2)
+* wp-al2fb checks authorization secret with plugin (3)
+* wp-al2fb redirects to plugin
+* Plugin stores Facebook access token
+
+1. Workaround for Microsoft Internet Explorer
+1. To transform the [URI fragment](http://en.wikipedia.org/wiki/Fragment_identifier "URI fragment") into a [query string](http://en.wikipedia.org/wiki/Query_string "Query string")
+1. To prevent using the service as redirection service
 
 == Acknowledgments ==
 
