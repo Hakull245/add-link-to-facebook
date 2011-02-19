@@ -23,6 +23,10 @@ define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 
+// Transient options
+define('c_al2fb_transient_cache', 'al2fb_cache_');
+define('c_al2fb_transient_available', 'al2fb_available');
+
 // User meta
 define('c_al2fb_meta_shared', 'al2fb_shared');
 define('c_al2fb_meta_client_id', 'al2fb_client_id');
@@ -569,7 +573,8 @@ if (!class_exists('WPAL2Facebook')) {
 			<input type="hidden" name="al2fb_action" value="config">
 			<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 
-<?php		if (self::Client_side_flow_available()) { ?>
+<?php		if (get_user_meta($user_ID, c_al2fb_meta_shared, true) ||
+				self::Client_side_flow_available()) { ?>
 				<table class="form-table">
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_app_shared"><strong><?php _e('Use shared Facebook application:', c_al2fb_text_domain); ?></strong></label>
@@ -911,12 +916,16 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Client_side_flow_available() {
-			try {
-				return self::Request(c_al2fb_app_url, 'available=' . c_al2fb_app_version, 'GET');
-			}
-			catch (Exception $e) {
-				return false;
-			}
+			$available = get_transient(c_al2fb_transient_available);
+			if (!$available)
+				try {
+					$available = self::Request(c_al2fb_app_url, 'available=' . c_al2fb_app_version, 'GET');
+					set_transient(c_al2fb_transient_available, $available, 60 * 60);
+				}
+				catch (Exception $e) {
+					$available = false;
+				}
+			return $available;
 		}
 
 		// Get Facebook authorize addess
@@ -1139,7 +1148,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$duration = intval(get_option(c_al2fb_option_msg_refresh));
 						if (!$duration)
 							$duration = 10;
-						$fb_key = 'al2fb_cache_' . $link_id;
+						$fb_key = c_al2fb_transient_cache . $link_id;
 						$fb_comments = get_transient($fb_key);
 						if ($fb_comments === false) {
 							$fb_comments = self::Get_comments($link_id);
