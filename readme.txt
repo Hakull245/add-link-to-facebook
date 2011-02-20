@@ -206,6 +206,10 @@ or [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.g
 to publish posts and still have links added to your wall or page automatically.
 Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
 
+= Are custom post types supported? =
+
+Yes, but the custom post type should support custom values.
+
 **--- Custom values ---**
 
 = What is the custom field 'al2fb_facebook_link_id' for? =
@@ -336,10 +340,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 0.46 =
 * Improvement: better search for links and images in text
 * Bugfix: selecting first image in post
+* Update FAQ
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 0.45 =
-* Disabling shared application beta
+* Disabled shared application beta
+* Updated description
 
 = 0.44 =
 * New feature: link picture: first image in the post
@@ -599,7 +605,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 Small improvement, bugfix, translation update
 
 = 0.45 =
-Disabling shared application beta
+Disabled shared application beta
 
 = 0.44 =
 New feature: link picture: first image in the post, bugfix
