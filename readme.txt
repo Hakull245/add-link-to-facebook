@@ -735,7 +735,6 @@ Initial version
 
 == Planned features ==
 
-* Support for custom post types
 * Support for fixed custom texts like 'Read more ...'
 * Support for Facebook wall/page per network site/user
 
