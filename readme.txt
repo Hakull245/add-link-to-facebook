@@ -25,6 +25,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Really simple setup using a shared Facebook application
 * Integrate Facebook comments on added links into Wordpress
 
+**Facebook disabled the shared application, because, according to Facebook,
+it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
+Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.**
+
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
 Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
