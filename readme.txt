@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.39
+Stable tag: 0.45
 
 Automatically add links to published posts to your Facebook wall or pages
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. Just two fields to fill in. The way links appear on Facebook can be customized.
+Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
@@ -43,6 +43,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
 * German (de\_DE) translation by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Your translation ...
+
+If you want to contribute a better [Facebook application icon](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application icon"), please let me know.
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -140,6 +142,15 @@ If you do that, you have to re-authorize one time more, because extra Facebook p
 If you use a private Facebook application, you can change it in the application settings.
 The application icon of the shared application cannot be changed.
 
+= How can I translate the plugin? =
+
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+**--- Security ---**
+
 = Which users can use this plugin? =
 
 Users with the *edit_posts* capability: all user roles, except subscriber.
@@ -150,13 +161,6 @@ Since version 0.11 administrators can change this using the setting *Required ca
 Because the Facebook authorization token is sent to you via a [Google App Engine application](http://code.google.com/appengine/ "Google App Engine application") that I manage.
 I theory I could collect your token and manipulate your Facebook wall.
 You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=true "wp-al2fb") of this application.
-
-= How can I translate the plugin? =
-
-You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
-After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
-Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
 
 **--- Compatibility ---**
 
@@ -302,7 +306,7 @@ Actually you are most probably having one of the above errors, but you cannot se
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
 if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
 
-= I get 'Javascript not enabled?' =
+= I get 'Javascript not enabled' =
 
 You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
 You can either enable JavaScript or try to use a private Facebook application.
@@ -323,6 +327,36 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.45 =
+* Disabling shared application beta
+
+= 0.44 =
+* New feature: link picture: first image in the post
+* Bugfix: keeping hyperlinks should work correct now
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.43 =
+* New feature: support for keeping hyperlinks
+* Improvement: include plugin version in availability check
+* Updated description
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.42 =
+* New feature: support for future posts
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
+= 0.41 =
+* Added link to security considerations shared application
+* Added link to [Facebook application wall](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application wall")
+* Improvement: debug information links
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.40 =
+* Improvement: cache availability *wp-al2fb* service
+* Updated FAQ
+* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.39 =
 * New feature: really simple setup (beta)
@@ -551,6 +585,24 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.45 =
+Disabling shared application beta
+
+= 0.44 =
+New feature: link picture: first image in the post, bugfix
+
+= 0.43 =
+New feature: support for keeping hyperlinks
+
+= 0.42 =
+New feature: support for future posts
+
+= 0.41 =
+Usability
+
+= 0.40 =
+Caching
+
 = 0.39 =
 New feature: really simple setup, translation, bugfix
 
@@ -667,6 +719,41 @@ Bugfixes
 
 = 0.1 =
 Initial version
+
+== Planned features ==
+
+* Support for custom post types
+* Support for fixed custom texts like 'Read more ...'
+* Support for Facebook wall/page per network site/user
+
+== Facebook Authorization ==
+
+*Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+* Authorize button posts to server
+* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
+* Server redirects to Facebook or to self when error
+* Facebook login (if needed)
+* Facebook authorization (if needed)
+* Facebook redirects to plugin
+* Plugin stores Facebook access token
+
+*Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+* Authorize button posts to server
+* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
+* Server redirects to Facebook or to self when error
+* Facebook login (if needed)
+* Facebook authorization (if needed)
+* Facebook redirects to [wp-al2fb service](http://wp-al2fb.appspot.com/ "wp-al2fb")
+* wp-al2fb redirects to self with JavaScript (2)
+* wp-al2fb checks authorization secret with plugin (3)
+* wp-al2fb redirects to plugin
+* Plugin stores Facebook access token
+
+1. Workaround for Microsoft Internet Explorer
+1. To transform the [URI fragment](http://en.wikipedia.org/wiki/Fragment_identifier "URI fragment") into a [query string](http://en.wikipedia.org/wiki/Query_string "Query string")
+1. To prevent using the service as redirection service
 
 == Acknowledgments ==
 
