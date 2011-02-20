@@ -75,14 +75,13 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // - Update meta box after update media gallery?
 // - Use tage line?
+// - Tags, categories?
 
 // - Check min image size
 // - Embed WordPress icon
-// - Custom post types
 // - Read more
-// - meta boxes if authorized?
-// - tags, categories?
-// - site config
+// - Meta boxes if authorized
+// - Network site config
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
