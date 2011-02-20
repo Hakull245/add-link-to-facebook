@@ -248,6 +248,13 @@ if (!class_exists('WPAL2Facebook')) {
 				global $user_ID;
 				get_currentuserinfo();
 
+				// Disable shared application
+				if (!self::Client_side_flow_available() &&
+					get_user_meta($user_ID, c_al2fb_meta_shared, true)) {
+					update_user_meta($user_ID, c_al2fb_meta_shared, false);
+					delete_user_meta($user_ID, c_al2fb_meta_access_token);
+				}
+
 				// Check actions
 				if (isset($_REQUEST['al2fb_action'])) {
 					// Configuration
@@ -309,7 +316,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Shared changed
 			if ($_POST[c_al2fb_meta_shared] != get_user_meta($user_ID, c_al2fb_meta_shared, true))
-					delete_user_meta($user_ID, c_al2fb_meta_access_token);
+				delete_user_meta($user_ID, c_al2fb_meta_access_token);
 
 			// App ID or secret changed
 			if (!$_POST[c_al2fb_meta_shared])
