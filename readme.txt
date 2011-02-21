@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.46
+Stable tag: 0.47
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -22,7 +22,6 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Beta features:**
 
-* Really simple setup using a shared Facebook application
 * Integrate Facebook comments on added links into Wordpress
 
 **Facebook disabled the shared application, because, according to Facebook,
@@ -46,7 +45,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) translation by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
+* Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Your translation ...
 
 If you want to contribute a better [Facebook application icon](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application icon"), please let me know.
@@ -115,7 +115,7 @@ Facebook might also have had trouble accessing the image.
 
 = What happens when I update a post? =
 
-If the link to the post was added already to your wall or page nothing,
+If the link to the post was added already to your wall or page, nothing,
 else a new link will be added. See also the next question.
 
 = How can I add a link to an existing post? =
@@ -163,6 +163,8 @@ Since version 0.11 administrators can change this using the setting *Required ca
 
 = Why is the shared application less secure? =
 
+**The shared application is no longer available**
+
 Because the Facebook authorization token is sent to you via a [Google App Engine application](http://code.google.com/appengine/ "Google App Engine application") that I manage.
 I theory I could collect your token and manipulate your Facebook wall.
 You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=true "wp-al2fb") of this application.
@@ -172,6 +174,10 @@ You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=tr
 = Is this plugin compatible with my theme? =
 
 This plugin is compatible with any theme, but featured images can only be used as link picture when your theme supports featured images.
+
+This plugin is known to be incompatible with:
+
+* [Geo Places](http://templatic.com/news/geo-places-city-directory-wordpress-theme "Geo Places"): publishing from the front-end doesn't add links
 
 = Is this plugin compatible with plugin xxx? =
 
@@ -187,7 +193,7 @@ This plugin is known to be incompatible with:
 
 * [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 
-If nessecary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+If necessary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
 = Are shortcodes being processed? =
 
@@ -336,6 +342,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.47 =
+* Updated description and FAQ
+* Added Polish (pl\_PL) translation by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011")
 
 = 0.46 =
 * Improvement: better search for links and images in text
@@ -601,6 +611,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.47 =
+Translation
+
 = 0.46 =
 Small improvement, bugfix, translation update
 
@@ -756,6 +769,8 @@ Initial version
 * Facebook redirects to plugin
 * Plugin stores Facebook access token
 
+**The shared Facebook application is not available anymore**
+
 *Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
 
 * Authorize button posts to server
@@ -778,3 +793,4 @@ Initial version
 This plugin uses:
 
 * [jQuery JavaScript Library](http://jquery.com/ "jQuery") published under both the GNU General Public License and MIT License
+
