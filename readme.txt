@@ -15,6 +15,7 @@ Automatically add links to posts that are being published to your Facebook wall 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
+
 There is support for multi-user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
@@ -48,8 +49,6 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Your translation ...
-
-If you want to contribute a better [Facebook application icon](http://www.facebook.com/apps/application.php?id=191927664162191 "Facebook application icon"), please let me know.
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -123,6 +122,10 @@ else a new link will be added. See also the next question.
 Change the post status temporarily to draft, update the post and publish the post again.
 If you want to add a link again, you should remove the custom field *al2fb_facebook_link_id* first.
 
+= Will links for future posts be added? =
+
+Yes, when they are published automatically a link will be added to your wall or page too.
+
 = How about private / password protected posts? =
 
 Don't worry, no links to private posts will be added.
@@ -149,7 +152,7 @@ The application icon of the shared application cannot be changed.
 
 = How can I translate the plugin? =
 
-You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as basis.
+You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as a start.
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
 Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
@@ -173,7 +176,7 @@ You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=tr
 
 = Is this plugin compatible with my theme? =
 
-This plugin is compatible with any theme, but featured images can only be used as link picture when your theme supports featured images.
+Most likely yes, but featured images can only be used as link picture when your theme supports this.
 
 This plugin is known to be incompatible with:
 
@@ -203,6 +206,10 @@ Yes, both in the excerpt and the post text.
 
 Yes, each user can configure his/her own wall or page.
 
+The plugin doesn't support different walls or pages for different sites for the same user.
+I will not implement this, because it could be a violation of
+the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+
 = Is remote publishing supported? =
 
 Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
@@ -214,7 +221,7 @@ Don't forget to enable remote publishing using the WordPress menu *Settings > Wr
 
 = Are custom post types supported? =
 
-Yes, but the custom post type should support custom values.
+Yes, but the custom post type should support custom values for it to work.
 
 **--- Custom values ---**
 
@@ -316,7 +323,7 @@ For all these errors you need to contact your hosting provider.
 
 You are probably using Microsoft Internet Explorer.
 This browser has the bad habbit not to display the content
-if there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
+when there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
 Actually you are most probably having one of the above errors, but you cannot see which one.
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
 if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
@@ -755,7 +762,6 @@ Initial version
 == Planned features ==
 
 * Support for fixed custom texts like 'Read more ...'
-* Support for Facebook wall/page per network site/user
 
 == Facebook Authorization ==
 
