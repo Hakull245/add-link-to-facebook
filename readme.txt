@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.47
+Stable tag: 0.48
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -300,6 +300,11 @@ In that case please send me the debug information, see the last question for ins
 You could try to re-authorize to fix this, but it should not happen.
 Please send me the debug information, see the last question for instructions.
 
+= I get 'An active access token must be used to query information about the current user' =
+
+The reason for this rare error is unknown yet.
+Please help me to find the cause by reporting this problem and by sending the debug information to me (see last question for how to).
+
 = I get 'Your server may not allow external connections' =
 
 This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
@@ -349,6 +354,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.48 =
+* Improvement: authorization clears last error
+* Improvement: authorization fail clears access token
+* Improvement: logging authorization time
+* Improvement: authorization failure reason logged
+* Improvement: get page info with page access token
+* Improvement: check result get page info 
+* Disabled beta client-side flow (shared Facebook app) completely
 
 = 0.47 =
 * Updated description and FAQ
@@ -617,6 +631,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.48 =
+Small improvements
 
 = 0.47 =
 Translation

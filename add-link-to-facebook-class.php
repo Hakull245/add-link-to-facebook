@@ -60,6 +60,7 @@ define('c_al2fb_log_redir_time', 'al2fb_redir_time');
 define('c_al2fb_log_redir_ref', 'al2fb_redir_ref');
 define('c_al2fb_log_redir_from', 'al2fb_redir_from');
 define('c_al2fb_log_redir_to', 'al2fb_redir_to');
+define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
 
@@ -380,7 +381,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Client-side flow authorization
 			if (get_user_meta($user_ID, c_al2fb_meta_shared, true) && isset($_REQUEST['access_token'])) {
+				update_option(c_al2fb_log_auth_time, date('c'));
 				update_user_meta($user_ID, c_al2fb_meta_access_token, $_REQUEST['access_token']);
+				delete_option(c_al2fb_last_error);
+				delete_option(c_al2fb_last_error_time);
 				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Authorized, go posting!', c_al2fb_text_domain) . '</p></div>';
 			}
 
@@ -389,17 +393,23 @@ if (!class_exists('WPAL2Facebook')) {
 				try {
 					// Get & store token
 					$access_token = self::Get_token();
+					update_option(c_al2fb_log_auth_time, date('c'));
 					update_user_meta($user_ID, c_al2fb_meta_access_token, $access_token);
+					delete_option(c_al2fb_last_error);
+					delete_option(c_al2fb_last_error_time);
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Authorized, go posting!', c_al2fb_text_domain) . '</p></div>';
 				}
 				catch (Exception $e) {
 					delete_user_meta($user_ID, c_al2fb_meta_access_token);
+					update_option(c_al2fb_last_error, $e->getMessage());
+					update_option(c_al2fb_last_error_time, date('c'));
 					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 				}
 			}
 
 			// Authorization error
 			else if (isset($_REQUEST['error'])) {
+				delete_user_meta($user_ID, c_al2fb_meta_access_token);
 				$msg = $_REQUEST['error_description'];
 				$msg .= ' reason=' . $_REQUEST['error_reason'];
 				$msg .= ' error=' . $_REQUEST['error'];
@@ -448,7 +458,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$notice = __('needs configuration', c_al2fb_text_domain);
 					$anchor = 'configure';
 				}
-				else if (!get_user_meta($user_ID, c_al2fb_meta_access_token, true)) {
+				else if (!self::Is_authorized($user_ID)) {
 					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
 				}
@@ -502,7 +512,6 @@ if (!class_exists('WPAL2Facebook')) {
 			get_currentuserinfo();
 
 			$charset = get_bloginfo('charset');
-			$access_token = get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 			$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 			if (isset($_REQUEST['debug']))
 				$config_url .= '&debug';
@@ -543,7 +552,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<a name="authorize"></a>
 				<h3><?php _e('Authorization', c_al2fb_text_domain); ?></h3>
 <?php
-				if ($access_token) {
+				if (self::Is_authorized($user_ID)) {
 					// Get page name
 					try {
 						$me = self::Get_me(false);
@@ -652,7 +661,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			<table class="form-table">
 <?php
-			if ($access_token)
+			if (self::Is_authorized($user_ID))
 				try {
 					$app = self::Get_application();
 ?>
@@ -696,7 +705,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 <?php
-			if ($access_token)
+			if (self::Is_authorized($user_ID))
 				try {
 					$me = self::Get_me(true);
 					$pages = self::Get_pages();
@@ -941,6 +950,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Client_side_flow_available() {
+			return false;
 			$available = get_transient(c_al2fb_transient_available);
 			if (!$available)
 				try {
@@ -1070,16 +1080,19 @@ if (!class_exists('WPAL2Facebook')) {
 			global $user_ID;
 			get_currentuserinfo();
 
-			$page = get_user_meta($user_ID, c_al2fb_meta_page, true);
-			if ($self | empty($page))
-				$page = 'me';
-			$url = 'https://graph.facebook.com/' . $page;
+			$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
+			if ($self || empty($page_id))
+				$page_id = 'me';
+			$url = 'https://graph.facebook.com/' . $page_id;
 			$query = http_build_query(array(
-				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
+				'access_token' => self::Get_access_token_by_page($user_ID, $page_id)
 			));
 			$response = self::Request($url, $query, 'GET');
 			$me = json_decode($response);
-			return $me;
+			if ($me)
+				return $me;
+			else
+				throw new Exception('Page ' . $page_id . ' not found');
 		}
 
 		// Get page list
@@ -1255,8 +1268,7 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 				else {
 					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-					if (!empty($link_id) &&
-						get_user_meta($post->post_author, c_al2fb_meta_access_token, true))
+					if (!empty($link_id) && self::Is_authorized($post->post_author))
 						self::Delete_link($post);
 				}
 			}
@@ -1267,7 +1279,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_ID);
 			if (self::user_can($post->post_author, get_option(c_al2fb_option_min_cap))) {
 				// Check if not added
-				if (get_user_meta($post->post_author, c_al2fb_meta_access_token, true) &&
+				if (self::Is_authorized($post->post_author) &&
 					!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
 
@@ -1390,7 +1402,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$page_id = 'me';
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 				$query = http_build_query(array(
-					'access_token' => self::Get_access_token($post),
+					'access_token' => self::Get_access_token_by_post($post),
 					'link' => $link,
 					'name' => $post->post_title,
 					'caption' => $caption,
@@ -1426,7 +1438,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 				$url = 'https://graph.facebook.com/' . $link_id;
 				$query = http_build_query(array(
-					'access_token' => self::Get_access_token($post),
+					'access_token' => self::Get_access_token_by_post($post),
 					'method' => 'delete'
 				));
 
@@ -1445,12 +1457,21 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
-		// Get correct access token
-		function Get_access_token($post) {
+		function Is_authorized($user_ID) {
+			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
+		}
+
+		// Get correct access for post
+		function Get_access_token_by_post($post) {
 			$page_id = get_user_meta($post->post_author, c_al2fb_meta_page, true);
-			$access_token = get_user_meta($post->post_author, c_al2fb_meta_access_token, true);
-			if ($page_id &&
-				get_user_meta($post->post_author, c_al2fb_meta_page_owner, true)) {
+			return self::Get_access_token_by_page($post->post_author, $page_id);
+		}
+
+		// Get access token for page
+		function Get_access_token_by_page($user_ID, $page_id) {
+			$access_token = get_user_meta($user_ID, c_al2fb_meta_access_token, true);
+			if ($page_id && $page_id != 'me' &&
+				get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
 				$found = false;
 				$pages = self::Get_pages();
 				foreach ($pages->data as $page)
@@ -1461,7 +1482,6 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!$found)
 					throw new Exception('Page token not found id=' . $page_id);
 			}
-
 			return $access_token;
 		}
 
@@ -1657,7 +1677,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get charset, token
 			$charset = get_bloginfo('charset');
-			$access_token = get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 
 			$info = '<div class="al2fb_debug"><table border="1">';
 			$info .= '<tr><td>Time:</td><td>' . date('c') . '</td></tr>';
@@ -1680,7 +1699,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Redirect referer:</td><td><a href="' . get_option(c_al2fb_log_redir_ref) . '">' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</a></td></tr>';
 			$info .= '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
 			$info .= '<tr><td>Redirect to:</td><td><a href="' . get_option(c_al2fb_log_redir_to) . '">' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</a></td></tr>';
-			$info .= '<tr><td>Authorized:</td><td>' . ($access_token ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Authorized:</td><td>' . (self::Is_authorized($user_ID) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Authorized time:</td><td>' . get_option(c_al2fb_log_auth_time) . '</td></tr>';
 			$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>SSL:</td><td>' . (function_exists('openssl_sign') ? 'Yes' : 'No') . '</td></tr>';
