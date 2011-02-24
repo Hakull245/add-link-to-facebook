@@ -327,7 +327,7 @@ For all these errors you need to contact your hosting provider.
 = I get 'HTTP 400 Bad Request' =
 
 You are probably using Microsoft Internet Explorer.
-This browser has the bad habbit not to display the content
+This browser has the bad habit not to display the content
 when there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
 Actually you are most probably having one of the above errors, but you cannot see which one.
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
