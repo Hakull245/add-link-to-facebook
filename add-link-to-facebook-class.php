@@ -1147,6 +1147,21 @@ if (!class_exists('WPAL2Facebook')) {
 			return $comments;
 		}
 
+		// Get comments
+		function Get_likes($id) {
+			// Get current user
+			global $user_ID;
+			get_currentuserinfo();
+
+			$url = 'https://graph.facebook.com/' . $id . '/likes';
+			$query = http_build_query(array(
+				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
+			));
+			$response = self::Request($url, $query, 'GET');
+			$likes = json_decode($response);
+			return $likes;
+		}
+
 		// Add exclude checkbox
 		function Post_submitbox() {
 			global $post;
@@ -1542,18 +1557,29 @@ if (!class_exists('WPAL2Facebook')) {
 				$link_id = get_post_meta($post_ID, c_al2fb_meta_link_id, true);
 				if ($link_id) {
 					try {
-						// Check cache
+						// Get cache duration
 						$duration = intval(get_option(c_al2fb_option_msg_refresh));
 						if (!$duration)
 							$duration = 10;
+
+						// Get (cached) comments
 						$fb_key = c_al2fb_transient_cache . $link_id;
 						$fb_comments = get_transient($fb_key);
 						if ($fb_comments === false) {
 							$fb_comments = self::Get_comments($link_id);
 							set_transient($fb_key, $fb_comments, $duration * 60);
 						}
+
+						// Get (cached) likes
+						$fb_key = c_al2fb_transient_cache . $link_id . '_likes';
+						$fb_likes = get_transient($fb_key);
+						if ($fb_likes === false) {
+							$fb_likes = self::Get_likes($link_id);
+							set_transient($fb_key, $fb_likes, $duration * 60);
+						}
+
 						// Check if comments
-						if ($fb_comments) {
+						if ($fb_comments)
 							foreach ($fb_comments->data as $fb_comment) {
 								// Create new virtual comment
 								$new = null;
@@ -1569,12 +1595,37 @@ if (!class_exists('WPAL2Facebook')) {
 								$new->comment_karma = 0;
 								$new->comment_approved = 1;
 								$new->comment_agent = 'Add Link to Facebook';
-								$new->comment_type = ''; // pingback|trackback
+								$new->comment_type = 'comment'; // pingback|trackback
 								$new->comment_parent = 0;
 								$new->user_id = 0;
 								$comments[] = $new;
 							}
 
+						// Check if likes
+						if ($fb_likes)
+							foreach ($fb_likes->data as $fb_like) {
+								// Create new virtual comment
+								$link = 'http://www.facebook.com/profile.php?id=' . $fb_like->id;
+								$new = null;
+								$new->comment_ID = $fb_like->id;
+								$new->comment_post_ID = $post_ID;
+								$new->comment_author = $fb_like->name . ' ' . __('on Facebook', c_al2fb_text_domain);
+								$new->comment_author_email = '';
+								$new->comment_author_url = $link;
+								$new->comment_author_ip = '';
+								$new->comment_date = date('Y-m-d H:i:s', time());
+								$new->comment_date_gmt = $new->comment_date;
+								$new->comment_content = '<em>' . __('Liked this post', c_al2fb_text_domain) . '</em>';
+								$new->comment_karma = 0;
+								$new->comment_approved = 1;
+								$new->comment_agent = 'Add Link to Facebook';
+								$new->comment_type = 'pingback';
+								$new->comment_parent = 0;
+								$new->user_id = 0;
+								$comments[] = $new;
+							}
+
+						if ($fb_comments || $fb_likes) {
 							// Sort comments by time
 							usort($comments, array(&$this, 'Comment_compare'));
 							if (get_option('comment_order') == 'desc')
@@ -1582,7 +1633,23 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 					}
 					catch (Exception $e) {
-						// Todo: what?
+						$new = null;
+						$new->comment_ID = 0;
+						$new->comment_post_ID = $post_ID;
+						$new->comment_author = 'Add Link to Facebook';
+						$new->comment_author_email = '';
+						$new->comment_author_url = '';
+						$new->comment_author_ip = '';
+						$new->comment_date = date('Y-m-d H:i:s', time());
+						$new->comment_date_gmt = $new->comment_date;
+						$new->comment_content = $e->getMessage();
+						$new->comment_karma = 0;
+						$new->comment_approved = 1;
+						$new->comment_agent = 'Add Link to Facebook';
+						$new->comment_type = '';
+						$new->comment_parent = 0;
+						$new->user_id = 0;
+						$comments[] = $new;
 					}
 				}
 			}
