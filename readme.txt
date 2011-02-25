@@ -132,7 +132,7 @@ Yes, when they are published automatically a link will be added to your wall or 
 
 Don't worry, no links to private posts will be added.
 
-= I want to add links to my community/business page =
+= I want to add links to my fan/community/business page =
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
