@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.48
+Stable tag: 0.49
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -327,7 +327,7 @@ For all these errors you need to contact your hosting provider.
 = I get 'HTTP 400 Bad Request' =
 
 You are probably using Microsoft Internet Explorer.
-This browser has the bad habbit not to display the content
+This browser has the bad habit not to display the content
 when there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
 Actually you are most probably having one of the above errors, but you cannot see which one.
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
@@ -354,6 +354,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.49 =
+* Added some *htmlspecialchars* calls and fixed one
+* Removed link to shared Facebook application
 
 = 0.48 =
 * Improvement: authorization clears last error
@@ -631,6 +635,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.49 =
+Small improvements
 
 = 0.48 =
 Small improvements
