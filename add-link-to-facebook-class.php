@@ -20,6 +20,7 @@ define('c_al2fb_option_timeout', 'al2fb_timeout');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 define('c_al2fb_option_min_cap', 'al2fb_min_cap');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
+define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 
@@ -40,6 +41,7 @@ define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
 define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_sentences', 'al2fb_sentences');
+define('c_al2fb_meta_trailer', 'al2fb_trailer');
 define('c_al2fb_meta_hyperlink', 'al2fb_hyperlink');
 define('c_al2fb_meta_integrate', 'al2fb_integrate');
 define('c_al2fb_meta_clean', 'al2fb_clean');
@@ -80,9 +82,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // - Check min image size
 // - Embed WordPress icon
-// - Read more
 // - Meta boxes if authorized
-// - Network site config
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -163,6 +163,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_msg);
 				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
 				delete_user_meta($user_ID, c_al2fb_meta_sentences);
+				delete_user_meta($user_ID, c_al2fb_meta_trailer);
 				delete_user_meta($user_ID, c_al2fb_meta_hyperlink);
 				delete_user_meta($user_ID, c_al2fb_meta_integrate);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
@@ -300,6 +301,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_shortlink] = null;
 			if (empty($_POST[c_al2fb_meta_sentences]))
 				$_POST[c_al2fb_meta_sentences] = null;
+			if (empty($_POST[c_al2fb_meta_trailer]))
+				$_POST[c_al2fb_meta_trailer] = null;
 			if (empty($_POST[c_al2fb_meta_hyperlink]))
 				$_POST[c_al2fb_meta_hyperlink] = null;
 			if (empty($_POST[c_al2fb_meta_integrate]))
@@ -313,6 +316,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
 			$_POST[c_al2fb_meta_picture] = trim(stripslashes($_POST[c_al2fb_meta_picture]));
 			$_POST[c_al2fb_meta_sentences] = trim($_POST[c_al2fb_meta_sentences]);
+			$_POST[c_al2fb_meta_trailer] = trim($_POST[c_al2fb_meta_trailer]);
 
 			// Shared changed
 			if ($_POST[c_al2fb_meta_shared] != get_user_meta($user_ID, c_al2fb_meta_shared, true))
@@ -340,6 +344,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_sentences, $_POST[c_al2fb_meta_sentences]);
+			update_user_meta($user_ID, c_al2fb_meta_trailer, $_POST[c_al2fb_meta_trailer]);
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_integrate, $_POST[c_al2fb_meta_integrate]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
@@ -353,10 +358,13 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_min_cap] = null;
 				if (empty($_POST[c_al2fb_option_msg_refresh]))
 					$_POST[c_al2fb_option_msg_refresh] = null;
+				if (empty($_POST[c_al2fb_option_max_descr]))
+					$_POST[c_al2fb_option_max_descr] = null;
 
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
+				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 
 				if (isset($_REQUEST['debug'])) {
 					if (empty($_POST[c_al2fb_option_siteurl]))
@@ -743,7 +751,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_caption"><?php _e('Use site title as caption:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_caption" name="<?php echo c_al2fb_meta_caption; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) echo ' checked="checked"'; ?> />
-				<br /><span class="al2fb_explanation"><?php echo htmlspecialchars(html_entity_decode(get_bloginfo('title')), ENT_QUOTES, $charset); ?></span>
+				<br /><span class="al2fb_explanation">&quot;<?php echo html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')); ?>&quot;</span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -764,6 +772,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input class="al2fb_numeric" id="al2fb_sentence" name="<?php echo c_al2fb_meta_sentences; ?>" text="text" value="<?php  echo get_user_meta($user_ID, c_al2fb_meta_sentences, true); ?>" />
 				<br /><span class="al2fb_explanation"><?php _e('Leave blank to let Facebook choose', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_trailer"><?php _e('Text trailer:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_text" id="al2fb_trailer" name="<?php echo c_al2fb_meta_trailer; ?>" text="text" value="<?php  echo get_user_meta($user_ID, c_al2fb_meta_trailer, true); ?>" />
+				<br /><span class="al2fb_explanation"><?php _e('For example "Read more ..."', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -837,6 +852,14 @@ if (!class_exists('WPAL2Facebook')) {
 					<input class="al2fb_numeric" id="al2fb_cache" name="<?php echo c_al2fb_option_msg_refresh; ?>" text="text" value="<?php  echo get_option(c_al2fb_option_msg_refresh); ?>" />
 					<span><?php _e('Minutes', c_al2fb_text_domain); ?></span>
 					<br /><span class="al2fb_explanation"><?php _e('Default every 10 minutes', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_max_descr"><?php _e('Maximum Facebook text length:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_numeric" id="al2fb_max_descr" name="<?php echo c_al2fb_option_max_descr; ?>" text="text" value="<?php  echo get_option(c_al2fb_option_max_descr); ?>" />
+					<span><?php _e('Characters', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Default 256 characters', c_al2fb_text_domain); ?></span>
 				</td></tr>
 				</table>
 
@@ -1311,21 +1334,48 @@ if (!class_exists('WPAL2Facebook')) {
 			$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
 			$content = preg_replace('/<[^>]*>/', '', $content);
 
-			// Get number of configured sentences
-			$sentences = intval(get_user_meta($post->post_author, c_al2fb_meta_sentences, true));
-			if ($sentences) {
+			$trailer = get_user_meta($post->post_author, c_al2fb_meta_trailer, true);
+			if ($trailer) {
+				// Get maximum FB description size
+				$maxlen = get_option(c_al2fb_option_max_descr);
+				if (!$maxlen)
+					$maxlen = 256;
+
+				// Add maximum number of sentences
 				$lines = explode('.', $content);
 				if ($lines) {
 					$count = 0;
 					$content = '';
 					foreach ($lines as $sentence) {
-						$content .= $sentence;
+						$line = $sentence;
 						if ($count + 1 < count($lines))
-							$content .= '.';
-						if ($sentence)
-							$count++;
-						if ($count >= $sentences)
+							$line .= '.';
+						if (strlen($content) + strlen($line) + strlen($trailer) < $maxlen)
+							$content .= $line;
+						else
 							break;
+					}
+					$content .= ' ';
+					$content .= $trailer;
+				}
+			}
+			else {
+				// Get number of configured sentences
+				$sentences = intval(get_user_meta($post->post_author, c_al2fb_meta_sentences, true));
+				if ($sentences) {
+					$lines = explode('.', $content);
+					if ($lines) {
+						$count = 0;
+						$content = '';
+						foreach ($lines as $sentence) {
+							$content .= $sentence;
+							if ($count + 1 < count($lines))
+								$content .= '.';
+							if ($sentence)
+								$count++;
+							if ($count >= $sentences)
+								break;
+						}
 					}
 				}
 			}
