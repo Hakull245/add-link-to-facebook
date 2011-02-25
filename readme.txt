@@ -4,17 +4,17 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.51
+Stable tag: 0.52
 
-Automatically add links to published posts to your Facebook wall or pages
+Automatically add links to published posts to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. The way links appear on Facebook can be customized.
+Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
-It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
+It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
 
 There is support for multi-user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
@@ -42,7 +42,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * English (en\_US), built-in, corrections are welcome
 * Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
 * Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
-* Norwegian (nb_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
+* Norwegian (nb\_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
@@ -116,7 +116,7 @@ Facebook might also have had trouble accessing the image.
 
 = What happens when I update a post? =
 
-If the link to the post was added already to your wall or page, nothing,
+If the link to the post was added already to your wall, page or group, nothing,
 else a new link will be added. See also the next question.
 
 = How can I add a link to an existing post? =
@@ -126,7 +126,7 @@ If you want to add a link again, you should remove the custom field *al2fb_faceb
 
 = Will links for future posts be added? =
 
-Yes, when they are published automatically a link will be added to your wall or page too.
+Yes, when they are published automatically a link will be added to your wall, page or group too.
 
 = How about private / password protected posts? =
 
@@ -137,7 +137,15 @@ Don't worry, no links to private posts will be added.
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
 Maybe you want to check the option *Add as page owner* too.
-If you do that, you have to re-authorize one time more, because extra Facebook permissions are needed for that.
+If you do that, you have to re-authorize one time more, because an extra Facebook permission is required for that.
+Note that pages and groups exclude each other.
+
+= I want to add links to a group =
+
+Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups*.
+You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
+After you have done that, you can select the group to add links to.
+Note that pages and groups exclude each other.
 
 = How can I use short URL's as Facebook link? =
 
@@ -357,6 +365,17 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.52 =
+* New feature: add links to group pages
+* Improvement: 'sentences' option has precedence over 'trailer' option
+* Improvement: 'trailer' option applies to excerpt too
+* Improvement: Facebook texts are not truncated within a sentence anymore
+* Improvement: extended debug information with all settings
+* Bugfix: preserve page selection
+* Bugfix: for <em>An active access token must be used ...</em>
+* Updated description and FAQ
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 0.51 =
 * New feature: integrate Facebook likes (beta)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -376,7 +395,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: logging authorization time
 * Improvement: authorization failure reason logged
 * Improvement: get page info with page access token
-* Improvement: check result get page info 
+* Improvement: check result get page info
 * Disabled beta client-side flow (shared Facebook app) completely
 
 = 0.47 =
@@ -418,7 +437,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 0.40 =
 * Improvement: cache availability *wp-al2fb* service
 * Updated FAQ
-* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.39 =
 * New feature: really simple setup (beta)
@@ -435,7 +454,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 0.37 =
 * Bugfix: pre-authorization check only when safe mode off
-* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 0.36 =
@@ -457,7 +476,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: select number of sentences to use
 * Improvement: more consequent image handling
 * Improvement: security hardened again
-* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.33 =
@@ -466,7 +485,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 0.32 =
 * Added Turkish (tr\_TR) translation by [laztrix](http://www.diviksfilm.com/blog "laztrix")
-* Updated Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated description and FAQ
 * Improvement: less verbose error if no cURL error
@@ -523,7 +542,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: check if theme supports featured images
 * Improvement: extended debug option
 * Updated FAQ
-* Added Norwegian (nb_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Added Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.23 =
 * New feature: image select in post meta box
@@ -646,6 +665,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.52 =
+New feature: add links to group pages
 
 = 0.51 =
 New feature: integrate Facebook likes (beta)
