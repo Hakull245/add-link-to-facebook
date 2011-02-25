@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.48
+Stable tag: 0.50
 
 Automatically add links to published posts to your Facebook wall or pages
 
@@ -13,7 +13,7 @@ Automatically add links to published posts to your Facebook wall or pages
 Automatically add links to posts that are being published to your Facebook wall or pages. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
-It is possible to configure a link image (WordPress icon, featured image or custom image) or you can let Facebook select one automatically.
+It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall or pages by ticking a check box just above the publish button.
 
 There is support for multi-user and network sites and shortcodes will be processed.
@@ -49,6 +49,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Your translation ...
+
+**If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -100,7 +102,7 @@ Selecting an image this way takes precedence over the other settings.
 = To which wall will a link be added? =
 
 Always to the wall of the post author, if configured.
-Even if somebody else is editting the post.
+Even if somebody else is editing the post.
 
 = Which link picture will Facebook select? =
 
@@ -327,7 +329,7 @@ For all these errors you need to contact your hosting provider.
 = I get 'HTTP 400 Bad Request' =
 
 You are probably using Microsoft Internet Explorer.
-This browser has the bad habbit not to display the content
+This browser has the bad habit not to display the content
 when there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
 Actually you are most probably having one of the above errors, but you cannot see which one.
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
@@ -354,6 +356,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.50 =
+* New feature: option for trailer texts like *Read more ...*
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 0.49 =
+* Added some *htmlspecialchars* calls and fixed one
+* Removed link to shared Facebook application
 
 = 0.48 =
 * Improvement: authorization clears last error
@@ -631,6 +642,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.50 =
+New feature: trailer texts like *Read more*
+
+= 0.49 =
+Small improvements
 
 = 0.48 =
 Small improvements

@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-20 11:45+0100\n"
+"PO-Revision-Date: 2011-02-25 12:27+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -230,6 +230,12 @@ msgstr "Aantal te gebruiken zinnen:"
 msgid "Leave blank to let Facebook choose"
 msgstr "Laat leeg om Facebook te laten kiezen"
 
+msgid "Text trailer:"
+msgstr "Tekst naschrift:"
+
+msgid "For example \"Read more ...\""
+msgstr "Bijvoorbeeld \"Lees meer ...\""
+
 msgid "Keep hyperlinks:"
 msgstr "Behoudt hyperlinks:"
 
@@ -250,4 +256,13 @@ msgstr "Minuten"
 
 msgid "Default every 10 minutes"
 msgstr "Standaard elke 10 minuten"
+
+msgid "Maximum Facebook text length:"
+msgstr "Maximale Facebook tekst lengte:"
+
+msgid "Characters"
+msgstr "Karakters"
+
+msgid "Default 256 characters"
+msgstr "Standaard 256 karakters"
 

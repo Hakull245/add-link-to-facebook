@@ -20,6 +20,7 @@ define('c_al2fb_option_timeout', 'al2fb_timeout');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 define('c_al2fb_option_min_cap', 'al2fb_min_cap');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
+define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 
@@ -40,6 +41,7 @@ define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
 define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_sentences', 'al2fb_sentences');
+define('c_al2fb_meta_trailer', 'al2fb_trailer');
 define('c_al2fb_meta_hyperlink', 'al2fb_hyperlink');
 define('c_al2fb_meta_integrate', 'al2fb_integrate');
 define('c_al2fb_meta_clean', 'al2fb_clean');
@@ -80,9 +82,7 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // - Check min image size
 // - Embed WordPress icon
-// - Read more
 // - Meta boxes if authorized
-// - Network site config
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -163,6 +163,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_msg);
 				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
 				delete_user_meta($user_ID, c_al2fb_meta_sentences);
+				delete_user_meta($user_ID, c_al2fb_meta_trailer);
 				delete_user_meta($user_ID, c_al2fb_meta_hyperlink);
 				delete_user_meta($user_ID, c_al2fb_meta_integrate);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
@@ -300,6 +301,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_shortlink] = null;
 			if (empty($_POST[c_al2fb_meta_sentences]))
 				$_POST[c_al2fb_meta_sentences] = null;
+			if (empty($_POST[c_al2fb_meta_trailer]))
+				$_POST[c_al2fb_meta_trailer] = null;
 			if (empty($_POST[c_al2fb_meta_hyperlink]))
 				$_POST[c_al2fb_meta_hyperlink] = null;
 			if (empty($_POST[c_al2fb_meta_integrate]))
@@ -313,6 +316,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
 			$_POST[c_al2fb_meta_picture] = trim(stripslashes($_POST[c_al2fb_meta_picture]));
 			$_POST[c_al2fb_meta_sentences] = trim($_POST[c_al2fb_meta_sentences]);
+			$_POST[c_al2fb_meta_trailer] = trim($_POST[c_al2fb_meta_trailer]);
 
 			// Shared changed
 			if ($_POST[c_al2fb_meta_shared] != get_user_meta($user_ID, c_al2fb_meta_shared, true))
@@ -340,6 +344,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_sentences, $_POST[c_al2fb_meta_sentences]);
+			update_user_meta($user_ID, c_al2fb_meta_trailer, $_POST[c_al2fb_meta_trailer]);
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_integrate, $_POST[c_al2fb_meta_integrate]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
@@ -353,10 +358,13 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_min_cap] = null;
 				if (empty($_POST[c_al2fb_option_msg_refresh]))
 					$_POST[c_al2fb_option_msg_refresh] = null;
+				if (empty($_POST[c_al2fb_option_max_descr]))
+					$_POST[c_al2fb_option_max_descr] = null;
 
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
+				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 
 				if (isset($_REQUEST['debug'])) {
 					if (empty($_POST[c_al2fb_option_siteurl]))
@@ -415,7 +423,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$msg .= ' error=' . $_REQUEST['error'];
 				update_option(c_al2fb_last_error, $msg);
 				update_option(c_al2fb_last_error_time, date('c'));
-				echo '<div id="message" class="error fade al2fb_error"><p>' . $_REQUEST['error_description'] . '</p></div>';
+				echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($_REQUEST['error_description'], ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 			}
 		}
 
@@ -432,7 +440,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Build message
 			$message = '<html><head><title>Add Link to Facebook</title></head><body>';
-			$message .= '<p>' . nl2br(htmlspecialchars(stripslashes($_POST[c_al2fb_mail_msg]))) . '</p>';
+			$message .= '<p>' . nl2br(htmlspecialchars(stripslashes($_POST[c_al2fb_mail_msg]), ENT_QUOTES, get_bloginfo('charset'))) . '</p>';
 			$message .= '<hr />';
 			$message .= self::Debug_info();
 			$message .= '</body></html>';
@@ -473,7 +481,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Check for error
 			if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'error') {
 					echo '<div id="message" class="error fade al2fb_error"><p>';
-					echo htmlspecialchars(stripslashes($_REQUEST['error'])) . '</p></div>';
+					echo htmlspecialchars(stripslashes($_REQUEST['error']), ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 			}
 
 			// Check for post errors
@@ -485,7 +493,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<div id="message" class="error fade al2fb_error"><p>';
 					echo __('Add Link to Facebook', c_al2fb_text_domain) . ' - ';
 					edit_post_link($posts->post->post_title, null, null, $posts->post->ID);
-					echo ': ' . htmlspecialchars($error) . '</p></div>';
+					echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 				}
 			}
 		}
@@ -668,7 +676,7 @@ if (!class_exists('WPAL2Facebook')) {
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
 					</th><td>
-						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name, ENT_QUOTES, $charset, $charset); ?></a>
+						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name, ENT_QUOTES, $charset); ?></a>
 					</td></tr>
 <?php
 				}
@@ -743,7 +751,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_caption"><?php _e('Use site title as caption:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_caption" name="<?php echo c_al2fb_meta_caption; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) echo ' checked="checked"'; ?> />
-				<br /><span class="al2fb_explanation"><?php echo htmlspecialchars(html_entity_decode(get_bloginfo('title'), ENT_QUOTES, $charset)); ?></span>
+				<br /><span class="al2fb_explanation">&quot;<?php echo html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')); ?>&quot;</span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -764,6 +772,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input class="al2fb_numeric" id="al2fb_sentence" name="<?php echo c_al2fb_meta_sentences; ?>" text="text" value="<?php  echo get_user_meta($user_ID, c_al2fb_meta_sentences, true); ?>" />
 				<br /><span class="al2fb_explanation"><?php _e('Leave blank to let Facebook choose', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_trailer"><?php _e('Text trailer:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_text" id="al2fb_trailer" name="<?php echo c_al2fb_meta_trailer; ?>" text="text" value="<?php  echo get_user_meta($user_ID, c_al2fb_meta_trailer, true); ?>" />
+				<br /><span class="al2fb_explanation"><?php _e('For example "Read more ..."', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -838,6 +853,14 @@ if (!class_exists('WPAL2Facebook')) {
 					<span><?php _e('Minutes', c_al2fb_text_domain); ?></span>
 					<br /><span class="al2fb_explanation"><?php _e('Default every 10 minutes', c_al2fb_text_domain); ?></span>
 				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_max_descr"><?php _e('Maximum Facebook text length:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_numeric" id="al2fb_max_descr" name="<?php echo c_al2fb_option_max_descr; ?>" text="text" value="<?php  echo get_option(c_al2fb_option_max_descr); ?>" />
+					<span><?php _e('Characters', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Default 256 characters', c_al2fb_text_domain); ?></span>
+				</td></tr>
 				</table>
 
 <?php		   if (isset($_REQUEST['debug'])) { ?>
@@ -893,7 +916,6 @@ if (!class_exists('WPAL2Facebook')) {
 			<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
 			<li><a href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
-			<li><a href="http://www.facebook.com/apps/application.php?id=<?php echo c_al2fb_app_id; ?>"><?php _e('Facebook wall', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
 			</ul>
@@ -1312,21 +1334,48 @@ if (!class_exists('WPAL2Facebook')) {
 			$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
 			$content = preg_replace('/<[^>]*>/', '', $content);
 
-			// Get number of configured sentences
-			$sentences = intval(get_user_meta($post->post_author, c_al2fb_meta_sentences, true));
-			if ($sentences) {
+			$trailer = get_user_meta($post->post_author, c_al2fb_meta_trailer, true);
+			if ($trailer) {
+				// Get maximum FB description size
+				$maxlen = get_option(c_al2fb_option_max_descr);
+				if (!$maxlen)
+					$maxlen = 256;
+
+				// Add maximum number of sentences
 				$lines = explode('.', $content);
 				if ($lines) {
 					$count = 0;
 					$content = '';
 					foreach ($lines as $sentence) {
-						$content .= $sentence;
+						$line = $sentence;
 						if ($count + 1 < count($lines))
-							$content .= '.';
-						if ($sentence)
-							$count++;
-						if ($count >= $sentences)
+							$line .= '.';
+						if (strlen($content) + strlen($line) + strlen($trailer) < $maxlen)
+							$content .= $line;
+						else
 							break;
+					}
+					$content .= ' ';
+					$content .= $trailer;
+				}
+			}
+			else {
+				// Get number of configured sentences
+				$sentences = intval(get_user_meta($post->post_author, c_al2fb_meta_sentences, true));
+				if ($sentences) {
+					$lines = explode('.', $content);
+					if ($lines) {
+						$count = 0;
+						$content = '';
+						foreach ($lines as $sentence) {
+							$content .= $sentence;
+							if ($count + 1 < count($lines))
+								$content .= '.';
+							if ($sentence)
+								$count++;
+							if ($count >= $sentences)
+								break;
+						}
 					}
 				}
 			}
@@ -1680,25 +1729,25 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info = '<div class="al2fb_debug"><table border="1">';
 			$info .= '<tr><td>Time:</td><td>' . date('c') . '</td></tr>';
-			$info .= '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . '</td></tr>';
-			$info .= '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name()) . '</td></tr>';
+			$info .= '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE'], ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name(), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
 			$info .= '<tr><td>safe_mode:</td><td>' . (ini_get('safe_mode') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>open_basedir:</td><td>' . ini_get('open_basedir') . '</td></tr>';
-			$info .= '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT']) . '</td></tr>';
+			$info .= '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>WordPress version:</td><td>' . $wp_version . '</td></tr>';
 			$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 			$info .= '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Blog address (home):</td><td><a href="' . get_home_url() . '">' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>WordPress address (site):</td><td><a href="' . get_site_url() . '">' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>Redirect URI:</td><td><a href="' . self::Redirect_uri() . '">' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</a></td></tr>';
-			$info .= '<tr><td>Authorize URL:</td><td><a href="' . self::Authorize_url() . '">' . htmlspecialchars(self::Authorize_url()) . '</a></td></tr>';
-			$info .= '<tr><td>Authorization init:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_init)) . '</td></tr>';
-			$info .= '<tr><td>Authorization check:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_check)) . '</td></tr>';
-			$info .= '<tr><td>Redirect time:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_time)) . '</td></tr>';
-			$info .= '<tr><td>Redirect referer:</td><td><a href="' . get_option(c_al2fb_log_redir_ref) . '">' . htmlspecialchars(get_option(c_al2fb_log_redir_ref)) . '</a></td></tr>';
-			$info .= '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from)) . '</td></tr>';
-			$info .= '<tr><td>Redirect to:</td><td><a href="' . get_option(c_al2fb_log_redir_to) . '">' . htmlspecialchars(get_option(c_al2fb_log_redir_to)) . '</a></td></tr>';
+			$info .= '<tr><td>Authorize URL:</td><td><a href="' . self::Authorize_url() . '">' . htmlspecialchars(self::Authorize_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
+			$info .= '<tr><td>Authorization init:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_init), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Authorization check:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_check), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Redirect time:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_time), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Redirect referer:</td><td><a href="' . get_option(c_al2fb_log_redir_ref) . '">' . htmlspecialchars(get_option(c_al2fb_log_redir_ref), ENT_QUOTES, $charset) . '</a></td></tr>';
+			$info .= '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Redirect to:</td><td><a href="' . get_option(c_al2fb_log_redir_to) . '">' . htmlspecialchars(get_option(c_al2fb_log_redir_to), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>Authorized:</td><td>' . (self::Is_authorized($user_ID) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Authorized time:</td><td>' . get_option(c_al2fb_log_auth_time) . '</td></tr>';
 			$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
@@ -1712,14 +1761,14 @@ if (!class_exists('WPAL2Facebook')) {
 				$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
 				if (!empty($error)) {
 					$info .= '<tr><td>Error:</td>';
-					$info .= '<td>' . htmlspecialchars($error) . '</td></tr>';
+					$info .= '<td>' . htmlspecialchars($error, ENT_QUOTES, $charset) . '</td></tr>';
 					$info .= '<tr><td>Error time:</td>';
-					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_link_time, true)) . '</td></tr>';
+					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_link_time, true), ENT_QUOTES, $charset) . '</td></tr>';
 				}
 			}
 
-			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error)) . '</td></tr>';
-			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time)) . '</td></tr>';
+			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '</table></div>';
 			return $info;
 		}
