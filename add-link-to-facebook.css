@@ -26,6 +26,7 @@
 
 .al2fb_instructions {
 	margin-top: 20px;
+	margin-bottom: 10px;
 	padding: 10px;
 	border: 1px solid #CCCCCC;
 	background-color: #FFFEEB;
@@ -75,6 +76,13 @@
 
 .al2fb_explanation {
 	font-size: smaller;
+}
+
+.al2fb_border {
+	border-width: 1px;
+	border-color: gray;
+	border-style: outset;
+	margin-bottom: 10px;
 }
 
 .al2fb_debug {
