@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.53
+Stable tag: 0.54
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -191,6 +191,7 @@ Most likely yes, but featured images can only be used as link picture when your 
 This plugin is known to be incompatible with:
 
 * [Geo Places](http://templatic.com/news/geo-places-city-directory-wordpress-theme "Geo Places"): publishing from the front-end doesn't add links
+* Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
 
 = Is this plugin compatible with plugin xxx? =
 
@@ -373,6 +374,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.54 =
+* Improvement: display correct number of comments when integrating
+* Improvement: option to integrate comments and/or likes separated
+* Improvement: dummy e-mail addresses for Facebook comments for generated avatars
+* Updated FAQ
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 0.53 =
 * Improvement: better styling of admin area
@@ -678,6 +686,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.54 =
+Integration improved, updated translation
 
 = 0.53 =
 Better styling of admin area
