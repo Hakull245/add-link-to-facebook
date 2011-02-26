@@ -665,7 +665,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<a href="http://www.facebook.com/developers/createapp.php" target="_blank">	<?php _e('Click here to create', c_al2fb_text_domain); ?></a>
 			</div>
 
-			<table class="form-table">
+			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_client_id"><strong><?php _e('App ID:', c_al2fb_text_domain); ?></strong></label>
 			</th><td>
@@ -677,6 +677,22 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_app_secret" class="al2fb_app_secret" name="<?php echo c_al2fb_meta_app_secret; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_app_secret, true); ?>" />
 			</td></tr>
+<?php
+			if (self::Is_authorized($user_ID))
+				try {
+					$app = self::Get_application($user_ID);
+?>
+					<tr valign="top"><th scope="row">
+						<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
+					</th><td>
+						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name, ENT_QUOTES, $charset); ?></a>
+					</td></tr>
+<?php
+				}
+				catch (Exception $e) {
+					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
+				}
+?>
 			</table>
 			</div>
 
@@ -696,25 +712,6 @@ if (!class_exists('WPAL2Facebook')) {
 				});
 			</script>
 
-			<table class="form-table">
-<?php
-			if (self::Is_authorized($user_ID))
-				try {
-					$app = self::Get_application($user_ID);
-?>
-					<tr valign="top"><th scope="row">
-						<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
-					</th><td>
-						<a id="al2fb_app_name" href="<?php echo $app->link; ?>" target="_blank"><?php echo htmlspecialchars($app->name, ENT_QUOTES, $charset); ?></a>
-					</td></tr>
-<?php
-				}
-				catch (Exception $e) {
-					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
-				}
-?>
-			</table>
-
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
@@ -722,7 +719,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<hr />
 			<h3><?php _e('Additional settings', c_al2fb_text_domain); ?></h3>
 
-			<table class="form-table">
+			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_picture_type"><?php _e('Link picture:', c_al2fb_text_domain); ?></label>
 			</th><td>
@@ -740,6 +737,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<input id="al2fb_picture" class="al2fb_picture" name="<?php echo c_al2fb_meta_picture; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_picture, true); ?>" />
 				<br /><span class="al2fb_explanation"><?php _e('At least 50 x 50 pixels', c_al2fb_text_domain); ?></span>
 			</td></tr>
+			</table>
 
 <?php
 			if (self::Is_authorized($user_ID))
@@ -750,6 +748,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$pages = self::Get_pages($user_ID);
 						$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 ?>
+						<table class="form-table al2fb_border">
 						<tr valign="top"><th scope="row">
 							<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
 						</th><td>
@@ -772,8 +771,10 @@ if (!class_exists('WPAL2Facebook')) {
 							<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
 							<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
 						</td></tr>
+						</table>
 <?php				} ?>
 
+					<table class="form-table al2fb_border">
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_use_groups"><?php _e('Use groups:', c_al2fb_text_domain); ?></label>
 					</th><td>
@@ -803,11 +804,15 @@ if (!class_exists('WPAL2Facebook')) {
 						</td></tr>
 <?php
 					}
+?>
+					</table>
+<?php
 				}
 				catch (Exception $e) {
 					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
 				}
 ?>
+			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_caption"><?php _e('Use site title as caption:', c_al2fb_text_domain); ?></label>
 			</th><td>
@@ -819,13 +824,6 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_msg"><?php _e('Use excerpt as message:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_msg" name="<?php echo c_al2fb_meta_msg; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_msg, true)) echo ' checked="checked"'; ?> />
-			</td></tr>
-
-			<tr valign="top"><th scope="row">
-				<label for="al2fb_shortlink"><?php _e('Use short URL:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
-				<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -847,6 +845,15 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_hyperlink" name="<?php echo c_al2fb_meta_hyperlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_hyperlink, true)) echo ' checked="checked"'; ?> />
 				<br /><span class="al2fb_explanation"><?php _e('The hyperlink title will be removed', c_al2fb_text_domain); ?></span>
+			</td></tr>
+			</table>
+
+			<table class="form-table al2fb_border">
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_shortlink"><?php _e('Use short URL:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
+				<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -873,7 +880,7 @@ if (!class_exists('WPAL2Facebook')) {
 <?php	   if (current_user_can('manage_options')) { ?>
 				<h3><?php _e('Administrator options', c_al2fb_text_domain); ?></h3>
 
-				<table class="form-table">
+				<table class="form-table al2fb_border">
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_nonotice"><?php _e('Do not display notices:', c_al2fb_text_domain); ?></label>
 				</th><td>
@@ -926,7 +933,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 <?php		   if (isset($_REQUEST['debug'])) { ?>
 					<h3><?php _e('Debug options', c_al2fb_text_domain); ?></h3>
-					<table class="form-table">
+					<table class="form-table al2fb_border">
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_siteurl"><?php _e('Use site URL as request URI:', c_al2fb_text_domain); ?></label>
 					</th><td>
