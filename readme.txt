@@ -23,12 +23,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Beta features:**
 
-* Integrate Facebook comments on added links into Wordpress
-
-**Facebook disabled the shared application, because, according to Facebook,
-it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
-If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
-Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.**
+* Integrate Facebook comments and likes on added links into Wordpress
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -113,6 +108,11 @@ It also depends on support for the [Open Graph protocol](http://developers.faceb
 
 Maybe because it is smaller than 50 x 50 pixels.
 Facebook might also have had trouble accessing the image.
+
+= I don't want a link picture =
+
+Facebook doesn't support this as far as I know,
+but you could let the custom link picture point to a valid but non existing address.
 
 = What happens when I update a post? =
 
@@ -220,6 +220,11 @@ The plugin doesn't support different walls or pages for different sites for the 
 I will not implement this, because it could be a violation of
 the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 
+In a coming version it will be possible for an administrator to setup one wall for all users of one site.
+In this configuration it will be necessary for every user to approve adding links to the common wall for each post.
+This is to prevent violations of
+the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+
 = Is remote publishing supported? =
 
 Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
@@ -268,6 +273,11 @@ Please send me the message and follow the instruction in the last question.
 You have probably entered a wrong *App ID* or the Facebook application may be deleted.
 If you didn't create a Facebook application yet, you should follow the instructions in the yellow box on the plugin page.
 
+Facebook disabled the shared application, because, according to Facebook,
+it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
+Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.
+
 = I get 'Error validating client secret' =
 
 You have probably entered a wrong *App Secret*.
@@ -289,7 +299,7 @@ Now try to authorize again.
 
 = I get 'The user hasn't authorized the application to perform this action' =
 
-You have probably revoked the publishing permissions of the Facebook application.
+You have probably revoked one of the permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you can also disable the plugin.
@@ -312,8 +322,7 @@ Please send me the debug information, see the last question for instructions.
 
 = I get 'An active access token must be used to query information about the current user' =
 
-The reason for this rare error is unknown yet.
-Please help me to find the cause by reporting this problem and by sending the debug information to me (see last question for how to).
+If you keep getting this error after upgrading to the latest version, please report it and send me the debug information (see the last question for instructions).
 
 = I get 'Your server may not allow external connections' =
 
@@ -332,7 +341,7 @@ cURL errors encountered so far:
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
-For all these errors you need to contact your hosting provider.
+For above cURL errors you need to contact your hosting provider.
 
 = I get 'HTTP 400 Bad Request' =
 
@@ -862,4 +871,3 @@ Initial version
 This plugin uses:
 
 * [jQuery JavaScript Library](http://jquery.com/ "jQuery") published under both the GNU General Public License and MIT License
-
