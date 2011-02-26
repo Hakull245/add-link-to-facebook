@@ -377,7 +377,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 0.54 =
 * Improvement: display correct number of comments when integrating
-* Improvement: option to integrate comments and/or likes separated
+* Improvement: option to integrate comments and/or likes separately
 * Improvement: dummy e-mail addresses for Facebook comments for generated avatars
 * Updated FAQ
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
