@@ -191,7 +191,6 @@ Most likely yes, but featured images can only be used as link picture when your 
 This plugin is known to be incompatible with:
 
 * [Geo Places](http://templatic.com/news/geo-places-city-directory-wordpress-theme "Geo Places"): publishing from the front-end doesn't add links
-* Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
 
 = Is this plugin compatible with plugin xxx? =
 
@@ -206,6 +205,7 @@ Auto posting plugins will work if one of the following actions is used:
 This plugin is known to be incompatible with:
 
 * [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+* Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
 
 If necessary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
