@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.52
+Stable tag: 0.53
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -374,6 +374,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.53 =
+* Improvement: better styling of admin area
+* Updated description and FAQ
+
 = 0.52 =
 * New feature: add links to group pages
 * Improvement: 'sentences' option has precedence over 'trailer' option
@@ -674,6 +678,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.53 =
+Better styling of admin area
 
 = 0.52 =
 New feature: add links to group pages
