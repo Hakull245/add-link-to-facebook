@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.52
+Stable tag: 0.55
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -23,12 +23,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Beta features:**
 
-* Integrate Facebook comments on added links into Wordpress
-
-**Facebook disabled the shared application, because, according to Facebook,
-it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
-If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
-Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.**
+* Integrate Facebook comments and likes on added links into Wordpress
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -48,6 +43,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
 * German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
+* Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Your translation ...
 
 **If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
@@ -114,6 +110,11 @@ It also depends on support for the [Open Graph protocol](http://developers.faceb
 Maybe because it is smaller than 50 x 50 pixels.
 Facebook might also have had trouble accessing the image.
 
+= I don't want a link picture =
+
+Facebook doesn't support this as far as I know,
+but you could let the custom link picture point to a valid but non existing address.
+
 = What happens when I update a post? =
 
 If the link to the post was added already to your wall, page or group, nothing,
@@ -164,8 +165,14 @@ The application icon of the shared application cannot be changed.
 
 You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as a start.
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+[See here](http://drupal.org/node/17564 "Poedit plural forms") for details on plural forms.
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
 Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+= How can I change the styling? =
+
+1. Copy *add-link-to-facebook.css* to your upload directory to prevent it from being overwritten by an update
+2. Change the style sheet to your wishes; the style sheet contains documentation
 
 **--- Security ---**
 
@@ -205,6 +212,7 @@ Auto posting plugins will work if one of the following actions is used:
 This plugin is known to be incompatible with:
 
 * [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+* Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
 
 If necessary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
@@ -218,6 +226,11 @@ Yes, each user can configure his/her own wall or page.
 
 The plugin doesn't support different walls or pages for different sites for the same user.
 I will not implement this, because it could be a violation of
+the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+
+In a coming version it will be possible for an administrator to setup one wall for all users of one site.
+In this configuration it will be necessary for every user to approve adding links to the common wall for each post.
+This is to prevent violations of
 the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 
 = Is remote publishing supported? =
@@ -268,6 +281,11 @@ Please send me the message and follow the instruction in the last question.
 You have probably entered a wrong *App ID* or the Facebook application may be deleted.
 If you didn't create a Facebook application yet, you should follow the instructions in the yellow box on the plugin page.
 
+Facebook disabled the shared application, because, according to Facebook,
+it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
+Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.
+
 = I get 'Error validating client secret' =
 
 You have probably entered a wrong *App Secret*.
@@ -289,7 +307,7 @@ Now try to authorize again.
 
 = I get 'The user hasn't authorized the application to perform this action' =
 
-You have probably revoked the publishing permissions of the Facebook application.
+You have probably revoked one of the permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you can also disable the plugin.
@@ -312,8 +330,7 @@ Please send me the debug information, see the last question for instructions.
 
 = I get 'An active access token must be used to query information about the current user' =
 
-The reason for this rare error is unknown yet.
-Please help me to find the cause by reporting this problem and by sending the debug information to me (see last question for how to).
+If you keep getting this error after upgrading to the latest version, please report it and send me the debug information (see the last question for instructions).
 
 = I get 'Your server may not allow external connections' =
 
@@ -332,7 +349,7 @@ cURL errors encountered so far:
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
-For all these errors you need to contact your hosting provider.
+For above cURL errors you need to contact your hosting provider.
 
 = I get 'HTTP 400 Bad Request' =
 
@@ -364,6 +381,24 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.55 =
+* New feature: display likers below post text
+* Updated description and FAQ
+* Added Hungarian (hu\_HU) translation by [Pitty](http://www.pittyphoto.hu/ "Pitty")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.54 =
+* Improvement: display correct number of comments when integrating
+* Improvement: option to integrate comments and/or likes separately
+* Improvement: dummy e-mail addresses for Facebook comments for generated avatars
+* Updated FAQ
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
+= 0.53 =
+* Improvement: better styling of admin area
+* Updated description and FAQ
 
 = 0.52 =
 * New feature: add links to group pages
@@ -666,6 +701,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 0.55 =
+New feature: display likers below post text, translations
+
+= 0.54 =
+Integration improved, updated translation
+
+= 0.53 =
+Better styling of admin area
+
 = 0.52 =
 New feature: add links to group pages
 
@@ -862,4 +906,3 @@ Initial version
 This plugin uses:
 
 * [jQuery JavaScript Library](http://jquery.com/ "jQuery") published under both the GNU General Public License and MIT License
-
