@@ -8,11 +8,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-26 20:59+0100\n"
+"PO-Revision-Date: 2011-02-27 09:56+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Settings updated"
 msgstr "Instellingen bijgewerkt"
@@ -257,6 +258,9 @@ msgstr "Integreer berichten van Facebook:"
 msgid "Integrate likes from Facebook:"
 msgstr "Integreer 'vind ik leuk' van Facebook:"
 
+msgid "Show likers below the post text:"
+msgstr "Toon 'vind ik leuk' onder de berichttekst:"
+
 msgid "on Facebook"
 msgstr "op Facebook"
 
@@ -280,4 +284,9 @@ msgstr "Karakters"
 
 msgid "Default 256 characters"
 msgstr "Standaard 256 karakters"
+
+msgid "liked this post"
+msgid_plural "liked this post"
+msgstr[0] "vond dit bericht leuk"
+msgstr[1] "vonden dit bericht leuk"
 

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.54
+Stable tag: 0.55
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -43,6 +43,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
 * German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
+* Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Your translation ...
 
 **If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
@@ -164,8 +165,14 @@ The application icon of the shared application cannot be changed.
 
 You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as a start.
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
+[See here](http://drupal.org/node/17564 "Poedit plural forms") for details on plural forms.
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
 Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+
+= How can I change the styling? =
+
+1. Copy *add-link-to-facebook.css* to your upload directory to prevent it from being overwritten by an update
+2. Change the style sheet to your wishes; the style sheet contains documentation
 
 **--- Security ---**
 
@@ -374,6 +381,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.55 =
+* New feature: display likers below post text
+* Updated description and FAQ
+* Added Hungarian (hu\_HU) translation by [Pitty](http://www.pittyphoto.hu/ "Pitty")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.54 =
 * Improvement: display correct number of comments when integrating
@@ -686,6 +700,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.55 =
+New feature: display likers below post text, translations
 
 = 0.54 =
 Integration improved, updated translation
