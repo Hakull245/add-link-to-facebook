@@ -24,6 +24,9 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Beta features:**
 
 * Integrate Facebook comments and likes on added links into Wordpress
+* Show the names of the people who liked your post on Facebook below the post text
+* Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
+* Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -104,6 +107,7 @@ Even if somebody else is editing the post.
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
 It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
+Since version 0.56 you can enable the Open Graph protocol using the plugin settings.
 
 = Why doesn't Facebook display my link picture? =
 
@@ -387,9 +391,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.56 =
-* New feature: option to show Facebook like button
-* New feature: option to use Open Graph protocol
-* New feature: option to see/enter access token in debug mode
+* New feature: option to show the [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button")
+* New feature: option to use the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* New feature: option to see/enter the Facebook access token in debug mode
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Hungarian (hu\_HU) translation by [Pitty](http://www.pittyphoto.hu/ "Pitty")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
