@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.55
+Stable tag: 0.56
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -332,6 +332,10 @@ Please send me the debug information, see the last question for instructions.
 
 If you keep getting this error after upgrading to the latest version, please report it and send me the debug information (see the last question for instructions).
 
+= I get 'Invalid access token signature' =
+
+You have probably entered an access token manually, but incomplete or with extra characters.
+
 = I get 'Your server may not allow external connections' =
 
 This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
@@ -381,6 +385,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.56 =
+* New feature: option to show Facebook like button
+* New feature: option to use Open Graph protocol
+* New feature: option to see/enter access token in debug mode
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Hungarian (hu\_HU) translation by [Pitty](http://www.pittyphoto.hu/ "Pitty")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Polish (pl\_PL) translation by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011")
 
 = 0.55 =
 * New feature: display likers below post text
@@ -700,6 +714,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.56 =
+New features, translations
 
 = 0.55 =
 New feature: display likers below post text, translations
