@@ -94,6 +94,11 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - RSS
 // - Comment replies
 // - Recent comments
+// - Configure like button
+
+// Open Graph protocol:
+//	- Frontpage
+//	- Pages
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
