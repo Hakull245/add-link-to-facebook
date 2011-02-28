@@ -394,7 +394,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Share with all users on this site (network sites only)
 * Improvement: better styling of likers (margin, block, clear)
 * Improvement: extended Open Graph protocol to pages
-* Improvement: extended Open Graph protocol wit image url
+* Improvement: extended Open Graph protocol with image url
 * Improvement: no external reference for WordPress logo anymore
 * Improvement: post error messages only for current user
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
