@@ -113,8 +113,9 @@ if (!class_exists('WPAL2Facebook')) {
 			global $wp_version;
 
 			// Get main file name
-			$bt = debug_backtrace();
-			$this->main_file = $bt[0]['file'];
+			//$bt = debug_backtrace();
+			//$this->main_file = $bt[0]['file'];
+			$this->main_file = str_replace('-class', '', __FILE__);
 
 			// Get plugin url
 			$this->plugin_url = WP_PLUGIN_URL . '/' . basename(dirname($this->main_file));

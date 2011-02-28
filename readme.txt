@@ -390,6 +390,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.57 =
+* Improvement: styling of likers
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 0.56 =
 * New feature: option to show the [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button")
 * New feature: option to use the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
@@ -718,6 +723,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.57 =
+Translations
 
 = 0.56 =
 New features, translations

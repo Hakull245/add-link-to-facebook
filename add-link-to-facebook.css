@@ -118,5 +118,7 @@
 
 /* Post text likers */
 .al2fb_likers {
+	display: block;
 	font-size: smaller;
+	margin-top: 10px;
 }
