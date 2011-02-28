@@ -390,6 +390,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.58 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 0.57 =
 * New feature: Share with all users on this site (network sites only)
 * Improvement: better styling of likers (margin, block, clear)
