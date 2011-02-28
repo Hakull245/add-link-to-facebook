@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.56
+Stable tag: 0.57
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -391,7 +391,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.57 =
-* Improvement: styling of likers
+* New feature: Share with all users on this site (network sites only)
+* Improvement: better styling of likers (margin, block, clear)
+* Improvement: extended Open Graph protocol to pages
+* Improvement: extended Open Graph protocol wit image url
+* Improvement: no external reference for WordPress logo anymore
+* Improvement: post error messages only for current user
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -725,7 +731,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 0.57 =
-Translations
+New feature: Share with all users on site, improvements, translation
 
 = 0.56 =
 New features, translations
