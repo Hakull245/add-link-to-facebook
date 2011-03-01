@@ -226,16 +226,15 @@ Yes, both in the excerpt and the post text.
 
 = Are multi-user and network sites supported? =
 
-Yes, each user can configure his/her own wall or page.
+Yes, each user can configure his/her own wall or page or group.
 
-The plugin doesn't support different walls or pages for different sites for the same user.
-I will not implement this, because it could be a violation of
-the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+One WordPress user can only add links to one wall OR page OR group, even if that user happens to have multiple sites (which is possible within a network site).
+Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
+I may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+Nevertheless, there could be valid use cases, so maybe I will realize this feature in the near future.
+Please let me know if you have such a use case.
 
-In a coming version it will be possible for an administrator to setup one wall for all users of one site.
-In this configuration it will be necessary for every user to approve adding links to the common wall for each post.
-This is to prevent violations of
-the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+An administrator can setup his wall for all users of one site by checking the option *Share with all users on this site*. Only the same administrator can undo this.
 
 = Is remote publishing supported? =
 
