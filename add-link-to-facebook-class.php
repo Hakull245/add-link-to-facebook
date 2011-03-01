@@ -100,6 +100,9 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // Open Graph protocol:
 //	- Frontpage
+//	- Image from chosen image
+//	- Description?
+//	- fb:admins -> fb:app_id
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -1771,7 +1774,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					if (!empty($appid))
-						echo '<meta property="fb:admins" content="' . $appid . '" />' . PHP_EOL;
+						echo '<meta property="fb:app_id" content="' . $appid . '" />' . PHP_EOL;
 				}
 			}
 		}
