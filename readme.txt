@@ -139,6 +139,8 @@ Don't worry, no links to private posts will be added.
 
 = I want to add links to my fan/community/business page =
 
+This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
+
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
 Maybe you want to check the option *Add as page owner* too.
@@ -147,10 +149,20 @@ Note that pages and groups exclude each other.
 
 = I want to add links to a group =
 
+This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
+
 Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups*.
 You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
 After you have done that, you can select the group to add links to.
 Note that pages and groups exclude each other.
+
+= How can I use hyperlinks on Facebook? =
+
+Since Facebook doesn't accept HTML, all HTML is stripped from the post text and excerpt before adding a link to Facebook.
+This means that hyperlinks are stripped too. The hyperlink texts are preserved, however.
+If you want to keep hyperlinks, check the option *Keep hyperlinks*.
+The consequence is that the hyperlink texts will be stripped.
+So you have to choose if you want the hyperlink text (the default) or the hyperlink itself.
 
 = How can I use short URL's as Facebook link? =
 
