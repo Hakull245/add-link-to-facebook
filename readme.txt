@@ -44,7 +44,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner") and [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Your translation ...
@@ -391,6 +391,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.58 =
+* Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.57 =
