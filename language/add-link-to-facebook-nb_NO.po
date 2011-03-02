@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-03-02 20:01+0100\n"
+"PO-Revision-Date: 2011-03-02 20:38+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -310,4 +310,49 @@ msgstr "Legg til 'Del' link:"
 
 msgid "Share"
 msgstr "Del"
+
+msgid "Default picture URL:"
+msgstr "Standard bilde URL:"
+
+msgid "Default WordPress logo"
+msgstr "Standard WordPress logo"
+
+msgid "Layout:"
+msgstr "Layout:"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Button with count"
+msgstr "Knapp med telling"
+
+msgid "Box with count"
+msgstr "Boks med telling"
+
+msgid "Faces:"
+msgstr "Ansikter:"
+
+msgid "Width:"
+msgstr "Bredde:"
+
+msgid "Action:"
+msgstr "Handling:"
+
+msgid "Like"
+msgstr "Liker"
+
+msgid "Recommend"
+msgstr "Anbefaler"
+
+msgid "Font:"
+msgstr "Skrifttype:"
+
+msgid "Color scheme:"
+msgstr "Fargekart:"
+
+msgid "Light"
+msgstr "Lys"
+
+msgid "Dark"
+msgstr "Mørk"
 
