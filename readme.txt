@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.55
+Stable tag: 0.58
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
+Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -24,6 +24,10 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Beta features:**
 
 * Integrate Facebook comments and likes on added links into Wordpress
+* Show the names of the people who liked your post on Facebook below the post text
+* Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
+* Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -41,7 +45,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner") and [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Your translation ...
@@ -104,6 +108,7 @@ Even if somebody else is editing the post.
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
 It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
+Since version 0.56 you can enable the Open Graph protocol using the plugin settings.
 
 = Why doesn't Facebook display my link picture? =
 
@@ -135,6 +140,8 @@ Don't worry, no links to private posts will be added.
 
 = I want to add links to my fan/community/business page =
 
+This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
+
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
 Maybe you want to check the option *Add as page owner* too.
@@ -143,10 +150,20 @@ Note that pages and groups exclude each other.
 
 = I want to add links to a group =
 
+This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
+
 Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups*.
 You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
 After you have done that, you can select the group to add links to.
 Note that pages and groups exclude each other.
+
+= How can I use hyperlinks on Facebook? =
+
+Since Facebook doesn't accept HTML, all HTML is stripped from the post text and excerpt before adding a link to Facebook.
+This means that hyperlinks are stripped too. The hyperlink texts are preserved, however.
+If you want to keep hyperlinks, check the option *Keep hyperlinks*.
+The consequence is that the hyperlink texts will be stripped.
+So you have to choose if you want the hyperlink text (the default) or the hyperlink itself.
 
 = How can I use short URL's as Facebook link? =
 
@@ -160,6 +177,13 @@ Note that pages and groups exclude each other.
 
 If you use a private Facebook application, you can change it in the application settings.
 The application icon of the shared application cannot be changed.
+
+= Why is the option "add 'Share' link" experimental? =
+
+For two reasons:
+
+1. The Facebook interface for this feature is undocumented
+2. Sharing works, but Facebook doesn't handle it correctly ([discussion](http://forum.developers.facebook.net/viewtopic.php?id=50049), [bug report](http://bugs.developers.facebook.net/show_bug.cgi?id=9075))
 
 = How can I translate the plugin? =
 
@@ -222,16 +246,15 @@ Yes, both in the excerpt and the post text.
 
 = Are multi-user and network sites supported? =
 
-Yes, each user can configure his/her own wall or page.
+Yes, each user can configure his/her own wall or page or group.
 
-The plugin doesn't support different walls or pages for different sites for the same user.
-I will not implement this, because it could be a violation of
-the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+One WordPress user can only add links to one wall OR page OR group, even if that user happens to have multiple sites (which is possible within a network site).
+Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
+I may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+Nevertheless, there could be valid use cases, so maybe I will realize this feature in the near future.
+Please let me know if you have such a use case.
 
-In a coming version it will be possible for an administrator to setup one wall for all users of one site.
-In this configuration it will be necessary for every user to approve adding links to the common wall for each post.
-This is to prevent violations of
-the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+An administrator can setup his wall for all users of one site by checking the option *Share with all users on this site*. Only the same administrator can undo this.
 
 = Is remote publishing supported? =
 
@@ -332,6 +355,10 @@ Please send me the debug information, see the last question for instructions.
 
 If you keep getting this error after upgrading to the latest version, please report it and send me the debug information (see the last question for instructions).
 
+= I get 'Invalid access token signature' =
+
+You have probably entered an access token manually, but incomplete or with extra characters.
+
 = I get 'Your server may not allow external connections' =
 
 This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
@@ -381,6 +408,38 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.58 =
+* New feature: add 'Share' link (experimental), thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Improvement: added debug option
+* Improvement: added description and link picture to Open Graph protocol
+* Improvement: changed *fb:admins* to *fb:app_id** (Open Graph protocol)
+* Improvement: Open Graph protocol for home page
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.57 =
+* New feature: Share with all users on this site (network sites only)
+* Improvement: better styling of likers (margin, block, clear)
+* Improvement: extended Open Graph protocol to pages
+* Improvement: extended Open Graph protocol with image url
+* Improvement: no external reference for WordPress logo anymore
+* Improvement: post error messages only for current user
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.56 =
+* New feature: option to show the [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button")
+* New feature: option to use the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* New feature: option to see/enter the Facebook access token in debug mode
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Hungarian (hu\_HU) translation by [Pitty](http://www.pittyphoto.hu/ "Pitty")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Polish (pl\_PL) translation by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011")
 
 = 0.55 =
 * New feature: display likers below post text
@@ -700,6 +759,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.58 =
+New feature: add 'Share' link (experimental)
+
+= 0.57 =
+New feature: Share with all users on site, improvements, translation
+
+= 0.56 =
+New features, translations
 
 = 0.55 =
 New feature: display likers below post text, translations
