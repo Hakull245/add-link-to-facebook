@@ -945,10 +945,6 @@ Bugfixes
 = 0.1 =
 Initial version
 
-== Planned features ==
-
-* Support for fixed custom texts like 'Read more ...'
-
 == Facebook Authorization ==
 
 *Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
