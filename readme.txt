@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.55
+Stable tag: 0.59
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
+Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -24,6 +24,10 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Beta features:**
 
 * Integrate Facebook comments and likes on added links into Wordpress
+* Show the names of the people who liked your post on Facebook below the post text
+* Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
+* Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -41,7 +45,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner") and [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Your translation ...
@@ -72,15 +76,15 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 **--- Usability ---**
 
-= What is a caption, message, etc? =
+= U01 What is a caption, message, etc? =
 
 Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea of what is what.
 
-= Why is the option 'Featured post image' grayed out? =
+= U02 Why is the option 'Featured post image' grayed out? =
 
 Because your current WordPress theme doesn't support featured images.
 
-= How can I display featured images as Facebook link pictures? =
+= U03 How can I display featured images as Facebook link pictures? =
 
 1. Configure the plugin to use featured images
 1. Select a featured image in the WordPress post screen
@@ -95,45 +99,48 @@ As an alternate to feature images, you can use the Add Link to Facebook post met
 In this box you can select one of the images attached to the post.
 Selecting an image this way takes precedence over the other settings.
 
-= To which wall will a link be added? =
+= U04 To which wall will a link be added? =
 
 Always to the wall of the post author, if configured.
 Even if somebody else is editing the post.
 
-= Which link picture will Facebook select? =
+= U05 Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
 It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
+Since version 0.56 you can enable the Open Graph protocol using the plugin settings.
 
-= Why doesn't Facebook display my link picture? =
+= U06 Why doesn't Facebook display my link picture? =
 
 Maybe because it is smaller than 50 x 50 pixels.
 Facebook might also have had trouble accessing the image.
 
-= I don't want a link picture =
+= U07 I don't want a link picture =
 
 Facebook doesn't support this as far as I know,
 but you could let the custom link picture point to a valid but non existing address.
 
-= What happens when I update a post? =
+= U08 What happens when I update a post? =
 
 If the link to the post was added already to your wall, page or group, nothing,
 else a new link will be added. See also the next question.
 
-= How can I add a link to an existing post? =
+= U09 How can I add a link to an existing post? =
 
 Change the post status temporarily to draft, update the post and publish the post again.
 If you want to add a link again, you should remove the custom field *al2fb_facebook_link_id* first.
 
-= Will links for future posts be added? =
+= U10 Will links for future posts be added? =
 
 Yes, when they are published automatically a link will be added to your wall, page or group too.
 
-= How about private / password protected posts? =
+= U11 How about private / password protected posts? =
 
 Don't worry, no links to private posts will be added.
 
-= I want to add links to my fan/community/business page =
+= U12 I want to add links to my fan/community/business page =
+
+This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
@@ -141,14 +148,24 @@ Maybe you want to check the option *Add as page owner* too.
 If you do that, you have to re-authorize one time more, because an extra Facebook permission is required for that.
 Note that pages and groups exclude each other.
 
-= I want to add links to a group =
+= U13 I want to add links to a group =
+
+This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
 
 Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups*.
 You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
 After you have done that, you can select the group to add links to.
 Note that pages and groups exclude each other.
 
-= How can I use short URL's as Facebook link? =
+= U14 How can I use hyperlinks on Facebook? =
+
+Since Facebook doesn't accept HTML, all HTML is stripped from the post text and excerpt before adding a link to Facebook.
+This means that hyperlinks are stripped too. The hyperlink texts are preserved, however.
+If you want to keep hyperlinks, check the option *Keep hyperlinks*.
+The consequence is that the hyperlink texts will be stripped.
+So you have to choose if you want the hyperlink text (the default) or the hyperlink itself.
+
+= U15 How can I use short URL's as Facebook link? =
 
 * Install and configure an URL shortener plugin
 * [URL Shortener](http://wordpress.org/extend/plugins/url-shortener/ "URL Shortener") is known to work
@@ -156,12 +173,19 @@ Note that pages and groups exclude each other.
 * Enable the option *Use short URL* (available since version 0.32)
 * You probably want to enable the option *Use site title as caption* too
 
-= I don't like the gear wheel application icon =
+= U16 I don't like the gear wheel application icon =
 
 If you use a private Facebook application, you can change it in the application settings.
 The application icon of the shared application cannot be changed.
 
-= How can I translate the plugin? =
+= U17 Why is the option "add 'Share' link" experimental? =
+
+For two reasons:
+
+1. The Facebook interface for this feature is undocumented
+2. Sharing works, but Facebook doesn't handle it correctly ([discussion](http://forum.developers.facebook.net/viewtopic.php?id=50049), [bug report](http://bugs.developers.facebook.net/show_bug.cgi?id=9075))
+
+= U18 How can I translate the plugin? =
 
 You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to-facebook/trunk/language/add-link-to-facebook-nl_NL.po "Dutch") as a start.
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
@@ -169,19 +193,19 @@ After saving the file, you can translate it by using a text editor or [Poedit](h
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
 Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
 
-= How can I change the styling? =
+= U19 How can I change the styling? =
 
 1. Copy *add-link-to-facebook.css* to your upload directory to prevent it from being overwritten by an update
 2. Change the style sheet to your wishes; the style sheet contains documentation
 
 **--- Security ---**
 
-= Which users can use this plugin? =
+= X01 Which users can use this plugin? =
 
 Users with the *edit_posts* capability: all user roles, except subscriber.
 Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
 
-= Why is the shared application less secure? =
+= X02 Why is the shared application less secure? =
 
 **The shared application is no longer available**
 
@@ -191,7 +215,7 @@ You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=tr
 
 **--- Compatibility ---**
 
-= Is this plugin compatible with my theme? =
+= C01 Is this plugin compatible with my theme? =
 
 Most likely yes, but featured images can only be used as link picture when your theme supports this.
 
@@ -199,7 +223,7 @@ This plugin is known to be incompatible with:
 
 * [Geo Places](http://templatic.com/news/geo-places-city-directory-wordpress-theme "Geo Places"): publishing from the front-end doesn't add links
 
-= Is this plugin compatible with plugin xxx? =
+= C02 Is this plugin compatible with plugin xxx? =
 
 Probably yes, but it all depends on how the plugin works.
 
@@ -216,24 +240,23 @@ This plugin is known to be incompatible with:
 
 If necessary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
-= Are shortcodes being processed? =
+= C03 Are shortcodes being processed? =
 
 Yes, both in the excerpt and the post text.
 
-= Are multi-user and network sites supported? =
+= C04 Are multi-user and network sites supported? =
 
-Yes, each user can configure his/her own wall or page.
+Yes, each user can configure his/her own wall or page or group.
 
-The plugin doesn't support different walls or pages for different sites for the same user.
-I will not implement this, because it could be a violation of
-the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+One WordPress user can only add links to one wall OR page OR group, even if that user happens to have multiple sites (which is possible within a network site).
+Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
+I may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+Nevertheless, there could be valid use cases, so maybe I will realize this feature in the near future.
+Please let me know if you have such a use case.
 
-In a coming version it will be possible for an administrator to setup one wall for all users of one site.
-In this configuration it will be necessary for every user to approve adding links to the common wall for each post.
-This is to prevent violations of
-the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+An administrator can setup his wall for all users of one site by checking the option *Share with all users on this site*. Only the same administrator can undo this.
 
-= Is remote publishing supported? =
+= C05 Is remote publishing supported? =
 
 Yes, via both [XML-RPC](http://en.wikipedia.org/wiki/XML-RPC "XML-RPC") and the [Atom Publishing Protocol](http://en.wikipedia.org/wiki/Atom_%28standard%29 "Atom").
 So you can use for example an [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") powered device (XML-RPC)
@@ -242,33 +265,33 @@ or [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.g
 to publish posts and still have links added to your wall or page automatically.
 Don't forget to enable remote publishing using the WordPress menu *Settings > Writing*.
 
-= Are custom post types supported? =
+= C06 Are custom post types supported? =
 
 Yes, but the custom post type should support custom values for it to work.
 
 **--- Custom values ---**
 
-= What is the custom field 'al2fb_facebook_link_id' for? =
+= V01 What is the custom field 'al2fb_facebook_link_id' for? =
 
 This is the Facebook identification of the added link.
 
-= What is the custom field 'al2fb_facebook_link_time' for? =
+= V02 What is the custom field 'al2fb_facebook_link_time' for? =
 
 This is the time (UTC) the link was added to Facebook or the time of the last error.
 
-= What is the custom field 'al2fb_facebook_link_picture' for? =
+= V03 What is the custom field 'al2fb_facebook_link_picture' for? =
 
 This is the picture type and URL of the link as added to Facebook.
 
-= What is the custom field 'al2fb_facebook_exclude' for? =
+= V04 What is the custom field 'al2fb_facebook_exclude' for? =
 
 This is to remember you ticked the check box *Do not add link to Facebook*.
 
-= What is the custom field 'al2fb_facebook_image_id' for? =
+= V05 What is the custom field 'al2fb_facebook_image_id' for? =
 
 This is to remember the image you have selected as link picture.
 
-= What is the custom field 'al2fb_facebook_error' for? =
+= V06 What is the custom field 'al2fb_facebook_error' for? =
 
 If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
 You can try to add the link again by updating the post.
@@ -276,7 +299,7 @@ Please send me the message and follow the instruction in the last question.
 
 **--- Error messages ---**
 
-= I get 'Error validating application' =
+= E01 I get 'Error validating application' =
 
 You have probably entered a wrong *App ID* or the Facebook application may be deleted.
 If you didn't create a Facebook application yet, you should follow the instructions in the yellow box on the plugin page.
@@ -286,11 +309,11 @@ it didn't conform to the [Facebook Platform Policies](http://developers.facebook
 If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
 Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.
 
-= I get 'Error validating client secret' =
+= E02 I get 'Error validating client secret' =
 
 You have probably entered a wrong *App Secret*.
 
-= I get 'Given URL is not allowed by the Application configuration' =
+= E03 I get 'Given URL is not allowed by the Application configuration' =
 
 You have probably entered a wrong URL in the Facebook application setting *Web Site > Site URL*.
 
@@ -305,39 +328,43 @@ Assuming you created a Facebook application successfully:
 
 Now try to authorize again.
 
-= I get 'The user hasn't authorized the application to perform this action' =
+= E04 I get 'The user hasn't authorized the application to perform this action' =
 
 You have probably revoked one of the permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you can also disable the plugin.
 
-= I get 'Invalid access token signature' =
+= E05 I get 'Invalid access token signature' =
 
 You have probably reset the *App Secret*. You should re-enter it.
 
-= I get 'Error validating verification code' =
+= E06 I get 'Error validating verification code' =
 
 You have probably deleted the Facebook application.
 You should delete the *App ID* and *App Secret* from the plugin settings and create a new Facebook application.
 This should not happen if you didn't delete the application.
 In that case please send me the debug information, see the last question for instructions.
 
-= I get 'This API call requires a valid app_id' =
+= E07 I get 'This API call requires a valid app_id' =
 
 You could try to re-authorize to fix this, but it should not happen.
 Please send me the debug information, see the last question for instructions.
 
-= I get 'An active access token must be used to query information about the current user' =
+= E08 I get 'An active access token must be used to query information about the current user' =
 
 If you keep getting this error after upgrading to the latest version, please report it and send me the debug information (see the last question for instructions).
 
-= I get 'Your server may not allow external connections' =
+= E09 I get 'Invalid access token signature' =
+
+You have probably entered an access token manually, but incomplete or with extra characters.
+
+= E10 I get 'Your server may not allow external connections' =
 
 This means the PHP setting [allow_url_fopen](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen "allow_url_fopen") is disabled
 and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available too. You may have to ask your hosting provider to enable at least one of the two.
 
-= I get 'cURL error ...' =
+= E11 I get 'cURL error ...' =
 
 Please help me to find out the cause by sending me the debug information, see the last question for instructions.
 You can find the cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
@@ -351,7 +378,7 @@ cURL errors encountered so far:
 
 For above cURL errors you need to contact your hosting provider.
 
-= I get 'HTTP 400 Bad Request' =
+= E12 I get 'HTTP 400 Bad Request' =
 
 You are probably using Microsoft Internet Explorer.
 This browser has the bad habit not to display the content
@@ -360,18 +387,18 @@ Actually you are most probably having one of the above errors, but you cannot se
 You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
 if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
 
-= I get 'Javascript not enabled' =
+= E13 I get 'Javascript not enabled' =
 
 You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
 You can either enable JavaScript or try to use a private Facebook application.
 
 **--- Support ---**
 
-= Where can I ask questions, report bugs and request features? =
+= S01 Where can I ask questions, report bugs and request features? =
 
 You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
 
-= How can I send the debug information? =
+= S02 How can I send the debug information? =
 
 Please go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
 Optionally fill in your name and describe the problem as accurate as possible and press the *Send* button.
@@ -381,6 +408,46 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.59 =
+* Improvement: configuration of Facebook like button
+* Improvement: extended debug information with settings version
+* Bugfix: input type text
+* Bugfix: multiple settings version upgrade
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.58 =
+* New feature: add 'Share' link (experimental), thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Improvement: added debug option
+* Improvement: added description and link picture to Open Graph protocol
+* Improvement: changed *fb:admins* to *fb:app_id* (Open Graph protocol)
+* Improvement: Open Graph protocol for home page
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.57 =
+* New feature: Share with all users on this site (network sites only)
+* Improvement: better styling of likers (margin, block, clear)
+* Improvement: extended Open Graph protocol to pages
+* Improvement: extended Open Graph protocol with image url
+* Improvement: no external reference for WordPress logo anymore
+* Improvement: post error messages only for current user
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 0.56 =
+* New feature: option to show the [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button")
+* New feature: option to use the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* New feature: option to see/enter the Facebook access token in debug mode
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Hungarian (hu\_HU) translation by [Pitty](http://www.pittyphoto.hu/ "Pitty")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Polish (pl\_PL) translation by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011")
 
 = 0.55 =
 * New feature: display likers below post text
@@ -700,6 +767,18 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.59 =
+Improvement: configuration of Facebook like button, bugfix
+
+= 0.58 =
+New feature: add 'Share' link (experimental)
+
+= 0.57 =
+New feature: Share with all users on site, improvements, translation
+
+= 0.56 =
+New features, translations
 
 = 0.55 =
 New feature: display likers below post text, translations

@@ -8,9 +8,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-18 17:19+0100\n"
+"PO-Revision-Date: 2011-03-01 18:12+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
-"Language-Team: Dirk\n"
+"Language-Team: Dirk & Björn\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
@@ -172,4 +172,94 @@ msgstr "Wähle Bild für Link:"
 
 msgid "None"
 msgstr "Keine"
+
+msgid "Facebook wall"
+msgstr "Facebook Pinnwand"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "E-mail:"
+msgstr "E-mail:"
+
+msgid "Message:"
+msgstr "Bericht:"
+
+msgid "Send"
+msgstr "Senden"
+
+msgid "Debug information sent"
+msgstr "Debug Informationen gesendet"
+
+msgid "Sending debug information failed"
+msgstr "Senden der Debug Informationen fehl geschlagen"
+
+msgid "Use short URL:"
+msgstr "Benutze kurze URL:"
+
+msgid "If available"
+msgstr "Wenn verfügbar"
+
+msgid "Delete existing Facebook link"
+msgstr "Lösche existiereden Facebook Link"
+
+msgid "Number of sentences to use:"
+msgstr "Zeichenanzahl, die benutzt werden soll:"
+
+msgid "Leave blank to let Facebook choose"
+msgstr "Lass es leer, wenn Facebook wählen soll"
+
+msgid "Text trailer:"
+msgstr "Textnachsatz:"
+
+msgid "For example \"Read more ...\""
+msgstr "Zum Bsp. lese \"Lese mehr unter...\""
+
+msgid "Keep hyperlinks:"
+msgstr "Behalte Hyperlinks:"
+
+msgid "The hyperlink title will be removed"
+msgstr "Der reine Hyberlink wird behalten, aber der Link-Text entfernt"
+
+msgid "Integrate comments from Facebook:"
+msgstr "Integriere Kommentare von Facebook:"
+
+msgid "Integrate likes from Facebook:"
+msgstr "Integriere  \"gefällt mir\" von Facebook:"
+
+msgid "Show likers below the post text:"
+msgstr "Zeige \"gefällt mir\" unter dem Blogtext"
+
+msgid "Show Facebook like button:"
+msgstr "Zeige Facebooks \"gefällt mir \" - Knopf:"
+
+msgid "Use Open Graph protocol:"
+msgstr "Benutze das Open Graph Protokol:"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "on Facebook"
+msgstr "in Facebook"
+
+msgid "Liked this post"
+msgstr "Gefällt dieser Beitrag"
+
+msgid "Refresh Facebook comments every:"
+msgstr "Aktuallisiere Facebook-Kommentare alle:"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Default every 10 minutes"
+msgstr "Standart alle 10 Minuten"
+
+msgid "Maximum Facebook text length:"
+msgstr "Maximale Facebook-Textlänge:"
+
+msgid "Characters"
+msgstr "Zeichen"
+
+msgid "Default 256 characters"
+msgstr "Standart 256 Zeichen"
 
