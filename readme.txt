@@ -413,7 +413,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: add 'Share' link (experimental), thanks to [Micha](http://www.styloweb.de/ "Micha")!
 * Improvement: added debug option
 * Improvement: added description and link picture to Open Graph protocol
-* Improvement: changed *fb:admins* to *fb:app_id** (Open Graph protocol)
+* Improvement: changed *fb:admins* to *fb:app_id* (Open Graph protocol)
 * Improvement: Open Graph protocol for home page
 * Updated description and FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
