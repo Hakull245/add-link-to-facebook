@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.57
+Stable tag: 0.58
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
+Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -27,6 +27,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the names of the people who liked your post on Facebook below the post text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
@@ -176,6 +177,13 @@ So you have to choose if you want the hyperlink text (the default) or the hyperl
 
 If you use a private Facebook application, you can change it in the application settings.
 The application icon of the shared application cannot be changed.
+
+= Why is the option "add 'Share' link" experimental? =
+
+For two reasons:
+
+1. The Facebook interface for this feature is undocumented
+2. Sharing works, but Facebook doesn't handle it correctly ([discussion](http://forum.developers.facebook.net/viewtopic.php?id=50049), [bug report](http://bugs.developers.facebook.net/show_bug.cgi?id=9075))
 
 = How can I translate the plugin? =
 
@@ -402,6 +410,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.58 =
+* New feature: add 'Share' link (experimental), thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Improvement: added debug option
+* Improvement: added description and link picture to Open Graph protocol
+* Improvement: changed *fb:admins* to *fb:app_id** (Open Graph protocol)
+* Improvement: Open Graph protocol for home page
+* Updated description and FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -744,6 +759,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.58 =
+New feature: add 'Share' link (experimental)
 
 = 0.57 =
 New feature: Share with all users on site, improvements, translation
