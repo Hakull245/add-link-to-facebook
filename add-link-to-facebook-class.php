@@ -145,9 +145,11 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('add_meta_boxes', array(&$this, 'Add_meta_boxes'));
 				add_action('save_post', array(&$this, 'Save_post'));
 			}
-			add_action('xmlrpc_publish_post', array(&$this, 'Publish_post'));
-			add_action('app_publish_post', array(&$this, 'Publish_post'));
-			add_action('publish_future_post', array(&$this, 'Publish_post'));
+			add_action('xmlrpc_publish_post', array(&$this, 'Remote_publish'));
+			add_action('app_publish_post', array(&$this, 'Remote_publish'));
+			add_action('future_to_publish', array(&$this, 'Future_to_publish'));
+			//add_action('publish_future_post', array(&$this, 'Future_to_publish'));
+			add_action('al2fb_publish', array(&$this, 'Remote_publish'));
 
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
@@ -484,13 +486,14 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Update admin options
 			if (current_user_can('manage_options')) {
-				if (is_multisite()) {
-					if (empty($_POST[c_al2fb_option_app_share]))
-						$_POST[c_al2fb_option_app_share] = null;
-					else
-						$_POST[c_al2fb_option_app_share] = $user_ID;
+				if (empty($_POST[c_al2fb_option_app_share]))
+					$_POST[c_al2fb_option_app_share] = null;
+				else
+					$_POST[c_al2fb_option_app_share] = $user_ID;
+				if (is_multisite())
 					update_site_option(c_al2fb_option_app_share, $_POST[c_al2fb_option_app_share]);
-				}
+				else
+					update_option(c_al2fb_option_app_share, $_POST[c_al2fb_option_app_share]);
 
 				if (empty($_POST[c_al2fb_option_nonotice]))
 					$_POST[c_al2fb_option_nonotice] = null;
@@ -605,8 +608,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$nonotice = get_option(c_al2fb_option_nonotice);
 			if (is_multisite())
-				if (get_site_option(c_al2fb_option_app_share))
-					$nonotice = true;
+				$nonotice = $nonotice || get_site_option(c_al2fb_option_app_share);
+			else
+				$nonotice = $nonotice || get_option(c_al2fb_option_app_share);
 
 			if ($nonotice ? strpos($uri, $url) !== false : true) {
 				if (!get_user_meta($user_ID, c_al2fb_meta_shared, true) &&
@@ -656,12 +660,13 @@ if (!class_exists('WPAL2Facebook')) {
 			global $user_ID;
 			get_currentuserinfo();
 
-			// Check for app sare
-			if (is_multisite()) {
+			// Check for app share
+			if (is_multisite())
 				$shared_user_ID = get_site_option(c_al2fb_option_app_share);
-				if ($shared_user_ID && $shared_user_ID != $user_ID)
-					return;
-			}
+			else
+				$shared_user_ID = get_option(c_al2fb_option_app_share);
+			if ($shared_user_ID && $shared_user_ID != $user_ID)
+				return;
 
 			if (function_exists('add_management_page'))
 				add_management_page(
@@ -849,7 +854,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
 				}
 
-			if (is_multisite() && current_user_can('manage_options')) {
+			if (current_user_can('manage_options')) {
 ?>
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_app_share"><?php _e('Share with all users on this site:', c_al2fb_text_domain); ?></label>
@@ -1499,7 +1504,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$chk_exclude = $exclude ? 'checked' : '';
 ?>
 			<div class="al2fb_post_submit">
-			<input type="hidden" name="<?php echo c_al2fb_meta_exclude . '_prev'; ?>" value="<?php echo $exclude; ?>" />
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
 <?php
@@ -1608,43 +1612,63 @@ if (!class_exists('WPAL2Facebook')) {
 			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
 				return $post_id;
 
+			// Process exclude flag
+			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
+				update_post_meta($post_id, c_al2fb_meta_exclude, true);
+			else
+				delete_post_meta($post_id, c_al2fb_meta_exclude);
+
 			// Persist data
 			if (isset($_POST['al2fb_image_id']))
 				update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
 		}
 
+		// Remote publish & custom action
+		function Remote_publish($post_ID) {
+			$post = get_post($post_ID);
+			if ($post->post_status == 'publish')
+				self::Publish_post($post);
+		}
+
+		// Workaround
+		function Future_to_publish($post_ID) {
+			$post = get_post($post_ID);
+			self::Transition_post_status('publish', 'future', $post);
+		}
+
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
+			// Log transition
+			if (get_option(c_al2fb_option_debug)) {
+				global $al2fb_transition_count;
+				if (isset($al2fb_transition_count))
+					$al2fb_transition_count++;
+				else
+					$al2fb_transition_count = 1;
+				add_post_meta($post->ID, c_al2fb_meta_log, $old_status . '->' . $new_status . ':' . $post->post_status . ' @' . date('c') . ' #' . $al2fb_transition_count);
+			}
+
+			// Security check
 			$user_ID = self::Get_user_ID($post);
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
-				// Process exclude flag
-				$prev_exclude = (empty($_POST[c_al2fb_meta_exclude . '_prev']) ? null : $_POST[c_al2fb_meta_exclude . '_prev']);
-				$exclude = (empty($_POST[c_al2fb_meta_exclude]) ? null : $_POST[c_al2fb_meta_exclude]);
-				if ($exclude)
-					update_post_meta($post->ID, c_al2fb_meta_exclude, $exclude);
-				else
-					delete_post_meta($post->ID, c_al2fb_meta_exclude);
-
 				// Add or delete link
-				if (empty($_POST['al2fb_delete']) || !$_POST['al2fb_delete']) {
-					// Check post status
-					if ($new_status == 'publish' &&
-						($new_status != $old_status ||
-						(!$exclude && $prev_exclude) ||
-						get_post_meta($post->ID, c_al2fb_meta_error, true)))
-						self::Publish_post($post->ID);
-				}
-				else {
+				if (isset($_POST['al2fb_delete']) && $_POST['al2fb_delete']) {
 					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 					if (!empty($link_id) && self::Is_authorized($user_ID))
 						self::Delete_link($post);
 				}
+				else {
+					// Check post status
+					if ($new_status == 'publish' &&
+						($new_status != $old_status ||
+						get_post_meta($post->ID, c_al2fb_meta_error, true)))
+						self::Publish_post($post);
+				}
 			}
 		}
 
-		// Handle publish post / XML-RPC publish post / future post publish
-		function Publish_post($post_ID) {
-			$post = get_post($post_ID);
+		// Handle publish post / XML-RPC publish post
+		function Publish_post($post) {
 			$user_ID = self::Get_user_ID($post);
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
 				// Check if not added
@@ -1653,7 +1677,7 @@ if (!class_exists('WPAL2Facebook')) {
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
 
 					// Check if public
-					if ($post->post_status == 'publish' && empty($post->post_password))
+					if (empty($post->post_password))
 						self::Add_link($post);
 				}
 			}
@@ -2187,11 +2211,12 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Get_user_ID($post) {
-			if (is_multisite()) {
+			if (is_multisite())
 				$shared_user_ID = get_site_option(c_al2fb_option_app_share);
-				if ($shared_user_ID)
-					return $shared_user_ID;
-			}
+			else
+				$shared_user_ID = get_option(c_al2fb_option_app_share);
+			if ($shared_user_ID)
+				return $shared_user_ID;
 			return $post->post_author;
 		}
 

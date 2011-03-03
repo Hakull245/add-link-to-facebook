@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.59
+Stable tag: 0.60
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -45,7 +45,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner") and [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn") and [Micha](http://www.styloweb.de/ "Micha"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Your translation ...
@@ -198,6 +198,12 @@ Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact for
 1. Copy *add-link-to-facebook.css* to your upload directory to prevent it from being overwritten by an update
 2. Change the style sheet to your wishes; the style sheet contains documentation
 
+= U20 How can I setup one wall for all users? =
+
+An administrator can setup his wall (personal/page/group) for all users of one site by checking the option *Share with all users on this site*.
+The other users cannot configure their own wall amymore if this option is used.
+Only the same administrator can undo this.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -253,8 +259,6 @@ Adding the same link to more than one wall may lead to difficulties with Faceboo
 I may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 Nevertheless, there could be valid use cases, so maybe I will realize this feature in the near future.
 Please let me know if you have such a use case.
-
-An administrator can setup his wall for all users of one site by checking the option *Share with all users on this site*. Only the same administrator can undo this.
 
 = C05 Is remote publishing supported? =
 
@@ -408,6 +412,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.60 =
+* Improvement: better handling of future posts
+* Improvement: simplified logic for excluding
+* Improvement: added custom hook *al2fb_publish*
+* Improvement: added post status transition to debug logging
+* Improvement: shared wall for single sites
+* Updated FAQ
+* Updated German (de\_DE) translation by [Micha](http://www.styloweb.de/ "Micha")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 0.59 =
 * Improvement: configuration of Facebook like button
@@ -767,6 +781,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.60 =
+Several improvements, updated translations
 
 = 0.59 =
 Improvement: configuration of Facebook like button, bugfix
