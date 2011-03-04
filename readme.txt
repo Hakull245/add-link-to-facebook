@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.60
+Stable tag: 0.61
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -203,6 +203,21 @@ Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact for
 An administrator can setup his wall (personal/page/group) for all users of one site by checking the option *Share with all users on this site*.
 The other users cannot configure their own wall amymore if this option is used.
 Only the same administrator can undo this.
+
+= U21 I don't see a link to my post on Facebook =
+
+Assuming that you have configured and authorize the plugin, you can check this:
+
+* Is the wall of the *post author* configured? See also question U4 and U20.
+* Has the *post author* the configured minimum capability? (default *edit_posts*)
+* Is *Do not add link to Facebook* un-checked?
+* Is the post password protected? See also question U11.
+* Was the post published before using the plugin? See also question U09.
+* Was there already a link added? See also question U09.
+* Did you check the *Most Recent* link on Facebook?
+* Are you logged into the correct Facebook account?
+* Are you looking at the correct personal/page/group wall?
+* If you are publishing to a page: check the Facebook tab *Others*. See also question U12.
 
 **--- Security ---**
 
@@ -412,6 +427,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.61 =
+* Improvement: always use ampersand as query var separator
+* Improvement: debug option *Use publish_post action*
+* Improvement: handle *transition_post_status* outside admin area
+* Improvement: more detailed error messages
+* Improvement: more debug logging
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 0.60 =
 * Improvement: better handling of future posts
@@ -781,6 +805,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.61 =
+Several improvements
 
 = 0.60 =
 Several improvements, updated translations
