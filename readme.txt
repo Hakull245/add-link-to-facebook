@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.61
+Stable tag: 0.62
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -21,12 +21,15 @@ It works for remote publishing too, for example from [Android](http://android.wo
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
 or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
 
-**Beta features:**
+**Additional features:**
 
-* Integrate Facebook comments and likes on added links into Wordpress
 * Show the names of the people who liked your post on Facebook below the post text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+
+**Beta features:**
+
+* Integrate Facebook comments and likes on added links into Wordpress
 * Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
 If you find this plugin useful, please rate it accordingly.
@@ -428,6 +431,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.62 =
+* New feature: specify URL for like button
+* Remove beta status of a number of features
+* Improvement: even more debug logging
+* Improvement: 'sentences' option removed
+* Improvement: send all text if no trailer text specified
+* Improvement: changed priority of *the_content filter* to 999
+* Bugfix: caching of likes
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 0.61 =
 * Improvement: always use ampersand as query var separator
 * Improvement: debug option *Use publish_post action*
@@ -805,6 +818,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.62 =
+Specify URL for like button, improvements, bugfix
 
 = 0.61 =
 Several improvements
