@@ -431,13 +431,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 0.63 =
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
 = 0.62 =
 * New feature: specify URL for like button
 * Remove beta status of a number of features
 * Improvement: even more debug logging
 * Improvement: 'sentences' option removed
 * Improvement: send all text if no trailer text specified
-* Improvement: changed priority of *the_content filter* to 999
+* Improvement: changed priority of *the_content* filter to 999
 * Bugfix: caching of likes
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
