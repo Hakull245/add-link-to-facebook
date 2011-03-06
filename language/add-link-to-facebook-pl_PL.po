@@ -7,11 +7,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-21 20:04+0100\n"
+"PO-Revision-Date: 2011-02-27 12:51+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: tomi0011\n"
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Settings updated"
 msgstr "Ustawienia zaktualizowane"
@@ -44,16 +45,16 @@ msgid "Simple, but less secure"
 msgstr "Prościej, ale mniej bezpiecznie!"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Aby uzyskać App ID oraz App Secret musisz utworzyć aplikacje na Facebooku."
+msgstr "Aby uzyskać App ID oraz App Secret musisz utworzyć aplikacje na Facebooku"
 
 msgid "You have to fill in the following:"
-msgstr "Musisz wypełnić następujące:"
+msgstr "Musisz wypenić następujące:"
 
 msgid "Click here to create"
 msgstr "Kliknij tu aby utworzyć!"
 
 msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "Wpisz cokolwiek. Nazwa będzie pojawiać się jako \"przez... \" pod wiadomością."
+msgstr "Wpisz cokolwiek. Nazwa będzie pojawiać się jako \"przez... \" pod wiadomością"
 
 msgid "Web Site > Site URL:"
 msgstr "Web Site > Adres (URL) strony:"
@@ -80,7 +81,7 @@ msgid "First attached image"
 msgstr "Pierwszy załączony obraz"
 
 msgid "Featured post image"
-msgstr "Obraz wyóżnionego wpisu"
+msgstr "Obraz wyróżnionego wpisu"
 
 msgid "Let Facebook select"
 msgstr "Niech Facebook wybierze"
@@ -106,6 +107,15 @@ msgstr "Dodaj jako właściciel strony"
 msgid "Requires manage pages permission"
 msgstr "Wymaga pozwolenia na zarządzanie stroną"
 
+msgid "Use groups:"
+msgstr "Użyj grup:"
+
+msgid "Requires user groups permission"
+msgstr "Wymaga pozwolenia użytkownika grup"
+
+msgid "Add to group:"
+msgstr "Dodaj do grupy:"
+
 msgid "Use site title as caption:"
 msgstr "Użyj tytułu strony jako nagłówka"
 
@@ -119,7 +129,7 @@ msgid "All data, except link id's"
 msgstr "Wszystkie dane poza id linków"
 
 msgid "I have donated to this plugin:"
-msgstr "Przekazałem darowiznę"
+msgstr "Przekazałem darowiznę tej wtyczce"
 
 msgid "Administrator options"
 msgstr "Opcje administratora:"
@@ -218,7 +228,7 @@ msgid "Use short URL:"
 msgstr "Użyj krótkich URL"
 
 msgid "If available"
-msgstr "Jeśli dostępne"
+msgstr "Jeśli dostepne"
 
 msgid "Delete existing Facebook link"
 msgstr "Użyj istniejące linki Facebooka"
@@ -229,6 +239,12 @@ msgstr "Liczba zdań do użycia:"
 msgid "Leave blank to let Facebook choose"
 msgstr "Zostaw puste i pozwól aby Facebook wybrał"
 
+msgid "Text trailer:"
+msgstr "Tekst-zapowiedź:"
+
+msgid "For example \"Read more ...\""
+msgstr "Np. \"Czytaj dalej ...\""
+
 msgid "Keep hyperlinks:"
 msgstr "Zachowaj hiperłącza (linki)"
 
@@ -238,8 +254,17 @@ msgstr "Tytuł hiperłącza zostanie usunięty"
 msgid "Integrate comments from Facebook:"
 msgstr "Połącz komentarze z Facebooka"
 
+msgid "Integrate likes from Facebook:"
+msgstr "Połącz lubiane z Facebooka:"
+
+msgid "Show likers below the post text:"
+msgstr "Pokaż osoby lubiące to poniżej wpisu:"
+
 msgid "on Facebook"
 msgstr "na Facebooku"
+
+msgid "Liked this post"
+msgstr "Lubisz ten wpis"
 
 msgid "Refresh Facebook comments every:"
 msgstr "Odśwież komentarze Facebooka co:"
@@ -249,4 +274,18 @@ msgstr "minut"
 
 msgid "Default every 10 minutes"
 msgstr "Domyślnie co 10 minut"
+
+msgid "Maximum Facebook text length:"
+msgstr "Maksymalna długośc tekstu na Facebook:"
+
+msgid "Characters"
+msgstr "Znaków"
+
+msgid "Default 256 characters"
+msgstr "Domyślnie 256 znaków"
+
+msgid "liked this post"
+msgid_plural "liked this post"
+msgstr[0] "Lubisz ten wpis"
+msgstr[1] "Lubisz te wpisy"
 
