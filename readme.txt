@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.63
+Stable tag: 0.64
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -397,6 +397,7 @@ You can find the cURL error codes on the [libcurl error page](http://curl.haxx.s
 
 cURL errors encountered so far:
 
+* Error 1: *The URL you passed to libcurl used a protocol that this libcurl does not support*: the hosting server may not support secure connections (https)
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
@@ -434,6 +435,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 0.64 =
+* Improvement: stripping HTML from text trailer
+* Updated FAQ
 
 = 0.63 =
 * New feature: selective disable like button on home page, posts and/or pages
@@ -833,6 +838,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.64 =
+Improvement
 
 = 0.63 =
 New feature, improvements, bugfix, translations

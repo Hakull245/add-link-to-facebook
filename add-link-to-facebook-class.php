@@ -1792,7 +1792,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Trailer: limit body size
 			$trailer = get_user_meta($user_ID, c_al2fb_meta_trailer, true);
 			if ($trailer) {
-				$trailer = ' ' . $trailer;
+				$trailer = ' ' . preg_replace('/<[^>]*>/', '', $trailer);
 
 				// Get maximum FB description size
 				$maxlen = get_option(c_al2fb_option_max_descr);
