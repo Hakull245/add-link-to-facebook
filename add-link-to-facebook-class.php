@@ -55,6 +55,9 @@ define('c_al2fb_meta_fb_comments', 'al2fb_fb_comments');
 define('c_al2fb_meta_fb_likes', 'al2fb_fb_likes');
 define('c_al2fb_meta_post_likers', 'al2fb_post_likers');
 define('c_al2fb_meta_post_like_button', 'al2fb_post_like_button');
+define('c_al2fb_meta_like_nohome', 'al2fb_like_nohome');
+define('c_al2fb_meta_like_noposts', 'al2fb_like_noposts');
+define('c_al2fb_meta_like_nopages', 'al2fb_like_nopages');
 define('c_al2fb_meta_like_layout', 'al2fb_like_layout');
 define('c_al2fb_meta_like_faces', 'al2fb_like_faces');
 define('c_al2fb_meta_like_width', 'al2fb_like_width');
@@ -228,6 +231,9 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_fb_likes);
 				delete_user_meta($user_ID, c_al2fb_meta_post_likers);
 				delete_user_meta($user_ID, c_al2fb_meta_post_like_button);
+				delete_user_meta($user_ID, c_al2fb_meta_like_nohome);
+				delete_user_meta($user_ID, c_al2fb_meta_like_noposts);
+				delete_user_meta($user_ID, c_al2fb_meta_like_nopages);
 				delete_user_meta($user_ID, c_al2fb_meta_like_layout);
 				delete_user_meta($user_ID, c_al2fb_meta_like_faces);
 				delete_user_meta($user_ID, c_al2fb_meta_like_width);
@@ -399,6 +405,12 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_post_likers] = null;
 			if (empty($_POST[c_al2fb_meta_post_like_button]))
 				$_POST[c_al2fb_meta_post_like_button] = null;
+			if (empty($_POST[c_al2fb_meta_like_nohome]))
+				$_POST[c_al2fb_meta_like_nohome] = null;
+			if (empty($_POST[c_al2fb_meta_like_noposts]))
+				$_POST[c_al2fb_meta_like_noposts] = null;
+			if (empty($_POST[c_al2fb_meta_like_nopages]))
+				$_POST[c_al2fb_meta_like_nopages] = null;
 			if (empty($_POST[c_al2fb_meta_like_layout]))
 				$_POST[c_al2fb_meta_like_layout] = null;
 			if (empty($_POST[c_al2fb_meta_like_faces]))
@@ -474,6 +486,9 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_fb_likes, $_POST[c_al2fb_meta_fb_likes]);
 			update_user_meta($user_ID, c_al2fb_meta_post_likers, $_POST[c_al2fb_meta_post_likers]);
 			update_user_meta($user_ID, c_al2fb_meta_post_like_button, $_POST[c_al2fb_meta_post_like_button]);
+			update_user_meta($user_ID, c_al2fb_meta_like_nohome, $_POST[c_al2fb_meta_like_nohome]);
+			update_user_meta($user_ID, c_al2fb_meta_like_noposts, $_POST[c_al2fb_meta_like_noposts]);
+			update_user_meta($user_ID, c_al2fb_meta_like_nopages, $_POST[c_al2fb_meta_like_nopages]);
 			update_user_meta($user_ID, c_al2fb_meta_like_layout, $_POST[c_al2fb_meta_like_layout]);
 			update_user_meta($user_ID, c_al2fb_meta_like_faces, $_POST[c_al2fb_meta_like_faces]);
 			update_user_meta($user_ID, c_al2fb_meta_like_width, $_POST[c_al2fb_meta_like_width]);
@@ -1070,6 +1085,24 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_post_like_button" name="<?php echo c_al2fb_meta_post_like_button; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true)) echo ' checked="checked"'; ?> />
 				<br /><a class="al2fb_explanation" href="http://developers.facebook.com/docs/reference/plugins/like/" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_post_nohome"><?php _e('Do not show on the home page:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_post_nohome" name="<?php echo c_al2fb_meta_like_nohome; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_nohome, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_post_noposts"><?php _e('Do not show on posts:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_post_noposts" name="<?php echo c_al2fb_meta_like_noposts; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_noposts, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_post_nopages"><?php _e('Do not show on pages:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_post_nopages" name="<?php echo c_al2fb_meta_like_nopages; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_nopages, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1780,6 +1813,8 @@ if (!class_exists('WPAL2Facebook')) {
 						else
 							break;
 					}
+					if (empty($description) && count($lines) > 0)
+						$description = substr($lines[0], 0, $maxlen - strlen($trailer));
 					$description .= $trailer;
 				}
 			}
@@ -1993,8 +2028,11 @@ if (!class_exists('WPAL2Facebook')) {
 					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
-					if (empty($link_picture))
-						$picture = self::Redirect_uri() . '?al2fb_image=1';
+					if (empty($link_picture)) {
+						$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+						if (empty($picture))
+							$picture = self::Redirect_uri() . '?al2fb_image=1';
+					}
 					else
 						$picture = substr($link_picture, strpos($link_picture, '=') + 1);
 
@@ -2019,11 +2057,9 @@ if (!class_exists('WPAL2Facebook')) {
 			{
 				$charset = get_bloginfo('charset');
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
-				$picture = self::Redirect_uri() . '?al2fb_image=1';
 				echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 				echo '<meta property="og:type" content="blog" />' . PHP_EOL;
 				echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
-				echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 			}
 		}
 
@@ -2052,7 +2088,10 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Show like button
-			if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true)) {
+			if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) &&
+				!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
+				!(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) &&
+				!(get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) && is_page())) {
 				// Get language
 				$lang = WPLANG;
 				if (empty($lang))
@@ -2471,6 +2510,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>FB likes:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Post likers:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_likers, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Post like button:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Not home page:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Not posts:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Not pages:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Min. capability:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Refresh comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_refresh), ENT_QUOTES, $charset) . '</td></tr>';

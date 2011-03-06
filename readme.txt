@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.62
+Stable tag: 0.63
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -436,7 +436,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.63 =
+* New feature: selective disable like button on home page, posts and/or pages
+* Improvement: truncate first sentence if too long
+* Improvement: use default picture for OGP if no link picture
+* Improvement: removed OGP picture for frontpage
 * Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
@@ -828,6 +833,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.63 =
+New feature, improvements, bugfix, translations
 
 = 0.62 =
 Specify URL for like button, improvements, bugfix
