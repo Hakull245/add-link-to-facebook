@@ -83,6 +83,11 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to get an idea of what is what.
 
+The plugin will use the excerpt if available, else the post text and will use it as description.
+The option *Use excerpt as message* will move the excerpt to the message at top and the post text will be used as description at the bottom.
+If you specify a *Text trailer* the text will be truncated and the text trailer (for example *Read more ...*) will be used as last words (no link).
+If you clear the text trailer, Facebook will show *See more* and if you click on it, see can see the whole post on Facebook.
+
 = U02 Why is the option 'Featured post image' grayed out? =
 
 Because your current WordPress theme doesn't support featured images.
@@ -431,6 +436,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.63 =
+* Updated FAQ
 * Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
