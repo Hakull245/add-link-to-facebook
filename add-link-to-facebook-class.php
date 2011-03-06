@@ -110,7 +110,6 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 // Use link instead of feed?
 // Add link to multiple walls
-// Frontend post: images?
 // Audio in Facebook?
 
 // Define class

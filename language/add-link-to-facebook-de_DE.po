@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
 "POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
-"PO-Revision-Date: 2011-03-05 17:56+0100\n"
+"PO-Revision-Date: 2011-03-06 10:40+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Michael Vollmer <m.vollmer@styloweb.de>\n"
 "MIME-Version: 1.0\n"
@@ -363,4 +363,10 @@ msgstr "Debug:"
 
 msgid "Facebook"
 msgstr "Facebook"
+
+msgid "Link to"
+msgstr "Link zu"
+
+msgid "Default the post or page"
+msgstr "Standart der Artikel oder die Seite"
 

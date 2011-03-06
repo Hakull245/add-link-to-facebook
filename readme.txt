@@ -33,8 +33,8 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
 If you find this plugin useful, please rate it accordingly.
-If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/#respond "Marcel's weblog").
-Please report any issue you have with this plugin on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog"), so I can at least try to fix it.
+If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
@@ -42,8 +42,8 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
 * English (en\_US), built-in, corrections are welcome
-* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
-* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel")
+* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
+* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
 * Norwegian (nb\_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
@@ -194,7 +194,7 @@ You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
 [See here](http://drupal.org/node/17564 "Poedit plural forms") for details on plural forms.
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use the [contact form](http://blog.bokhorst.biz/contact/ "the contact form") to send me the new .po file.
+Please use the [contact form](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") to send me the new .po file.
 
 = U19 How can I change the styling? =
 
@@ -256,13 +256,12 @@ Auto posting plugins will work if one of the following actions is used:
 * <em>transition_post_status</em>
 * <em>xmlrpc_publish_post</em>
 * <em>app_publish_post</em>
+* <em>al2fb_publish</em>
 
 This plugin is known to be incompatible with:
 
 * [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 * Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
-
-If necessary I am happy to implement a custom action. Just [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
 = C03 Are shortcodes being processed? =
 
@@ -418,7 +417,7 @@ You can either enable JavaScript or try to use a private Facebook application.
 
 = S01 Where can I ask questions, report bugs and request features? =
 
-You can write a comment on the [support page](http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/ "Marcel's weblog").
+You can open a topic in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
 
 = S02 How can I send the debug information? =
 
@@ -432,6 +431,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.63 =
+* Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
