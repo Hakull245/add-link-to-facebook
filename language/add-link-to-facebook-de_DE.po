@@ -1,18 +1,21 @@
-# Copyright (C) 2010 Marcel Bokhorst
-# This file is distributed under the same license as the Add Link to Facebook package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
 "POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
+"PO-Revision-Date: 2011-03-06 10:40+0100\n"
+"Last-Translator: Marcel Bokhorst\n"
+"Language-Team: Michael Vollmer <m.vollmer@styloweb.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-18 17:19+0100\n"
-"Last-Translator: Marcel Bokhorst\n"
-"Language-Team: Dirk\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
 
 msgid "Settings updated"
 msgstr "Einstellungen aktualisiert"
@@ -24,7 +27,7 @@ msgid "needs configuration"
 msgstr "Konfiguration erforderlich"
 
 msgid "needs authorization"
-msgstr "Zustimmung erforderlich"
+msgstr "Autorisierung erforderlich"
 
 msgid "Add Link to Facebook"
 msgstr "Add Link to Facebook"
@@ -33,46 +36,70 @@ msgid "Administration"
 msgstr "Administration"
 
 msgid "Your server may not allow external connections"
-msgstr "Server erlaubt keine externen Verbindungen"
+msgstr "Ihr Server lässt keine externen Verbindungen zu"
 
 msgid "Easy setup"
-msgstr "Easy-Setup"
+msgstr "Einfache Einrichtung"
+
+msgid "Use shared Facebook application:"
+msgstr "Freigegebene Facebook-Anwendung verwenden:"
+
+msgid "Simple, but less secure"
+msgstr "Einfacher, aber weniger sicher"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Um eine App-ID und App Secret muss eine Facebook-Anwendung erstellt werden"
+msgstr "Um eine App-ID und App Secret zu erhalten müssen Sie eine Facebook-Anwendung erstellen"
+
+msgid "You have to fill in the following:"
+msgstr "Sie müssen folgendes ausfüllen:"
 
 msgid "Click here to create"
-msgstr "Zur Erstellung hier klicken"
+msgstr "Klicken Sie hier, um zu erstellen"
 
 msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "Alles was du willst, erscheint als \"via ... \" unter dem Beitrag"
+msgstr "Alles, was ihnen gefällt, erscheint mit &quot;via ...&quot; unter der Nachricht"
 
 msgid "Web Site > Site URL:"
-msgstr "Web-Site > Site URL:"
+msgstr "Webseite &gt; Seiten-URL:"
 
 msgid "App ID:"
-msgstr "Anwendungs-ID"
+msgstr "App-ID:"
 
 msgid "App Secret:"
 msgstr "App Secret:"
 
+msgid "Access token:"
+msgstr "Access token:"
+
 msgid "App Name:"
-msgstr "Anwendungsname:"
+msgstr "App Name:"
+
+msgid "Share with all users on this site:"
+msgstr "Teilen Sie mit allen Benutzern auf dieser Website:"
 
 msgid "Additional settings"
-msgstr "Weitere Einstellungen"
+msgstr "Zusätzliche Einstellungen"
+
+msgid "Link picture:"
+msgstr "Linkbild:"
 
 msgid "WordPress logo"
-msgstr "WordPress logo"
+msgstr "WordPress-Logo"
+
+msgid "First attached image"
+msgstr "Erstes angehängtes Bild"
 
 msgid "Featured post image"
-msgstr "Featured post image"
+msgstr "Artikelbild"
 
 msgid "Let Facebook select"
-msgstr "Lass Facebook auswählen"
+msgstr "Lassen Sie Facebook wählen"
+
+msgid "First image in the post"
+msgstr "Erstes Bild im Artikel"
 
 msgid "Custom picture below"
-msgstr "Benutzerdefiniertes Bild unten"
+msgstr "Folgendes benutzerdefiniertes Bild:"
 
 msgid "Custom picture URL:"
 msgstr "URL zum benutzerdefinierten Bild:"
@@ -81,7 +108,7 @@ msgid "At least 50 x 50 pixels"
 msgstr "Mindestens 50 x 50 Pixel"
 
 msgid "Add to page:"
-msgstr "Auf Seite hinzufügen:"
+msgstr "Zur Seite hinzufügen:"
 
 msgid "Add as page owner:"
 msgstr "Als Eigentümer der Seite hinzufügen:"
@@ -89,17 +116,26 @@ msgstr "Als Eigentümer der Seite hinzufügen:"
 msgid "Requires manage pages permission"
 msgstr "Benötigt Berechtigung als Seitenverwalter"
 
+msgid "Use groups:"
+msgstr "Gruppen verwenden:"
+
+msgid "Requires user groups permission"
+msgstr "Benötigt Benutzergruppenberechtigung"
+
+msgid "Add to group:"
+msgstr "Zur Gruppe hinzufügen:"
+
 msgid "Use site title as caption:"
-msgstr "Verwende Site-Titel als Bildunterschrift:"
+msgstr "Seitentitel als Bildunterschrift verwenden:"
 
 msgid "Use excerpt as message:"
-msgstr "Verwende Auszug als Beitrag:"
+msgstr "Auszug als Beitrag verwenden:"
 
 msgid "Clean on deactivate:"
-msgstr "Bereinige nach Deaktivierung:"
+msgstr "Bei Deaktivierung breinigen:"
 
 msgid "All data, except link id's"
-msgstr "Alle Daten, außer Link-ID's"
+msgstr "Alle Daten, außer Link-IDs"
 
 msgid "I have donated to this plugin:"
 msgstr "Ich habe für dieses Plugin gespendet:"
@@ -108,19 +144,22 @@ msgid "Administrator options"
 msgstr "Administrator-Optionen"
 
 msgid "Do not display notices:"
-msgstr "Beiträge nicht anzeigen:"
+msgstr "Keine Hinweise anzeigen:"
 
 msgid "Except on this page"
 msgstr "Außer auf dieser Seite"
 
 msgid "Required capability to use plugin:"
-msgstr "Benötigte Fähigkeit, um dieses Plugin zu nutzen"
+msgstr "Erforderliche Berechtigung, um dieses Plugin nutzen zu können:"
+
+msgid "Debug options"
+msgstr "Debug-Optionen"
 
 msgid "Use site URL as request URI:"
-msgstr "Verwende Site-URL als Nachfrage URI:"
+msgstr "Webseiten-URL als Anforderungs-URI verwenden:"
 
 msgid "Do not use cURL:"
-msgstr "Verwende keine cURL:"
+msgstr "Keine cURL verwenden:"
 
 msgid "Save"
 msgstr "Speichern"
@@ -129,16 +168,16 @@ msgid "Authorization"
 msgstr "Autorisierung"
 
 msgid "Links will be added to"
-msgstr "Links werden hinzugefügt an"
+msgstr "Links werden hinzugefügt zu"
 
 msgid "Authorize"
 msgstr "Autorisieren"
 
 msgid "Privacy in the Sustainable Plugins Sponsorship Network"
-msgstr "Datenschutz im Sustainable Plugins Sponsoring-Netzwerk"
+msgstr "Datenschutz im Netzwerk für nachhaltige Plugin-Werbung"
 
 msgid "Resources"
-msgstr "Ressourcen"
+msgstr "Resourcen"
 
 msgid "Frequently asked questions"
 msgstr "Häufig gestellte Fragen"
@@ -153,10 +192,10 @@ msgid "Other plugins"
 msgstr "Andere Plugins"
 
 msgid "Do not add link to Facebook"
-msgstr "Link nicht auf Facebook hinzufügen"
+msgstr "Keinen Facebook-Link einfügen"
 
 msgid "Debug information"
-msgstr "Debug-Informationen"
+msgstr "Debug-Information"
 
 msgid "Yes"
 msgstr "Ja"
@@ -165,11 +204,169 @@ msgid "No"
 msgstr "Nein"
 
 msgid "No images in the media library for this post"
-msgstr "Keine Bilder in der Mediathek für diesen Beitrag"
+msgstr "Keine Bilder in der Mediathek für diesen Artikel"
 
 msgid "Select link image:"
-msgstr "Wähle Bild für Link:"
+msgstr "Linkbild wählen:"
 
 msgid "None"
 msgstr "Keine"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "E-mail:"
+msgstr "E-Mail:"
+
+msgid "Message:"
+msgstr "Nachricht:"
+
+msgid "Send"
+msgstr "Senden"
+
+msgid "Debug information sent"
+msgstr "Debug-Informationen gesendet"
+
+msgid "Sending debug information failed"
+msgstr "Senden der Debug-Informationen fehlgeschlagen"
+
+msgid "Use short URL:"
+msgstr "Gekürzte URL verwenden:"
+
+msgid "If available"
+msgstr "Falls verfügbar"
+
+msgid "Delete existing Facebook link"
+msgstr "Vorhandenen Facebook-Link löschen"
+
+msgid "Number of sentences to use:"
+msgstr "Anzahl der zu verwendenden Sätze:"
+
+msgid "Leave blank to let Facebook choose"
+msgstr "Leer lassen, um Facebook wählen zu lassen"
+
+msgid "Text trailer:"
+msgstr "Text-Suffix:"
+
+msgid "For example \"Read more ...\""
+msgstr "Zum Beispiel &quot;Lesen Sie mehr ...&quot;"
+
+msgid "Keep hyperlinks:"
+msgstr "Hyperlinks belassen:"
+
+msgid "The hyperlink title will be removed"
+msgstr "Der Linktext wird entfernt, der eigentliche Hyperlink aber belassen"
+
+msgid "Integrate comments from Facebook:"
+msgstr "Kommentare von Facebook integrieren:"
+
+msgid "Integrate likes from Facebook:"
+msgstr "\"Gefällt mir\" von Facebook integrieren:"
+
+msgid "Show likers below the post text:"
+msgstr "Benutzer unter Artikel anzeigen, denen dieser gefällt:"
+
+msgid "Show Facebook like button:"
+msgstr "\"Gefällt mir\"-Button von Facebook anzeigen:"
+
+msgid "Use Open Graph protocol:"
+msgstr "Open Graph-Protokoll verwenden:"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "on Facebook"
+msgstr "auf Facebook"
+
+msgid "Liked this post"
+msgstr "gefällt dieser Artikel"
+
+msgid "Refresh Facebook comments every:"
+msgstr "Aktualisiere Facebook-Kommentare alle:"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Default every 10 minutes"
+msgstr "Standard: alle 10 Minuten"
+
+msgid "Maximum Facebook text length:"
+msgstr "Maximale Facebook-Textlänge:"
+
+msgid "Characters"
+msgstr "Zeichen"
+
+msgid "Default 256 characters"
+msgstr "Standard: 256 Zeichen"
+
+msgid "liked this post"
+msgid_plural "liked this post"
+msgstr[0] "gefällt dieser Artikel"
+msgstr[1] "gefällt dieser Artikel"
+
+msgid "Add 'Share' link:"
+msgstr "&#39;Teilen&#39;-Link einfügen:"
+
+msgid "Share"
+msgstr "Teilen"
+
+msgid "Default picture URL:"
+msgstr "Standardbild-URL:"
+
+msgid "Default WordPress logo"
+msgstr "Standard: WordPress-Logo"
+
+msgid "Layout:"
+msgstr "Layout:"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Button with count"
+msgstr "Button mit Zähler"
+
+msgid "Box with count"
+msgstr "Box mit Zähler"
+
+msgid "Faces:"
+msgstr "Gesichter:"
+
+msgid "Width:"
+msgstr "Breite:"
+
+msgid "Pixels"
+msgstr "Pixel"
+
+msgid "Action:"
+msgstr "Aktion:"
+
+msgid "Like"
+msgstr "Gefällt mir"
+
+msgid "Recommend"
+msgstr "Empfehlen"
+
+msgid "Font:"
+msgstr "Schriftart:"
+
+msgid "Color scheme:"
+msgstr "Farbschema:"
+
+msgid "Light"
+msgstr "Hell"
+
+msgid "Dark"
+msgstr "Dunkel"
+
+msgid "Debug:"
+msgstr "Debug:"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Link to"
+msgstr "Link zu"
+
+msgid "Default the post or page"
+msgstr "Standart der Artikel oder die Seite"
 
