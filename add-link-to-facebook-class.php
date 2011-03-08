@@ -110,6 +110,9 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - RSS
 // - Comment replies
 // - Recent comments
+// - Edit link
+// - Avatars
+// - Like count
 
 // Use link instead of feed?
 // Add link to multiple walls
@@ -174,6 +177,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin activation
 		function Activate() {
+			global $wpdb;
 			$version = get_option(c_al2fb_option_version);
 			if ($version <= 1) {
 				delete_option(c_al2fb_meta_client_id);
@@ -186,7 +190,6 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_option(c_al2fb_meta_donated);
 			}
 			if ($version <= 2) {
-				global $wpdb;
 				$rows = $wpdb->get_results("SELECT user_id, meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='al2fb_integrate'");
 				foreach ($rows as $row) {
 					update_user_meta($row->user_id, c_al2fb_meta_fb_comments, $row->meta_value);
@@ -200,7 +203,14 @@ if (!class_exists('WPAL2Facebook')) {
 				foreach ($rows as $row)
 					update_user_meta($row->ID, c_al2fb_meta_like_faces, true);
 			}
-			update_option(c_al2fb_option_version, 4);
+			if ($version <= 4) {
+				$rows = $wpdb->get_results("SELECT user_id, meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='" . c_al2fb_meta_trailer . "'");
+				foreach ($rows as $row) {
+					$value = get_user_meta($row->user_id, c_al2fb_meta_trailer, true);
+					update_user_meta($row->user_id, c_al2fb_meta_trailer, ' ' . $value);
+				}
+			}
+			update_option(c_al2fb_option_version, 5);
 		}
 
 		// Handle plugin deactivation
@@ -432,7 +442,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
 			$_POST[c_al2fb_meta_picture] = trim(stripslashes($_POST[c_al2fb_meta_picture]));
 			$_POST[c_al2fb_meta_picture_default] = trim(stripslashes($_POST[c_al2fb_meta_picture_default]));
-			$_POST[c_al2fb_meta_trailer] = trim($_POST[c_al2fb_meta_trailer]);
+			$_POST[c_al2fb_meta_trailer] = rtrim($_POST[c_al2fb_meta_trailer]);
 			$_POST[c_al2fb_meta_like_width] = trim($_POST[c_al2fb_meta_like_width]);
 			$_POST[c_al2fb_meta_like_link] = trim($_POST[c_al2fb_meta_like_link]);
 
@@ -1792,7 +1802,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Trailer: limit body size
 			$trailer = get_user_meta($user_ID, c_al2fb_meta_trailer, true);
 			if ($trailer) {
-				$trailer = ' ' . preg_replace('/<[^>]*>/', '', $trailer);
+				$trailer = preg_replace('/<[^>]*>/', '', $trailer);
 
 				// Get maximum FB description size
 				$maxlen = get_option(c_al2fb_option_max_descr);

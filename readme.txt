@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.64
+Stable tag: 0.65
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -437,8 +437,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 0.65 =
+* Improvement: removed hardcoded space in front of text trailer
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Polish (pl\_PL) translation by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011")
 
 = 0.64 =
 * Improvement: stripping HTML from text trailer
@@ -842,6 +844,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 0.65 =
+Small improvement, translations
 
 = 0.64 =
 Improvement

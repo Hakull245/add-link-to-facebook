@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-02-27 12:51+0100\n"
+"PO-Revision-Date: 2011-03-08 08:15+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: tomi0011\n"
 "X-Poedit-Language: Polish\n"
@@ -65,8 +65,14 @@ msgstr "App ID:"
 msgid "App Secret:"
 msgstr "App Secret:"
 
+msgid "Access token:"
+msgstr "Access token:"
+
 msgid "App Name:"
 msgstr "Nazwa aplikacji:"
+
+msgid "Share with all users on this site:"
+msgstr "Udostępnij dla wszystkich na tej stronie:"
 
 msgid "Additional settings"
 msgstr "Dodatkowe ustawienia:"
@@ -260,6 +266,15 @@ msgstr "Połącz lubiane z Facebooka:"
 msgid "Show likers below the post text:"
 msgstr "Pokaż osoby lubiące to poniżej wpisu:"
 
+msgid "Show Facebook like button:"
+msgstr "Pokazuj przycisk Like:"
+
+msgid "Use Open Graph protocol:"
+msgstr "Użyj protokołu Open Graph:"
+
+msgid "Documentation"
+msgstr "Dokumentacja"
+
 msgid "on Facebook"
 msgstr "na Facebooku"
 
@@ -288,4 +303,76 @@ msgid "liked this post"
 msgid_plural "liked this post"
 msgstr[0] "Lubisz ten wpis"
 msgstr[1] "Lubisz te wpisy"
+
+msgid "Add 'Share' link:"
+msgstr "Dodaj link 'Udostępnij':"
+
+msgid "Share"
+msgstr "Udostępnij"
+
+msgid "Default picture URL:"
+msgstr "Domyślny obraz URL:"
+
+msgid "Default WordPress logo"
+msgstr "Domyślne logo WordPress"
+
+msgid "Layout:"
+msgstr "Położenie:"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Button with count"
+msgstr "Przycisk z liczbą"
+
+msgid "Box with count"
+msgstr "Kwadracik z liczbą"
+
+msgid "Faces:"
+msgstr "Twarze:"
+
+msgid "Width:"
+msgstr "Szerokość:"
+
+msgid "Pixels"
+msgstr "Pikseli"
+
+msgid "Action:"
+msgstr "Akcja:"
+
+msgid "Like"
+msgstr "Lubię"
+
+msgid "Recommend"
+msgstr "Poleć"
+
+msgid "Font:"
+msgstr "Czcionka:"
+
+msgid "Color scheme:"
+msgstr "Schemat koloru:"
+
+msgid "Light"
+msgstr "Jasny"
+
+msgid "Dark"
+msgstr "Ciemny"
+
+msgid "Use publish_post action:"
+msgstr "Użyj akcji publish_post:"
+
+msgid "Link to:"
+msgstr "Link do:"
+
+msgid "Default the post or page"
+msgstr "Domyślnie wpis lub strona"
+
+msgid "Do not show on the home page:"
+msgstr "Nie pokazuj na stronie głównej:"
+
+msgid "Do not show on posts:"
+msgstr "Nie pokazuj we wpisach:"
+
+msgid "Do not show on pages:"
+msgstr "Nie pokazuj na tronach:"
 
