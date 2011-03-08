@@ -438,6 +438,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.0 =
+* Updating to version one, since the basic functions seem to be complete and stable
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
 = 0.66 =
 * New feature: option to exclude custom post types
 * Bugfix: exclude remote published pages
