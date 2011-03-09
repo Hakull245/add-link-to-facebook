@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.66
+Stable tag: 1.0
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -441,11 +441,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.0 =
+* New feature: auto remove image captions
 * Improvement: more logging (link picture logic)
 * Updated description
-* Updating to version one, since the basic functions seem to be complete and stable
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updating to version one, since the basic functions seem to be complete and stable
 
 = 0.66 =
 * New feature: option to exclude custom post types
@@ -864,6 +865,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.0 =
+New feature: auto remove image captions, translations
+
 = 0.66 =
 New feature: option to exclude custom post types, bugfix
 
@@ -1075,6 +1079,8 @@ Basically there are five steps to follow:
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
 5. Press the *Authorize* button to allow the plugin to add links to Facebook
+
+Note that you don't have to submit the Facebook application to use it.
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care the phone number is correct.

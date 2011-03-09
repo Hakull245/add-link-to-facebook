@@ -128,6 +128,7 @@ if (!class_exists('WPAL2Facebook')) {
 		var $php_error = null;
 		var $debug = null;
 		var $site_id = '';
+		var $blog_id = '';
 
 		// Constructor
 		function __construct() {
@@ -144,10 +145,12 @@ if (!class_exists('WPAL2Facebook')) {
 			// Log
 			$this->debug = get_option(c_al2fb_option_debug);
 
-			// Get site id
+			// Get site & blog id
 			if (is_multisite()) {
 				$current_site = get_current_site();
 				$this->site_id = $current_site->id;
+				global $blog_id;
+				$this->blog_id = $blog_id;
 			}
 
 			// register activation actions
@@ -185,10 +188,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin activation
 		function Activate() {
-			global $current_site, $blog_id;
-			print_r(get_current_site());
-			echo 'Site: ' . $current_site->id . ' blog: ' . $blog_id;
-
 			global $wpdb;
 			$version = get_option(c_al2fb_option_version);
 			if ($version <= 1) {
@@ -1622,10 +1621,12 @@ if (!class_exists('WPAL2Facebook')) {
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
-			global $post;
-			$texts = self::Get_texts($post);
-			echo 'Original: ' . htmlspecialchars($post->post_content) . '<br />';
-			echo 'Processed: ' . htmlspecialchars($texts['content']) . '<br />';
+			if ($this->debug) {
+				global $post;
+				$texts = self::Get_texts($post);
+				echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
+				echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
+			}
 
 			if (function_exists('wp_get_attachment_image_src')) {
 				// Get attached images
@@ -1811,11 +1812,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Replace hyperlinks
 			if (get_user_meta($user_ID, c_al2fb_meta_hyperlink, true)) {
-				$excerpt = preg_replace('/< *a[^>]*href *= *["\']([^"\']*)["\'][^\<]*/i', '$1<a>', $excerpt);
-				$content = preg_replace('/< *a[^>]*href *= *["\']([^"\']*)["\'][^\<]*/i', '$1<a>', $content);
+				$excerpt = preg_replace('/< *a[^>]*href *= *["\']([^"\']*)["\'][^<]*/i', '$1<a>', $excerpt);
+				$content = preg_replace('/< *a[^>]*href *= *["\']([^"\']*)["\'][^<]*/i', '$1<a>', $content);
 			}
 
-			//$content = preg_replace('/< *p[^>]*class *= *["\']wp-caption-text["\'][^\<]*/i', '', $content);
+			// Remove image captions
+			$content = preg_replace('/<p[^>]*class="wp-caption-text"[^>]*>[^<]*<\/p>/i', '', $content);
 
 			// Get plain texts
 			$excerpt = preg_replace('/<[^>]*>/', '', $excerpt);
@@ -2528,11 +2530,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$picture = '<a href="' . get_user_meta($user_ID, c_al2fb_meta_picture, true) . '">' . get_user_meta($user_ID, c_al2fb_meta_picture, true) . '</a>';
 			$picture_default = '<a href="' . get_user_meta($user_ID, c_al2fb_meta_picture_default, true) . '">' . get_user_meta($user_ID, c_al2fb_meta_picture_default, true) . '</a>';
 
-			// Build info
-			global $current_site, $blog_id;
-			print_r(get_current_site());
-			echo 'Site: ' . $current_site->id . ' blog: ' . $blog_id;
-
 			$info = '<div class="al2fb_debug"><table border="1">';
 			$info .= '<tr><td>Time:</td><td>' . date('c') . '</td></tr>';
 			$info .= '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE'], ENT_QUOTES, $charset) . '</td></tr>';
@@ -2546,6 +2543,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Settings version:</td><td>' . get_option(c_al2fb_option_version) . '</td></tr>';
 			$info .= '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site id:</td><td>' . $this->site_id . '</td></tr>';
+			$info .= '<tr><td>Blog id:</td><td>' . $this->blog_id . '</td></tr>';
 			$info .= '<tr><td>Blog address (home):</td><td><a href="' . get_home_url() . '">' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>WordPress address (site):</td><td><a href="' . get_site_url() . '">' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>Redirect URI:</td><td><a href="' . self::Redirect_uri() . '">' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</a></td></tr>';
