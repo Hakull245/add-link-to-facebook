@@ -440,6 +440,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.1 =
+* Updated German (de\_DE) translation by [Björn](http://cooleisbaer.co.funpic.de/ "Björn")
+
 = 1.0 =
 * New feature: auto remove image captions
 * Improvement: more logging (link picture logic)

@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
 "POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
-"PO-Revision-Date: 2011-03-06 10:40+0100\n"
+"PO-Revision-Date: 2011-03-09 19:58+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
-"Language-Team: Michael Vollmer <m.vollmer@styloweb.de>\n"
+"Language-Team: Björn Deutschmann <cooleisbaer.funpic.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -369,4 +369,22 @@ msgstr "Link zu"
 
 msgid "Default the post or page"
 msgstr "Standart der Artikel oder die Seite"
+
+msgid "Do not show on the home page:"
+msgstr "Nicht auf der Hauptseite zeigen:"
+
+msgid "Do not show on posts:"
+msgstr "Nicht unter Artikeln zeigen:"
+
+msgid "Do not show on pages:"
+msgstr "Nicht auf Seiten zeigen"
+
+msgid "Exclude these custom post types:"
+msgstr "Ausgenommen diese benutzerdefinierten Nachrichtentypen:"
+
+msgid "Separate by commas"
+msgstr "Getrennt durch Kommas"
+
+msgid "Use publish_post action:"
+msgstr "Benutze publish_post Aktion:"
 
