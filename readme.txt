@@ -34,7 +34,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
-The beta feature are tested and working, but are not completely finished or require feedback.
+The beta features are tested and working, but are not completely finished or require feedback.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -1080,11 +1080,11 @@ Basically there are five steps to follow:
 4. Press the *Save* button to save the configuration
 5. Press the *Authorize* button to allow the plugin to add links to Facebook
 
-Note that you don't have to submit the Facebook application to use it.
+Note that you don't have to submit the Facebook application to the *App Directory* to use it.
 
 Some people need to verify their account before they can create an application.
-If you want to use your mobile phone number, take care the phone number is correct.
-When it was wrong, you have to wait more than a week before you can retry again.
+If you want to use your mobile phone number, take care that the phone number is correct.
+When it was wrong, you have to wait more than a week before you can try again.
 
 If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
