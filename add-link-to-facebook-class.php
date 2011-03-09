@@ -1869,6 +1869,30 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true))
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 
+			// Log
+			if ($this->debug) {
+				$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
+				$log = 'Picture type: ' . $picture_type . PHP_EOL;
+
+				$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+				$log .= '- meta: ' . $image_id . PHP_EOL;
+
+				$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
+				$log .= '- attached: ' . print_r($images, true);
+
+				$picture_id = get_post_thumbnail_id($post->ID);
+				$log .= '- featured: ' . $picture_id . PHP_EOL;
+
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $post->post_content, $matches))
+					$log .= '- post: ' .  $matches[1] . PHP_EOL;
+				else
+					$log .= '- post: none' . PHP_EOL;
+
+				$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);
+				$log .= '- custom: ' .  $custom . PHP_EOL;
+				add_post_meta($post->ID, c_al2fb_meta_log, $log);
+			}
+
 			// Get link picture
 			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
 			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
