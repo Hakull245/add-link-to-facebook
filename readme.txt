@@ -16,6 +16,8 @@ The link title will be the post title. The link description will be the excerpt,
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
 
+[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
+
 There is support for multi-user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
@@ -440,6 +442,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.0 =
 * Improvement: more logging (link picture logic)
+* Updated description
 * Updating to version one, since the basic functions seem to be complete and stable
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
@@ -1058,6 +1061,26 @@ Bugfixes
 
 = 0.1 =
 Initial version
+
+== Setup guide ==
+
+The setup of the plugin should be fairly self-explanatory.
+Basically there are five steps to follow:
+
+1. Click on the link in the yellow box *Click here to create*
+2. Create the Facebook application:
+	* Give it any name you like (will appear as *via* below the added links)
+	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
+	* Press the *Save Changes* button
+3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
+4. Press the *Save* button to save the configuration
+5. Press the *Authorize* button to allow the plugin to add links to Facebook
+
+Some people need to verify their account before they can create an application.
+If you want to use your mobile phone number, take care the phone number is correct.
+When it was wrong, you have to wait more than a week before you can retry again.
+
+If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
 == Facebook Authorization ==
 
