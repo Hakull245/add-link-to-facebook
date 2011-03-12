@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -871,6 +871,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.1 =
+Translations
+
 = 1.0 =
 New feature: auto remove image captions, translations
 
@@ -1095,7 +1098,7 @@ When it was wrong, you have to wait more than a week before you can try again.
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 
-== Request features ==
+== Requested features ==
 
 * Facebook comments with Avatars
 * Like count in post list
