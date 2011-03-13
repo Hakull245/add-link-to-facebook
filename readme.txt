@@ -1105,6 +1105,7 @@ If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contac
 * Disable Facebook yes/no column in post list
 * Default exclude option
 * Add link as group owner
+* Change location of like button
 
 * Adding links to multiple walls
 * One wall per site/blog
