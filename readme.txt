@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.1
+Stable tag: 1.2
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -32,7 +32,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Beta features:**
 
 * Integrate Facebook comments and likes on added links into Wordpress
-* Add 'Share' link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 
 The beta features are tested and working, but are not completely finished or require feedback.
 
@@ -410,6 +410,8 @@ cURL errors encountered so far:
 
 For above cURL errors you need to contact your hosting provider.
 
+Error 60: try enabling the option *Do not verify the peer's certificate* (since version 1.2).
+
 = E12 I get 'HTTP 400 Bad Request' =
 
 You are probably using Microsoft Internet Explorer.
@@ -440,6 +442,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.2 =
+* New feature: do not verify the peer's certificate to beat cURL error 60, thanks to *Chris*.
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.1 =
 * Russian translation (ru\_RU) by *Lurii*
@@ -521,7 +527,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 0.58 =
-* New feature: add 'Share' link (experimental), thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* New feature: add *Share* link (experimental), thanks to [Micha](http://www.styloweb.de/ "Micha")!
 * Improvement: added debug option
 * Improvement: added description and link picture to Open Graph protocol
 * Improvement: changed *fb:admins* to *fb:app_id* (Open Graph protocol)
@@ -871,6 +877,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.2 =
+New feature: do not verify the peer's certificate
+
 = 1.1 =
 Translations
 
@@ -902,7 +911,7 @@ Several improvements, updated translations
 Improvement: configuration of Facebook like button, bugfix
 
 = 0.58 =
-New feature: add 'Share' link (experimental)
+New feature: add *Share* link (experimental)
 
 = 0.57 =
 New feature: Share with all users on site, improvements, translation
@@ -1100,15 +1109,16 @@ If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contac
 
 == Requested features ==
 
+In no particular order:
+
 * Facebook comments with Avatars
 * Like count in post list
 * Disable Facebook yes/no column in post list
 * Default exclude option
 * Add link as group owner
 * Change location of like button
-
 * Adding links to multiple walls
-* One wall per site/blog
+* Common wall per site/blog
 
 == Facebook Authorization ==
 
