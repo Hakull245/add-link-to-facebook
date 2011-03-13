@@ -1106,6 +1106,9 @@ If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contac
 * Default exclude option
 * Add link as group owner
 
+* Adding links to multiple walls
+* One wall per site/blog
+
 == Facebook Authorization ==
 
 *Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
