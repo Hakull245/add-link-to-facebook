@@ -443,6 +443,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.3 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.2 =
 * New feature: do not verify the peer's certificate to beat cURL error 60, thanks to *Chris*.
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations

@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-03-09 07:09+0100\n"
+"PO-Revision-Date: 2011-03-13 14:16+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -382,4 +382,10 @@ msgstr "Utelukke disse tilpassede innleggstypene:"
 
 msgid "Separate by commas"
 msgstr "Atskille med komma"
+
+msgid "Do not verify the peer's certificate:"
+msgstr "Ikke verifisere peer sertifikat:"
+
+msgid "Try this in case of cURL error 60"
+msgstr "Prøv dette i tilfelle av cURL feil 60"
 
