@@ -444,6 +444,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.3 =
+* Added requested feature
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -1123,6 +1124,7 @@ In no particular order:
 * Change location of like button
 * Adding links to multiple walls
 * Common wall per site/blog
+* Template tag/shortcode for likers/like button
 
 == Facebook Authorization ==
 
