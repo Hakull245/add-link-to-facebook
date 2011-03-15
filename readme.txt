@@ -1125,6 +1125,7 @@ In no particular order:
 * Adding links to multiple walls
 * Common wall per site/blog
 * Template tag/shortcode for likers/like button
+* Facebook comment styling (class="facebook-comment")
 
 == Facebook Authorization ==
 
