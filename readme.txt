@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.2
+Stable tag: 1.3
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -444,7 +444,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.3 =
-* Added requested feature
+* Workaround for [Facebook like button bug](http://bugs.developers.facebook.net/show_bug.cgi?id=15879 "Facebook like button bug")
+* Updated requested feature list
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -881,6 +882,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.3 =
+Workaround for Facebook like button bug
 
 = 1.2 =
 New feature: do not verify the peer's certificate
