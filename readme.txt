@@ -23,6 +23,11 @@ It works for remote publishing too, for example from [Android](http://android.wo
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
 or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
 
+**The Facebook like button seems to be disappeared from some sites.
+This is caused by [this bug](http://bugs.developers.facebook.net/show_bug.cgi?id=15879) in Facebook.
+Version 1.3 of the plugin works around this bug, but unfortunately it does not work for everybody.
+So, we should have some patience until the engineers of Facebook have fixed it.**
+
 **Additional features:**
 
 * Show the names of the people who liked your post on Facebook below the post text
