@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.3
+Stable tag: 1.4
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -22,11 +22,6 @@ There is support for multi-user and network sites and shortcodes will be process
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
 or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
-
-**The Facebook like button seems to be disappeared from some sites.
-This is caused by [this bug](http://bugs.developers.facebook.net/show_bug.cgi?id=15879) in Facebook.
-Version 1.3 of the plugin works around this bug, but unfortunately it does not work for everybody.
-So, we should have some patience until the engineers of Facebook have fixed it.**
 
 **Additional features:**
 
@@ -447,6 +442,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.4 =
+* Reverting workaround for Facebook bug
 
 = 1.3 =
 * Workaround for [Facebook like button bug](http://bugs.developers.facebook.net/show_bug.cgi?id=15879 "Facebook like button bug")
@@ -887,6 +885,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.4 =
+Reverting workaround for Facebook bug
 
 = 1.3 =
 Workaround for Facebook like button bug

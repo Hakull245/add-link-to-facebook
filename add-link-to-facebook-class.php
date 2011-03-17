@@ -304,12 +304,6 @@ if (!class_exists('WPAL2Facebook')) {
 			wp_register_style('al2fb_style', $css_url);
 			wp_enqueue_style('al2fb_style');
 
-			// Facebook like button
-			$lang = WPLANG;
-			if (empty($lang))
-				$lang = 'en_US';
-			wp_enqueue_script('al2fb-like-button', 'http://connect.facebook.net/' . $lang . '/all.js#xfbml=1');
-
 			// Check user capability
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
 				if (is_admin()) {
@@ -2174,6 +2168,10 @@ if (!class_exists('WPAL2Facebook')) {
 				!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) && is_page())) {
+				// Get language
+				$lang = WPLANG;
+				if (empty($lang))
+					$lang = 'en_US';
 
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
@@ -2187,7 +2185,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$link = get_permalink($post->ID);
 
 				// Build content
-				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
 				$content .= '<fb:like ref="AL2FB"';
 				if (!empty($layout))
 					$content .= ' layout="' . $layout . '"';
