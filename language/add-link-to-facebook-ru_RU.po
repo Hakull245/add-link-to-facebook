@@ -1,0 +1,377 @@
+# This file is distributed under the same license as the Add Link to Facebook package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Add Link to Facebook\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
+"POT-Creation-Date: 2011-02-20 23:02:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2011-03-11 06:03+0100\n"
+"Last-Translator: Marcel Bokhorst\n"
+"Language-Team: makitra.net <hichnik@gmail.com>\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Settings updated"
+msgstr "Настройки сохранены"
+
+msgid "Authorized, go posting!"
+msgstr "Авторизованы, можно писать!"
+
+msgid "needs configuration"
+msgstr "требуется настройка"
+
+msgid "needs authorization"
+msgstr "требуется авторизация"
+
+msgid "Add Link to Facebook"
+msgstr "Добавить Ссылку в Facebook"
+
+msgid "Administration"
+msgstr "Администрирование"
+
+msgid "Your server may not allow external connections"
+msgstr "Ваш сервер может не разрешать внешние соединения"
+
+msgid "Easy setup"
+msgstr "Простая настройка"
+
+msgid "Use shared Facebook application:"
+msgstr "Использовать общедоступное приложение Facebook"
+
+msgid "Simple, but less secure"
+msgstr "Проще, но менее безопасно"
+
+msgid "To get an App ID and App Secret you have to create a Facebook application"
+msgstr "Чтобы получить App ID и App Secret вам нужно создать приложение на Facebook"
+
+msgid "You have to fill in the following:"
+msgstr "Вам нужно заполнить следующее:"
+
+msgid "Click here to create"
+msgstr "Нажмите тут для создания"
+
+msgid "Anything you like, will appear as \"via ...\" below the message"
+msgstr "Чтобы вам не понравилось. оно появится \"как... \" под сообщением"
+
+msgid "Web Site > Site URL:"
+msgstr "Веб сайт > Адрес (URL) страницы:"
+
+msgid "App ID:"
+msgstr "ИД - App ID:"
+
+msgid "App Secret:"
+msgstr "Ключ - App Secret:"
+
+msgid "Access token:"
+msgstr "Код - Access token:"
+
+msgid "App Name:"
+msgstr "Имя приложения:"
+
+msgid "Share with all users on this site:"
+msgstr "Поделиться со всеми пользователями сайта:"
+
+msgid "Additional settings"
+msgstr "Дополнительные настройки:"
+
+msgid "Link picture:"
+msgstr "Картинка ссылки:"
+
+msgid "WordPress logo"
+msgstr "Логотип WordPress"
+
+msgid "First attached image"
+msgstr "Первая прикрепленная картинка"
+
+msgid "Featured post image"
+msgstr "Выбранная картинка записи"
+
+msgid "Let Facebook select"
+msgstr "Позволить Facebook выбрать"
+
+msgid "First image in the post"
+msgstr "Первая картинка в записи"
+
+msgid "Custom picture below"
+msgstr "Выбранная картинка ниже"
+
+msgid "Custom picture URL:"
+msgstr "URL картинки:"
+
+msgid "At least 50 x 50 pixels"
+msgstr "Как минимум 50 x 50 пикселей"
+
+msgid "Add to page:"
+msgstr "Добавить на страницу:"
+
+msgid "Add as page owner:"
+msgstr "Добавить как автор страницы"
+
+msgid "Requires manage pages permission"
+msgstr "Тербует прав редактирования страниц"
+
+msgid "Use groups:"
+msgstr "Использовать группы:"
+
+msgid "Requires user groups permission"
+msgstr "Требует прав групп"
+
+msgid "Add to group:"
+msgstr "Добавить в группу:"
+
+msgid "Use site title as caption:"
+msgstr "Исползовать заголовок сайта как подсказку"
+
+msgid "Use excerpt as message:"
+msgstr "Использовать кроме сообщения"
+
+msgid "Clean on deactivate:"
+msgstr "Очистить при деактивации"
+
+msgid "All data, except link id's"
+msgstr "Все данные, кроме ссылки с id"
+
+msgid "I have donated to this plugin:"
+msgstr "Я пожертвовал создателю плагина"
+
+msgid "Administrator options"
+msgstr "Настройки администратора:"
+
+msgid "Do not display notices:"
+msgstr "Не показывать примечания"
+
+msgid "Except on this page"
+msgstr "Кроме этой страницы"
+
+msgid "Required capability to use plugin:"
+msgstr "Требуется права исползования плагина:"
+
+msgid "Debug options"
+msgstr "Опции отладки"
+
+msgid "Use site URL as request URI:"
+msgstr "Использовать URL сайта как URI запроса"
+
+msgid "Do not use cURL:"
+msgstr "Не использовать cURL"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Authorization"
+msgstr "Авторизация:"
+
+msgid "Links will be added to"
+msgstr "Ссылки будут добавлены в"
+
+msgid "Authorize"
+msgstr "Авторизоваться"
+
+msgid "Privacy in the Sustainable Plugins Sponsorship Network"
+msgstr "Политика конфиденциальности: Sustainable Plugins Sponsorship Network"
+
+msgid "Resources"
+msgstr "Материалы:"
+
+msgid "Frequently asked questions"
+msgstr "Часто задаваемые вопросы"
+
+msgid "Facebook wall"
+msgstr "Стена Facebook"
+
+msgid "Support page"
+msgstr "Страница поддержки"
+
+msgid "About the author"
+msgstr "О Авторе"
+
+msgid "Other plugins"
+msgstr "Другие плагины"
+
+msgid "Do not add link to Facebook"
+msgstr "Не добавлять ссылку в Facebook"
+
+msgid "Debug information"
+msgstr "Отладочная информация"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "No images in the media library for this post"
+msgstr "Нет картинок в библиотеке Медиа к этой записи"
+
+msgid "Select link image:"
+msgstr "Выберите картинку ссылки:"
+
+msgid "None"
+msgstr "Ничего"
+
+msgid "Name:"
+msgstr "Имя:"
+
+msgid "E-mail:"
+msgstr "Е-мейл:"
+
+msgid "Message:"
+msgstr "Сообщение:"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Debug information sent"
+msgstr "Отладочная информация отправлена"
+
+msgid "Sending debug information failed"
+msgstr "Отправка отладочной информации не удалась"
+
+msgid "Use short URL:"
+msgstr "Использовать короткие URL"
+
+msgid "If available"
+msgstr "Если доступно"
+
+msgid "Delete existing Facebook link"
+msgstr "Удалить существующую ссылку Facebook"
+
+msgid "Number of sentences to use:"
+msgstr "Количество публикуемых предожений:"
+
+msgid "Leave blank to let Facebook choose"
+msgstr "Оставьте пустым, чтобы позволить Facebook выбрать"
+
+msgid "Text trailer:"
+msgstr "Разделитель текста:"
+
+msgid "For example \"Read more ...\""
+msgstr "К примеру \"Читать далее ...\""
+
+msgid "Keep hyperlinks:"
+msgstr "Оставлять гиперссылки:"
+
+msgid "The hyperlink title will be removed"
+msgstr "Заголовок ссылки будет удален"
+
+msgid "Integrate comments from Facebook:"
+msgstr "Включить комментарии Facebook"
+
+msgid "Integrate likes from Facebook:"
+msgstr "Включить like из Facebook:"
+
+msgid "Show likers below the post text:"
+msgstr "Показать тех, кто советовал ниж текста сообщения:"
+
+msgid "Show Facebook like button:"
+msgstr "Показывать кнопку Нравится:"
+
+msgid "Use Open Graph protocol:"
+msgstr "Исползовать протокол Open Graph:"
+
+msgid "Documentation"
+msgstr "Документация"
+
+msgid "on Facebook"
+msgstr "в Facebook"
+
+msgid "Liked this post"
+msgstr "Понравился этот пост"
+
+msgid "Refresh Facebook comments every:"
+msgstr "Обновлять комментарии Facebooka каждые:"
+
+msgid "Minutes"
+msgstr "Минут"
+
+msgid "Default every 10 minutes"
+msgstr "По умолчанию 10 минут"
+
+msgid "Maximum Facebook text length:"
+msgstr "Максимальная длина текста на Facebook:"
+
+msgid "Characters"
+msgstr "Символов"
+
+msgid "Default 256 characters"
+msgstr "По умолчанию 256 символов"
+
+msgid "liked this post"
+msgstr "Понравилась эта запись"
+
+msgid "Add 'Share' link:"
+msgstr "Добавить ссылку 'Поделиться':"
+
+msgid "Share"
+msgstr "Поделиться"
+
+msgid "Default picture URL:"
+msgstr "URL картинки по умолчанию:"
+
+msgid "Default WordPress logo"
+msgstr "Логотип WordPress по умолчанию"
+
+msgid "Layout:"
+msgstr "Положение:"
+
+msgid "Standard"
+msgstr "Стандартное"
+
+msgid "Button with count"
+msgstr "Кнопка со счетчиком"
+
+msgid "Box with count"
+msgstr "Счетчик в квадрате"
+
+msgid "Faces:"
+msgstr "лица(Faces):"
+
+msgid "Width:"
+msgstr "Длина:"
+
+msgid "Pixels"
+msgstr "Пикселов"
+
+msgid "Action:"
+msgstr "Действие:"
+
+msgid "Like"
+msgstr "Нравится"
+
+msgid "Recommend"
+msgstr "Рекомендует"
+
+msgid "Font:"
+msgstr "Шрифт:"
+
+msgid "Color scheme:"
+msgstr "Цветовая схема:"
+
+msgid "Light"
+msgstr "Светлый"
+
+msgid "Dark"
+msgstr "Темный"
+
+msgid "Use publish_post action:"
+msgstr "Выполнять публикацию поста:"
+
+msgid "Link to:"
+msgstr "Ссылка:"
+
+msgid "Default the post or page"
+msgstr "По умолчанию запись или страница"
+
+msgid "Do not show on the home page:"
+msgstr "Не показывать на главной странице:"
+
+msgid "Do not show on posts:"
+msgstr "Не показывать на записях в блоге:"
+
+msgid "Do not show on pages:"
+msgstr "Не показывать на страницах:"
+
