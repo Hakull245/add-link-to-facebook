@@ -232,6 +232,10 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Are you looking at the correct personal/page/group wall?
 * If you are publishing to a page: check the Facebook tab *Others*. See also question U12.
 
+= U22 Where are the settings of the plugin? =
+
+In the WordPress menu *Tools*.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -425,6 +429,12 @@ if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marc
 
 You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
 You can either enable JavaScript or try to use a private Facebook application.
+
+= E14 I get '(#100) Invalid parameter' =
+
+You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
+Go to the post with the error, enabled *Custom fields* with the *Screen Option* in the upper right corner if needed,
+now scroll down to the *Custom Fields* section and delete the values starting with *al2fb_* to remove the error.
 
 **--- Support ---**
 
@@ -1136,6 +1146,7 @@ In no particular order:
 * Common wall per site/blog
 * Template tag/shortcode for likers/like button
 * Facebook comment styling (class="facebook-comment")
+* Stop showing Facebook links on posts on archives and categories
 
 == Facebook Authorization ==
 
