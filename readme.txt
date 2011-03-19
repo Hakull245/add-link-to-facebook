@@ -433,7 +433,7 @@ You can either enable JavaScript or try to use a private Facebook application.
 = E14 I get '(#100) Invalid parameter' =
 
 You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
-Go to the post with the error, enabled *Custom fields* with the *Screen Option* in the upper right corner if needed,
+Go to the post with the error, enabled *Custom fields* with the *Screen Options* in the upper right corner if needed,
 now scroll down to the *Custom Fields* section and delete the values starting with *al2fb_* to remove the error.
 
 **--- Support ---**
@@ -1147,6 +1147,8 @@ In no particular order:
 * Template tag/shortcode for likers/like button
 * Facebook comment styling (class="facebook-comment")
 * Stop showing Facebook links on posts on archives and categories
+* Shortcode for Facebook like button
+* Filter by category
 
 == Facebook Authorization ==
 
