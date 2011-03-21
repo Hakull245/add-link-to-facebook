@@ -1149,6 +1149,7 @@ In no particular order:
 * Stop showing Facebook links on posts on archives and categories
 * Shortcode for Facebook like button
 * Filter by category
+* A choice list for og:type
 
 == Facebook Authorization ==
 
