@@ -436,6 +436,13 @@ You may have deleted a link on Facebook that was added by the plugin and also tr
 Go to the post with the error, enabled *Custom fields* with the *Screen Options* in the upper right corner if needed,
 now scroll down to the *Custom Fields* section and delete the values starting with *al2fb_* to remove the error.
 
+= E15 I get 'Error validating access token' =
+
+The access token the plugin acquired during the authorization process may be revoked.
+Maybe because there was a security problem with your Facebook application or Facebook account.
+Re-authorizing will probably solve this problem. If you know why you got this error,
+please [let me know](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
