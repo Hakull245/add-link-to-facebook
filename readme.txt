@@ -1157,6 +1157,7 @@ In no particular order:
 * Shortcode for Facebook like button
 * Filter by category
 * A choice list for og:type
+* Add links for new pages
 
 == Facebook Authorization ==
 
