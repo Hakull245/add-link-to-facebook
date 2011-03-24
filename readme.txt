@@ -1158,6 +1158,7 @@ In no particular order:
 * Filter by category
 * A choice list for og:type
 * Add links for new pages
+* Link videos, posted via JW Player plugin
 
 == Facebook Authorization ==
 
