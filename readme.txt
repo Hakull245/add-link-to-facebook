@@ -55,7 +55,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn") and [Micha](http://www.styloweb.de/ "Micha"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
-* Russian (ru\_RU) by *Lurii* and *Pavel*, thanks!
+* Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * Your translation ...
 
 **If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
@@ -461,7 +461,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.5 =
-* Updated Russian (ru\_RU) translation by [Pavel](http:// "Pavel")
+* Updated Russian (ru\_RU) translation by [Pavel](http://jack.kiev.ua "Pavel")
 
 = 1.4 =
 * Reverting workaround for Facebook bug
