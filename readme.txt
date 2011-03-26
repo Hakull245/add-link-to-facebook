@@ -298,8 +298,9 @@ Auto posting plugins will work if one of the following actions is used:
 
 This plugin is known to be incompatible with:
 
-* [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+* Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 * Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
+* [WP-FB-AutoConnect](http://wordpress.org/extend/plugins/wp-fb-autoconnect/ "WP-FB-AutoConnect")
 
 = C03 Are shortcodes being processed? =
 
