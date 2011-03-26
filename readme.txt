@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.4
+Stable tag: 1.5
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -28,6 +28,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the names of the people who liked your post on Facebook below the post text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* Shortcode and template tags for likers names and like button
 
 **Beta features:**
 
@@ -235,6 +236,29 @@ Assuming that you have configured and authorize the plugin, you can check this:
 = U22 Where are the settings of the plugin? =
 
 In the WordPress menu *Tools*.
+
+= U23 How can I use the shortcodes? =
+
+Just put one of the shortcodes below in your post or page text.
+
+To show liker names:
+
+* [al2fb_likers]
+* [al2fb_likers post_id="123"]
+
+To show a like button:
+
+* [al2fb_like_button]
+* [al2fb_like_button post_id="123"]
+
+= U24 How can I use the template tags? =
+
+Put one of these lines somewhere in your theme:
+
+* if (function_exists('al2fb_likers')) al2fb_likers();
+* if (function_exists('al2fb_likers')) al2fb_likers(123);
+* if (function_exists('al2fb_like_button')) al2fb_like_button();
+* if (function_exists('al2fb_like_button')) al2fb_like_button(123);
 
 **--- Security ---**
 
@@ -461,6 +485,17 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.5 =
+* New feature: Disable Facebook yes/no column in post list
+* New feature: Facebook comment and like count in post list
+* New feature: Default *Do not add link to Facebook* option
+* New feature: Add link to Facebook for new pages
+* New feature: A choice list for *og:type*; new default: *article*
+* New feature: Template tag/shortcode for likers/like button (see [FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ"))
+* New feature: Stop showing Facebook links on posts in archives and categories
+* New feature: Change location of like button: option to show at top of post
+* New feature: Facebook comment styling (*class="facebook-comment"*)
+* New feature: Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Russian (ru\_RU) translation by [Pavel](http://jack.kiev.ua "Pavel")
 
 = 1.4 =
@@ -906,6 +941,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.5 =
+Ten new features, updated translations
+
 = 1.4 =
 Reverting workaround for Facebook bug
 
@@ -1147,21 +1185,25 @@ If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contac
 In no particular order:
 
 * Facebook comments with Avatars
-* Like count in post list
-* Disable Facebook yes/no column in post list
-* Default exclude option
-* Add link as group owner
-* Change location of like button
 * Adding links to multiple walls
 * Common wall per site/blog
-* Template tag/shortcode for likers/like button
-* Facebook comment styling (class="facebook-comment")
-* Stop showing Facebook links on posts on archives and categories
-* Shortcode for Facebook like button
 * Filter by category
-* A choice list for og:type
-* Add links for new pages
 * Link videos, posted via JW Player plugin
+* Settings link in plugin list
+
+Realized features:
+
+* Add link as group owner: not possible
+* Disable Facebook yes/no column in post list (version 1.5)
+* Facebook comment and like count in post list (version 1.5)
+* Default *Do not add link to Facebook* option (version 1.5)
+* Add link to Facebook for new pages (version 1.5)
+* A choice list for *og:type*; new default: *article* (version 1.5)
+* Template tag/shortcode for likers/like button (version 1.5)
+* Stop showing Facebook links on posts in archives and categories (version 1.5)
+* Change location of like button: option to show at top of post (version 1.5)
+* Facebook comment styling (*class="facebook-comment"*) (version 1.5)
+* Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*) (version 1.5)
 
 == Facebook Authorization ==
 
