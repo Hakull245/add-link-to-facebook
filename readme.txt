@@ -485,6 +485,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.7 =
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
 = 1.6 =
 * New feature: Facebook comments with Avatars
 * New feature: Settings link in plugin list
