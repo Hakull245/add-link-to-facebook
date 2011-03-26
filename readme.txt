@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.5
+Stable tag: 1.6
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -488,7 +488,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.6 =
 * New feature: Facebook comments with Avatars
 * New feature: Settings link in plugin list
+* New feature: Filter by category
+* Bugfix: filter texts
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.5 =
 * New feature: Disable Facebook yes/no column in post list
@@ -948,7 +951,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.6 =
-Two new features
+Three new features, bugfix, updated translations
 
 = 1.5 =
 Ten new features, updated translations
@@ -1195,7 +1198,7 @@ In no particular order:
 
 * Adding links to multiple walls
 * Common wall per site/blog
-* Filter by category
+* Link audio
 * Link videos, posted via JW Player plugin
 
 Realized features:
@@ -1213,6 +1216,7 @@ Realized features:
 * Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*) (version 1.5)
 * Facebook comments with Avatars (version 1.6)
 * Settings link in plugin list (version 1.6)
+* Filter by category (version 1.6)
 
 == Facebook Authorization ==
 

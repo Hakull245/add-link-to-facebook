@@ -22,6 +22,7 @@ define('c_al2fb_option_min_cap', 'al2fb_min_cap');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
 define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
+define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
@@ -107,25 +108,20 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 // - Check app permissions? not possible :-(
 // - target="_blank"? how to do?
 // - Admin dashboard? how to get links to messages?
-
 // - Update meta box after update media gallery?
 // - Use tage line?
 // - Tags, categories?
 // - Meta boxes if authorized?
-
 // - Check min image size: what is it?
+// - Use link instead of feed?
+
+// - Improve cleaning
 
 // Integration:
 // - RSS
-// - Comment replies
 // - Recent comments
-// - Edit link
-// - Avatars
+// - Edit/reply
 // - Like count
-
-// Use link instead of feed?
-// Add link to multiple walls
-// Audio in Facebook?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -202,8 +198,8 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
 
-			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 2);
-			add_filter('al2fb_content', array(&$this, 'Filter_content'), 2);
+			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
+			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 2);
 		}
 
 		// Handle plugin activation
@@ -292,6 +288,20 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_not_post_list);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
+
+				//delete_option(c_al2fb_option_version);
+				//delete_option(c_al2fb_option_timeout);
+				//delete_option(c_al2fb_option_nonotice);
+				//delete_option(c_al2fb_option_min_cap);
+				//delete_option(c_al2fb_option_msg_refresh);
+				//delete_option(c_al2fb_option_max_descr);
+				//delete_option(c_al2fb_option_exclude_type);
+				//delete_option(c_al2fb_option_exclude_cat);
+				//delete_option(c_al2fb_option_noverifypeer);
+				//delete_option(c_al2fb_option_siteurl);
+				//delete_option(c_al2fb_option_nocurl);
+				//delete_option(c_al2fb_option_use_pp);
+				//delete_option(c_al2fb_option_debug);
 			}
 		}
 
@@ -598,12 +608,14 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_msg_refresh] = trim($_POST[c_al2fb_option_msg_refresh]);
 				$_POST[c_al2fb_option_max_descr] = trim($_POST[c_al2fb_option_max_descr]);
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
+				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
 
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
+				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 
 				if (isset($_REQUEST['debug'])) {
@@ -1390,6 +1402,13 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_exclude_cat"><?php _e('Exclude these categories:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_exclude_cat" id="al2fb_max_descr" name="<?php echo c_al2fb_option_exclude_cat; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_cat); ?>" />
+					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_noverifypeer"><?php _e('Do not verify the peer\'s certificate:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input id="al2fb_noverifypeer" name="<?php echo c_al2fb_option_noverifypeer; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noverifypeer)) echo ' checked="checked"'; ?> />
@@ -1460,7 +1479,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<h3><?php _e('Resources', c_al2fb_text_domain); ?></h3>
 			<ul>
 			<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
-			<li><a href="http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
+			<li><a href="http://forum.bokhorst.biz/add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
 			<li><a href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
@@ -1970,10 +1989,18 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$add_new_page = get_user_meta($user_ID, c_al2fb_meta_add_new_page, true);
 
+					$exclude_category = false;
+					$categories = get_the_category($post->ID);
+					$excluding_categories = explode(',', get_option(c_al2fb_option_exclude_cat));
+					foreach ($categories as $category)
+						if (in_array($category->cat_ID, $excluding_categories))
+							$exclude_category = true;
+
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
-						!in_array($post->post_type, explode(',', get_option(c_al2fb_option_exclude_type))))
+						!in_array($post->post_type, explode(',', get_option(c_al2fb_option_exclude_type))) &&
+						!$exclude_category)
 						self::Add_link($post);
 				}
 			}
@@ -2899,6 +2926,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Refresh comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_refresh), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Max. length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_descr), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site URL:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_siteurl), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
