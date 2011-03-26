@@ -485,6 +485,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.6 =
+* New feature: Facebook comments with Avatars
+* New feature: Settings link in plugin list
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.5 =
 * New feature: Disable Facebook yes/no column in post list
 * New feature: Facebook comment and like count in post list
@@ -942,6 +947,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.6 =
+Two new features
+
 = 1.5 =
 Ten new features, updated translations
 
@@ -1185,12 +1193,10 @@ If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contac
 
 In no particular order:
 
-* Facebook comments with Avatars
 * Adding links to multiple walls
 * Common wall per site/blog
 * Filter by category
 * Link videos, posted via JW Player plugin
-* Settings link in plugin list
 
 Realized features:
 
@@ -1205,6 +1211,8 @@ Realized features:
 * Change location of like button: option to show at top of post (version 1.5)
 * Facebook comment styling (*class="facebook-comment"*) (version 1.5)
 * Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*) (version 1.5)
+* Facebook comments with Avatars (version 1.6)
+* Settings link in plugin list (version 1.6)
 
 == Facebook Authorization ==
 

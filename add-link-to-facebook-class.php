@@ -169,6 +169,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_action('init', array(&$this, 'Init'), 0);
 			if (is_admin()) {
 				add_action('admin_menu', array(&$this, 'Admin_menu'));
+				add_filter('plugin_action_links', array(&$this, 'Plugin_action_links'), 10, 2);
 				add_action('admin_notices', array(&$this, 'Admin_notices'));
 				add_action('post_submitbox_start', array(&$this, 'Post_submitbox'));
 				add_filter('manage_posts_columns', array(&$this, 'Manage_posts_columns'));
@@ -194,7 +195,8 @@ if (!class_exists('WPAL2Facebook')) {
 			//add_filter('the_posts', array(&$this, 'The_posts'), 10, 2);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
-			add_filter('comment_class', array(&$this, 'Comment_class'), 10);
+			add_filter('comment_class', array(&$this, 'Comment_class'));
+			add_filter('get_avatar', array(&$this, 'Get_avatar'), 10, 5);
 
 			// Shortcodes
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
@@ -360,6 +362,8 @@ if (!class_exists('WPAL2Facebook')) {
 						catch (Exception $e) {
 							// Register error
 							update_option(c_al2fb_log_redir_check, $e->getMessage());
+							update_option(c_al2fb_last_error, $e->getMessage());
+							update_option(c_al2fb_last_error_time, date('c'));
 							// Redirect
 							$error_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 							$error_url .= '&al2fb_action=error';
@@ -660,11 +664,13 @@ if (!class_exists('WPAL2Facebook')) {
 			// Authorization error
 			else if (isset($_REQUEST['error'])) {
 				delete_user_meta($user_ID, c_al2fb_meta_access_token);
+				$faq = 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/';
 				$msg = stripslashes($_REQUEST['error_description']);
 				$msg .= ' error: ' . stripslashes($_REQUEST['error']);
 				$msg .= ' reason: ' . stripslashes($_REQUEST['error_reason']);
 				update_option(c_al2fb_last_error, $msg);
 				update_option(c_al2fb_last_error_time, date('c'));
+				$msg .= '<br /><br />Most errors are described in <a href="' . $faq . '" target="_blank">the FAQ</a>';
 				echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($msg, ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 			}
 		}
@@ -729,8 +735,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check for error
 			if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'error') {
-				echo '<div id="message" class="error fade al2fb_error"><p>';
-				echo htmlspecialchars(stripslashes($_REQUEST['error']), ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
+				$faq = 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/';
+				$msg = htmlspecialchars(stripslashes($_REQUEST['error']), ENT_QUOTES, get_bloginfo('charset'));
+				$msg .= '<br /><br />Most errors are described in <a href="' . $faq . '" target="_blank">the FAQ</a>';
+				echo '<div id="message" class="error fade al2fb_error"><p>' . $msg . '</p></div>';
 			}
 
 			// Check for post errors
@@ -771,6 +779,28 @@ if (!class_exists('WPAL2Facebook')) {
 					get_option(c_al2fb_option_min_cap),
 					$this->main_file,
 					array(&$this, 'Administration'));
+		}
+
+		function Plugin_action_links($links, $file) {
+			if ($file == plugin_basename($this->main_file)) {
+				if (current_user_can(get_option(c_al2fb_option_min_cap))) {
+					// Get current user
+					global $user_ID;
+					get_currentuserinfo();
+
+					// Check for shared app
+					if (is_multisite())
+						$shared_user_ID = get_site_option(c_al2fb_option_app_share);
+					else
+						$shared_user_ID = get_option(c_al2fb_option_app_share);
+					if (!$shared_user_ID || $shared_user_ID == $user_ID) {
+						// Add settings link
+						$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+						$links[] = '<a href="' . $config_url . '">' . __('Settings', c_al2fb_text_domain) . '</a>';
+					}
+				}
+			}
+			return $links;
 		}
 
 		// Handle option page
@@ -1670,6 +1700,19 @@ if (!class_exists('WPAL2Facebook')) {
 			return $likes;
 		}
 
+		// Get comments
+		function Get_picture_url($id, $size) {
+			if (function_exists('get_header')) {
+				$headers = get_headers('https://graph.facebook.com/' . $id . '/picture?' . $size, true);
+				if (isset($headers['Location']))
+					return $headers['Location'];
+				else
+					return false;
+			}
+			else
+				return false;
+		}
+
 		// Add exclude checkbox
 		function Post_submitbox() {
 			global $post;
@@ -2452,7 +2495,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$new->comment_ID = $fb_comment->id;
 						$new->comment_post_ID = $post_ID;
 						$new->comment_author = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
-						$new->comment_author_email = str_replace(' ', '_', $fb_comment->from->name) . '@example.org';
+						$new->comment_author_email = $fb_comment->from->id;
 						$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
 						$new->comment_author_ip = '';
 						$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
@@ -2508,6 +2551,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return strcmp($a->comment_date_gmt, $b->comment_date_gmt);
 		}
 
+		// Get comment count with FB comments/likes
 		function Get_comments_number($count, $post_ID) {
 			$post = get_post($post_ID);
 			$user_ID = self::Get_user_ID($post);
@@ -2522,12 +2566,39 @@ if (!class_exists('WPAL2Facebook')) {
 			return $count;
 		}
 
+		// Annotate FB comments/likes
 		function Comment_class($classes) {
-			$comment_ID = get_comment_ID();
-			$comment = get_comment($comment_ID);
-			if ($comment->comment_agent == 'AL2FB')
+			global $comment;
+			if (!empty($comment) && $comment->comment_agent == 'AL2FB')
 				$classes[] = 'facebook-comment';
 			return $classes;
+		}
+
+		// Get FB picture as avatar
+		function Get_avatar($avatar) {
+			global $comment;
+			if (!empty($comment) &&
+				$comment->comment_type == 'comment' &&
+				$comment->comment_agent == 'AL2FB') {
+
+				// Get picture url
+				$fb_key = c_al2fb_transient_cache . md5('p' . $comment->comment_author_email);
+				$fb_picture_url = get_transient($fb_key);
+				if ($this->debug)
+					$fb_picture_url = false;
+				if ($fb_picture_url === false) {
+					$fb_picture_url = self::Get_picture_url($comment->comment_author_email, 'normal');
+					$duration = intval(get_option(c_al2fb_option_msg_refresh));
+					if (!$duration)
+						$duration = 10;
+					set_transient($fb_key, $fb_picture_url, $duration * 60);
+				}
+
+				// Build avatar image
+				if ($fb_picture_url)
+					return '<img alt="' . $comment->comment_author . '" src="' . $fb_picture_url . '" class="avatar photo" />';
+			}
+			return $avatar;
 		}
 
 		function Get_fb_comments($post, $likes) {
