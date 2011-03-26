@@ -466,7 +466,7 @@ now scroll down to the *Custom Fields* section and delete the values starting wi
 The access token the plugin acquired during the authorization process may be revoked.
 Maybe because there was a security problem with your Facebook application or Facebook account.
 Re-authorizing will probably solve this problem. If you know why you got this error,
-please [let me know](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+please leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
 
 **--- Support ---**
 
@@ -1187,7 +1187,7 @@ If you want to use your mobile phone number, take care that the phone number is 
 When it was wrong, you have to wait more than a week before you can try again.
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
 
 == Requested features ==
 
