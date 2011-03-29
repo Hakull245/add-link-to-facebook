@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.6
+Stable tag: 1.7
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -57,6 +57,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
+* French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Your translation ...
 
 **If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
@@ -486,7 +487,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.7 =
-* Added French (fr\_FR) translation by [Alberto](http:// "Alberto")
+* Added French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -954,6 +955,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.7 =
+New and updated translations
 
 = 1.6 =
 Three new features, bugfix, updated translations
