@@ -1209,6 +1209,7 @@ In no particular order:
 * Common wall per site/blog
 * Link audio
 * Link videos, posted via JW Player plugin
+* Exclude like button for individual pages
 
 Realized features:
 
