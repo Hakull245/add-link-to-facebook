@@ -2071,8 +2071,14 @@ if (!class_exists('WPAL2Facebook')) {
 		function Filter_standard($text, $post) {
 			$user_ID = self::Get_user_ID($post);
 
+			// Convert to UTF-8 if needed
+			$text = self::Convert_encoding($text);
+
 			// Execute shortcodes
 			$text = do_shortcode($text);
+
+			// Remove scripts
+			$text = preg_replace('/<script.+?<\/script>/im', '', $text);
 
 			// Replace hyperlinks
 			if (get_user_meta($user_ID, c_al2fb_meta_hyperlink, true))
@@ -2085,6 +2091,15 @@ if (!class_exists('WPAL2Facebook')) {
 			$text = preg_replace('/<[^>]*>/', '', $text);
 
 			return $text;
+		}
+
+		// Convert charset
+		function Convert_encoding($text) {
+			$encoding = get_option('blog_charset');
+			if ($encoding != 'UTF-8' && function_exists('mb_convert_encoding'))
+				return mb_convert_encoding($text, 'UTF-8', $encoding);
+			else
+				return $text;
 		}
 
 		// Add Link to Facebook
@@ -2102,10 +2117,15 @@ if (!class_exists('WPAL2Facebook')) {
 			$content = $texts['content'];
 			$description = $texts['description'];
 
+			// Get name
+			$name = self::Convert_encoding($post->post_title);
+
 			// Get caption
 			$caption = '';
-			if (get_user_meta($user_ID, c_al2fb_meta_caption, true))
+			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+				$caption = self::Convert_encoding($caption);
+			}
 
 			// Log
 			if ($this->debug) {
@@ -2198,7 +2218,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$query_array = array(
 					'access_token' => self::Get_access_token_by_post($post),
 					'link' => $link,
-					'name' => $post->post_title,
+					'name' => $name,
 					'caption' => $caption,
 					'description' => $description,
 					'picture' => $picture,
@@ -2451,7 +2471,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$link = get_permalink($post->ID);
 
 			// Build content
-			$content = '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
+			$content = '<div class="al2fb_like_button">';
+			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
 			$content .= '<fb:like ref="AL2FB"';
 			if (!empty($layout))
 				$content .= ' layout="' . $layout . '"';
@@ -2470,6 +2491,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (!empty($colorscheme))
 				$content .= ' colorscheme="' . $colorscheme . '"';
 			$content .= ' href="' . $link . '"></fb:like>';
+			$content .= '</div>';
 			return $content;
 		}
 
@@ -2880,6 +2902,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>SSL:</td><td>' . (function_exists('openssl_sign') ? 'Yes' : 'No') . '</td></tr>';
+
+			$info .= '<tr><td>Encoding:</td><td>' . htmlspecialchars(get_option('blog_charset'), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>mb_convert_encoding:</td><td>' . (function_exists('mb_convert_encoding') ? 'Yes' : 'No') . '</td></tr>';
+
 			$info .= '<tr><td>Application:</td><td>' . $app . '</td></tr>';
 
 			$info .= '<tr><td>Picture type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_picture_type, true) . '</td></tr>';
