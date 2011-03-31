@@ -1218,6 +1218,7 @@ In no particular order:
 * Link audio
 * Link videos, posted via JW Player plugin
 * Exclude like button on individual pages
+* Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
 
 Realized features:
 
