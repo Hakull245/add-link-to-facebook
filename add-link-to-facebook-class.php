@@ -104,6 +104,8 @@ define('c_al2fb_mail_name', 'al2fb_debug_name');
 define('c_al2fb_mail_email', 'al2fb_debug_email');
 define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
+define('USERPHOTO_APPROVED', 2);
+
 // To Do
 // - Check app permissions? not possible :-(
 // - target="_blank"? how to do?
@@ -837,11 +839,16 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
 			$pic_post = ($pic_type == 'post' ? ' checked' : '');
+			$pic_userphoto = ($pic_type == 'userphoto' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
+
 			if (!current_theme_supports('post-thumbnails') ||
 				!function_exists('get_post_thumbnail_id') ||
 				!function_exists('wp_get_attachment_image_src'))
 				$pic_featured .= ' disabled';
+
+			if (!in_array('user-photo/user-photo.php', get_option('active_plugins')))
+				$pic_userphoto .= ' disabled';
 
 			// Like button
 			$like_layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
@@ -1037,6 +1044,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br>
 			</td></tr>
 
@@ -2191,6 +2199,14 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($picture_type == 'post') {
 					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $post->post_content, $matches))
 						$picture = $matches[1];
+				}
+				else if ($picture_type == 'userphoto') {
+					$userdata = get_userdata($post->post_author);
+					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
+						$image_file = $userdata->userphoto_image_file;
+						$upload_dir = wp_upload_dir();
+						$picture = trailingslashit($upload_dir['baseurl']) . 'userphoto/' . $image_file;
+					}
 				}
 				else if ($picture_type == 'custom') {
 					$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);

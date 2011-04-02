@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.8
+Stable tag: 1.9
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -486,6 +486,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.9 =
+* New feature: get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.8 =
 * New feature: div around like button for styling purposes
 * New feature: convert character encoding of non UTF-8 blogs
@@ -961,6 +965,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.9 =
+One new feature
+
 = 1.8 =
 Three new features
 
@@ -1218,7 +1225,6 @@ In no particular order:
 * Link audio
 * Link videos, posted via JW Player plugin
 * Exclude like button on individual pages
-* Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
 
 Realized features:
 
@@ -1236,6 +1242,9 @@ Realized features:
 * Facebook comments with Avatars (version 1.6)
 * Settings link in plugin list (version 1.6)
 * Filter by category (version 1.6)
+* Div around like button for styling purposes (version 1.8)
+* New feature: remove scripts from post/page text (version 1.8)
+* Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
 
 == Facebook Authorization ==
 
