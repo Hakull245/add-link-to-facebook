@@ -1198,7 +1198,7 @@ Initial version
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
-1. Click on the link in the yellow box *Click here to create*
+1. Click on the link *Click here to create* in the yellow box on the settings page
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
 	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
