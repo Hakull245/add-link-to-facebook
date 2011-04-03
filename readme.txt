@@ -486,6 +486,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.10 =
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
 = 1.9 =
 * New feature: get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
