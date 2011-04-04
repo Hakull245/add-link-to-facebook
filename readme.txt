@@ -237,6 +237,7 @@ Assuming that you have configured and authorize the plugin, you can check this:
 = U22 Where are the settings of the plugin? =
 
 In the WordPress menu *Tools*.
+Note that if you checked the option *Share with all users on this site*, only the adminstrator that checked this option can access the settings.
 
 = U23 How can I use the shortcodes? =
 
