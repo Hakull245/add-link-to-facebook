@@ -237,6 +237,7 @@ Assuming that you have configured and authorize the plugin, you can check this:
 = U22 Where are the settings of the plugin? =
 
 In the WordPress menu *Tools*.
+Note that if you checked the option *Share with all users on this site*, only the adminstrator that checked this option can access the settings.
 
 = U23 How can I use the shortcodes? =
 
@@ -485,6 +486,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.10 =
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.9 =
 * New feature: get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
