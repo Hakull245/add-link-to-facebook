@@ -470,6 +470,17 @@ Maybe because there was a security problem with your Facebook application or Fac
 Re-authorizing will probably solve this problem. If you know why you got this error,
 please leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
 
+= E16 I get 'You failed to provide a valid list of administators' =
+
+This message occurs when clicking on the like button.
+The like button probably points to a page without Open Graph Protocol meta tags.
+If you didn't enable the Open Graph Protocol try to enable it.
+If you have set the option *Link to*, make sure this page has Open Graph Protocol meta tags.
+If this option is not set (the default) the like button points to the post or page.
+Note that the plugin cannot create the meta tags for pages with more than one post (for example the home page, categories and archives).
+The plugin is only able to determine the correct Facebook application for posts and pages, because it needs to know an author for this.
+You can use the [URL Linter](http://developers.facebook.com/tools/lint/ "URL Linter") to see if there are valid meta tags.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
