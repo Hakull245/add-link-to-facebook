@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 1.4
+Tested up to: 3.1.1
+Stable tag: 1.11
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -28,13 +28,12 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the names of the people who liked your post on Facebook below the post text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+* Shortcodes and template tags for liker names and like button
+* Integrate Facebook comments and likes on added links into Wordpress
 
 **Beta features:**
 
-* Integrate Facebook comments and likes on added links into Wordpress
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
-
-The beta features are tested and working, but are not completely finished or require feedback.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -55,7 +54,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn") and [Micha](http://www.styloweb.de/ "Micha"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
-* Russian (ru\_RU) by *Lurii*, thanks!
+* Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
+* French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Your translation ...
 
 **If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
@@ -235,6 +235,36 @@ Assuming that you have configured and authorize the plugin, you can check this:
 = U22 Where are the settings of the plugin? =
 
 In the WordPress menu *Tools*.
+Note that if you checked the option *Share with all users on this site*, only the adminstrator that checked this option can access the settings.
+
+= U23 How can I use the shortcodes? =
+
+Just put one of the shortcodes below in your post or page text.
+
+To show liker names:
+
+* [al2fb_likers]
+* [al2fb_likers post_id="123"]
+
+To show a like button:
+
+* [al2fb_like_button]
+* [al2fb_like_button post_id="123"]
+
+= U24 How can I use the template tags? =
+
+Put one of these lines somewhere in your theme:
+
+* if (function_exists('al2fb_likers')) al2fb_likers();
+* if (function_exists('al2fb_likers')) al2fb_likers(123);
+* if (function_exists('al2fb_like_button')) al2fb_like_button();
+* if (function_exists('al2fb_like_button')) al2fb_like_button(123);
+
+= U25 Can I add links to multiple walls? =
+
+One WordPress user can only add links to one wall OR one page OR one group, even if that user happens to have multiple sites (which is possible within a network site).
+Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
+It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 
 **--- Security ---**
 
@@ -274,8 +304,9 @@ Auto posting plugins will work if one of the following actions is used:
 
 This plugin is known to be incompatible with:
 
-* [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
+* Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 * Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
+* [WP-FB-AutoConnect](http://wordpress.org/extend/plugins/wp-fb-autoconnect/ "WP-FB-AutoConnect")
 
 = C03 Are shortcodes being processed? =
 
@@ -284,12 +315,7 @@ Yes, both in the excerpt and the post text.
 = C04 Are multi-user and network sites supported? =
 
 Yes, each user can configure his/her own wall or page or group.
-
-One WordPress user can only add links to one wall OR page OR group, even if that user happens to have multiple sites (which is possible within a network site).
-Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
-I may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
-Nevertheless, there could be valid use cases, so maybe I will realize this feature in the near future.
-Please let me know if you have such a use case.
+See also question U25.
 
 = C05 Is remote publishing supported? =
 
@@ -441,7 +467,18 @@ now scroll down to the *Custom Fields* section and delete the values starting wi
 The access token the plugin acquired during the authorization process may be revoked.
 Maybe because there was a security problem with your Facebook application or Facebook account.
 Re-authorizing will probably solve this problem. If you know why you got this error,
-please [let me know](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+please leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+
+= E16 I get 'You failed to provide a valid list of administators' =
+
+This message occurs when clicking on the like button.
+The like button probably points to a page without Open Graph Protocol meta tags.
+If you didn't enable the Open Graph Protocol try to enable it.
+If you have set the option *Link to*, make sure this page has Open Graph Protocol meta tags.
+If this option is not set (the default) the like button points to the post or page.
+Note that the plugin cannot create the meta tags for pages with more than one post (for example the home page, categories and archives).
+The plugin is only able to determine the correct Facebook application for posts and pages, because it needs to know an author for this.
+You can use the [URL Linter](http://developers.facebook.com/tools/lint/ "URL Linter") to see if there are valid meta tags.
 
 **--- Support ---**
 
@@ -459,6 +496,53 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.11 =
+* Updated FAQ
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.10 =
+* New feature: *Do not add like button* for individual posts/pages
+* New feature: override default Facebook character encoding (UTF-8)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Tested with WordPress version 3.1.1
+
+= 1.9 =
+* New feature: get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.8 =
+* New feature: div around like button for styling purposes
+* New feature: convert character encoding of non UTF-8 blogs
+* New feature: remove scripts from post/page text
+
+= 1.7 =
+* Added French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.6 =
+* New feature: Facebook comments with Avatars
+* New feature: Settings link in plugin list
+* New feature: Filter by category
+* Bugfix: filter texts
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
+= 1.5 =
+* New feature: Disable Facebook yes/no column in post list
+* New feature: Facebook comment and like count in post list
+* New feature: Default *Do not add link to Facebook* option
+* New feature: Add link to Facebook for new pages
+* New feature: A choice list for *og:type*; new default: *article*
+* New feature: Template tag/shortcode for likers/like button (see [FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ"))
+* New feature: Stop showing Facebook links on posts in archives and categories
+* New feature: Change location of like button: option to show at top of post
+* New feature: Facebook comment styling (*class="facebook-comment"*)
+* New feature: Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Russian (ru\_RU) translation by [Pavel](http://jack.kiev.ua "Pavel")
 
 = 1.4 =
 * Reverting workaround for Facebook bug
@@ -903,6 +987,27 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.11 =
+Updated translation
+
+= 1.10 =
+Two new features, updated translation
+
+= 1.9 =
+One new feature
+
+= 1.8 =
+Three new features
+
+= 1.7 =
+New and updated translations
+
+= 1.6 =
+Three new features, bugfix, updated translations
+
+= 1.5 =
+Ten new features, updated translations
+
 = 1.4 =
 Reverting workaround for Facebook bug
 
@@ -1121,7 +1226,7 @@ Initial version
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
-1. Click on the link in the yellow box *Click here to create*
+1. Click on the link *Click here to create* in the yellow box on the settings page
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
 	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
@@ -1137,28 +1242,41 @@ If you want to use your mobile phone number, take care that the phone number is 
 When it was wrong, you have to wait more than a week before you can try again.
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, don't hesitate to [contact me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
 
 == Requested features ==
 
 In no particular order:
 
-* Facebook comments with Avatars
-* Like count in post list
-* Disable Facebook yes/no column in post list
-* Default exclude option
-* Add link as group owner
-* Change location of like button
-* Adding links to multiple walls
-* Common wall per site/blog
-* Template tag/shortcode for likers/like button
-* Facebook comment styling (class="facebook-comment")
-* Stop showing Facebook links on posts on archives and categories
-* Shortcode for Facebook like button
-* Filter by category
-* A choice list for og:type
-* Add links for new pages
-* Link videos, posted via JW Player plugin
+* ...
+
+Realized features:
+
+* Disable Facebook yes/no column in post list (version 1.5)
+* Facebook comment and like count in post list (version 1.5)
+* Default *Do not add link to Facebook* option (version 1.5)
+* Add link to Facebook for new pages (version 1.5)
+* A choice list for *og:type*; new default: *article* (version 1.5)
+* Template tag/shortcode for likers/like button (version 1.5)
+* Stop showing Facebook links on posts in archives and categories (version 1.5)
+* Change location of like button: option to show at top of post (version 1.5)
+* Facebook comment styling (*class="facebook-comment"*) (version 1.5)
+* Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*) (version 1.5)
+* Facebook comments with Avatars (version 1.6)
+* Settings link in plugin list (version 1.6)
+* Filter by category (version 1.6)
+* Div around like button for styling purposes (version 1.8)
+* New feature: remove scripts from post/page text (version 1.8)
+* Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
+* Exclude like button on individual pages (version 1.10)
+
+Feature which will not be realized:
+
+* Add link as group owner: not possible
+* Adding links to multiple walls: see FAQ, question U25
+* Common wall per site/blog: see FAQ, question U25
+* Link audio: too far from the core function of the plugin
+* Link videos, posted via JW Player plugin: too far from the core function of the plugin
 
 == Facebook Authorization ==
 
@@ -1172,9 +1290,9 @@ In no particular order:
 * Facebook redirects to plugin
 * Plugin stores Facebook access token
 
-**The shared Facebook application is not available anymore**
-
 *Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+**The shared Facebook application is not available anymore**
 
 * Authorize button posts to server
 * Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
