@@ -1272,7 +1272,7 @@ Realized features:
 
 Feature which will not be realized:
 
-* Add link as group owner: not possible
+* Add link as group owner: not possible unfortunately
 * Adding links to multiple walls: see FAQ, question U25
 * Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
