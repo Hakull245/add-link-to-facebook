@@ -1248,7 +1248,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* ...
+* Custom exerpt text
 
 Realized features:
 
