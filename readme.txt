@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.10
+Stable tag: 1.11
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -29,13 +29,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Shortcodes and template tags for liker names and like button
+* Integrate Facebook comments and likes on added links into Wordpress
 
 **Beta features:**
 
-* Integrate Facebook comments and likes on added links into Wordpress
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
-
-The beta features are tested and working, but are not completely finished or require feedback.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -262,6 +260,12 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_like_button')) al2fb_like_button();
 * if (function_exists('al2fb_like_button')) al2fb_like_button(123);
 
+= U25 Can I add links to multiple walls? =
+
+One WordPress user can only add links to one wall OR one page OR one group, even if that user happens to have multiple sites (which is possible within a network site).
+Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
+It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -311,12 +315,7 @@ Yes, both in the excerpt and the post text.
 = C04 Are multi-user and network sites supported? =
 
 Yes, each user can configure his/her own wall or page or group.
-
-One WordPress user can only add links to one wall OR page OR group, even if that user happens to have multiple sites (which is possible within a network site).
-Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
-I may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
-Nevertheless, there could be valid use cases, so maybe I will realize this feature in the near future.
-Please let me know if you have such a use case.
+See also question U25.
 
 = C05 Is remote publishing supported? =
 
@@ -497,6 +496,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.11 =
+* Updated FAQ
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.10 =
 * New feature: *Do not add like button* for individual posts/pages
@@ -984,6 +987,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.11 =
+Updated translation
+
 = 1.10 =
 Two new features, updated translation
 
@@ -1242,14 +1248,10 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* Adding links to multiple walls
-* Common wall per site/blog
-* Link audio
-* Link videos, posted via JW Player plugin
+* ...
 
 Realized features:
 
-* Add link as group owner: not possible
 * Disable Facebook yes/no column in post list (version 1.5)
 * Facebook comment and like count in post list (version 1.5)
 * Default *Do not add link to Facebook* option (version 1.5)
@@ -1268,6 +1270,14 @@ Realized features:
 * Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
 * Exclude like button on individual pages (version 1.10)
 
+Feature which will not be realized:
+
+* Add link as group owner: not possible
+* Adding links to multiple walls: see FAQ, question U25
+* Common wall per site/blog: see FAQ, question U25
+* Link audio: too far from the core function of the plugin
+* Link videos, posted via JW Player plugin: too far from the core function of the plugin
+
 == Facebook Authorization ==
 
 *Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
@@ -1280,9 +1290,9 @@ Realized features:
 * Facebook redirects to plugin
 * Plugin stores Facebook access token
 
-**The shared Facebook application is not available anymore**
-
 *Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+
+**The shared Facebook application is not available anymore**
 
 * Authorize button posts to server
 * Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
