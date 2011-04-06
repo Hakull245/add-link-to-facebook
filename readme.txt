@@ -500,7 +500,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.10 =
 * New feature: *Do not add like button* for individual posts/pages
-* New feature: override default Facebook character encoding (UTF-8); use with care!
+* New feature: override default Facebook character encoding (UTF-8)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Tested with WordPress version 3.1.1
