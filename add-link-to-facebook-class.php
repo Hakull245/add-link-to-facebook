@@ -76,6 +76,7 @@ define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
 define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
+define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 
@@ -86,6 +87,7 @@ define('c_al2fb_meta_link_picture', 'al2fb_facebook_link_picture');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
 define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
+define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
 define('c_al2fb_meta_log', 'al2fb_log');
 
 // Logging
@@ -288,6 +290,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_exclude_default);
 				delete_user_meta($user_ID, c_al2fb_meta_not_post_list);
+				delete_user_meta($user_ID, c_al2fb_meta_fb_encoding);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 
@@ -510,6 +513,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_like_width] = trim($_POST[c_al2fb_meta_like_width]);
 			$_POST[c_al2fb_meta_like_link] = trim($_POST[c_al2fb_meta_like_link]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
+			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
 
 			// Prevent losing selected page
 			if (!self::Is_authorized($user_ID) ||
@@ -579,6 +583,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
+			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 
@@ -1336,6 +1341,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_fb_encoding"><?php _e('Facebook character encoding:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_fb_encoding" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_encoding; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true); ?>" />
+				<br /><span class="al2fb_explanation"><?php _e('Default UTF-8; do not change if no need', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_clean" name="<?php echo c_al2fb_meta_clean; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_clean, true)) echo ' checked="checked"'; ?> />
@@ -1405,14 +1417,14 @@ if (!class_exists('WPAL2Facebook')) {
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_exclude_type"><?php _e('Exclude these custom post types:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<input class="al2fb_exclude_type" id="al2fb_max_descr" name="<?php echo c_al2fb_option_exclude_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_type); ?>" />
+					<input class="al2fb_text" id="al2fb_exclude_type" name="<?php echo c_al2fb_option_exclude_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_type); ?>" />
 					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_exclude_cat"><?php _e('Exclude these categories:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<input class="al2fb_exclude_cat" id="al2fb_max_descr" name="<?php echo c_al2fb_option_exclude_cat; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_cat); ?>" />
+					<input class="al2fb_text" id="al2fb_exclude_cat" name="<?php echo c_al2fb_option_exclude_cat; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_cat); ?>" />
 					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
@@ -1745,21 +1757,30 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 			$user_ID = self::Get_user_ID($post);
 
+			// Check if links for pages enabled
 			if ($post->post_type == 'page')
 				if (!get_user_meta($user_ID, c_al2fb_meta_add_new_page, true))
 					return;
 
+			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 			if (!$link_id && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
 				$exclude = true;
+			$chk_exclude = ($exclude ? 'checked' : '');
 
-			$chk_exclude = $exclude ? 'checked' : '';
+			// Get no like button indication
+			$chk_nolike = (get_post_meta($post->ID, c_al2fb_meta_nolike, true) ? 'checked' : '');
 ?>
 			<div class="al2fb_post_submit">
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
+<?php		if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true)) { ?>
+				<br />
+				<input id="al2fb_nolike" type="checkbox" name="<?php echo c_al2fb_meta_nolike; ?>" <?php echo $chk_nolike; ?> />
+				<label for="al2fb_nolike"><?php _e('Do not add like button', c_al2fb_text_domain); ?></label>
 <?php
+			}
 			if (!empty($link_id)) {
 ?>
 				<br />
@@ -1895,11 +1916,17 @@ if (!class_exists('WPAL2Facebook')) {
 			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
 				return $post_id;
 
-			// Process exclude flag
+			// Process exclude indication
 			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
 				update_post_meta($post_id, c_al2fb_meta_exclude, true);
 			else
 				delete_post_meta($post_id, c_al2fb_meta_exclude);
+
+			// Process no like indication
+			if (isset($_POST[c_al2fb_meta_nolike]) && $_POST[c_al2fb_meta_nolike])
+				update_post_meta($post_id, c_al2fb_meta_nolike, true);
+			else
+				delete_post_meta($post_id, c_al2fb_meta_nolike);
 
 			// Persist data
 			if (isset($_POST['al2fb_image_id']))
@@ -2080,7 +2107,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Convert to UTF-8 if needed
-			$text = self::Convert_encoding($text);
+			$text = self::Convert_encoding($user_ID, $text);
 
 			// Execute shortcodes
 			$text = do_shortcode($text);
@@ -2102,10 +2129,14 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Convert charset
-		function Convert_encoding($text) {
-			$encoding = get_option('blog_charset');
-			if ($encoding != 'UTF-8' && function_exists('mb_convert_encoding'))
-				return mb_convert_encoding($text, 'UTF-8', $encoding);
+		function Convert_encoding($user_ID, $text) {
+			$blog_encoding = get_option('blog_charset');
+			$fb_encoding = get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true);
+			if (empty($fb_encoding))
+				$fb_encoding = 'UTF-8';
+
+			if ($blog_encoding != $fb_encoding && function_exists('mb_convert_encoding'))
+				return mb_convert_encoding($text, $fb_encoding, $blog_encoding);
 			else
 				return $text;
 		}
@@ -2126,13 +2157,13 @@ if (!class_exists('WPAL2Facebook')) {
 			$description = $texts['description'];
 
 			// Get name
-			$name = self::Convert_encoding($post->post_title);
+			$name = self::Convert_encoding($user_ID, $post->post_title);
 
 			// Get caption
 			$caption = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
-				$caption = self::Convert_encoding($caption);
+				$caption = self::Convert_encoding($user_ID, $caption);
 			}
 
 			// Log
@@ -2411,7 +2442,8 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Show like button
-				if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true)) {
+				if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) &&
+					!get_post_meta($post->ID, c_al2fb_meta_nolike, true)) {
 					$like_button = self::Get_like_button($post);
 					if (!empty($like_button))
 						if (get_user_meta($user_ID, c_al2fb_meta_like_top, true))
@@ -2920,6 +2952,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>SSL:</td><td>' . (function_exists('openssl_sign') ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Encoding:</td><td>' . htmlspecialchars(get_option('blog_charset'), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Facebook:</td><td>' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>mb_convert_encoding:</td><td>' . (function_exists('mb_convert_encoding') ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Application:</td><td>' . $app . '</td></tr>';

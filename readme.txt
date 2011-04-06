@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 1.9
+Tested up to: 3.1.1
+Stable tag: 1.10
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -499,7 +499,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.10 =
+* New feature: *Do not add like button* for individual posts/pages
+* New feature: override default Facebook character encoding (UTF-8); use with care!
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Tested with WordPress version 3.1.1
 
 = 1.9 =
 * New feature: get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
@@ -980,6 +984,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.10 =
+Two new features, updated translation
+
 = 1.9 =
 One new feature
 
@@ -1239,7 +1246,6 @@ In no particular order:
 * Common wall per site/blog
 * Link audio
 * Link videos, posted via JW Player plugin
-* Exclude like button on individual pages
 
 Realized features:
 
@@ -1260,6 +1266,7 @@ Realized features:
 * Div around like button for styling purposes (version 1.8)
 * New feature: remove scripts from post/page text (version 1.8)
 * Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
+* Exclude like button on individual pages (version 1.10)
 
 == Facebook Authorization ==
 
