@@ -1257,6 +1257,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Custom exerpt text
+* Display only first name for Facebook comments and likers
 
 Realized features:
 
