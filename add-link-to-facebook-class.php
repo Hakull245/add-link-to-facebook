@@ -79,6 +79,7 @@ define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
 define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
+define('c_al2fb_meta_rated', 'al2fb_rated');
 
 // Post meta
 define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
@@ -293,6 +294,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_fb_encoding);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
+				delete_user_meta($user_ID, c_al2fb_meta_rated);
 
 				//delete_option(c_al2fb_option_version);
 				//delete_option(c_al2fb_option_timeout);
@@ -504,6 +506,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_clean] = null;
 			if (empty($_POST[c_al2fb_meta_donated]))
 				$_POST[c_al2fb_meta_donated] = null;
+			if (empty($_POST[c_al2fb_meta_rated]))
+				$_POST[c_al2fb_meta_rated] = null;
 
 			$_POST[c_al2fb_meta_client_id] = trim($_POST[c_al2fb_meta_client_id]);
 			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
@@ -586,6 +590,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
+			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
 
 			if (isset($_REQUEST['debug'])) {
 				if (empty($_POST[c_al2fb_meta_access_token]))
@@ -732,8 +737,9 @@ if (!class_exists('WPAL2Facebook')) {
 				$nonotice = $nonotice || get_site_option(c_al2fb_option_app_share);
 			else
 				$nonotice = $nonotice || get_option(c_al2fb_option_app_share);
+			$donotice = ($nonotice ? strpos($uri, $url) !== false : true);
 
-			if ($nonotice ? strpos($uri, $url) !== false : true) {
+			if ($donotice) {
 				if (!get_user_meta($user_ID, c_al2fb_meta_shared, true) &&
 					(!get_user_meta($user_ID, c_al2fb_meta_client_id, true) ||
 					!get_user_meta($user_ID, c_al2fb_meta_app_secret, true))) {
@@ -745,10 +751,9 @@ if (!class_exists('WPAL2Facebook')) {
 					$anchor = 'authorize';
 				}
 				if (!empty($notice)) {
-					$url .= '#' . $anchor;
 					echo '<div class="error fade al2fb_error"><p>';
 					_e('Add Link to Facebook', c_al2fb_text_domain);
-					echo ' <a href="' . $url . '">' . $notice . '</a></p></div>';
+					echo ' <a href="' . $url . '#' . $anchor . '">' . $notice . '</a></p></div>';
 				}
 			}
 
@@ -774,6 +779,15 @@ if (!class_exists('WPAL2Facebook')) {
 					edit_post_link($posts->post->post_title, null, null, $posts->post->ID);
 					echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 				}
+			}
+
+			// Check for rating notice
+			if ($donotice && !get_user_meta($user_ID, c_al2fb_meta_rated, true)) {
+				echo '<div id="message" class="error fade al2fb_error"><p>';
+				$msg = __('If you like the Add Link to Facebook plugin, please rate it on <a href="[wordpress]" target="_blank">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option "I have rated this plugin" on the <a href="[settings]">settings page</a>.', c_al2fb_text_domain);
+				$msg = str_replace('[wordpress]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/', $msg);
+				$msg = str_replace('[settings]', $url, $msg);
+				echo $msg . '</p></div>';
 			}
 		}
 
@@ -1356,6 +1370,12 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_rated"><?php _e('I have rated this plugin:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_rated" name="<?php echo c_al2fb_meta_rated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_rated, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 			</table>
 
