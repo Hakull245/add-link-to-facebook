@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.12
+Stable tag: 1.13
 
 Automatically add links to published posts to your Facebook wall, pages or groups
 
@@ -496,6 +496,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.13 =
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.12 =
 * Added notice for plugin rating
@@ -992,6 +996,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.13 =
+Updated translations
+
 = 1.12 =
 Added notice for plugin rating
 
@@ -1257,7 +1264,6 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Custom exerpt text
-* Display only first name for Facebook comments and likers
 
 Realized features:
 
@@ -1286,6 +1292,7 @@ Feature which will not be realized:
 * Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
+* Display only first name for Facebook comments and likers: not possible unfortunately
 
 == Facebook Authorization ==
 
