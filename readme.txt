@@ -1264,7 +1264,6 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Custom exerpt text
-* Display only first name for Facebook comments and likers
 
 Realized features:
 
@@ -1293,6 +1292,7 @@ Feature which will not be realized:
 * Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
+* Display only first name for Facebook comments and likers: not possible unfortunately
 
 == Facebook Authorization ==
 
