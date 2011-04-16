@@ -498,7 +498,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.13 =
-* Added meta box to pages too; fixes *Do not add like button* for pages too
+* Added meta box to pages; fixes *Do not add like button* for pages too
 * Updated French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
