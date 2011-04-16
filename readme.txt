@@ -6,11 +6,11 @@ Requires at least: 3.0
 Tested up to: 3.1.1
 Stable tag: 1.13
 
-Automatically add links to published posts to your Facebook wall, pages or groups
+Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
+Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -498,6 +498,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.13 =
+* Added meta box to pages too; fixes *Do not add like button* for pages too
+* Updated French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -997,7 +999,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.13 =
-Updated translations
+Updated translations, one new feature and bugfix
 
 = 1.12 =
 Added notice for plugin rating
@@ -1264,7 +1266,6 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Custom exerpt text
-* Display only first name for Facebook comments and likers
 
 Realized features:
 
@@ -1293,6 +1294,7 @@ Feature which will not be realized:
 * Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
+* Display only first name for Facebook comments and likers: not possible unfortunately
 
 == Facebook Authorization ==
 
