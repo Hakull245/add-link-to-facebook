@@ -1855,6 +1855,11 @@ if (!class_exists('WPAL2Facebook')) {
 				__('Add Link to Facebook', c_al2fb_text_domain),
 				array(&$this, 'Meta_box'),
 				'post');
+			add_meta_box(
+				'al2fb_meta',
+				__('Add Link to Facebook', c_al2fb_text_domain),
+				array(&$this, 'Meta_box'),
+				'page');
 		}
 
 		// Display attached image selector

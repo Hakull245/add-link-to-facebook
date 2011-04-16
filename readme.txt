@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.12
+Stable tag: 1.13
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -498,6 +498,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.13 =
+* Added meta box to pages too; fixes *Do not add like button* for pages too
 * Updated French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
@@ -998,7 +999,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.13 =
-Updated translations
+Updated translations, one new feature and bugfix
 
 = 1.12 =
 Added notice for plugin rating
