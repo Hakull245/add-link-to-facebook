@@ -1266,6 +1266,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Custom exerpt text
+* Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button")
 
 Realized features:
 
