@@ -1274,7 +1274,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* ...
+* None
 
 Realized features:
 
