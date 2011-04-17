@@ -358,6 +358,14 @@ If something goes wrong when adding a link to your wall or page, the error messa
 You can try to add the link again by updating the post.
 Please send me the message and follow the instruction in the last question.
 
+= V07 What is the custom field 'al2fb_facebook_nolike' for? =
+
+This field indicates that the like button shouldn't be show for the post or page.
+
+= V08 What is the custom field 'c_al2fb_meta_excerpt' for? =
+
+This fields holds the custom excerpt that will be used in stead of the WordPress excerpt.
+
 **--- Error messages ---**
 
 = E01 I get 'Error validating application' =
@@ -1274,7 +1282,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* None
+* ...
 
 Realized features:
 
