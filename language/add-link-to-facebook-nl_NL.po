@@ -1,0 +1,445 @@
+# Copyright (C) 2010 Marcel Bokhorst
+# This file is distributed under the same license as the Add Link to Facebook package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Add Link to Facebook\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
+"POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2011-04-17 10:56+0100\n"
+"Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
+"Language-Team: Marcel Bokhorst\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+msgid "Settings updated"
+msgstr "Instellingen bijgewerkt"
+
+msgid "Authorized, go posting!"
+msgstr "Geautoriseerd, ga berichten schrijven!"
+
+msgid "needs configuration"
+msgstr "moet geconfigureerd worden"
+
+msgid "needs authorization"
+msgstr "moet geautoriseerd worden"
+
+msgid "Add Link to Facebook"
+msgstr "Add Link to Facebook"
+
+msgid "Administration"
+msgstr "Administratie"
+
+msgid "Your server may not allow external connections"
+msgstr "Uw server staat wellicht geen externe verbindingen toe"
+
+msgid "Easy setup"
+msgstr "Makkelijke instelling"
+
+msgid "Use shared Facebook application:"
+msgstr "Gebruik gedeelde Facebook applicatie:"
+
+msgid "Simple, but less secure"
+msgstr "Simpel, maar minder veilig"
+
+msgid "To get an App ID and App Secret you have to create a Facebook application"
+msgstr "Voor een Toepassings-ID en App Secret moet u een Facebook applicatie maken"
+
+msgid "You have to fill in the following:"
+msgstr "U moet het volgende invullen:"
+
+msgid "Click here to create"
+msgstr "Klik hier om te creëren"
+
+msgid "Anything you like, will appear as \"via ...\" below the message"
+msgstr "Alles wat u wilt, verschijnt als \"via ... \" onder het bericht"
+
+msgid "Web Site > Site URL:"
+msgstr "Website > Site URL:"
+
+msgid "App ID:"
+msgstr "Toepassings-ID:"
+
+msgid "App Secret:"
+msgstr "App Secret:"
+
+msgid "Access token:"
+msgstr "Access token:"
+
+msgid "App Name:"
+msgstr "Toepassingsnaam:"
+
+msgid "Share with all users on this site:"
+msgstr "Deel met alle gebruikers op deze site:"
+
+msgid "Additional settings"
+msgstr "Aanvullende instellingen"
+
+msgid "Link picture:"
+msgstr "Koppelingsafbeelding:"
+
+msgid "WordPress logo"
+msgstr "WordPress logo"
+
+msgid "First attached image"
+msgstr "Eerste gekoppelde afbeelding"
+
+msgid "Featured post image"
+msgstr "Featured post afbeelding"
+
+msgid "Let Facebook select"
+msgstr "Laat Facebook kiezen"
+
+msgid "First image in the post"
+msgstr "Eerste afbeelding in het bericht"
+
+msgid "Custom picture below"
+msgstr "Eigen afbeelding onder"
+
+msgid "Custom picture URL:"
+msgstr "URL eigen afbeelding:"
+
+msgid "At least 50 x 50 pixels"
+msgstr "Minstens 50 x 50 pixels"
+
+msgid "Add to page:"
+msgstr "Voeg toe aan pagina:"
+
+msgid "Add as page owner:"
+msgstr "Voeg toe als pagina-eigenaar:"
+
+msgid "Requires manage pages permission"
+msgstr "Vereist manage pages toestemming"
+
+msgid "Use groups:"
+msgstr "Gebruik groepen:"
+
+msgid "Requires user groups permission"
+msgstr "Vereist user groups toestemming"
+
+msgid "Add to group:"
+msgstr "Voeg toe aan groep:"
+
+msgid "Use site title as caption:"
+msgstr "Gebruik blog titel als onderschrift:"
+
+msgid "Use excerpt as message:"
+msgstr "Gebruik samenvatting als bericht:"
+
+msgid "Clean on deactivate:"
+msgstr "Opschonen bij deactiveren:"
+
+msgid "All data, except link id's"
+msgstr "Alle gegevens, behalve link id's"
+
+msgid "I have donated to this plugin:"
+msgstr "Ik heb gedoneerd voor deze plugin:"
+
+msgid "Administrator options"
+msgstr "Administrator opties"
+
+msgid "Do not display notices:"
+msgstr "Toon geen meldingen:"
+
+msgid "Except on this page"
+msgstr "Behalve op deze pagina"
+
+msgid "Required capability to use plugin:"
+msgstr "Benodigde capability om deze plugin te gebruiken:"
+
+msgid "Debug options"
+msgstr "Debug opties"
+
+msgid "Use site URL as request URI:"
+msgstr "Gebruik blog URL als request URI:"
+
+msgid "Do not use cURL:"
+msgstr "Gebruik geen cURL:"
+
+msgid "Save"
+msgstr "Bewaar"
+
+msgid "Authorization"
+msgstr "Autorisatie"
+
+msgid "Links will be added to"
+msgstr "Koppelingen worden toegevoegd aan"
+
+msgid "Authorize"
+msgstr "Autoriseren"
+
+msgid "Privacy in the Sustainable Plugins Sponsorship Network"
+msgstr "Privacy in het Sustainable Plugins Sponsorship Network"
+
+msgid "Resources"
+msgstr "Bronnen"
+
+msgid "Frequently asked questions"
+msgstr "Vaak gestelde vragen"
+
+msgid "Facebook wall"
+msgstr "Facebook prikbord"
+
+msgid "Support page"
+msgstr "Ondersteuningspagina"
+
+msgid "About the author"
+msgstr "Over de auteur"
+
+msgid "Other plugins"
+msgstr "Andere plugins"
+
+msgid "Do not add link to Facebook"
+msgstr "Voeg geen koppeling aan Facebook toe"
+
+msgid "Debug information"
+msgstr "Debug informatie"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "No images in the media library for this post"
+msgstr "Geen afbeeldingen in de media bibliotheek voor dit bericht"
+
+msgid "Select link image:"
+msgstr "Selecteer afbeelding voor koppeling:"
+
+msgid "None"
+msgstr "Geen"
+
+msgid "Name:"
+msgstr "Naam:"
+
+msgid "E-mail:"
+msgstr "E-mail:"
+
+msgid "Message:"
+msgstr "Bericht:"
+
+msgid "Send"
+msgstr "Stuur"
+
+msgid "Debug information sent"
+msgstr "Debug informatie verzonden"
+
+msgid "Sending debug information failed"
+msgstr "Het sturen van debug informatie mislukte"
+
+msgid "Use short URL:"
+msgstr "Gebruik korte URL:"
+
+msgid "If available"
+msgstr "Indien beschikbaar"
+
+msgid "Delete existing Facebook link"
+msgstr "Verwijder bestaande Facebook koppeling"
+
+msgid "Number of sentences to use:"
+msgstr "Aantal te gebruiken zinnen:"
+
+msgid "Leave blank to let Facebook choose"
+msgstr "Laat leeg om Facebook te laten kiezen"
+
+msgid "Text trailer:"
+msgstr "Tekst naschrift:"
+
+msgid "For example \"Read more ...\""
+msgstr "Bijvoorbeeld \"Lees meer ...\""
+
+msgid "Keep hyperlinks:"
+msgstr "Behoudt hyperlinks:"
+
+msgid "The hyperlink title will be removed"
+msgstr "De hyperlink titel zal worden verwijderd"
+
+msgid "Integrate comments from Facebook:"
+msgstr "Integreer berichten van Facebook:"
+
+msgid "Integrate likes from Facebook:"
+msgstr "Integreer 'vind ik leuk' van Facebook:"
+
+msgid "Show likers below the post text:"
+msgstr "Toon 'vind ik leuk' onder de berichttekst:"
+
+msgid "Show Facebook like button:"
+msgstr "Toon Facebook 'vind ik leuk' knop:"
+
+msgid "Use Open Graph protocol:"
+msgstr "Gebruik Open Graph protocol:"
+
+msgid "Documentation"
+msgstr "Documentatie"
+
+msgid "on Facebook"
+msgstr "op Facebook"
+
+msgid "Liked this post"
+msgstr "Vond dit bericht leuk"
+
+msgid "Refresh Facebook comments every:"
+msgstr "Ververs Facebook berichten elke:"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Default every 10 minutes"
+msgstr "Standaard elke 10 minuten"
+
+msgid "Maximum Facebook text length:"
+msgstr "Maximale Facebook tekst lengte:"
+
+msgid "Characters"
+msgstr "Karakters"
+
+msgid "Default 256 characters"
+msgstr "Standaard 256 karakters"
+
+msgid "liked this post"
+msgid_plural "liked this post"
+msgstr[0] "vond dit bericht leuk"
+msgstr[1] "vonden dit bericht leuk"
+
+msgid "Add 'Share' link:"
+msgstr "Voeg 'Delen' koppeling toe:"
+
+msgid "Share"
+msgstr "Delen"
+
+msgid "Default picture URL:"
+msgstr "URL standaard afbeelding:"
+
+msgid "Default WordPress logo"
+msgstr "Standaard WordPress logo"
+
+msgid "Layout:"
+msgstr "Vormgeving:"
+
+msgid "Standard"
+msgstr "Standaard"
+
+msgid "Button with count"
+msgstr "Knop met aantal"
+
+msgid "Box with count"
+msgstr "Vak met aantal"
+
+msgid "Faces:"
+msgstr "Gezichten:"
+
+msgid "Width:"
+msgstr "Breedte:"
+
+msgid "Pixels"
+msgstr "Pixels"
+
+msgid "Action:"
+msgstr "Actie:"
+
+msgid "Like"
+msgstr "Vind ik leuk"
+
+msgid "Recommend"
+msgstr "Aanraden"
+
+msgid "Font:"
+msgstr "Lettertype:"
+
+msgid "Color scheme:"
+msgstr "Kleurenschema:"
+
+msgid "Light"
+msgstr "Licht"
+
+msgid "Dark"
+msgstr "Donker"
+
+msgid "Use publish_post action:"
+msgstr "Gebruik publish_post actie:"
+
+msgid "Link to:"
+msgstr "Koppel naar:"
+
+msgid "Default the post or page"
+msgstr "Standaard het bericht of de pagina"
+
+msgid "Do not show on the home page:"
+msgstr "Toon niet op de thuis-pagina:"
+
+msgid "Do not show on posts:"
+msgstr "Toon niet op berichten:"
+
+msgid "Do not show on pages:"
+msgstr "Toon niet op pagina's:"
+
+msgid "Exclude these custom post types:"
+msgstr "Sluit deze maatwerk berichttypes uit:"
+
+msgid "Separate by commas"
+msgstr "Gescheiden door comma's"
+
+msgid "Do not verify the peer's certificate:"
+msgstr "Verifieer het certificaat van de peer niet:"
+
+msgid "Try this in case of cURL error 60"
+msgstr "Probeer dit in het geval van cURL error 60"
+
+msgid "Add links for new pages:"
+msgstr "Voeg koppeling toe voor nieuwe pagina's:"
+
+msgid "Do not show in archives:"
+msgstr "Toon niet in archieven:"
+
+msgid "Do not show in categories:"
+msgstr "Toon niet in categorieën:"
+
+msgid "Show at the top of the post:"
+msgstr "Toon bovenaan het bericht:"
+
+msgid "Open Graph protocol <em>og:type</em>:"
+msgstr "Open Graph protocol <em>og:type</em>:"
+
+msgid "Do not add link by default:"
+msgstr "Voeg standaard geen koppeling toe:"
+
+msgid "Don't show a summary in the post list:"
+msgstr "Toon geen samenvatting in de berichtenlijst:"
+
+msgid "comments"
+msgstr "berichten"
+
+msgid "likes"
+msgstr "vind ik leuk"
+
+msgid "Exclude these categories:"
+msgstr "Sluit deze categorieën uit:"
+
+msgid "Image from User Photo plugin"
+msgstr "Afbeelding van User Photo plugin"
+
+msgid "Facebook character encoding:"
+msgstr "Facebook karakter codering:"
+
+msgid "Default UTF-8; do not change if no need"
+msgstr "Standaard UTF-8; niet veranderen wanneer niet nodig"
+
+msgid "Do not add like button"
+msgstr "Voeg geen 'vind ik leuk' knop toe"
+
+msgid "I have rated this plugin:"
+msgstr "Ik heb deze plugin beoordeeld:"
+
+msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
+msgstr "Als u de Add Link to Facebook plugin goed vindt, beoordeelt u hem dan alstublieft op <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Als de gemiddelde beoordeling laag is, is het niet zinvol om deze plugin te ondersteunen.<br />U kunt deze melding uitzetten door de optie \"Ik heb deze plugin beoordeeld\" op de  <a href=\"[settings]\">instellingen pagina</a>."
+
+msgid "Custom exerpt"
+msgstr "Maatwerk samenvatting"
+
+msgid "Use iframe in stead of XFBML:"
+msgstr "Gebruik iframe in plaats van XFBML:"
+
