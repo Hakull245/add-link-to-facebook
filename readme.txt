@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.13
+Stable tag: 1.14
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -496,6 +496,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.14 =
+* New feature: custom excerpt
+* New feature: *Use iframe in stead of XFBML*
+* Bugfix: comment integration for Twenty Ten and other themes
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.13 =
 * Added meta box to pages; fixes *Do not add like button* for pages too
@@ -998,6 +1004,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.14 =
+Updated translation, two new features and one bugfix
+
 = 1.13 =
 Updated translations, one new feature and bugfix
 
@@ -1265,8 +1274,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* Custom exerpt text
-* Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button")
+* ...
 
 Realized features:
 
@@ -1287,6 +1295,8 @@ Realized features:
 * New feature: remove scripts from post/page text (version 1.8)
 * Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
 * Exclude like button on individual pages (version 1.10)
+* Custom exerpt text (version 1.14)
+* Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button") (version 1.14)
 
 Feature which will not be realized:
 
