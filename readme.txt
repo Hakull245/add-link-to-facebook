@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.13
+Stable tag: 1.15
 
-Automatically add links to published posts to your Facebook wall, pages or groups
+Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
+Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -358,6 +358,14 @@ If something goes wrong when adding a link to your wall or page, the error messa
 You can try to add the link again by updating the post.
 Please send me the message and follow the instruction in the last question.
 
+= V07 What is the custom field 'al2fb_facebook_nolike' for? =
+
+This field indicates that the like button shouldn't be show for the post or page.
+
+= V08 What is the custom field 'c_al2fb_meta_excerpt' for? =
+
+This fields holds the custom excerpt that will be used in stead of the WordPress excerpt.
+
 **--- Error messages ---**
 
 = E01 I get 'Error validating application' =
@@ -497,7 +505,20 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.15 =
+* Improvement: find first image in text with processed shortcodes
+* Improvement: use image selected in meta box as fallback for OGP
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.14 =
+* New feature: custom excerpt
+* New feature: *Use iframe in stead of XFBML*
+* Bugfix: comment integration for Twenty Ten and other themes
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.13 =
+* Added meta box to pages; fixes *Do not add like button* for pages too
+* Updated French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -996,8 +1017,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.15 =
+Two improvements, updated translation
+
+= 1.14 =
+Updated translation, two new features and one bugfix
+
 = 1.13 =
-Updated translations
+Updated translations, one new feature and bugfix
 
 = 1.12 =
 Added notice for plugin rating
@@ -1263,8 +1290,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* Custom exerpt text
-* Display only first name for Facebook comments and likers
+* ...
 
 Realized features:
 
@@ -1285,6 +1311,8 @@ Realized features:
 * New feature: remove scripts from post/page text (version 1.8)
 * Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
 * Exclude like button on individual pages (version 1.10)
+* Custom exerpt text (version 1.14)
+* Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button") (version 1.14)
 
 Feature which will not be realized:
 
@@ -1293,6 +1321,7 @@ Feature which will not be realized:
 * Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
+* Display only first name for Facebook comments and likers: not possible unfortunately
 
 == Facebook Authorization ==
 
