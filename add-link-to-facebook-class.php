@@ -2225,7 +2225,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$picture_id = get_post_thumbnail_id($post->ID);
 				$log .= '- featured: ' . $picture_id . PHP_EOL;
 
-				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $post->post_content, $matches))
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
 					$log .= '- post: ' .  $matches[1] . PHP_EOL;
 				else
 					$log .= '- post: none' . PHP_EOL;
@@ -2273,7 +2273,7 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($picture_type == 'facebook')
 					$picture = '';
 				else if ($picture_type == 'post') {
-					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $post->post_content, $matches))
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
 						$picture = $matches[1];
 				}
 				else if ($picture_type == 'userphoto') {
@@ -2425,7 +2425,11 @@ if (!class_exists('WPAL2Facebook')) {
 					// Get link picture
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
 					if (empty($link_picture)) {
-						$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+						$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+						if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url'))
+							$picture = wp_get_attachment_thumb_url($image_id);
+						if (empty($picture))
+							$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
 						if (empty($picture))
 							$picture = self::Redirect_uri() . '?al2fb_image=1';
 					}

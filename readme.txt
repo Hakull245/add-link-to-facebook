@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.14
+Stable tag: 1.15
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -504,6 +504,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.15 =
+* Improvement: find first image in text with processed shortcodes
+* Improvement: use image selected in meta box as fallback for OGP
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.14 =
 * New feature: custom excerpt
@@ -1011,6 +1016,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.15 =
+Two improvements, updated translation
 
 = 1.14 =
 Updated translation, two new features and one bugfix
