@@ -506,8 +506,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.15 =
-* Improvement: find first image in text with processed shortcodes
-* Improvement: use image selected in meta box as fallback for OGP
+* Improvement: find first image in post/page text with processed shortcodes
+* Improvement: use image selected in meta box as fallback for OGP, by *bestsaigon*, thanks!
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.14 =
