@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.15
+Stable tag: 1.16
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -506,6 +506,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.16 =
+* Improvement: Open Graph Protocol includes picture even if no link added
 * Updated German (de\_DE) translation by [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk")
 
 = 1.15 =
@@ -1019,6 +1020,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.16 =
+One improvement, updated translation
 
 = 1.15 =
 Two improvements, updated translation

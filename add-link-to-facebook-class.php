@@ -2140,6 +2140,70 @@ if (!class_exists('WPAL2Facebook')) {
 			return $texts;
 		}
 
+		// Get link picture
+		function Get_link_picture($post, $user_ID) {
+			// Get selected image
+			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
+				$picture_type = 'meta';
+				$picture = wp_get_attachment_thumb_url($image_id);
+			}
+
+			if (empty($picture)) {
+				// Default picture
+				$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+				if (empty($picture))
+					$picture = self::Redirect_uri() . '?al2fb_image=1';
+
+				// Check picture type
+				$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
+				if ($picture_type == 'media') {
+					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
+					if (!empty($images) && function_exists('wp_get_attachment_image_src')) {
+						$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
+						if ($picture && $picture[0])
+							$picture = $picture[0];
+					}
+				}
+				else if ($picture_type == 'featured') {
+					if (current_theme_supports('post-thumbnails') &&
+						function_exists('get_post_thumbnail_id') &&
+						function_exists('wp_get_attachment_image_src')) {
+						$picture_id = get_post_thumbnail_id($post->ID);
+						if ($picture_id) {
+							$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
+							if ($picture && $picture[0])
+								$picture = $picture[0];
+						}
+					}
+				}
+				else if ($picture_type == 'facebook')
+					$picture = '';
+				else if ($picture_type == 'post') {
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
+						$picture = $matches[1];
+				}
+				else if ($picture_type == 'userphoto') {
+					$userdata = get_userdata($post->post_author);
+					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
+						$image_file = $userdata->userphoto_image_file;
+						$upload_dir = wp_upload_dir();
+						$picture = trailingslashit($upload_dir['baseurl']) . 'userphoto/' . $image_file;
+					}
+				}
+				else if ($picture_type == 'custom') {
+					$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);
+					if ($custom)
+						$picture = $custom;
+				}
+			}
+
+			return array(
+				'picture' => $picture,
+				'picture_type' => $picture_type
+			);
+		}
+
 		function Filter_excerpt($excerpt, $post) {
 			return self::Filter_standard($excerpt, $post);
 		}
@@ -2236,60 +2300,9 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Get link picture
-			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
-				$picture_type = 'meta';
-				$picture = wp_get_attachment_thumb_url($image_id);
-			}
-
-			if (empty($picture)) {
-				// Default picture
-				$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
-				if (empty($picture))
-					$picture = self::Redirect_uri() . '?al2fb_image=1';
-
-				// Check picture type
-				$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
-				if ($picture_type == 'media') {
-					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
-					if (!empty($images) && function_exists('wp_get_attachment_image_src')) {
-						$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
-						if ($picture && $picture[0])
-							$picture = $picture[0];
-					}
-				}
-				else if ($picture_type == 'featured') {
-					if (current_theme_supports('post-thumbnails') &&
-						function_exists('get_post_thumbnail_id') &&
-						function_exists('wp_get_attachment_image_src')) {
-						$picture_id = get_post_thumbnail_id($post->ID);
-						if ($picture_id) {
-							$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
-							if ($picture && $picture[0])
-								$picture = $picture[0];
-						}
-					}
-				}
-				else if ($picture_type == 'facebook')
-					$picture = '';
-				else if ($picture_type == 'post') {
-					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
-						$picture = $matches[1];
-				}
-				else if ($picture_type == 'userphoto') {
-					$userdata = get_userdata($post->post_author);
-					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
-						$image_file = $userdata->userphoto_image_file;
-						$upload_dir = wp_upload_dir();
-						$picture = trailingslashit($upload_dir['baseurl']) . 'userphoto/' . $image_file;
-					}
-				}
-				else if ($picture_type == 'custom') {
-					$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);
-					if ($custom)
-						$picture = $custom;
-				}
-			}
+			$picture_info = self::Get_link_picture($post, $user_ID);
+			$picture = $picture_info['picture'];
+			$picture_type = $picture_info['picture_type'];
 
 			// Get user note
 			$message = '';
@@ -2425,11 +2438,8 @@ if (!class_exists('WPAL2Facebook')) {
 					// Get link picture
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
 					if (empty($link_picture)) {
-						$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-						if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url'))
-							$picture = wp_get_attachment_thumb_url($image_id);
-						if (empty($picture))
-							$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+						$picture_info = self::Get_link_picture($post, $user_ID);
+						$picture = $picture_info['picture'];
 						if (empty($picture))
 							$picture = self::Redirect_uri() . '?al2fb_image=1';
 					}
