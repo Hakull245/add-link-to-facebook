@@ -505,6 +505,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.16 =
+* Updated German (de\_DE) translation by [Till](http:// "Till")
+
 = 1.15 =
 * Improvement: find first image in post/page text with processed shortcodes
 * Improvement: use image selected in meta box as fallback for OGP, by *bestsaigon*, thanks!
