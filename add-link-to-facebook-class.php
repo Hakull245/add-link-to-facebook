@@ -2718,7 +2718,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_avatar($avatar) {
 			global $comment;
 			if (!empty($comment) &&
-				$comment->comment_type == 'comment' &&
+				$comment->comment_type == '' &&
 				$comment->comment_agent == 'AL2FB') {
 
 				// Get picture url
@@ -2736,7 +2736,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Build avatar image
 				if ($fb_picture_url)
-					return '<img alt="' . $comment->comment_author . '" src="' . $fb_picture_url . '" class="avatar photo" />';
+					return '<img alt="' . $comment->comment_author . '" src="' . $fb_picture_url . '" class="avatar photo al2fb" />';
 			}
 			return $avatar;
 		}
