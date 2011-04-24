@@ -1770,8 +1770,27 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get comments
 		function Get_picture_url($id, $size) {
-			if (function_exists('get_header') && ini_get('allow_url_fopen')) {
-				$headers = get_headers('https://graph.facebook.com/' . $id . '/picture?' . $size, true);
+			$url = 'https://graph.facebook.com/' . $id . '/picture?' . $size;
+			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
+				$timeout = get_option(c_al2fb_option_timeout);
+				if (!$timeout)
+					$timeout = 30;
+
+				$c = curl_init();
+				curl_setopt($c, CURLOPT_URL, $url);
+				curl_setopt($c, CURLOPT_HEADER, 1);
+				curl_setopt($c, CURLOPT_NOBODY, 1);
+				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
+				$headers = curl_exec($c);
+				curl_close ($c);
+				if (preg_match('/Location: (.*)/', $headers, $location))
+					return trim($location[1]);
+				else
+					return false;
+			}
+			else if (function_exists('get_header') && ini_get('allow_url_fopen')) {
+				$headers = get_headers($url, true);
 				if (isset($headers['Location']))
 					return $headers['Location'];
 				else
@@ -2718,7 +2737,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_avatar($avatar) {
 			global $comment;
 			if (!empty($comment) &&
-				$comment->comment_type == '' &&
+				($comment->comment_type == '' || $comment->comment_type == 'comment') &&
 				$comment->comment_agent == 'AL2FB') {
 
 				// Get picture url

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.18
+Stable tag: 1.19
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -476,6 +476,7 @@ The access token the plugin acquired during the authorization process may be rev
 Maybe because there was a security problem with your Facebook application or Facebook account.
 Re-authorizing will probably solve this problem. If you know why you got this error,
 please leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+You could also try to reset your application secret [here](http://www.facebook.com/developers/apps.php) and enter the new secret in the plugin settings.
 
 = E16 I get 'You failed to provide a valid list of administators' =
 
@@ -504,6 +505,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.19 =
+* Improvement: Facebook comment avatars should be working for most people now
+* Updated FAQ
 
 = 1.18 =
 * Improvement: only calling *get_header* when *allow_url_fopen* to prevent warnings
@@ -1026,6 +1031,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.19 =
+One improvement
 
 = 1.18 =
 One improvement
