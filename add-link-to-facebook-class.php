@@ -1770,7 +1770,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get comments
 		function Get_picture_url($id, $size) {
-			if (function_exists('get_header')) {
+			if (function_exists('get_header') && ini_get('allow_url_fopen')) {
 				$headers = get_headers('https://graph.facebook.com/' . $id . '/picture?' . $size, true);
 				if (isset($headers['Location']))
 					return $headers['Location'];
