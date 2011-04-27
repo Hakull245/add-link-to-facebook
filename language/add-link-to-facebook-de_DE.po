@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
 "POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
-"PO-Revision-Date: 2011-03-09 19:58+0100\n"
-"Last-Translator: Marcel Bokhorst\n"
+"PO-Revision-Date: 2011-04-19 18:01+0100\n"
+"Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Björn Deutschmann <cooleisbaer.funpic.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,16 +63,16 @@ msgid "Web Site > Site URL:"
 msgstr "Webseite &gt; Seiten-URL:"
 
 msgid "App ID:"
-msgstr "App-ID:"
+msgstr "Anwendungsnummer:"
 
 msgid "App Secret:"
-msgstr "App Secret:"
+msgstr "Anwendungs-Geheimcode:"
 
 msgid "Access token:"
 msgstr "Access token:"
 
 msgid "App Name:"
-msgstr "App Name:"
+msgstr "Name der Anwendung:"
 
 msgid "Share with all users on this site:"
 msgstr "Teilen Sie mit allen Benutzern auf dieser Website:"
@@ -81,7 +81,7 @@ msgid "Additional settings"
 msgstr "Zusätzliche Einstellungen"
 
 msgid "Link picture:"
-msgstr "Linkbild:"
+msgstr "Link-Bild:"
 
 msgid "WordPress logo"
 msgstr "WordPress-Logo"
@@ -338,7 +338,7 @@ msgid "Pixels"
 msgstr "Pixel"
 
 msgid "Action:"
-msgstr "Aktion:"
+msgstr "Button Funktion als:"
 
 msgid "Like"
 msgstr "Gefällt mir"
@@ -364,8 +364,11 @@ msgstr "Debug:"
 msgid "Facebook"
 msgstr "Facebook"
 
-msgid "Link to"
-msgstr "Link zu"
+msgid "Link to:"
+msgstr "Link zu:"
+
+msgid "Use iframe in stead of XFBML:"
+msgstr "Benutze iframe anstelle von XFBML:"
 
 msgid "Default the post or page"
 msgstr "Standart der Artikel oder die Seite"
@@ -377,7 +380,7 @@ msgid "Do not show on posts:"
 msgstr "Nicht unter Artikeln zeigen:"
 
 msgid "Do not show on pages:"
-msgstr "Nicht auf Seiten zeigen"
+msgstr "Nicht auf Seiten zeigen:"
 
 msgid "Exclude these custom post types:"
 msgstr "Ausgenommen diese benutzerdefinierten Nachrichtentypen:"
@@ -387,4 +390,43 @@ msgstr "Getrennt durch Kommas"
 
 msgid "Use publish_post action:"
 msgstr "Benutze publish_post Aktion:"
+
+msgid "Experimental!"
+msgstr "Experimentell!"
+
+msgid "Do not show in archives:"
+msgstr "Nicht im Archiv zeigen:"
+
+msgid "Do not show in categories:"
+msgstr "Nicht in den Kategorien zeigen:"
+
+msgid "Show at the top of the post:"
+msgstr "Über den Artikel anzeigen:"
+
+msgid "Do not add link by default:"
+msgstr "\"Keinen Facebook-Link einfügen\" als Standart:"
+
+msgid "Don't show a summary in the post list:"
+msgstr "Zusammenfassung der Artikel nicht anzeigen:"
+
+msgid "Facebook character encoding:"
+msgstr "Facebook Zeichenkodierung:"
+
+msgid "Default UTF-8; do not change if no need"
+msgstr "Standart UTF-8; nicht ändern wenn es nicht nötig ist"
+
+msgid "I have rated this plugin:"
+msgstr "Ich habe das Plugin bewertet:"
+
+msgid "Exclude these categories:"
+msgstr "Diese Kategorien ausschließen:"
+
+msgid "Do not verify the peer's certificate:"
+msgstr "Peer-Zertifikat nicht überprüfen:"
+
+msgid "Try this in case of cURL error 60"
+msgstr "Versuche das im Fall von \"cURL error 60\""
+
+msgid "Add links for new pages:"
+msgstr "Neue Seiten auf Facebook posten:"
 
