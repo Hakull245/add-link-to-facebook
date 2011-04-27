@@ -507,6 +507,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.20 =
+* Improvement: always show post submit check boxes on pages
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.19 =
@@ -1036,7 +1037,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.20 =
-Updated translation
+One improvement, updated translation
 
 = 1.19 =
 One improvement

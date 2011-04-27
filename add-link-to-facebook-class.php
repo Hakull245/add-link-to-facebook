@@ -1805,11 +1805,6 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 			$user_ID = self::Get_user_ID($post);
 
-			// Check if links for pages enabled
-			if ($post->post_type == 'page')
-				if (!get_user_meta($user_ID, c_al2fb_meta_add_new_page, true))
-					return;
-
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
