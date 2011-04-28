@@ -56,6 +56,7 @@ define('c_al2fb_meta_trailer', 'al2fb_trailer');
 define('c_al2fb_meta_hyperlink', 'al2fb_hyperlink');
 define('c_al2fb_meta_share_link', 'al2fb_share_link');
 define('c_al2fb_meta_fb_comments', 'al2fb_fb_comments');
+define('c_al2fb_meta_fb_comments_postback', 'al2fb_fb_comments_postback');
 define('c_al2fb_meta_fb_likes', 'al2fb_fb_likes');
 define('c_al2fb_meta_post_likers', 'al2fb_post_likers');
 define('c_al2fb_meta_post_like_button', 'al2fb_post_like_button');
@@ -72,6 +73,7 @@ define('c_al2fb_meta_like_font', 'al2fb_like_font');
 define('c_al2fb_meta_like_colorscheme', 'al2fb_like_colorscheme');
 define('c_al2fb_meta_like_link', 'al2fb_like_link');
 define('c_al2fb_meta_like_top', 'al2fb_like_top');
+define('c_al2fb_meta_like_iframe', 'al2fb_like_iframe');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
@@ -89,7 +91,11 @@ define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
 define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
 define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
+define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
 define('c_al2fb_meta_log', 'al2fb_log');
+
+// Comment meta
+define('c_al2fb_meta_fb_comment_id', 'al2fb_facebook_comment_id');
 
 // Logging
 define('c_al2fb_log_redir_init', 'al2fb_redir_init');
@@ -190,10 +196,11 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_option(c_al2fb_option_use_pp))
 				add_action('publish_post', array(&$this, 'Remote_publish'));
 
+			add_action('comment_post', array(&$this, 'Comment_post'));
+
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
 			add_filter('the_content', array(&$this, 'The_content'), 999);
-			//add_filter('the_posts', array(&$this, 'The_posts'), 10, 2);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
 			add_filter('comment_class', array(&$this, 'Comment_class'));
@@ -203,6 +210,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
 
+			// Custom filters
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
 			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 2);
 		}
@@ -271,6 +279,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_hyperlink);
 				delete_user_meta($user_ID, c_al2fb_meta_share_link);
 				delete_user_meta($user_ID, c_al2fb_meta_fb_comments);
+				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_postback);
 				delete_user_meta($user_ID, c_al2fb_meta_fb_likes);
 				delete_user_meta($user_ID, c_al2fb_meta_post_likers);
 				delete_user_meta($user_ID, c_al2fb_meta_post_like_button);
@@ -287,6 +296,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_like_colorscheme);
 				delete_user_meta($user_ID, c_al2fb_meta_like_link);
 				delete_user_meta($user_ID, c_al2fb_meta_like_top);
+				delete_user_meta($user_ID, c_al2fb_meta_like_iframe);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_exclude_default);
@@ -468,6 +478,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_share_link] = null;
 			if (empty($_POST[c_al2fb_meta_fb_comments]))
 				$_POST[c_al2fb_meta_fb_comments] = null;
+			if (empty($_POST[c_al2fb_meta_fb_comments_postback]))
+				$_POST[c_al2fb_meta_fb_comments_postback] = null;
 			if (empty($_POST[c_al2fb_meta_fb_likes]))
 				$_POST[c_al2fb_meta_fb_likes] = null;
 			if (empty($_POST[c_al2fb_meta_post_likers]))
@@ -496,6 +508,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_like_colorscheme] = null;
 			if (empty($_POST[c_al2fb_meta_like_top]))
 				$_POST[c_al2fb_meta_like_top] = null;
+			if (empty($_POST[c_al2fb_meta_like_iframe]))
+				$_POST[c_al2fb_meta_like_iframe] = null;
 			if (empty($_POST[c_al2fb_meta_open_graph]))
 				$_POST[c_al2fb_meta_open_graph] = null;
 			if (empty($_POST[c_al2fb_meta_exclude_default]))
@@ -567,6 +581,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_share_link, $_POST[c_al2fb_meta_share_link]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments, $_POST[c_al2fb_meta_fb_comments]);
+			update_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, $_POST[c_al2fb_meta_fb_comments_postback]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_likes, $_POST[c_al2fb_meta_fb_likes]);
 			update_user_meta($user_ID, c_al2fb_meta_post_likers, $_POST[c_al2fb_meta_post_likers]);
 			update_user_meta($user_ID, c_al2fb_meta_post_like_button, $_POST[c_al2fb_meta_post_like_button]);
@@ -583,6 +598,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_colorscheme, $_POST[c_al2fb_meta_like_colorscheme]);
 			update_user_meta($user_ID, c_al2fb_meta_like_link, $_POST[c_al2fb_meta_like_link]);
 			update_user_meta($user_ID, c_al2fb_meta_like_top, $_POST[c_al2fb_meta_like_top]);
+			update_user_meta($user_ID, c_al2fb_meta_like_iframe, $_POST[c_al2fb_meta_like_iframe]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
@@ -1210,6 +1226,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_fb_comments_postback"><?php _e('Post WordPress comments back to Facebook:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_fb_comments_postback" name="<?php echo c_al2fb_meta_fb_comments_postback; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true)) echo ' checked="checked"'; ?> />
+				<strong>Beta!</strong>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_fb_likes"><?php _e('Integrate likes from Facebook:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_fb_likes" name="<?php echo c_al2fb_meta_fb_likes; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) echo ' checked="checked"'; ?> />
@@ -1320,6 +1343,12 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_like_top"><?php _e('Show at the top of the post:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_like_top" name="<?php echo c_al2fb_meta_like_top; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_top, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_like_iframe"><?php _e('Use iframe in stead of XFBML:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_like_iframe" name="<?php echo c_al2fb_meta_like_iframe; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1759,8 +1788,27 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get comments
 		function Get_picture_url($id, $size) {
-			if (function_exists('get_header')) {
-				$headers = get_headers('https://graph.facebook.com/' . $id . '/picture?' . $size, true);
+			$url = 'https://graph.facebook.com/' . $id . '/picture?' . $size;
+			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
+				$timeout = get_option(c_al2fb_option_timeout);
+				if (!$timeout)
+					$timeout = 30;
+
+				$c = curl_init();
+				curl_setopt($c, CURLOPT_URL, $url);
+				curl_setopt($c, CURLOPT_HEADER, 1);
+				curl_setopt($c, CURLOPT_NOBODY, 1);
+				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
+				$headers = curl_exec($c);
+				curl_close ($c);
+				if (preg_match('/Location: (.*)/', $headers, $location))
+					return trim($location[1]);
+				else
+					return false;
+			}
+			else if (function_exists('get_header') && ini_get('allow_url_fopen')) {
+				$headers = get_headers($url, true);
 				if (isset($headers['Location']))
 					return $headers['Location'];
 				else
@@ -1774,11 +1822,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Post_submitbox() {
 			global $post;
 			$user_ID = self::Get_user_ID($post);
-
-			// Check if links for pages enabled
-			if ($post->post_type == 'page')
-				if (!get_user_meta($user_ID, c_al2fb_meta_add_new_page, true))
-					return;
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
@@ -1855,6 +1898,11 @@ if (!class_exists('WPAL2Facebook')) {
 				__('Add Link to Facebook', c_al2fb_text_domain),
 				array(&$this, 'Meta_box'),
 				'post');
+			add_meta_box(
+				'al2fb_meta',
+				__('Add Link to Facebook', c_al2fb_text_domain),
+				array(&$this, 'Meta_box'),
+				'page');
 		}
 
 		// Display attached image selector
@@ -1874,7 +1922,7 @@ if (!class_exists('WPAL2Facebook')) {
 				global $post;
 				$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
 				if (empty($images))
-					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span>';
+					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span><br />';
 				else {
 					// Display image selector
 					$disabled = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
@@ -1919,6 +1967,11 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else
 				echo 'wp_get_attachment_image_src does not exist';
+
+			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
+			echo '<h4>' . __('Custom exerpt', c_al2fb_text_domain) . '</h4>';
+			echo '<textarea id="al2fb_excerpt" name="al2fb_excerpt" cols="40" rows="1" class="attachmentlinks">';
+			echo $excerpt . '</textarea>';
 		}
 
 		// Save selected attached image
@@ -1949,6 +2002,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Persist data
 			if (isset($_POST['al2fb_image_id']))
 				update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
+
+			if (isset($_POST['al2fb_excerpt']))
+				update_post_meta($post_id, c_al2fb_meta_excerpt, $_POST['al2fb_excerpt']);
 		}
 
 		// Remote publish & custom action
@@ -2004,7 +2060,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($delete) {
 					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 					if (!empty($link_id) && self::Is_authorized($user_ID))
-						self::Delete_link($post);
+						self::Delete_fb_link($post);
 				}
 				else {
 					// Check post status
@@ -2054,7 +2110,7 @@ if (!class_exists('WPAL2Facebook')) {
 						($post->post_type != 'page' || $add_new_page) &&
 						!in_array($post->post_type, explode(',', get_option(c_al2fb_option_exclude_type))) &&
 						!$exclude_category)
-						self::Add_link($post);
+						self::Add_fb_link($post);
 				}
 			}
 		}
@@ -2064,7 +2120,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Filter texts
-			$excerpt = apply_filters('al2fb_excerpt', $post->post_excerpt, $post);
+			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
+			if (empty($excerpt))
+				$excerpt = $post->post_excerpt;
+			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
 			$content = apply_filters('al2fb_content', $post->post_content, $post);
 
 			// Get body
@@ -2111,6 +2170,70 @@ if (!class_exists('WPAL2Facebook')) {
 				'description' => $description
 			);
 			return $texts;
+		}
+
+		// Get link picture
+		function Get_link_picture($post, $user_ID) {
+			// Get selected image
+			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
+				$picture_type = 'meta';
+				$picture = wp_get_attachment_thumb_url($image_id);
+			}
+
+			if (empty($picture)) {
+				// Default picture
+				$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+				if (empty($picture))
+					$picture = self::Redirect_uri() . '?al2fb_image=1';
+
+				// Check picture type
+				$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
+				if ($picture_type == 'media') {
+					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
+					if (!empty($images) && function_exists('wp_get_attachment_image_src')) {
+						$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
+						if ($picture && $picture[0])
+							$picture = $picture[0];
+					}
+				}
+				else if ($picture_type == 'featured') {
+					if (current_theme_supports('post-thumbnails') &&
+						function_exists('get_post_thumbnail_id') &&
+						function_exists('wp_get_attachment_image_src')) {
+						$picture_id = get_post_thumbnail_id($post->ID);
+						if ($picture_id) {
+							$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
+							if ($picture && $picture[0])
+								$picture = $picture[0];
+						}
+					}
+				}
+				else if ($picture_type == 'facebook')
+					$picture = '';
+				else if ($picture_type == 'post') {
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
+						$picture = $matches[1];
+				}
+				else if ($picture_type == 'userphoto') {
+					$userdata = get_userdata($post->post_author);
+					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
+						$image_file = $userdata->userphoto_image_file;
+						$upload_dir = wp_upload_dir();
+						$picture = trailingslashit($upload_dir['baseurl']) . 'userphoto/' . $image_file;
+					}
+				}
+				else if ($picture_type == 'custom') {
+					$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);
+					if ($custom)
+						$picture = $custom;
+				}
+			}
+
+			return array(
+				'picture' => $picture,
+				'picture_type' => $picture_type
+			);
 		}
 
 		function Filter_excerpt($excerpt, $post) {
@@ -2160,7 +2283,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Add Link to Facebook
-		function Add_link($post) {
+		function Add_fb_link($post) {
 			// Get url
 			$user_ID = self::Get_user_ID($post);
 			if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true))
@@ -2198,7 +2321,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$picture_id = get_post_thumbnail_id($post->ID);
 				$log .= '- featured: ' . $picture_id . PHP_EOL;
 
-				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $post->post_content, $matches))
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
 					$log .= '- post: ' .  $matches[1] . PHP_EOL;
 				else
 					$log .= '- post: none' . PHP_EOL;
@@ -2209,60 +2332,9 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Get link picture
-			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
-				$picture_type = 'meta';
-				$picture = wp_get_attachment_thumb_url($image_id);
-			}
-
-			if (empty($picture)) {
-				// Default picture
-				$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
-				if (empty($picture))
-					$picture = self::Redirect_uri() . '?al2fb_image=1';
-
-				// Check picture type
-				$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
-				if ($picture_type == 'media') {
-					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
-					if (!empty($images) && function_exists('wp_get_attachment_image_src')) {
-						$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
-						if ($picture && $picture[0])
-							$picture = $picture[0];
-					}
-				}
-				else if ($picture_type == 'featured') {
-					if (current_theme_supports('post-thumbnails') &&
-						function_exists('get_post_thumbnail_id') &&
-						function_exists('wp_get_attachment_image_src')) {
-						$picture_id = get_post_thumbnail_id($post->ID);
-						if ($picture_id) {
-							$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
-							if ($picture && $picture[0])
-								$picture = $picture[0];
-						}
-					}
-				}
-				else if ($picture_type == 'facebook')
-					$picture = '';
-				else if ($picture_type == 'post') {
-					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $post->post_content, $matches))
-						$picture = $matches[1];
-				}
-				else if ($picture_type == 'userphoto') {
-					$userdata = get_userdata($post->post_author);
-					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
-						$image_file = $userdata->userphoto_image_file;
-						$upload_dir = wp_upload_dir();
-						$picture = trailingslashit($upload_dir['baseurl']) . 'userphoto/' . $image_file;
-					}
-				}
-				else if ($picture_type == 'custom') {
-					$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);
-					if ($custom)
-						$picture = $custom;
-				}
-			}
+			$picture_info = self::Get_link_picture($post, $user_ID);
+			$picture = $picture_info['picture'];
+			$picture_type = $picture_info['picture_type'];
 
 			// Get user note
 			$message = '';
@@ -2328,7 +2400,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Add Link to Facebook
-		function Delete_link($post) {
+		function Delete_fb_link($post) {
 			// Do not disturb WordPress
 			try {
 				// Build request
@@ -2356,6 +2428,62 @@ if (!class_exists('WPAL2Facebook')) {
 			catch (Exception $e) {
 				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+			}
+		}
+
+		// New comment
+		function Comment_post($comment_ID) {
+			$comment = get_comment($comment_ID);
+			if ($comment->comment_approved == '1')
+				self::Add_fb_link_comment($comment);
+		}
+
+		// Add comment to link
+		function Add_fb_link_comment($comment) {
+			// Get data
+			$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+			if (!empty($fb_comment_id))
+				return;
+			$post = get_post($comment->comment_post_ID);
+			if (empty($post))
+				return;
+			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+			if (empty($link_id))
+				return;
+			$user_ID = self::Get_user_ID($post);
+			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
+				return;
+
+			// Build message
+			$message = self::Convert_encoding($user_ID, $comment->comment_content);
+
+			// Do not disturb WordPress
+			try {
+				$url = 'https://graph.facebook.com/' . $link_id . '/comments';
+
+				$query_array = array(
+					'access_token' => self::Get_access_token_by_post($post),
+					'message' => $message
+				);
+
+				// http://developers.facebook.com/docs/reference/api/Comment/
+				$query = http_build_query($query_array, '', '&');
+				if ($this->debug) {
+					add_post_meta($post->ID, c_al2fb_meta_log, print_r($query_array, true));
+					add_post_meta($post->ID, c_al2fb_meta_log, $query);
+				}
+
+				// Execute request
+				$response = self::Request($url, $query, 'POST');
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, print_r($response, true));
+
+				// Process response
+				$fb_comment = json_decode($response);
+				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+			}
+			catch (Exception $e) {
+				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
 			}
 		}
 
@@ -2398,7 +2526,8 @@ if (!class_exists('WPAL2Facebook')) {
 					// Get link picture
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
 					if (empty($link_picture)) {
-						$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+						$picture_info = self::Get_link_picture($post, $user_ID);
+						$picture = $picture_info['picture'];
 						if (empty($picture))
 							$picture = self::Redirect_uri() . '?al2fb_image=1';
 					}
@@ -2537,62 +2666,46 @@ if (!class_exists('WPAL2Facebook')) {
 				$link = get_permalink($post->ID);
 
 			// Build content
-			$content = '<div class="al2fb_like_button">';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
-			$content .= '<fb:like ref="AL2FB"';
-			if (!empty($layout))
-				$content .= ' layout="' . $layout . '"';
-			if ($faces)
-				$content .= ' show_faces="true"';
-			else
-				$content .= ' show_faces="false"';
-			if (empty($width))
-				$content .= ' width="450"';
-			else
-				$content .= ' width="' . $width . '"';
-			if (!empty($action))
-				$content .= ' action="' . $action . '"';
-			if (!empty($font))
-				$content .= ' font="' . $font . '"';
-			if (!empty($colorscheme))
-				$content .= ' colorscheme="' . $colorscheme . '"';
-			$content .= ' href="' . $link . '"></fb:like>';
-			$content .= '</div>';
-			return $content;
-		}
+			if (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true)) {
+				$height = '80';
+				if ($layout == 'standard')
+					$height = '80';
+				else if ($layout == 'button_count')
+					$height = '21';
+				else if ($layout == 'box_count')
+					$height = '65';
 
-		// Beta
-		function The_posts($posts, $query) {
-			foreach ($posts as $post) {
-				$user_ID = self::Get_user_ID($post);
-				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-					$fb_comments = self::Get_fb_comments($post, false);
-					if ($fb_comments)
-						foreach ($fb_comments->data as $fb_comment) {
-							// Create new virtual comment
-							$new = null;
-							$new->comment_ID = $fb_comment->id;
-							$new->comment_post_ID = $post->ID;
-							$new->comment_author = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
-							$new->comment_author_email = str_replace(' ', '_', $fb_comment->from->name) . '@example.org';
-							$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
-							$new->comment_author_ip = '';
-							$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
-							$new->comment_date_gmt = $new->comment_date;
-							$new->comment_content = $fb_comment->message;
-							$new->comment_karma = 0;
-							$new->comment_approved = 1;
-							$new->comment_agent = 'Add Link to Facebook';
-							$new->comment_type = 'comment'; // pingback|trackback
-							$new->comment_parent = 0;
-							$new->user_id = 0;
-							$query->comments[] = $new;
-							$query->comment_count++;
-							$post->comment_count++;
-						}
-				}
+				$content = '<iframe src="http://www.facebook.com/plugins/like.php';
+				$content .= '?href=' . urlencode($link);
+				$content .= '&amp;layout=' . (empty($layout) ? 'standard' : $layout);
+				$content .= '&amp;show_faces=' . ($faces ? 'true' : 'false');
+				$content .= '&amp;width=' . (empty($width) ? '450' : $width);
+				$contnet .= '&amp;action=' . (empty($action) ? 'like' : $action);
+				$content .= '&amp;font=' . (empty($font) ? 'arial' : $font);
+				$content .= '&amp;colorscheme=' . (empty($colorscheme) ? 'light' : $colorscheme);
+				$content .= '&amp;height=' . $height;
+				$content .= '&amp;ref=AL2B"';
+				$content .= ' scrolling="no"';
+				$content .= ' frameborder="0"';
+				$content .= ' style="border:none; overflow:hidden;';
+				$content .= ' width:' . (empty($width) ? '450' : $width) . 'px;';
+				$content .= ' height:' . $height . 'px;"';
+				$content .= ' allowTransparency="true"></iframe>';
 			}
-			return $posts;
+			else {
+				$content = '<div class="al2fb_like_button">';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
+				$content .= '<fb:like ref="AL2FB"';
+				$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
+				$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+				$content .= ' width="' . (empty($width) ? '450' : $width) . '"';
+				$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
+				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+				$content .= ' href="' . $link . '"></fb:like>';
+				$content .= '</div>';
+			}
+			return $content;
 		}
 
 		// Modify comment list
@@ -2605,24 +2718,36 @@ if (!class_exists('WPAL2Facebook')) {
 				$fb_comments = self::Get_fb_comments($post, false);
 				if ($fb_comments)
 					foreach ($fb_comments->data as $fb_comment) {
-						// Create new virtual comment
-						$new = null;
-						$new->comment_ID = $fb_comment->id;
-						$new->comment_post_ID = $post_ID;
-						$new->comment_author = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
-						$new->comment_author_email = $fb_comment->from->id;
-						$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
-						$new->comment_author_ip = '';
-						$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
-						$new->comment_date_gmt = $new->comment_date;
-						$new->comment_content = $fb_comment->message;
-						$new->comment_karma = 0;
-						$new->comment_approved = 1;
-						$new->comment_agent = 'AL2FB';
-						$new->comment_type = 'comment'; // pingback|trackback
-						$new->comment_parent = 0;
-						$new->user_id = 0;
-						$comments[] = $new;
+						// Check if post back from WordPress to Facebook
+						$postback = false;
+						foreach ($comments as $comment) {
+							$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+							if ($fb_comment_id == $fb_comment->id) {
+								$postback = true;
+								break;
+							}
+						}
+
+						if (!$postback) {
+							// Create new virtual comment
+							$new = null;
+							$new->comment_ID = $fb_comment->id;
+							$new->comment_post_ID = $post_ID;
+							$new->comment_author = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
+							$new->comment_author_email = $fb_comment->from->id;
+							$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
+							$new->comment_author_ip = '';
+							$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
+							$new->comment_date_gmt = $new->comment_date;
+							$new->comment_content = $fb_comment->message;
+							$new->comment_karma = 0;
+							$new->comment_approved = 1;
+							$new->comment_agent = 'AL2FB';
+							$new->comment_type = ''; // pingback|trackback
+							$new->comment_parent = 0;
+							$new->user_id = 0;
+							$comments[] = $new;
+						}
 					}
 			}
 
@@ -2693,7 +2818,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_avatar($avatar) {
 			global $comment;
 			if (!empty($comment) &&
-				$comment->comment_type == 'comment' &&
+				($comment->comment_type == '' || $comment->comment_type == 'comment') &&
 				$comment->comment_agent == 'AL2FB') {
 
 				// Get picture url
@@ -2711,7 +2836,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Build avatar image
 				if ($fb_picture_url)
-					return '<img alt="' . $comment->comment_author . '" src="' . $fb_picture_url . '" class="avatar photo" />';
+					return '<img alt="' . $comment->comment_author . '" src="' . $fb_picture_url . '" class="avatar photo al2fb" />';
 			}
 			return $avatar;
 		}
@@ -2993,6 +3118,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Page link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_add_new_page, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>FB comments:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>FB comments postback:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB likes:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Post likers:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_likers, true) ? 'Yes' : 'No') . '</td></tr>';
@@ -3010,6 +3136,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Like color scheme:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true) . '</td></tr>';
 			$info .= '<tr><td>Like link:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_link, true) . '</td></tr>';
 			$info .= '<tr><td>Like top:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_top, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Like iframe:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
