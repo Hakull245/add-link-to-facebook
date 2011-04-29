@@ -198,6 +198,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			add_action('comment_post', array(&$this, 'Comment_post'));
 			add_action('comment_unapproved_to_approved', array(&$this, 'Comment_approved'));
+			add_action('comment_approved_to_unapproved', array(&$this, 'Comment_unapproved'));
 
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
@@ -2400,7 +2401,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
-		// Add Link to Facebook
+		// Delete Link from Facebook
 		function Delete_fb_link($post) {
 			// Do not disturb WordPress
 			try {
@@ -2432,6 +2433,40 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
+		// Delete Link from Facebook
+		function Delete_fb_link_comment($comment) {
+			// Get data
+			$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+			if (empty($fb_comment_id))
+				return;
+			$post = get_post($comment->comment_post_ID);
+			if (empty($post))
+				return;
+
+			// Do not disturb WordPress
+			try {
+				// Build request
+				$url = 'https://graph.facebook.com/' . $fb_comment_id;
+				$query = http_build_query(array(
+					'access_token' => self::Get_access_token_by_post($post),
+					'method' => 'delete'
+				), '', '&');
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, $query);
+
+				// Execute request
+				$response = self::Request($url, $query, 'POST');
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, print_r($response, true));
+
+				// Delete meta data
+				delete_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id);
+			}
+			catch (Exception $e) {
+				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
+			}
+		}
+
 		// New comment
 		function Comment_post($comment_ID) {
 			$comment = get_comment($comment_ID);
@@ -2442,6 +2477,11 @@ if (!class_exists('WPAL2Facebook')) {
 		// Approved comment
 		function Comment_approved($comment) {
 			self::Add_fb_link_comment($comment);
+		}
+
+		// Disapproved comment
+		function Comment_unapproved($comment) {
+			self::Delete_fb_link_comment($comment);
 		}
 
 		// Add comment to link
