@@ -506,7 +506,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.24 =
-* Improvement: unapprove comment will delete comment from Facebook
+* Improvement: unapproving a comment will delete comment from Facebook too
 
 = 1.23 =
 * Improvement: comment postback on comment approval
