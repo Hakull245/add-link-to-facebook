@@ -2455,7 +2455,10 @@ if (!class_exists('WPAL2Facebook')) {
 				return;
 
 			// Build message
-			$message = self::Convert_encoding($user_ID, $comment->comment_content);
+			$message = $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
+			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
+			$message .= $comment->comment_content;
+			$message = self::Convert_encoding($user_ID, $message);
 
 			// Do not disturb WordPress
 			try {

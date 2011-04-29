@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.21
+Stable tag: 1.22
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -58,8 +58,6 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Your translation ...
-
-**If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -506,6 +504,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.22 =
+* Improvement: added caption to posted back comments
+* Updated description
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.21 =
 * New feature: option to post WordPress comments back to Facebook (beta: reports bad or good appreciated)
@@ -1040,6 +1043,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.22 =
+One improvement, updated translation
 
 = 1.21 =
 One new feature, updated translations
