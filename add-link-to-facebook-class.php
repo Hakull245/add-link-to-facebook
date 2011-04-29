@@ -197,6 +197,7 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('publish_post', array(&$this, 'Remote_publish'));
 
 			add_action('comment_post', array(&$this, 'Comment_post'));
+			add_action('comment_unapproved_to_approved', array(&$this, 'Comment_approved'));
 
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
@@ -2436,6 +2437,11 @@ if (!class_exists('WPAL2Facebook')) {
 			$comment = get_comment($comment_ID);
 			if ($comment->comment_approved == '1')
 				self::Add_fb_link_comment($comment);
+		}
+
+		// Approved comment
+		function Comment_approved($comment) {
+			self::Add_fb_link_comment($comment);
 		}
 
 		// Add comment to link
