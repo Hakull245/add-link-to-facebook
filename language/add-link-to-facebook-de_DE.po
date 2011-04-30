@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/add-link-to-facebook\n"
 "POT-Creation-Date: 2011-02-07 15:02:41+00:00\n"
-"PO-Revision-Date: 2011-04-19 18:01+0100\n"
+"PO-Revision-Date: 2011-04-30 17:58+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Björn Deutschmann <cooleisbaer.funpic.de>\n"
 "MIME-Version: 1.0\n"
@@ -48,13 +48,13 @@ msgid "Simple, but less secure"
 msgstr "Einfacher, aber weniger sicher"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Um eine App-ID und App Secret zu erhalten müssen Sie eine Facebook-Anwendung erstellen"
+msgstr "Um eine Anwendungsnummer und Anwendungs-Geheimcode zu erhalten müssen Sie eine Facebook-Anwendung erstellen"
 
 msgid "You have to fill in the following:"
 msgstr "Sie müssen folgendes ausfüllen:"
 
 msgid "Click here to create"
-msgstr "Klicken Sie hier, um zu erstellen"
+msgstr "Klicken Sie hier um eine Facebook-Anwendung zu erstellen"
 
 msgid "Anything you like, will appear as \"via ...\" below the message"
 msgstr "Alles, was ihnen gefällt, erscheint mit &quot;via ...&quot; unter der Nachricht"
@@ -282,7 +282,7 @@ msgid "Liked this post"
 msgstr "gefällt dieser Artikel"
 
 msgid "Refresh Facebook comments every:"
-msgstr "Aktualisiere Facebook-Kommentare alle:"
+msgstr "Aktualisiere Facebook-Kommentare alle X Minuten:"
 
 msgid "Minutes"
 msgstr "Minuten"
@@ -429,4 +429,7 @@ msgstr "Versuche das im Fall von \"cURL error 60\""
 
 msgid "Add links for new pages:"
 msgstr "Neue Seiten auf Facebook posten:"
+
+msgid "Post WordPress comments back to Facebook:"
+msgstr "WordPress Kommentare auf Facebook posten:"
 

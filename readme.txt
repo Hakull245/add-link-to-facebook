@@ -505,6 +505,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.25 =
+* Updated German (de\_DE) translation by [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk")
+
 = 1.24 =
 * Improvement: unapproving a comment will delete comment from Facebook too
 
@@ -1052,6 +1055,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.25 =
+Updated translation
 
 = 1.24 =
 One improvement
