@@ -74,6 +74,7 @@ define('c_al2fb_meta_like_colorscheme', 'al2fb_like_colorscheme');
 define('c_al2fb_meta_like_link', 'al2fb_like_link');
 define('c_al2fb_meta_like_top', 'al2fb_like_top');
 define('c_al2fb_meta_like_iframe', 'al2fb_like_iframe');
+define('c_al2fb_meta_post_send_button', 'al2fb_post_send_button');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
@@ -120,13 +121,9 @@ define('USERPHOTO_APPROVED', 2);
 // - target="_blank"? how to do?
 // - Admin dashboard? how to get links to messages?
 // - Update meta box after update media gallery?
-// - Use tage line?
-// - Tags, categories?
-// - Meta boxes if authorized?
-// - Check min image size: what is it?
 // - Use link instead of feed?
-
 // - Improve cleaning
+// - Option to set timeout
 
 // Integration:
 // - RSS
@@ -299,6 +296,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_like_link);
 				delete_user_meta($user_ID, c_al2fb_meta_like_top);
 				delete_user_meta($user_ID, c_al2fb_meta_like_iframe);
+				delete_user_meta($user_ID, c_al2fb_meta_post_send_button);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_exclude_default);
@@ -307,20 +305,6 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 				delete_user_meta($user_ID, c_al2fb_meta_rated);
-
-				//delete_option(c_al2fb_option_version);
-				//delete_option(c_al2fb_option_timeout);
-				//delete_option(c_al2fb_option_nonotice);
-				//delete_option(c_al2fb_option_min_cap);
-				//delete_option(c_al2fb_option_msg_refresh);
-				//delete_option(c_al2fb_option_max_descr);
-				//delete_option(c_al2fb_option_exclude_type);
-				//delete_option(c_al2fb_option_exclude_cat);
-				//delete_option(c_al2fb_option_noverifypeer);
-				//delete_option(c_al2fb_option_siteurl);
-				//delete_option(c_al2fb_option_nocurl);
-				//delete_option(c_al2fb_option_use_pp);
-				//delete_option(c_al2fb_option_debug);
 			}
 		}
 
@@ -512,6 +496,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_like_top] = null;
 			if (empty($_POST[c_al2fb_meta_like_iframe]))
 				$_POST[c_al2fb_meta_like_iframe] = null;
+			if (empty($_POST[c_al2fb_meta_post_send_button]))
+				$_POST[c_al2fb_meta_post_send_button] = null;
 			if (empty($_POST[c_al2fb_meta_open_graph]))
 				$_POST[c_al2fb_meta_open_graph] = null;
 			if (empty($_POST[c_al2fb_meta_exclude_default]))
@@ -601,6 +587,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_link, $_POST[c_al2fb_meta_like_link]);
 			update_user_meta($user_ID, c_al2fb_meta_like_top, $_POST[c_al2fb_meta_like_top]);
 			update_user_meta($user_ID, c_al2fb_meta_like_iframe, $_POST[c_al2fb_meta_like_iframe]);
+			update_user_meta($user_ID, c_al2fb_meta_post_send_button, $_POST[c_al2fb_meta_post_send_button]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
@@ -1354,6 +1341,15 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_like_send"><?php _e('Show Facebook send button:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_like_send" name="<?php echo c_al2fb_meta_post_send_button; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true)) echo ' checked="checked"'; ?> />
+				<strong>Beta!</strong>
+				<br />
+				<a class="al2fb_explanation" href="http://developers.facebook.com/docs/reference/plugins/send/" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_open_graph"><?php _e('Use Open Graph protocol:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_open_graph" name="<?php echo c_al2fb_meta_open_graph; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_open_graph, true)) echo ' checked="checked"'; ?> />
@@ -1534,7 +1530,7 @@ if (!class_exists('WPAL2Facebook')) {
 				var psHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 				document.write(unescape("%3Cscript src='" + psHost + "pluginsponsors.com/direct/spsn/display.php?client=add-link-to-facebook&spot=' type='text/javascript'%3E%3C/script%3E"));
 				</script>
-				<a class="al2fb_sponsorship" href="http://pluginsponsors.com/privacy.html" target=_blank">
+				<a class="al2fb_sponsorship" href="http://pluginsponsors.com/privacy.html" target="_blank">
 				<?php _e('Privacy in the Sustainable Plugins Sponsorship Network', c_al2fb_text_domain); ?></a>
 <?php
 			}
@@ -1621,7 +1617,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $available;
 		}
 
-		// Get Facebook authorize addess
+		// Get Facebook authorize address
 		function Authorize_url($user_ID) {
 			// http://developers.facebook.com/docs/authentication/permissions
 			$url = 'https://graph.facebook.com/oauth/authorize';
@@ -2638,15 +2634,17 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Show like button
-				if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) &&
-					!get_post_meta($post->ID, c_al2fb_meta_nolike, true)) {
-					$like_button = self::Get_like_button($post);
-					if (!empty($like_button))
-						if (get_user_meta($user_ID, c_al2fb_meta_like_top, true))
-							$content = $like_button . $content;
-						else
-							$content .= $like_button;
+				if (!get_post_meta($post->ID, c_al2fb_meta_nolike, true)) {
+					if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true))
+						$button = self::Get_like_button($post);
+					if (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true))
+						$button .= self::Get_send_button($post);
 				}
+				if (!empty($button))
+					if (get_user_meta($user_ID, c_al2fb_meta_like_top, true))
+						$content = $button . $content;
+					else
+						$content .= $button;
 			}
 
 			return $content;
@@ -2733,6 +2731,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$content .= '&amp;font=' . (empty($font) ? 'arial' : $font);
 				$content .= '&amp;colorscheme=' . (empty($colorscheme) ? 'light' : $colorscheme);
 				$content .= '&amp;height=' . $height;
+				$content .= '&amp;locale=' . $lang;
 				$content .= '&amp;ref=AL2B"';
 				$content .= ' scrolling="no"';
 				$content .= ' frameborder="0"';
@@ -2754,6 +2753,34 @@ if (!class_exists('WPAL2Facebook')) {
 				$content .= ' href="' . $link . '"></fb:like>';
 				$content .= '</div>';
 			}
+			return $content;
+		}
+
+		// Get HTML for like button
+		function Get_send_button($post) {
+			$user_ID = self::Get_user_ID($post);
+
+			// Get language
+			$lang = WPLANG;
+			if (empty($lang))
+				$lang = 'en_US';
+
+			// Get options
+			$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
+			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+			if (empty($link))
+				$link = get_permalink($post->ID);
+
+			// Send button
+			$content = '<div class="al2fb_send_button">';
+			$content = '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
+			$content .= '<fb:send ref="AL2FB"';
+			$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+			$content .= ' href="' . $link . '"></fb:send>';
+			$content .= '</div>';
+
 			return $content;
 		}
 
@@ -3186,6 +3213,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Like link:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_link, true) . '</td></tr>';
 			$info .= '<tr><td>Like top:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_top, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Like iframe:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Send button:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
