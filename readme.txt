@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.26
+Stable tag: 1.27
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
@@ -27,9 +27,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 * Show the names of the people who liked your post on Facebook below the post text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
+* Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names and like button
+* Shortcodes and template tags for liker names, like button and send button
 * Integrate Facebook comments and likes on added links into Wordpress
+* Postback of WordPress comments to Facebook
 
 **Beta features:**
 
@@ -250,6 +252,11 @@ To show a like button:
 * [al2fb_like_button]
 * [al2fb_like_button post_id="123"]
 
+To show a send button:
+
+* [al2fb_send_button]
+* [al2fb_send_button post_id="123"]
+
 = U24 How can I use the template tags? =
 
 Put one of these lines somewhere in your theme:
@@ -258,6 +265,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
 * if (function_exists('al2fb_like_button')) al2fb_like_button();
 * if (function_exists('al2fb_like_button')) al2fb_like_button(123);
+* if (function_exists('al2fb_send_button')) al2fb_send_button();
+* if (function_exists('al2fb_send_button')) al2fb_send_button(123);
 
 = U25 Can I add links to multiple walls? =
 
@@ -504,6 +513,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.27 =
+* Updated FAQ
+* Improvement: added shortcode/template tag for send button
 
 = 1.26 =
 * Bugfix: for send button, thanks [Stein](http://www.idyrøy.no/ "Stein Ivar Johnsen")!
@@ -1062,6 +1075,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.27 =
+One improvement
 
 = 1.26 =
 One bugfix

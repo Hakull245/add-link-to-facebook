@@ -208,6 +208,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Shortcodes
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
+			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
 
 			// Custom filters
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
@@ -2670,6 +2671,17 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_like_button($post);
+		}
+
+		// Shortcode send button
+		function Shortcode_send_button($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_send_button($post);
 		}
 
 		// Get HTML for likers
