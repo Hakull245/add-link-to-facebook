@@ -48,8 +48,8 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
 * English (en\_US), built-in, corrections are welcome
-* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
-* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
+* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
+* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
 * Norwegian (nb\_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
