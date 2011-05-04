@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.13
+Stable tag: 1.28
 
-Automatically add links to published posts to your Facebook wall, pages or groups
+Automatically add links to published posts or pages to your Facebook wall, pages or groups
 
 == Description ==
 
-Automatically add links to posts that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
+Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -27,13 +27,16 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 * Show the names of the people who liked your post on Facebook below the post text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
+* Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names and like button
+* Shortcodes and template tags for liker names, like button and send button
 * Integrate Facebook comments and likes on added links into Wordpress
+* Postback of WordPress comments to Facebook
 
 **Beta features:**
 
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Post WordPress comments back to Facebook
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -45,20 +48,18 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
 * English (en\_US), built-in, corrections are welcome
-* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
-* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst")
+* Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
+* Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
 * Norwegian (nb\_NO) by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen"), thanks!
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn") and [Micha](http://www.styloweb.de/ "Micha"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), [Micha](http://www.styloweb.de/ "Micha") and [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Your translation ...
-
-**If someone would like to contribute a idiot proof guide for settings up the plugin, I would be grateful. I am happy to make a link to your website if needed.**
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -251,6 +252,11 @@ To show a like button:
 * [al2fb_like_button]
 * [al2fb_like_button post_id="123"]
 
+To show a send button:
+
+* [al2fb_send_button]
+* [al2fb_send_button post_id="123"]
+
 = U24 How can I use the template tags? =
 
 Put one of these lines somewhere in your theme:
@@ -259,6 +265,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
 * if (function_exists('al2fb_like_button')) al2fb_like_button();
 * if (function_exists('al2fb_like_button')) al2fb_like_button(123);
+* if (function_exists('al2fb_send_button')) al2fb_send_button();
+* if (function_exists('al2fb_send_button')) al2fb_send_button(123);
 
 = U25 Can I add links to multiple walls? =
 
@@ -357,6 +365,14 @@ This is to remember the image you have selected as link picture.
 If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
 You can try to add the link again by updating the post.
 Please send me the message and follow the instruction in the last question.
+
+= V07 What is the custom field 'al2fb_facebook_nolike' for? =
+
+This field indicates that the like button shouldn't be show for the post or page.
+
+= V08 What is the custom field 'c_al2fb_meta_excerpt' for? =
+
+This fields holds the custom excerpt that will be used in stead of the WordPress excerpt.
 
 **--- Error messages ---**
 
@@ -468,6 +484,7 @@ The access token the plugin acquired during the authorization process may be rev
 Maybe because there was a security problem with your Facebook application or Facebook account.
 Re-authorizing will probably solve this problem. If you know why you got this error,
 please leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+You could also try to reset your application secret [here](http://www.facebook.com/developers/apps.php) and enter the new secret in the plugin settings.
 
 = E16 I get 'You failed to provide a valid list of administators' =
 
@@ -497,7 +514,75 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.28 =
+* New feature: disable comments integration per post/page
+* Improvement: add WordPress time zone to Facebook comment UTC time
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations by [Satyamo](http://www.satyamo.nl/ "Satyamo")
+
+= 1.27 =
+* Updated FAQ
+* Improvement: added shortcode/template tag for send button
+
+= 1.26 =
+* Bugfix: for send button, thanks [Stein](http://www.idyrøy.no/ "Stein Ivar Johnsen")!
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.25 =
+* New feature: Facebook send button
+* Improvement: added locale to iframe like button
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations by [Satyamo](http://www.satyamo.nl/ "Satyamo")
+* Updated German (de\_DE) translation by [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk")
+
+= 1.24 =
+* Improvement: unapproving a comment will delete comment from Facebook too
+
+= 1.23 =
+* Improvement: comment postback on comment approval
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.22 =
+* Improvement: added caption to posted back comments
+* Updated description
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
+= 1.21 =
+* New feature: option to post WordPress comments back to Facebook (beta: reports bad or good appreciated)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.20 =
+* Improvement: always show post submit check boxes on pages
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
+= 1.19 =
+* Improvement: Facebook comment avatars should be working for most people now
+* Updated FAQ
+
+= 1.18 =
+* Improvement: only calling *get_header* when *allow_url_fopen* to prevent warnings
+
+= 1.17 =
+* Bugfix: Facebook avatars broken since version 1.14
+
+= 1.16 =
+* Improvement: Open Graph Protocol includes picture even if no link added
+* Updated German (de\_DE) translation by [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk")
+
+= 1.15 =
+* Improvement: find first image in post/page text with processed shortcodes
+* Improvement: use image selected in meta box as fallback for OGP, by *bestsaigon*, thanks!
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.14 =
+* New feature: custom excerpt
+* New feature: *Use iframe in stead of XFBML*
+* Bugfix: comment integration for Twenty Ten and other themes
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.13 =
+* Added meta box to pages; fixes *Do not add like button* for pages too
+* Updated French (fr\_FR) translation by [Alberto](http://www.wowbelgium.be/ "Alberto")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -996,8 +1081,53 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.28 =
+One new feature, one improvement, translation update
+
+= 1.27 =
+One improvement
+
+= 1.26 =
+One bugfix
+
+= 1.25 =
+One new feature, one improvement updated translations
+
+= 1.24 =
+One improvement
+
+= 1.23 =
+One improvement, updated translations
+
+= 1.22 =
+One improvement, updated translation
+
+= 1.21 =
+One new feature, updated translations
+
+= 1.20 =
+One improvement, updated translation
+
+= 1.19 =
+One improvement
+
+= 1.18 =
+One improvement
+
+= 1.17 =
+Bugfix
+
+= 1.16 =
+One improvement, updated translation
+
+= 1.15 =
+Two improvements, updated translation
+
+= 1.14 =
+Updated translation, two new features and one bugfix
+
 = 1.13 =
-Updated translations
+Updated translations, one new feature and bugfix
 
 = 1.12 =
 Added notice for plugin rating
@@ -1263,8 +1393,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* Custom exerpt text
-* Display only first name for Facebook comments and likers
+* ...
 
 Realized features:
 
@@ -1285,6 +1414,8 @@ Realized features:
 * New feature: remove scripts from post/page text (version 1.8)
 * Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
 * Exclude like button on individual pages (version 1.10)
+* Custom exerpt text (version 1.14)
+* Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button") (version 1.14)
 
 Feature which will not be realized:
 
@@ -1293,6 +1424,7 @@ Feature which will not be realized:
 * Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
+* Display only first name for Facebook comments and likers: not possible unfortunately
 
 == Facebook Authorization ==
 
