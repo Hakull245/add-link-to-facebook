@@ -92,6 +92,7 @@ define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
 define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
 define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
+define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
 define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
 define('c_al2fb_meta_log', 'al2fb_log');
 
@@ -1831,18 +1832,19 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get no like button indication
 			$chk_nolike = (get_post_meta($post->ID, c_al2fb_meta_nolike, true) ? 'checked' : '');
+			$chk_nointegrate = (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ? 'checked' : '');
 ?>
 			<div class="al2fb_post_submit">
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>" <?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
-<?php		if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true)) { ?>
-				<br />
-				<input id="al2fb_nolike" type="checkbox" name="<?php echo c_al2fb_meta_nolike; ?>" <?php echo $chk_nolike; ?> />
-				<label for="al2fb_nolike"><?php _e('Do not add like button', c_al2fb_text_domain); ?></label>
-<?php
-			}
-			if (!empty($link_id)) {
-?>
+			<br />
+			<input id="al2fb_nolike" type="checkbox" name="<?php echo c_al2fb_meta_nolike; ?>" <?php echo $chk_nolike; ?> />
+			<label for="al2fb_nolike"><?php _e('Do not add like button', c_al2fb_text_domain); ?></label>
+			<br />
+			<input id="al2fb_nointegrate" type="checkbox" name="<?php echo c_al2fb_meta_nointegrate; ?>" <?php echo $chk_nointegrate; ?> />
+			<label for="al2fb_nointegrate"><?php _e('Do not integrate comments', c_al2fb_text_domain); ?></label>
+
+<?php		if (!empty($link_id)) { ?>
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="al2fb_delete"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
@@ -1997,6 +1999,12 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post_id, c_al2fb_meta_nolike, true);
 			else
 				delete_post_meta($post_id, c_al2fb_meta_nolike);
+
+			// Process no integrate indication
+			if (isset($_POST[c_al2fb_meta_nointegrate]) && $_POST[c_al2fb_meta_nointegrate])
+				update_post_meta($post_id, c_al2fb_meta_nointegrate, true);
+			else
+				delete_post_meta($post_id, c_al2fb_meta_nointegrate);
 
 			// Persist data
 			if (isset($_POST['al2fb_image_id']))
@@ -2493,6 +2501,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 			if (empty($link_id))
 				return;
+			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return;
 			$user_ID = self::Get_user_ID($post);
 			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
 				return;
@@ -2799,7 +2809,19 @@ if (!class_exists('WPAL2Facebook')) {
 		// Modify comment list
 		function Comments_array($comments, $post_ID) {
 			$post = get_post($post_ID);
+
+			// Integration turned off?
+			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return $comments;
+
 			$user_ID = self::Get_user_ID($post);
+
+			// Get time zone offset
+			$tz_off = get_option('gmt_offset');
+			if (empty($tz_off))
+				$tz_off = 0;
+			else
+				$tz_off = $tz_off * 3600;
 
 			// Process comments
 			if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
@@ -2825,8 +2847,8 @@ if (!class_exists('WPAL2Facebook')) {
 							$new->comment_author_email = $fb_comment->from->id;
 							$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
 							$new->comment_author_ip = '';
-							$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
-							$new->comment_date_gmt = $new->comment_date;
+							$new->comment_date_gmt = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
+							$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off);
 							$new->comment_content = $fb_comment->message;
 							$new->comment_karma = 0;
 							$new->comment_approved = 1;
@@ -2853,8 +2875,8 @@ if (!class_exists('WPAL2Facebook')) {
 						$new->comment_author_email = '';
 						$new->comment_author_url = $link;
 						$new->comment_author_ip = '';
-						$new->comment_date = date('Y-m-d H:i:s', time());
-						$new->comment_date_gmt = $new->comment_date;
+						$new->comment_date_gmt = date('Y-m-d H:i:s', time());
+						$new->comment_date = $new->comment_date_gmt;
 						$new->comment_content = '<em>' . __('Liked this post', c_al2fb_text_domain) . '</em>';
 						$new->comment_karma = 0;
 						$new->comment_approved = 1;
