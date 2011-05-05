@@ -514,10 +514,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.29 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.28 =
 * New feature: disable comments integration per post/page
 * Improvement: add WordPress time zone to Facebook comment UTC time
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations by [Satyamo](http://www.satyamo.nl/ "Satyamo")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.27 =
 * Updated FAQ
