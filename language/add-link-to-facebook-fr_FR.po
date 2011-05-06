@@ -8,8 +8,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-03-29 17:52+0100\n"
-"Last-Translator: Marcel Bokhorst\n"
+"PO-Revision-Date: 2011-04-14 17:49+0100\n"
+"Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Pinto Lopes Alberto\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
@@ -27,7 +27,7 @@ msgid "needs authorization"
 msgstr "nécessite une autorisation"
 
 msgid "Add Link to Facebook"
-msgstr "Ajouter un lien vers Facebook"
+msgstr "Publier sur Facebook"
 
 msgid "Administration"
 msgstr "Administration"
@@ -42,10 +42,10 @@ msgid "Use shared Facebook application:"
 msgstr "Utiliser application Facebook partagée:"
 
 msgid "Simple, but less secure"
-msgstr "Simple, mais moins sûr"
+msgstr "Simple, mais moins sécurisé"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Pour obtenir un ID d'application et App Secret, vous devez créer une application Facebook"
+msgstr "Pour obtenir un App ID et un App Secret, vous devez créer une application sur Facebook"
 
 msgid "You have to fill in the following:"
 msgstr "Vous devez remplir le formulaire suivant:"
@@ -54,10 +54,10 @@ msgid "Click here to create"
 msgstr "Cliquez ici pour créer"
 
 msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "Tout ce que vous aimez, apparaîtra comme \"via ... \" en dessous du message"
+msgstr "le nom que vous souhaitez, apparaîtra comme \"via ... \" en dessous du message"
 
 msgid "Web Site > Site URL:"
-msgstr "Site Web > URL du site:"
+msgstr "Site Web > URL de votre site:"
 
 msgid "App ID:"
 msgstr "App ID:"
@@ -72,7 +72,7 @@ msgid "App Name:"
 msgstr "Nom de l'Application:"
 
 msgid "Share with all users on this site:"
-msgstr "Partager avec tous les utilisateurs sur ce site:"
+msgstr "Partager avec tous les utilisateurs de votre site:"
 
 msgid "Additional settings"
 msgstr "Paramètres supplémentaires"
@@ -99,7 +99,7 @@ msgid "Custom picture below"
 msgstr "Image personnalisé ci-dessous"
 
 msgid "Custom picture URL:"
-msgstr "URL d'image personnalisé:"
+msgstr "URL de l'image personnalisé:"
 
 msgid "At least 50 x 50 pixels"
 msgstr "Au moins 50 x 50 pixels"
@@ -117,7 +117,7 @@ msgid "Use groups:"
 msgstr "Utilisez les groupes:"
 
 msgid "Requires user groups permission"
-msgstr "Requiert l'autorisation des groupes d'utilisateurs"
+msgstr "Requiert l'autorisation du groupe d'utilisateurs"
 
 msgid "Add to group:"
 msgstr "Ajouter au groupe:"
@@ -126,16 +126,16 @@ msgid "Use site title as caption:"
 msgstr "Utiliser le titre du site comme légende:"
 
 msgid "Use excerpt as message:"
-msgstr "Utiliser l'extrait comme message:"
+msgstr "Utiliser un extrait comme message:"
 
 msgid "Clean on deactivate:"
 msgstr "Nettoyer à la désactivation:"
 
 msgid "All data, except link id's"
-msgstr "Toutes les données, sauf l'ID des liens"
+msgstr "Toutes les données, sauf l'ID du lien"
 
 msgid "I have donated to this plugin:"
-msgstr "J'ai donné à ce plugin:"
+msgstr "J'ai fait une don pour ce plugin:"
 
 msgid "Administrator options"
 msgstr "Options administrateur"
@@ -147,7 +147,7 @@ msgid "Except on this page"
 msgstr "Sauf sur cette page"
 
 msgid "Required capability to use plugin:"
-msgstr "Capacité requise pour utiliser le plugin:"
+msgstr "Requiert la capacité d'utiliser le plugin:"
 
 msgid "Debug options"
 msgstr "Options de débogage"
@@ -165,13 +165,13 @@ msgid "Authorization"
 msgstr "Autorisation"
 
 msgid "Links will be added to"
-msgstr "Des liens seront ajoutés à"
+msgstr "Les liens seront ajoutés à"
 
 msgid "Authorize"
 msgstr "Autoriser"
 
 msgid "Privacy in the Sustainable Plugins Sponsorship Network"
-msgstr "Protection des renseignements personnels dans le réseau de parrainage des Plugins"
+msgstr "Politique de confidentialité sur les données privés du réseau Plugins Sponsorship"
 
 msgid "Resources"
 msgstr "Ressources"
@@ -192,7 +192,7 @@ msgid "Other plugins"
 msgstr "Autres plugins"
 
 msgid "Do not add link to Facebook"
-msgstr "Ne pas ajouter de lien vers Facebook"
+msgstr "Ne pas publier sur Facebook"
 
 msgid "Debug information"
 msgstr "Informations de débogage"
@@ -243,31 +243,31 @@ msgid "Number of sentences to use:"
 msgstr "Nombre de phrases à utiliser:"
 
 msgid "Leave blank to let Facebook choose"
-msgstr "Laissez vide pour laisser Facebook choisir "
+msgstr "Laissez vide pour permettre à Facebook de choisir"
 
 msgid "Text trailer:"
 msgstr "Texte d'introduction:"
 
 msgid "For example \"Read more ...\""
-msgstr "Par exemple \"Lire la suite ... \""
+msgstr "Par exemple «Lire la suite ...»"
 
 msgid "Keep hyperlinks:"
-msgstr "Garder des liens hypertexte:"
+msgstr "Attribuer le lien hypertexte:"
 
 msgid "The hyperlink title will be removed"
-msgstr "L'hyperlien du titre sera retiré"
+msgstr "Le lien hypertext du titre sera retiré"
 
 msgid "Integrate comments from Facebook:"
 msgstr "Intégrer les commentaires de Facebook:"
 
 msgid "Integrate likes from Facebook:"
-msgstr "Intégrer les aime de Facebook:"
+msgstr "Intégrer les «J'aime» de Facebook:"
 
 msgid "Show likers below the post text:"
-msgstr "Afficher ceux qui aiment en dessous de l'article"
+msgstr "Afficher ceux qui aiment en dessous de l'article:"
 
 msgid "Show Facebook like button:"
-msgstr "Afficher le bouton Facebook j'aime:"
+msgstr "Afficher le bouton Facebook «J'aime»:"
 
 msgid "Use Open Graph protocol:"
 msgstr "Utiliser le protocole Open Graph:"
@@ -282,7 +282,7 @@ msgid "Liked this post"
 msgstr "Aime cet article"
 
 msgid "Refresh Facebook comments every:"
-msgstr "Actualiser les commentaires Facebook tous les:"
+msgstr "Actualiser les commentaires de Facebook toutes les:"
 
 msgid "Minutes"
 msgstr "Minutes"
@@ -291,7 +291,7 @@ msgid "Default every 10 minutes"
 msgstr "Par défaut toutes les 10 minutes"
 
 msgid "Maximum Facebook text length:"
-msgstr "Longueur maximale du texte Facebook:"
+msgstr "Longueur maximale du texte de Facebook:"
 
 msgid "Characters"
 msgstr "Charactères"
@@ -336,7 +336,7 @@ msgid "Action:"
 msgstr "Action:"
 
 msgid "Like"
-msgstr "aime"
+msgstr "Aime"
 
 msgid "Recommend"
 msgstr "Recommander"
@@ -381,7 +381,7 @@ msgid "Do not verify the peer's certificate:"
 msgstr "Ne pas vérifier le certificat du peer:"
 
 msgid "Try this in case of cURL error 60"
-msgstr "Essayez ceci en cas d'erreur cURL 60"
+msgstr "A essayer en cas d'erreur cURL 60"
 
 msgid "Add links for new pages:"
 msgstr "Ajouter des liens pour les nouvelles pages:"
