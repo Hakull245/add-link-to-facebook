@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-04-08 18:15+0100\n"
+"PO-Revision-Date: 2011-05-05 06:07+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -436,4 +436,22 @@ msgstr "Jeg har klassifisert denne plugin:"
 
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
 msgstr "Hvis du liker Tilføy link til Facebook innstikk, kan du klassifisere den på <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Hvis den gjennomsnittlige rating er lav, er det ingen mening å supportere dette innstikk lenger.<br />Du kan deaktivere denne notisen ved å merke av alternativet \"Jeg har klassifisert denne plugin\" på  <a href=\"[settings]\">innstillings siden</a>."
+
+msgid "Custom exerpt"
+msgstr "Tilpasset utdrag"
+
+msgid "Use iframe in stead of XFBML:"
+msgstr "Bruk iframe i stedet for XFBML:"
+
+msgid "Post WordPress comments back to Facebook:"
+msgstr "Poster WordPress kommentarer tilbake til Facebook:"
+
+msgid "commented on"
+msgstr "kommenterte på"
+
+msgid "Show Facebook send button:"
+msgstr "Vis Facebook send knapp:"
+
+msgid "Do not integrate comments"
+msgstr "Ikke integrer kommentarer"
 
