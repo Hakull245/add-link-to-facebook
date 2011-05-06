@@ -35,7 +35,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Beta features:**
 
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
-* Postback of WordPress comments to Facebook
+* Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
 
 If you find this plugin useful, please rate it accordingly.
