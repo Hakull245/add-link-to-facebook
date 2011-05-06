@@ -98,6 +98,9 @@ define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
 define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
 define('c_al2fb_meta_log', 'al2fb_log');
 
+define('c_al2fb_action_delete', 'al2fb_action_delete');
+define('c_al2fb_action_clear', 'al2fb_action_clear');
+
 // Comment meta
 define('c_al2fb_meta_fb_comment_id', 'al2fb_facebook_comment_id');
 
@@ -1855,6 +1858,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get no like button indication
 			$chk_nolike = (get_post_meta($post->ID, c_al2fb_meta_nolike, true) ? ' checked' : '');
 			$chk_nointegrate = (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ? ' checked' : '');
+
+			// Check if errors
+			$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
 ?>
 			<div class="al2fb_post_submit">
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>"<?php echo $chk_exclude; ?> />
@@ -1868,8 +1874,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 <?php		if (!empty($link_id)) { ?>
 				<br />
-				<input id="al2fb_delete" type="checkbox" name="al2fb_delete"/>
+				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+<?php		} ?>
+<?php		if (!empty($error)) { ?>
+				<br />
+				<input id="al2fb_clear" type="checkbox" name="<?php echo c_al2fb_action_clear; ?>"/>
+				<label for="al2fb_clear"><?php _e('Clear error messages', c_al2fb_text_domain); ?></label>
 <?php		} ?>
 			</div>
 <?php
@@ -1997,7 +2008,7 @@ if (!class_exists('WPAL2Facebook')) {
 			echo $excerpt . '</textarea>';
 		}
 
-		// Save selected attached image
+		// Save indications & selected attached image
 		function Save_post($post_id) {
 			// Security checks
 			$nonce = (isset($_POST[c_al2fb_nonce_form]) ? $_POST[c_al2fb_nonce_form] : null);
@@ -2027,6 +2038,10 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post_id, c_al2fb_meta_nointegrate, true);
 			else
 				delete_post_meta($post_id, c_al2fb_meta_nointegrate);
+
+			// Clear errors
+			if (isset($_POST[c_al2fb_action_clear]) && $_POST[c_al2fb_action_clear])
+				delete_post_meta($post_id, c_al2fb_meta_error);
 
 			// Persist data
 			if (isset($_POST['al2fb_image_id']))
@@ -2064,7 +2079,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
 			$user_ID = self::Get_user_ID($post);
-			$delete = (isset($_POST['al2fb_delete']) && $_POST['al2fb_delete']);
+			$delete = (isset($_POST[c_al2fb_action_delete]) && $_POST[c_al2fb_action_delete]);
 
 			// Log
 			if ($this->debug) {
