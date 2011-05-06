@@ -31,12 +31,12 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Shortcodes and template tags for liker names, like button and send button
 * Integrate Facebook comments and likes on added links into Wordpress
-* Postback of WordPress comments to Facebook
 
 **Beta features:**
 
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
-* Post WordPress comments back to Facebook
+* Postback of WordPress comments to Facebook
+* Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
