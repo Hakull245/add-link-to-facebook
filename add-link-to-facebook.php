@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://blog.bokhorst.biz/5018/computers-en-internet/wordpress-plugin-add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 1.29
+Version: 1.30
 Author: Marcel Bokhorst
 Author URI: http://blog.bokhorst.biz/about/
 */
