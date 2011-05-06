@@ -37,6 +37,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
+* Sidebar widget for like/send button
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -515,7 +516,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.31 =
-* New feature: widget for like/send button
+* New feature: sidebar widget for like/send button
 * New feature: combine like/send button
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
