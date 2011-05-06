@@ -6,7 +6,7 @@ Requires at least: 3.0
 Tested up to: 3.1.1
 Stable tag: 1.29
 
-Automatically add links to published posts or pages to your Facebook wall, pages or groups
+Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
 == Description ==
 
