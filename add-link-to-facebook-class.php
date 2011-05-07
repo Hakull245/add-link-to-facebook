@@ -3416,18 +3416,20 @@ class AL2FB_Widget extends WP_Widget {
 		$user_ID = $wp_al2fb->Get_user_ID($post);
 
 		// Check if widget should be displayed
-		if (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
+		$buttons = (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
 			!(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) &&
 			!(get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) && is_page()) &&
 			!(get_user_meta($user_ID, c_al2fb_meta_like_noarchives, true) && is_archive()) &&
 			!(get_user_meta($user_ID, c_al2fb_meta_like_nocategories, true) && is_category()) &&
-			!get_post_meta($post->ID, c_al2fb_meta_nolike, true)) {
+			!get_post_meta($post->ID, c_al2fb_meta_nolike, true));
+		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] && $buttons : false;
+		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] && $buttons : false;
+		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 
+		if ($like_button || $send_button || $profile) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
-			$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] : false;
-			$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] : false;
 
 			// Build content
 			echo $before_widget;
@@ -3435,10 +3437,30 @@ class AL2FB_Widget extends WP_Widget {
 				$title = 'Add Link to Facebook';
 			echo $before_title . $title . $after_title;
 
+			// Like button
 			if ($like_button)
 				echo $wp_al2fb->Get_like_button($post);
+				
+			// Send button
 			if ($send_button)
 				echo $wp_al2fb->Get_send_button($post);
+				
+			// Profile
+			if ($profile) {
+				$me = get_transient(c_al2fb_transient_cache . 'me');
+				if ($me === false) {
+					$me = $wp_al2fb->Get_me($user_ID, false);
+					$duration = intval(get_option(c_al2fb_option_msg_refresh));
+					if (!$duration)
+						$duration = 10;
+					set_transient(c_al2fb_transient_cache . 'me', $me, $duration * 60);
+				}
+				if (!empty($me)) {
+					$img = 'http://creative.ak.fbcdn.net/ads3/creative/pressroom/jpg/b_1234209334_facebook_logo.jpg';
+					echo '<div class="al2fb_profile"><a href="' . $me->link . '">';
+					echo '<img src="' . $img . '" alt="Facebook profile" /></a></div>';
+				}
+			}
 
 			echo $after_widget;
 		}
@@ -3449,12 +3471,14 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['al2fb_like_button'] = $new_instance['al2fb_like_button'];
 		$instance['al2fb_send_button'] = $new_instance['al2fb_send_button'];
+		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
 		return $instance;
 	}
 
 	function form($instance) {
 		$chk_like = ($instance['al2fb_like_button'] ? ' checked ' : '');
 		$chk_send = ($instance['al2fb_send_button'] ? ' checked ' : '');
+		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
@@ -3465,6 +3489,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_send; ?> id="<?php echo $this->get_field_id('al2fb_send_button'); ?>" name="<?php echo $this->get_field_name('al2fb_send_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_send_button'); ?>"><?php _e('Show Facebook send button', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_profile; ?> id="<?php echo $this->get_field_id('al2fb_profile'); ?>" name="<?php echo $this->get_field_name('al2fb_profile'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook image/link', c_al2fb_text_domain); ?></label>
 		</p>
 		<?php
 	}
