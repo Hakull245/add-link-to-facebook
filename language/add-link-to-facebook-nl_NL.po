@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-04-07 17:22+0100\n"
+"PO-Revision-Date: 2011-05-06 23:21+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -253,7 +253,7 @@ msgid "For example \"Read more ...\""
 msgstr "Bijvoorbeeld \"Lees meer ...\""
 
 msgid "Keep hyperlinks:"
-msgstr "Behoudt hyperlinks:"
+msgstr "Behoud hyperlinks:"
 
 msgid "The hyperlink title will be removed"
 msgstr "De hyperlink titel zal worden verwijderd"
@@ -268,7 +268,7 @@ msgid "Show likers below the post text:"
 msgstr "Toon 'vind ik leuk' onder de berichttekst:"
 
 msgid "Show Facebook like button:"
-msgstr "Toon Facebook 'vind ik leuk' knop:"
+msgstr "Toon Facebook vind ik leuk knop:"
 
 msgid "Use Open Graph protocol:"
 msgstr "Gebruik Open Graph protocol:"
@@ -429,11 +429,47 @@ msgid "Default UTF-8; do not change if no need"
 msgstr "Standaard UTF-8; niet veranderen wanneer niet nodig"
 
 msgid "Do not add like button"
-msgstr "Voeg geen 'vind ik leuk' knop toe"
+msgstr "Voeg geen vind ik leuk knop toe"
 
 msgid "I have rated this plugin:"
 msgstr "Ik heb deze plugin beoordeeld:"
 
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
 msgstr "Als u de Add Link to Facebook plugin goed vindt, beoordeelt u hem dan alstublieft op <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Als de gemiddelde beoordeling laag is, is het niet zinvol om deze plugin te ondersteunen.<br />U kunt deze melding uitzetten door de optie \"Ik heb deze plugin beoordeeld\" op de  <a href=\"[settings]\">instellingen pagina</a>."
+
+msgid "Custom exerpt"
+msgstr "Maatwerk samenvatting"
+
+msgid "Use iframe in stead of XFBML:"
+msgstr "Gebruik iframe in plaats van XFBML:"
+
+msgid "Post WordPress comments back to Facebook:"
+msgstr "Stuur WordPress berichten terug naar Facebook:"
+
+msgid "commented on"
+msgstr "schreef op"
+
+msgid "Show Facebook send button:"
+msgstr "Toon Facebook verstuur knop:"
+
+msgid "Do not integrate comments"
+msgstr "Integreer berichten niet"
+
+msgid "Copy comments from Facebook to WordPress:"
+msgstr "Kopieer berichten van Facebook naar WordPress:"
+
+msgid "Enables for example editing of Facebook comments"
+msgstr "Staat bijvoorbeeld wijzigen van Facebook berichten toe"
+
+msgid "Show Facebook like button"
+msgstr "Toon Facebook vind ik leuk knop"
+
+msgid "Show Facebook send button"
+msgstr "Toon Facebook verstuur knop"
+
+msgid "Combine Facebook like and send buttons:"
+msgstr "Combineer Facebook vind ik leuk en verstuur knoppen:"
+
+msgid "Clear error messages"
+msgstr "Wis foutmeldingen"
 
