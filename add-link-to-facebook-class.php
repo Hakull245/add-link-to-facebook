@@ -1114,12 +1114,13 @@ if (!class_exists('WPAL2Facebook')) {
 							<select id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
 							echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</option>';
-							foreach ($pages->data as $page) {
-								echo '<option value="' . $page->id . '"';
-								if ($page->id == $selected_page)
-									echo ' selected';
-								echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' - ' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . '</option>';
-							}
+							if ($pages->data)
+								foreach ($pages->data as $page) {
+									echo '<option value="' . $page->id . '"';
+									if ($page->id == $selected_page)
+										echo ' selected';
+									echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' - ' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . '</option>';
+								}
 ?>
 							</select>
 						</td></tr>
@@ -1151,12 +1152,13 @@ if (!class_exists('WPAL2Facebook')) {
 							<select id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
 <?php
 							echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
-							foreach ($groups->data as $group) {
-								echo '<option value="' . $group->id . '"';
-								if ($group->id == $selected_group)
-									echo ' selected';
-								echo '>' . htmlspecialchars($group->name, ENT_QUOTES, $charset) . '</option>';
-							}
+							if ($groups->data)
+								foreach ($groups->data as $group) {
+									echo '<option value="' . $group->id . '"';
+									if ($group->id == $selected_group)
+										echo ' selected';
+									echo '>' . htmlspecialchars($group->name, ENT_QUOTES, $charset) . '</option>';
+								}
 ?>
 							</select>
 						</td></tr>
@@ -1980,22 +1982,23 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '</div>';
 
 					// Images
-					foreach ($images as $attachment_id => $attachment) {
-						$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+					if ($images)
+						foreach ($images as $attachment_id => $attachment) {
+							$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
 
-						echo '<div class="al2fb_image">';
-						echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
-						if ($attachment_id == $image_id)
-							echo ' checked';
-						echo $disabled;
-						echo ' value="' . $attachment_id . '">';
-						echo '<br />';
-						echo '<label for="al2fb_image_' . $attachment_id . '">';
-						echo '<img src="' . $picture[0] . '" alt=""></label>';
-						echo '<br />';
-						echo '<span>' . $picture[1] . ' x ' . $picture[2] . '</span>';
-						echo '</div>';
-					}
+							echo '<div class="al2fb_image">';
+							echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
+							if ($attachment_id == $image_id)
+								echo ' checked';
+							echo $disabled;
+							echo ' value="' . $attachment_id . '">';
+							echo '<br />';
+							echo '<label for="al2fb_image_' . $attachment_id . '">';
+							echo '<img src="' . $picture[0] . '" alt=""></label>';
+							echo '<br />';
+							echo '<span>' . $picture[1] . ' x ' . $picture[2] . '</span>';
+							echo '</div>';
+						}
 					echo '</div>';
 				}
 			}
@@ -2145,9 +2148,10 @@ if (!class_exists('WPAL2Facebook')) {
 					$exclude_category = false;
 					$categories = get_the_category($post->ID);
 					$excluding_categories = explode(',', get_option(c_al2fb_option_exclude_cat));
-					foreach ($categories as $category)
-						if (in_array($category->cat_ID, $excluding_categories))
-							$exclude_category = true;
+					if ($categories)
+						foreach ($categories as $category)
+							if (in_array($category->cat_ID, $excluding_categories))
+								$exclude_category = true;
 
 					// Check if public post
 					if (empty($post->post_password) &&
@@ -2598,11 +2602,12 @@ if (!class_exists('WPAL2Facebook')) {
 				get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
 				$found = false;
 				$pages = self::Get_pages($user_ID);
-				foreach ($pages->data as $page)
-					if ($page->id == $page_id) {
-						$found = true;
-						$access_token = $page->access_token;
-					}
+				if ($pages->data)
+					foreach ($pages->data as $page)
+						if ($page->id == $page_id) {
+							$found = true;
+							$access_token = $page->access_token;
+						}
 			}
 			return $access_token;
 		}
@@ -2872,13 +2877,14 @@ if (!class_exists('WPAL2Facebook')) {
 					foreach ($fb_comments->data as $fb_comment) {
 						// Check if post back from WordPress to Facebook
 						$postback = false;
-						foreach ($comments as $comment) {
-							$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-							if ($fb_comment_id == $fb_comment->id) {
-								$postback = true;
-								break;
+						if ($comments)
+							foreach ($comments as $comment) {
+								$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+								if ($fb_comment_id == $fb_comment->id) {
+									$postback = true;
+									break;
+								}
 							}
-						}
 
 						if (!$postback) {
 							// Create new virtual comment
@@ -2886,7 +2892,7 @@ if (!class_exists('WPAL2Facebook')) {
 							$new->comment_ID = $fb_comment->id;
 							$new->comment_post_ID = $post_ID;
 							$new->comment_author = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
-							$new->comment_author_email = $fb_comment->from->id;
+							$new->comment_author_email = '';
 							$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
 							$new->comment_author_IP = '';
 							$new->comment_date_gmt = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
@@ -2977,13 +2983,14 @@ if (!class_exists('WPAL2Facebook')) {
 					foreach ($fb_comments->data as $fb_comment)
 						if (!empty($fb_comments)) {
 							$postback = false;
-							foreach ($comments as $comment) {
-								$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-								if ($fb_comment_id == $fb_comment->id) {
-									$postback = true;
-									break;
+							if ($comments)
+								foreach ($comments as $comment) {
+									$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+									if ($fb_comment_id == $fb_comment->id) {
+										$postback = true;
+										break;
+									}
 								}
-							}
 							if (!$postback)
 								$count++;
 						}
@@ -3014,12 +3021,13 @@ if (!class_exists('WPAL2Facebook')) {
 				$comment->comment_agent == 'AL2FB') {
 
 				// Get picture url
-				$fb_key = c_al2fb_transient_cache . md5('p' . $comment->comment_author_email);
+				$id = explode('id=', $comment->comment_author_url);
+				$fb_key = c_al2fb_transient_cache . md5('p' . $id[1]);
 				$fb_picture_url = get_transient($fb_key);
 				if ($this->debug)
 					$fb_picture_url = false;
 				if ($fb_picture_url === false) {
-					$fb_picture_url = self::Get_picture_url($comment->comment_author_email, 'normal');
+					$fb_picture_url = self::Get_picture_url($id[1], 'normal');
 					$duration = intval(get_option(c_al2fb_option_msg_refresh));
 					if (!$duration)
 						$duration = 10;
