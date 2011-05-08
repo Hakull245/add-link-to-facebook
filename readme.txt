@@ -60,6 +60,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
+* Vietnamese (vi\_VN) by [](http:// ""), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -517,6 +518,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.35 =
 * Improvement: removed like/send button combination for iframe version
+* Added Vietnamese (vi\_VN) translation by [](http:// "")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.34 =
