@@ -515,6 +515,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.35 =
+* Improvement: removed like/send button combination for iframe version
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.34 =
 * New feature: show Facebook image/link in widget
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
