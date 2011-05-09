@@ -2153,10 +2153,13 @@ if (!class_exists('WPAL2Facebook')) {
 							if (in_array($category->cat_ID, $excluding_categories))
 								$exclude_category = true;
 
+					$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+					$ex_custom_types[] = 'nav_menu_item';
+
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
-						!in_array($post->post_type, explode(',', get_option(c_al2fb_option_exclude_type))) &&
+						!in_array($post->post_type, $ex_custom_types) &&
 						!$exclude_category)
 						self::Add_fb_link($post);
 				}
