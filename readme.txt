@@ -517,6 +517,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.35 =
+* Bugfix: do not add link for custom menus
 * Improvement: removed like/send button combination for iframe version
 * Added Vietnamese (vi\_VN) translation by [Crazywolfdl](http://mydalat.com "Crazywolfdl")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
