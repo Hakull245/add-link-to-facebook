@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.34
+Stable tag: 1.35
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -55,11 +55,12 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Afrikaans (afr\_AFR) by [Jeremy](http://www.primeimage.co.za/ "Jeremy"), thanks!
 * Italian (it\_IT) by [Gianni](http://gidibao.net/ "Gianni"), thanks!
 * Turkish (tr\_TR) by [laztrix](http://www.diviksfilm.com/blog "laztrix"), thanks!
-* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), [Micha](http://www.styloweb.de/ "Micha") and [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk"), thanks!
+* German (de\_DE) by [Dirk Exner](http://www.ping-pongline.de/ "Dirk Exner"), [Björn](http://cooleisbaer.co.funpic.de/ "Björn"), [Micha](http://www.styloweb.de/ "Micha"), [Till Grzegorczyk](http://www.formpix.com "Till Grzegorczyk") and [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer"), thanks!
 * Polish (pl\_PL) by [tomi0011](http://blog.coszsieciami.cba.pl/ "tomi0011"), thanks!
 * Hungarian (hu\_HU) by [Pitty](http://www.pittyphoto.hu/ "Pitty"), thanks!
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
+* Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -514,6 +515,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.35 =
+* Bugfix: do not add links for custom menus
+* Bugfix: correct comment count for posts for which comments are not integrated
+* Improvement: removed like/send button combination for iframe version
+* Added Vietnamese (vi\_VN) translation by [Crazywolfdl](http://mydalat.com "Crazywolfdl")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.34 =
 * New feature: show Facebook image/link in widget
@@ -1109,6 +1118,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.35 =
+Two bugfixes, one improvement, new translation, translation updates
 
 = 1.34 =
 One new feature, translation updates

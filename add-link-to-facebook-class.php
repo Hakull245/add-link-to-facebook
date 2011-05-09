@@ -2153,10 +2153,13 @@ if (!class_exists('WPAL2Facebook')) {
 							if (in_array($category->cat_ID, $excluding_categories))
 								$exclude_category = true;
 
+					$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+					$ex_custom_types[] = 'nav_menu_item';
+
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
-						!in_array($post->post_type, explode(',', get_option(c_al2fb_option_exclude_type))) &&
+						!in_array($post->post_type, $ex_custom_types) &&
 						!$exclude_category)
 						self::Add_fb_link($post);
 				}
@@ -2789,8 +2792,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 				$content = '<iframe src="http://www.facebook.com/plugins/like.php';
 				$content .= '?href=' . urlencode($link);
-				if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
-					$content .= '&amp;send=true';
+				//if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
+				//	$content .= '&amp;send=true';
 				$content .= '&amp;layout=' . (empty($layout) ? 'standard' : $layout);
 				$content .= '&amp;show_faces=' . ($faces ? 'true' : 'false');
 				$content .= '&amp;width=' . (empty($width) ? '450' : $width);
@@ -2809,8 +2812,10 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else {
 				$content = '<div class="al2fb_like_button">';
+				$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
-				$content .= '<fb:like ref="AL2FB"';
+				$content .= '<fb:like';
+				$content .= ' href="' . $link . '"';
 				if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
 					$content .= ' send="true"';
 				$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
@@ -2819,7 +2824,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
 				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
 				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
-				$content .= ' href="' . $link . '"></fb:like>';
+				$content .= ' ref="AL2FB"';
+				$content .= '></fb:like>';
 				$content .= '</div>';
 			}
 			return $content;
@@ -2973,6 +2979,11 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get comment count with FB comments/likes
 		function Get_comments_number($count, $post_ID) {
 			$post = get_post($post_ID);
+
+			// Integration turned off?
+			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return $count;
+
 			$user_ID = self::Get_user_ID($post);
 
 			// Comment count
@@ -3440,11 +3451,11 @@ class AL2FB_Widget extends WP_Widget {
 			// Like button
 			if ($like_button)
 				echo $wp_al2fb->Get_like_button($post);
-				
+
 			// Send button
 			if ($send_button)
 				echo $wp_al2fb->Get_send_button($post);
-				
+
 			// Profile
 			if ($profile) {
 				$me = get_transient(c_al2fb_transient_cache . 'me');
