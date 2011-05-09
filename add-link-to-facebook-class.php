@@ -131,6 +131,11 @@ define('USERPHOTO_APPROVED', 2);
 // - Improve cleaning
 // - Option to set timeout
 
+// - Imported FB comments: option link profile or not
+// - Option to set Facebook avatar size
+// - Styling of like/send button and liker names
+// - Monitor combined link/send button problem
+
 // Define class
 if (!class_exists('WPAL2Facebook')) {
 	class WPAL2Facebook {
@@ -1814,8 +1819,9 @@ if (!class_exists('WPAL2Facebook')) {
 			return $likes;
 		}
 
-		// Get comments
-		function Get_picture_url($id, $size) {
+		// Get Facebook picture
+		// Returns a HTTP 302 with the URL of the user's profile picture (use ?type=square | small | normal | large to request a different photo)
+		function Get_fb_picture_url($id, $size) {
 			$url = 'https://graph.facebook.com/' . $id . '/picture?' . $size;
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
 				$timeout = get_option(c_al2fb_option_timeout);
@@ -3042,7 +3048,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($this->debug)
 					$fb_picture_url = false;
 				if ($fb_picture_url === false) {
-					$fb_picture_url = self::Get_picture_url($id[1], 'normal');
+					$fb_picture_url = self::Get_fb_picture_url($id[1], 'normal');
 					$duration = intval(get_option(c_al2fb_option_msg_refresh));
 					if (!$duration)
 						$duration = 10;
