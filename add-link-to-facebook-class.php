@@ -2979,6 +2979,11 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get comment count with FB comments/likes
 		function Get_comments_number($count, $post_ID) {
 			$post = get_post($post_ID);
+
+			// Integration turned off?
+			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return $count;
+
 			$user_ID = self::Get_user_ID($post);
 
 			// Comment count
