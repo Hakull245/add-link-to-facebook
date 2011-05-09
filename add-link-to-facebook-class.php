@@ -175,6 +175,7 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('admin_menu', array(&$this, 'Admin_menu'));
 				add_filter('plugin_action_links', array(&$this, 'Plugin_action_links'), 10, 2);
 				add_action('admin_notices', array(&$this, 'Admin_notices'));
+				add_action('post_submitbox_misc_actions', array(&$this, 'Post_submitbox_misc_actions'));
 				add_action('post_submitbox_start', array(&$this, 'Post_submitbox'));
 				add_filter('manage_posts_columns', array(&$this, 'Manage_posts_columns'));
 				add_action('manage_posts_custom_column', array(&$this, 'Manage_posts_custom_column'), 10, 2);
@@ -1843,6 +1844,9 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else
 				return false;
+		}
+
+		function Post_submitbox_misc_actions() {
 		}
 
 		// Add exclude checkbox
