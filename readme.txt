@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.35
+Stable tag: 1.36
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -517,6 +517,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.36 =
+* New feature: option to not link to Facebook comment author
+* Improvement: moved post actions from start to misc actions
+* Updated description
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.35 =
@@ -1122,6 +1126,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.36 =
+One new feature, one improvement, translation updates
+
 = 1.35 =
 Two bugfixes, one improvement, new translation, translation updates
 
@@ -1482,6 +1489,7 @@ Realized features:
 * Facebook send button (version 1.25)
 * Disable comments integration per post/page (version 1.28)
 * Copy Facebook comments into WordPress database (version 1.29)
+* Option to not link to Facebook comment author (version 1.36)
 
 Feature which will not be realized:
 
