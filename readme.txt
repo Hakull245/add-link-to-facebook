@@ -85,6 +85,8 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 == Frequently Asked Questions ==
 
+**Warning: if you delete your Facebook application, you will also delete the links it added!**
+
 **--- Usability ---**
 
 = U01 What is a caption, message, etc? =
@@ -519,7 +521,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.36 =
 * New feature: option to not link to Facebook comment author
 * Improvement: moved post actions from start to misc actions
-* Updated description
+* Updated FAQ and description
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
