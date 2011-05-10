@@ -2837,7 +2837,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else {
 				$content = '<div class="al2fb_like_button">';
-				$content .= '<div id="fb-root"></div>';
+				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
 				$content .= '<fb:like';
 				$content .= ' href="' . $link . '"';
