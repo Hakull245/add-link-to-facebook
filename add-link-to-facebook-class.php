@@ -58,6 +58,7 @@ define('c_al2fb_meta_share_link', 'al2fb_share_link');
 define('c_al2fb_meta_fb_comments', 'al2fb_fb_comments');
 define('c_al2fb_meta_fb_comments_postback', 'al2fb_fb_comments_postback');
 define('c_al2fb_meta_fb_comments_copy', 'al2fb_fb_comments_copy');
+define('c_al2fb_meta_fb_comments_nolink', 'al2fb_fb_comments_nolink');
 define('c_al2fb_meta_fb_likes', 'al2fb_fb_likes');
 define('c_al2fb_meta_post_likers', 'al2fb_post_likers');
 define('c_al2fb_meta_post_like_button', 'al2fb_post_like_button');
@@ -130,10 +131,9 @@ define('USERPHOTO_APPROVED', 2);
 // - Use link instead of feed?
 // - Improve cleaning
 // - Option to set timeout
-
-// - Imported FB comments: option link profile or not
 // - Option to set Facebook avatar size
-// - Styling of like/send button and liker names
+
+// - Styling of like/send button and liker names?
 // - Monitor combined link/send button problem
 
 // Define class
@@ -207,6 +207,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_action('wp_head', array(&$this, 'WP_head'));
 			add_filter('the_content', array(&$this, 'The_content'), 999);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
+			add_filter('get_comment', array(&$this, 'Get_comment'));
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
 			add_filter('comment_class', array(&$this, 'Comment_class'));
 			add_filter('get_avatar', array(&$this, 'Get_avatar'), 10, 5);
@@ -290,6 +291,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_fb_comments);
 				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_postback);
 				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_copy);
+				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink);
 				delete_user_meta($user_ID, c_al2fb_meta_fb_likes);
 				delete_user_meta($user_ID, c_al2fb_meta_post_likers);
 				delete_user_meta($user_ID, c_al2fb_meta_post_like_button);
@@ -480,6 +482,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_fb_comments_postback] = null;
 			if (empty($_POST[c_al2fb_meta_fb_comments_copy]))
 				$_POST[c_al2fb_meta_fb_comments_copy] = null;
+			if (empty($_POST[c_al2fb_meta_fb_comments_nolink]))
+				$_POST[c_al2fb_meta_fb_comments_nolink] = null;
 			if (empty($_POST[c_al2fb_meta_fb_likes]))
 				$_POST[c_al2fb_meta_fb_likes] = null;
 			if (empty($_POST[c_al2fb_meta_post_likers]))
@@ -587,6 +591,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments, $_POST[c_al2fb_meta_fb_comments]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, $_POST[c_al2fb_meta_fb_comments_postback]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, $_POST[c_al2fb_meta_fb_comments_copy]);
+			update_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, $_POST[c_al2fb_meta_fb_comments_nolink]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_likes, $_POST[c_al2fb_meta_fb_likes]);
 			update_user_meta($user_ID, c_al2fb_meta_post_likers, $_POST[c_al2fb_meta_post_likers]);
 			update_user_meta($user_ID, c_al2fb_meta_post_like_button, $_POST[c_al2fb_meta_post_like_button]);
@@ -1250,6 +1255,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_fb_comments_nolink"><?php _e('Do not link to Facebook comment author:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_fb_comments_nolink" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true)) echo ' checked="checked"'; ?> />
+				<strong>Beta!</strong>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_fb_likes"><?php _e('Integrate likes from Facebook:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_fb_likes" name="<?php echo c_al2fb_meta_fb_likes; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) echo ' checked="checked"'; ?> />
@@ -1852,11 +1864,8 @@ if (!class_exists('WPAL2Facebook')) {
 				return false;
 		}
 
-		function Post_submitbox_misc_actions() {
-		}
-
 		// Add exclude checkbox
-		function Post_submitbox() {
+		function Post_submitbox_misc_actions() {
 			global $post;
 			$user_ID = self::Get_user_ID($post);
 
@@ -1874,7 +1883,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Check if errors
 			$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
 ?>
+			<div class="misc-pub-section"></div>
 			<div class="al2fb_post_submit">
+			<div class="misc-pub-section">
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>"<?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
 			<br />
@@ -1895,7 +1906,11 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_clear"><?php _e('Clear error messages', c_al2fb_text_domain); ?></label>
 <?php		} ?>
 			</div>
+			</div>
 <?php
+		}
+
+		function Post_submitbox() {
 		}
 
 		// Add post Facebook column
@@ -2822,7 +2837,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else {
 				$content = '<div class="al2fb_like_button">';
-				$content .= '<div id="fb-root"></div>';
+				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
 				$content .= '<fb:like';
 				$content .= ' href="' . $link . '"';
@@ -2984,6 +2999,17 @@ if (!class_exists('WPAL2Facebook')) {
 
 		function Comment_compare($a, $b) {
 			return strcmp($a->comment_date_gmt, $b->comment_date_gmt);
+		}
+
+		// Modify Facebook comments
+		function Get_comment($comment) {
+			if ($comment->comment_agent == 'AL2FB') {
+				$post = get_post($comment->comment_post_ID);
+				$user_ID = self::Get_user_ID($post);
+				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true))
+					$comment->comment_author_url = '';
+			}
+			return $comment;
 		}
 
 		// Get comment count with FB comments/likes
@@ -3341,6 +3367,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>FB comments:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB comments postback:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB comments copy:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>FB comments no link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB likes:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Post likers:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_likers, true) ? 'Yes' : 'No') . '</td></tr>';
