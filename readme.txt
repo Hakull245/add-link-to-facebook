@@ -616,7 +616,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.14 =
-* New feature: custom excerpt
+* New feature: custom excerpts
 * New feature: *Use iframe in stead of XFBML*
 * Bugfix: comment integration for Twenty Ten and other themes
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -1455,7 +1455,7 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 
 In no particular order:
 
-* ...
+* Postback comments with 'In reply to NAME: ...'
 
 Realized features:
 
@@ -1478,6 +1478,10 @@ Realized features:
 * Exclude like button on individual pages (version 1.10)
 * Custom exerpt text (version 1.14)
 * Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button") (version 1.14)
+* Option to post WordPress comments back to Facebook (version 1.21)
+* Facebook send button (version 1.25)
+* Disable comments integration per post/page (version 1.28)
+* Copy Facebook comments into WordPress database (version 1.29)
 
 Feature which will not be realized:
 
