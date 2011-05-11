@@ -2797,7 +2797,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Get language
-			$lang = WPLANG;
+			$lang = defined('WPLANG') ? WPLANG : '';
 			if (empty($lang))
 				$lang = 'en_US';
 
@@ -2868,7 +2868,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Get language
-			$lang = WPLANG;
+			$lang = defined('WPLANG') ? WPLANG : '';
 			if (empty($lang))
 				$lang = 'en_US';
 
