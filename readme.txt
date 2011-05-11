@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.37
+Stable tag: 1.38
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -517,6 +517,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.38 =
+* Improvement: efficienter not linking to Facebook comment author
+* Improvement: not linking from liker names too
+* Improvement: added rel="nofollow" to liker names link
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.37 =
 * Forgot to remove experimental code to get combined like/send button working
@@ -1131,6 +1138,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.38 =
+Three improvements, translation updates
+
+= 1.37 =
+Correction
+
 = 1.36 =
 One new feature, one improvement, translation updates
 
@@ -1468,6 +1481,8 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Postback comments with 'In reply to NAME: ...'
+* Link back to Facebook wall
+* Comment with Facebook login
 
 Realized features:
 
