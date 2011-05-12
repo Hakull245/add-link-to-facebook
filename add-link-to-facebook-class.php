@@ -1868,6 +1868,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add exclude checkbox
 		function Post_submitbox_misc_actions() {
+			self::Post_submit();
+		}
+
+		function Post_submitbox() {
+		}
+
+		function Post_submit() {
 			global $post;
 			$user_ID = self::Get_user_ID($post);
 
@@ -1888,6 +1895,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="misc-pub-section"></div>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
+<?php
+			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+?>
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>"<?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
 			<br />
@@ -1910,9 +1920,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</div>
 			</div>
 <?php
-		}
-
-		function Post_submitbox() {
 		}
 
 		// Add post Facebook column
@@ -2331,8 +2338,13 @@ if (!class_exists('WPAL2Facebook')) {
 			// Execute shortcodes
 			$text = do_shortcode($text);
 
+			// http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
+
 			// Remove scripts
-			$text = preg_replace('/<script.+?<\/script>/im', '', $text);
+			$text = preg_replace('/<script.+?<\/script>/ims', '', $text);
+
+			// Remove styles
+			$text = preg_replace('/<style.+?<\/style>/ims', '', $text);
 
 			// Replace hyperlinks
 			if (get_user_meta($user_ID, c_al2fb_meta_hyperlink, true))
