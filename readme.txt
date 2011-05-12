@@ -1,10 +1,10 @@
 ﻿=== Add Link to Facebook ===
 Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
-Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin
+Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.37
+Stable tag: 1.41
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -481,6 +481,7 @@ You can either enable JavaScript or try to use a private Facebook application.
 You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
 Go to the post with the error, enabled *Custom fields* with the *Screen Options* in the upper right corner if needed,
 now scroll down to the *Custom Fields* section and delete the values starting with *al2fb_* to remove the error.
+Since version 1.32 of the plugin, you can use the *Clear error messages* checkbox.
 
 = E15 I get 'Error validating access token' =
 
@@ -501,6 +502,12 @@ Note that the plugin cannot create the meta tags for pages with more than one po
 The plugin is only able to determine the correct Facebook application for posts and pages, because it needs to know an author for this.
 You can use the [URL Linter](http://developers.facebook.com/tools/lint/ "URL Linter") to see if there are valid meta tags.
 
+= E17 I get 'Error finding the requested story' ==
+
+The plugin tried to add a WordPress comment to an added link on Facebook, but the link does not exist anymore.
+To prevent this message in the future, you should delete the link from WordPress too.
+While deleting, you will probably get the error described in question E14 too.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -517,6 +524,27 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.41 =
+* Improvement: added exception handler to widget
+* Improvement: some source code organization
+
+= 1.40 =
+* Updated FAQ
+* Improvement: remove style elements from texts
+* Improvement: remove multi-line scripts from texts
+* Bugfix: save check box state for custom post types
+
+= 1.39 =
+* Bugfix: check if WPLANG is defined
+* Updated FAQ
+
+= 1.38 =
+* Improvement: efficienter not linking to Facebook comment author
+* Improvement: not linking from liker names too
+* Improvement: added rel="nofollow" to liker names link
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.37 =
 * Forgot to remove experimental code to get combined like/send button working
@@ -1131,6 +1159,21 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.41 =
+One improvement
+
+= 1.40 =
+Two improvements, one bugfix
+
+= 1.39 =
+One bugfix
+
+= 1.38 =
+Three improvements, translation updates
+
+= 1.37 =
+Correction
+
 = 1.36 =
 One new feature, one improvement, translation updates
 
@@ -1468,6 +1511,8 @@ If you need help, don't hesitate to leave a message on the [support forum](http:
 In no particular order:
 
 * Postback comments with 'In reply to NAME: ...'
+* Link back to Facebook wall
+* Comment with Facebook login
 
 Realized features:
 
