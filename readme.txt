@@ -525,6 +525,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.42 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.41 =
 * Improvement: added exception handler to widget
 * Improvement: some source code organization
@@ -536,8 +539,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: save check box state for custom post types
 
 = 1.39 =
-* Bugfix: check if WPLANG is defined
 * Updated FAQ
+* Bugfix: check if WPLANG is defined
 
 = 1.38 =
 * Improvement: efficienter not linking to Facebook comment author
