@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.40
+Stable tag: 1.41
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -524,6 +524,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.41 =
+* Improvement: added exception handler to widget
+* Improvement: some source code organization
 
 = 1.40 =
 * Updated FAQ
@@ -1154,6 +1158,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Development version
 
 == Upgrade Notice ==
+
+= 1.41 =
+One improvement
 
 = 1.40 =
 Two improvements, one bugfix
