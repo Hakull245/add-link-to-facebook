@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-05-11 08:42+0100\n"
+"PO-Revision-Date: 2011-05-13 09:37+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -481,4 +481,7 @@ msgstr "Koppel niet naar de auteur van Facebook berichten:"
 
 msgid "Disables displaying of Facebook avatars too"
 msgstr "Zet ook het tonen van Facebook avatars uit"
+
+msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
+msgstr "en navigeer naar '<em>My Apps</em>' en dan naar '<em>Set Up New App</em>'"
 
