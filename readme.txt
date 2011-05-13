@@ -525,6 +525,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.43 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.42 =
 * Changed Facebook application creation link
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
