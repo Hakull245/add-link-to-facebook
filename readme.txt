@@ -1524,6 +1524,7 @@ In no particular order:
 * Postback comments with 'In reply to NAME: ...'
 * Link back to Facebook wall
 * Comment with Facebook login
+* Add Link with author name for multi-user sites
 
 Realized features:
 
