@@ -1712,7 +1712,7 @@ Realized features:
 * Copy Facebook comments into WordPress database (version 1.29)
 * Option to not link to Facebook comment author (version 1.36)
 
-Feature which will not be realized:
+Feature which will not be realized, sorry:
 
 * Add link as group owner: not possible unfortunately
 * Adding links to multiple walls: see FAQ, question U25
