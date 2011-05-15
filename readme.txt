@@ -83,6 +83,8 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 1. Upload the entire add-link-to-facebook/ directory to the /wp-content/plugins/ directory
 1. Activate the plugin through the Plugins menu in WordPress
 
+Continue to the [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide").
+
 == Frequently Asked Questions ==
 
 **Warning: if you delete your Facebook application, you will also delete the links it added!**
