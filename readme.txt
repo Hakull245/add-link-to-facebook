@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.42
+Stable tag: 1.43
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -526,6 +526,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.43 =
+* Added a [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide"), feedback welcome!
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.42 =
@@ -1167,6 +1168,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.43 =
+Added User Guide, translation update
+
 = 1.42 =
 One change, translation updates
 
@@ -1517,14 +1521,167 @@ When it was wrong, you have to wait more than a week before you can try again.
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
 
+== User Guide ==
+
+**Easy setup**
+
+Everybody has to start here. Just follow the short instruction on the setup page or the setup guide above.
+The first goal is the acquire the following two values from Facebook:
+
+* App ID
+* App Secret
+
+After entering these values you should authorize the plugin.
+The plugin will use the App ID and Secret to obtain an access token, which is required to access your Facebook wall.
+
+Common problems:
+
+* To create an application you have to verify your account
+* Error *Given URL is not allowed by the Application configuration*: see question E03 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
+
+For administrators (capability *manage\_options*) there is one option in this section:
+
+* Share with all users on this site
+
+The default is that each user of your weblog has to setup/authorize the plugin.
+If you check this option all users will use your access token.
+After checking this option the setup page of the plugin will be accessible only to the administrator that enabled this option.
+Note that all users will use your name, which might not be so bad if you use the option *Add as page owner* (see below).
+
+**Additional settings**
+
+*Link picture*
+
+Links on Facebook can have a link picture, which is displayed between your Facebook profile picture and the link text(s).
+The plugin offers several options to automatically select a picture:
+
+* WordPress logo: the default, unless *Default picture URL* is filled in
+* First attached image: the image which was first uploaded on the post page
+* Featured post image: for themes that support a featured image only
+* Let Facebook select: this often doesn't work as you want to, because Facebook can select for example a header image
+* First image in the post: similar to first attached image, but the image doesn't have to be associated with the post
+* Image from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
+* Custom picture below: complete URL to a static picture of your choice
+
+Most users probably want to use *First image in the post*.
+This is also the best option for users that use remote publishing.
+
+Note that the default picture is used if no link picture could be found,
+for example if there was no featured post image selected or when there was no picture in the post.
+
+No picture at all is not officially supported by Facebook, but you can try to use an invalid custom picture.
+
+*Pages and groups*
+
+The plugin can add a link to a page or group wall of your choice.
+The plugin will always add only one link, see question U25 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
+Just check what you want, page or group, press *Save* and select the page or group you want to add links to.
+For pages it is possible to add links as page owner, instead of with your personal account.
+For groups this is not possible, since Facebook doesn't support it.
+
+*Link appearance*
+
+Some visual aspects of added links can be controlled, but most of the layout is entirely determined by Facebook.
+The plugin will strip all markup, since Facebook doesn't allow it.
+
+To better understand some of the options take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/ "Screen shot") to see what is what.
+
+* Use site title as caption: replace the URL by your blog title (shown below the option)
+* Use excerpt as message: by default there is no message, but if you like you can use the standard WordPress excerpt (if any)
+* Text trailer: if you use this option, the text will be truncated (whole sentences) and the text trailer will be appended
+* Keep hyperlinks: by default hyperlinks are stripped, leaving the title (if any), this options reverses that
+* Add 'Share' link: this option is experimental, because it is not officially supported by Facebook (it is not documented)
+* Use short URL: see question U15 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for details
+* Add links for new pages: by default only links will be added for new posts, check this option if you want the same for new pages
+
+If you don't use a trailer text, the complete post/page text will be sent to Facebook and
+Facebook will truncate the text and display *Read more*, which when clicked will reveal the complete text.
+
+*Comments and likes*
+
+* Integrate comments from Facebook: show Facebook comments in WordPress
+* Post WordPress comments back to Facebook: show WordPress comments on Facebook
+* Copy comments from Facebook to WordPress: store Facebook comments in the WordPress database, so you can for example edit them
+* Do not link to Facebook comment author: for privacy reasons you may choose to display only the author name without a link to his/her Facebook profile
+* Integrate likes from Facebook: show Facebook links as WordPress pingbacks
+* Show likers below the post text: show a comma separated list of Facebook liker names at the bottom of your post
+
+You can disable comment integration for individual posts/pages by selecting *Do not integrate comments* on the post page.
+
+*Standard Facebook buttons*
+
+The plugin can as an extra add a standard Facebook like and/or send button to your post.
+The layout is mostly determined by Facebook.
+You can only control the general layout, if there will be faces, the width, the action (like or recommend), the font and color scheme.
+See for details [the Facebook documentation](http://developers.facebook.com/docs/reference/plugins/like/ "Like button").
+
+By default the buttons will be shown below your post/page text, but you can change that by checking *Show at the top of the post*.
+If you want more control over the location of the buttons, you can use a shortcode or template tag.
+See question U23 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for details.
+
+There are options to suppress showing the like and send button on your home page, on individual posts or pages, in archives and in categories.
+It is also possible to check *Do not add like button* on the post page to suppress showing the like/send button for individual posts.
+
+By default the like button will link to the post or page where it is shown (recommended).
+It is possible to change this to a static URL with the *Link to* option. Use with care.
+
+If you use a Facebook like button, you should enable the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
+(unless you use another plugin for this purpose).
+Most problems with the like button do find its cause in not using the Open Graph protocol.
+
+The Facebook like button doesn't look right for some themes.
+To remedy this, you can *Use iframe in stead of XFBML*.
+Please note that the like/send button combination is not supported for the iframes version.
+
+*Other options*
+
+If you explicitly want to select when to add, check the option *Do not add link by default*.
+Alternatively you can select *Do not add link to Facebook* on the post page to prevent the plugin from adding a link.
+
+If your post overview is already full of extra columns, you could check the option *Don't show a summary in the post list*.
+
+I have never had a report about it, but if you have problems displaying the correct characters on Facebook, you could use the *Facebook character encoding* option to override the default character encoding (UTF-8).
+
+When you don't want to use the plugin anymore, you can check *Clean on deactivate* before deactivating the plugin to erase all options. This doesn't erase the administrator option, however.
+
+Checking the option *I have donated to this plugin* will remove the sponsorship messages and all the donate buttons and links.
+Developing this plugin took many hours. A small donation as your appreciation is always welcome.
+
+Please let me know if you think this plugin is good or bad by rating it.
+Checking *I have rated this plugin* will remove the rating reminder message.
+If you don't like the plugin, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+If the plugin isn't working for you, [help is just one question away](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+
+*Administrator options*
+
+The administrator options can only be changed by an administrator (obviously) and apply to all users.
+
+When you are running a multi-user weblog, you probably want to check *Do not display notices* to restrict the plugin notices, mostly error messages, to the plugin setting page only.
+And maybe you don't want to allow usage of the plugin to all users. This is what the option *Required capability to use plugin* is for.
+
+When comment integration is turned on, Facebook comments are fetched every 10 minutes by default.
+You can use the option *Refresh Facebook comments every* to do this more or less often, maybe depending on the number of visitors of your weblog.
+
+The text trailer option will truncate the text to whole sentences with a maximum of 256 characters. This is the maximum number of characters Facebook will display.
+For the case this changes or if your local version of Facebook behaves differently, you can use the option *Maximum Facebook text length*.
+
+The plugin supports custom post types if the custom post type support custom values.
+Sometimes you don't want to add links for certain custom post types. That is where the option *Exclude these custom post types* is for.
+
+Speaking about excluding things, maybe you don't want to add links for certain categories.
+You are in luck, because you can use the option *Exclude these categories* for this.
+You should use catergory id's, not names.
+
+If your server isn't setup completely right, there could be problems making a secure link to Facebook.
+In case you get cURL error 60, you can try the option *Do not verify the peer's certificate* as a workaround.
+Of course this is less secure ...
+
 == Requested features ==
 
 In no particular order:
 
-* Postback comments with 'In reply to NAME: ...'
-* Link back to Facebook wall
 * Comment with Facebook login
-* Add Link with author name for multi-user sites
+* Link back to Facebook wall from comments (does anybody know how?)
 
 Realized features:
 
@@ -1561,6 +1718,8 @@ Feature which will not be realized:
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
 * Display only first name for Facebook comments and likers: not possible unfortunately
+* Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
+* Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
 
 == Facebook Authorization ==
 
