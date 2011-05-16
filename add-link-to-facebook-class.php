@@ -2680,7 +2680,7 @@ if (!class_exists('WPAL2Facebook')) {
 					if (empty($ogp_type))
 						$ogp_type = 'article';
 
-					// Generate meta
+					// Generate meta tags
 					echo '<meta property="og:title" content="' . htmlspecialchars($post->post_title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="' . $ogp_type . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
@@ -2700,11 +2700,24 @@ if (!class_exists('WPAL2Facebook')) {
 
 			else if (is_home())
 			{
-				$charset = get_bloginfo('charset');
-				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
-				echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
-				echo '<meta property="og:type" content="blog" />' . PHP_EOL;
-				echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
+				// Check if any user has enabled the OGP
+				global $wpdb;
+				$opg = false;
+				$rows = $wpdb->get_results("SELECT meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='" . c_al2fb_meta_open_graph . "'");
+				foreach ($rows as $row)
+					if ($row->meta_value) {
+						$opg = true;
+						break;
+					}
+
+				// Generate meta tags
+				if ($opg) {
+					$charset = get_bloginfo('charset');
+					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
+					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
+				}
 			}
 		}
 
