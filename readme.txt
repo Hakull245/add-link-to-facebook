@@ -678,6 +678,12 @@ Facebook will truncate the text and display *Read more*, which when clicked will
 * Integrate likes from Facebook: show Facebook links as WordPress pingbacks
 * Show likers below the post text: show a comma separated list of Facebook liker names at the bottom of your post
 
+The plugin only mirrors comments on links it added. In summary it works like this:
+
+* The plugin adds a link to Facebook
+* Somebody writes a comment on the link on Facebook, if enabled the plugin will mirror the comment to WordPress
+* Somebody writes a comment on WordPress, if enabled the plugin will mirror the comment to Facebook, using your Facebook account
+
 You can disable comment integration for individual posts/pages by selecting *Do not integrate comments* on the post page.
 
 *Standard Facebook buttons*
@@ -738,7 +744,9 @@ The text trailer option will truncate the text to whole sentences with a maximum
 For the case this changes or if your local version of Facebook behaves differently, you can use the option *Maximum Facebook text length*.
 
 The plugin supports custom post types if the custom post type support custom values.
-Sometimes you don't want to add links for certain custom post types. That is where the option *Exclude these custom post types* is for.
+Sometimes you don't want to add links for certain custom post types.
+That is where the option *Exclude these custom post types* is for.
+Enter the names, separated by comma's for which you don't want the plugin add links.
 
 Speaking about excluding things, maybe you don't want to add links for certain categories.
 You are in luck, because you can use the option *Exclude these categories* for this.
