@@ -527,6 +527,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.45 =
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
 = 1.44 =
 * Improvement: disable OGP on home page if no user has enabled it
 
