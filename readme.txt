@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.45
+Stable tag: 1.47
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -527,6 +527,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.47 =
+* Bugfix: link liker names to profile
+
+= 1.46 =
+* New feature: link imported comments to discussion on Facebook, thanks to [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
 = 1.45 =
 * Improvement: option to override WordPress [locale](http://en.wikipedia.org/wiki/Locale "locale")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -559,6 +568,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.47 =
+One bugfix
+
+= 1.46 =
+One improvement, translation updates
 
 = 1.45 =
 One improvement, translation updates
@@ -682,9 +697,16 @@ Facebook will truncate the text and display *Read more*, which when clicked will
 * Integrate comments from Facebook: show Facebook comments in WordPress
 * Post WordPress comments back to Facebook: show WordPress comments on Facebook
 * Copy comments from Facebook to WordPress: store Facebook comments in the WordPress database, so you can for example edit them
-* Do not link to Facebook comment author: for privacy reasons you may choose to display only the author name without a link to his/her Facebook profile
 * Integrate likes from Facebook: show Facebook links as WordPress pingbacks
 * Show likers below the post text: show a comma separated list of Facebook liker names at the bottom of your post
+
+Link Facebook comment to:
+
+* None: no link at all, good for privacy
+* Profile author: default, link to the profile page of comment author
+* Added link: link to the discussion on the added link
+
+The Facebook author name is always shown.
 
 The plugin only mirrors comments on links it added. In summary it works like this:
 
@@ -769,7 +791,6 @@ Of course this is less secure ...
 In no particular order:
 
 * Comment with Facebook login
-* Link back to Facebook wall from comments (does anybody know how?)
 
 Realized features:
 
@@ -797,6 +818,7 @@ Realized features:
 * Disable comments integration per post/page (version 1.28)
 * Copy Facebook comments into WordPress database (version 1.29)
 * Option to not link to Facebook comment author (version 1.36)
+* Link back to Facebook wall from comments (version 1.46)
 
 Feature which will not be realized, sorry:
 
