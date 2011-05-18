@@ -83,6 +83,7 @@ define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
 define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
 define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
+define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated', 'al2fb_rated');
@@ -317,6 +318,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_exclude_default);
 				delete_user_meta($user_ID, c_al2fb_meta_not_post_list);
 				delete_user_meta($user_ID, c_al2fb_meta_fb_encoding);
+				delete_user_meta($user_ID, c_al2fb_meta_fb_locale);
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 				delete_user_meta($user_ID, c_al2fb_meta_rated);
@@ -541,6 +543,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_like_link] = trim($_POST[c_al2fb_meta_like_link]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
 			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
+			$_POST[c_al2fb_meta_fb_locale] = trim($_POST[c_al2fb_meta_fb_locale]);
 
 			// Prevent losing selected page
 			if (!self::Is_authorized($user_ID) ||
@@ -617,6 +620,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
+			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
@@ -1434,6 +1438,13 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_fb_encoding" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_encoding; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true); ?>" />
 				<br /><span class="al2fb_explanation"><?php _e('Default UTF-8; do not change if no need', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_fb_locale"><?php _e('Facebook locale:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_fb_locale" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_locale; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_locale, true); ?>" />
+				<br /><span class="al2fb_explanation"><?php _e('Do not change if no need', c_al2fb_text_domain); ?><span>&nbsp;(<?php echo WPLANG; ?>)</span></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -2818,14 +2829,22 @@ if (!class_exists('WPAL2Facebook')) {
 			return $likers;
 		}
 
+		function Get_locale($user_ID) {
+			$locale = get_user_meta($user_ID, c_al2fb_meta_fb_locale, true);
+			if (empty($locale)) {
+				$locale = defined('WPLANG') ? WPLANG : '';
+				if (empty($locale))
+					$locale = 'en_US';
+			}
+			return $locale;
+		}
+
 		// Get HTML for like button
 		function Get_like_button($post) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Get language
-			$lang = defined('WPLANG') ? WPLANG : '';
-			if (empty($lang))
-				$lang = 'en_US';
+			$lang = self::Get_locale($user_ID);
 
 			// Get options
 			$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
@@ -2894,9 +2913,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Get language
-			$lang = defined('WPLANG') ? WPLANG : '';
-			if (empty($lang))
-				$lang = 'en_US';
+			$lang = self::Get_locale($user_ID);
 
 			// Get options
 			$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
@@ -3373,6 +3390,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info .= '<tr><td>Encoding:</td><td>' . htmlspecialchars(get_option('blog_charset'), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Facebook:</td><td>' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Locale:</td><td>' . htmlspecialchars(WPLANG, ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Facebook:</td><td>' . htmlspecialchars(self::Get_locale($user_ID), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>mb_convert_encoding:</td><td>' . (function_exists('mb_convert_encoding') ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Application:</td><td>' . $app . '</td></tr>';

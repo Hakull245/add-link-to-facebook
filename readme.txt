@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.44
+Stable tag: 1.45
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -528,6 +528,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.45 =
+* Improvement: option to override WordPress [locale](http://en.wikipedia.org/wiki/Locale "locale")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.44 =
@@ -557,6 +559,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.45 =
+One improvement, translation updates
 
 = 1.44 =
 One improvement
