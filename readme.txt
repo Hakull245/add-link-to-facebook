@@ -527,6 +527,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.46 =
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
 = 1.45 =
 * Improvement: option to override WordPress [locale](http://en.wikipedia.org/wiki/Locale "locale")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
