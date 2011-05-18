@@ -1277,6 +1277,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="author"<?php echo $comments_nolink_author; ?>><?php _e('Profile author', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="link"<?php echo $comments_nolink_link; ?>><?php _e('Added link', c_al2fb_text_domain); ?><br />
+				<span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span><br />
 				<strong>Beta!</strong>
 			</td></tr>
 
@@ -2826,12 +2827,12 @@ if (!class_exists('WPAL2Facebook')) {
 				foreach ($fb_likes->data as $fb_like) {
 					if (!empty($likers))
 						$likers .= ', ';
-					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true))
-						$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
-					else {
+					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) == 'author') {
 						$link = 'http://www.facebook.com/profile.php?id=' . $fb_like->id;
 						$likers .= '<a href="' . $link . '" rel="nofollow">' . htmlspecialchars($fb_like->name, ENT_QUOTES, $charset) . '</a>';
 					}
+					else
+						$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
 				}
 
 			if (!empty($likers)) {
@@ -3439,7 +3440,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>FB comments:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB comments postback:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB comments copy:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true) ? 'Yes' : 'No') . '</td></tr>';
-			$info .= '<tr><td>FB comments no link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>FB comments no link:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) . '</td></tr>';
 			$info .= '<tr><td>FB likes:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Post likers:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_likers, true) ? 'Yes' : 'No') . '</td></tr>';
