@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.47
+Stable tag: 1.48
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -405,7 +405,7 @@ Assuming you created a Facebook application successfully:
 * Go to the plugin page through the WordPress *Tools* menu
 * Copy the link after *Web Site > Site URL:*
 * Click on the *Click here to create* link
-* Do not fill anything in, but instead click on the *Back to My Apps* link
+* Navigate to *My Apps* and select the application you created before
 * Click on the *Edit Settings* link and select the tab *Web Site*
 * Paste into the field *Site URL* and press *Save Changes*
 
@@ -528,7 +528,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.48 =
+* Updated FAQ
+* Updated Setup Guide
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.47 =
@@ -573,6 +576,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.48 =
+Documentation and translation updates
+
 = 1.47 =
 One bugfix
 
@@ -603,6 +609,8 @@ The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
+	* Navigate to *My Apps*
+	* Select *Set Up New App*
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
 	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
