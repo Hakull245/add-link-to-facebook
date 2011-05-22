@@ -936,6 +936,7 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
 
 			self::Render_debug_info();
+			self::Render_resources();
 ?>
 			<div class="al2fb_options">
 
@@ -1590,7 +1591,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</form>
 
 			</div>
-<?php		self::Render_resources(); ?>
 			</div>
 <?php
 		}

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.49
+Stable tag: 1.50
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -527,6 +527,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.50 =
+* Reverted styling fix, since it is not working in Internet Explorer
+
 = 1.49 =
 * Improvement: styling fix settings page
 * Improvement: not saving excerpt when empty
@@ -580,6 +583,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.50 =
+Reverted styling fix
 
 = 1.49 =
 Three improvements

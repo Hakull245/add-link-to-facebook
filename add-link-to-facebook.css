@@ -21,20 +21,16 @@
 /* Resources panel right */
 .al2fb_resources {
 	float: right;
-	position: relative;
-	display: inline-block;
-	vertical-align: top;
 	padding: 10px;
 	width: 180px;
+	margin-top: 30px;
 	border: 1px solid #CCCCCC;
 	background-color: #FFFEEB;
 }
 
 /* Options panel left */
 .al2fb_options {
-	display: inline-block;
-	margin-right: -220px;
-	vertical-align: top;
+	float: left;
 }
 
 /* Application setup instructions */
