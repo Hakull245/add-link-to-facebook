@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.50
+Stable tag: 1.51
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -529,7 +529,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.51 =
+* Improvement: link to Facebook discussion from post list and post edit page
 * Added Swedish (sv\_SE) translation by *JornB*
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.50 =
 * Reverted styling fix, since it is not working in Internet Explorer
@@ -587,6 +589,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.51 =
+One improvement, new/updated translation
 
 = 1.50 =
 Reverted styling fix

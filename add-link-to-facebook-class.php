@@ -1940,6 +1940,8 @@ if (!class_exists('WPAL2Facebook')) {
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+				<br />
+				<a href="<?php echo self::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
 <?php		} ?>
 <?php		if (!empty($error)) { ?>
 				<br />
@@ -1967,7 +1969,10 @@ if (!class_exists('WPAL2Facebook')) {
 		function Manage_posts_custom_column($column_name, $post_ID) {
 			if ($column_name == 'al2fb') {
 				$link_id = get_post_meta($post_ID, c_al2fb_meta_link_id, true);
-				echo '<span>' . ($link_id ? __('Yes', c_al2fb_text_domain) : __('No', c_al2fb_text_domain)) . '</span>';
+				if ($link_id)
+					echo '<a href="' . self::Get_fb_permalink($link_id) . '" target="_blank">' . __('Yes', c_al2fb_text_domain) . '</a>';
+				else
+					echo '<span>' . __('No', c_al2fb_text_domain) . '</span>';
 
 				if ($link_id) {
 					$post = get_post($post_ID);
@@ -2348,6 +2353,11 @@ if (!class_exists('WPAL2Facebook')) {
 				'picture' => $picture,
 				'picture_type' => $picture_type
 			);
+		}
+
+		function Get_fb_permalink($link_id) {
+			$ids = explode('_', $link_id);
+			return 'http://www.facebook.com/permalink.php?story_fbid=' . $ids[1] . '&id=' . $ids[0];
 		}
 
 		function Filter_excerpt($excerpt, $post) {
@@ -3069,14 +3079,14 @@ if (!class_exists('WPAL2Facebook')) {
 				$comments_nolink = 'none';
 
 			if ($comments_nolink == 'none' || $comments_nolink == 'link') {
-				$ids = explode('_', $link_id);
+				$link = self::Get_fb_permalink($link_id);
 				if ($comments)
 					foreach ($comments as $comment)
 						if ($comment->comment_agent == 'AL2FB')
 							if ($comments_nolink == 'none')
 								$comment->comment_author_url = '';
 							else if ($comments_nolink == 'link')
-								$comment->comment_author_url = 'http://www.facebook.com/permalink.php?story_fbid=' . $ids[1] . '&id=' . $ids[0];
+								$comment->comment_author_url = $link;
 			}
 
 			return $comments;
