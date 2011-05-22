@@ -61,6 +61,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
+* Swedish (sv\_SE) by *JornB*, thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -528,7 +529,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.51 =
-* Added Swedish (sv\_SE) translation
+* Added Swedish (sv\_SE) translation by *JornB*
 
 = 1.50 =
 * Reverted styling fix, since it is not working in Internet Explorer
