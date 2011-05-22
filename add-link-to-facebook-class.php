@@ -1916,8 +1916,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check if errors
 			$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
+
+			global $wp_version;
+			if (version_compare($wp_version, '3.2') < 0) {
 ?>
-			<div class="misc-pub-section"></div>
+				<div class="misc-pub-section"></div>
+<?php		} ?>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
 <?php
@@ -2109,7 +2113,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (isset($_POST['al2fb_image_id']))
 				update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
 
-			if (isset($_POST['al2fb_excerpt']))
+			if (isset($_POST['al2fb_excerpt']) && !empty($_POST['al2fb_excerpt']))
 				update_post_meta($post_id, c_al2fb_meta_excerpt, $_POST['al2fb_excerpt']);
 		}
 
