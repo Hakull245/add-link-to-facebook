@@ -527,6 +527,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.51 =
+* Added Swedish (sv\_SE) translation
+
 = 1.50 =
 * Reverted styling fix, since it is not working in Internet Explorer
 
