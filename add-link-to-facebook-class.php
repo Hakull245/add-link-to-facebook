@@ -915,6 +915,16 @@ if (!class_exists('WPAL2Facebook')) {
 			$like_color_light = ($like_color == 'light' ? ' checked' : '');
 			$like_color_dark = ($like_color == 'dark' ? ' checked' : '');
 
+			// Comment link option
+			$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
+			if (empty($comments_nolink))
+				$comments_nolink = 'author';
+			else if ($comments_nolink == 'on')
+				$comments_nolink = 'none';
+			$comments_nolink_none = ($comments_nolink == 'none' ? ' checked' : '');
+			$comments_nolink_author = ($comments_nolink == 'author' ? ' checked' : '');
+			$comments_nolink_link = ($comments_nolink == 'link' ? ' checked' : '');
+
 			// Sustainable Plugins Sponsorship Network
 			self::Render_sponsorship();
 ?>
@@ -1088,17 +1098,18 @@ if (!class_exists('WPAL2Facebook')) {
 			<hr />
 			<h3><?php _e('Additional settings', c_al2fb_text_domain); ?></h3>
 
+			<h4><?php _e('Link picture', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_picture_type"><?php _e('Link picture:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="wordpress"<?php echo $pic_wordpress; ?>><?php _e('WordPress logo', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="media"<?php echo $pic_media; ?>><?php _e('First attached image', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="wordpress"<?php echo $pic_wordpress; ?>><?php _e('WordPress logo', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="media"<?php echo $pic_media; ?>><?php _e('First attached image', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1115,6 +1126,9 @@ if (!class_exists('WPAL2Facebook')) {
 				<br /><span class="al2fb_explanation"><?php _e('Default WordPress logo', c_al2fb_text_domain); ?></span>
 			</td></tr>
 			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
 <?php
 			if (self::Is_authorized($user_ID))
 				try {
@@ -1124,6 +1138,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$pages = self::Get_fb_pages($user_ID);
 						$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 ?>
+						<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
 						<table class="form-table al2fb_border">
 						<tr valign="top"><th scope="row">
 							<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
@@ -1149,8 +1164,12 @@ if (!class_exists('WPAL2Facebook')) {
 							<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
 						</td></tr>
 						</table>
+						<p class="submit">
+						<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+						</p>
 <?php				} ?>
 
+					<h4><?php _e('Facebook group', c_al2fb_text_domain); ?></h4>
 					<table class="form-table al2fb_border">
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_use_groups"><?php _e('Use groups:', c_al2fb_text_domain); ?></label>
@@ -1183,12 +1202,16 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 ?>
 					</table>
+					<p class="submit">
+					<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+					</p>
 <?php
 				}
 				catch (Exception $e) {
 					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
 				}
 ?>
+			<h4><?php _e('Link appearance', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_caption"><?php _e('Use site title as caption:', c_al2fb_text_domain); ?></label>
@@ -1237,7 +1260,11 @@ if (!class_exists('WPAL2Facebook')) {
 				<input id="al2fb_add_new_page" name="<?php echo c_al2fb_meta_add_new_page; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_add_new_page, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
 
+			<h4><?php _e('Facebook comments', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_fb_comments"><?php _e('Integrate comments from Facebook:', c_al2fb_text_domain); ?></label>
@@ -1249,23 +1276,23 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_fb_comments_postback"><?php _e('Post WordPress comments back to Facebook:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_fb_comments_postback" name="<?php echo c_al2fb_meta_fb_comments_postback; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true)) echo ' checked="checked"'; ?> />
-				<strong>Beta!</strong>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_fb_comments_copy"><?php _e('Copy comments from Facebook to WordPress:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_fb_comments_copy" name="<?php echo c_al2fb_meta_fb_comments_copy; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) echo ' checked="checked"'; ?> />
-				<strong>Beta!</strong>
 				<br /><span class="al2fb_explanation"><?php _e('Enables for example editing of Facebook comments', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_fb_comments_nolink"><?php _e('Do not link to Facebook comment author:', c_al2fb_text_domain); ?></label>
+				<label for="al2fb_fb_comments_nolink"><?php _e('Link Facebook comment to:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<input id="al2fb_fb_comments_nolink" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true)) echo ' checked="checked"'; ?> />
-				<strong>Beta!</strong>
-				<br /><span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span>
+				<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="none"<?php echo $comments_nolink_none; ?>><?php _e('None', c_al2fb_text_domain); ?><br />
+				<span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="author"<?php echo $comments_nolink_author; ?>><?php _e('Profile author', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="link"<?php echo $comments_nolink_link; ?>><?php _e('Added link', c_al2fb_text_domain); ?><br />
+				<span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span><br />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1280,7 +1307,11 @@ if (!class_exists('WPAL2Facebook')) {
 				<input id="al2fb_post_likers" name="<?php echo c_al2fb_meta_post_likers; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_likers, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
 
+			<h4><?php _e('Facebook like button', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_post_like_button"><?php _e('Show Facebook like button:', c_al2fb_text_domain); ?></label>
@@ -1322,9 +1353,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_like_layout"><?php _e('Layout:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="standard"<?php echo $like_layout_standard; ?>><?php _e('Standard', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="button_count"<?php echo $like_layout_button; ?>><?php _e('Button with count', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="box_count"<?php echo $like_layout_box; ?>><?php _e('Box with count', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="standard"<?php echo $like_layout_standard; ?>><?php _e('Standard', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="button_count"<?php echo $like_layout_button; ?>><?php _e('Button with count', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="box_count"<?php echo $like_layout_box; ?>><?php _e('Box with count', c_al2fb_text_domain); ?><br />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1343,8 +1374,8 @@ if (!class_exists('WPAL2Facebook')) {
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_like_action"><?php _e('Action:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_action; ?>" value="like"<?php echo $like_action_like; ?>><?php _e('Like', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_action; ?>" value="recommend"<?php echo $like_action_recommend; ?>><?php _e('Recommend', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_like_action; ?>" value="like"<?php echo $like_action_like; ?>><?php _e('Like', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_like_action; ?>" value="recommend"<?php echo $like_action_recommend; ?>><?php _e('Recommend', c_al2fb_text_domain); ?><br />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1364,8 +1395,8 @@ if (!class_exists('WPAL2Facebook')) {
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_like_color"><?php _e('Color scheme:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_colorscheme; ?>" value="light"<?php echo $like_color_light; ?>><?php _e('Light', c_al2fb_text_domain); ?><br>
-				<input type="radio" name="<?php echo c_al2fb_meta_like_colorscheme; ?>" value="dark"<?php echo $like_color_dark; ?>><?php _e('Dark', c_al2fb_text_domain); ?><br>
+				<input type="radio" name="<?php echo c_al2fb_meta_like_colorscheme; ?>" value="light"<?php echo $like_color_light; ?>><?php _e('Light', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_like_colorscheme; ?>" value="dark"<?php echo $like_color_dark; ?>><?php _e('Dark', c_al2fb_text_domain); ?><br />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1391,7 +1422,6 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_like_send"><?php _e('Show Facebook send button:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_like_send" name="<?php echo c_al2fb_meta_post_send_button; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true)) echo ' checked="checked"'; ?> />
-				<strong>Beta!</strong>
 				<br />
 				<a class="al2fb_explanation" href="http://developers.facebook.com/docs/reference/plugins/send/" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
 			</td></tr>
@@ -1400,14 +1430,13 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_combine"><?php _e('Combine Facebook like and send buttons:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_combine" name="<?php echo c_al2fb_meta_post_combine_buttons; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true)) echo ' checked="checked"'; ?> />
-				<strong>Beta!</strong>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_open_graph"><?php _e('Use Open Graph protocol:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_open_graph" name="<?php echo c_al2fb_meta_open_graph; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_open_graph, true)) echo ' checked="checked"'; ?> />
-				<br>
+				<br />
 				<a class="al2fb_explanation" href="http://developers.facebook.com/docs/opengraph/" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
 			</td></tr>
 
@@ -1415,11 +1444,15 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_open_graph_type"><?php _e('Open Graph protocol <em>og:type</em>:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_open_graph_type" class="al2fb_text" name="<?php echo c_al2fb_meta_open_graph_type; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true); ?>" />
-				<br>
+				<br />
 				<a class="al2fb_explanation" href="http://developers.facebook.com/docs/opengraph/#types" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
 			</td></tr>
 			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
 
+			<h4><?php _e('Miscelaneous settings', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_exclude_default"><?php _e('Do not add link by default:', c_al2fb_text_domain); ?></label>
@@ -1466,6 +1499,9 @@ if (!class_exists('WPAL2Facebook')) {
 				<input id="al2fb_rated" name="<?php echo c_al2fb_meta_rated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_rated, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
 
 <?php	   if (current_user_can('manage_options')) { ?>
 				<h3><?php _e('Administrator options', c_al2fb_text_domain); ?></h3>
@@ -1903,8 +1939,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check if errors
 			$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
+
+			global $wp_version;
+			if (version_compare($wp_version, '3.2') < 0) {
 ?>
-			<div class="misc-pub-section"></div>
+				<div class="misc-pub-section"></div>
+<?php		} ?>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
 <?php
@@ -1923,6 +1963,8 @@ if (!class_exists('WPAL2Facebook')) {
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+				<br />
+				<a href="<?php echo self::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
 <?php		} ?>
 <?php		if (!empty($error)) { ?>
 				<br />
@@ -1950,7 +1992,10 @@ if (!class_exists('WPAL2Facebook')) {
 		function Manage_posts_custom_column($column_name, $post_ID) {
 			if ($column_name == 'al2fb') {
 				$link_id = get_post_meta($post_ID, c_al2fb_meta_link_id, true);
-				echo '<span>' . ($link_id ? __('Yes', c_al2fb_text_domain) : __('No', c_al2fb_text_domain)) . '</span>';
+				if ($link_id)
+					echo '<a href="' . self::Get_fb_permalink($link_id) . '" target="_blank">' . __('Yes', c_al2fb_text_domain) . '</a>';
+				else
+					echo '<span>' . __('No', c_al2fb_text_domain) . '</span>';
 
 				if ($link_id) {
 					$post = get_post($post_ID);
@@ -2096,7 +2141,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (isset($_POST['al2fb_image_id']))
 				update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
 
-			if (isset($_POST['al2fb_excerpt']))
+			if (isset($_POST['al2fb_excerpt']) && !empty($_POST['al2fb_excerpt']))
 				update_post_meta($post_id, c_al2fb_meta_excerpt, $_POST['al2fb_excerpt']);
 		}
 
@@ -2331,6 +2376,11 @@ if (!class_exists('WPAL2Facebook')) {
 				'picture' => $picture,
 				'picture_type' => $picture_type
 			);
+		}
+
+		function Get_fb_permalink($link_id) {
+			$ids = explode('_', $link_id);
+			return 'http://www.facebook.com/permalink.php?story_fbid=' . $ids[1] . '&id=' . $ids[0];
 		}
 
 		function Filter_excerpt($excerpt, $post) {
@@ -2814,12 +2864,12 @@ if (!class_exists('WPAL2Facebook')) {
 				foreach ($fb_likes->data as $fb_like) {
 					if (!empty($likers))
 						$likers .= ', ';
-					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true))
-						$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
-					else {
+					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) == 'author') {
 						$link = 'http://www.facebook.com/profile.php?id=' . $fb_like->id;
 						$likers .= '<a href="' . $link . '" rel="nofollow">' . htmlspecialchars($fb_like->name, ENT_QUOTES, $charset) . '</a>';
 					}
+					else
+						$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
 				}
 
 			if (!empty($likers)) {
@@ -3043,12 +3093,23 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 			}
 
-			// No link to Facebook profile
-			if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true)) {
+			// Comment link type
+			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+			$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
+			if (empty($comments_nolink))
+				$comments_nolink = 'author';
+			else if ($comments_nolink == 'on' || empty($link_id))
+				$comments_nolink = 'none';
+
+			if ($comments_nolink == 'none' || $comments_nolink == 'link') {
+				$link = self::Get_fb_permalink($link_id);
 				if ($comments)
 					foreach ($comments as $comment)
 						if ($comment->comment_agent == 'AL2FB')
-							$comment->comment_author_url = '';
+							if ($comments_nolink == 'none')
+								$comment->comment_author_url = '';
+							else if ($comments_nolink == 'link')
+								$comment->comment_author_url = $link;
 			}
 
 			return $comments;
@@ -3416,7 +3477,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>FB comments:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB comments postback:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>FB comments copy:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true) ? 'Yes' : 'No') . '</td></tr>';
-			$info .= '<tr><td>FB comments no link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>FB comments no link:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) . '</td></tr>';
 			$info .= '<tr><td>FB likes:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Post likers:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_likers, true) ? 'Yes' : 'No') . '</td></tr>';

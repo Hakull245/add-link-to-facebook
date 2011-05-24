@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook in italiano\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-05-19 18:35+0100\n"
-"PO-Revision-Date: 2011-05-20 08:55+0100\n"
+"PO-Revision-Date: 2011-05-22 10:28+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Gianni Diurno | gidibao.net\n"
 "MIME-Version: 1.0\n"
@@ -20,28 +20,28 @@ msgstr ""
 
 #: add-link-to-facebook-class.php:684
 msgid "Settings updated"
-msgstr "Le impostazioni sono state aggiornate"
+msgstr "Inställningar uppdaterade"
 
 #: add-link-to-facebook-class.php:699
 #: add-link-to-facebook-class.php:711
 msgid "Authorized, go posting!"
-msgstr "Tutto ok! Puoi iniziare..."
+msgstr "Godkänd, posta på!"
 
 #: add-link-to-facebook-class.php:753
 msgid "Debug information sent"
-msgstr "Le informazioni debug sono state inviate"
+msgstr "Felinformation skickad"
 
 #: add-link-to-facebook-class.php:755
 msgid "Sending debug information failed"
-msgstr "L'invio delle informazioni debug é fallito"
+msgstr "Sändingen av felinformationen misslyckades"
 
 #: add-link-to-facebook-class.php:779
 msgid "needs configuration"
-msgstr "deve essere configurato"
+msgstr "behöver konfigureras"
 
 #: add-link-to-facebook-class.php:783
 msgid "needs authorization"
-msgstr "E' necessaria l'autorizzazione"
+msgstr "behöver godkännas"
 
 #: add-link-to-facebook-class.php:788
 #: add-link-to-facebook-class.php:811
@@ -55,72 +55,72 @@ msgstr "Add Link to Facebook"
 
 #: add-link-to-facebook-class.php:820
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
-msgstr "Avessi gradito il plugin Add Link to Facebook, esprimi la tua valutazione su <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Se il gradimento fosse basso, non avrà più senso sviluppare questo plugin.<br />Puoi disattivare questo messaggio mettendo il segno di spunta alla opzione \"Ho già votato\" nella pagina delle <a href=\"[settings]\">impostazioni</a>."
+msgstr "Om du gillar Add Link to Facebook plugin:en, betygsätt den då på <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Om det genomsnittliga betyget är lågt är det ingen idé att fortsätta med denna plugin.<br />Du kan ta bort detta meddelade genom att markera \"Jag har betygsatt denna plugin\" under <a href=\"[settings]\">Inställningar</a>."
 
 #: add-link-to-facebook-class.php:843
 msgid "Administration"
-msgstr "Amministrazione"
+msgstr "Administration"
 
 #: add-link-to-facebook-class.php:865
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr "Inställningar"
 
 #: add-link-to-facebook-class.php:936
 msgid "Your server may not allow external connections"
-msgstr "Il tuo server non permette le connessioni esterne"
+msgstr "Din server kanske inte tillåter externa anslutningar"
 
 #: add-link-to-facebook-class.php:949
 msgid "Authorization"
-msgstr "Autorizzazione"
+msgstr "Auktorisation"
 
 #: add-link-to-facebook-class.php:955
 msgid "Links will be added to"
-msgstr "I link saranno aggiunti a"
+msgstr "Länkar kommer att läggas till"
 
 #: add-link-to-facebook-class.php:971
 msgid "Authorize"
-msgstr "Autorizza"
+msgstr "Godkänna"
 
 #: add-link-to-facebook-class.php:991
 msgid "Easy setup"
-msgstr "Configurazione semplificata"
+msgstr "Enkel installation"
 
 #: add-link-to-facebook-class.php:1001
 msgid "Use shared Facebook application:"
-msgstr "Usa applicazione condividivisione segnalibro:"
+msgstr "Använd delad Facebook applikation:"
 
 #: add-link-to-facebook-class.php:1005
 msgid "Simple, but less secure"
-msgstr "Semplice, ma meno sicuro"
+msgstr "Enkel men mindre säker"
 
 #: add-link-to-facebook-class.php:1012
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Per ottenere le App ID e Secret dovrai creare una applicazione Facebook"
+msgstr "För att få ett App ID och en App hemlighet behöver du skapa en Facebook applikation"
 
 #: add-link-to-facebook-class.php:1013
 msgid "You have to fill in the following:"
-msgstr "Compila quanto segue:"
+msgstr "Du behöver fylla i följande:"
 
 #: add-link-to-facebook-class.php:1016
 #: add-link-to-facebook-class.php:1055
 msgid "App Name:"
-msgstr "Nome app:"
+msgstr "App namn:"
 
 #: add-link-to-facebook-class.php:1017
 msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "un nome per la tua applicazione..."
+msgstr "Det du gillar kommer visas som \"via...\" under meddelandet"
 
 #: add-link-to-facebook-class.php:1020
 msgid "Web Site > Site URL:"
-msgstr "Sito web > URL sito:"
+msgstr "Webbsajt > Sajt URL:"
 
 #: add-link-to-facebook-class.php:1024
 msgid "Click here to create"
-msgstr "Clicca qui per crearla"
+msgstr "Klicka här för att skapa"
 
 #: add-link-to-facebook-class.php:1025
 msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
-msgstr "andando a '<em>Le mie applicazioni</em>' quindi a '<em>Set Up New App</em>'"
+msgstr "och navigera till '<em>Mina apps</em>' och sedan till '<em>Ställ in ny app</em>'"
 
 #: add-link-to-facebook-class.php:1030
 msgid "App ID:"
@@ -128,110 +128,110 @@ msgstr "App ID:"
 
 #: add-link-to-facebook-class.php:1036
 msgid "App Secret:"
-msgstr "App Secret:"
+msgstr "App hemlighet:"
 
 #: add-link-to-facebook-class.php:1043
 msgid "Access token:"
-msgstr "Token d'accesso:"
+msgstr "Åtkomsttoken:"
 
 #: add-link-to-facebook-class.php:1068
 msgid "Share with all users on this site:"
-msgstr "Condividi con tutti gli utenti di questo sito:"
+msgstr "Dela med alla användare på denna sajt:"
 
 #: add-link-to-facebook-class.php:1095
 #: add-link-to-facebook-class.php:1589
 msgid "Save"
-msgstr "Salva"
+msgstr "Spara"
 
 #: add-link-to-facebook-class.php:1099
 msgid "Additional settings"
-msgstr "Impostazioni aggiuntive"
+msgstr "Ytterligare inställningar"
 
 #: add-link-to-facebook-class.php:1103
 msgid "Link picture:"
-msgstr "Link immagine:"
+msgstr "Länka bild:"
 
 #: add-link-to-facebook-class.php:1105
 msgid "WordPress logo"
-msgstr "logo WordPress"
+msgstr "WordPress logotyp"
 
 #: add-link-to-facebook-class.php:1106
 msgid "First attached image"
-msgstr "la prima immagine allegata"
+msgstr "Första bifogade bilden"
 
 #: add-link-to-facebook-class.php:1107
 msgid "Featured post image"
-msgstr "immagine in evidenza"
+msgstr "Dagens inlägg bild"
 
 #: add-link-to-facebook-class.php:1108
 msgid "Let Facebook select"
-msgstr "Facebook (predefinita)"
+msgstr "Låt Facebook välja"
 
 #: add-link-to-facebook-class.php:1109
 msgid "First image in the post"
-msgstr "la prima immagine nell'articolo"
+msgstr "Första bilden i inlägget"
 
 #: add-link-to-facebook-class.php:1110
 msgid "Image from User Photo plugin"
-msgstr "immagine da plugin User Photo"
+msgstr "Bild från User Photo plugin:en"
 
 #: add-link-to-facebook-class.php:1111
 msgid "Custom picture below"
-msgstr "immagine personalizzata (qui sotto)"
+msgstr "Anpassad bilden nedan"
 
 #: add-link-to-facebook-class.php:1115
 msgid "Custom picture URL:"
-msgstr "URL immagine personalizzata:"
+msgstr "Anpassad bild URL:"
 
 #: add-link-to-facebook-class.php:1118
 msgid "At least 50 x 50 pixels"
-msgstr "minimo 50 x 50 pixel"
+msgstr "Minst 50 x 50 pixel"
 
 #: add-link-to-facebook-class.php:1122
 msgid "Default picture URL:"
-msgstr "URL immagine predefinita:"
+msgstr "Standard bild URL:"
 
 #: add-link-to-facebook-class.php:1125
 msgid "Default WordPress logo"
-msgstr "logo predefinito WordPress"
+msgstr "Standard Wordpress logotyp"
 
 #: add-link-to-facebook-class.php:1139
 msgid "Add to page:"
-msgstr "Aggiungi alla pagina:"
+msgstr "Lägg till sidan:"
 
 #: add-link-to-facebook-class.php:1156
 msgid "Add as page owner:"
-msgstr "Aggiungi come proprietario pagina: "
+msgstr "Lägg till som sidans ägare:"
 
 #: add-link-to-facebook-class.php:1159
 msgid "Requires manage pages permission"
-msgstr "richiede permesso gestione pagine"
+msgstr "Kräver att tillstånd för sidorna hanteras"
 
 #: add-link-to-facebook-class.php:1166
 msgid "Use groups:"
-msgstr "Utilizza ruolo:"
+msgstr "Använd grupper:"
 
 #: add-link-to-facebook-class.php:1169
 msgid "Requires user groups permission"
-msgstr "richiede permessi gruppo utenti"
+msgstr "Kräver att tillstånd för grupper hanteras"
 
 #: add-link-to-facebook-class.php:1177
 msgid "Add to group:"
-msgstr "Aggiungi al gruppo:"
+msgstr "Lägg till grupp:"
 
 #: add-link-to-facebook-class.php:1181
 #: add-link-to-facebook-class.php:1276
 #: add-link-to-facebook-class.php:2040
 msgid "None"
-msgstr "nessuno"
+msgstr "Ingen"
 
 #: add-link-to-facebook-class.php:1204
 msgid "Use site title as caption:"
-msgstr "Usa nome sito:"
+msgstr "Använd sidans titel som rubrik"
 
 #: add-link-to-facebook-class.php:1211
 msgid "Use excerpt as message:"
-msgstr "Usa estratto:"
+msgstr "Använd utdrag som meddelande:"
 
 #: add-link-to-facebook-class.php:1217
 msgid "Text trailer:"
@@ -239,103 +239,103 @@ msgstr "Text trailer:"
 
 #: add-link-to-facebook-class.php:1220
 msgid "For example \"Read more ...\""
-msgstr "ad esempio \"Prosegui la lettura ...\""
+msgstr "Till exempel \"Läs mer ...\""
 
 #: add-link-to-facebook-class.php:1224
 msgid "Keep hyperlinks:"
-msgstr "Gestione link:"
+msgstr "Spara länkar:"
 
 #: add-link-to-facebook-class.php:1227
 msgid "The hyperlink title will be removed"
-msgstr "l'attributo titolo verrà rimosso dal link"
+msgstr "Länktiteln kommer att tas bort"
 
 #: add-link-to-facebook-class.php:1231
 msgid "Add 'Share' link:"
-msgstr "Aggiungi link 'Share':"
+msgstr "Lägg till 'Dela' länk:"
 
 #: add-link-to-facebook-class.php:1238
 msgid "Use short URL:"
-msgstr "Usa URL breve:"
+msgstr "Använd kort URL:"
 
 #: add-link-to-facebook-class.php:1241
 msgid "If available"
-msgstr "se disponibile"
+msgstr "Om tillgänglig"
 
 #: add-link-to-facebook-class.php:1245
 msgid "Add links for new pages:"
-msgstr "Aggiungi link a nuove pagine:"
+msgstr "Lägg till länkar för nya sidor:"
 
 #: add-link-to-facebook-class.php:1253
 msgid "Integrate comments from Facebook:"
-msgstr "Integra i commenti da FB:"
+msgstr "Integrera kommentarer från Facebook:"
 
 #: add-link-to-facebook-class.php:1259
 msgid "Post WordPress comments back to Facebook:"
-msgstr "Pubblica i commenti WP di risposta su FB:"
+msgstr "Publicera WordPress kommentarer tillbaka till Facebook:"
 
 #: add-link-to-facebook-class.php:1266
 msgid "Copy comments from Facebook to WordPress:"
-msgstr "Copia i commenti da Facebook a WordPress:"
+msgstr "Kopiera kommentarer från Facebook till WordPress:"
 
 #: add-link-to-facebook-class.php:1270
 msgid "Enables for example editing of Facebook comments"
-msgstr "attiva ad esempio editing commenti Facebook"
+msgstr "Aktiverar till exempel redigering av Facebook kommentarer"
 
 #: add-link-to-facebook-class.php:1274
 msgid "Link Facebook comment to:"
-msgstr "Collega commento FB a:"
+msgstr "Länka Facebook kommentarer till:"
 
 #: add-link-to-facebook-class.php:1277
 #: add-link-to-facebook-class.php:1280
 msgid "Disables displaying of Facebook avatars too"
-msgstr "disattiva anche visualizzazione avatar FB"
+msgstr "Inaktiverar också visning av Facebook avatarer"
 
 #: add-link-to-facebook-class.php:1278
 msgid "Profile author"
-msgstr "profilo autore"
+msgstr "Profil författare"
 
 #: add-link-to-facebook-class.php:1279
 msgid "Added link"
-msgstr "collegamento aggiunto"
+msgstr "Tillagda länkar"
 
 #: add-link-to-facebook-class.php:1285
 msgid "Integrate likes from Facebook:"
-msgstr "Integra i Mi piace da FB:"
+msgstr "Integrera Gilla från Facebook:"
 
 #: add-link-to-facebook-class.php:1291
 msgid "Show likers below the post text:"
-msgstr "Mostra sotto il testo i fan:"
+msgstr "Visa Gilla:re under inläggets text:"
 
 #: add-link-to-facebook-class.php:1299
 msgid "Show Facebook like button:"
-msgstr "Mostra pulsante FB Mi piace:"
+msgstr "Visa Facebook Gilla knapp:"
 
 #: add-link-to-facebook-class.php:1302
 #: add-link-to-facebook-class.php:1409
 #: add-link-to-facebook-class.php:1424
 #: add-link-to-facebook-class.php:1432
 msgid "Documentation"
-msgstr "Documentazione"
+msgstr "Dokumentation"
 
 #: add-link-to-facebook-class.php:1306
 msgid "Do not show on the home page:"
-msgstr "Non mostrare nella home:"
+msgstr "Visa inte på hemsidan:"
 
 #: add-link-to-facebook-class.php:1312
 msgid "Do not show on posts:"
-msgstr "Non mostrare negli articoli:"
+msgstr "Visa inte i inlägg:"
 
 #: add-link-to-facebook-class.php:1318
 msgid "Do not show on pages:"
-msgstr "Non mostrare nelle pagine:"
+msgstr "Visa inte på sidor:"
 
 #: add-link-to-facebook-class.php:1324
 msgid "Do not show in archives:"
-msgstr "Non mostrare negli archivi:"
+msgstr "Visa inte i arkiv:"
 
 #: add-link-to-facebook-class.php:1330
 msgid "Do not show in categories:"
-msgstr "Non mostrare nelle categorie:"
+msgstr "Visa inte i kategorier:"
 
 #: add-link-to-facebook-class.php:1336
 msgid "Layout:"
@@ -343,103 +343,103 @@ msgstr "Layout:"
 
 #: add-link-to-facebook-class.php:1338
 msgid "Standard"
-msgstr "standard"
+msgstr "Standard"
 
 #: add-link-to-facebook-class.php:1339
 msgid "Button with count"
-msgstr "pulsante con contatore"
+msgstr "Knapp med räknare"
 
 #: add-link-to-facebook-class.php:1340
 msgid "Box with count"
-msgstr "box con contatore"
+msgstr "Låda med räknare"
 
 #: add-link-to-facebook-class.php:1344
 msgid "Faces:"
-msgstr "Faces:"
+msgstr "Ansikten:"
 
 #: add-link-to-facebook-class.php:1350
 msgid "Width:"
-msgstr "Larghezza:"
+msgstr "Bredd:"
 
 #: add-link-to-facebook-class.php:1353
 msgid "Pixels"
-msgstr "pixel"
+msgstr "Pixlar"
 
 #: add-link-to-facebook-class.php:1357
 msgid "Action:"
-msgstr "Azione:"
+msgstr "Åtgärd:"
 
 #: add-link-to-facebook-class.php:1359
 msgid "Like"
-msgstr "Mi piace"
+msgstr "Gilla"
 
 #: add-link-to-facebook-class.php:1360
 msgid "Recommend"
-msgstr "Consiglia"
+msgstr "Rekommendera"
 
 #: add-link-to-facebook-class.php:1364
 msgid "Font:"
-msgstr "Carattere:"
+msgstr "Typsnitt:"
 
 #: add-link-to-facebook-class.php:1378
 msgid "Color scheme:"
-msgstr "Schema colore:"
+msgstr "Färgschema:"
 
 #: add-link-to-facebook-class.php:1380
 msgid "Light"
-msgstr "chiaro"
+msgstr "Ljus"
 
 #: add-link-to-facebook-class.php:1381
 msgid "Dark"
-msgstr "scuro"
+msgstr "Mörk"
 
 #: add-link-to-facebook-class.php:1385
 msgid "Link to:"
-msgstr "Collegato a: "
+msgstr "Länka till:"
 
 #: add-link-to-facebook-class.php:1388
 msgid "Default the post or page"
-msgstr "pagina o articolo predefinito"
+msgstr "Standard inlägg eller sida"
 
 #: add-link-to-facebook-class.php:1392
 msgid "Show at the top of the post:"
-msgstr "Mostra in cima all'articolo:"
+msgstr "Visa ovan inlägget:"
 
 #: add-link-to-facebook-class.php:1398
 msgid "Use iframe in stead of XFBML:"
-msgstr "Usa iframe, no XFBML:"
+msgstr "Använd iFrame istället för XFBML:"
 
 #: add-link-to-facebook-class.php:1404
 msgid "Show Facebook send button:"
-msgstr "Mostra pulsante FB Send:"
+msgstr "Visa Facebook Skicka knapp:"
 
 #: add-link-to-facebook-class.php:1413
 msgid "Combine Facebook like and send buttons:"
-msgstr "Abbina pulsanti FB Mi piace e Send:"
+msgstr "Kombinera Facebook Gilla och Skicka knappar:"
 
 #: add-link-to-facebook-class.php:1420
 msgid "Use Open Graph protocol:"
-msgstr "Usa protocollo Open Graph:"
+msgstr "Använd OpenGraph protokoll:"
 
 #: add-link-to-facebook-class.php:1428
 msgid "Open Graph protocol <em>og:type</em>:"
-msgstr "Protocollo Open Graph <em>og:type</em>:"
+msgstr "OpenGraph protokoll <em>og:type</em>:"
 
 #: add-link-to-facebook-class.php:1438
 msgid "Do not add link by default:"
-msgstr "Non aggiungere i link (predefinito):"
+msgstr "Lägg inte till länk som standard:"
 
 #: add-link-to-facebook-class.php:1444
 msgid "Don't show a summary in the post list:"
-msgstr "Non mostrare sommario nella lista degli articoli:"
+msgstr "Visa inte en summering i inläggslistan:"
 
 #: add-link-to-facebook-class.php:1450
 msgid "Facebook character encoding:"
-msgstr "Codifica del carattere FB:"
+msgstr "Facebook teckenkodning:"
 
 #: add-link-to-facebook-class.php:1453
 msgid "Default UTF-8; do not change if no need"
-msgstr "predefinito UTF-8; cambia solo se necessario"
+msgstr "Standard UTF-8; ändra inte om det inte behövs"
 
 #: add-link-to-facebook-class.php:1457
 msgid "Facebook locale:"
@@ -447,100 +447,100 @@ msgstr "Facebook locale:"
 
 #: add-link-to-facebook-class.php:1460
 msgid "Do not change if no need"
-msgstr "cambia solo se necessario"
+msgstr "Ändra inte om det inte behövs"
 
 #: add-link-to-facebook-class.php:1464
 msgid "Clean on deactivate:"
-msgstr "Svuota alla disattivazione:"
+msgstr "Ren vid avaktivering:"
 
 #: add-link-to-facebook-class.php:1467
 msgid "All data, except link id's"
-msgstr "tutti i dati, id link estratti"
+msgstr "All data, utom länkars ID"
 
 #: add-link-to-facebook-class.php:1471
 msgid "I have donated to this plugin:"
-msgstr "Ho donato:"
+msgstr "Jag har donerat till denna plugin:"
 
 #: add-link-to-facebook-class.php:1477
 msgid "I have rated this plugin:"
-msgstr "Ho già votato:"
+msgstr "Jag har betygsatt denna plugin:"
 
 #: add-link-to-facebook-class.php:1484
 msgid "Administrator options"
-msgstr "Opzioni amministratore"
+msgstr "Administratörsinställningar:"
 
 #: add-link-to-facebook-class.php:1488
 msgid "Do not display notices:"
-msgstr "Non mostrare avvisi:"
+msgstr "Visa inte meddelanden:"
 
 #: add-link-to-facebook-class.php:1491
 msgid "Except on this page"
-msgstr "riassumi su questa pagina"
+msgstr "Förutom på denna sidan"
 
 #: add-link-to-facebook-class.php:1495
 msgid "Required capability to use plugin:"
-msgstr "Condizione richiesta per l'utilizzo del plugin:"
+msgstr "Kräver kompabilitet för att använda plugin:"
 
 #: add-link-to-facebook-class.php:1521
 msgid "Refresh Facebook comments every:"
-msgstr "Ricarica i commenti di Facebook ogni:"
+msgstr "Uppdatera Facebook kommentarer varje:"
 
 #: add-link-to-facebook-class.php:1524
 msgid "Minutes"
-msgstr "minuti"
+msgstr "minuter"
 
 #: add-link-to-facebook-class.php:1525
 msgid "Default every 10 minutes"
-msgstr "predefinito a 10 minuti"
+msgstr "Standard var 10:e minut"
 
 #: add-link-to-facebook-class.php:1529
 msgid "Maximum Facebook text length:"
-msgstr "Lunghezza max per il testo Facebook:"
+msgstr "Maximal Facebook textlängd:"
 
 #: add-link-to-facebook-class.php:1532
 msgid "Characters"
-msgstr "caratteri"
+msgstr "tecken"
 
 #: add-link-to-facebook-class.php:1533
 msgid "Default 256 characters"
-msgstr "256 caratteri (predefinito)"
+msgstr "Standard 256 tecken"
 
 #: add-link-to-facebook-class.php:1537
 msgid "Exclude these custom post types:"
-msgstr "Escludi questi tipi di articoli personalizzati:"
+msgstr "Uteslut dessa anpassade inläggstyper:"
 
 #: add-link-to-facebook-class.php:1540
 #: add-link-to-facebook-class.php:1547
 msgid "Separate by commas"
-msgstr "separa con delle virgole"
+msgstr "Separera med komma"
 
 #: add-link-to-facebook-class.php:1544
 msgid "Exclude these categories:"
-msgstr "Escludi queste categorie:"
+msgstr "Uteslut dessa kategorier:"
 
 #: add-link-to-facebook-class.php:1551
 msgid "Do not verify the peer's certificate:"
-msgstr "Non verificare il certificato peer:"
+msgstr "Verifiera inte certifikat:"
 
 #: add-link-to-facebook-class.php:1554
 msgid "Try this in case of cURL error 60"
-msgstr "da provare in caso di cURL error 60"
+msgstr "Prova detta vid cURL error 60"
 
 #: add-link-to-facebook-class.php:1559
 msgid "Debug options"
-msgstr "Opzioni debug"
+msgstr "Debug alternativ"
 
 #: add-link-to-facebook-class.php:1562
 msgid "Use site URL as request URI:"
-msgstr "Usa URL sito come URI richiedente:"
+msgstr "Använd sajtens URL som URI begäran:"
 
 #: add-link-to-facebook-class.php:1568
 msgid "Do not use cURL:"
-msgstr "Non usare cURL:"
+msgstr "Använd inte cURL:"
 
 #: add-link-to-facebook-class.php:1574
 msgid "Use publish_post action:"
-msgstr "Utilizza azione publish_post:"
+msgstr "Använd publish_post:"
 
 #: add-link-to-facebook-class.php:1580
 msgid "Debug:"
@@ -548,11 +548,11 @@ msgstr "Debug:"
 
 #: add-link-to-facebook-class.php:1608
 msgid "Privacy in the Sustainable Plugins Sponsorship Network"
-msgstr "Privacy in the Sustainable Plugins Sponsorship Network"
+msgstr "Sekretess i Sustainable Plugins Sponsorship Network"
 
 #: add-link-to-facebook-class.php:1618
 msgid "Resources"
-msgstr "Risorse"
+msgstr "Resurser"
 
 #: add-link-to-facebook-class.php:1620
 msgid "Frequently asked questions"
@@ -560,56 +560,56 @@ msgstr "FAQ"
 
 #: add-link-to-facebook-class.php:1621
 msgid "Support page"
-msgstr "Pagina di supporto "
+msgstr "Supportsida"
 
 #: add-link-to-facebook-class.php:1622
 #: add-link-to-facebook-class.php:1644
 msgid "Debug information"
-msgstr "Informazioni debug"
+msgstr "Debug information"
 
 #: add-link-to-facebook-class.php:1623
 msgid "About the author"
-msgstr "Info autore"
+msgstr "Om författaren"
 
 #: add-link-to-facebook-class.php:1624
 msgid "Other plugins"
-msgstr "Altri plugin"
+msgstr "Andra plugin"
 
 #: add-link-to-facebook-class.php:1651
 msgid "Name:"
-msgstr "Nome:"
+msgstr "Namn:"
 
 #: add-link-to-facebook-class.php:1657
 msgid "E-mail:"
-msgstr "Email:"
+msgstr "E-post:"
 
 #: add-link-to-facebook-class.php:1663
 msgid "Message:"
-msgstr "Messaggio:"
+msgstr "Meddelande:"
 
 #: add-link-to-facebook-class.php:1670
 msgid "Send"
-msgstr "Invia"
+msgstr "Skicka"
 
 #: add-link-to-facebook-class.php:1927
 msgid "Do not add link to Facebook"
-msgstr "Non aggiungere link a FB"
+msgstr "Länka inte till Facebook"
 
 #: add-link-to-facebook-class.php:1930
 msgid "Do not add like button"
-msgstr "No pulsante FB Mi piace"
+msgstr "Lägg inte till Gilla-knappen"
 
 #: add-link-to-facebook-class.php:1933
 msgid "Do not integrate comments"
-msgstr "Non integrare i commenti"
+msgstr "Integrera inte kommentarer"
 
 #: add-link-to-facebook-class.php:1938
 msgid "Delete existing Facebook link"
-msgstr "Rimuovi link a FB già esistenti"
+msgstr "Ta bort länk till Facebook"
 
 #: add-link-to-facebook-class.php:1943
 msgid "Clear error messages"
-msgstr "Svuota messaggi errore"
+msgstr "Ta bort felmeddelanden"
 
 #: add-link-to-facebook-class.php:1958
 msgid "Facebook"
@@ -617,64 +617,64 @@ msgstr "Facebook"
 
 #: add-link-to-facebook-class.php:1966
 msgid "Yes"
-msgstr "Si"
+msgstr "Ja"
 
 #: add-link-to-facebook-class.php:1966
 msgid "No"
-msgstr "No"
+msgstr "Nej"
 
 #: add-link-to-facebook-class.php:1976
 msgid "comments"
-msgstr "commenti"
+msgstr "kommentarer"
 
 #: add-link-to-facebook-class.php:1983
 msgid "likes"
-msgstr "mi piace"
+msgstr "gillar"
 
 #: add-link-to-facebook-class.php:2020
 msgid "No images in the media library for this post"
-msgstr "Nessuna immagine per questo articolo presente nella Libreria media"
+msgstr "Inga bilder i media biblioteket för detta inlägg"
 
 #: add-link-to-facebook-class.php:2028
 msgid "Select link image:"
-msgstr "Seleziona link immagine:"
+msgstr "Välj länkbild:"
 
 #: add-link-to-facebook-class.php:2068
 msgid "Custom exerpt"
-msgstr "Riassunto personalizzato"
+msgstr "Anpassat utdrag"
 
 #: add-link-to-facebook-class.php:2485
 msgid "Share"
-msgstr "Condividi"
+msgstr "Dela"
 
 #: add-link-to-facebook-class.php:2619
 msgid "commented on"
-msgstr "commentato su"
+msgstr "kommenterade"
 
 #: add-link-to-facebook-class.php:2985
 #: add-link-to-facebook-class.php:3034
 msgid "on Facebook"
-msgstr "su Facebook"
+msgstr "på Facebook"
 
 #: add-link-to-facebook-class.php:3040
 msgid "Liked this post"
-msgstr "Mi piace questo post"
+msgstr "Gillade det här inlägget"
 
 #: add-link-to-facebook-class.php:3609
 msgid "Title:"
-msgstr "Titolo:"
+msgstr "Titel:"
 
 #: add-link-to-facebook-class.php:3613
 msgid "Show Facebook like button"
-msgstr "Mostra pulsante FB Mi piace"
+msgstr "Visa Gilla-knappen till Facebook"
 
 #: add-link-to-facebook-class.php:3616
 msgid "Show Facebook send button"
-msgstr "Mostra pulsante FB Send"
+msgstr "Visa Skicka-knappen till Facebook"
 
 #: add-link-to-facebook-class.php:3619
 msgid "Show Facebook image/link"
-msgstr "Mostra immagine/link FB"
+msgstr "Visa bild/länk till Facebook"
 
 #~ msgid "Number of sentences to use:"
 #~ msgstr "Numero di frasi da usare:"
