@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.51
+Stable tag: 1.52
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -31,13 +31,13 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Shortcodes and template tags for liker names, like button and send button
 * Integrate Facebook comments and likes on added links into Wordpress
+* Post WordPress comments back to Facebook
+* Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
+* Sidebar widget for like/send button
 
 **Beta features:**
 
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
-* Post WordPress comments back to Facebook
-* Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
-* Sidebar widget for like/send button
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -528,6 +528,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.52 =
+* Updated description
+* Updated setup guide
+* Updated requested features list
+* Removed all beta notices
+* Improvement: added headers and more save buttons to setup page
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.51 =
 * Improvement: link to Facebook discussion from post list and post edit page
 * Added Swedish (sv\_SE) translation by *JornB*
@@ -590,6 +598,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.52 =
+One improvement, updated texts
+
 = 1.51 =
 One improvement, new/updated translation
 
@@ -647,6 +658,7 @@ Note that you don't have to submit the Facebook application to the *App Director
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
+If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php "Confirm phone").
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
@@ -825,7 +837,7 @@ Of course this is less secure ...
 
 In no particular order:
 
-* Comment with Facebook login
+* None
 
 Realized features:
 
@@ -865,6 +877,7 @@ Feature which will not be realized, sorry:
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
+* Comment with Facebook login: no feasible solution
 
 == Facebook Authorization ==
 
