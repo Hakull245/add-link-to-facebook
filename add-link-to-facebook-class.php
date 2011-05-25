@@ -2429,7 +2429,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$fb_encoding = 'UTF-8';
 
 			if ($blog_encoding != $fb_encoding && function_exists('mb_convert_encoding'))
-				return mb_convert_encoding($text, $fb_encoding, $blog_encoding);
+				return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
 			else
 				return $text;
 		}
@@ -2940,7 +2940,7 @@ if (!class_exists('WPAL2Facebook')) {
 			else {
 				$content = '<div class="al2fb_like_button">';
 				//$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
 				$content .= '<fb:like';
 				$content .= ' href="' . $link . '"';
 				if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
@@ -2974,7 +2974,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Send button
 			$content = '<div class="al2fb_send_button">';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1"></script>';
+			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
 			$content .= '<fb:send ref="AL2FB"';
 			$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
 			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';

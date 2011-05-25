@@ -528,6 +528,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.53 =
+* Improvement: suppress warnings of *mb_convert_encoding*
+* Improvement: added *type="text/javascript"* to Facebook scripts
+
 = 1.52 =
 * Updated description
 * Updated setup guide
@@ -597,6 +601,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.53 =
+Two improvements
 
 = 1.52 =
 One improvement, updated texts
