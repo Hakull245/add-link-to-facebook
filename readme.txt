@@ -511,6 +511,10 @@ The plugin tried to add a WordPress comment to an added link on Facebook, but th
 To prevent this message in the future, you should delete the link from WordPress too.
 While deleting, you will probably get the error described in question E14 too.
 
+= E18 I get 'Missing redirect_uri parameter' ==
+
+It could be that you have filled something wrong into the field App ID. This field should contain only digits.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -531,6 +535,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.53 =
 * Improvement: suppress warnings of *mb_convert_encoding*
 * Improvement: added *type="text/javascript"* to Facebook scripts
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.52 =
 * Updated description
