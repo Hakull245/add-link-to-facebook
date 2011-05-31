@@ -32,7 +32,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Shortcodes and template tags for liker names, like button and send button
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
-* Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
+* Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for like/send button
 
 **Beta features:**
@@ -280,6 +280,13 @@ Put one of these lines somewhere in your theme:
 One WordPress user can only add links to one wall OR one page OR one group, even if that user happens to have multiple sites (which is possible within a network site).
 Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
 It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+
+= U26 Why are liker names not displayed? =
+
+The option *Show likers below the post text* shows the names of the people that liked the *link* the plugin added on Facebook.
+The like button is a standard Facebook like button which is not connect to links added by the plugin (this is not possible).
+The like button is connected to the *page* on which it is displayed.
+So, people that click on the like button are displayed within the like button (depending on how the like button is setup), but not as people that liked an added link.
 
 **--- Security ---**
 
@@ -769,6 +776,8 @@ Facebook will truncate the text and display *Read more*, which when clicked will
 * Integrate likes from Facebook: show Facebook links as WordPress pingbacks
 * Show likers below the post text: show a comma separated list of Facebook liker names at the bottom of your post
 
+Comments copied from Facebook to WordPress are subject to moderation and notification, depending on the WordPress discussion settings.
+
 Link Facebook comment to:
 
 * None: no link at all, good for privacy
@@ -888,6 +897,7 @@ Realized features:
 * Copy Facebook comments into WordPress database (version 1.29)
 * Option to not link to Facebook comment author (version 1.36)
 * Link back to Facebook wall from comments (version 1.46)
+* Facebook comment moderation (version 1.54)
 
 Feature which will not be realized, sorry:
 
