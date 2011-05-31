@@ -3001,61 +3001,86 @@ if (!class_exists('WPAL2Facebook')) {
 				// Get Facebook comments
 				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
-					if ($fb_comments)
+					if ($fb_comments) {
+						// Get WordPress comments
+						$stored_comments = get_comments('post_id=' . $post->ID);
+
 						foreach ($fb_comments->data as $fb_comment) {
-							// Check if post back from WordPress to Facebook
-							$postback = false;
-							if ($comments)
-								foreach ($comments as $comment) {
+							// Check if stored comment
+							$stored = false;
+							if ($stored_comments)
+								foreach ($stored_comments as $comment) {
 									$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
 									if ($fb_comment_id == $fb_comment->id) {
-										$postback = true;
+										$stored = true;
 										break;
 									}
 								}
 
-							// Create new virtual comment
-							if (!$postback) {
-								$new = null;
-								$new->comment_ID = $fb_comment->id;
-								$new->comment_post_ID = $post_ID;
-								$new->comment_author = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
-								$new->comment_author_email = '';
-								$new->comment_author_url = 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id;
-								$new->comment_author_IP = '';
-								$new->comment_date_gmt = date('Y-m-d H:i:s', strtotime($fb_comment->created_time));
-								$new->comment_date = date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off);
-								$new->comment_content = $fb_comment->message;
-								$new->comment_karma = 0;
-								$new->comment_approved = 1;
-								$new->comment_agent = 'AL2FB';
-								$new->comment_type = ''; // pingback|trackback
-								$new->comment_parent = 0;
-								$new->user_id = 0;
-								$comments[] = $new;
+							// Create new comment
+							if (!$stored) {
+								$comment_ID = $fb_comment->id;
+								$commentdata = array(
+									'comment_post_ID' => $post_ID,
+									'comment_author' => $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain),
+									'comment_author_email' => '',
+									'comment_author_url' => 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id,
+									'comment_author_IP' => '',
+									'comment_date' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off),
+									'comment_date_gmt' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time)),
+									'comment_content' => $fb_comment->message,
+									'comment_karma' => 0,
+									'comment_approved' => 1,
+									'comment_agent' => 'AL2FB',
+									'comment_type' => '', // pingback|trackback
+									'comment_parent' => 0,
+									'user_id' => 0
+								);
 
 								// Copy Facebook comment to WordPress database
 								if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) {
-									$data = array(
-										'comment_post_ID' => $new->comment_post_ID,
-										'comment_author' => $new->comment_author,
-										'comment_author_email' => $new->comment_author_email,
-										'comment_author_url' => $new->comment_author_url,
-										'comment_author_IP' => $new->comment_author_ip,
-										'comment_date' => $new->comment_date,
-										'comment_content' => $new->comment_content,
-										'comment_karma' => $new->comment_karma,
-										'comment_approved' => $new->comment_approved,
-										'comment_agent' => $new->comment_agent,
-										'comment_type' => $new->comment_type,
-										'comment_parent' => $new->comment_parent,
-										'user_id' => $new->user_id
-									);
-									$new->comment_ID = wp_insert_comment($data);
-									add_comment_meta($new->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+									// Apply filters
+									$commentdata = apply_filters('preprocess_comment', $commentdata);
+									$commentdata = wp_filter_comment($commentdata);
+									$commentdata['comment_approved'] = wp_allow_comment($commentdata);
+
+									// Insert comment in database
+									$comment_ID = wp_insert_comment($commentdata);
+									add_comment_meta($comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+									do_action('comment_post', $comment_ID, $commentdata['comment_approved']);
+
+									// Notify
+									if ('spam' !== $commentdata['comment_approved']) {
+										if ('0' == $commentdata['comment_approved'])
+											wp_notify_moderator($comment_ID);
+										if (get_option('comments_notify') && $commentdata['comment_approved'])
+											wp_notify_postauthor($comment_ID, $commentdata['comment_type']);
+									}
+								}
+
+								// Add comment to array
+								if ($commentdata['comment_approved'] == 1) {
+									$new = null;
+									$new->comment_ID = $comment_ID;
+									$new->comment_post_ID = $commentdata['comment_post_ID'];
+									$new->comment_author = $commentdata['comment_author'];
+									$new->comment_author_email = $commentdata['comment_author_email'];
+									$new->comment_author_url = $commentdata['comment_author_url'];
+									$new->comment_author_ip = $commentdata['comment_author_IP'];
+									$new->comment_date = $commentdata['comment_date'];
+									$new->comment_date_gmt = $commentdata['comment_date_gmt'];
+									$new->comment_content = $commentdata['comment_content'];
+									$new->comment_karma = $commentdata['comment_karma'];
+									$new->comment_approved = $commentdata['comment_approved'];
+									$new->comment_agent = $commentdata['comment_agent'];
+									$new->comment_type = $commentdata['comment_type'];
+									$new->comment_parent = $commentdata['comment_parent'];
+									$new->user_id = $commentdata['user_id'];
+									$comments[] = $new;
 								}
 							}
 						}
+					}
 				}
 
 				// Get likes
@@ -3132,23 +3157,25 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Comment count
 			if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-				$comments = get_comments('post_id=' . $post_ID);
 				$fb_comments = self::Get_comments_or_likes($post, false);
-				if ($fb_comments)
+				if ($fb_comments) {
+					$stored_comments = get_comments('post_id=' . $post_ID);
+
 					foreach ($fb_comments->data as $fb_comment)
 						if (!empty($fb_comments)) {
-							$postback = false;
-							if ($comments)
-								foreach ($comments as $comment) {
+							$stored = false;
+							if ($stored_comments)
+								foreach ($stored_comments as $comment) {
 									$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
 									if ($fb_comment_id == $fb_comment->id) {
-										$postback = true;
+										$stored = true;
 										break;
 									}
 								}
-							if (!$postback)
+							if (!$stored)
 								$count++;
 						}
+				}
 			}
 
 			// Like count

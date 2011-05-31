@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.53
+Stable tag: 1.54
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -532,6 +532,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.54 =
+* Improvement: use WordPress comment notification settings for *stored* Facebook comments
+* Improvement: use WordPress comment moderation settings for *stored* Facebook comments
+* Improvement: call WordPress comment filters and actions for *stored* Facebook comments
+
 = 1.53 =
 * Improvement: suppress warnings of *mb_convert_encoding*
 * Improvement: added *type="text/javascript"* to Facebook scripts
@@ -608,6 +613,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.54 =
+Three improvements
 
 = 1.53 =
 Two improvements, translation updates
