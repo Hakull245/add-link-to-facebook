@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.54
+Stable tag: 1.55
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -539,7 +539,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.55 =
+* Bugfix: html entities in text trailer
+
 = 1.54 =
+* Updated description, FAQ and user guide
 * Improvement: use WordPress comment notification settings for *stored* Facebook comments
 * Improvement: use WordPress comment moderation settings for *stored* Facebook comments
 * Improvement: call WordPress comment filters and actions for *stored* Facebook comments
@@ -620,6 +624,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.55 =
+Bugfix
 
 = 1.54 =
 Three improvements
@@ -765,7 +772,8 @@ To better understand some of the options take a look at [the screen shot](http:/
 * Use short URL: see question U15 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for details
 * Add links for new pages: by default only links will be added for new posts, check this option if you want the same for new pages
 
-If you don't use a trailer text, the complete post/page text will be sent to Facebook and
+If you use a text trailer, you should know it is just a text and it is not clickable.
+If you don't use a text trailer, the complete post/page text will be sent to Facebook and
 Facebook will truncate the text and display *Read more*, which when clicked will reveal the complete text.
 
 *Comments and likes*
