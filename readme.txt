@@ -675,6 +675,8 @@ Two improvements, one bugfix
 
 == Setup guide ==
 
+**If you have more than one Facebook account, either logout completely or login to the correct account before you start.**
+
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
