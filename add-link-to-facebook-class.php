@@ -3003,7 +3003,9 @@ if (!class_exists('WPAL2Facebook')) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
 						// Get WordPress comments
-						$stored_comments = get_comments('post_id=' . $post->ID);
+						$stored_comments = array_merge(
+							get_comments('post_id=' . $post->ID),
+							get_comments('status=spam&post_id=' . $post->ID));
 
 						foreach ($fb_comments->data as $fb_comment) {
 							// Check if stored comment
