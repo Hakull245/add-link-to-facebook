@@ -512,13 +512,13 @@ Note that the plugin cannot create the meta tags for pages with more than one po
 The plugin is only able to determine the correct Facebook application for posts and pages, because it needs to know an author for this.
 You can use the [URL Linter](http://developers.facebook.com/tools/lint/ "URL Linter") to see if there are valid meta tags.
 
-= E17 I get 'Error finding the requested story' ==
+= E17 I get 'Error finding the requested story' =
 
 The plugin tried to add a WordPress comment to an added link on Facebook, but the link does not exist anymore.
 To prevent this message in the future, you should delete the link from WordPress too.
 While deleting, you will probably get the error described in question E14 too.
 
-= E18 I get 'Missing redirect_uri parameter' ==
+= E18 I get 'Missing redirect_uri parameter' =
 
 It could be that you have filled something wrong into the field App ID. This field should contain only digits.
 
@@ -801,9 +801,10 @@ To better understand some of the options take a look at [the screen shot](http:/
 If you use a text trailer, you should know it is just a text and it is not clickable.
 The text including the trailer will not be longer than 256 characters, this is what Facebook will display at maximum without truncating the text.
 Note that the text could be shorter, because the plugin will truncate the text after periods only (sentences).
-You can change the default maximum text length with trailer using a plugin option.
-If you don't use a text trailer, the complete post/page text will be sent to Facebook and
-Facebook will truncate the text and display *Read more*, which when clicked will reveal the complete text.
+You can change the default maximum text length with trailer of 256 characters using a plugin option.
+If you don't use a text trailer, the complete post/page text up to 10,000 characters will be sent to Facebook and
+Facebook will truncate the text at 256 characters and display *Read more*, which when clicked will reveal the complete text.
+You can change the default maximum text length of 10,000 characters using a plugin option.
 
 *Comments and likes*
 
