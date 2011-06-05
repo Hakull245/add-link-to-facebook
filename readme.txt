@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.56
+Stable tag: 1.57
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -522,6 +522,14 @@ While deleting, you will probably get the error described in question E14 too.
 
 It could be that you have filled something wrong into the field App ID. This field should contain only digits.
 
+= E19 How can I remove error messages? =
+
+The first thing you should try is to simply update the post(s) using the WordPress update button.
+The plugin will add a link to the post if it didn't already do that and remove the error message in the process.
+You can also tick the checkbox *Clear error messages* in the post submit box, near the update button.
+In this way you can clear the error message without adding a link to Facebook
+(you'll probably want to check *Do not add link to Facebook* too in this case).
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -538,6 +546,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.57 =
+* Improvement: limit length of text sent to Facebook
+* Improvement: added theme name and version to debug information
+* Updated FAQ
+* Updated User Guide
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.56 =
 * Bugfix: spam Facebook comments marked as duplicate
@@ -627,6 +642,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.57 =
+Two improvements, updated texts, translation updates
 
 = 1.56 =
 Bugfix
@@ -781,6 +799,9 @@ To better understand some of the options take a look at [the screen shot](http:/
 * Add links for new pages: by default only links will be added for new posts, check this option if you want the same for new pages
 
 If you use a text trailer, you should know it is just a text and it is not clickable.
+The text including the trailer will not be longer than 256 characters, this is what Facebook will display at maximum without truncating the text.
+Note that the text could be shorter, because the plugin will truncate the text after periods only (sentences).
+You can change the default maximum text length with trailer using a plugin option.
 If you don't use a text trailer, the complete post/page text will be sent to Facebook and
 Facebook will truncate the text and display *Read more*, which when clicked will reveal the complete text.
 
