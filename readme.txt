@@ -804,7 +804,8 @@ Note that the text could be shorter, because the plugin will truncate the text a
 You can change the default maximum text length with trailer of 256 characters using a plugin option.
 If you don't use a text trailer, the complete post/page text up to 10,000 characters will be sent to Facebook and
 Facebook will truncate the text at 256 characters and display *Read more*, which when clicked will reveal the complete text.
-You can change the default maximum text length of 10,000 characters using a plugin option.
+You can change the default maximum text length of 10,000 characters using a plugin option,
+but you shouldn't set it above 10,000 characters, since Facebook will report an error above this hard limit.
 
 *Comments and likes*
 
