@@ -547,6 +547,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.58 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.57 =
 * Improvement: limit length of text sent to Facebook
 * Improvement: added theme name and version to debug information
