@@ -949,6 +949,8 @@ Feature which will not be realized, sorry:
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
 * Comment with Facebook login: no feasible solution
+* Other social buttons: too far from the core function of the plugin
+* Like button at the bottom and top: there are already enough like buttons in the world
 
 == Facebook Authorization ==
 
