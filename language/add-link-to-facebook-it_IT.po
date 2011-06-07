@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Add Link to Facebook in italiano\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-27 08:03+0100\n"
-"PO-Revision-Date: 2011-05-27 08:43+0100\n"
+"POT-Creation-Date: 2011-06-06 21:36+0100\n"
+"PO-Revision-Date: 2011-06-07 07:28+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Gianni Diurno | gidibao.net\n"
 "MIME-Version: 1.0\n"
@@ -18,700 +18,709 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: add-link-to-facebook-class.php:684
+#: add-link-to-facebook-class.php:687
 msgid "Settings updated"
 msgstr "Le impostazioni sono state aggiornate"
 
-#: add-link-to-facebook-class.php:699
-#: add-link-to-facebook-class.php:711
+#: add-link-to-facebook-class.php:702
+#: add-link-to-facebook-class.php:714
 msgid "Authorized, go posting!"
 msgstr "Tutto ok! Puoi iniziare..."
 
-#: add-link-to-facebook-class.php:753
+#: add-link-to-facebook-class.php:756
 msgid "Debug information sent"
 msgstr "Le informazioni debug sono state inviate"
 
-#: add-link-to-facebook-class.php:755
+#: add-link-to-facebook-class.php:758
 msgid "Sending debug information failed"
 msgstr "L'invio delle informazioni debug é fallito"
 
-#: add-link-to-facebook-class.php:779
+#: add-link-to-facebook-class.php:782
 msgid "needs configuration"
 msgstr "deve essere configurato"
 
-#: add-link-to-facebook-class.php:783
+#: add-link-to-facebook-class.php:786
 msgid "needs authorization"
 msgstr "E' necessaria l'autorizzazione"
 
-#: add-link-to-facebook-class.php:788
-#: add-link-to-facebook-class.php:811
-#: add-link-to-facebook-class.php:843
-#: add-link-to-facebook-class.php:844
-#: add-link-to-facebook-class.php:932
-#: add-link-to-facebook-class.php:2025
-#: add-link-to-facebook-class.php:2030
+#: add-link-to-facebook-class.php:791
+#: add-link-to-facebook-class.php:814
+#: add-link-to-facebook-class.php:846
+#: add-link-to-facebook-class.php:847
+#: add-link-to-facebook-class.php:935
+#: add-link-to-facebook-class.php:2036
+#: add-link-to-facebook-class.php:2041
 msgid "Add Link to Facebook"
 msgstr "Add Link to Facebook"
 
-#: add-link-to-facebook-class.php:820
+#: add-link-to-facebook-class.php:823
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
 msgstr "Avessi gradito il plugin Add Link to Facebook, esprimi la tua valutazione su <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Se il gradimento fosse basso, non avrà più senso sviluppare questo plugin.<br />Puoi disattivare questo messaggio mettendo il segno di spunta alla opzione \"Ho già votato\" nella pagina delle <a href=\"[settings]\">impostazioni</a>."
 
-#: add-link-to-facebook-class.php:843
+#: add-link-to-facebook-class.php:846
 msgid "Administration"
 msgstr "Amministrazione"
 
-#: add-link-to-facebook-class.php:865
+#: add-link-to-facebook-class.php:868
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: add-link-to-facebook-class.php:936
+#: add-link-to-facebook-class.php:939
 msgid "Your server may not allow external connections"
 msgstr "Il tuo server non permette le connessioni esterne"
 
-#: add-link-to-facebook-class.php:949
+#: add-link-to-facebook-class.php:952
 msgid "Authorization"
 msgstr "Autorizzazione"
 
-#: add-link-to-facebook-class.php:955
+#: add-link-to-facebook-class.php:958
 msgid "Links will be added to"
 msgstr "I link saranno aggiunti a"
 
-#: add-link-to-facebook-class.php:971
+#: add-link-to-facebook-class.php:974
 msgid "Authorize"
 msgstr "Autorizza"
 
-#: add-link-to-facebook-class.php:991
+#: add-link-to-facebook-class.php:994
 msgid "Easy setup"
 msgstr "Configurazione semplificata"
 
-#: add-link-to-facebook-class.php:1001
+#: add-link-to-facebook-class.php:1004
 msgid "Use shared Facebook application:"
 msgstr "Usa applicazione condividivisione segnalibro:"
 
-#: add-link-to-facebook-class.php:1005
+#: add-link-to-facebook-class.php:1008
 msgid "Simple, but less secure"
 msgstr "Semplice, ma meno sicuro"
 
-#: add-link-to-facebook-class.php:1012
+#: add-link-to-facebook-class.php:1015
 msgid "To get an App ID and App Secret you have to create a Facebook application"
 msgstr "Per ottenere le App ID e Secret dovrai creare una applicazione Facebook"
 
-#: add-link-to-facebook-class.php:1013
+#: add-link-to-facebook-class.php:1016
 msgid "You have to fill in the following:"
 msgstr "Compila quanto segue:"
 
-#: add-link-to-facebook-class.php:1016
-#: add-link-to-facebook-class.php:1055
+#: add-link-to-facebook-class.php:1019
+#: add-link-to-facebook-class.php:1058
 msgid "App Name:"
 msgstr "Nome app:"
 
-#: add-link-to-facebook-class.php:1017
+#: add-link-to-facebook-class.php:1020
 msgid "Anything you like, will appear as \"via ...\" below the message"
 msgstr "un nome per la tua applicazione..."
 
-#: add-link-to-facebook-class.php:1020
+#: add-link-to-facebook-class.php:1023
 msgid "Web Site > Site URL:"
 msgstr "Sito web > URL sito:"
 
-#: add-link-to-facebook-class.php:1024
+#: add-link-to-facebook-class.php:1027
 msgid "Click here to create"
 msgstr "Clicca qui per crearla"
 
-#: add-link-to-facebook-class.php:1025
+#: add-link-to-facebook-class.php:1028
 msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
 msgstr "andando a '<em>Le mie applicazioni</em>' quindi a '<em>Set Up New App</em>'"
 
-#: add-link-to-facebook-class.php:1030
+#: add-link-to-facebook-class.php:1033
 msgid "App ID:"
 msgstr "App ID:"
 
-#: add-link-to-facebook-class.php:1036
+#: add-link-to-facebook-class.php:1039
 msgid "App Secret:"
 msgstr "App Secret:"
 
-#: add-link-to-facebook-class.php:1043
+#: add-link-to-facebook-class.php:1046
 msgid "Access token:"
 msgstr "Token d'accesso:"
 
-#: add-link-to-facebook-class.php:1068
+#: add-link-to-facebook-class.php:1071
 msgid "Share with all users on this site:"
 msgstr "Condividi con tutti gli utenti di questo sito:"
 
-#: add-link-to-facebook-class.php:1095
-#: add-link-to-facebook-class.php:1130
-#: add-link-to-facebook-class.php:1168
-#: add-link-to-facebook-class.php:1206
-#: add-link-to-facebook-class.php:1264
-#: add-link-to-facebook-class.php:1311
-#: add-link-to-facebook-class.php:1452
-#: add-link-to-facebook-class.php:1503
-#: add-link-to-facebook-class.php:1612
+#: add-link-to-facebook-class.php:1098
+#: add-link-to-facebook-class.php:1133
+#: add-link-to-facebook-class.php:1171
+#: add-link-to-facebook-class.php:1209
+#: add-link-to-facebook-class.php:1267
+#: add-link-to-facebook-class.php:1314
+#: add-link-to-facebook-class.php:1455
+#: add-link-to-facebook-class.php:1506
+#: add-link-to-facebook-class.php:1623
 msgid "Save"
 msgstr "Salva"
 
-#: add-link-to-facebook-class.php:1099
+#: add-link-to-facebook-class.php:1102
 msgid "Additional settings"
 msgstr "Impostazioni aggiuntive"
 
-#: add-link-to-facebook-class.php:1101
+#: add-link-to-facebook-class.php:1104
 msgid "Link picture"
 msgstr "Opzioni link alla immagine"
 
-#: add-link-to-facebook-class.php:1104
+#: add-link-to-facebook-class.php:1107
 msgid "Link picture:"
 msgstr "Link immagine:"
 
-#: add-link-to-facebook-class.php:1106
+#: add-link-to-facebook-class.php:1109
 msgid "WordPress logo"
 msgstr "logo WordPress"
 
-#: add-link-to-facebook-class.php:1107
+#: add-link-to-facebook-class.php:1110
 msgid "First attached image"
 msgstr "la prima immagine allegata"
 
-#: add-link-to-facebook-class.php:1108
+#: add-link-to-facebook-class.php:1111
 msgid "Featured post image"
 msgstr "immagine in evidenza"
 
-#: add-link-to-facebook-class.php:1109
+#: add-link-to-facebook-class.php:1112
 msgid "Let Facebook select"
 msgstr "Facebook (predefinita)"
 
-#: add-link-to-facebook-class.php:1110
+#: add-link-to-facebook-class.php:1113
 msgid "First image in the post"
 msgstr "la prima immagine nell'articolo"
 
-#: add-link-to-facebook-class.php:1111
+#: add-link-to-facebook-class.php:1114
 msgid "Image from User Photo plugin"
 msgstr "immagine da plugin User Photo"
 
-#: add-link-to-facebook-class.php:1112
+#: add-link-to-facebook-class.php:1115
 msgid "Custom picture below"
 msgstr "immagine personalizzata (qui sotto)"
 
-#: add-link-to-facebook-class.php:1116
+#: add-link-to-facebook-class.php:1119
 msgid "Custom picture URL:"
 msgstr "URL immagine personalizzata:"
 
-#: add-link-to-facebook-class.php:1119
+#: add-link-to-facebook-class.php:1122
 msgid "At least 50 x 50 pixels"
 msgstr "minimo 50 x 50 pixel"
 
-#: add-link-to-facebook-class.php:1123
+#: add-link-to-facebook-class.php:1126
 msgid "Default picture URL:"
 msgstr "URL immagine predefinita:"
 
-#: add-link-to-facebook-class.php:1126
+#: add-link-to-facebook-class.php:1129
 msgid "Default WordPress logo"
 msgstr "logo predefinito WordPress"
 
-#: add-link-to-facebook-class.php:1141
+#: add-link-to-facebook-class.php:1144
 msgid "Facebook page"
 msgstr "Pagina Facebook"
 
-#: add-link-to-facebook-class.php:1144
+#: add-link-to-facebook-class.php:1147
 msgid "Add to page:"
 msgstr "Aggiungi alla pagina:"
 
-#: add-link-to-facebook-class.php:1161
+#: add-link-to-facebook-class.php:1164
 msgid "Add as page owner:"
 msgstr "Aggiungi come proprietario pagina: "
 
-#: add-link-to-facebook-class.php:1164
+#: add-link-to-facebook-class.php:1167
 msgid "Requires manage pages permission"
 msgstr "richiede permesso gestione pagine"
 
-#: add-link-to-facebook-class.php:1172
+#: add-link-to-facebook-class.php:1175
 msgid "Facebook group"
 msgstr "Gruppo Facebook"
 
-#: add-link-to-facebook-class.php:1175
+#: add-link-to-facebook-class.php:1178
 msgid "Use groups:"
 msgstr "Utilizza ruolo:"
 
-#: add-link-to-facebook-class.php:1178
+#: add-link-to-facebook-class.php:1181
 msgid "Requires user groups permission"
 msgstr "richiede permessi gruppo utenti"
 
-#: add-link-to-facebook-class.php:1186
+#: add-link-to-facebook-class.php:1189
 msgid "Add to group:"
 msgstr "Aggiungi al gruppo:"
 
-#: add-link-to-facebook-class.php:1190
-#: add-link-to-facebook-class.php:1291
-#: add-link-to-facebook-class.php:2072
+#: add-link-to-facebook-class.php:1193
+#: add-link-to-facebook-class.php:1294
+#: add-link-to-facebook-class.php:2083
 msgid "None"
 msgstr "nessuno"
 
-#: add-link-to-facebook-class.php:1214
+#: add-link-to-facebook-class.php:1217
 msgid "Link appearance"
 msgstr "Aspetto link"
 
-#: add-link-to-facebook-class.php:1217
+#: add-link-to-facebook-class.php:1220
 msgid "Use site title as caption:"
 msgstr "Usa nome sito:"
 
-#: add-link-to-facebook-class.php:1224
+#: add-link-to-facebook-class.php:1227
 msgid "Use excerpt as message:"
 msgstr "Usa estratto:"
 
-#: add-link-to-facebook-class.php:1230
+#: add-link-to-facebook-class.php:1233
 msgid "Text trailer:"
 msgstr "Text trailer:"
 
-#: add-link-to-facebook-class.php:1233
+#: add-link-to-facebook-class.php:1236
 msgid "For example \"Read more ...\""
 msgstr "ad esempio \"Prosegui la lettura ...\""
 
-#: add-link-to-facebook-class.php:1237
+#: add-link-to-facebook-class.php:1240
 msgid "Keep hyperlinks:"
 msgstr "Gestione link:"
 
-#: add-link-to-facebook-class.php:1240
+#: add-link-to-facebook-class.php:1243
 msgid "The hyperlink title will be removed"
 msgstr "l'attributo titolo verrà rimosso dal link"
 
-#: add-link-to-facebook-class.php:1244
+#: add-link-to-facebook-class.php:1247
 msgid "Add 'Share' link:"
 msgstr "Aggiungi link 'Share':"
 
-#: add-link-to-facebook-class.php:1251
+#: add-link-to-facebook-class.php:1254
 msgid "Use short URL:"
 msgstr "Usa URL breve:"
 
-#: add-link-to-facebook-class.php:1254
+#: add-link-to-facebook-class.php:1257
 msgid "If available"
 msgstr "se disponibile"
 
-#: add-link-to-facebook-class.php:1258
+#: add-link-to-facebook-class.php:1261
 msgid "Add links for new pages:"
 msgstr "Aggiungi link a nuove pagine:"
 
-#: add-link-to-facebook-class.php:1267
+#: add-link-to-facebook-class.php:1270
 msgid "Facebook comments"
 msgstr "Commenti Facebook"
 
-#: add-link-to-facebook-class.php:1270
+#: add-link-to-facebook-class.php:1273
 msgid "Integrate comments from Facebook:"
 msgstr "Integra i commenti da FB:"
 
-#: add-link-to-facebook-class.php:1276
+#: add-link-to-facebook-class.php:1279
 msgid "Post WordPress comments back to Facebook:"
 msgstr "Pubblica i commenti WP di risposta su FB:"
 
-#: add-link-to-facebook-class.php:1282
+#: add-link-to-facebook-class.php:1285
 msgid "Copy comments from Facebook to WordPress:"
 msgstr "Copia i commenti da Facebook a WordPress:"
 
-#: add-link-to-facebook-class.php:1285
+#: add-link-to-facebook-class.php:1288
 msgid "Enables for example editing of Facebook comments"
 msgstr "attiva ad esempio editing commenti Facebook"
 
-#: add-link-to-facebook-class.php:1289
+#: add-link-to-facebook-class.php:1292
 msgid "Link Facebook comment to:"
 msgstr "Collega commento FB a:"
 
-#: add-link-to-facebook-class.php:1292
 #: add-link-to-facebook-class.php:1295
+#: add-link-to-facebook-class.php:1298
 msgid "Disables displaying of Facebook avatars too"
 msgstr "disattiva anche visualizzazione avatar FB"
 
-#: add-link-to-facebook-class.php:1293
+#: add-link-to-facebook-class.php:1296
 msgid "Profile author"
 msgstr "profilo autore"
 
-#: add-link-to-facebook-class.php:1294
+#: add-link-to-facebook-class.php:1297
 msgid "Added link"
 msgstr "collegamento aggiunto"
 
-#: add-link-to-facebook-class.php:1299
+#: add-link-to-facebook-class.php:1302
 msgid "Integrate likes from Facebook:"
 msgstr "Integra i Mi piace da FB:"
 
-#: add-link-to-facebook-class.php:1305
+#: add-link-to-facebook-class.php:1308
 msgid "Show likers below the post text:"
 msgstr "Mostra sotto il testo i fan:"
 
-#: add-link-to-facebook-class.php:1314
+#: add-link-to-facebook-class.php:1317
 msgid "Facebook like button"
 msgstr "Pulsante Facebook Mi piace"
 
-#: add-link-to-facebook-class.php:1317
+#: add-link-to-facebook-class.php:1320
 msgid "Show Facebook like button:"
 msgstr "Mostra pulsante FB Mi piace:"
 
-#: add-link-to-facebook-class.php:1320
-#: add-link-to-facebook-class.php:1426
-#: add-link-to-facebook-class.php:1440
-#: add-link-to-facebook-class.php:1448
+#: add-link-to-facebook-class.php:1323
+#: add-link-to-facebook-class.php:1429
+#: add-link-to-facebook-class.php:1443
+#: add-link-to-facebook-class.php:1451
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: add-link-to-facebook-class.php:1324
+#: add-link-to-facebook-class.php:1327
 msgid "Do not show on the home page:"
 msgstr "Non mostrare nella home:"
 
-#: add-link-to-facebook-class.php:1330
+#: add-link-to-facebook-class.php:1333
 msgid "Do not show on posts:"
 msgstr "Non mostrare negli articoli:"
 
-#: add-link-to-facebook-class.php:1336
+#: add-link-to-facebook-class.php:1339
 msgid "Do not show on pages:"
 msgstr "Non mostrare nelle pagine:"
 
-#: add-link-to-facebook-class.php:1342
+#: add-link-to-facebook-class.php:1345
 msgid "Do not show in archives:"
 msgstr "Non mostrare negli archivi:"
 
-#: add-link-to-facebook-class.php:1348
+#: add-link-to-facebook-class.php:1351
 msgid "Do not show in categories:"
 msgstr "Non mostrare nelle categorie:"
 
-#: add-link-to-facebook-class.php:1354
+#: add-link-to-facebook-class.php:1357
 msgid "Layout:"
 msgstr "Layout:"
 
-#: add-link-to-facebook-class.php:1356
+#: add-link-to-facebook-class.php:1359
 msgid "Standard"
 msgstr "standard"
 
-#: add-link-to-facebook-class.php:1357
+#: add-link-to-facebook-class.php:1360
 msgid "Button with count"
 msgstr "pulsante con contatore"
 
-#: add-link-to-facebook-class.php:1358
+#: add-link-to-facebook-class.php:1361
 msgid "Box with count"
 msgstr "box con contatore"
 
-#: add-link-to-facebook-class.php:1362
+#: add-link-to-facebook-class.php:1365
 msgid "Faces:"
 msgstr "Faces:"
 
-#: add-link-to-facebook-class.php:1368
+#: add-link-to-facebook-class.php:1371
 msgid "Width:"
 msgstr "Larghezza:"
 
-#: add-link-to-facebook-class.php:1371
+#: add-link-to-facebook-class.php:1374
 msgid "Pixels"
 msgstr "pixel"
 
-#: add-link-to-facebook-class.php:1375
+#: add-link-to-facebook-class.php:1378
 msgid "Action:"
 msgstr "Azione:"
 
-#: add-link-to-facebook-class.php:1377
+#: add-link-to-facebook-class.php:1380
 msgid "Like"
 msgstr "Mi piace"
 
-#: add-link-to-facebook-class.php:1378
+#: add-link-to-facebook-class.php:1381
 msgid "Recommend"
 msgstr "Consiglia"
 
-#: add-link-to-facebook-class.php:1382
+#: add-link-to-facebook-class.php:1385
 msgid "Font:"
 msgstr "Carattere:"
 
-#: add-link-to-facebook-class.php:1396
+#: add-link-to-facebook-class.php:1399
 msgid "Color scheme:"
 msgstr "Schema colore:"
 
-#: add-link-to-facebook-class.php:1398
+#: add-link-to-facebook-class.php:1401
 msgid "Light"
 msgstr "chiaro"
 
-#: add-link-to-facebook-class.php:1399
+#: add-link-to-facebook-class.php:1402
 msgid "Dark"
 msgstr "scuro"
 
-#: add-link-to-facebook-class.php:1403
+#: add-link-to-facebook-class.php:1406
 msgid "Link to:"
 msgstr "Collegato a: "
 
-#: add-link-to-facebook-class.php:1406
+#: add-link-to-facebook-class.php:1409
 msgid "Default the post or page"
 msgstr "pagina o articolo predefinito"
 
-#: add-link-to-facebook-class.php:1410
+#: add-link-to-facebook-class.php:1413
 msgid "Show at the top of the post:"
 msgstr "Mostra in cima all'articolo:"
 
-#: add-link-to-facebook-class.php:1416
+#: add-link-to-facebook-class.php:1419
 msgid "Use iframe in stead of XFBML:"
 msgstr "Usa iframe, no XFBML:"
 
-#: add-link-to-facebook-class.php:1422
+#: add-link-to-facebook-class.php:1425
 msgid "Show Facebook send button:"
 msgstr "Mostra pulsante FB Send:"
 
-#: add-link-to-facebook-class.php:1430
+#: add-link-to-facebook-class.php:1433
 msgid "Combine Facebook like and send buttons:"
 msgstr "Abbina pulsanti FB Mi piace e Send:"
 
-#: add-link-to-facebook-class.php:1436
+#: add-link-to-facebook-class.php:1439
 msgid "Use Open Graph protocol:"
 msgstr "Usa protocollo Open Graph:"
 
-#: add-link-to-facebook-class.php:1444
+#: add-link-to-facebook-class.php:1447
 msgid "Open Graph protocol <em>og:type</em>:"
 msgstr "Protocollo Open Graph <em>og:type</em>:"
 
-#: add-link-to-facebook-class.php:1455
+#: add-link-to-facebook-class.php:1458
 msgid "Miscelaneous settings"
 msgstr "Impostazioni varie"
 
-#: add-link-to-facebook-class.php:1458
+#: add-link-to-facebook-class.php:1461
 msgid "Do not add link by default:"
 msgstr "Non aggiungere i link (predefinito):"
 
-#: add-link-to-facebook-class.php:1464
+#: add-link-to-facebook-class.php:1467
 msgid "Don't show a summary in the post list:"
 msgstr "Non mostrare sommario nella lista degli articoli:"
 
-#: add-link-to-facebook-class.php:1470
+#: add-link-to-facebook-class.php:1473
 msgid "Facebook character encoding:"
 msgstr "Codifica del carattere FB:"
 
-#: add-link-to-facebook-class.php:1473
+#: add-link-to-facebook-class.php:1476
 msgid "Default UTF-8; do not change if no need"
 msgstr "predefinito UTF-8; cambia solo se necessario"
 
-#: add-link-to-facebook-class.php:1477
+#: add-link-to-facebook-class.php:1480
 msgid "Facebook locale:"
 msgstr "Facebook locale:"
 
-#: add-link-to-facebook-class.php:1480
+#: add-link-to-facebook-class.php:1483
 msgid "Do not change if no need"
 msgstr "cambia solo se necessario"
 
-#: add-link-to-facebook-class.php:1484
+#: add-link-to-facebook-class.php:1487
 msgid "Clean on deactivate:"
 msgstr "Svuota alla disattivazione:"
 
-#: add-link-to-facebook-class.php:1487
+#: add-link-to-facebook-class.php:1490
 msgid "All data, except link id's"
 msgstr "tutti i dati, id link estratti"
 
-#: add-link-to-facebook-class.php:1491
+#: add-link-to-facebook-class.php:1494
 msgid "I have donated to this plugin:"
 msgstr "Ho donato:"
 
-#: add-link-to-facebook-class.php:1497
+#: add-link-to-facebook-class.php:1500
 msgid "I have rated this plugin:"
 msgstr "Ho già votato:"
 
-#: add-link-to-facebook-class.php:1507
+#: add-link-to-facebook-class.php:1510
 msgid "Administrator options"
 msgstr "Opzioni amministratore"
 
-#: add-link-to-facebook-class.php:1511
+#: add-link-to-facebook-class.php:1514
 msgid "Do not display notices:"
 msgstr "Non mostrare avvisi:"
 
-#: add-link-to-facebook-class.php:1514
+#: add-link-to-facebook-class.php:1517
 msgid "Except on this page"
 msgstr "riassumi su questa pagina"
 
-#: add-link-to-facebook-class.php:1518
+#: add-link-to-facebook-class.php:1521
 msgid "Required capability to use plugin:"
 msgstr "Condizione richiesta per l'utilizzo del plugin:"
 
-#: add-link-to-facebook-class.php:1544
+#: add-link-to-facebook-class.php:1547
 msgid "Refresh Facebook comments every:"
 msgstr "Ricarica i commenti di Facebook ogni:"
 
-#: add-link-to-facebook-class.php:1547
+#: add-link-to-facebook-class.php:1550
 msgid "Minutes"
 msgstr "minuti"
 
-#: add-link-to-facebook-class.php:1548
+#: add-link-to-facebook-class.php:1551
 msgid "Default every 10 minutes"
 msgstr "predefinito a 10 minuti"
 
-#: add-link-to-facebook-class.php:1552
-msgid "Maximum Facebook text length:"
-msgstr "Lunghezza max per il testo Facebook:"
-
 #: add-link-to-facebook-class.php:1555
+msgid "Maximum text length with trailer:"
+msgstr "Lunghezza max per il testo:"
+
+#: add-link-to-facebook-class.php:1558
+#: add-link-to-facebook-class.php:1566
 msgid "Characters"
 msgstr "caratteri"
 
-#: add-link-to-facebook-class.php:1556
+#: add-link-to-facebook-class.php:1559
 msgid "Default 256 characters"
 msgstr "256 caratteri (predefinito)"
 
-#: add-link-to-facebook-class.php:1560
+#: add-link-to-facebook-class.php:1563
+msgid "Maximum Facebook text length:"
+msgstr "Lunghezza max per il testo Facebook:"
+
+#: add-link-to-facebook-class.php:1567
+msgid "Default 10,000 characters"
+msgstr "10000 caratteri (predefinito)"
+
+#: add-link-to-facebook-class.php:1571
 msgid "Exclude these custom post types:"
 msgstr "Escludi questi tipi di articoli personalizzati:"
 
-#: add-link-to-facebook-class.php:1563
-#: add-link-to-facebook-class.php:1570
+#: add-link-to-facebook-class.php:1574
+#: add-link-to-facebook-class.php:1581
 msgid "Separate by commas"
 msgstr "separa con delle virgole"
 
-#: add-link-to-facebook-class.php:1567
+#: add-link-to-facebook-class.php:1578
 msgid "Exclude these categories:"
 msgstr "Escludi queste categorie:"
 
-#: add-link-to-facebook-class.php:1574
+#: add-link-to-facebook-class.php:1585
 msgid "Do not verify the peer's certificate:"
 msgstr "Non verificare il certificato peer:"
 
-#: add-link-to-facebook-class.php:1577
+#: add-link-to-facebook-class.php:1588
 msgid "Try this in case of cURL error 60"
 msgstr "da provare in caso di cURL error 60"
 
-#: add-link-to-facebook-class.php:1582
+#: add-link-to-facebook-class.php:1593
 msgid "Debug options"
 msgstr "Opzioni debug"
 
-#: add-link-to-facebook-class.php:1585
+#: add-link-to-facebook-class.php:1596
 msgid "Use site URL as request URI:"
 msgstr "Usa URL sito come URI richiedente:"
 
-#: add-link-to-facebook-class.php:1591
+#: add-link-to-facebook-class.php:1602
 msgid "Do not use cURL:"
 msgstr "Non usare cURL:"
 
-#: add-link-to-facebook-class.php:1597
+#: add-link-to-facebook-class.php:1608
 msgid "Use publish_post action:"
 msgstr "Utilizza azione publish_post:"
 
-#: add-link-to-facebook-class.php:1603
+#: add-link-to-facebook-class.php:1614
 msgid "Debug:"
 msgstr "Debug:"
 
-#: add-link-to-facebook-class.php:1631
+#: add-link-to-facebook-class.php:1642
 msgid "Privacy in the Sustainable Plugins Sponsorship Network"
 msgstr "Privacy in the Sustainable Plugins Sponsorship Network"
 
-#: add-link-to-facebook-class.php:1641
+#: add-link-to-facebook-class.php:1652
 msgid "Resources"
 msgstr "Risorse"
 
-#: add-link-to-facebook-class.php:1643
+#: add-link-to-facebook-class.php:1654
 msgid "Frequently asked questions"
 msgstr "FAQ"
 
-#: add-link-to-facebook-class.php:1644
+#: add-link-to-facebook-class.php:1655
 msgid "Support page"
 msgstr "Pagina di supporto "
 
-#: add-link-to-facebook-class.php:1645
-#: add-link-to-facebook-class.php:1667
+#: add-link-to-facebook-class.php:1656
+#: add-link-to-facebook-class.php:1678
 msgid "Debug information"
 msgstr "Informazioni debug"
 
-#: add-link-to-facebook-class.php:1646
+#: add-link-to-facebook-class.php:1657
 msgid "About the author"
 msgstr "Info autore"
 
-#: add-link-to-facebook-class.php:1647
+#: add-link-to-facebook-class.php:1658
 msgid "Other plugins"
 msgstr "Altri plugin"
 
-#: add-link-to-facebook-class.php:1674
+#: add-link-to-facebook-class.php:1685
 msgid "Name:"
 msgstr "Nome:"
 
-#: add-link-to-facebook-class.php:1680
+#: add-link-to-facebook-class.php:1691
 msgid "E-mail:"
 msgstr "Email:"
 
-#: add-link-to-facebook-class.php:1686
+#: add-link-to-facebook-class.php:1697
 msgid "Message:"
 msgstr "Messaggio:"
 
-#: add-link-to-facebook-class.php:1693
+#: add-link-to-facebook-class.php:1704
 msgid "Send"
 msgstr "Invia"
 
-#: add-link-to-facebook-class.php:1954
+#: add-link-to-facebook-class.php:1965
 msgid "Do not add link to Facebook"
 msgstr "Non aggiungere link a FB"
 
-#: add-link-to-facebook-class.php:1957
+#: add-link-to-facebook-class.php:1968
 msgid "Do not add like button"
 msgstr "No pulsante FB Mi piace"
 
-#: add-link-to-facebook-class.php:1960
+#: add-link-to-facebook-class.php:1971
 msgid "Do not integrate comments"
 msgstr "Non integrare i commenti"
 
-#: add-link-to-facebook-class.php:1965
+#: add-link-to-facebook-class.php:1976
 msgid "Delete existing Facebook link"
 msgstr "Rimuovi link a FB già esistenti"
 
-#: add-link-to-facebook-class.php:1967
+#: add-link-to-facebook-class.php:1978
 msgid "Link on Facebook"
 msgstr "link su Facebook"
 
-#: add-link-to-facebook-class.php:1972
+#: add-link-to-facebook-class.php:1983
 msgid "Clear error messages"
 msgstr "Svuota messaggi errore"
 
-#: add-link-to-facebook-class.php:1987
+#: add-link-to-facebook-class.php:1998
 msgid "Facebook"
 msgstr "Facebook"
 
-#: add-link-to-facebook-class.php:1996
+#: add-link-to-facebook-class.php:2007
 msgid "Yes"
 msgstr "Si"
 
-#: add-link-to-facebook-class.php:1998
+#: add-link-to-facebook-class.php:2009
 msgid "No"
 msgstr "No"
 
-#: add-link-to-facebook-class.php:2008
+#: add-link-to-facebook-class.php:2019
 msgid "comments"
 msgstr "commenti"
 
-#: add-link-to-facebook-class.php:2015
+#: add-link-to-facebook-class.php:2026
 msgid "likes"
 msgstr "mi piace"
 
-#: add-link-to-facebook-class.php:2052
+#: add-link-to-facebook-class.php:2063
 msgid "No images in the media library for this post"
 msgstr "Nessuna immagine per questo articolo presente nella Libreria media"
 
-#: add-link-to-facebook-class.php:2060
+#: add-link-to-facebook-class.php:2071
 msgid "Select link image:"
 msgstr "Seleziona link immagine:"
 
-#: add-link-to-facebook-class.php:2100
+#: add-link-to-facebook-class.php:2111
 msgid "Custom exerpt"
 msgstr "Riassunto personalizzato"
 
-#: add-link-to-facebook-class.php:2522
+#: add-link-to-facebook-class.php:2539
 msgid "Share"
 msgstr "Condividi"
 
-#: add-link-to-facebook-class.php:2656
+#: add-link-to-facebook-class.php:2673
 msgid "commented on"
 msgstr "commentato su"
 
-#: add-link-to-facebook-class.php:3022
-#: add-link-to-facebook-class.php:3071
+#: add-link-to-facebook-class.php:3044
+#: add-link-to-facebook-class.php:3115
 msgid "on Facebook"
 msgstr "su Facebook"
 
-#: add-link-to-facebook-class.php:3077
+#: add-link-to-facebook-class.php:3121
 msgid "Liked this post"
 msgstr "Mi piace questo post"
 
-#: add-link-to-facebook-class.php:3646
+#: add-link-to-facebook-class.php:3698
 msgid "Title:"
 msgstr "Titolo:"
 
-#: add-link-to-facebook-class.php:3650
+#: add-link-to-facebook-class.php:3702
 msgid "Show Facebook like button"
 msgstr "Mostra pulsante FB Mi piace"
 
-#: add-link-to-facebook-class.php:3653
+#: add-link-to-facebook-class.php:3705
 msgid "Show Facebook send button"
 msgstr "Mostra pulsante FB Send"
 
-#: add-link-to-facebook-class.php:3656
+#: add-link-to-facebook-class.php:3708
 msgid "Show Facebook image/link"
 msgstr "Mostra immagine/link FB"
 
