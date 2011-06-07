@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.57
+Stable tag: 1.58
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -548,6 +548,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.58 =
+* Improvement: option to set timeout
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -646,6 +648,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.58 =
+One improvement, translation updates
 
 = 1.57 =
 Two improvements, updated texts, translation updates
