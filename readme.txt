@@ -547,6 +547,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.59 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.58 =
 * Improvement: option to set timeout
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
