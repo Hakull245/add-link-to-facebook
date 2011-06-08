@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.58
+Stable tag: 1.59
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -196,8 +196,7 @@ So you have to choose if you want the hyperlink text (the default) or the hyperl
 
 = U16 I don't like the gear wheel application icon =
 
-If you use a private Facebook application, you can change it in the application settings.
-The application icon of the shared application cannot be changed.
+You can change it in the Facebook application settings.
 
 = U17 Why is the option "add 'Share' link" experimental? =
 
@@ -295,14 +294,6 @@ So, people that click on the like button are displayed within the like button (d
 Users with the *edit_posts* capability: all user roles, except subscriber.
 Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
 
-= X02 Why is the shared application less secure? =
-
-**The shared application is no longer available**
-
-Because the Facebook authorization token is sent to you via a [Google App Engine application](http://code.google.com/appengine/ "Google App Engine application") that I manage.
-I theory I could collect your token and manipulate your Facebook wall.
-You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=true "wp-al2fb") of this application.
-
 **--- Compatibility ---**
 
 = C01 Is this plugin compatible with my theme? =
@@ -395,11 +386,6 @@ This fields holds the custom excerpt that will be used in stead of the WordPress
 You have probably entered a wrong *App ID* or the Facebook application may be deleted.
 If you didn't create a Facebook application yet, you should follow the instructions in the yellow box on the plugin page.
 
-Facebook disabled the shared application, because, according to Facebook,
-it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
-If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
-Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.
-
 = E02 I get 'Error validating client secret' =
 
 You have probably entered a wrong *App Secret*.
@@ -483,8 +469,7 @@ if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marc
 
 = E13 I get 'Javascript not enabled' =
 
-You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
-You can either enable JavaScript or try to use a private Facebook application.
+Can not happen anymore in recent versions.
 
 = E14 I get '(#100) Invalid parameter' =
 
@@ -548,6 +533,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.59 =
+* Improvement: extended debug information with link pictures
+* Improvement: removed shared application from code and descriptions
+* Improvement: using *wp_upload_dir* for CSS file
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.58 =
@@ -651,6 +640,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.59 =
+Three improvements, translation update
 
 = 1.58 =
 One improvement, translation updates
@@ -893,14 +885,16 @@ If the plugin isn't working for you, [help is just one question away](http://for
 
 The administrator options can only be changed by an administrator (obviously) and apply to all users.
 
+The plugin needs to communicate with Facebook. The default timeout time is 30 seconds.
+If your server has a slow connection, you may have to increase the timeout time to for example 60 seconds.
+
 When you are running a multi-user weblog, you probably want to check *Do not display notices* to restrict the plugin notices, mostly error messages, to the plugin setting page only.
 And maybe you don't want to allow usage of the plugin to all users. This is what the option *Required capability to use plugin* is for.
 
 When comment integration is turned on, Facebook comments are fetched every 10 minutes by default.
 You can use the option *Refresh Facebook comments every* to do this more or less often, maybe depending on the number of visitors of your weblog.
 
-The text trailer option will truncate the text to whole sentences with a maximum of 256 characters. This is the maximum number of characters Facebook will display.
-For the case this changes or if your local version of Facebook behaves differently, you can use the option *Maximum Facebook text length*.
+See link appearance section above for a description of the text length options.
 
 The plugin supports custom post types if the custom post type support custom values.
 Sometimes you don't want to add links for certain custom post types.
@@ -966,37 +960,15 @@ Feature which will not be realized, sorry:
 
 == Facebook Authorization ==
 
-*Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+[Server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
 
 * Authorize button posts to server
 * Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
-* Server redirects to Facebook or to self when error
+* Server redirects to Facebook (or to self when error)
 * Facebook login (if needed)
 * Facebook authorization (if needed)
 * Facebook redirects to plugin
 * Plugin stores Facebook access token
-
-*Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
-
-**The shared Facebook application is not available anymore**
-
-* Authorize button posts to server
-* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
-* Server redirects to Facebook or to self when error
-* Facebook login (if needed)
-* Facebook authorization (if needed)
-* Facebook redirects to [wp-al2fb service](http://wp-al2fb.appspot.com/ "wp-al2fb")
-* wp-al2fb redirects to self with JavaScript (2)
-* wp-al2fb checks authorization secret with plugin (3)
-* wp-al2fb redirects to plugin
-* Plugin stores Facebook access token
+* Plugin adds links with access token
 
 1. Workaround for Microsoft Internet Explorer
-1. To transform the [URI fragment](http://en.wikipedia.org/wiki/Fragment_identifier "URI fragment") into a [query string](http://en.wikipedia.org/wiki/Query_string "Query string")
-1. To prevent using the service as redirection service
-
-== Acknowledgments ==
-
-This plugin uses:
-
-* [jQuery JavaScript Library](http://jquery.com/ "jQuery") published under both the GNU General Public License and MIT License
