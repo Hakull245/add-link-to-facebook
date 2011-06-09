@@ -533,6 +533,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.61 =
+* Updated Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
+
 = 1.60 =
 * Improvement: better Facebook avatar handling
 * Added Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
