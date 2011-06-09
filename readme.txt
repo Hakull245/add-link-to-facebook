@@ -62,6 +62,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
 * Swedish (sv\_SE) by *JornB*, thanks!
+* Spanish (es\_ES)
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -531,6 +532,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.60 =
+* Added Spanish (es\_ES) translation
 
 = 1.59 =
 * Improvement: extended debug information with link pictures
