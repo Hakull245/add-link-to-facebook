@@ -3131,29 +3131,35 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get FB picture as avatar
-		function Get_avatar($avatar) {
-			global $comment;
-			if (!empty($comment) &&
-				($comment->comment_type == '' || $comment->comment_type == 'comment') &&
-				$comment->comment_agent == 'AL2FB') {
+		function Get_avatar($avatar, $id_or_email, $size, $default, $alt) {
+			if (is_object($id_or_email)) {
+				$comment = $id_or_email;
+				if ($comment->comment_agent == 'AL2FB' &&
+					($comment->comment_type == '' || $comment->comment_type == 'comment')) {
 
-				// Get picture url
-				$id = explode('id=', $comment->comment_author_url);
-				$fb_key = c_al2fb_transient_cache . md5('p' . $id[1]);
-				$fb_picture_url = get_transient($fb_key);
-				if ($this->debug)
-					$fb_picture_url = false;
-				if ($fb_picture_url === false) {
-					$fb_picture_url = self::Get_fb_picture_url($id[1], 'normal');
-					$duration = intval(get_option(c_al2fb_option_msg_refresh));
-					if (!$duration)
-						$duration = 10;
-					set_transient($fb_key, $fb_picture_url, $duration * 60);
+					// Get picture url
+					$id = explode('id=', $comment->comment_author_url);
+					$fb_key = c_al2fb_transient_cache . md5('p' . $id[1]);
+					$fb_picture_url = get_transient($fb_key);
+					if ($this->debug)
+						$fb_picture_url = false;
+					if ($fb_picture_url === false) {
+						$fb_picture_url = self::Get_fb_picture_url($id[1], 'normal');
+						$duration = intval(get_option(c_al2fb_option_msg_refresh));
+						if (!$duration)
+							$duration = 10;
+						set_transient($fb_key, $fb_picture_url, $duration * 60);
+					}
+
+					// Build avatar image
+					if ($fb_picture_url)
+						$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
+						$avatar .= ' src="' . $fb_picture_url . '"';
+						$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
+						$avatar .= ' height=' . $size;
+						$avatar .= ' width=' . $size;
+						$avatar .= ' />';
 				}
-
-				// Build avatar image
-				if ($fb_picture_url)
-					return '<img alt="' . $comment->comment_author . '" src="' . $fb_picture_url . '" class="avatar photo al2fb" />';
 			}
 			return $avatar;
 		}
