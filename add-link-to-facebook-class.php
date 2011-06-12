@@ -2403,7 +2403,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
 				$log .= '- attached: ' . print_r($images, true);
 
-				$picture_id = get_post_thumbnail_id($post->ID);
+				if (function_exists('get_post_thumbnail_id'))
+					$picture_id = get_post_thumbnail_id($post->ID);
 				$log .= '- featured: ' . $picture_id . PHP_EOL;
 
 				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
