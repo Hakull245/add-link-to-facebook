@@ -917,11 +917,13 @@ if (!class_exists('WPAL2Facebook')) {
 					// Get page name
 					try {
 						$me = self::Get_fb_me($user_ID, false);
-						_e('Links will be added to', c_al2fb_text_domain);
-						echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
-						if (!empty($me->category))
-							echo ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
-						echo '</a>';
+						if ($me != null) {
+							_e('Links will be added to', c_al2fb_text_domain);
+							echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
+							if (!empty($me->category))
+								echo ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
+							echo '</a>';
+						}
 					}
 					catch (Exception $e) {
 						echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
@@ -1081,7 +1083,8 @@ if (!class_exists('WPAL2Facebook')) {
 						</th><td>
 							<select id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
-							echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</option>';
+							if ($me != null)
+								echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</option>';
 							if ($pages->data)
 								foreach ($pages->data as $page) {
 									echo '<option value="' . $page->id . '"';
@@ -1750,9 +1753,10 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($self || empty($page_id))
 				$page_id = 'me';
 			$url = 'https://graph.facebook.com/' . $page_id;
-			$query = http_build_query(array(
-				'access_token' => self::Get_access_token_by_page($user_ID, $page_id)
-			), '', '&');
+			$token = self::Get_access_token_by_page($user_ID, $page_id);
+			if (empty($token))
+				return null;
+			$query = http_build_query(array('access_token' => $token), '', '&');
 			$response = self::Request($url, $query, 'GET');
 			$me = json_decode($response);
 			if ($me) {
@@ -3372,10 +3376,14 @@ if (!class_exists('WPAL2Facebook')) {
 			try {
 				if (self::Is_authorized($user_ID)) {
 					$me = self::Get_fb_me($user_ID, false);
-					$page = '<a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
-					if (!empty($me->category))
-						$page .= ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
-					$page .= '</a>';
+					if ($me == null)
+						$page = 'n/a';
+					else {
+						$page = '<a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
+						if (!empty($me->category))
+							$page .= ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
+						$page .= '</a>';
+					}
 				}
 				else
 					$page = 'n/a';
@@ -3497,7 +3505,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$link_picture = get_post_meta($posts->post->ID, c_al2fb_meta_link_picture, true);
 				if (!empty($link_picture)) {
 					$info .= '<tr><td>Link picture:</td>';
-					$info .= '<td>' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . ': ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset) . '</td></tr>';
+					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>: ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset) . '</td></tr>';
 				}
 			}
 
@@ -3512,7 +3520,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$info .= '<tr><td>Error time:</td>';
 					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_link_time, true), ENT_QUOTES, $charset) . '</td></tr>';
 					$info .= '<tr><td>Error post:</td>';
-					$info .= '<td>' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</td></tr>';
+					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a></td></tr>';
 				}
 			}
 
@@ -3574,7 +3582,29 @@ class AL2FB_Widget extends WP_Widget {
 		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] && $buttons : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 
-		if ($like_button || $send_button || $profile) {
+		// Get link to me
+		$me = null;
+		$error = null;
+		if ($profile) {
+			try {
+				$me_key = c_al2fb_transient_cache . md5('me' . $user_ID);
+				$me = get_transient($me_key);
+				if ($me === false) {
+					$me = $wp_al2fb->Get_fb_me($user_ID, false);
+					if ($me != null) {
+						$duration = intval(get_option(c_al2fb_option_msg_refresh));
+						if (!$duration)
+							$duration = 10;
+						set_transient($me_key, $me, $duration * 60);
+					}
+				}
+			}
+			catch (Exception $e) {
+				$error = $e->getMessage();
+			}
+		}
+
+		if ($like_button || $send_button || $me || $error) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -3594,25 +3624,15 @@ class AL2FB_Widget extends WP_Widget {
 				echo $wp_al2fb->Get_send_button($post);
 
 			// Profile
-			if ($profile)
-				try {
-					$me = get_transient(c_al2fb_transient_cache . 'me');
-					if ($me === false) {
-						$me = $wp_al2fb->Get_fb_me($user_ID, false);
-						$duration = intval(get_option(c_al2fb_option_msg_refresh));
-						if (!$duration)
-							$duration = 10;
-						set_transient(c_al2fb_transient_cache . 'me', $me, $duration * 60);
-					}
-					if (!empty($me)) {
-						$img = 'http://creative.ak.fbcdn.net/ads3/creative/pressroom/jpg/b_1234209334_facebook_logo.jpg';
-						echo '<div class="al2fb_profile"><a href="' . $me->link . '">';
-						echo '<img src="' . $img . '" alt="Facebook profile" /></a></div>';
-					}
+			if ($profile) {
+				if (!empty($me)) {
+					$img = 'http://creative.ak.fbcdn.net/ads3/creative/pressroom/jpg/b_1234209334_facebook_logo.jpg';
+					echo '<div class="al2fb_profile"><a href="' . $me->link . '">';
+					echo '<img src="' . $img . '" alt="Facebook profile" /></a></div>';
 				}
-				catch (Exception $e) {
-					echo '<span>' . htmlspecialchars($e->getMessage()) . '</span>';
-				}
+				if (!empty($error))
+					echo '<span>' . htmlspecialchars($error) . '</span><br />';
+			}
 
 			echo $after_widget;
 		}
