@@ -2310,6 +2310,8 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Get_fb_permalink($link_id) {
+			if (empty($link_id))
+				return '';
 			$ids = explode('_', $link_id);
 			return 'http://www.facebook.com/permalink.php?story_fbid=' . $ids[1] . '&id=' . $ids[0];
 		}
@@ -3136,7 +3138,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get FB picture as avatar
-		function Get_avatar($avatar, $id_or_email, $size, $default, $alt) {
+		function Get_avatar($avatar, $id_or_email, $size, $default) {
 			if (is_object($id_or_email)) {
 				$comment = $id_or_email;
 				if ($comment->comment_agent == 'AL2FB' &&
