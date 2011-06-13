@@ -533,6 +533,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.62 =
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
 = 1.61 =
 * Bugfix: error when displaying widget profile link for non authorized author
 * Updated Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
