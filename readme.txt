@@ -534,6 +534,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.63 =
+* Improvement: even more debug information
+
 = 1.62 =
 * Bugfix: removed *get_avatar* warning
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")

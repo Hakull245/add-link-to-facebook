@@ -1635,12 +1635,14 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_debug_email"><strong><?php _e('E-mail:', c_al2fb_text_domain); ?></strong></label>
 				</th><td>
 					<input id="al2fb_debug_email" class="" name="<?php echo c_al2fb_mail_email; ?>" type="text" value="<?php echo $user_email; ?>" />
+					<br><strong><?php _e('Please check if this is a correct, reachable e-mail address', c_al2fb_text_domain); ?></strong>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_debug_msg"><strong><?php _e('Message:', c_al2fb_text_domain); ?></strong></label>
 				</th><td>
 					<textarea id="al2fb_debug_msg" name="<?php echo c_al2fb_mail_msg; ?>" rows="10" cols="50"></textarea>
+					<br><strong><?php _e('Please describe your problem, even if you did before', c_al2fb_text_domain); ?></strong>
 				</td></tr>
 				</table>
 
@@ -1670,11 +1672,6 @@ if (!class_exists('WPAL2Facebook')) {
 				$url .= ',user_groups';
 
 			$url .= '&state=' . self::Authorize_secret();
-			if ($shared) {
-				$url .= ',' . urlencode(self::Redirect_uri());
-				$url .= ',' . c_al2fb_app_version;
-				$url .= '&response_type=token';
-			}
 			return $url;
 		}
 
@@ -3353,6 +3350,10 @@ if (!class_exists('WPAL2Facebook')) {
 			global $user_ID;
 			get_currentuserinfo();
 
+			// Get users
+			global $wpdb;
+			$users = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users");
+
 			// Get versions
 			global $wp_version;
 			$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
@@ -3417,6 +3418,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site id:</td><td>' . $this->site_id . '</td></tr>';
 			$info .= '<tr><td>Blog id:</td><td>' . $this->blog_id . '</td></tr>';
+			$info .= '<tr><td>Number of users:</td><td>' . $users . '</td></tr>';
 			$info .= '<tr><td>Blog address (home):</td><td><a href="' . get_home_url() . '">' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>WordPress address (site):</td><td><a href="' . get_site_url() . '">' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>Redirect URI:</td><td><a href="' . self::Redirect_uri() . '">' . htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset) . '</a></td></tr>';
@@ -3500,14 +3502,28 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Use publish_post:</td><td>' . (get_option(c_al2fb_option_use_pp) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Debug:</td><td>' . (get_option(c_al2fb_option_debug) ? 'Yes' : 'No') . '</td></tr>';
 
+			// Last posts
+			$posts = new WP_Query(array('posts_per_page' => 5));
+			while ($posts->have_posts()) {
+				$posts->next_post();
+				$userdata = get_userdata($posts->post->post_author);
+
+				$info .= '<tr><td>Post #' . $posts->post->ID . ':</td>';
+				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
+				$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
+				$info .= ' @ ' . $posts->post->post_date . '</td></tr>';
+			}
+
 			// Last link pictures
-			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_link_picture, 'posts_per_page' => 3));
+			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_link_picture, 'posts_per_page' => 5));
 			while ($posts->have_posts()) {
 				$posts->next_post();
 				$link_picture = get_post_meta($posts->post->ID, c_al2fb_meta_link_picture, true);
 				if (!empty($link_picture)) {
-					$info .= '<tr><td>Link picture:</td>';
-					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>: ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset) . '</td></tr>';
+					$info .= '<tr><td>Link picture #' . $posts->post->ID . ':</td>';
+					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
+					$info .= ': ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset);
+					$info .= ' @ ' . $posts->post->post_date . '</td></tr>';
 				}
 			}
 
