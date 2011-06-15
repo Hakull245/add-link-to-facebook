@@ -936,7 +936,7 @@ Of course this is less secure ...
 
 In no particular order:
 
-* None
+* Restrict adding links to no more than x per hour
 
 Realized features:
 
