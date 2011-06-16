@@ -3007,7 +3007,7 @@ if (!class_exists('WPAL2Facebook')) {
 									$new->comment_author_ip = $commentdata['comment_author_IP'];
 									$new->comment_date = $commentdata['comment_date'];
 									$new->comment_date_gmt = $commentdata['comment_date_gmt'];
-									$new->comment_content = $commentdata['comment_content'];
+									$new->comment_content = stripslashes($commentdata['comment_content']);
 									$new->comment_karma = $commentdata['comment_karma'];
 									$new->comment_approved = $commentdata['comment_approved'];
 									$new->comment_agent = $commentdata['comment_agent'];
