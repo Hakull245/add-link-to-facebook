@@ -534,6 +534,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.65 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.64 =
 * Bugfix: using *stripslashes* for stored comments
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
