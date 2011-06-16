@@ -121,10 +121,7 @@ define('USERPHOTO_APPROVED', 2);
 // To Do
 // - Check app permissions? not possible :-(
 // - target="_blank"? how to do?
-// - Admin dashboard? how to get links to messages?
 // - Update meta box after update media gallery?
-// - Use link instead of feed?
-
 // - Improve cleaning
 // - Option to set Facebook avatar size?
 
@@ -2066,7 +2063,9 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_post_meta($post_id, c_al2fb_meta_error);
 
 			// Persist data
-			if (isset($_POST['al2fb_image_id']))
+			if (empty($_POST['al2fb_image_id']))
+				delete_post_meta($post_id, c_al2fb_meta_image_id);
+			else
 				update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
 
 			if (isset($_POST['al2fb_excerpt']) && !empty($_POST['al2fb_excerpt']))
@@ -3352,7 +3351,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get users
 			global $wpdb;
-			$users = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users");
+			$users = $wpdb->get_var('SELECT COUNT(ID) FROM ' . $wpdb->users);
 
 			// Get versions
 			global $wp_version;
@@ -3502,16 +3501,71 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Use publish_post:</td><td>' . (get_option(c_al2fb_option_use_pp) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Debug:</td><td>' . (get_option(c_al2fb_option_debug) ? 'Yes' : 'No') . '</td></tr>';
 
+			$info .= '<tr><td>wp_get_attachment_thumb_url:</td><td>' . (function_exists('wp_get_attachment_thumb_url') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>wp_get_attachment_image_src:</td><td>' . (function_exists('wp_get_attachment_image_src') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>theme - post-thumbnails:</td><td>' . (current_theme_supports('post-thumbnails') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>get_post_thumbnail_id:</td><td>' . (function_exists('get_post_thumbnail_id') ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>wp_get_attachment_image_src:</td><td>' . (function_exists('wp_get_attachment_image_src') ? 'Yes' : 'No') . '</td></tr>';
+
 			// Last posts
 			$posts = new WP_Query(array('posts_per_page' => 5));
 			while ($posts->have_posts()) {
 				$posts->next_post();
 				$userdata = get_userdata($posts->post->post_author);
+				$link_id = get_post_meta($posts->post->ID, c_al2fb_meta_link_id, true);
+
+				// Selected picture
+				$selected_picture = null;
+				$image_id = get_post_meta($posts->post->ID, c_al2fb_meta_image_id, true);
+				if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url'))
+					$selected_picture = wp_get_attachment_thumb_url($image_id);
+
+				// Attached picture
+				$attached_picture = null;
+				$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $posts->post->ID));
+				if (!empty($images) && function_exists('wp_get_attachment_image_src')) {
+					$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
+					if ($picture && $picture[0])
+						$attached_picture = $picture[0];
+				}
+
+				// Feature picture
+				$featured_picture = null;
+				if (current_theme_supports('post-thumbnails') &&
+					function_exists('get_post_thumbnail_id') &&
+					function_exists('wp_get_attachment_image_src')) {
+					$picture_id = get_post_thumbnail_id($posts->post->ID);
+					if ($picture_id) {
+						$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
+						if ($picture && $picture[0])
+							$featured_picture = $picture[0];
+					}
+				}
+
+				// First picture in post
+				$post_picture = null;
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($posts->post->post_content), $matches))
+					$post_picture = $matches[1];
+
+				// Actual picture
+				$picture = self::Get_link_picture($posts->post, self::Get_user_ID($posts->post));
 
 				$info .= '<tr><td>Post #' . $posts->post->ID . ':</td>';
-				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
+				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
 				$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
-				$info .= ' @ ' . $posts->post->post_date . '</td></tr>';
+				$info .= ' @ ' . $posts->post->post_date;
+				$info .= ' <a href="' . $picture['picture'] . '" target="_blank">' . $picture['picture_type'] . '</a>';
+				if (!empty($selected_picture))
+					$info .= ' <a href="' . $selected_picture . '" target="_blank">selected</a>';
+				if (!empty($attached_picture))
+					$info .= ' <a href="' . $attached_picture . '" target="_blank">attached</a>';
+				if (!empty($featured_picture))
+					$info .= ' <a href="' . $featured_picture . '" target="_blank">featured</a>';
+				if (!empty($post_picture))
+					$info .= ' <a href="' . $post_picture . '" target="_blank">post</a>';
+				if (!empty($link_id))
+					$info .= ' <a href="' . self::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
+				$info .= '</td></tr>';
 			}
 
 			// Last link pictures
@@ -3521,8 +3575,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$link_picture = get_post_meta($posts->post->ID, c_al2fb_meta_link_picture, true);
 				if (!empty($link_picture)) {
 					$info .= '<tr><td>Link picture #' . $posts->post->ID . ':</td>';
-					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
-					$info .= ': ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset);
+					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
+					$info .= ' ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset);
 					$info .= ' @ ' . $posts->post->post_date . '</td></tr>';
 				}
 			}
