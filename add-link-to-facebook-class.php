@@ -1807,6 +1807,23 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get Facebook picture
+		function Get_fb_picture_url_cached($id, $size) {
+			$fb_key = c_al2fb_transient_cache . md5('p' . $id);
+			$fb_url = get_transient($fb_key);
+			if ($this->debug)
+				$fb_url = false;
+			if ($fb_url === false) {
+				$fb_url = self::Get_fb_picture_url($id, 'normal');
+
+				$duration = intval(get_option(c_al2fb_option_msg_refresh));
+				if (!$duration)
+					$duration = 10;
+				set_transient($fb_key, $fb_url, $duration * 60);
+			}
+			return $fb_url;
+		}
+
+		// Get Facebook picture
 		// Returns a HTTP 302 with the URL of the user's profile picture (use ?type=square | small | normal | large to request a different photo)
 		function Get_fb_picture_url($id, $size) {
 			$url = 'https://graph.facebook.com/' . $id . '/picture?' . $size;
@@ -3142,26 +3159,18 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Get picture url
 					$id = explode('id=', $comment->comment_author_url);
-					$fb_key = c_al2fb_transient_cache . md5('p' . $id[1]);
-					$fb_picture_url = get_transient($fb_key);
-					if ($this->debug)
-						$fb_picture_url = false;
-					if ($fb_picture_url === false) {
-						$fb_picture_url = self::Get_fb_picture_url($id[1], 'normal');
-						$duration = intval(get_option(c_al2fb_option_msg_refresh));
-						if (!$duration)
-							$duration = 10;
-						set_transient($fb_key, $fb_picture_url, $duration * 60);
-					}
+					if (count($id) == 2) {
+						$fb_picture_url = self::Get_fb_picture_url_cached($id[1], 'normal');
 
-					// Build avatar image
-					if ($fb_picture_url)
-						$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
-						$avatar .= ' src="' . $fb_picture_url . '"';
-						$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
-						$avatar .= ' height=' . $size;
-						$avatar .= ' width=' . $size;
-						$avatar .= ' />';
+						// Build avatar image
+						if ($fb_picture_url)
+							$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
+							$avatar .= ' src="' . $fb_picture_url . '"';
+							$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
+							$avatar .= ' height=' . $size;
+							$avatar .= ' width=' . $size;
+							$avatar .= ' />';
+					}
 				}
 			}
 			return $avatar;
@@ -3652,7 +3661,16 @@ class AL2FB_Widget extends WP_Widget {
 			!get_post_meta($post->ID, c_al2fb_meta_nolike, true));
 		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] && $buttons : false;
 		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] && $buttons : false;
+		$comments = isset($instance['al2fb_comments']) ? $instance['al2fb_comments'] : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
+
+		// Get link type
+		$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+		$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
+		if (empty($comments_nolink))
+			$comments_nolink = 'author';
+		else if ($comments_nolink == 'on' || empty($link_id))
+			$comments_nolink = 'none';
 
 		// Get link to me
 		$me = null;
@@ -3676,7 +3694,7 @@ class AL2FB_Widget extends WP_Widget {
 			}
 		}
 
-		if ($like_button || $send_button || $me || $error) {
+		if ($comments || $like_button || $send_button || $me || $error) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -3686,6 +3704,39 @@ class AL2FB_Widget extends WP_Widget {
 			if (empty($title))
 				$title = 'Add Link to Facebook';
 			echo $before_title . $title . $after_title;
+
+			// Comments
+			if ($comments) {
+				$fb_comments = $wp_al2fb->Get_comments_or_likes($post, false);
+				if ($fb_comments) {
+					// Get time zone offset
+					$tz_off = get_option('gmt_offset');
+					if (empty($tz_off))
+						$tz_off = 0;
+					else
+						$tz_off = $tz_off * 3600;
+
+					echo '<div class="al2fb_widget_comments"><ul>';
+					foreach ($fb_comments->data as $fb_comment) {
+						$fb_time = strtotime($fb_comment->created_time) + $tz_off;
+						echo '<li>';
+						if ($comments_nolink == 'author')
+							echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
+						echo '<span class="al2fb_widget_comment">' .  htmlspecialchars($fb_comment->message) . '</span>';
+						echo ' ';
+						if ($comments_nolink == 'link')
+							echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name) . '</a>';
+						else if ($comments_nolink == 'author')
+							echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_comment->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name) . '</a>';
+						else
+							echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name) . '</span>';
+						echo ' ';
+						echo '<span class="al2fb_widget_date">' . date(get_option('date_format') . ' ' . get_option('time_format'), $fb_time) . '</span>';
+						echo '</li>';
+					}
+					echo '</ul></div>';
+				}
+			}
 
 			// Like button
 			if ($like_button)
@@ -3713,6 +3764,7 @@ class AL2FB_Widget extends WP_Widget {
 	function update($new_instance, $old_instance) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['al2fb_comments'] = $new_instance['al2fb_comments'];
 		$instance['al2fb_like_button'] = $new_instance['al2fb_like_button'];
 		$instance['al2fb_send_button'] = $new_instance['al2fb_send_button'];
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
@@ -3720,6 +3772,18 @@ class AL2FB_Widget extends WP_Widget {
 	}
 
 	function form($instance) {
+		if (empty($instance['title']))
+			$instance['title'] = null;
+		if (empty($instance['al2fb_comments']))
+			$instance['al2fb_comments'] = false;
+		if (empty($instance['al2fb_like_button']))
+			$instance['al2fb_like_button'] = false;
+		if (empty($instance['al2fb_send_button']))
+			$instance['al2fb_send_button'] = false;
+		if (empty($instance['al2fb_profile']))
+			$instance['al2fb_profile'] = false;
+
+		$chk_comments = ($instance['al2fb_comments'] ? ' checked ' : '');
 		$chk_like = ($instance['al2fb_like_button'] ? ' checked ' : '');
 		$chk_send = ($instance['al2fb_send_button'] ? ' checked ' : '');
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
@@ -3727,6 +3791,9 @@ class AL2FB_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($instance['title']); ?>" />
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_comments; ?> id="<?php echo $this->get_field_id('al2fb_comments'); ?>" name="<?php echo $this->get_field_name('al2fb_comments'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_comments'); ?>"><?php _e('Show Facebook comments', c_al2fb_text_domain); ?></label>
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_like; ?> id="<?php echo $this->get_field_id('al2fb_like_button'); ?>" name="<?php echo $this->get_field_name('al2fb_like_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_like_button'); ?>"><?php _e('Show Facebook like button', c_al2fb_text_domain); ?></label>

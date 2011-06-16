@@ -535,6 +535,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.65 =
+* Bugfix: no avatar when comment removed from Facebook
+* Improvement: widget can show Facebook comments, styling depends on your theme!
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.64 =
