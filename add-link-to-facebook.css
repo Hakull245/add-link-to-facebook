@@ -127,26 +127,3 @@
 .al2fb_profile img {
 	width: 80px;
 }
-
-/* Widget */
-
-.al2fb_widget_comments {
-}
-
-.al2fb_widget_comments li {
-}
-
-.al2fb_widget_picture {
-	width: 32px;
-	height: 32px;
-}
-
-.al2fb_widget_name {
-}
-
-.al2fb_widget_comment {
-}
-
-.al2fb_widget_date {
-	font-size: smaller;
-}

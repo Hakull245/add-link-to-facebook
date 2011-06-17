@@ -20,6 +20,7 @@ define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
+define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 define('c_al2fb_option_use_pp', 'al2fb_use_pp');
@@ -211,6 +212,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Widget
 			add_action('widgets_init', create_function('', 'return register_widget("AL2FB_Widget");'));
+			add_action('wp_print_styles', array(&$this, 'WP_print_styles'));
 		}
 
 		// Handle plugin activation
@@ -248,7 +250,17 @@ if (!class_exists('WPAL2Facebook')) {
 					update_user_meta($row->user_id, c_al2fb_meta_trailer, ' ' . $value);
 				}
 			}
-			update_option(c_al2fb_option_version, 5);
+			if ($version <= 5) {
+				update_option(c_al2fb_option_css,
+'.al2fb_widget_comments { }
+.al2fb_widget_comments li { }
+.al2fb_widget_picture { width: 32px; height: 32px; }
+.al2fb_widget_name { }
+.al2fb_widget_comment { }
+.al2fb_widget_date { font-size: smaller; }
+');
+			}
+			update_option(c_al2fb_option_version, 6);
 		}
 
 		// Handle plugin deactivation
@@ -543,6 +555,11 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!get_user_meta($user_ID, c_al2fb_meta_group, true))
 					delete_user_meta($user_ID, c_al2fb_meta_access_token);
 
+			// Like or send button enabled
+			if ((!get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) && !empty($_POST[c_al2fb_meta_post_like_button])) ||
+				(!get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) && !empty($_POST[c_al2fb_meta_post_send_button])))
+				$_POST[c_al2fb_meta_open_graph] = true;
+
 			// Update user options
 			update_user_meta($user_ID, c_al2fb_meta_client_id, $_POST[c_al2fb_meta_client_id]);
 			update_user_meta($user_ID, c_al2fb_meta_app_secret, $_POST[c_al2fb_meta_app_secret]);
@@ -625,6 +642,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_max_text] = trim($_POST[c_al2fb_option_max_text]);
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
 				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
+				$_POST[c_al2fb_option_css] = trim($_POST[c_al2fb_option_css]);
 
 				update_option(c_al2fb_option_timeout, $_POST[c_al2fb_option_timeout]);
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
@@ -635,6 +653,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
+				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
 				if (isset($_REQUEST['debug'])) {
 					if (empty($_POST[c_al2fb_option_siteurl]))
@@ -1527,6 +1546,13 @@ if (!class_exists('WPAL2Facebook')) {
 				</th><td>
 					<input id="al2fb_noverifypeer" name="<?php echo c_al2fb_option_noverifypeer; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noverifypeer)) echo ' checked="checked"'; ?> />
 					<br /><span class="al2fb_explanation"><?php _e('Try this in case of cURL error 60', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row" colspan="2">
+					<label for="al2fb_css"><?php _e('Additional styling rules (CSS):', c_al2fb_text_domain); ?></label>
+					<br />
+					<textarea id="al2fb_css" name="<?php echo c_al2fb_option_css; ?>" cols="75" rows="10"><?php echo get_option(c_al2fb_option_css); ?></textarea>
+				</th><td>
 				</td></tr>
 				</table>
 
@@ -2735,6 +2761,15 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
+		function WP_print_styles() {
+			$css = get_option(c_al2fb_option_css);
+			if (!empty($css)) {
+				echo '<style type="text/css">' . PHP_EOL;
+				echo $css;
+				echo '</style>' . PHP_EOL;
+			}
+		}
+
 		// Post content
 		function The_content($content = '') {
 			global $post;
@@ -3510,6 +3545,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Use publish_post:</td><td>' . (get_option(c_al2fb_option_use_pp) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Debug:</td><td>' . (get_option(c_al2fb_option_debug) ? 'Yes' : 'No') . '</td></tr>';
 
+			$info .= '<tr><td>CSS:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_css), ENT_QUOTES, $charset) . '</td></tr>';
+
 			$info .= '<tr><td>wp_get_attachment_thumb_url:</td><td>' . (function_exists('wp_get_attachment_thumb_url') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>wp_get_attachment_image_src:</td><td>' . (function_exists('wp_get_attachment_image_src') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>theme - post-thumbnails:</td><td>' . (current_theme_supports('post-thumbnails') ? 'Yes' : 'No') . '</td></tr>';
@@ -3651,6 +3688,7 @@ class AL2FB_Widget extends WP_Widget {
 		if (empty($post))
 			return;
 		$user_ID = $wp_al2fb->Get_user_ID($post);
+		$charset = get_bloginfo('charset');
 
 		// Check if widget should be displayed
 		$buttons = (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
@@ -3720,18 +3758,28 @@ class AL2FB_Widget extends WP_Widget {
 					foreach ($fb_comments->data as $fb_comment) {
 						$fb_time = strtotime($fb_comment->created_time) + $tz_off;
 						echo '<li>';
+
+						// Picture
 						if ($comments_nolink == 'author')
-							echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
-						echo '<span class="al2fb_widget_comment">' .  htmlspecialchars($fb_comment->message) . '</span>';
+							echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
+
+						// Author
 						echo ' ';
 						if ($comments_nolink == 'link')
-							echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name) . '</a>';
+							echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 						else if ($comments_nolink == 'author')
-							echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_comment->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name) . '</a>';
+							echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_comment->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 						else
-							echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name) . '</span>';
+							echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</span>';
+
+						// Comment
+						echo ' ';
+						echo '<span class="al2fb_widget_comment">' .  htmlspecialchars($fb_comment->message, ENT_QUOTES, $charset) . '</span>';
+
+						// Time
 						echo ' ';
 						echo '<span class="al2fb_widget_date">' . date(get_option('date_format') . ' ' . get_option('time_format'), $fb_time) . '</span>';
+
 						echo '</li>';
 					}
 					echo '</ul></div>';
@@ -3754,7 +3802,7 @@ class AL2FB_Widget extends WP_Widget {
 					echo '<img src="' . $img . '" alt="Facebook profile" /></a></div>';
 				}
 				if (!empty($error))
-					echo '<span>' . htmlspecialchars($error) . '</span><br />';
+					echo '<span>' . htmlspecialchars($error, ENT_QUOTES, $charset) . '</span><br />';
 			}
 
 			echo $after_widget;
@@ -3794,6 +3842,8 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_comments; ?> id="<?php echo $this->get_field_id('al2fb_comments'); ?>" name="<?php echo $this->get_field_name('al2fb_comments'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_comments'); ?>"><?php _e('Show Facebook comments', c_al2fb_text_domain); ?></label>
+			<br />
+			<strong><?php _e('Appearance depends on your theme!', c_al2fb_text_domain); ?></strong>
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_like; ?> id="<?php echo $this->get_field_id('al2fb_like_button'); ?>" name="<?php echo $this->get_field_name('al2fb_like_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_like_button'); ?>"><?php _e('Show Facebook like button', c_al2fb_text_domain); ?></label>
