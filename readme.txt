@@ -33,7 +33,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for like/send button and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments and/or like/send button and/or a link to your Facebook profile
 
 **Beta features:**
 
