@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-06-16 14:22+0100\n"
+"PO-Revision-Date: 2011-06-17 10:36+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -544,4 +544,13 @@ msgstr "Vennligst sjekk om dette er en korrekt, tilgjengelig e-postadresse"
 
 msgid "Please describe your problem, even if you did before"
 msgstr "Beskriv ditt problem, selv om du har gjort det før"
+
+msgid "Show Facebook comments"
+msgstr "Vis Facebook kommentarer"
+
+msgid "Appearance depends on your theme!"
+msgstr "Utseende avhenger av ditt tema!"
+
+msgid "Additional styling rules (CSS):"
+msgstr "Ekstra styling regler (CSS):"
 
