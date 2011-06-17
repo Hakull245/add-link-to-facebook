@@ -251,7 +251,8 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 			}
 			if ($version <= 5) {
-				update_option(c_al2fb_option_css,
+				if (!get_option(c_al2fb_option_css))
+					update_option(c_al2fb_option_css,
 '.al2fb_widget_comments { }
 .al2fb_widget_comments li { }
 .al2fb_widget_picture { width: 32px; height: 32px; }
@@ -3689,6 +3690,7 @@ class AL2FB_Widget extends WP_Widget {
 			return;
 		$user_ID = $wp_al2fb->Get_user_ID($post);
 		$charset = get_bloginfo('charset');
+		$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 
 		// Check if widget should be displayed
 		$buttons = (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
@@ -3703,12 +3705,25 @@ class AL2FB_Widget extends WP_Widget {
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 
 		// Get link type
-		$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-		$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
-		if (empty($comments_nolink))
-			$comments_nolink = 'author';
-		else if ($comments_nolink == 'on' || empty($link_id))
-			$comments_nolink = 'none';
+		$fb_comments = false;
+		if ($comments) {
+			// Get link type
+			$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
+			if (empty($comments_nolink))
+				$comments_nolink = 'author';
+			else if ($comments_nolink == 'on' || empty($link_id))
+				$comments_nolink = 'none';
+
+			// Get time zone offset
+			$tz_off = get_option('gmt_offset');
+			if (empty($tz_off))
+				$tz_off = 0;
+			else
+				$tz_off = $tz_off * 3600;
+
+			// Get comments
+			$fb_comments = $wp_al2fb->Get_comments_or_likes($post, false);
+		}
 
 		// Get link to me
 		$me = null;
@@ -3732,7 +3747,7 @@ class AL2FB_Widget extends WP_Widget {
 			}
 		}
 
-		if ($comments || $like_button || $send_button || $me || $error) {
+		if ($fb_comments || $like_button || $send_button || $me || $error) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -3744,46 +3759,36 @@ class AL2FB_Widget extends WP_Widget {
 			echo $before_title . $title . $after_title;
 
 			// Comments
-			if ($comments) {
-				$fb_comments = $wp_al2fb->Get_comments_or_likes($post, false);
-				if ($fb_comments) {
-					// Get time zone offset
-					$tz_off = get_option('gmt_offset');
-					if (empty($tz_off))
-						$tz_off = 0;
+			if ($fb_comments) {
+				echo '<div class="al2fb_widget_comments"><ul>';
+				foreach ($fb_comments->data as $fb_comment) {
+					echo '<li>';
+
+					// Picture
+					if ($comments_nolink == 'author')
+						echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
+
+					// Author
+					echo ' ';
+					if ($comments_nolink == 'link')
+						echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
+					else if ($comments_nolink == 'author')
+						echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_comment->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 					else
-						$tz_off = $tz_off * 3600;
+						echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</span>';
 
-					echo '<div class="al2fb_widget_comments"><ul>';
-					foreach ($fb_comments->data as $fb_comment) {
-						$fb_time = strtotime($fb_comment->created_time) + $tz_off;
-						echo '<li>';
+					// Comment
+					echo ' ';
+					echo '<span class="al2fb_widget_comment">' .  htmlspecialchars($fb_comment->message, ENT_QUOTES, $charset) . '</span>';
 
-						// Picture
-						if ($comments_nolink == 'author')
-							echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
+					// Time
+					echo ' ';
+					$fb_time = strtotime($fb_comment->created_time) + $tz_off;
+					echo '<span class="al2fb_widget_date">' . date(get_option('date_format') . ' ' . get_option('time_format'), $fb_time) . '</span>';
 
-						// Author
-						echo ' ';
-						if ($comments_nolink == 'link')
-							echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
-						else if ($comments_nolink == 'author')
-							echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_comment->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
-						else
-							echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</span>';
-
-						// Comment
-						echo ' ';
-						echo '<span class="al2fb_widget_comment">' .  htmlspecialchars($fb_comment->message, ENT_QUOTES, $charset) . '</span>';
-
-						// Time
-						echo ' ';
-						echo '<span class="al2fb_widget_date">' . date(get_option('date_format') . ' ' . get_option('time_format'), $fb_time) . '</span>';
-
-						echo '</li>';
-					}
-					echo '</ul></div>';
+					echo '</li>';
 				}
+				echo '</ul></div>';
 			}
 
 			// Like button
