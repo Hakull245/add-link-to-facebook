@@ -535,6 +535,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.67 =
+* Bugfix: display widget comments for single posts/pages only
+* New feature: Facebook messages in widget (re-authorize if you want to use this)
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.66 =
