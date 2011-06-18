@@ -161,7 +161,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// register activation actions
-			register_activation_hook($this->main_file, array(&$this, 'Activate'));
+			//register_activation_hook($this->main_file, array(&$this, 'Activate'));
 			register_deactivation_hook($this->main_file, array(&$this, 'Deactivate'));
 
 			// Register actions
@@ -690,6 +690,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$access_token = self::Get_fb_token($user_ID);
 					update_option(c_al2fb_log_auth_time, date('c'));
 					update_user_meta($user_ID, c_al2fb_meta_access_token, $access_token);
+					if (get_option(c_al2fb_option_version) <= 6)
+						update_option(c_al2fb_option_version, 7);
 					delete_option(c_al2fb_last_error);
 					delete_option(c_al2fb_last_error_time);
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Authorized, go posting!', c_al2fb_text_domain) . '</p></div>';
@@ -765,6 +767,12 @@ if (!class_exists('WPAL2Facebook')) {
 				else if (!self::Is_authorized($user_ID)) {
 					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
+				}
+				else if (get_option(c_al2fb_option_version) <= 6) {
+					if (strpos($uri, $url) !== false) {
+						$notice = __('should be authorized again to show Facebook messages in the widget', c_al2fb_text_domain);
+						$anchor = 'authorize';
+					}
 				}
 				if (!empty($notice)) {
 					echo '<div class="error fade al2fb_error"><p>';
@@ -922,6 +930,8 @@ if (!class_exists('WPAL2Facebook')) {
 			self::Render_resources();
 ?>
 			<div class="al2fb_options">
+
+			<div class="al2fb_instructions" style="width: 550px;"><strong><?php _e('Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!', c_al2fb_text_domain); ?></strong></div>
 
 <?php		if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) &&
 				get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {

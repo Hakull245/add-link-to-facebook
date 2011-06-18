@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.66
+Stable tag: 1.67
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -33,7 +33,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments and/or like/send button and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments/messages and/or like/send button and/or a link to your Facebook profile
 
 **Beta features:**
 
@@ -536,7 +536,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.67 =
 * Bugfix: display widget comments for single posts/pages only
-* New feature: Facebook messages in widget (re-authorize if you want to use this)
+* New feature: Facebook messages in widget (only status messages, no photos, links, videos, etc)
+* Improvement: better options upgrade procedure
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -546,8 +548,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.65 =
 * Bugfix: no avatar when comment removed from Facebook
 * Bugfix: solved activation warnings
-* Improvement: enabling link or send button enables OGP
 * New feature: Facebook comments in widget
+* Improvement: enabling link or send button enables OGP
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -679,6 +681,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.67 =
+One bugfix, one new feature, one improvement, translation updates
 
 = 1.66 =
 One bugfix
