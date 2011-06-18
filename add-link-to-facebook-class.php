@@ -3714,9 +3714,14 @@ class AL2FB_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $post, $wp_al2fb;
+		global $wp_al2fb;
+		if (!empty($GLOBALS['post']))
+			$post = $GLOBALS['post'];
 		if (empty($post))
 			return;
+		if (empty($post->ID) && !empty($post['post_id']))
+			$post = get_post($post['post_id']);
+
 		$user_ID = $wp_al2fb->Get_user_ID($post);
 		$charset = get_bloginfo('charset');
 		$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
