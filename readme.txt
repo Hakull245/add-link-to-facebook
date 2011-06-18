@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
-Tested up to: 3.1.1
-Stable tag: 1.45
+Tested up to: 3.2
+Stable tag: 1.68
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -31,13 +31,13 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Shortcodes and template tags for liker names, like button and send button
 * Integrate Facebook comments and likes on added links into Wordpress
+* Post WordPress comments back to Facebook
+* Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
+* Sidebar widget for Facebook comments/messages and/or like/send button and/or a link to your Facebook profile
 
 **Beta features:**
 
 * Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
-* Post WordPress comments back to Facebook
-* Copy Facebook comments to the WordPress database (for archiving, editing, replying, etc)
-* Sidebar widget for like/send button
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -61,6 +61,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Russian (ru\_RU) by *Lurii* and [Pavel](http://jack.kiev.ua "Pavel"), thanks!
 * French (fr\_FR) by [Alberto](http://www.wowbelgium.be/ "Alberto"), thanks!
 * Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
+* Swedish (sv\_SE) by *JornB*, thanks!
+* Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -195,8 +197,7 @@ So you have to choose if you want the hyperlink text (the default) or the hyperl
 
 = U16 I don't like the gear wheel application icon =
 
-If you use a private Facebook application, you can change it in the application settings.
-The application icon of the shared application cannot be changed.
+You can change it in the Facebook application settings.
 
 = U17 Why is the option "add 'Share' link" experimental? =
 
@@ -280,20 +281,19 @@ One WordPress user can only add links to one wall OR one page OR one group, even
 Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
 It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 
+= U26 Why are liker names not displayed? =
+
+The option *Show likers below the post text* shows the names of the people that liked the *link* the plugin added on Facebook.
+The like button is a standard Facebook like button which is not connect to links added by the plugin (this is not possible).
+The like button is connected to the *page* on which it is displayed.
+So, people that click on the like button are displayed within the like button (depending on how the like button is setup), but not as people that liked an added link.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
 
 Users with the *edit_posts* capability: all user roles, except subscriber.
 Since version 0.11 administrators can change this using the setting *Required capability to use plugin*.
-
-= X02 Why is the shared application less secure? =
-
-**The shared application is no longer available**
-
-Because the Facebook authorization token is sent to you via a [Google App Engine application](http://code.google.com/appengine/ "Google App Engine application") that I manage.
-I theory I could collect your token and manipulate your Facebook wall.
-You are free to inspect [the source code](http://wp-al2fb.appspot.com/?source=true "wp-al2fb") of this application.
 
 **--- Compatibility ---**
 
@@ -387,11 +387,6 @@ This fields holds the custom excerpt that will be used in stead of the WordPress
 You have probably entered a wrong *App ID* or the Facebook application may be deleted.
 If you didn't create a Facebook application yet, you should follow the instructions in the yellow box on the plugin page.
 
-Facebook disabled the shared application, because, according to Facebook,
-it didn't conform to the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
-If you had chosen for this (beta) configuration option, you will now see the message *Error validating application*.
-Unfortunately there is not much I can do about it. You can still use the plugin, but you have to create a private application now.
-
 = E02 I get 'Error validating client secret' =
 
 You have probably entered a wrong *App Secret*.
@@ -405,7 +400,7 @@ Assuming you created a Facebook application successfully:
 * Go to the plugin page through the WordPress *Tools* menu
 * Copy the link after *Web Site > Site URL:*
 * Click on the *Click here to create* link
-* Do not fill anything in, but instead click on the *Back to My Apps* link
+* Navigate to *My Apps* and select the application you created before
 * Click on the *Edit Settings* link and select the tab *Web Site*
 * Paste into the field *Site URL* and press *Save Changes*
 
@@ -457,6 +452,7 @@ cURL errors encountered so far:
 * Error 1: *The URL you passed to libcurl used a protocol that this libcurl does not support*: the hosting server may not support secure connections (https)
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
+* Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
@@ -475,8 +471,7 @@ if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marc
 
 = E13 I get 'Javascript not enabled' =
 
-You can only authorize with the shared application if [JavaScript](http://en.wikipedia.org/wiki/JavaScript "JavaScript") in your browser is enabled.
-You can either enable JavaScript or try to use a private Facebook application.
+Can not happen anymore in recent versions.
 
 = E14 I get '(#100) Invalid parameter' =
 
@@ -504,11 +499,23 @@ Note that the plugin cannot create the meta tags for pages with more than one po
 The plugin is only able to determine the correct Facebook application for posts and pages, because it needs to know an author for this.
 You can use the [URL Linter](http://developers.facebook.com/tools/lint/ "URL Linter") to see if there are valid meta tags.
 
-= E17 I get 'Error finding the requested story' ==
+= E17 I get 'Error finding the requested story' =
 
 The plugin tried to add a WordPress comment to an added link on Facebook, but the link does not exist anymore.
 To prevent this message in the future, you should delete the link from WordPress too.
 While deleting, you will probably get the error described in question E14 too.
+
+= E18 I get 'Missing redirect_uri parameter' =
+
+It could be that you have filled something wrong into the field App ID. This field should contain only digits.
+
+= E19 How can I remove error messages? =
+
+The first thing you should try is to simply update the post(s) using the WordPress update button.
+The plugin will add a link to the post if it didn't already do that and remove the error message in the process.
+You can also tick the checkbox *Clear error messages* in the post submit box, near the update button.
+In this way you can clear the error message without adding a link to Facebook
+(you'll probably want to check *Do not add link to Facebook* too in this case).
 
 **--- Support ---**
 
@@ -526,6 +533,124 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.68 =
+* Improvement: workaround getting post for widget for some themes
+
+= 1.67 =
+* Bugfix: display widget comments for single posts/pages only
+* New feature: Facebook messages in widget (only status messages, no photos, links, videos, etc)
+* Improvement: better options upgrade procedure
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.66 =
+* Bugfix: only display widget if comments
+
+= 1.65 =
+* Bugfix: no avatar when comment removed from Facebook
+* Bugfix: solved activation warnings
+* New feature: Facebook comments in widget
+* Improvement: enabling link or send button enables OGP
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.64 =
+* Bugfix: using *stripslashes* for stored comments
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.63 =
+* Improvement: not saving selected image meta if none
+* Improvement: more debug information about link pictures
+
+= 1.62 =
+* Bugfix: removed *get_avatar* warning
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
+= 1.61 =
+* Bugfix: error when displaying widget profile link for non authorized author
+* Updated Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
+
+= 1.60 =
+* Improvement: better Facebook avatar handling
+* Added Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
+
+= 1.59 =
+* Improvement: extended debug information with link pictures
+* Improvement: removed shared application from code and descriptions
+* Improvement: using *wp_upload_dir* for CSS file
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.58 =
+* Improvement: option to set timeout
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.57 =
+* Improvement: limit length of text sent to Facebook
+* Improvement: added theme name and version to debug information
+* Updated FAQ
+* Updated User Guide
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.56 =
+* Bugfix: spam Facebook comments marked as duplicate
+
+= 1.55 =
+* Bugfix: html entities in text trailer
+
+= 1.54 =
+* Updated description, FAQ and user guide
+* Improvement: use WordPress comment notification settings for *stored* Facebook comments
+* Improvement: use WordPress comment moderation settings for *stored* Facebook comments
+* Improvement: call WordPress comment filters and actions for *stored* Facebook comments
+
+= 1.53 =
+* Improvement: suppress warnings of *mb_convert_encoding*
+* Improvement: added *type="text/javascript"* to Facebook scripts
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.52 =
+* Updated description
+* Updated setup guide
+* Updated requested features list
+* Removed all beta notices
+* Improvement: added headers and more save buttons to setup page
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.51 =
+* Improvement: link to Facebook discussion from post list and post edit page
+* Added Swedish (sv\_SE) translation by *JornB*
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.50 =
+* Reverted styling fix, since it is not working in Internet Explorer
+
+= 1.49 =
+* Improvement: styling fix settings page
+* Improvement: not saving excerpt when empty
+* Improvement: tested with WordPress version 3.2
+
+= 1.48 =
+* Updated FAQ
+* Updated Setup Guide
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.47 =
+* Bugfix: link liker names to profile
+
+= 1.46 =
+* New feature: link imported comments to discussion on Facebook, thanks to [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.45 =
 * Improvement: option to override WordPress [locale](http://en.wikipedia.org/wiki/Locale "locale")
@@ -560,6 +685,75 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.68 =
+One improvement
+
+= 1.67 =
+One bugfix, one new feature, one improvement, translation updates
+
+= 1.66 =
+One bugfix
+
+= 1.65 =
+Two bugfixes, one improvement, one new feature, translation updates
+
+= 1.64 =
+One bugfix
+
+= 1.63 =
+Two improvements
+
+= 1.62 =
+One bugfix, translation update
+
+= 1.61 =
+One bugfix, translation update
+
+= 1.60 =
+One improvement, new translation
+
+= 1.59 =
+Three improvements, translation update
+
+= 1.58 =
+One improvement, translation updates
+
+= 1.57 =
+Two improvements, updated texts, translation updates
+
+= 1.56 =
+Bugfix
+
+= 1.55 =
+Bugfix
+
+= 1.54 =
+Three improvements
+
+= 1.53 =
+Two improvements, translation updates
+
+= 1.52 =
+One improvement, updated texts
+
+= 1.51 =
+One improvement, new/updated translation
+
+= 1.50 =
+Reverted styling fix
+
+= 1.49 =
+Three improvements
+
+= 1.48 =
+Documentation and translation updates
+
+= 1.47 =
+One bugfix
+
+= 1.46 =
+One improvement, translation updates
+
 = 1.45 =
 One improvement, translation updates
 
@@ -580,10 +774,14 @@ Two improvements, one bugfix
 
 == Setup guide ==
 
+**If you have more than one Facebook account, either logout completely or login to the correct account before you start.**
+
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
+	* Navigate to *My Apps*
+	* Select *Set Up New App*
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
 	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
@@ -597,6 +795,7 @@ Note that you don't have to submit the Facebook application to the *App Director
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
+If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php "Confirm phone").
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
@@ -674,17 +873,32 @@ To better understand some of the options take a look at [the screen shot](http:/
 * Use short URL: see question U15 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for details
 * Add links for new pages: by default only links will be added for new posts, check this option if you want the same for new pages
 
-If you don't use a trailer text, the complete post/page text will be sent to Facebook and
-Facebook will truncate the text and display *Read more*, which when clicked will reveal the complete text.
+If you use a text trailer, you should know it is just a text and it is not clickable.
+The text including the trailer will not be longer than 256 characters, this is what Facebook will display at maximum without truncating the text.
+Note that the text could be shorter, because the plugin will truncate the text after periods only (sentences).
+You can change the default maximum text length with trailer of 256 characters using a plugin option.
+If you don't use a text trailer, the complete post/page text up to 10,000 characters will be sent to Facebook and
+Facebook will truncate the text at 256 characters and display *Read more*, which when clicked will reveal the complete text.
+You can change the default maximum text length of 10,000 characters using a plugin option,
+but you shouldn't set it above 10,000 characters, since Facebook will report an error above this hard limit.
 
 *Comments and likes*
 
 * Integrate comments from Facebook: show Facebook comments in WordPress
 * Post WordPress comments back to Facebook: show WordPress comments on Facebook
 * Copy comments from Facebook to WordPress: store Facebook comments in the WordPress database, so you can for example edit them
-* Do not link to Facebook comment author: for privacy reasons you may choose to display only the author name without a link to his/her Facebook profile
 * Integrate likes from Facebook: show Facebook links as WordPress pingbacks
 * Show likers below the post text: show a comma separated list of Facebook liker names at the bottom of your post
+
+Comments copied from Facebook to WordPress are subject to moderation and notification, depending on the WordPress discussion settings.
+
+Link Facebook comment to:
+
+* None: no link at all, good for privacy
+* Profile author: default, link to the profile page of comment author
+* Added link: link to the discussion on the added link
+
+The Facebook author name is always shown.
 
 The plugin only mirrors comments on links it added. In summary it works like this:
 
@@ -742,14 +956,16 @@ If the plugin isn't working for you, [help is just one question away](http://for
 
 The administrator options can only be changed by an administrator (obviously) and apply to all users.
 
+The plugin needs to communicate with Facebook. The default timeout time is 30 seconds.
+If your server has a slow connection, you may have to increase the timeout time to for example 60 seconds.
+
 When you are running a multi-user weblog, you probably want to check *Do not display notices* to restrict the plugin notices, mostly error messages, to the plugin setting page only.
 And maybe you don't want to allow usage of the plugin to all users. This is what the option *Required capability to use plugin* is for.
 
 When comment integration is turned on, Facebook comments are fetched every 10 minutes by default.
 You can use the option *Refresh Facebook comments every* to do this more or less often, maybe depending on the number of visitors of your weblog.
 
-The text trailer option will truncate the text to whole sentences with a maximum of 256 characters. This is the maximum number of characters Facebook will display.
-For the case this changes or if your local version of Facebook behaves differently, you can use the option *Maximum Facebook text length*.
+See link appearance section above for a description of the text length options.
 
 The plugin supports custom post types if the custom post type support custom values.
 Sometimes you don't want to add links for certain custom post types.
@@ -768,8 +984,7 @@ Of course this is less secure ...
 
 In no particular order:
 
-* Comment with Facebook login
-* Link back to Facebook wall from comments (does anybody know how?)
+* Restrict adding links to no more than x per hour
 
 Realized features:
 
@@ -797,6 +1012,8 @@ Realized features:
 * Disable comments integration per post/page (version 1.28)
 * Copy Facebook comments into WordPress database (version 1.29)
 * Option to not link to Facebook comment author (version 1.36)
+* Link back to Facebook wall from comments (version 1.46)
+* Facebook comment moderation (version 1.54)
 
 Feature which will not be realized, sorry:
 
@@ -808,40 +1025,21 @@ Feature which will not be realized, sorry:
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
+* Comment with Facebook login: no feasible solution
+* Other social buttons: too far from the core function of the plugin
+* Like button at the bottom and top: there are already enough like buttons in the world
 
 == Facebook Authorization ==
 
-*Private Facebook application*: [server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
+[Server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
 
 * Authorize button posts to server
 * Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
-* Server redirects to Facebook or to self when error
+* Server redirects to Facebook (or to self when error)
 * Facebook login (if needed)
 * Facebook authorization (if needed)
 * Facebook redirects to plugin
 * Plugin stores Facebook access token
-
-*Shared Facebook application*: [client-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
-
-**The shared Facebook application is not available anymore**
-
-* Authorize button posts to server
-* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
-* Server redirects to Facebook or to self when error
-* Facebook login (if needed)
-* Facebook authorization (if needed)
-* Facebook redirects to [wp-al2fb service](http://wp-al2fb.appspot.com/ "wp-al2fb")
-* wp-al2fb redirects to self with JavaScript (2)
-* wp-al2fb checks authorization secret with plugin (3)
-* wp-al2fb redirects to plugin
-* Plugin stores Facebook access token
+* Plugin adds links with access token
 
 1. Workaround for Microsoft Internet Explorer
-1. To transform the [URI fragment](http://en.wikipedia.org/wiki/Fragment_identifier "URI fragment") into a [query string](http://en.wikipedia.org/wiki/Query_string "Query string")
-1. To prevent using the service as redirection service
-
-== Acknowledgments ==
-
-This plugin uses:
-
-* [jQuery JavaScript Library](http://jquery.com/ "jQuery") published under both the GNU General Public License and MIT License
