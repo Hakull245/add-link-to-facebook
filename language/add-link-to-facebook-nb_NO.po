@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-05-13 14:08+0100\n"
+"PO-Revision-Date: 2011-06-17 10:36+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -484,4 +484,73 @@ msgstr "Deaktiverer visning av Facebook avatarer også"
 
 msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
 msgstr "og naviger til '<em>Mine Apps</em>' og deretter til '<em>Sett opp ny App</em>'"
+
+msgid "Facebook locale"
+msgstr "Facebook locale"
+
+msgid "Do not change if no need"
+msgstr "Ikke endre om ikke nødvendig"
+
+msgid "Link Facebook comment to:"
+msgstr "Link Facebook kommentar til:"
+
+msgid "Profile author"
+msgstr "Profil forfatter"
+
+msgid "Added link"
+msgstr "Lagt til link"
+
+msgid "Link on Facebook"
+msgstr "Link på Facebook"
+
+msgid "Link picture"
+msgstr "Link bilde"
+
+msgid "Facebook page"
+msgstr "Facebook side"
+
+msgid "Facebook group"
+msgstr "Facebook gruppe"
+
+msgid "Link appearance"
+msgstr "Link utseende"
+
+msgid "Facebook comments"
+msgstr "Facebook komentarer"
+
+msgid "Facebook like button"
+msgstr "Facebook liker knapp"
+
+msgid "Miscelaneous settings"
+msgstr "Diverse innstillinger"
+
+msgid "Maximum text length with trailer:"
+msgstr "Maksimal tekst lengde med trailer:"
+
+msgid "Default 10,000 characters"
+msgstr "Standard 10.000 tegn"
+
+msgid "Facebook communication timeout:"
+msgstr "Facebook kommunikasjon timeout:"
+
+msgid "Seconds"
+msgstr "Sekunder"
+
+msgid "Default 30 seconds"
+msgstr "Standard 30 sekunder"
+
+msgid "Please check if this is a correct, reachable e-mail address"
+msgstr "Vennligst sjekk om dette er en korrekt, tilgjengelig e-postadresse"
+
+msgid "Please describe your problem, even if you did before"
+msgstr "Beskriv ditt problem, selv om du har gjort det før"
+
+msgid "Show Facebook comments"
+msgstr "Vis Facebook kommentarer"
+
+msgid "Appearance depends on your theme!"
+msgstr "Utseende avhenger av ditt tema!"
+
+msgid "Additional styling rules (CSS):"
+msgstr "Ekstra styling regler (CSS):"
 
