@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.68
+Stable tag: 1.69
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -537,10 +537,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.69 =
 * Added Flattr button
 * Improvement: additional styling only on frontend
+* Removed unused icon
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.68 =
-* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Improvement: workaround getting post for widget for some themes
 
 = 1.67 =
@@ -690,6 +691,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.69 =
+One improvement, documentation and translation updates
 
 = 1.68 =
 One improvement
