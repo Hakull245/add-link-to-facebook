@@ -535,6 +535,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.68 =
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Improvement: workaround getting post for widget for some themes
 
 = 1.67 =
@@ -884,6 +885,8 @@ but you shouldn't set it above 10,000 characters, since Facebook will report an 
 
 *Comments and likes*
 
+**Please be aware that comment integration could harm the privacy of other Facebook users!**
+
 * Integrate comments from Facebook: show Facebook comments in WordPress
 * Post WordPress comments back to Facebook: show WordPress comments on Facebook
 * Copy comments from Facebook to WordPress: store Facebook comments in the WordPress database, so you can for example edit them
@@ -979,6 +982,26 @@ You should use catergory id's, not names.
 If your server isn't setup completely right, there could be problems making a secure link to Facebook.
 In case you get cURL error 60, you can try the option *Do not verify the peer's certificate* as a workaround.
 Of course this is less secure ...
+
+*Widget*
+
+**Please be aware that showing Facebook comments and status messages in the widget could harm the privacy of other Facebook users!**
+
+You can read [here](http://codex.wordpress.org/Widgets_SubPanel "Widgets") in the WordPress codex how widgets work.
+
+The Add Link to Facebook widget can display:
+
+* Facebook comments on added links
+* Facebook status updates from your wall
+* Facebook like button
+* Facebook send button
+* Facebook icon with a link to your Facebook profile
+
+The widget is only shown on single posts or pages (not on the home page or elsewhere).
+Facebook comments, status updates and the profile link are only shown if the post author has authorized the plugin
+(or when the option *Share with all users on this site* is enabled).
+The styling (layout, colors, etc) of the widget depends on the styling of your theme.
+You can add additional styling rules using a plugin option.
 
 == Requested features ==
 
