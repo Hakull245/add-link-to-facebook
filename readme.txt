@@ -534,6 +534,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.69 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.68 =
 * Improvement: workaround getting post for widget for some themes
 

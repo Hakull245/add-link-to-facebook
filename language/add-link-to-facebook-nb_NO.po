@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-06-17 10:36+0100\n"
+"PO-Revision-Date: 2011-06-19 06:59+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -548,9 +548,18 @@ msgstr "Beskriv ditt problem, selv om du har gjort det før"
 msgid "Show Facebook comments"
 msgstr "Vis Facebook kommentarer"
 
+msgid "Show Facebook messages"
+msgstr "Vis Facebook meldinger"
+
 msgid "Appearance depends on your theme!"
 msgstr "Utseende avhenger av ditt tema!"
 
 msgid "Additional styling rules (CSS):"
 msgstr "Ekstra styling regler (CSS):"
+
+msgid "Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!"
+msgstr "Vær oppmerksom på at kommentar integrering eller visning av Facebook-meldinger i widgeten kan skade privatlivet til andre Facebook-brukere!"
+
+msgid "should be authorized again to show Facebook messages in the widget"
+msgstr "må bli autorisert igjen for å vise Facebook meldinger i widget"
 
