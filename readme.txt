@@ -534,6 +534,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.70 =
+* Improvement: extended debug information with active plugins
+
 = 1.69 =
 * Added Flattr button
 * Improvement: additional styling only on frontend
