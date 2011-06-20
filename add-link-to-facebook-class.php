@@ -771,8 +771,9 @@ if (!class_exists('WPAL2Facebook')) {
 					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
 				}
-				else if (get_option(c_al2fb_option_version) <= 6) {
-					if (strpos($uri, $url) !== false) {
+				else {
+					$version = get_option(c_al2fb_option_version);
+					if ($version && $version <= 6) {
 						$notice = __('should be authorized again to show Facebook messages in the widget', c_al2fb_text_domain);
 						$anchor = 'authorize';
 					}
