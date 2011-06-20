@@ -534,6 +534,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.73 =
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
 = 1.72 =
 * Bugfix: incorrect display of *should be authorized again* message
 
@@ -649,57 +652,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Swedish (sv\_SE) translation by *JornB*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.50 =
-* Reverted styling fix, since it is not working in Internet Explorer
-
-= 1.49 =
-* Improvement: styling fix settings page
-* Improvement: not saving excerpt when empty
-* Improvement: tested with WordPress version 3.2
-
-= 1.48 =
-* Updated FAQ
-* Updated Setup Guide
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.47 =
-* Bugfix: link liker names to profile
-
-= 1.46 =
-* New feature: link imported comments to discussion on Facebook, thanks to [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.45 =
-* Improvement: option to override WordPress [locale](http://en.wikipedia.org/wiki/Locale "locale")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.44 =
-* Improvement: disable OGP on home page if no user has enabled it
-
-= 1.43 =
-* Added a [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide"), feedback welcome!
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.42 =
-* Changed Facebook application creation link
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.41 =
-* Improvement: added exception handler to widget
-* Improvement: some source code organization
-
-= 1.40 =
-* Updated FAQ
-* Improvement: remove style elements from texts
-* Improvement: remove multi-line scripts from texts
-* Bugfix: save check box state for custom post types
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions are always compatible with older versions
@@ -774,36 +726,6 @@ One improvement, new/updated translation
 
 = 1.50 =
 Reverted styling fix
-
-= 1.49 =
-Three improvements
-
-= 1.48 =
-Documentation and translation updates
-
-= 1.47 =
-One bugfix
-
-= 1.46 =
-One improvement, translation updates
-
-= 1.45 =
-One improvement, translation updates
-
-= 1.44 =
-One improvement
-
-= 1.43 =
-Added User Guide, translation update
-
-= 1.42 =
-One change, translation updates
-
-= 1.41 =
-One improvement
-
-= 1.40 =
-Two improvements, one bugfix
 
 == Setup guide ==
 
