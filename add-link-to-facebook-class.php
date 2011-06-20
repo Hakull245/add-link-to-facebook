@@ -264,7 +264,8 @@ if (!class_exists('WPAL2Facebook')) {
 .al2fb_widget_date { font-size: smaller; }
 ');
 			}
-			update_option(c_al2fb_option_version, 6);
+			if ($version < 6)
+				update_option(c_al2fb_option_version, 6);
 		}
 
 		// Handle plugin deactivation
