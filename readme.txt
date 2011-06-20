@@ -536,6 +536,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.73 =
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.72 =
 * Bugfix: incorrect display of *should be authorized again* message
