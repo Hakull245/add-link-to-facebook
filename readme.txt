@@ -536,6 +536,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.70 =
 * Improvement: extended debug information with active plugins
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.69 =
 * Added Flattr button

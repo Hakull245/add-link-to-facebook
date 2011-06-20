@@ -944,6 +944,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<h3><?php _e('Authorization', c_al2fb_text_domain); ?></h3>
 <?php
 				if (self::Is_authorized($user_ID)) {
+					echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
 					// Get page name
 					try {
 						$me = self::Get_fb_me($user_ID, false);
