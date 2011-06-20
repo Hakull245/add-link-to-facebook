@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.69
+Stable tag: 1.70
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -535,7 +535,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.70 =
+* Improvement: link to discussion for Facebook widget
+* Improvement: showing icon for Facebook messages in widget
+* Improvement: option to show comments on Facebook messages in widget
 * Improvement: extended debug information with active plugins
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.69 =
@@ -695,6 +699,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.70 =
+Three improvements, translation update
 
 = 1.69 =
 One improvement, documentation and translation updates
@@ -1013,6 +1020,7 @@ The Add Link to Facebook widget can display:
 The widget is only shown on single posts or pages (not on the home page or elsewhere).
 Facebook comments, status updates and the profile link are only shown if the post author has authorized the plugin
 (or when the option *Share with all users on this site* is enabled).
+The link to the author follow the comment integration settings (*None*, *Profile author* or *Added link*).
 The styling (layout, colors, etc) of the widget depends on the styling of your theme.
 You can add additional styling rules using a plugin option.
 
@@ -1020,7 +1028,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Restrict adding links to no more than x per hour
+* None
 
 Realized features:
 
@@ -1064,6 +1072,7 @@ Feature which will not be realized, sorry:
 * Comment with Facebook login: no feasible solution
 * Other social buttons: too far from the core function of the plugin
 * Like button at the bottom and top: there are already enough like buttons in the world
+* Restrict adding links to no more than x per hour: plugin is designed for real-time
 
 == Facebook Authorization ==
 
