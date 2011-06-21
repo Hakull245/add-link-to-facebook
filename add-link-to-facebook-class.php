@@ -3927,6 +3927,14 @@ class AL2FB_Widget extends WP_Widget {
 	// Helper render Facebook comments
 	function Render_fb_comments($fb_comments, $comments_nolink, $link_id) {
 		global $wp_al2fb;
+		$charset = get_bloginfo('charset');
+
+		// Get time zone offset
+		$tz_off = get_option('gmt_offset');
+		if (empty($tz_off))
+			$tz_off = 0;
+		else
+			$tz_off = $tz_off * 3600;
 
 		echo '<ul>';
 		foreach ($fb_comments->data as $fb_comment) {

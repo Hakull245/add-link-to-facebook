@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.72
+Stable tag: 1.73
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -535,6 +535,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.73 =
+* Bugfix: no timezone correction for comments in widget
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
@@ -658,6 +659,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.73 =
+One bugfix, translation updates
 
 = 1.72 =
 One bugfix
