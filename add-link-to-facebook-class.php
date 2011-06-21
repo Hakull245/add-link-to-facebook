@@ -264,7 +264,8 @@ if (!class_exists('WPAL2Facebook')) {
 .al2fb_widget_date { font-size: smaller; }
 ');
 			}
-			update_option(c_al2fb_option_version, 6);
+			if ($version < 6)
+				update_option(c_al2fb_option_version, 6);
 		}
 
 		// Handle plugin deactivation
@@ -771,8 +772,9 @@ if (!class_exists('WPAL2Facebook')) {
 					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
 				}
-				else if (get_option(c_al2fb_option_version) <= 6) {
-					if (strpos($uri, $url) !== false) {
+				else {
+					$version = get_option(c_al2fb_option_version);
+					if ($version && $version <= 6) {
 						$notice = __('should be authorized again to show Facebook messages in the widget', c_al2fb_text_domain);
 						$anchor = 'authorize';
 					}
@@ -3925,6 +3927,14 @@ class AL2FB_Widget extends WP_Widget {
 	// Helper render Facebook comments
 	function Render_fb_comments($fb_comments, $comments_nolink, $link_id) {
 		global $wp_al2fb;
+		$charset = get_bloginfo('charset');
+
+		// Get time zone offset
+		$tz_off = get_option('gmt_offset');
+		if (empty($tz_off))
+			$tz_off = 0;
+		else
+			$tz_off = $tz_off * 3600;
 
 		echo '<ul>';
 		foreach ($fb_comments->data as $fb_comment) {
