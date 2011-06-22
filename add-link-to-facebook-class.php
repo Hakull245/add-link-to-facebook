@@ -93,7 +93,6 @@ define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
 define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
 define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
 define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
-define('c_al2fb_meta_log', 'al2fb_log');
 
 define('c_al2fb_action_delete', 'al2fb_action_delete');
 define('c_al2fb_action_clear', 'al2fb_action_clear');
@@ -2200,10 +2199,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Remote_publish($post_ID) {
 			$post = get_post($post_ID);
 
-			// Log
-			if ($this->debug)
-				add_post_meta($post->ID, c_al2fb_meta_log, 'Remote ' . $post->post_status . ' @' . date('c'));
-
 			// Only if published
 			if ($post->post_status == 'publish')
 				self::Publish_post($post);
@@ -2213,10 +2208,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Future_to_publish($post_ID) {
 			$post = get_post($post_ID);
 
-			// Log
-			if ($this->debug)
-				add_post_meta($post->ID, c_al2fb_meta_log, 'Future_to_publish @' . date('c'));
-
 			// Delegate
 			self::Transition_post_status('publish', 'future', $post);
 		}
@@ -2225,23 +2216,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Transition_post_status($new_status, $old_status, $post) {
 			$user_ID = self::Get_user_ID($post);
 			$delete = (isset($_POST[c_al2fb_action_delete]) && $_POST[c_al2fb_action_delete]);
-
-			// Log
-			if ($this->debug) {
-				global $al2fb_transition_count;
-				if (isset($al2fb_transition_count))
-					$al2fb_transition_count++;
-				else
-					$al2fb_transition_count = 1;
-
-				$msg = ($delete ? 'Delete' : 'Add') . ':';
-				$msg .= ' ' . $old_status . '->' . $new_status . ':' . $post->post_status;
-				$msg .= ((self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) ? '' : ' no') . ' can;');
-				$msg .= ((get_post_meta($post->ID, c_al2fb_meta_error, true) ? '' : ' no') . ' err;');
-				$msg .= ' @' . date('c');
-				$msg .= ' #' . $al2fb_transition_count;
-				add_post_meta($post->ID, c_al2fb_meta_log, $msg);
-			}
 
 			// Security check
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
@@ -2264,19 +2238,6 @@ if (!class_exists('WPAL2Facebook')) {
 		// Handle publish post / XML-RPC publish post
 		function Publish_post($post) {
 			$user_ID = self::Get_user_ID($post);
-
-			// Log
-			if ($this->debug) {
-				$msg = 'Publish ' . $post->post_type . ':';
-				$msg .= ((self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) ? '' : ' no') . ' can;');
-				$msg .= ((self::Is_authorized($user_ID) ? '' : ' no') . ' auth;');
-				$msg .= ((get_post_meta($post->ID, c_al2fb_meta_link_id, true) ? '' : ' no') . ' lnk;');
-				$msg .= ((get_post_meta($post->ID, c_al2fb_meta_exclude, true) ? '' : ' no') . ' ex;');
-				$msg .= ((empty($post->post_password) ? ' no' : '') . ' pwd;');
-				$msg .= ' ' . strlen($post->post_excerpt) . ':' . strlen($post->post_content);
-				$msg .= ' @' . date('c');
-				add_post_meta($post->ID, c_al2fb_meta_log, $msg);
-			}
 
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
@@ -2518,31 +2479,6 @@ if (!class_exists('WPAL2Facebook')) {
 				$caption = self::Convert_encoding($user_ID, $caption);
 			}
 
-			// Log
-			if ($this->debug) {
-				$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
-				$log = 'Picture type: ' . $picture_type . PHP_EOL;
-
-				$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-				$log .= '- meta: ' . $image_id . PHP_EOL;
-
-				$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
-				$log .= '- attached: ' . print_r($images, true);
-
-				if (function_exists('get_post_thumbnail_id'))
-					$picture_id = get_post_thumbnail_id($post->ID);
-				$log .= '- featured: ' . $picture_id . PHP_EOL;
-
-				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
-					$log .= '- post: ' .  $matches[1] . PHP_EOL;
-				else
-					$log .= '- post: none' . PHP_EOL;
-
-				$custom = get_user_meta($user_ID, c_al2fb_meta_picture, true);
-				$log .= '- custom: ' .  $custom . PHP_EOL;
-				add_post_meta($post->ID, c_al2fb_meta_log, $log);
-			}
-
 			// Get link picture
 			$picture_info = self::Get_link_picture($post, $user_ID);
 			$picture = $picture_info['picture'];
@@ -2587,15 +2523,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// http://developers.facebook.com/docs/reference/api/link/
 				$query = http_build_query($query_array, '', '&');
-				if ($this->debug) {
-					add_post_meta($post->ID, c_al2fb_meta_log, print_r($query_array, true));
-					add_post_meta($post->ID, c_al2fb_meta_log, $query);
-				}
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
-				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, print_r($response, true));
 				$fb_link = json_decode($response);
 
 				// Register link/date
@@ -2623,13 +2553,9 @@ if (!class_exists('WPAL2Facebook')) {
 					'access_token' => self::Get_access_token_by_post($post),
 					'method' => 'delete'
 				), '', '&');
-				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, $query);
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
-				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, print_r($response, true));
 
 				// Delete meta data
 				delete_post_meta($post->ID, c_al2fb_meta_link_id);
@@ -2661,13 +2587,9 @@ if (!class_exists('WPAL2Facebook')) {
 					'access_token' => self::Get_access_token_by_post($post),
 					'method' => 'delete'
 				), '', '&');
-				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, $query);
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
-				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, print_r($response, true));
 
 				// Delete meta data
 				delete_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id);
@@ -2729,15 +2651,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// http://developers.facebook.com/docs/reference/api/Comment/
 				$query = http_build_query($query_array, '', '&');
-				if ($this->debug) {
-					add_post_meta($post->ID, c_al2fb_meta_log, print_r($query_array, true));
-					add_post_meta($post->ID, c_al2fb_meta_log, $query);
-				}
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
-				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, print_r($response, true));
 
 				// Process response
 				$fb_comment = json_decode($response);
