@@ -288,6 +288,11 @@ The like button is a standard Facebook like button which is not connect to links
 The like button is connected to the *page* on which it is displayed.
 So, people that click on the like button are displayed within the like button (depending on how the like button is setup), but not as people that liked an added link.
 
+= U27 I don't want to display a single comment from Facebook on WordPress =
+
+Trash the comment, but leave it in the trash folder.
+If you delete the comment permanently, the plugin will copy the comment again from Facebook.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -533,6 +538,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.74 =
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.73 =
 * Bugfix: no timezone correction for comments in widget
