@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.73
+Stable tag: 1.74
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -33,7 +33,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments/messages and/or like/send button and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments/messages and/or like/send button, like box and/or a link to your Facebook profile
 
 **Beta features:**
 
@@ -259,6 +259,11 @@ To show a like button:
 * [al2fb_like_button]
 * [al2fb_like_button post_id="123"]
 
+To show a like box:
+
+* [al2fb_like_box]
+* [al2fb_like_box post_id="123"]
+
 To show a send button:
 
 * [al2fb_send_button]
@@ -272,6 +277,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
 * if (function_exists('al2fb_like_button')) al2fb_like_button();
 * if (function_exists('al2fb_like_button')) al2fb_like_button(123);
+* if (function_exists('al2fb_like_box')) al2fb_like_box();
+* if (function_exists('al2fb_like_box')) al2fb_like_box(123);
 * if (function_exists('al2fb_send_button')) al2fb_send_button();
 * if (function_exists('al2fb_send_button')) al2fb_send_button(123);
 
@@ -540,8 +547,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.74 =
+* Bugfix: check if personal wall exists
 * Bugfix: using correct charset for text trailer
+* New feature: update added links
+* New feature: like box in widget
+* New feature: template tag/shortcode for like box
 * Improvement: removed debug logging
+* Improvement: better error handling
+* Updated description & FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.73 =
@@ -669,6 +683,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.74 =
+Two bugixes, three new features, two improvements, translation updates
 
 = 1.73 =
 One bugfix, translation updates
@@ -977,7 +994,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget
+* None
 
 Realized features:
 
@@ -1007,6 +1024,9 @@ Realized features:
 * Option to not link to Facebook comment author (version 1.36)
 * Link back to Facebook wall from comments (version 1.46)
 * Facebook comment moderation (version 1.54)
+* Update added links (version 1.74)
+* [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
+
 
 Feature which will not be realized, sorry:
 

@@ -94,6 +94,7 @@ define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
 define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
 define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
 
+define('c_al2fb_action_update', 'al2fb_action_update');
 define('c_al2fb_action_delete', 'al2fb_action_delete');
 define('c_al2fb_action_clear', 'al2fb_action_clear');
 
@@ -203,6 +204,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Shortcodes
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
+			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
 
 			// Custom filters
@@ -1816,7 +1818,7 @@ if (!class_exists('WPAL2Facebook')) {
 				return $me;
 			}
 			else
-				throw new Exception('Page ' . $page_id . ' not found');
+				throw new Exception('Page "' . $page_id . '" not found');
 		}
 
 		// Get page list
@@ -2013,6 +2015,11 @@ if (!class_exists('WPAL2Facebook')) {
 			<label for="al2fb_nointegrate"><?php _e('Do not integrate comments', c_al2fb_text_domain); ?></label>
 
 <?php		if (!empty($link_id)) { ?>
+				<br />
+				<input id="al2fb_update" type="checkbox" name="<?php echo c_al2fb_action_update; ?>"/>
+				<label for="al2fb_update"><?php _e('Update existing Facebook link', c_al2fb_text_domain); ?></label>
+				<br />
+				<span class="al2fb_explanation"><?php _e('Comments and likes will be lost!', c_al2fb_text_domain); ?></span>
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
@@ -2220,20 +2227,21 @@ if (!class_exists('WPAL2Facebook')) {
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
 			$user_ID = self::Get_user_ID($post);
+			$update = (isset($_POST[c_al2fb_action_update]) && $_POST[c_al2fb_action_update]);
 			$delete = (isset($_POST[c_al2fb_action_delete]) && $_POST[c_al2fb_action_delete]);
 
 			// Security check
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
-				// Add or delete link
-				if ($delete) {
+				// Add, update or delete link
+				if ($update || $delete) {
 					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 					if (!empty($link_id) && self::Is_authorized($user_ID))
 						self::Delete_fb_link($post);
 				}
-				else {
+				if (!$delete) {
 					// Check post status
 					if ($new_status == 'publish' &&
-						($new_status != $old_status ||
+						($new_status != $old_status || $update ||
 						get_post_meta($post->ID, c_al2fb_meta_error, true)))
 						self::Publish_post($post);
 				}
@@ -2812,7 +2820,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Show like button
 				if (!get_post_meta($post->ID, c_al2fb_meta_nolike, true)) {
 					if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true))
-						$button = self::Get_like_button($post);
+						$button = self::Get_like_button($post, false);
 					if (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) &&
 						!get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
 						$button .= self::Get_send_button($post);
@@ -2846,7 +2854,18 @@ if (!class_exists('WPAL2Facebook')) {
 			else
 				$post = get_post($post_id);
 			if (isset($post))
-				return self::Get_like_button($post);
+				return self::Get_like_button($post, false);
+		}
+
+		// Shortcode like box
+		function Shortcode_like_box($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_like_button($post, true);
 		}
 
 		// Shortcode send button
@@ -2896,7 +2915,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get HTML for like button
-		function Get_like_button($post) {
+		function Get_like_button($post, $box) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Get language
@@ -2909,9 +2928,26 @@ if (!class_exists('WPAL2Facebook')) {
 			$action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
 			$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
-			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
-			if (empty($link))
-				$link = get_permalink($post->ID);
+
+			if ($box) {
+				// Get page
+				if (self::Is_authorized($user_ID) &&
+					!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
+					get_user_meta($user_ID, c_al2fb_meta_page, true))
+					try {
+						$me = self::Get_fb_me($user_ID, false);
+						$link = $me->link;
+					}
+					catch (Exception $e) {
+					}
+				if (empty($link))
+					return '';
+			}
+			else {
+				$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+				if (empty($link))
+					$link = get_permalink($post->ID);
+			}
 
 			// Build content
 			if (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true)) {
@@ -2923,43 +2959,62 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($layout == 'box_count')
 					$height = '65';
 
-				$content = '<iframe src="http://www.facebook.com/plugins/like.php';
+				$content = '<iframe src="http://www.facebook.com/plugins/' . ($box ? 'likebox.php' : 'like.php');
 				$content .= '?href=' . urlencode($link);
 				//if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
 				//	$content .= '&amp;send=true';
-				$content .= '&amp;layout=' . (empty($layout) ? 'standard' : $layout);
+				if (!$box)
+					$content .= '&amp;layout=' . (empty($layout) ? 'standard' : $layout);
 				$content .= '&amp;show_faces=' . ($faces ? 'true' : 'false');
-				$content .= '&amp;width=' . (empty($width) ? '450' : $width);
-				$contnet .= '&amp;action=' . (empty($action) ? 'like' : $action);
-				$content .= '&amp;font=' . (empty($font) ? 'arial' : $font);
+				$content .= '&amp;width=' . (empty($width) ? ($box ? '292' : '450') : $width);
+				if (!$box) {
+					$content .= '&amp;action=' . (empty($action) ? 'like' : $action);
+					$content .= '&amp;font=' . (empty($font) ? 'arial' : $font);
+				}
 				$content .= '&amp;colorscheme=' . (empty($colorscheme) ? 'light' : $colorscheme);
-				$content .= '&amp;height=' . $height;
+				if (!$box)
+					$content .= '&amp;ref=AL2FB"';
+				if ($box) {
+					$content .= '&amp;border_color';
+					$content .= '&amp;stream=true';
+					$content .= '&amp;header=true';
+				}
+				$content .= '&amp;height=' . ($box ? '427' : $height);
 				$content .= '&amp;locale=' . $lang;
-				$content .= '&amp;ref=AL2FB"';
 				$content .= ' scrolling="no"';
 				$content .= ' frameborder="0"';
 				$content .= ' style="border:none; overflow:hidden;';
-				$content .= ' width:' . (empty($width) ? '450' : $width) . 'px;';
-				$content .= ' height:' . $height . 'px;"';
+				$content .= ' width:' . (empty($width) ? ($box ? '292' : '450') : $width) . 'px;';
+				$content .= ' height:' . ($box ? '427' : $height) . 'px;"';
 				$content .= ' allowTransparency="true"></iframe>';
 			}
 			else {
-				$content = '<div class="al2fb_like_button">';
+				$content = ($box ? '' : '<div class="al2fb_like_button">');
 				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
-				$content .= '<fb:like';
+				$content .= ($box ? '<fb:like-box' : '<fb:like');
 				$content .= ' href="' . $link . '"';
-				if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
+				if (!$box && get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
 					$content .= ' send="true"';
-				$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
+				if (!$box)
+					$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
 				$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
-				$content .= ' width="' . (empty($width) ? '450' : $width) . '"';
-				$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
-				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				$content .= ' width="' . (empty($width) ? ($box ? '292' : '450') : $width) . '"';
+				if (!$box) {
+					$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
+					$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				}
 				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
-				$content .= ' ref="AL2FB"';
-				$content .= '></fb:like>';
-				$content .= '</div>';
+				if (!$box)
+					$content .= ' ref="AL2FB"';
+				if ($box) {
+					$content .= ' border_color=""';
+					$content .= ' stream="true"';
+					$content .= ' header="true"';
+				}
+				$content .= ($box ? '></fb:like-box>' : '></fb:like>');
+				if (!$box)
+					$content .= '</div>';
 			}
 			return $content;
 		}
@@ -3240,6 +3295,8 @@ if (!class_exists('WPAL2Facebook')) {
 						return self::Get_fb_comments_cached($user_ID, $link_id);
 				}
 				catch (Exception $e) {
+					if ($this->debug)
+						echo htmlspecialchars($e->getMessage());
 					return null;
 				}
 			return null;
@@ -3704,6 +3761,7 @@ class AL2FB_Widget extends WP_Widget {
 		$messages = isset($instance['al2fb_messages']) ? $instance['al2fb_messages'] : false;
 		$messages_comments = isset($instance['al2fb_messages_comments']) ? $instance['al2fb_messages_comments'] : false;
 		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] && $buttons : false;
+		$like_box = isset($instance['al2fb_like_box']) ? $instance['al2fb_like_box'] && $buttons : false;
 		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] && $buttons : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 
@@ -3758,7 +3816,7 @@ class AL2FB_Widget extends WP_Widget {
 			}
 		}
 
-		if ($fb_comments || $fb_messages || $like_button || $send_button || $me || $error) {
+		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $me || $error) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -3812,7 +3870,7 @@ class AL2FB_Widget extends WP_Widget {
 									self::Render_fb_comments($fb_message_comments, $comments_nolink, $fb_message->id);
 							}
 							catch (Exception $e) {
-								echo '<ul><li>' . $e->getMessage() . '</li></ul>';
+								$error = $e->getMessage();
 							}
 
 						echo '</li>';
@@ -3822,7 +3880,10 @@ class AL2FB_Widget extends WP_Widget {
 
 			// Like button
 			if ($like_button)
-				echo $wp_al2fb->Get_like_button($post);
+				echo $wp_al2fb->Get_like_button($post, false);
+
+			if ($like_box)
+				echo $wp_al2fb->Get_like_button($post, true);
 
 			// Send button
 			if ($send_button)
@@ -3838,7 +3899,7 @@ class AL2FB_Widget extends WP_Widget {
 			}
 
 			// Errors
-			if (!empty($error))
+			if (!empty($error) && $wp_al2fb->debug)
 				echo '<span>' . htmlspecialchars($error, ENT_QUOTES, $charset) . '</span><br />';
 
 			echo $after_widget;
@@ -3895,6 +3956,7 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['al2fb_messages'] = $new_instance['al2fb_messages'];
 		$instance['al2fb_messages_comments'] = $new_instance['al2fb_messages_comments'];
 		$instance['al2fb_like_button'] = $new_instance['al2fb_like_button'];
+		$instance['al2fb_like_box'] = $new_instance['al2fb_like_box'];
 		$instance['al2fb_send_button'] = $new_instance['al2fb_send_button'];
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
 		return $instance;
@@ -3911,6 +3973,8 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['al2fb_messages_comments'] = false;
 		if (empty($instance['al2fb_like_button']))
 			$instance['al2fb_like_button'] = false;
+		if (empty($instance['al2fb_like_box']))
+			$instance['al2fb_like_box'] = false;
 		if (empty($instance['al2fb_send_button']))
 			$instance['al2fb_send_button'] = false;
 		if (empty($instance['al2fb_profile']))
@@ -3920,6 +3984,7 @@ class AL2FB_Widget extends WP_Widget {
 		$chk_messages = ($instance['al2fb_messages'] ? ' checked ' : '');
 		$chk_messages_comments = ($instance['al2fb_messages_comments'] ? ' checked ' : '');
 		$chk_like = ($instance['al2fb_like_button'] ? ' checked ' : '');
+		$chk_box = ($instance['al2fb_like_box'] ? ' checked ' : '');
 		$chk_send = ($instance['al2fb_send_button'] ? ' checked ' : '');
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
 		?>
@@ -3942,6 +4007,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_like; ?> id="<?php echo $this->get_field_id('al2fb_like_button'); ?>" name="<?php echo $this->get_field_name('al2fb_like_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_like_button'); ?>"><?php _e('Show Facebook like button', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_box; ?> id="<?php echo $this->get_field_id('al2fb_like_box'); ?>" name="<?php echo $this->get_field_name('al2fb_like_box'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_like_box'); ?>"><?php _e('Show Facebook like box', c_al2fb_text_domain); ?></label>
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_send; ?> id="<?php echo $this->get_field_id('al2fb_send_button'); ?>" name="<?php echo $this->get_field_name('al2fb_send_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_send_button'); ?>"><?php _e('Show Facebook send button', c_al2fb_text_domain); ?></label>
