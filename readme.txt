@@ -977,7 +977,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* None
+* [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget
 
 Realized features:
 

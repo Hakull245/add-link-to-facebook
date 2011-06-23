@@ -1109,7 +1109,12 @@ if (!class_exists('WPAL2Facebook')) {
 				try {
 					if (!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ||
 						!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
-						$me = self::Get_fb_me($user_ID, true);
+						try {
+							$me = self::Get_fb_me($user_ID, true);
+						}
+						catch (Exception $e) {
+							$me = null;
+						}
 						$pages = self::Get_fb_pages($user_ID);
 						$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 ?>
