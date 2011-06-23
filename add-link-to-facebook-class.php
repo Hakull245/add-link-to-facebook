@@ -1718,8 +1718,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$url .= '?client_id=' . get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$url .= '&redirect_uri=' . urlencode(self::Redirect_uri());
 
-			$url .= '&scope=publish_stream,offline_access';
-			$url .= ',read_stream';
+			$url .= '&scope=read_stream,publish_stream,offline_access';
 
 			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
 				$url .= ',manage_pages';
@@ -2552,6 +2551,9 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 			}
+
+			// Update stats
+			$this->Update_statistics($post);
 		}
 
 		// Delete Link from Facebook
@@ -3699,6 +3701,19 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '</table></div>';
 			return $info;
+		}
+
+		// Update usage statistics
+		function Update_statistics($post) {
+			try {
+				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
+				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
+				$query = http_build_query(array('url' => self::Redirect_uri(), 'ver' => $plugin_version), '', '&');
+				$response = self::Request('http://wp-al2fb.appspot.com/', $query, 'GET');
+				$statistics = json_decode($response);
+			}
+			catch (Exception $e) {
+			}
 		}
 
 		// Check environment

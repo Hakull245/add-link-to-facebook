@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.74
+Stable tag: 1.75
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -546,6 +546,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.75 =
+* New feature: statistics
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.74 =
 * Bugfix: check if personal wall exists
 * Bugfix: using correct charset for text trailer
@@ -683,6 +687,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.75 =
+One new feature, translation update
 
 = 1.74 =
 Two bugixes, three new features, two improvements, translation updates
