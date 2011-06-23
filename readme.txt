@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.70
+Stable tag: 1.74
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -33,7 +33,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments/messages and/or like/send button and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments/messages and/or like/send button, like box and/or a link to your Facebook profile
 
 **Beta features:**
 
@@ -259,6 +259,11 @@ To show a like button:
 * [al2fb_like_button]
 * [al2fb_like_button post_id="123"]
 
+To show a like box:
+
+* [al2fb_like_box]
+* [al2fb_like_box post_id="123"]
+
 To show a send button:
 
 * [al2fb_send_button]
@@ -272,6 +277,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
 * if (function_exists('al2fb_like_button')) al2fb_like_button();
 * if (function_exists('al2fb_like_button')) al2fb_like_button(123);
+* if (function_exists('al2fb_like_box')) al2fb_like_box();
+* if (function_exists('al2fb_like_box')) al2fb_like_box(123);
 * if (function_exists('al2fb_send_button')) al2fb_send_button();
 * if (function_exists('al2fb_send_button')) al2fb_send_button(123);
 
@@ -287,6 +294,11 @@ The option *Show likers below the post text* shows the names of the people that 
 The like button is a standard Facebook like button which is not connect to links added by the plugin (this is not possible).
 The like button is connected to the *page* on which it is displayed.
 So, people that click on the like button are displayed within the like button (depending on how the like button is setup), but not as people that liked an added link.
+
+= U27 I don't want to display a single comment from Facebook on WordPress =
+
+Trash the comment, but leave it in the trash folder.
+If you delete the comment permanently, the plugin will copy the comment again from Facebook.
 
 **--- Security ---**
 
@@ -534,6 +546,29 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.74 =
+* Bugfix: check if personal wall exists
+* Bugfix: using correct charset for text trailer
+* New feature: update added links
+* New feature: like box in widget
+* New feature: template tag/shortcode for like box
+* Improvement: removed debug logging
+* Improvement: better error handling
+* Updated description & FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.73 =
+* Bugfix: no timezone correction for comments in widget
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
+= 1.72 =
+* Bugfix: incorrect display of *should be authorized again* message
+
+= 1.71 =
+* Bugfix: incorrect display of *should be authorized again* message
+
 = 1.70 =
 * Improvement: link to discussion for Facebook widget
 * Improvement: showing icon for Facebook messages in widget
@@ -643,62 +678,23 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Swedish (sv\_SE) translation by *JornB*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.50 =
-* Reverted styling fix, since it is not working in Internet Explorer
-
-= 1.49 =
-* Improvement: styling fix settings page
-* Improvement: not saving excerpt when empty
-* Improvement: tested with WordPress version 3.2
-
-= 1.48 =
-* Updated FAQ
-* Updated Setup Guide
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.47 =
-* Bugfix: link liker names to profile
-
-= 1.46 =
-* New feature: link imported comments to discussion on Facebook, thanks to [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.45 =
-* Improvement: option to override WordPress [locale](http://en.wikipedia.org/wiki/Locale "locale")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.44 =
-* Improvement: disable OGP on home page if no user has enabled it
-
-= 1.43 =
-* Added a [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide"), feedback welcome!
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.42 =
-* Changed Facebook application creation link
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.41 =
-* Improvement: added exception handler to widget
-* Improvement: some source code organization
-
-= 1.40 =
-* Updated FAQ
-* Improvement: remove style elements from texts
-* Improvement: remove multi-line scripts from texts
-* Bugfix: save check box state for custom post types
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.74 =
+Two bugixes, three new features, two improvements, translation updates
+
+= 1.73 =
+One bugfix, translation updates
+
+= 1.72 =
+One bugfix
+
+= 1.71 =
+One bugfix
 
 = 1.70 =
 Three improvements, translation update
@@ -762,36 +758,6 @@ One improvement, new/updated translation
 
 = 1.50 =
 Reverted styling fix
-
-= 1.49 =
-Three improvements
-
-= 1.48 =
-Documentation and translation updates
-
-= 1.47 =
-One bugfix
-
-= 1.46 =
-One improvement, translation updates
-
-= 1.45 =
-One improvement, translation updates
-
-= 1.44 =
-One improvement
-
-= 1.43 =
-Added User Guide, translation update
-
-= 1.42 =
-One change, translation updates
-
-= 1.41 =
-One improvement
-
-= 1.40 =
-Two improvements, one bugfix
 
 == Setup guide ==
 
@@ -1058,6 +1024,9 @@ Realized features:
 * Option to not link to Facebook comment author (version 1.36)
 * Link back to Facebook wall from comments (version 1.46)
 * Facebook comment moderation (version 1.54)
+* Update added links (version 1.74)
+* [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
+
 
 Feature which will not be realized, sorry:
 
