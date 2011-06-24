@@ -1514,7 +1514,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
 
-<?php	   if (current_user_can('manage_options')) { ?>
+<?php		if (current_user_can('manage_options')) { ?>
 				<h3><?php _e('Administrator options', c_al2fb_text_domain); ?></h3>
 
 				<table class="form-table al2fb_border">
@@ -1612,7 +1612,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 				</table>
 
-<?php		   if (isset($_REQUEST['debug'])) { ?>
+<?php			if (isset($_REQUEST['debug'])) { ?>
 					<h3><?php _e('Debug options', c_al2fb_text_domain); ?></h3>
 					<table class="form-table al2fb_border">
 					<tr valign="top"><th scope="row">
@@ -1639,12 +1639,12 @@ if (!class_exists('WPAL2Facebook')) {
 						<input id="al2fb_debug" name="<?php echo c_al2fb_option_debug; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_debug)) echo ' checked="checked"'; ?> />
 					</td></tr>
 					</table>
-<?php		   } ?>
-<?php	   } ?>
+<?php			} ?>
+				<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+				</p>
+<?php		} ?>
 
-			<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
-			</p>
 			</form>
 
 			</div>
@@ -2596,15 +2596,15 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
+
+				// Update stats
+				$this->Update_statistics('add', $post);
 			}
 			catch (Exception $e) {
 				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 			}
-
-			// Update stats
-			$this->Update_statistics($post);
 		}
 
 		// Delete Link from Facebook
@@ -2628,6 +2628,9 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_post_meta($post->ID, c_al2fb_meta_link_time);
 				delete_post_meta($post->ID, c_al2fb_meta_link_picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
+
+				// Update stats
+				$this->Update_statistics('del', $post);
 			}
 			catch (Exception $e) {
 				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
@@ -3782,19 +3785,19 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Update usage statistics
-		function Update_statistics($post) {
+		function Update_statistics($action, $post) {
 			try {
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
 				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
 				$query = http_build_query(array(
-					'action' => 'link',
+					'action' => $action,
 					'url' => self::Redirect_uri(),
-					'title' => $title,
 					'charset' => get_bloginfo('charset'),
 					'lang' => WPLANG,
 					'ver' => $plugin_version,
+					'title' => $title,
 					'hash' => $hash
 				), '', '&');
 				$response = self::Request('http://wp-al2fb.appspot.com/', $query, 'GET');
