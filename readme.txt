@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.76
+Stable tag: 1.77
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -546,6 +546,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.77 =
+* New feature: avatar of post author as link picture
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.76 =
 * Bugfix: html error in iframe Facebook plugins
 * New feature: option to disable like box header/stream
@@ -694,6 +698,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.77 =
+One new feature
 
 = 1.76 =
 One bugfix, one new feature, two improvements, translation update

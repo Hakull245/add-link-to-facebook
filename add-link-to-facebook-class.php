@@ -898,6 +898,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
 			$pic_post = ($pic_type == 'post' ? ' checked' : '');
+			$pic_avatar = ($pic_type == 'avatar' ? ' checked' : '');
 			$pic_userphoto = ($pic_type == 'userphoto' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 
@@ -1099,6 +1100,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="avatar"<?php echo $pic_avatar; ?>><?php _e('Avatar of author', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br />
 			</td></tr>
@@ -2423,6 +2425,13 @@ if (!class_exists('WPAL2Facebook')) {
 					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
 						$picture = $matches[1];
 				}
+				else if ($picture_type == 'avatar') {
+					$userdata = get_userdata($post->post_author);
+					$avatar = get_avatar($userdata->user_email);
+					if (!empty($avatar))
+						if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $avatar, $matches))
+							$picture = $matches[1];
+				}
 				else if ($picture_type == 'userphoto') {
 					$userdata = get_userdata($post->post_author);
 					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
@@ -3669,7 +3678,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>wp_get_attachment_image_src:</td><td>' . (function_exists('wp_get_attachment_image_src') ? 'Yes' : 'No') . '</td></tr>';
 
 			// Last posts
-			$posts = new WP_Query(array('posts_per_page' => 5));
+			$posts = new WP_Query(array('posts_per_page' => 10));
 			while ($posts->have_posts()) {
 				$posts->next_post();
 				$userdata = get_userdata($posts->post->post_author);
@@ -3708,6 +3717,13 @@ if (!class_exists('WPAL2Facebook')) {
 				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($posts->post->post_content), $matches))
 					$post_picture = $matches[1];
 
+				// Author avatar
+				$avatar_picture = null;
+				$avatar = get_avatar($userdata->user_email);
+				if (!empty($avatar))
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $avatar, $matches))
+						$avatar_picture = $matches[1];
+
 				// Actual picture
 				$picture = self::Get_link_picture($posts->post, self::Get_user_ID($posts->post));
 
@@ -3724,6 +3740,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$info .= ' <a href="' . $featured_picture . '" target="_blank">featured</a>';
 				if (!empty($post_picture))
 					$info .= ' <a href="' . $post_picture . '" target="_blank">post</a>';
+				if (!empty($avatar_picture))
+					$info .= ' <a href="' . $avatar_picture . '" target="_blank">avatar</a>';
 				if (!empty($link_id))
 					$info .= ' <a href="' . self::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
 				$info .= '</td></tr>';
@@ -3743,7 +3761,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Last errors
-			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 5));
+			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 10));
 			while ($posts->have_posts()) {
 				$posts->next_post();
 				$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
@@ -3774,6 +3792,8 @@ if (!class_exists('WPAL2Facebook')) {
 					'action' => 'link',
 					'url' => self::Redirect_uri(),
 					'title' => $title,
+					'charset' => get_bloginfo('charset'),
+					'lang' => WPLANG,
 					'ver' => $plugin_version,
 					'hash' => $hash
 				), '', '&');
