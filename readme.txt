@@ -548,6 +548,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.77 =
 * New feature: avatar of post author as link picture
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.76 =
@@ -837,6 +838,7 @@ The default is that each user of your weblog has to setup/authorize the plugin.
 If you check this option all users will use your access token.
 After checking this option the setup page of the plugin will be accessible only to the administrator that enabled this option.
 Note that all users will use your name, which might not be so bad if you use the option *Add as page owner* (see below).
+You may want to choose *Avatar of author* as link picture (see below).
 
 **Additional settings**
 
@@ -850,6 +852,7 @@ The plugin offers several options to automatically select a picture:
 * Featured post image: for themes that support a featured image only
 * Let Facebook select: this often doesn't work as you want to, because Facebook can select for example a header image
 * First image in the post: similar to first attached image, but the image doesn't have to be associated with the post
+* Avatar of author
 * Image from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
 * Custom picture below: complete URL to a static picture of your choice
 
