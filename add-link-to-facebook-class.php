@@ -73,6 +73,8 @@ define('c_al2fb_meta_like_top', 'al2fb_like_top');
 define('c_al2fb_meta_like_iframe', 'al2fb_like_iframe');
 define('c_al2fb_meta_post_send_button', 'al2fb_post_send_button');
 define('c_al2fb_meta_post_combine_buttons', 'al2fb_post_combine_buttons');
+define('c_al2fb_meta_like_box_noheader', 'al2fb_box_noheader');
+define('c_al2fb_meta_like_box_nostream', 'al2fb_box_nostream');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
@@ -316,6 +318,8 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_like_iframe);
 				delete_user_meta($user_ID, c_al2fb_meta_post_send_button);
 				delete_user_meta($user_ID, c_al2fb_meta_post_combine_buttons);
+				delete_user_meta($user_ID, c_al2fb_meta_like_box_noheader);
+				delete_user_meta($user_ID, c_al2fb_meta_like_box_nostream);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_exclude_default);
@@ -513,6 +517,10 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_post_send_button] = null;
 			if (empty($_POST[c_al2fb_meta_post_combine_buttons]))
 				$_POST[c_al2fb_meta_post_combine_buttons] = null;
+			if (empty($_POST[c_al2fb_meta_like_box_noheader]))
+				$_POST[c_al2fb_meta_like_box_noheader] = null;
+			if (empty($_POST[c_al2fb_meta_like_box_nostream]))
+				$_POST[c_al2fb_meta_like_box_nostream] = null;
 			if (empty($_POST[c_al2fb_meta_open_graph]))
 				$_POST[c_al2fb_meta_open_graph] = null;
 			if (empty($_POST[c_al2fb_meta_exclude_default]))
@@ -606,6 +614,8 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_iframe, $_POST[c_al2fb_meta_like_iframe]);
 			update_user_meta($user_ID, c_al2fb_meta_post_send_button, $_POST[c_al2fb_meta_post_send_button]);
 			update_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, $_POST[c_al2fb_meta_post_combine_buttons]);
+			update_user_meta($user_ID, c_al2fb_meta_like_box_noheader, $_POST[c_al2fb_meta_like_box_noheader]);
+			update_user_meta($user_ID, c_al2fb_meta_like_box_nostream, $_POST[c_al2fb_meta_like_box_nostream]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
@@ -888,6 +898,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$pic_featured = ($pic_type == 'featured' ? ' checked' : '');
 			$pic_facebook = ($pic_type == 'facebook' ? ' checked' : '');
 			$pic_post = ($pic_type == 'post' ? ' checked' : '');
+			$pic_avatar = ($pic_type == 'avatar' ? ' checked' : '');
 			$pic_userphoto = ($pic_type == 'userphoto' ? ' checked' : '');
 			$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 
@@ -974,23 +985,27 @@ if (!class_exists('WPAL2Facebook')) {
 				</form>
 				</td>
 
-<?php		   if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
-				<td>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
-				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-				</form>
-				</td>
-				<td>
-				<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://wordpress.org/extend/plugins/add-link-to-facebook/"></a>
-				<noscript><a href="http://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin" target="_blank">
-				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-				</td>
-<?php		   } ?>
+<?php			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
+					<td>
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					</form>
+					</td>
+					<td>
+					<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://wordpress.org/extend/plugins/add-link-to-facebook/"></a>
+					<noscript><a href="http://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin" target="_blank">
+					<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+					</td>
+<?php			} ?>
 				</tr>
 				</table>
-<?php	   } ?>
+<?php			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
+					<span><a href="http://www.bitcoin.org/">Bitcoin</a>: <code>19Y8QKKK4cpBMZ64UtAT4C6MEwknUerNDe</code></span>
+<?php			} ?>
+
+<?php		} ?>
 
 			<hr />
 			<a name="configure"></a>
@@ -1085,6 +1100,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="featured"<?php echo $pic_featured; ?>><?php _e('Featured post image', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br />
+				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="avatar"<?php echo $pic_avatar; ?>><?php _e('Avatar of author', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br />
 			</td></tr>
@@ -1413,6 +1429,18 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_combine"><?php _e('Combine Facebook like and send buttons:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_combine" name="<?php echo c_al2fb_meta_post_combine_buttons; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_box_noheader"><?php _e('Disable like box header:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_box_noheader" name="<?php echo c_al2fb_meta_like_box_noheader; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_box_nostream"><?php _e('Disable like box stream:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_box_nostream" name="<?php echo c_al2fb_meta_like_box_nostream; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -1796,7 +1824,23 @@ if (!class_exists('WPAL2Facebook')) {
 			return $app;
 		}
 
-		// Get wall or page name
+		// Get wall, page or group name and cache
+		function Get_fb_me_cached($user_ID, $self) {
+			$me_key = c_al2fb_transient_cache . md5('me' . $user_ID . ($self ? 'me' : ''));
+			$me = get_transient($me_key);
+			if ($me === false) {
+				$me = self::Get_fb_me($user_ID, $self);
+				if ($me != null) {
+					$duration = intval(get_option(c_al2fb_option_msg_refresh));
+					if (!$duration)
+						$duration = 10;
+					set_transient($me_key, $me, $duration * 60);
+				}
+			}
+			return $me;
+		}
+
+		// Get wall, page or group name
 		function Get_fb_me($user_ID, $self) {
 			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
 				$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
@@ -2381,6 +2425,13 @@ if (!class_exists('WPAL2Facebook')) {
 					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
 						$picture = $matches[1];
 				}
+				else if ($picture_type == 'avatar') {
+					$userdata = get_userdata($post->post_author);
+					$avatar = get_avatar($userdata->user_email);
+					if (!empty($avatar))
+						if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $avatar, $matches))
+							$picture = $matches[1];
+				}
 				else if ($picture_type == 'userphoto') {
 					$userdata = get_userdata($post->post_author);
 					if ($userdata->userphoto_approvalstatus == USERPHOTO_APPROVED) {
@@ -2930,6 +2981,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
 			$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+			$noheader = get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true);
+			$nostream = get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true);
 
 			if ($box) {
 				// Get page
@@ -2937,7 +2990,7 @@ if (!class_exists('WPAL2Facebook')) {
 					!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
 					get_user_meta($user_ID, c_al2fb_meta_page, true))
 					try {
-						$me = self::Get_fb_me($user_ID, false);
+						$me = self::Get_fb_me_cached($user_ID, false);
 						$link = $me->link;
 					}
 					catch (Exception $e) {
@@ -2953,13 +3006,24 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Build content
 			if (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true)) {
-				$height = '80';
-				if ($layout == 'standard')
+				if ($box) {
+					if ($nostream)
+						$height = '62';
+					else
+						if ($noheader)
+							$height = '395';
+						else
+							$height = '427';
+				}
+				else {
 					$height = '80';
-				else if ($layout == 'button_count')
-					$height = '21';
-				else if ($layout == 'box_count')
-					$height = '65';
+					if ($layout == 'standard')
+						$height = '80';
+					else if ($layout == 'button_count')
+						$height = '21';
+					else if ($layout == 'box_count')
+						$height = '65';
+				}
 
 				$content = '<iframe src="http://www.facebook.com/plugins/' . ($box ? 'likebox.php' : 'like.php');
 				$content .= '?href=' . urlencode($link);
@@ -2975,19 +3039,20 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 				$content .= '&amp;colorscheme=' . (empty($colorscheme) ? 'light' : $colorscheme);
 				if (!$box)
-					$content .= '&amp;ref=AL2FB"';
+					$content .= '&amp;ref=AL2FB';
 				if ($box) {
 					$content .= '&amp;border_color';
-					$content .= '&amp;stream=true';
-					$content .= '&amp;header=true';
+					$content .= '&amp;stream=' . ($nostream ? 'false' : 'true');
+					$content .= '&amp;header=' . ($noheader ? 'false' : 'true');
 				}
-				$content .= '&amp;height=' . ($box ? '427' : $height);
+				$content .= '&amp;height=' . $height;
 				$content .= '&amp;locale=' . $lang;
+				$content .= '"';
 				$content .= ' scrolling="no"';
 				$content .= ' frameborder="0"';
 				$content .= ' style="border:none; overflow:hidden;';
 				$content .= ' width:' . (empty($width) ? ($box ? '292' : '450') : $width) . 'px;';
-				$content .= ' height:' . ($box ? '427' : $height) . 'px;"';
+				$content .= ' height:' . $height . 'px;"';
 				$content .= ' allowTransparency="true"></iframe>';
 			}
 			else {
@@ -3011,8 +3076,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= ' ref="AL2FB"';
 				if ($box) {
 					$content .= ' border_color=""';
-					$content .= ' stream="true"';
-					$content .= ' header="true"';
+					$content .= ' stream="' . ($nostream ? 'false' : 'true') . '"';
+					$content .= ' header="' . ($noheader ? 'false' : 'true') . '"';
 				}
 				$content .= ($box ? '></fb:like-box>' : '></fb:like>');
 				if (!$box)
@@ -3277,8 +3342,8 @@ if (!class_exists('WPAL2Facebook')) {
 							$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
 							$avatar .= ' src="' . $fb_picture_url . '"';
 							$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
-							$avatar .= ' height=' . $size;
-							$avatar .= ' width=' . $size;
+							$avatar .= ' height="' . $size . '"';
+							$avatar .= ' width="' . $size . '"';
 							$avatar .= ' />';
 					}
 				}
@@ -3509,7 +3574,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Theme version:</td><td>' . htmlspecialchars($theme_data['Version'], ENT_QUOTES, $charset) . '</td></tr>';
 
 			foreach (get_plugins() as $plugin_data)
-				$info .= '<tr><td>Active:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . '</a></td></tr>';
+				$info .= '<tr><td>Active plugin:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . '</a></td></tr>';
 
 			$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 			$info .= '<tr><td>Settings version:</td><td>' . get_option(c_al2fb_option_version) . '</td></tr>';
@@ -3580,8 +3645,12 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Like link:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_link, true) . '</td></tr>';
 			$info .= '<tr><td>Like top:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_top, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Like iframe:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_iframe, true) ? 'Yes' : 'No') . '</td></tr>';
+
 			$info .= '<tr><td>Send button:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Combine buttons:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true) ? 'Yes' : 'No') . '</td></tr>';
+
+			$info .= '<tr><td>Like box no header:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Like box no stream:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
@@ -3609,7 +3678,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>wp_get_attachment_image_src:</td><td>' . (function_exists('wp_get_attachment_image_src') ? 'Yes' : 'No') . '</td></tr>';
 
 			// Last posts
-			$posts = new WP_Query(array('posts_per_page' => 5));
+			$posts = new WP_Query(array('posts_per_page' => 10));
 			while ($posts->have_posts()) {
 				$posts->next_post();
 				$userdata = get_userdata($posts->post->post_author);
@@ -3648,6 +3717,13 @@ if (!class_exists('WPAL2Facebook')) {
 				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($posts->post->post_content), $matches))
 					$post_picture = $matches[1];
 
+				// Author avatar
+				$avatar_picture = null;
+				$avatar = get_avatar($userdata->user_email);
+				if (!empty($avatar))
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $avatar, $matches))
+						$avatar_picture = $matches[1];
+
 				// Actual picture
 				$picture = self::Get_link_picture($posts->post, self::Get_user_ID($posts->post));
 
@@ -3664,6 +3740,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$info .= ' <a href="' . $featured_picture . '" target="_blank">featured</a>';
 				if (!empty($post_picture))
 					$info .= ' <a href="' . $post_picture . '" target="_blank">post</a>';
+				if (!empty($avatar_picture))
+					$info .= ' <a href="' . $avatar_picture . '" target="_blank">avatar</a>';
 				if (!empty($link_id))
 					$info .= ' <a href="' . self::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
 				$info .= '</td></tr>';
@@ -3683,7 +3761,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Last errors
-			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 5));
+			$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 10));
 			while ($posts->have_posts()) {
 				$posts->next_post();
 				$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
@@ -3706,9 +3784,19 @@ if (!class_exists('WPAL2Facebook')) {
 		// Update usage statistics
 		function Update_statistics($post) {
 			try {
+				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
-				$query = http_build_query(array('url' => self::Redirect_uri(), 'ver' => $plugin_version), '', '&');
+				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
+				$query = http_build_query(array(
+					'action' => 'link',
+					'url' => self::Redirect_uri(),
+					'title' => $title,
+					'charset' => get_bloginfo('charset'),
+					'lang' => WPLANG,
+					'ver' => $plugin_version,
+					'hash' => $hash
+				), '', '&');
 				$response = self::Request('http://wp-al2fb.appspot.com/', $query, 'GET');
 				$statistics = json_decode($response);
 			}
@@ -3814,17 +3902,7 @@ class AL2FB_Widget extends WP_Widget {
 		$error = null;
 		if ($profile) {
 			try {
-				$me_key = c_al2fb_transient_cache . md5('me' . $user_ID);
-				$me = get_transient($me_key);
-				if ($me === false) {
-					$me = $wp_al2fb->Get_fb_me($user_ID, false);
-					if ($me != null) {
-						$duration = intval(get_option(c_al2fb_option_msg_refresh));
-						if (!$duration)
-							$duration = 10;
-						set_transient($me_key, $me, $duration * 60);
-					}
-				}
+				$me = $wp_al2fb->Get_fb_me_cached($user_ID, false);
 			}
 			catch (Exception $e) {
 				$error = $e->getMessage();
