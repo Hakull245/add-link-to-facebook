@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.75
+Stable tag: 1.78
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -546,6 +546,24 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.78 =
+* New feature: option to specify Facebook administrators for Open Graph Protocol
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.77 =
+* New feature: avatar of post author as link picture
+* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.76 =
+* Bugfix: html error in iframe Facebook plugins
+* New feature: option to disable like box header/stream
+* Improvement: better profile link/like box performance
+* Improvement: added [Bitcoin](http://www.bitcoin.org/ "Bitcoin") wallet
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.75 =
 * New feature: statistics
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
@@ -688,6 +706,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.78 =
+One new feature, translation updates
+
+= 1.77 =
+One new feature, translation update
+
+= 1.76 =
+One bugfix, one new feature, two improvements, translation update
+
 = 1.75 =
 One new feature, translation update
 
@@ -820,6 +847,7 @@ The default is that each user of your weblog has to setup/authorize the plugin.
 If you check this option all users will use your access token.
 After checking this option the setup page of the plugin will be accessible only to the administrator that enabled this option.
 Note that all users will use your name, which might not be so bad if you use the option *Add as page owner* (see below).
+You may want to choose *Avatar of author* as link picture (see below).
 
 **Additional settings**
 
@@ -833,6 +861,7 @@ The plugin offers several options to automatically select a picture:
 * Featured post image: for themes that support a featured image only
 * Let Facebook select: this often doesn't work as you want to, because Facebook can select for example a header image
 * First image in the post: similar to first attached image, but the image doesn't have to be associated with the post
+* Avatar of author
 * Image from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
 * Custom picture below: complete URL to a static picture of your choice
 
