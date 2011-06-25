@@ -127,7 +127,8 @@ define('USERPHOTO_APPROVED', 2);
 // - target="_blank"? how to do?
 // - Update meta box after update media gallery?
 // - Improve cleaning
-// - Option to set Facebook avatar size?
+
+// - link to Facebook comments? shortcode?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -2977,7 +2978,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$locale = get_user_meta($user_ID, c_al2fb_meta_fb_locale, true);
 			if (empty($locale)) {
 				$locale = defined('WPLANG') ? WPLANG : '';
-				if (empty($locale))
+				if (empty($locale) || strlen($locale) != 5)
 					$locale = 'en_US';
 			}
 			return $locale;
@@ -3805,6 +3806,25 @@ if (!class_exists('WPAL2Facebook')) {
 				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
 				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
+
+				// Post author
+				$userdata = get_userdata($post->post_author);
+
+				// Post categories
+				$cats = array();
+				$post_cats = get_the_category($post->ID);
+				if (!empty($post_cats))
+					foreach ($post_cats as $category)
+						$cats[] = $category->cat_name;
+
+				// Post tags
+				$tags = array();
+				$post_tags = get_the_tags($post->ID);
+				if (!empty($post_tags))
+					foreach ($post_tags as $tag)
+						$tags[] = $tag->name;
+
+				// Update
 				$query = http_build_query(array(
 					'action' => $action,
 					'url' => self::Redirect_uri(),
@@ -3812,9 +3832,17 @@ if (!class_exists('WPAL2Facebook')) {
 					'lang' => WPLANG,
 					'ver' => $plugin_version,
 					'title' => $title,
+					'post_id' => $post->ID,
+					'post_date' => $post->post_date_gmt,
+					'post_type' => $post->post_type,
+					'post_url' => get_permalink($post->ID),
+					'post_title' => $post->post_title,
+					'post_author' => $userdata->user_login,
+					'post_cat' => $cats,
+					'post_tag' => $tags,
 					'hash' => $hash
 				), '', '&');
-				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'GET');
+				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
 				$statistics = json_decode($response);
 			}
 			catch (Exception $e) {

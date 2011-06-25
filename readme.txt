@@ -546,6 +546,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.79 =
+* Improvement: check length of WP locale
+
 = 1.78 =
 * New feature: option to specify Facebook administrators for Open Graph Protocol
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -599,107 +602,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.69 =
-* Added Flattr button
-* Improvement: additional styling only on frontend
-* Removed unused icon
-* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.68 =
-* Improvement: workaround getting post for widget for some themes
-
-= 1.67 =
-* Bugfix: display widget comments for single posts/pages only
-* New feature: Facebook messages in widget (only status messages, no photos, links, videos, etc)
-* Improvement: better options upgrade procedure
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.66 =
-* Bugfix: only display widget if comments
-
-= 1.65 =
-* Bugfix: no avatar when comment removed from Facebook
-* Bugfix: solved activation warnings
-* New feature: Facebook comments in widget
-* Improvement: enabling link or send button enables OGP
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.64 =
-* Bugfix: using *stripslashes* for stored comments
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.63 =
-* Improvement: not saving selected image meta if none
-* Improvement: more debug information about link pictures
-
-= 1.62 =
-* Bugfix: removed *get_avatar* warning
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.61 =
-* Bugfix: error when displaying widget profile link for non authorized author
-* Updated Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
-
-= 1.60 =
-* Improvement: better Facebook avatar handling
-* Added Spanish (es\_ES) translation by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard")
-
-= 1.59 =
-* Improvement: extended debug information with link pictures
-* Improvement: removed shared application from code and descriptions
-* Improvement: using *wp_upload_dir* for CSS file
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.58 =
-* Improvement: option to set timeout
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.57 =
-* Improvement: limit length of text sent to Facebook
-* Improvement: added theme name and version to debug information
-* Updated FAQ
-* Updated User Guide
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.56 =
-* Bugfix: spam Facebook comments marked as duplicate
-
-= 1.55 =
-* Bugfix: html entities in text trailer
-
-= 1.54 =
-* Updated description, FAQ and user guide
-* Improvement: use WordPress comment notification settings for *stored* Facebook comments
-* Improvement: use WordPress comment moderation settings for *stored* Facebook comments
-* Improvement: call WordPress comment filters and actions for *stored* Facebook comments
-
-= 1.53 =
-* Improvement: suppress warnings of *mb_convert_encoding*
-* Improvement: added *type="text/javascript"* to Facebook scripts
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.52 =
-* Updated description
-* Updated setup guide
-* Updated requested features list
-* Removed all beta notices
-* Improvement: added headers and more save buttons to setup page
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.51 =
-* Improvement: link to Facebook discussion from post list and post edit page
-* Added Swedish (sv\_SE) translation by *JornB*
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions are always compatible with older versions
@@ -732,66 +634,6 @@ One bugfix
 
 = 1.70 =
 Three improvements, translation update
-
-= 1.69 =
-One improvement, documentation and translation updates
-
-= 1.68 =
-One improvement
-
-= 1.67 =
-One bugfix, one new feature, one improvement, translation updates
-
-= 1.66 =
-One bugfix
-
-= 1.65 =
-Two bugfixes, one improvement, one new feature, translation updates
-
-= 1.64 =
-One bugfix
-
-= 1.63 =
-Two improvements
-
-= 1.62 =
-One bugfix, translation update
-
-= 1.61 =
-One bugfix, translation update
-
-= 1.60 =
-One improvement, new translation
-
-= 1.59 =
-Three improvements, translation update
-
-= 1.58 =
-One improvement, translation updates
-
-= 1.57 =
-Two improvements, updated texts, translation updates
-
-= 1.56 =
-Bugfix
-
-= 1.55 =
-Bugfix
-
-= 1.54 =
-Three improvements
-
-= 1.53 =
-Two improvements, translation updates
-
-= 1.52 =
-One improvement, updated texts
-
-= 1.51 =
-One improvement, new/updated translation
-
-= 1.50 =
-Reverted styling fix
 
 == Setup guide ==
 
