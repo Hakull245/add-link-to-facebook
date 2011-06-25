@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.78
+Stable tag: 1.79
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -547,7 +547,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.79 =
+* Bugfix: undefined function *get_plugins*
 * Improvement: check length of WP locale
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.78 =
 * New feature: option to specify Facebook administrators for Open Graph Protocol
@@ -607,6 +609,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.79 =
+One bugfix, one improvement, translation update
 
 = 1.78 =
 One new feature, translation updates

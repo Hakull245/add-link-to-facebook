@@ -3532,6 +3532,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get versions
 			global $wp_version;
+			if (!function_exists('get_plugins'))
+				require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 			$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 			$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
 
@@ -3803,9 +3805,12 @@ if (!class_exists('WPAL2Facebook')) {
 		function Update_statistics($action, $post) {
 			try {
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+
+				// Get plugin version
+				if (!function_exists('get_plugins'))
+					require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
-				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
 
 				// Post author
 				$userdata = get_userdata($post->post_author);
@@ -3824,20 +3829,24 @@ if (!class_exists('WPAL2Facebook')) {
 					foreach ($post_tags as $tag)
 						$tags[] = $tag->name;
 
+				// Security
+				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
+
 				// Update
 				$query = http_build_query(array(
 					'action' => $action,
 					'url' => self::Redirect_uri(),
 					'charset' => get_bloginfo('charset'),
-					'lang' => WPLANG,
+					'lang' => get_bloginfo('language'),
+					'dir' => get_bloginfo('text_direction'),
 					'ver' => $plugin_version,
 					'title' => $title,
 					'post_id' => $post->ID,
 					'post_date' => $post->post_date_gmt,
 					'post_type' => $post->post_type,
+					'post_author' => $userdata->user_login,
 					'post_url' => get_permalink($post->ID),
 					'post_title' => $post->post_title,
-					'post_author' => $userdata->user_login,
 					'post_cat' => $cats,
 					'post_tag' => $tags,
 					'hash' => $hash
