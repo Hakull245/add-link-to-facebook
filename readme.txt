@@ -563,6 +563,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Facebook comments plugin widget/shortcode/template tag
 * Removed support for iframe Facebook plugins
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.79 =
 * Bugfix: undefined function *get_plugins*
@@ -629,7 +630,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.80 =
-Five improvements, two new features, translation update
+Five improvements, two new features, translation updates
 
 = 1.79 =
 One bugfix, one improvement, translation update
