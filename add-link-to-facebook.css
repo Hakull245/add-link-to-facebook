@@ -116,6 +116,11 @@
 	margin: 0 0 5px 0;
 }
 
+/* Extra CSS */
+#al2fb_css {
+	font-family: monospace;
+}
+
 /* Post text likers */
 .al2fb_likers {
 	display: block;

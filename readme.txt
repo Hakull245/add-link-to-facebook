@@ -548,6 +548,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.80 =
 * Improvement: replace dash by underscore in WP locale
+* Improvement: reorganized Facebook like button/box settings
+* Improvement: *Link to* option applies also to like box
+* New feature: added options to set like box width and border
+* Removed support for iframe Facebook plugins
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.79 =
 * Bugfix: undefined function *get_plugins*
