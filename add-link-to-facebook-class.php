@@ -2978,6 +2978,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$locale = get_user_meta($user_ID, c_al2fb_meta_fb_locale, true);
 			if (empty($locale)) {
 				$locale = defined('WPLANG') ? WPLANG : '';
+				$locale = str_replace('-', '_', $locale);
 				if (empty($locale) || strlen($locale) != 5)
 					$locale = 'en_US';
 			}

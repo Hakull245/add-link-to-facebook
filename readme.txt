@@ -546,6 +546,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.80 =
+* Improvement: replace dash by underscore in WP locale
+
 = 1.79 =
 * Bugfix: undefined function *get_plugins*
 * Improvement: check length of WP locale
