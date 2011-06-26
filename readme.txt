@@ -33,7 +33,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments/messages and/or like/send button, like box and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin and/or a link to your Facebook profile
 
 **Beta features:**
 
@@ -269,6 +269,11 @@ To show a send button:
 * [al2fb_send_button]
 * [al2fb_send_button post_id="123"]
 
+To show the comments plugin:
+
+* [al2fb_comments_plugin]
+* [al2fb_comments_plugin post_id="123"]
+
 = U24 How can I use the template tags? =
 
 Put one of these lines somewhere in your theme:
@@ -281,6 +286,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_like_box')) al2fb_like_box(123);
 * if (function_exists('al2fb_send_button')) al2fb_send_button();
 * if (function_exists('al2fb_send_button')) al2fb_send_button(123);
+* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin();
+* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin(123);
 
 = U25 Can I add links to multiple walls? =
 
@@ -620,6 +627,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.80 =
+Five improvements, two new features, translation update
 
 = 1.79 =
 One bugfix, one improvement, translation update
