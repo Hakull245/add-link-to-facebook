@@ -77,6 +77,8 @@ define('c_al2fb_meta_like_box_width', 'al2fb_box_width');
 define('c_al2fb_meta_like_box_border', 'al2fb_box_border');
 define('c_al2fb_meta_like_box_noheader', 'al2fb_box_noheader');
 define('c_al2fb_meta_like_box_nostream', 'al2fb_box_nostream');
+define('c_al2fb_meta_comments_posts', 'al2fb_comments_posts');
+define('c_al2fb_meta_comments_width', 'al2fb_comments_width');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_open_graph_admins', 'al2fb_open_graph_admins');
@@ -129,8 +131,6 @@ define('USERPHOTO_APPROVED', 2);
 // - target="_blank"? how to do?
 // - Update meta box after update media gallery?
 // - Improve cleaning
-
-// - link to Facebook comments? shortcode?
 
 // Define class
 if (!class_exists('WPAL2Facebook')) {
@@ -212,6 +212,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
 			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
+			add_shortcode('al2fb_comments_plugin', array(&$this, 'Shortcode_comments_plugin'));
 
 			// Custom filters
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
@@ -326,6 +327,8 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_like_box_border);
 				delete_user_meta($user_ID, c_al2fb_meta_like_box_noheader);
 				delete_user_meta($user_ID, c_al2fb_meta_like_box_nostream);
+				delete_user_meta($user_ID, c_al2fb_meta_comments_posts);
+				delete_user_meta($user_ID, c_al2fb_meta_comments_width);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_admins);
@@ -548,6 +551,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_like_link] = trim($_POST[c_al2fb_meta_like_link]);
 			$_POST[c_al2fb_meta_like_box_width] = trim($_POST[c_al2fb_meta_like_box_width]);
 			$_POST[c_al2fb_meta_like_box_border] = trim($_POST[c_al2fb_meta_like_box_border]);
+			$_POST[c_al2fb_meta_comments_posts] = trim($_POST[c_al2fb_meta_comments_posts]);
+			$_POST[c_al2fb_meta_comments_width] = trim($_POST[c_al2fb_meta_comments_width]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
 			$_POST[c_al2fb_meta_open_graph_admins] = trim($_POST[c_al2fb_meta_open_graph_admins]);
 			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
@@ -625,6 +630,8 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_box_border, $_POST[c_al2fb_meta_like_box_border]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_noheader, $_POST[c_al2fb_meta_like_box_noheader]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_nostream, $_POST[c_al2fb_meta_like_box_nostream]);
+			update_user_meta($user_ID, c_al2fb_meta_comments_posts, $_POST[c_al2fb_meta_comments_posts]);
+			update_user_meta($user_ID, c_al2fb_meta_comments_width, $_POST[c_al2fb_meta_comments_width]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
@@ -1415,6 +1422,27 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_box_nostream"><?php _e('Disable like box stream:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_box_nostream" name="<?php echo c_al2fb_meta_like_box_nostream; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
+
+			<h4><?php _e('Facebook comments plugin', c_al2fb_text_domain); ?></h4>
+			<table class="form-table al2fb_border">
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_comments_posts"><?php _e('Number of posts:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_comments_posts" name="<?php echo c_al2fb_meta_comments_posts; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_comments_posts, true); ?>" />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_comments_width"><?php _e('Width:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_comments_width" name="<?php echo c_al2fb_meta_comments_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_comments_width, true); ?>" />
+				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 			</table>
@@ -2977,6 +3005,17 @@ if (!class_exists('WPAL2Facebook')) {
 				return self::Get_send_button($post);
 		}
 
+		// Shortcode comments plugin
+		function Shortcode_comments_plugin($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_comments_plugin($post);
+		}
+
 		// Get HTML for likers
 		function Get_likers($post) {
 			$user_ID = self::Get_user_ID($post);
@@ -3065,8 +3104,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$link = get_permalink($post->ID);
 
 			// Build content
-			$content = ($box ? '' : '<div class="al2fb_like_button">');
-			//$content .= '<div id="fb-root"></div>';
+			$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
+			$content .= '<div id="fb-root"></div>';
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
 			$content .= ($box ? '<fb:like-box' : '<fb:like');
 			$content .= ' href="' . $link . '"';
@@ -3089,8 +3128,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$content .= ' header="' . ($noheader ? 'false' : 'true') . '"';
 			}
 			$content .= ($box ? '></fb:like-box>' : '></fb:like>');
-			if (!$box)
-				$content .= '</div>';
+			$content .= '</div>';
 
 			return $content;
 		}
@@ -3111,11 +3149,41 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Send button
 			$content = '<div class="al2fb_send_button">';
+			$content .= '<div id="fb-root"></div>';
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
 			$content .= '<fb:send ref="AL2FB"';
 			$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
 			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
 			$content .= ' href="' . $link . '"></fb:send>';
+			$content .= '</div>';
+
+			return $content;
+		}
+
+		// Get HTML for comments plugin
+		function Get_comments_plugin($post) {
+			$user_ID = self::Get_user_ID($post);
+
+			// Get language
+			$lang = self::Get_locale($user_ID);
+
+			// Get options
+			$posts = get_user_meta($user_ID, c_al2fb_meta_comments_posts, true);
+			$width = get_user_meta($user_ID, c_al2fb_meta_comments_width, true);
+			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+			if (empty($link))
+				$link = get_permalink($post->ID);
+
+			// Send button
+			$content = '<div class="al2fb_comments_plugin">';
+			$content .= '<div id="fb-root"></div>';
+			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+			$content .= '<fb:comments';
+			$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
+			$content .= ' width="' . (empty($width) ? '500' : $width) . '"';
+			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+			$content .= ' href="' . $link . '"></fb:comments>';
 			$content .= '</div>';
 
 			return $content;
@@ -3664,6 +3732,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Like box no header:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Like box no stream:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true) ? 'Yes' : 'No') . '</td></tr>';
 
+			$info .= '<tr><td>Comments posts:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_comments_posts, true) . '</td></tr>';
+			$info .= '<tr><td>Comments width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_comments_width, true) . '</td></tr>';
+
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 			$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
@@ -3913,6 +3984,7 @@ class AL2FB_Widget extends WP_Widget {
 		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] && $buttons : false;
 		$like_box = isset($instance['al2fb_like_box']) ? $instance['al2fb_like_box'] && $buttons : false;
 		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] && $buttons : false;
+		$comments_plugin = isset($instance['al2fb_comments_plugin']) ? $instance['al2fb_comments_plugin'] && $buttons : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 
 		// Get link type
@@ -3956,7 +4028,7 @@ class AL2FB_Widget extends WP_Widget {
 			}
 		}
 
-		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $me || $error) {
+		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $me || $error) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -4029,6 +4101,9 @@ class AL2FB_Widget extends WP_Widget {
 			if ($send_button)
 				echo $wp_al2fb->Get_send_button($post);
 
+			if ($comments_plugin)
+				echo $wp_al2fb->Get_comments_plugin($post);
+
 			// Profile
 			if ($profile) {
 				if (!empty($me)) {
@@ -4098,6 +4173,7 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['al2fb_like_button'] = $new_instance['al2fb_like_button'];
 		$instance['al2fb_like_box'] = $new_instance['al2fb_like_box'];
 		$instance['al2fb_send_button'] = $new_instance['al2fb_send_button'];
+		$instance['al2fb_comments_plugin'] = $new_instance['al2fb_comments_plugin'];
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
 		return $instance;
 	}
@@ -4117,6 +4193,8 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['al2fb_like_box'] = false;
 		if (empty($instance['al2fb_send_button']))
 			$instance['al2fb_send_button'] = false;
+		if (empty($instance['al2fb_comments_plugin']))
+			$instance['al2fb_comments_plugin'] = false;
 		if (empty($instance['al2fb_profile']))
 			$instance['al2fb_profile'] = false;
 
@@ -4126,6 +4204,7 @@ class AL2FB_Widget extends WP_Widget {
 		$chk_like = ($instance['al2fb_like_button'] ? ' checked ' : '');
 		$chk_box = ($instance['al2fb_like_box'] ? ' checked ' : '');
 		$chk_send = ($instance['al2fb_send_button'] ? ' checked ' : '');
+		$chk_comments_plugin = ($instance['al2fb_comments_plugin'] ? ' checked ' : '');
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
 		?>
 		<p>
@@ -4153,6 +4232,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_send; ?> id="<?php echo $this->get_field_id('al2fb_send_button'); ?>" name="<?php echo $this->get_field_name('al2fb_send_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_send_button'); ?>"><?php _e('Show Facebook send button', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_comments_plugin; ?> id="<?php echo $this->get_field_id('al2fb_comments_plugin'); ?>" name="<?php echo $this->get_field_name('al2fb_comments_plugin'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_comments_plugin'); ?>"><?php _e('Show Facebook comments plugin', c_al2fb_text_domain); ?></label>
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_profile; ?> id="<?php echo $this->get_field_id('al2fb_profile'); ?>" name="<?php echo $this->get_field_name('al2fb_profile'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook image/link', c_al2fb_text_domain); ?></label>

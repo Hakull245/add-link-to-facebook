@@ -550,7 +550,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: replace dash by underscore in WP locale
 * Improvement: reorganized Facebook like button/box settings
 * Improvement: *Link to* option applies also to like box
+* Improvement: added fb-root to Facebook plugins
+* Improvement: div for styling around like box
 * New feature: added options to set like box width and border
+* New feature: Facebook comments plugin widget/shortcode/template tag
 * Removed support for iframe Facebook plugins
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
