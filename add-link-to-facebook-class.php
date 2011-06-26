@@ -3893,6 +3893,9 @@ if (!class_exists('WPAL2Facebook')) {
 					foreach ($post_tags as $tag)
 						$tags[] = $tag->name;
 
+				$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
+				$picture = substr($link_picture, strpos($link_picture, '=') + 1);
+
 				// Security
 				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
 
@@ -3913,6 +3916,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'post_title' => $post->post_title,
 					'post_cat' => $cats,
 					'post_tag' => $tags,
+					'post_pic' => $picture,
 					'hash' => $hash
 				), '', '&');
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
