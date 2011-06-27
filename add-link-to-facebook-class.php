@@ -803,8 +803,8 @@ if (!class_exists('WPAL2Facebook')) {
 									'hash' => md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'))
 								), '', '&');
 								$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
-								$status = json_decode($response);
-								if ($status->status == 'ok')
+								$service = json_decode($response);
+								if (isset($service->status) && $service->status == 'ok')
 									delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
 							}
 							catch (Exception $e) {
@@ -981,6 +981,7 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<div class="wrap">';
 				echo '<h2>' . __('Add Link to Facebook', c_al2fb_text_domain) . '</h2>';
 				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
+				echo '<span><a href="/wp-admin/">' . __('Go to dashboard', c_al2fb_text_domain) . '</a></span>';
 				echo '</div>';
 				return;
 			}
@@ -4026,13 +4027,6 @@ if (!class_exists('WPAL2Facebook')) {
 				), '', '&');
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
 				$service = json_decode($response);
-
-				if (false && $action == 'add' && $this->debug) {
-					print_r($link_picture);
-					print_r($query);
-					print_r($response);
-					print_r($service);
-				}
 
 				if (isset($service->id)) {
 					$user_ID = self::Get_user_ID($post);
