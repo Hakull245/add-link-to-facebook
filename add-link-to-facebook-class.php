@@ -3954,7 +3954,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'post_id' => $post->ID,
 					'post_date' => $post->post_date_gmt,
 					'post_type' => $post->post_type,
-					'post_author' => $userdata->user_login,
+					'post_author' => $userdata->display_name,
 					'post_url' => get_permalink($post->ID),
 					'post_title' => $post->post_title,
 					'post_cat' => $cats,
