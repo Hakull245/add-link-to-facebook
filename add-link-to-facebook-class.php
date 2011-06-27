@@ -896,7 +896,7 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 					<div class="updated fade al2fb_service"><p>
 					<h3><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h3>
-					<span class="al2fb_service_msg"><?php echo $msg->msg; ?></span>
+					<span class="al2fb_service_msg"><?php echo $msg->text; ?></span>
 
 					<table><tr>
 
