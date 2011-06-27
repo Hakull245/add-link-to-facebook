@@ -4011,6 +4011,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'charset' => get_bloginfo('charset'),
 					'lang' => get_bloginfo('language'),
 					'dir' => get_bloginfo('text_direction'),
+					'zone' => get_option('gmt_offset'),
 					'ver' => $plugin_version,
 					'title' => $title,
 					'post_date' => $post->post_date_gmt,
