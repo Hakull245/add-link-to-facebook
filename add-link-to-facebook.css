@@ -17,6 +17,14 @@
 .al2fb_service {
 }
 
+.al2fb_service_msg {
+}
+
+.al2fb_service_time {
+	font-size: smaller;
+	color: gray;
+}
+
 /* Privacy notice top */
 .al2fb_sponsorship {
 	font-size: smaller;

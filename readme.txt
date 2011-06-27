@@ -563,6 +563,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Facebook comments plugin widget/shortcode/template tag
 * Removed support for iframe Facebook plugins
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.79 =

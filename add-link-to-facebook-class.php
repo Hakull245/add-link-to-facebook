@@ -791,7 +791,28 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($msgs)
 				foreach ($msgs as $msg)
 					if ($msg->id == $_POST['al2fb_msgid'])
-						delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
+						if ($msg->report)
+							try {
+								// Send report
+								$query = http_build_query(array(
+									'action' => 'report',
+									'api' => 1,
+									'url' => self::Redirect_uri(),
+									'id' => $_POST['al2fb_msgid'],
+									'choice' => $_POST['al2fb_choice'],
+									'hash' => md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'))
+								), '', '&');
+								$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
+								$status = json_decode($response);
+								if ($status->status == 'ok')
+									delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
+							}
+							catch (Exception $e) {
+								if ($this->debug)
+									print_r($e);
+							}
+						else
+							delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
 		}
 
 		// Display notices
@@ -874,16 +895,35 @@ if (!class_exists('WPAL2Facebook')) {
 				foreach ($msgs as $msg) {
 ?>
 					<div class="updated fade al2fb_service"><p>
-					<form method="post" action="<?php echo $url; ?>">
+					<h3><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h3>
+					<span class="al2fb_service_msg"><?php echo $msg->msg; ?></span>
+
+					<table><tr>
+
+					<td><form method="post" action="<?php echo $url; ?>">
+					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 					<input type="hidden" name="al2fb_action" value="service">
 					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg->id; ?>">
-					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
-					<h3><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h3>
-					<span><?php echo $msg->msg; ?></span>
+					<input type="hidden" name="al2fb_choice" value="yes">
 					<p class="submit">
-					<input type="submit" class="button-primary" value="<?php _e('Ok', c_al2fb_text_domain) ?>" />
+					<input type="submit" class="button-primary" value="<?php _e('Yes', c_al2fb_text_domain) ?>" />
 					</p>
-					</form>
+					</form></td>
+
+					<td><form method="post" action="<?php echo $url; ?>">
+					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
+					<input type="hidden" name="al2fb_action" value="service">
+					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg->id; ?>">
+					<input type="hidden" name="al2fb_choice" value="no">
+					<p class="submit">
+					<input type="submit" class="button-primary" value="<?php _e('No', c_al2fb_text_domain) ?>" />
+					</p>
+					</form></td>
+
+					</tr></table>
+
+					<span class="al2fb_service_time"><?php echo $msg->time; echo $msg->report; ?></span>
+
 					</p></div>
 <?php
 				}
@@ -936,6 +976,15 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle option page
 		function Administration() {
+			// Handle service message
+			if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'service') {
+				echo '<div class="wrap">';
+				echo '<h2>' . __('Add Link to Facebook', c_al2fb_text_domain) . '</h2>';
+				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
+				echo '</div>';
+				return;
+			}
+
 			// Security check
 			if (!current_user_can(get_option(c_al2fb_option_min_cap)))
 				die('Unauthorized');
@@ -3911,6 +3960,8 @@ if (!class_exists('WPAL2Facebook')) {
 		// Update usage statistics
 		function Update_statistics($action, $post) {
 			try {
+				$uri = self::Redirect_uri();
+
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 
 				// Get plugin version
@@ -3921,6 +3972,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Post author
 				$userdata = get_userdata($post->post_author);
+
+				$permalink = get_permalink($post->ID);
+				if (strpos($permalink, $uri) === 0)
+					$permalink = substr($permalink, strlen($uri));
 
 				// Post categories
 				$cats = array();
@@ -3937,7 +3992,13 @@ if (!class_exists('WPAL2Facebook')) {
 						$tags[] = $tag->name;
 
 				$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
-				$picture = substr($link_picture, strpos($link_picture, '=') + 1);
+				if ($link_picture) {
+					$picture = substr($link_picture, strpos($link_picture, '=') + 1);
+					if (strpos($picture, $uri) === 0)
+						$picture = substr($picture, strlen($uri));
+				}
+				else
+					$picture = null;
 
 				// Security
 				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
@@ -3945,17 +4006,17 @@ if (!class_exists('WPAL2Facebook')) {
 				// Update
 				$query = http_build_query(array(
 					'action' => $action,
-					'url' => self::Redirect_uri(),
+					'api' => 1,
+					'url' => $uri,
 					'charset' => get_bloginfo('charset'),
 					'lang' => get_bloginfo('language'),
 					'dir' => get_bloginfo('text_direction'),
 					'ver' => $plugin_version,
 					'title' => $title,
-					'post_id' => $post->ID,
 					'post_date' => $post->post_date_gmt,
 					'post_type' => $post->post_type,
 					'post_author' => $userdata->display_name,
-					'post_url' => get_permalink($post->ID),
+					'post_url' => $permalink,
 					'post_title' => $post->post_title,
 					'post_cat' => $cats,
 					'post_tag' => $tags,
@@ -3965,23 +4026,30 @@ if (!class_exists('WPAL2Facebook')) {
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
 				$service = json_decode($response);
 
-				if (!empty($service->id)) {
+				if (false && $action == 'add' && $this->debug) {
+					print_r($link_picture);
+					print_r($query);
+					print_r($response);
+					print_r($service);
+				}
+
+				if (isset($service->id)) {
 					$user_ID = self::Get_user_ID($post);
 
-					$found = false;
+					// Delete existing messages
 					$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
 					if ($msgs)
 						foreach ($msgs as $msg)
-							if ($msg->id == $service->id) {
-								$found = true;
-								break;
-							}
+							if ($msg->id == $service->id)
+								delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
 
-					if (!$found)
-						add_user_meta($user_ID, c_al2fb_meta_service, $service);
+					// Add new message
+					add_user_meta($user_ID, c_al2fb_meta_service, $service);
 				}
 			}
 			catch (Exception $e) {
+				if ($this->debug)
+					print_r($e);
 			}
 		}
 
