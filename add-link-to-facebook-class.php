@@ -804,8 +804,35 @@ if (!class_exists('WPAL2Facebook')) {
 								), '', '&');
 								$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
 								$service = json_decode($response);
-								if (isset($service->status) && $service->status == 'ok')
+								if (isset($service->status) && $service->status == 'ok') {
+									// Check response
+									$text = __('Settings updated', c_al2fb_text_domain);
+									$func = null;
+									if ($_POST['al2fb_choice'] == 'yes') {
+										if (isset($msg->yes_text))
+											$text = $msg->yes_text;
+										if (isset($msg->yes_func))
+											$func = array(&$this, $msg->yes_func);
+									}
+									else {
+										if (isset($msg->no_text))
+											$text = $msg->no_text;
+										if (isset($msg->no_func))
+											$func = array(&$this, $msg->no_func);
+									}
+
+									// Do action
+									if (is_callable($func))
+										$show = call_user_func($func, $msg);
+									else
+										$show = true;
+
+									if ($show)
+										echo '<div id="message" class="updated fade al2fb_notice"><p>' . $text . '</p></div>';
+
+									// Delete the message
 									delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
+								}
 							}
 							catch (Exception $e) {
 								if ($this->debug)
@@ -813,6 +840,14 @@ if (!class_exists('WPAL2Facebook')) {
 							}
 						else
 							delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
+		}
+
+		function eula_yes($msg) {
+			return true;
+		}
+
+		function eula_no($msg) {
+			return true;
 		}
 
 		// Display notices
@@ -980,7 +1015,6 @@ if (!class_exists('WPAL2Facebook')) {
 			if (isset($_REQUEST['al2fb_action']) && $_REQUEST['al2fb_action'] == 'service') {
 				echo '<div class="wrap">';
 				echo '<h2>' . __('Add Link to Facebook', c_al2fb_text_domain) . '</h2>';
-				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
 				echo '<span><a href="/wp-admin/">' . __('Go to dashboard', c_al2fb_text_domain) . '</a></span>';
 				echo '</div>';
 				return;
@@ -3962,7 +3996,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Update_statistics($action, $post) {
 			try {
 				$uri = self::Redirect_uri();
-
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 
 				// Get plugin version
@@ -3970,36 +4003,6 @@ if (!class_exists('WPAL2Facebook')) {
 					require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
-
-				// Post author
-				$userdata = get_userdata($post->post_author);
-
-				$permalink = get_permalink($post->ID);
-				if (strpos($permalink, $uri) === 0)
-					$permalink = substr($permalink, strlen($uri));
-
-				// Post categories
-				$cats = array();
-				$post_cats = get_the_category($post->ID);
-				if (!empty($post_cats))
-					foreach ($post_cats as $category)
-						$cats[] = $category->cat_name;
-
-				// Post tags
-				$tags = array();
-				$post_tags = get_the_tags($post->ID);
-				if (!empty($post_tags))
-					foreach ($post_tags as $tag)
-						$tags[] = $tag->name;
-
-				$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
-				if ($link_picture) {
-					$picture = substr($link_picture, strpos($link_picture, '=') + 1);
-					if (strpos($picture, $uri) === 0)
-						$picture = substr($picture, strlen($uri));
-				}
-				else
-					$picture = null;
 
 				// Security
 				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
@@ -4015,14 +4018,6 @@ if (!class_exists('WPAL2Facebook')) {
 					'zone' => get_option('gmt_offset'),
 					'ver' => $plugin_version,
 					'title' => $title,
-					'post_date' => $post->post_date_gmt,
-					'post_type' => $post->post_type,
-					'post_author' => $userdata->display_name,
-					'post_url' => $permalink,
-					'post_title' => $post->post_title,
-					'post_cat' => $cats,
-					'post_tag' => $tags,
-					'post_pic' => $picture,
 					'hash' => $hash
 				), '', '&');
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
