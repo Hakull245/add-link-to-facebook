@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.79
+Stable tag: 1.81
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -29,7 +29,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names, like button and send button
+* Shortcodes and template tags for liker names, like button, like box, send button and profile icon/link
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
@@ -254,25 +254,30 @@ To show liker names:
 * [al2fb_likers]
 * [al2fb_likers post_id="123"]
 
-To show a like button:
+To show a Facebook like button:
 
 * [al2fb_like_button]
 * [al2fb_like_button post_id="123"]
 
-To show a like box:
+To show a Facebook like box:
 
 * [al2fb_like_box]
 * [al2fb_like_box post_id="123"]
 
-To show a send button:
+To show a Facebook send button:
 
 * [al2fb_send_button]
 * [al2fb_send_button post_id="123"]
 
-To show the comments plugin:
+To show the Facebook comments plugin:
 
 * [al2fb_comments_plugin]
 * [al2fb_comments_plugin post_id="123"]
+
+To show the Facebook profile icon/link:
+
+* [al2fb_profile_link]
+* [al2fb_profile_link post_id="123"]
 
 = U24 How can I use the template tags? =
 
@@ -288,6 +293,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_send_button')) al2fb_send_button(123);
 * if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin();
 * if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin(123);
+* if (function_exists('al2fb_profile_link')) al2fb_profile_link();
+* if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
 
 = U25 Can I add links to multiple walls? =
 
@@ -306,6 +313,14 @@ So, people that click on the like button are displayed within the like button (d
 
 Trash the comment, but leave it in the trash folder.
 If you delete the comment permanently, the plugin will copy the comment again from Facebook.
+
+= U28 Can I display the widget on every page? =
+
+This is not directly possible. The plugin is a multi-user plugin.
+Only on single posts/pages an author can be determined, which is needed to get the correct settings (layout, link, etc).
+
+However, there is a workaround: choose a post/page you want to tie the widget to and
+use one or more of the shortcodes to display what you want, see question U23 for more details.
 
 **--- Security ---**
 
@@ -553,19 +568,27 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.80 =
+= 1.81 =
+* Bug fix: correct cached link for like box
 * Improvement: replace dash by underscore in WP locale
 * Improvement: reorganized Facebook like button/box settings
 * Improvement: *Link to* option applies also to like box
 * Improvement: added fb-root to Facebook plugins
-* Improvement: div for styling around like box
+* Improvement: added div for styling like box
+* Improvement: Facebook common settings apply to all widget features
 * New feature: added options to set like box width and border
 * New feature: Facebook comments plugin widget/shortcode/template tag
+* New feature: Facebook profile icon/link shortcode/template tag
+* Added [End-user license agreement](http://al2fb.bokhorst.biz/eula "EULA")
 * Removed support for iframe Facebook plugins
+* Updated FAQ & [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.80 =
+* Development version
 
 = 1.79 =
 * Bugfix: undefined function *get_plugins*
@@ -631,8 +654,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
-= 1.80 =
-Five improvements, two new features, translation updates
+= 1.81 =
+One bugfix, six improvements, three new features, EULA, documentation & translation updates
 
 = 1.79 =
 One bugfix, one improvement, translation update

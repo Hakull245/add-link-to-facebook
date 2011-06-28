@@ -214,6 +214,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
 			add_shortcode('al2fb_comments_plugin', array(&$this, 'Shortcode_comments_plugin'));
+			add_shortcode('al2fb_profile_link', array(&$this, 'Shortcode_profile_link'));
 
 			// Custom filters
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
@@ -2019,7 +2020,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get wall, page or group name and cache
 		function Get_fb_me_cached($user_ID, $self) {
-			$me_key = c_al2fb_transient_cache . md5('me' . $user_ID . ($self ? 'me' : ''));
+			$page_id = self::Get_page_id($user_ID, $self);
+			$me_key = c_al2fb_transient_cache . md5('me' . $user_ID . $page_id);
 			$me = get_transient($me_key);
 			if ($me === false) {
 				$me = self::Get_fb_me($user_ID, $self);
@@ -2035,12 +2037,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get wall, page or group name
 		function Get_fb_me($user_ID, $self) {
-			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
-			if (empty($page_id))
-				$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
-			if ($self || empty($page_id))
-				$page_id = 'me';
+			$page_id = self::Get_page_id($user_ID, $self);
 			$url = 'https://graph.facebook.com/' . $page_id;
 			$token = self::Get_access_token_by_page($user_ID, $page_id);
 			if (empty($token))
@@ -2055,6 +2052,16 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else
 				throw new Exception('Page "' . $page_id . '" not found');
+		}
+
+		function Get_page_id($user_ID, $self) {
+			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
+				$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
+			if (empty($page_id))
+				$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
+			if ($self || empty($page_id))
+				$page_id = 'me';
+			return $page_id;
 		}
 
 		// Get page list
@@ -3143,6 +3150,17 @@ if (!class_exists('WPAL2Facebook')) {
 				return self::Get_comments_plugin($post);
 		}
 
+		// Shortcode profile link
+		function Shortcode_profile_link($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_profile_link($post);
+		}
+
 		// Get HTML for likers
 		function Get_likers($post) {
 			$user_ID = self::Get_user_ID($post);
@@ -3313,6 +3331,22 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= ' href="' . $link . '"></fb:comments>';
 			$content .= '</div>';
 
+			return $content;
+		}
+
+		function Get_profile_link($post) {
+			$content = '';
+			try {
+				$user_ID = self::Get_user_ID($post);
+				$me = self::Get_fb_me_cached($user_ID, false);
+				if (!empty($me)) {
+					$img = 'http://creative.ak.fbcdn.net/ads3/creative/pressroom/jpg/b_1234209334_facebook_logo.jpg';
+					$content .= '<div class="al2fb_profile"><a href="' . $me->link . '">';
+					$content .= '<img src="' . $img . '" alt="Facebook profile" /></a></div>';
+				}
+			}
+			catch (Exception $e) {
+			}
 			return $content;
 		}
 
@@ -4080,33 +4114,42 @@ class AL2FB_Widget extends WP_Widget {
 
 	function widget($args, $instance) {
 		global $wp_al2fb;
+
+		// Get current post
+		if (!is_single())
+			return;
 		if (!empty($GLOBALS['post']))
 			$post = $GLOBALS['post'];
-		if (empty($post))
-			return;
 		if (empty($post->ID) && !empty($post['post_id']))
 			$post = get_post($post['post_id']);
+		if (empty($post))
+			return;
 
+		// Get user
 		$user_ID = $wp_al2fb->Get_user_ID($post);
-		$charset = get_bloginfo('charset');
-		$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 
 		// Check if widget should be displayed
-		$buttons = (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
-			!(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) &&
-			!(get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) && is_page()) &&
-			!(get_user_meta($user_ID, c_al2fb_meta_like_noarchives, true) && is_archive()) &&
-			!(get_user_meta($user_ID, c_al2fb_meta_like_nocategories, true) && is_category()) &&
-			!get_post_meta($post->ID, c_al2fb_meta_nolike, true));
+		if ((get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) ||
+			(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) ||
+			(get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) && is_page()) ||
+			(get_user_meta($user_ID, c_al2fb_meta_like_noarchives, true) && is_archive()) ||
+			(get_user_meta($user_ID, c_al2fb_meta_like_nocategories, true) && is_category()) ||
+			get_post_meta($post->ID, c_al2fb_meta_nolike, true))
+			return;
 
+		// Get settings
 		$comments = isset($instance['al2fb_comments']) ? $instance['al2fb_comments'] : false;
 		$messages = isset($instance['al2fb_messages']) ? $instance['al2fb_messages'] : false;
 		$messages_comments = isset($instance['al2fb_messages_comments']) ? $instance['al2fb_messages_comments'] : false;
-		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] && $buttons : false;
-		$like_box = isset($instance['al2fb_like_box']) ? $instance['al2fb_like_box'] && $buttons : false;
-		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] && $buttons : false;
-		$comments_plugin = isset($instance['al2fb_comments_plugin']) ? $instance['al2fb_comments_plugin'] && $buttons : false;
+		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] : false;
+		$like_box = isset($instance['al2fb_like_box']) ? $instance['al2fb_like_box'] : false;
+		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] : false;
+		$comments_plugin = isset($instance['al2fb_comments_plugin']) ? $instance['al2fb_comments_plugin'] : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
+
+		// More settings
+		$charset = get_bloginfo('charset');
+		$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 
 		// Get link type
 		$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
@@ -4124,32 +4167,19 @@ class AL2FB_Widget extends WP_Widget {
 
 		// Get comments
 		$fb_comments = false;
-		if ($comments && is_single())
+		if ($comments)
 			$fb_comments = $wp_al2fb->Get_comments_or_likes($post, false);
 
 		// Get messages
 		$fb_messages = false;
-		if ($messages && is_single())
+		if ($messages)
 			try {
 				$fb_messages = $wp_al2fb->Get_fb_feed($user_ID);
 			}
 			catch (Exception $e) {
-				$error = $e->getMessage();
 			}
 
-		// Get link to me
-		$me = null;
-		$error = null;
-		if ($profile) {
-			try {
-				$me = $wp_al2fb->Get_fb_me_cached($user_ID, false);
-			}
-			catch (Exception $e) {
-				$error = $e->getMessage();
-			}
-		}
-
-		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $me || $error) {
+		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $profile) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -4226,17 +4256,8 @@ class AL2FB_Widget extends WP_Widget {
 				echo $wp_al2fb->Get_comments_plugin($post);
 
 			// Profile
-			if ($profile) {
-				if (!empty($me)) {
-					$img = 'http://creative.ak.fbcdn.net/ads3/creative/pressroom/jpg/b_1234209334_facebook_logo.jpg';
-					echo '<div class="al2fb_profile"><a href="' . $me->link . '">';
-					echo '<img src="' . $img . '" alt="Facebook profile" /></a></div>';
-				}
-			}
-
-			// Errors
-			if (!empty($error) && $wp_al2fb->debug)
-				echo '<span>' . htmlspecialchars($error, ENT_QUOTES, $charset) . '</span><br />';
+			if ($profile)
+				echo $wp_al2fb->Get_profile_link($post);
 
 			echo $after_widget;
 		}
