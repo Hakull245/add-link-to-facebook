@@ -570,6 +570,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.83 =
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.82 =
 * Administrator option to disable collection of statistics
