@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.81
+Stable tag: 1.82
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -568,6 +568,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.82 =
+* Administrator option to disable collection of statistics
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.81 =
 * Bug fix: correct cached link for like box
 * Improvement: replace dash by underscore in WP locale
@@ -653,6 +657,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.82 =
+Option to disable collection of statistics
 
 = 1.81 =
 One bugfix, six improvements, three new features, EULA, documentation & translation updates
