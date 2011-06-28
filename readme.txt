@@ -568,6 +568,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.83 =
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
 = 1.82 =
 * Administrator option to disable collection of statistics
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
