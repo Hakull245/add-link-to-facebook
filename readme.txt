@@ -25,7 +25,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Additional features:**
 
-* Show the names of the people who liked your post on Facebook below the post text
+* Show the names of the people who liked your post on Facebook below the post/page text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
@@ -588,7 +588,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.80 =
-* Development version
+* Beta version
 
 = 1.79 =
 * Bugfix: undefined function *get_plugins*
