@@ -551,6 +551,10 @@ You can also tick the checkbox *Clear error messages* in the post submit box, ne
 In this way you can clear the error message without adding a link to Facebook
 (you'll probably want to check *Do not add link to Facebook* too in this case).
 
+= E20 I get 'Error validating access token: The session has been invalidated because the user has changed the password' =
+
+Authorizing the plugin again will most probably solve this problem.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -567,6 +571,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.84 =
+* Updated FAQ
+* Adde Indonesian translation (id\_ID)
 
 = 1.83 =
 * Bugfix: correct user for EULA
