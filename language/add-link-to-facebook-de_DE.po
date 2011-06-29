@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-20 13:57+0100\n"
-"PO-Revision-Date: 2011-06-20 14:45+0100\n"
+"POT-Creation-Date: 2011-06-28 12:12+0100\n"
+"PO-Revision-Date: 2011-06-28 12:32+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Björn Deutschmann <cooleisbaer.funpic.de>\n"
 "MIME-Version: 1.0\n"
@@ -18,770 +18,842 @@ msgstr ""
 "X-Poedit-Basepath: C:\\Users\\Wolfgang\\Desktop\\translation\\add-link-to-facebook.1.37\n"
 "X-Poedit-SearchPath-0: C:\\Users\\Wolfgang\\Desktop\\translation\\add-link-to-facebook.1.37\n"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:680
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:718
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:814
 msgid "Settings updated"
 msgstr "Einstellungen aktualisiert"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:700
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:738
 msgid "Authorized, go posting!"
 msgstr "Autorisiert. Schreiben Sie jetzt Artikel!"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:742
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:780
 msgid "Debug information sent"
 msgstr "Debug-Informationen gesendet"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:744
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:782
 msgid "Sending debug information failed"
 msgstr "Senden der Debug-Informationen fehlgeschlagen"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:767
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:878
 msgid "needs configuration"
 msgstr "Konfiguration erforderlich"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:771
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:882
 msgid "needs authorization"
 msgstr "Autorisierung erforderlich"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:777
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:888
 msgid "should be authorized again to show Facebook messages in the widget"
 msgstr "sollte erneut autorisiert werden, um Facebook-Nachrichten im Widget anzuzeigen"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:783
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:806
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:838
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:839
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:927
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2073
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2078
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:894
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:917
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:938
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:988
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:989
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1022
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1087
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2338
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2343
 msgid "Add Link to Facebook"
 msgstr "Add Link to Facebook"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:815
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:926
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
 msgstr "Wenn Ihnen das Plugin \"Add Link to Facebook\" gefällt, bewerten Sie es bitte unter <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Denn wenn das Durchschnittsurteil nicht gut ist, ist es nicht sinnvoll, das Plugin weiterhin zu unterstützen.<br />Sie können diesen Hinweis durch Auswahl der Option \"Ich habe das Plugin bewertet\" auf der <a href=\"[settings]\">Seite der Einstellungen</a> verbergen."
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:838
-msgid "Administration"
-msgstr "Administration"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:860
-msgid "Settings"
-msgstr "Einstellungen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:931
-msgid "Your server may not allow external connections"
-msgstr "Ihr Server lässt keine externen Verbindungen zu"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:938
-msgid "Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!"
-msgstr "Bitte seien Sie sich bewusst, dass die Integration oder Anzeige der Facebook-Nachrichten im Widget die Privatsphäre anderer Facebook-Nutzer verletzten oder dies gegen die Datenschutzbestimmungen Ihres Landes verstoßen könnte!"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:945
-msgid "Authorization"
-msgstr "Autorisierung"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:948
-msgid "Plugin is authorized"
-msgstr "Plugin ist autorisiert"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:953
-msgid "Links will be added to"
-msgstr "Links werden hinzugefügt zu"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:970
-msgid "Authorize"
-msgstr "Autorisieren"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:995
-msgid "Easy setup"
-msgstr "Grundeinstellungen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1003
-msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Um Anwendungsnummer und Anwendungs-Geheimcode zu erhalten, müssen Sie eine Facebook-Anwendung erstellen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1004
-msgid "You have to fill in the following:"
-msgstr "Sie müssen Folgendes ausfüllen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1007
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1046
-msgid "App Name:"
-msgstr "Name der Anwendung:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1008
-msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "Beliebige Bezeichnung. Erscheint als &quot;via ...&quot; unter der Facebook-Notiz."
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1011
-msgid "Web Site > Site URL:"
-msgstr "Website &gt; Site-URL:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1015
-msgid "Click here to create"
-msgstr "Zum Erstellen hier klicken"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1016
-msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
-msgstr "und dann auf '<em>Meine Anwendungen</em>' und '<em>Erstelle eine neue Anwendung</em>'"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1021
-msgid "App ID:"
-msgstr "Anwendungsnummer:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1027
-msgid "App Secret:"
-msgstr "Anwendungs-Geheimcode:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1034
-msgid "Access token:"
-msgstr "Access token:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1059
-msgid "Share with all users on this site:"
-msgstr "Mit allen Nutzern der Site teilen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1070
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1105
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1144
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1182
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1240
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1287
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1428
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1479
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1611
-msgid "Save"
-msgstr "Speichern"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1074
-msgid "Additional settings"
-msgstr "Zusätzliche Einstellungen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1076
-msgid "Link picture"
-msgstr "Link-Bild"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1079
-msgid "Link picture:"
-msgstr "Link-Bild:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1081
-msgid "WordPress logo"
-msgstr "WordPress-Logo"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1082
-msgid "First attached image"
-msgstr "Erstes angehängtes Bild"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1083
-msgid "Featured post image"
-msgstr "Artikelbild"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1084
-msgid "Let Facebook select"
-msgstr "Lassen Sie Facebook wählen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1085
-msgid "First image in the post"
-msgstr "Erstes Bild im Artikel"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1086
-msgid "Image from User Photo plugin"
-msgstr "Bild vom User-Photo-Plugin"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1087
-msgid "Custom picture below"
-msgstr "Folgendes benutzerdefiniertes Bild:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1091
-msgid "Custom picture URL:"
-msgstr "URL benutzerdefiniertes Bild:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1094
-msgid "At least 50 x 50 pixels"
-msgstr "Mindestens 50 x 50 Pixel"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1098
-msgid "Default picture URL:"
-msgstr "Standardbild-URL:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1101
-msgid "Default WordPress logo"
-msgstr "Standard: WordPress-Logo"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1116
-msgid "Facebook page"
-msgstr "Facebook-Seite"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1119
-msgid "Add to page:"
-msgstr "Zur Seite hinzufügen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1137
-msgid "Add as page owner:"
-msgstr "Als Eigentümer der Seite hinzufügen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1140
-msgid "Requires manage pages permission"
-msgstr "Benötigt Berechtigung als Seiten-Administrator"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1148
-msgid "Facebook group"
-msgstr "Facebook-Gruppe"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1151
-msgid "Use groups:"
-msgstr "Gruppen verwenden:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1154
-msgid "Requires user groups permission"
-msgstr "Benötigt Benutzergruppenberechtigung"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1162
-msgid "Add to group:"
-msgstr "Zur Gruppe hinzufügen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1166
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1267
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2120
-msgid "None"
-msgstr "keinerlei Link"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1190
-msgid "Link appearance"
-msgstr "Link-Optionen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1193
-msgid "Use site title as caption:"
-msgstr "Site-Titel als Bildunterschrift:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1200
-msgid "Use excerpt as message:"
-msgstr "Auszug als Beitrag verwenden:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1206
-msgid "Text trailer:"
-msgstr "Text-Suffix:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1209
-msgid "For example \"Read more ...\""
-msgstr "Zum Beispiel &quot;Lesen Sie mehr ...&quot;"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1213
-msgid "Keep hyperlinks:"
-msgstr "Hyperlinks belassen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1216
-msgid "The hyperlink title will be removed"
-msgstr "Der Linktext wird entfernt, der eigentliche Hyperlink aber belassen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1220
-msgid "Add 'Share' link:"
-msgstr "\"Teilen\"-Link einfügen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1227
-msgid "Use short URL:"
-msgstr "Kurzlink verwenden:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1230
-msgid "If available"
-msgstr "Falls verfügbar"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1234
-msgid "Add links for new pages:"
-msgstr "Neue Seiten auf Facebook posten:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1243
-msgid "Facebook comments"
-msgstr "Facebook-Kommentare"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1246
-msgid "Integrate comments from Facebook:"
-msgstr "Facebook-Kommentare virtuell integrieren:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1252
-msgid "Post WordPress comments back to Facebook:"
-msgstr "WordPress-Kommentare auf Facebook posten:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1258
-msgid "Copy comments from Facebook to WordPress:"
-msgstr "Facebook-Kommentare als WordPress-Kommentare importieren:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1261
-msgid "Enables for example editing of Facebook comments"
-msgstr "Ermöglicht beispielsweise das Bearbeiten der Kommentare"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1265
-msgid "Link Facebook comment to:"
-msgstr "Kommentarverlinkung mit:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1268
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1271
-msgid "Disables displaying of Facebook avatars too"
-msgstr "Deaktiviert auch die Anzeige der Facebook-Avatare"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1269
-msgid "Profile author"
-msgstr "Facebook-Profil des Kommentierenden"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1270
-msgid "Added link"
-msgstr "Kommentar bei Facebook"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1275
-msgid "Integrate likes from Facebook:"
-msgstr "\"Gefällt mir\" von Facebook integrieren:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1281
-msgid "Show likers below the post text:"
-msgstr "Benutzer unter Artikel anzeigen, denen dieser gefällt:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1290
-msgid "Facebook like button"
-msgstr "Facebook \"Gefällt mir\"-Button"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1293
-msgid "Show Facebook like button:"
-msgstr "\"Gefällt mir\"-Button von Facebook anzeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1296
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1402
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1416
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1424
-msgid "Documentation"
-msgstr "Dokumentation"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1300
-msgid "Do not show on the home page:"
-msgstr "Nicht auf der Hauptseite zeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1306
-msgid "Do not show on posts:"
-msgstr "Nicht unter Artikeln zeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1312
-msgid "Do not show on pages:"
-msgstr "Nicht auf Seiten zeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1318
-msgid "Do not show in archives:"
-msgstr "Nicht im Archiv zeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1324
-msgid "Do not show in categories:"
-msgstr "Nicht in den Kategorien zeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1330
-msgid "Layout:"
-msgstr "Layout:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1332
-msgid "Standard"
-msgstr "Standard"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1333
-msgid "Button with count"
-msgstr "Button mit Zähler"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1334
-msgid "Box with count"
-msgstr "Box mit Zähler"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1338
-msgid "Faces:"
-msgstr "Gesichter:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1344
-msgid "Width:"
-msgstr "Breite:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1347
-msgid "Pixels"
-msgstr "Pixel"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1351
-msgid "Action:"
-msgstr "Button-Funktion als:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1353
-msgid "Like"
-msgstr "Gefällt mir"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1354
-msgid "Recommend"
-msgstr "Senden"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1358
-msgid "Font:"
-msgstr "Schriftart:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1372
-msgid "Color scheme:"
-msgstr "Farbschema:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1374
-msgid "Light"
-msgstr "Hell"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1375
-msgid "Dark"
-msgstr "Dunkel"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1379
-msgid "Link to:"
-msgstr "Link zu:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1382
-msgid "Default the post or page"
-msgstr "Standardmäßig Artikel oder Seite"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1386
-msgid "Show at the top of the post:"
-msgstr "Über dem Artikel anzeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1392
-msgid "Use iframe in stead of XFBML:"
-msgstr "Benutze iframe anstelle von XFBML:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1398
-msgid "Show Facebook send button:"
-msgstr "\"Senden\"-Button von Facebook anzeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1406
-msgid "Combine Facebook like and send buttons:"
-msgstr "\"Gefällt mir\"- und \"Senden\"-Button kombinieren:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1412
-msgid "Use Open Graph protocol:"
-msgstr "Open Graph-Protokoll verwenden:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1420
-msgid "Open Graph protocol <em>og:type</em>:"
-msgstr "Open-Graph-Protokol <em>og:type</em>:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1431
-msgid "Miscelaneous settings"
-msgstr "Verschiedene Einstellungen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1434
-msgid "Do not add link by default:"
-msgstr "\"Keinen Facebook-Link einfügen\" als Standard:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1440
-msgid "Don't show a summary in the post list:"
-msgstr "Zusammenfassung der Artikel nicht anzeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1446
-msgid "Facebook character encoding:"
-msgstr "Facebook-Zeichenkodierung:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1449
-msgid "Default UTF-8; do not change if no need"
-msgstr "Standard UTF-8; nicht ändern wenn es nicht nötig ist"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1453
-msgid "Facebook locale:"
-msgstr "Facebook locale:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1456
-msgid "Do not change if no need"
-msgstr "Muss in der Regel nicht geändert werden"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1460
-msgid "Clean on deactivate:"
-msgstr "Bei Deaktivierung bereinigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1463
-msgid "All data, except link id's"
-msgstr "Alle Daten, außer Link-IDs"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1467
-msgid "I have donated to this plugin:"
-msgstr "Ich habe für dieses Plugin gespendet:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1473
-msgid "I have rated this plugin:"
-msgstr "Ich habe dieses Plugin bewertet:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1483
-msgid "Administrator options"
-msgstr "Administrator-Optionen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1487
-msgid "Facebook communication timeout:"
-msgstr "Timeout für Facebook-Anfrage:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1490
-msgid "Seconds"
-msgstr "Sekunden"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1491
-msgid "Default 30 seconds"
-msgstr "Standard: 30 Sek."
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1495
-msgid "Do not display notices:"
-msgstr "Keine Hinweise anzeigen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1498
-msgid "Except on this page"
-msgstr "Außer auf dieser Seite"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1502
-msgid "Required capability to use plugin:"
-msgstr "Erforderliche Berechtigung, um dieses Plugin nutzen zu können:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1528
-msgid "Refresh Facebook comments every:"
-msgstr "Aktualisiere Facebook-Kommentare alle x Minuten:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1531
-msgid "Minutes"
-msgstr "Minuten"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1532
-msgid "Default every 10 minutes"
-msgstr "Standard: alle 10 Minuten"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1536
-msgid "Maximum text length with trailer:"
-msgstr "Maximale Textlänge mit Präfix:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1539
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1547
-msgid "Characters"
-msgstr "Zeichen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1540
-msgid "Default 256 characters"
-msgstr "Standard: 256 Zeichen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1544
-msgid "Maximum Facebook text length:"
-msgstr "Maximale Facebook-Textlänge:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1548
-msgid "Default 10,000 characters"
-msgstr "Standard: 10.000 Zeichen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1552
-msgid "Exclude these custom post types:"
-msgstr "Ausgenommen diese benutzerdefinierten Nachrichtentypen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1555
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1562
-msgid "Separate by commas"
-msgstr "Getrennt durch Kommas"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1559
-msgid "Exclude these categories:"
-msgstr "Diese Kategorien ausschließen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1566
-msgid "Do not verify the peer's certificate:"
-msgstr "Peer-Zertifikat nicht überprüfen:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1569
-msgid "Try this in case of cURL error 60"
-msgstr "Versuche das im Fall von \"cURL error 60\""
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1573
-msgid "Additional styling rules (CSS):"
-msgstr "Zusätzliche Designangaben (CSS):"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1581
-msgid "Debug options"
-msgstr "Debug-Optionen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1584
-msgid "Use site URL as request URI:"
-msgstr "Webseiten-URL als Anforderungs-URI verwenden:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1590
-msgid "Do not use cURL:"
-msgstr "Keine cURL verwenden:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1596
-msgid "Use publish_post action:"
-msgstr "Benutze publish_post-Aktion:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1602
-msgid "Debug:"
-msgstr "Debug:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1630
-msgid "Privacy in the Sustainable Plugins Sponsorship Network"
-msgstr "Datenschutz im \"Sustainable Plugins Sponsorship Network\""
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1640
-msgid "Resources"
-msgstr "Weitere Infos"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1642
-msgid "Frequently asked questions"
-msgstr "Häufig gestellte Fragen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1643
-msgid "Support page"
-msgstr "Support-Seite"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1644
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1670
-msgid "Debug information"
-msgstr "Debug-Informationen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1645
-msgid "About the author"
-msgstr "Über den Autor"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1646
-msgid "Other plugins"
-msgstr "Andere Plugins"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1677
-msgid "Name:"
-msgstr "Name:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1683
-msgid "E-mail:"
-msgstr "E-Mail:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1686
-msgid "Please check if this is a correct, reachable e-mail address"
-msgstr "Bitte prüfen, ob dies eine gültige und erreichbare E-Mail-Adresse ist"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1690
-msgid "Message:"
-msgstr "Nachricht:"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1693
-msgid "Please describe your problem, even if you did before"
-msgstr "Bitte beschreiben Sie Ihr Problem, auch wenn Sie dies bereits zuvor getan haben"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1698
-msgid "Send"
-msgstr "Senden"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2002
-msgid "Do not add link to Facebook"
-msgstr "Keinen Facebook-Link einfügen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2005
-msgid "Do not add like button"
-msgstr "Keinen \"Gefällt mir\"-Button einfügen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2008
-msgid "Do not integrate comments"
-msgstr "Kommentare nicht integrieren"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2013
-msgid "Delete existing Facebook link"
-msgstr "Vorhandenen Facebook-Link löschen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2015
-msgid "Link on Facebook"
-msgstr "Link auf Facebook"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2020
-msgid "Clear error messages"
-msgstr "Fehlermeldungen löschen"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2035
-msgid "Facebook"
-msgstr "Facebook"
-
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2044
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:949
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2309
 msgid "Yes"
 msgstr "Ja"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2046
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:959
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2311
 msgid "No"
 msgstr "Nein"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2056
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:988
+msgid "Administration"
+msgstr "Administration"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1010
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1023
+msgid "Go to dashboard"
+msgstr "Zum Dashboard"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1091
+msgid "Your server may not allow external connections"
+msgstr "Ihr Server lässt keine externen Verbindungen zu"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1099
+msgid "Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!"
+msgstr "Bitte seien Sie sich bewusst, dass die Integration oder Anzeige der Facebook-Nachrichten im Widget die Privatsphäre anderer Facebook-Nutzer verletzten oder dies gegen die Datenschutzbestimmungen Ihres Landes verstoßen könnte!"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1107
+msgid "Authorization"
+msgstr "Autorisierung"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1110
+msgid "Plugin is authorized"
+msgstr "Plugin ist autorisiert"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1115
+msgid "Links will be added to"
+msgstr "Links werden hinzugefügt zu"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1132
+msgid "Authorize"
+msgstr "Autorisieren"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1161
+msgid "Easy setup"
+msgstr "Grundeinstellungen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1169
+msgid "To get an App ID and App Secret you have to create a Facebook application"
+msgstr "Um Anwendungsnummer und Anwendungs-Geheimcode zu erhalten, müssen Sie eine Facebook-Anwendung erstellen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1170
+msgid "You have to fill in the following:"
+msgstr "Sie müssen Folgendes ausfüllen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1173
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1212
+msgid "App Name:"
+msgstr "Name der Anwendung:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1174
+msgid "Anything you like, will appear as \"via ...\" below the message"
+msgstr "Beliebige Bezeichnung. Erscheint als &quot;via ...&quot; unter der Facebook-Notiz."
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1177
+msgid "Web Site > Site URL:"
+msgstr "Website &gt; Site-URL:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1181
+msgid "Click here to create"
+msgstr "Zum Erstellen hier klicken"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1182
+msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
+msgstr "und dann auf '<em>Meine Anwendungen</em>' und '<em>Erstelle eine neue Anwendung</em>'"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1187
+msgid "App ID:"
+msgstr "Anwendungsnummer:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1193
+msgid "App Secret:"
+msgstr "Anwendungs-Geheimcode:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1200
+msgid "Access token:"
+msgstr "Access token:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1225
+msgid "Share with all users on this site:"
+msgstr "Mit allen Nutzern der Site teilen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1236
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1272
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1316
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1354
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1412
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1459
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1528
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1561
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1582
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1661
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1712
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1848
+msgid "Save"
+msgstr "Speichern"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1240
+msgid "Additional settings"
+msgstr "Zusätzliche Einstellungen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1242
+msgid "Link picture"
+msgstr "Link-Bild"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1245
+msgid "Link picture:"
+msgstr "Link-Bild:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1247
+msgid "WordPress logo"
+msgstr "WordPress-Logo"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1248
+msgid "First attached image"
+msgstr "Erstes angehängtes Bild"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1249
+msgid "Featured post image"
+msgstr "Artikelbild"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1250
+msgid "Let Facebook select"
+msgstr "Lassen Sie Facebook wählen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1251
+msgid "First image in the post"
+msgstr "Erstes Bild im Artikel"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1252
+msgid "Avatar of author"
+msgstr "Avatar des Autors"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1253
+msgid "Image from User Photo plugin"
+msgstr "Bild vom User-Photo-Plugin"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1254
+msgid "Custom picture below"
+msgstr "Folgendes benutzerdefiniertes Bild:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1258
+msgid "Custom picture URL:"
+msgstr "URL benutzerdefiniertes Bild:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1261
+msgid "At least 50 x 50 pixels"
+msgstr "Mindestens 50 x 50 Pixel"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1265
+msgid "Default picture URL:"
+msgstr "Standardbild-URL:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1268
+msgid "Default WordPress logo"
+msgstr "Standard: WordPress-Logo"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1288
+msgid "Facebook page"
+msgstr "Facebook-Seite"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1291
+msgid "Add to page:"
+msgstr "Zur Seite hinzufügen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1309
+msgid "Add as page owner:"
+msgstr "Als Eigentümer der Seite hinzufügen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1312
+msgid "Requires manage pages permission"
+msgstr "Benötigt Berechtigung als Seiten-Administrator"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1320
+msgid "Facebook group"
+msgstr "Facebook-Gruppe"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1323
+msgid "Use groups:"
+msgstr "Gruppen verwenden:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1326
+msgid "Requires user groups permission"
+msgstr "Benötigt Benutzergruppenberechtigung"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1334
+msgid "Add to group:"
+msgstr "Zur Gruppe hinzufügen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1338
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1439
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2385
+msgid "None"
+msgstr "keinerlei Link"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1362
+msgid "Link appearance"
+msgstr "Link-Optionen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1365
+msgid "Use site title as caption:"
+msgstr "Site-Titel als Bildunterschrift:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1372
+msgid "Use excerpt as message:"
+msgstr "Auszug als Beitrag verwenden:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1378
+msgid "Text trailer:"
+msgstr "Text-Suffix:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1381
+msgid "For example \"Read more ...\""
+msgstr "Zum Beispiel &quot;Lesen Sie mehr ...&quot;"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1385
+msgid "Keep hyperlinks:"
+msgstr "Hyperlinks belassen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1388
+msgid "The hyperlink title will be removed"
+msgstr "Der Linktext wird entfernt, der eigentliche Hyperlink aber belassen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1392
+msgid "Add 'Share' link:"
+msgstr "\"Teilen\"-Link einfügen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1399
+msgid "Use short URL:"
+msgstr "Kurzlink verwenden:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1402
+msgid "If available"
+msgstr "Falls verfügbar"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1406
+msgid "Add links for new pages:"
+msgstr "Neue Seiten auf Facebook posten:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1415
+msgid "Facebook comments"
+msgstr "Facebook-Kommentare"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1418
+msgid "Integrate comments from Facebook:"
+msgstr "Facebook-Kommentare virtuell integrieren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1424
+msgid "Post WordPress comments back to Facebook:"
+msgstr "WordPress-Kommentare auf Facebook posten:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1430
+msgid "Copy comments from Facebook to WordPress:"
+msgstr "Facebook-Kommentare als WordPress-Kommentare importieren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1433
+msgid "Enables for example editing of Facebook comments"
+msgstr "Ermöglicht beispielsweise das Bearbeiten der Kommentare"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1437
+msgid "Link Facebook comment to:"
+msgstr "Kommentarverlinkung mit:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1440
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1443
+msgid "Disables displaying of Facebook avatars too"
+msgstr "Deaktiviert auch die Anzeige der Facebook-Avatare"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1441
+msgid "Profile author"
+msgstr "Facebook-Profil des Kommentierenden"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1442
+msgid "Added link"
+msgstr "Kommentar bei Facebook"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1447
+msgid "Integrate likes from Facebook:"
+msgstr "\"Gefällt mir\" von Facebook integrieren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1453
+msgid "Show likers below the post text:"
+msgstr "Benutzer unter Artikel anzeigen, denen dieser gefällt:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1462
+msgid "Facebook like button"
+msgstr "Facebook \"Gefällt mir\"-Button"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1465
+msgid "Show Facebook like button:"
+msgstr "\"Gefällt mir\"-Button von Facebook anzeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1468
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1517
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1642
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1649
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1472
+msgid "Layout:"
+msgstr "Layout:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1474
+msgid "Standard"
+msgstr "Standard"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1475
+msgid "Button with count"
+msgstr "Button mit Zähler"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1476
+msgid "Box with count"
+msgstr "Box mit Zähler"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1480
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1535
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1574
+msgid "Width:"
+msgstr "Breite:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1483
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1538
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1577
+msgid "Pixels"
+msgstr "Pixel"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1487
+msgid "Action:"
+msgstr "Button-Funktion als:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1489
+msgid "Like"
+msgstr "Gefällt mir"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1490
+msgid "Recommend"
+msgstr "Senden"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1494
+msgid "Font:"
+msgstr "Schriftart:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1508
+msgid "Show at the top of the post:"
+msgstr "Über dem Artikel anzeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1514
+msgid "Show Facebook send button:"
+msgstr "\"Senden\"-Button von Facebook anzeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1521
+msgid "Combine Facebook like and send buttons:"
+msgstr "\"Gefällt mir\"- und \"Senden\"-Button kombinieren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1531
+msgid "Facebook like box"
+msgstr "Facebook-\"Like Box\""
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1542
+msgid "Border color:"
+msgstr "Rahmenfarbe:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1548
+msgid "Disable like box header:"
+msgstr "Überschrift deaktivieren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1554
+msgid "Disable like box stream:"
+msgstr "Stream deaktivieren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1564
+msgid "Facebook comments plugin"
+msgstr "Facebook-Comments-Plugin"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1568
+msgid "Number of posts:"
+msgstr "Anzahl der Beiträge:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1585
+msgid "Facebook common"
+msgstr "Facebook allgemein"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1589
+msgid "Do not show on the home page:"
+msgstr "Nicht auf der Hauptseite zeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1595
+msgid "Do not show on posts:"
+msgstr "Nicht unter Artikeln zeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1601
+msgid "Do not show on pages:"
+msgstr "Nicht auf Seiten zeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1607
+msgid "Do not show in archives:"
+msgstr "Nicht im Archiv zeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1613
+msgid "Do not show in categories:"
+msgstr "Nicht in den Kategorien zeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1619
+msgid "Faces:"
+msgstr "Gesichter:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1625
+msgid "Color scheme:"
+msgstr "Farbschema:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1627
+msgid "Light"
+msgstr "Hell"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1628
+msgid "Dark"
+msgstr "Dunkel"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1632
+msgid "Link to:"
+msgstr "Link zu:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1635
+msgid "Default the post or page"
+msgstr "Standardmäßig Artikel oder Seite"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1639
+msgid "Use Open Graph protocol:"
+msgstr "Open Graph-Protokoll verwenden:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1646
+msgid "Open Graph protocol <em>og:type</em>:"
+msgstr "Open-Graph-Protokol <em>og:type</em>:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1653
+msgid "Facebook administrators:"
+msgstr "Facebook-Administratoren:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1656
+msgid "Separate multiple administrators by a comma without spaces"
+msgstr "Trennen Sie mehrere Administratoren durch Kommas ohne Leerzeichen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1664
+msgid "Miscelaneous settings"
+msgstr "Verschiedene Einstellungen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1667
+msgid "Do not add link by default:"
+msgstr "\"Keinen Facebook-Link einfügen\" als Standard:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1673
+msgid "Don't show a summary in the post list:"
+msgstr "Zusammenfassung der Artikel nicht anzeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1679
+msgid "Facebook character encoding:"
+msgstr "Facebook-Zeichenkodierung:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1682
+msgid "Default UTF-8; do not change if no need"
+msgstr "Standard UTF-8; nicht ändern wenn es nicht nötig ist"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1686
+msgid "Facebook locale:"
+msgstr "Facebook locale:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1689
+msgid "Do not change if no need"
+msgstr "Muss in der Regel nicht geändert werden"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1693
+msgid "Clean on deactivate:"
+msgstr "Bei Deaktivierung bereinigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1696
+msgid "All data, except link id's"
+msgstr "Alle Daten, außer Link-IDs"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1700
+msgid "I have donated to this plugin:"
+msgstr "Ich habe für dieses Plugin gespendet:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1706
+msgid "I have rated this plugin:"
+msgstr "Ich habe dieses Plugin bewertet:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1716
+msgid "Administrator options"
+msgstr "Administrator-Optionen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1720
+msgid "Facebook communication timeout:"
+msgstr "Timeout für Facebook-Anfrage:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1723
+msgid "Seconds"
+msgstr "Sekunden"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1724
+msgid "Default 30 seconds"
+msgstr "Standard: 30 Sek."
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1728
+msgid "Do not display notices:"
+msgstr "Keine Hinweise anzeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1731
+msgid "Except on this page"
+msgstr "Außer auf dieser Seite"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1735
+msgid "Required capability to use plugin:"
+msgstr "Erforderliche Berechtigung, um dieses Plugin nutzen zu können:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1761
+msgid "Refresh Facebook comments every:"
+msgstr "Aktualisiere Facebook-Kommentare alle x Minuten:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1764
+msgid "Minutes"
+msgstr "Minuten"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1765
+msgid "Default every 10 minutes"
+msgstr "Standard: alle 10 Minuten"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1769
+msgid "Maximum text length with trailer:"
+msgstr "Maximale Textlänge mit Präfix:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1772
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1780
+msgid "Characters"
+msgstr "Zeichen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1773
+msgid "Default 256 characters"
+msgstr "Standard: 256 Zeichen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1777
+msgid "Maximum Facebook text length:"
+msgstr "Maximale Facebook-Textlänge:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1781
+msgid "Default 10,000 characters"
+msgstr "Standard: 10.000 Zeichen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1785
+msgid "Exclude these custom post types:"
+msgstr "Ausgenommen diese benutzerdefinierten Nachrichtentypen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1788
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1795
+msgid "Separate by commas"
+msgstr "Getrennt durch Kommas"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1792
+msgid "Exclude these categories:"
+msgstr "Diese Kategorien ausschließen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1799
+msgid "Do not verify the peer's certificate:"
+msgstr "Peer-Zertifikat nicht überprüfen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1802
+msgid "Try this in case of cURL error 60"
+msgstr "Versuche das im Fall von \"cURL error 60\""
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1806
+msgid "Do not collect statistics:"
+msgstr "Keine Statistikdaten übermitteln:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1812
+msgid "Additional styling rules (CSS):"
+msgstr "Zusätzliche Designangaben (CSS):"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1820
+msgid "Debug options"
+msgstr "Debug-Optionen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1823
+msgid "Use site URL as request URI:"
+msgstr "Webseiten-URL als Anforderungs-URI verwenden:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1829
+msgid "Do not use cURL:"
+msgstr "Keine cURL verwenden:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1835
+msgid "Use publish_post action:"
+msgstr "Benutze publish_post-Aktion:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1841
+msgid "Debug:"
+msgstr "Debug:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1869
+msgid "Privacy in the Sustainable Plugins Sponsorship Network"
+msgstr "Datenschutz im \"Sustainable Plugins Sponsorship Network\""
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1879
+msgid "Resources"
+msgstr "Weitere Infos"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1881
+msgid "Frequently asked questions"
+msgstr "Häufig gestellte Fragen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1882
+msgid "Support page"
+msgstr "Support-Seite"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1883
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1909
+msgid "Debug information"
+msgstr "Debug-Informationen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1884
+msgid "About the author"
+msgstr "Über den Autor"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1885
+msgid "Other plugins"
+msgstr "Andere Plugins"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1916
+msgid "Name:"
+msgstr "Name:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1922
+msgid "E-mail:"
+msgstr "E-Mail:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1925
+msgid "Please check if this is a correct, reachable e-mail address"
+msgstr "Bitte prüfen, ob dies eine gültige und erreichbare E-Mail-Adresse ist"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1929
+msgid "Message:"
+msgstr "Nachricht:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1932
+msgid "Please describe your problem, even if you did before"
+msgstr "Bitte beschreiben Sie Ihr Problem, auch wenn Sie dies bereits zuvor getan haben"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:1937
+msgid "Send"
+msgstr "Senden"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2262
+msgid "Do not add link to Facebook"
+msgstr "Keinen Facebook-Link einfügen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2265
+msgid "Do not add like button"
+msgstr "Keinen \"Gefällt mir\"-Button einfügen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2268
+msgid "Do not integrate comments"
+msgstr "Kommentare nicht integrieren"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2273
+msgid "Update existing Facebook link"
+msgstr "Vorhandenen Facebook-Link aktualisieren"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2275
+msgid "Comments and likes will be lost!"
+msgstr "Kommentare und \"Gefällt mir\"-Angaben gehen verloren!"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2278
+msgid "Delete existing Facebook link"
+msgstr "Vorhandenen Facebook-Link löschen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2280
+msgid "Link on Facebook"
+msgstr "Link auf Facebook"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2285
+msgid "Clear error messages"
+msgstr "Fehlermeldungen löschen"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2300
+msgid "Facebook"
+msgstr "Facebook"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2321
 msgid "comments"
 msgstr "Kommentare"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2063
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2328
 msgid "likes"
 msgstr "Gefällt mir"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2100
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2365
 msgid "No images in the media library for this post"
 msgstr "Keine Bilder in der Mediathek für diesen Artikel"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2108
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2373
 msgid "Select link image:"
 msgstr "Linkbild wählen:"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2148
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2413
 msgid "Custom exerpt"
 msgstr "Individueller Linktext"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2581
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2791
 msgid "Share"
 msgstr "Teilen"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2715
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2917
 msgid "commented on"
 msgstr "kommentiert zu"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2960
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3193
 msgid "liked this post"
 msgid_plural "liked this post"
 msgstr[0] "gefällt dieser Artikel"
 msgstr[1] "gefällt dieser Artikel"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3111
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3182
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3403
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3474
 msgid "on Facebook"
 msgstr "via Facebook"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3188
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3480
 msgid "Liked this post"
 msgstr "Gefällt dieser Artikel"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:3997
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4367
 msgid "Title:"
 msgstr "Titel:"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4001
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4371
 msgid "Show Facebook comments"
 msgstr "Zeige Facebook-Kommentare"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4003
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4011
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4373
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4381
 msgid "Appearance depends on your theme!"
 msgstr "Das Aussehen hängt von Ihrem Theme ab!"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4006
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4376
 msgid "Show Facebook messages"
 msgstr "Facebook-Nachrichten anzeigen"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4009
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4379
 msgid "Show comments on messages"
 msgstr "Kommentare zu den Nachrichten zeigen"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4014
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4384
 msgid "Show Facebook like button"
 msgstr "\"Gefällt mir\"-Button von Facebook anzeigen:"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4017
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4387
+msgid "Show Facebook like box"
+msgstr "Facebook-\"Like Box\" anzeigen:"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4390
 msgid "Show Facebook send button"
 msgstr "\"Senden\"-Button von Facebook anzeigen:"
 
-#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4020
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4393
+msgid "Show Facebook comments plugin"
+msgstr "Zeige Facebook-Comments-Plugin"
+
+#: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:4396
 msgid "Show Facebook image/link"
 msgstr "Facebook-Bild/Link anzeigen:"
+
+#~ msgid "Use iframe in stead of XFBML:"
+#~ msgstr "Benutze iframe anstelle von XFBML:"
 
 #~ msgid "Use shared Facebook application:"
 #~ msgstr "Freigegebene Facebook-Anwendung verwenden:"
 
 #~ msgid "Simple, but less secure"
 #~ msgstr "Einfacher, aber weniger sicher"
-
-#~ msgid "Number of sentences to use:"
-#~ msgstr "Anzahl der zu verwendenden Sätze:"
 
 #~ msgid "Leave blank to let Facebook choose"
 #~ msgstr "Leer lassen, um Facebook wählen zu lassen"
