@@ -63,6 +63,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
 * Swedish (sv\_SE) by *JornB*, thanks!
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
+* Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -574,7 +575,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.84 =
 * Updated FAQ
-* Adde Indonesian translation (id\_ID)
+* Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
 
 = 1.83 =
 * Bugfix: correct user for EULA
