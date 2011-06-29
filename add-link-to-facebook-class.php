@@ -796,13 +796,14 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($msgs)
 				foreach ($msgs as $msg)
 					if ($msg->id == $_POST['al2fb_msgid'])
-						if ($msg->report)
+						if ($msg->report && (isset($msg->userid) ? $msg->userid == $user_ID : true))
 							try {
 								// Send report
 								$query = http_build_query(array(
 									'action' => 'report',
 									'api' => 1,
 									'url' => self::Redirect_uri(),
+									'userid' => $user_ID,
 									'id' => $_POST['al2fb_msgid'],
 									'choice' => $_POST['al2fb_choice'],
 									'hash' => md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'))
@@ -4060,6 +4061,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'action' => $action,
 					'api' => 1,
 					'url' => $uri,
+					'userid' => self::Get_user_ID($post),
 					'charset' => get_bloginfo('charset'),
 					'lang' => get_bloginfo('language'),
 					'dir' => get_bloginfo('text_direction'),
