@@ -573,7 +573,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.84 =
+= 1.84 (next release) =
 * Updated FAQ
 * Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
 
@@ -948,7 +948,10 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* None
+* Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
+* Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile")
+* Integrate posts from Facebook
 
 Realized features:
 
