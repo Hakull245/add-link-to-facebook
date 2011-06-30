@@ -63,6 +63,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
 * Swedish (sv\_SE) by *JornB*, thanks!
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
+* Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -551,6 +552,10 @@ You can also tick the checkbox *Clear error messages* in the post submit box, ne
 In this way you can clear the error message without adding a link to Facebook
 (you'll probably want to check *Do not add link to Facebook* too in this case).
 
+= E20 I get 'Error validating access token: The session has been invalidated because the user has changed the password' =
+
+Authorizing the plugin again will most probably solve this problem.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -567,6 +572,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.84 (next release) =
+* Updated FAQ
+* Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
 
 = 1.83 =
 * Bugfix: correct user for EULA
@@ -939,7 +948,10 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* None
+* Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
+* Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile")
+* Integrate posts from Facebook
 
 Realized features:
 
