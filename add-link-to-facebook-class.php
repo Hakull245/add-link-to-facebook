@@ -125,6 +125,9 @@ define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
 
+// User meta
+define('c_al2fb_meta_facebook_id', 'al2fb_facebook_id');
+
 // Mail
 define('c_al2fb_mail_name', 'al2fb_debug_name');
 define('c_al2fb_mail_email', 'al2fb_debug_email');
@@ -370,6 +373,31 @@ if (!class_exists('WPAL2Facebook')) {
 				header('Content-type: image/png');
 				readfile($img);
   				exit();
+			}
+
+			if (isset($_REQUEST['al2fb_registration'])) {
+				header('Content-type: text/plain');
+				$reg = self::parse_signed_request($_REQUEST['al2fb_userid']);
+				if (email_exists($reg['registration']['email']))
+					echo 'e-mail in use!';
+				else {
+					$user_ID = wp_insert_user(array(
+						'first_name' => $reg['registration']['first_name'],
+						'last_name' => $reg['registration']['last_name'],
+						'user_email' => $reg['registration']['email'],
+						'user_login' => $reg['registration']['user_name'],
+						'user_pass' => $reg['registration']['password']
+					)) ;
+					if (is_wp_error($user_ID))
+						echo $user_ID->get_error_message();
+					else {
+						update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+						echo 'Accepted!';
+					}
+				}
+				if ($this->debug)
+					print_r($reg);
+				exit();
 			}
 
 			// Set default capability
@@ -3448,6 +3476,54 @@ if (!class_exists('WPAL2Facebook')) {
 			return $content;
 		}
 
+		function Get_registration($user_ID) {
+			// http://developers.facebook.com/docs/plugins/registration/
+
+			// Get language
+			$lang = self::Get_locale($user_ID);
+			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+			$width = '';
+
+			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'User name','type':'text'},{'name':'password'}]";
+
+			$content = '<div class="al2fb_registration">';
+			$content .= '<div id="fb-root"></div>';
+			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+			$content .= '<fb:registration';
+			$content .= ' fields="' . $fields . '"';
+			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_registration=true&al2fb_userid=' . $user_ID . '"';
+			$content .= ' width="' . (empty($width) ? '530' : $width) . '">';
+			$content .= '</fb:registration>';
+			$content .= '</div>';
+
+			return $content;
+		}
+
+		function parse_signed_request($user_ID) {
+			$signed_request = $_REQUEST['signed_request'];
+			$secret = get_user_meta($user_ID, c_al2fb_meta_app_secret, true);
+
+			list($encoded_sig, $payload) = explode('.', $signed_request, 2);
+
+			// decode the data
+			$sig = self::base64_url_decode($encoded_sig);
+			$data = json_decode(self::base64_url_decode($payload), true);
+
+			if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
+				return null;
+
+			// check sig
+			$expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
+			if ($sig !== $expected_sig)
+				return null;
+
+			return $data;
+		}
+
+		function base64_url_decode($input) {
+			return base64_decode(strtr($input, '-_', '+/'));
+		}
+
 		// Modify comment list
 		function Comments_array($comments, $post_ID) {
 			$post = get_post($post_ID);
@@ -4255,6 +4331,7 @@ class AL2FB_Widget extends WP_Widget {
 		$comments_plugin = isset($instance['al2fb_comments_plugin']) ? $instance['al2fb_comments_plugin'] : false;
 		$face_pile = isset($instance['al2fb_face_pile']) ? $instance['al2fb_face_pile'] : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
+		$registration = isset($instance['al2fb_registration']) ? $instance['al2fb_registration'] : false;
 
 		// More settings
 		$charset = get_bloginfo('charset');
@@ -4288,7 +4365,7 @@ class AL2FB_Widget extends WP_Widget {
 			catch (Exception $e) {
 			}
 
-		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $face_pile || $profile) {
+		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $face_pile || $profile || $registration) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -4371,6 +4448,9 @@ class AL2FB_Widget extends WP_Widget {
 			if ($profile)
 				echo $wp_al2fb->Get_profile_link($post);
 
+			if ($registration)
+				echo $wp_al2fb->Get_registration($user_ID);
+
 			echo $after_widget;
 		}
 	}
@@ -4430,6 +4510,7 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['al2fb_comments_plugin'] = $new_instance['al2fb_comments_plugin'];
 		$instance['al2fb_face_pile'] = $new_instance['al2fb_face_pile'];
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
+		$instance['al2fb_registration'] = $new_instance['al2fb_registration'];
 		return $instance;
 	}
 
@@ -4454,6 +4535,8 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['al2fb_face_pile'] = false;
 		if (empty($instance['al2fb_profile']))
 			$instance['al2fb_profile'] = false;
+		if (empty($instance['al2fb_registration']))
+			$instance['al2fb_registration'] = false;
 
 		$chk_comments = ($instance['al2fb_comments'] ? ' checked ' : '');
 		$chk_messages = ($instance['al2fb_messages'] ? ' checked ' : '');
@@ -4464,6 +4547,7 @@ class AL2FB_Widget extends WP_Widget {
 		$chk_comments_plugin = ($instance['al2fb_comments_plugin'] ? ' checked ' : '');
 		$chk_face_pile = ($instance['al2fb_face_pile'] ? ' checked ' : '');
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
+		$chk_registration = ($instance['al2fb_registration'] ? ' checked ' : '');
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
@@ -4499,6 +4583,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_profile; ?> id="<?php echo $this->get_field_id('al2fb_profile'); ?>" name="<?php echo $this->get_field_name('al2fb_profile'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook image/link', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_registration; ?> id="<?php echo $this->get_field_id('al2fb_registration'); ?>" name="<?php echo $this->get_field_name('al2fb_registration'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook registration', c_al2fb_text_domain); ?></label>
 		</p>
 		<?php
 	}
