@@ -556,6 +556,11 @@ In this way you can clear the error message without adding a link to Facebook
 
 Authorizing the plugin again will most probably solve this problem.
 
+= E21 I get 'failed to open stream: no suitable wrapper could be found' =
+
+Your hosting server probably doesn't have the software installed or it isn't configured correctly to make a (secure) connection to the internet.
+Ask your provider to install and configure [cURL](http://www.php.net/manual/en/curl.setup.php "cURL").
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
