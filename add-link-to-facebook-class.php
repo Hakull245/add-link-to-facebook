@@ -922,7 +922,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!empty($error)) {
 					echo '<div id="message" class="error fade al2fb_error"><p>';
 					echo __('Add Link to Facebook', c_al2fb_text_domain) . ' - ';
-					edit_post_link($posts->post->post_title, null, null, $posts->post->ID);
+					edit_post_link(get_the_title($posts->post->ID), null, null, $posts->post->ID);
 					echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
 				}
 			}
@@ -2756,7 +2756,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$description = $texts['description'];
 
 			// Get name
-			$name = self::Convert_encoding($user_ID, $post->post_title);
+			$name = self::Convert_encoding($user_ID, get_the_title($post->ID));
 
 			// Get caption
 			$caption = '';
@@ -2802,7 +2802,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
 					$actions = array(
 						'name' => __('Share', c_al2fb_text_domain),
-						'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . urlencode($post->post_title)
+						'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . urlencode(get_the_title($post->ID))
 					);
 					$query_array['actions'] = json_encode($actions);
 				}
@@ -3010,7 +3010,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$ogp_type = 'article';
 
 					// Generate meta tags
-					echo '<meta property="og:title" content="' . htmlspecialchars($post->post_title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:title" content="' . htmlspecialchars(get_the_title($post->ID), ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="' . $ogp_type . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
@@ -3998,7 +3998,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$picture = self::Get_link_picture($posts->post, self::Get_user_ID($posts->post));
 
 				$info .= '<tr><td>Post #' . $posts->post->ID . ':</td>';
-				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
+				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a>';
 				$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
 				$info .= ' @ ' . $posts->post->post_date;
 				$info .= ' <a href="' . $picture['picture'] . '" target="_blank">' . $picture['picture_type'] . '</a>';
@@ -4024,7 +4024,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$link_picture = get_post_meta($posts->post->ID, c_al2fb_meta_link_picture, true);
 				if (!empty($link_picture)) {
 					$info .= '<tr><td>Link picture #' . $posts->post->ID . ':</td>';
-					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a>';
+					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a>';
 					$info .= ' ' . htmlspecialchars($link_picture, ENT_QUOTES, $charset);
 					$info .= ' @ ' . $posts->post->post_date . '</td></tr>';
 				}
@@ -4041,7 +4041,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$info .= '<tr><td>Error time:</td>';
 					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_link_time, true), ENT_QUOTES, $charset) . '</td></tr>';
 					$info .= '<tr><td>Error post:</td>';
-					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars($posts->post->post_title, ENT_QUOTES, $charset) . '</a></td></tr>';
+					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a></td></tr>';
 				}
 			}
 
