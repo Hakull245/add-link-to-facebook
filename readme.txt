@@ -580,7 +580,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.84 (next release) =
-* Updated FAQ
+* New feature: option to enable shortcodes in widgets
+* Updated FAQ and [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")

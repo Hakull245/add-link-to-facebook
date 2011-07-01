@@ -20,6 +20,7 @@ define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
+define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
 define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
@@ -216,6 +217,8 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
 			add_shortcode('al2fb_comments_plugin', array(&$this, 'Shortcode_comments_plugin'));
 			add_shortcode('al2fb_profile_link', array(&$this, 'Shortcode_profile_link'));
+			if (get_option(c_al2fb_option_shortcode_widget))
+				add_filter('widget_text', 'do_shortcode');
 
 			// Custom filters
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
@@ -675,6 +678,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_min_cap] = null;
 				if (empty($_POST[c_al2fb_option_noverifypeer]))
 					$_POST[c_al2fb_option_noverifypeer] = null;
+				if (empty($_POST[c_al2fb_option_shortcode_widget]))
+					$_POST[c_al2fb_option_shortcode_widget] = null;
 				if (empty($_POST[c_al2fb_option_optout]))
 					$_POST[c_al2fb_option_optout] = null;
 
@@ -694,6 +699,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
+				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
 				update_option(c_al2fb_option_optout, $_POST[c_al2fb_option_optout]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
@@ -1801,6 +1807,12 @@ if (!class_exists('WPAL2Facebook')) {
 				</th><td>
 					<input id="al2fb_noverifypeer" name="<?php echo c_al2fb_option_noverifypeer; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noverifypeer)) echo ' checked="checked"'; ?> />
 					<br /><span class="al2fb_explanation"><?php _e('Try this in case of cURL error 60', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_shortcode"><?php _e('Execute shortcodes in widgets:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_shortcode" name="<?php echo c_al2fb_option_shortcode_widget; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_shortcode_widget)) echo ' checked="checked"'; ?> />
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -3920,6 +3932,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No statistics:</td><td>' . (get_option(c_al2fb_option_optout) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site URL:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_siteurl), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
@@ -4138,7 +4151,7 @@ class AL2FB_Widget extends WP_Widget {
 			$post = $GLOBALS['post'];
 		if (empty($post->ID) && !empty($post['post_id']))
 			$post = get_post($post['post_id']);
-		if (empty($post))
+		if (empty($post) || empty($post->ID))
 			return;
 
 		// Get user
