@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.83
+Stable tag: 1.84
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -29,11 +29,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names, like button, like box, send button and profile icon/link
+* Shortcodes and template tags for liker names, like button, like box, send button, Facepile and profile icon/link
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
 
 **Beta features:**
 
@@ -275,6 +275,11 @@ To show the Facebook comments plugin:
 * [al2fb_comments_plugin]
 * [al2fb_comments_plugin post_id="123"]
 
+To show the Facebook face pile:
+
+* [al2fb_face_pile]
+* [al2fb_face_pile post_id="123"]
+
 To show the Facebook profile icon/link:
 
 * [al2fb_profile_link]
@@ -294,6 +299,8 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_send_button')) al2fb_send_button(123);
 * if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin();
 * if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin(123);
+* if (function_exists('al2fb_face_pile')) al2fb_face_pile();
+* if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link();
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
 
@@ -579,13 +586,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.84 (next release) =
+= 1.85 (next release) =
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
+
+= 1.84 =
+* New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
 * New feature: option to enable shortcodes in widgets
 * Improvement: post/page titles will be filtered
-* Updated FAQ and [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
+* Updated description, FAQ and [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
 
 = 1.83 =
 * Bugfix: correct user for EULA
@@ -681,6 +691,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.84 =
+Two new features, one improvement, documentation and translation updates
 
 = 1.83 =
 One bugfix, translation updates
@@ -960,7 +973,6 @@ In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
 * Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
-* Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile")
 * Integrate posts from Facebook
 
 Realized features:
@@ -993,7 +1005,7 @@ Realized features:
 * Facebook comment moderation (version 1.54)
 * Update added links (version 1.74)
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
-
+* Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
 
 Feature which will not be realized, sorry:
 

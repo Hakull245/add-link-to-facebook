@@ -81,6 +81,9 @@ define('c_al2fb_meta_like_box_noheader', 'al2fb_box_noheader');
 define('c_al2fb_meta_like_box_nostream', 'al2fb_box_nostream');
 define('c_al2fb_meta_comments_posts', 'al2fb_comments_posts');
 define('c_al2fb_meta_comments_width', 'al2fb_comments_width');
+define('c_al2fb_meta_pile_size', 'al2fb_pile_size');
+define('c_al2fb_meta_pile_width', 'al2fb_pile_width');
+define('c_al2fb_meta_pile_rows', 'al2fb_pile_rows');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_open_graph_admins', 'al2fb_open_graph_admins');
@@ -216,6 +219,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
 			add_shortcode('al2fb_comments_plugin', array(&$this, 'Shortcode_comments_plugin'));
+			add_shortcode('al2fb_face_pile', array(&$this, 'Shortcode_face_pile'));
 			add_shortcode('al2fb_profile_link', array(&$this, 'Shortcode_profile_link'));
 			if (get_option(c_al2fb_option_shortcode_widget))
 				add_filter('widget_text', 'do_shortcode');
@@ -335,6 +339,9 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_like_box_nostream);
 				delete_user_meta($user_ID, c_al2fb_meta_comments_posts);
 				delete_user_meta($user_ID, c_al2fb_meta_comments_width);
+				delete_user_meta($user_ID, c_al2fb_meta_pile_size);
+				delete_user_meta($user_ID, c_al2fb_meta_pile_width);
+				delete_user_meta($user_ID, c_al2fb_meta_pile_rows);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_admins);
@@ -538,6 +545,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_like_box_noheader] = null;
 			if (empty($_POST[c_al2fb_meta_like_box_nostream]))
 				$_POST[c_al2fb_meta_like_box_nostream] = null;
+			if (empty($_POST[c_al2fb_meta_pile_size]))
+				$_POST[c_al2fb_meta_pile_size] = null;
 			if (empty($_POST[c_al2fb_meta_open_graph]))
 				$_POST[c_al2fb_meta_open_graph] = null;
 			if (empty($_POST[c_al2fb_meta_exclude_default]))
@@ -562,6 +571,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_like_box_border] = trim($_POST[c_al2fb_meta_like_box_border]);
 			$_POST[c_al2fb_meta_comments_posts] = trim($_POST[c_al2fb_meta_comments_posts]);
 			$_POST[c_al2fb_meta_comments_width] = trim($_POST[c_al2fb_meta_comments_width]);
+			$_POST[c_al2fb_meta_pile_width] = trim($_POST[c_al2fb_meta_pile_width]);
+			$_POST[c_al2fb_meta_pile_rows] = trim($_POST[c_al2fb_meta_pile_rows]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
 			$_POST[c_al2fb_meta_open_graph_admins] = trim($_POST[c_al2fb_meta_open_graph_admins]);
 			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
@@ -641,6 +652,9 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_box_nostream, $_POST[c_al2fb_meta_like_box_nostream]);
 			update_user_meta($user_ID, c_al2fb_meta_comments_posts, $_POST[c_al2fb_meta_comments_posts]);
 			update_user_meta($user_ID, c_al2fb_meta_comments_width, $_POST[c_al2fb_meta_comments_width]);
+			update_user_meta($user_ID, c_al2fb_meta_pile_size, $_POST[c_al2fb_meta_pile_size]);
+			update_user_meta($user_ID, c_al2fb_meta_pile_width, $_POST[c_al2fb_meta_pile_width]);
+			update_user_meta($user_ID, c_al2fb_meta_pile_rows, $_POST[c_al2fb_meta_pile_rows]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
@@ -1087,6 +1101,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$comments_nolink_author = ($comments_nolink == 'author' ? ' checked' : '');
 			$comments_nolink_link = ($comments_nolink == 'link' ? ' checked' : '');
 
+			// Face pile
+			$pile_size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
+
 			// Sustainable Plugins Sponsorship Network
 			self::Render_sponsorship();
 ?>
@@ -1498,20 +1515,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_like_font"><?php _e('Font:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<select id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
-				<option value="" <?php echo empty($like_font) ? 'selected' : ''; ?>></option>
-				<option value="arial" <?php echo $like_font == 'arial' ? 'selected' : ''; ?>>arial</option>
-				<option value="lucida grande" <?php echo $like_font == 'lucida grande' ? 'selected' : ''; ?>>lucida grande</option>
-				<option value="segoe ui" <?php echo $like_font == 'segoe ui' ? 'selected' : ''; ?>>segoe ui</option>
-				<option value="tahoma" <?php echo $like_font == 'tahoma' ? 'selected' : ''; ?>>tahoma</option>
-				<option value="trebuchet ms" <?php echo $like_font == 'trebuchet ms' ? 'selected' : ''; ?>>trebuchet ms</option>
-				<option value="verdana" <?php echo $like_font == 'verdana' ? 'selected' : ''; ?>>verdana</option>
-				</select>
-			</td></tr>
-
-			<tr valign="top"><th scope="row">
 				<label for="al2fb_like_top"><?php _e('Show at the top of the post:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_like_top" name="<?php echo c_al2fb_meta_like_top; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_top, true)) echo ' checked="checked"'; ?> />
@@ -1589,6 +1592,36 @@ if (!class_exists('WPAL2Facebook')) {
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
 
+			<h4><?php _e('Facebook face pile', c_al2fb_text_domain); ?></h4>
+			<table class="form-table al2fb_border">
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_pile_size"><?php _e('Size:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<select id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
+				<option value="small" <?php echo $pile_size == 'small' ? 'selected' : ''; ?>><?php _e('Small', c_al2fb_text_domain); ?></option>
+				<option value="large" <?php echo $pile_size == 'large' ? 'selected' : ''; ?>><?php _e('Large', c_al2fb_text_domain); ?></option>
+				</select>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_pile_width"><?php _e('Width:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_pile_width" name="<?php echo c_al2fb_meta_pile_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_pile_width, true); ?>" />
+				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_pile_rows"><?php _e('Maximum count of rows:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_pile_rows" name="<?php echo c_al2fb_meta_pile_rows; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_pile_rows, true); ?>" />
+			</td></tr>
+
+			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
+
 			<h4><?php _e('Facebook common', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1626,6 +1659,20 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_like_faces"><?php _e('Faces:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_like_faces" name="<?php echo c_al2fb_meta_like_faces; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_faces, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_like_font"><?php _e('Font:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<select id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
+				<option value="" <?php echo empty($like_font) ? 'selected' : ''; ?>></option>
+				<option value="arial" <?php echo $like_font == 'arial' ? 'selected' : ''; ?>>arial</option>
+				<option value="lucida grande" <?php echo $like_font == 'lucida grande' ? 'selected' : ''; ?>>lucida grande</option>
+				<option value="segoe ui" <?php echo $like_font == 'segoe ui' ? 'selected' : ''; ?>>segoe ui</option>
+				<option value="tahoma" <?php echo $like_font == 'tahoma' ? 'selected' : ''; ?>>tahoma</option>
+				<option value="trebuchet ms" <?php echo $like_font == 'trebuchet ms' ? 'selected' : ''; ?>>trebuchet ms</option>
+				<option value="verdana" <?php echo $like_font == 'verdana' ? 'selected' : ''; ?>>verdana</option>
+				</select>
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -3173,6 +3220,17 @@ if (!class_exists('WPAL2Facebook')) {
 				return self::Get_comments_plugin($post);
 		}
 
+		// Shortcode face pile
+		function Shortcode_face_pile($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_face_pile($post);
+		}
+
 		// Shortcode profile link
 		function Shortcode_profile_link($atts) {
 			extract(shortcode_atts(array('post_id' => null), $atts));
@@ -3219,19 +3277,6 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			return $locale;
 		}
-
-		// Button:
-
-		// Box:
-		// - URL (generated)
-		// - Width
-		// - Border color
-		// - Show stream
-		// - Show header
-
-		// Common:
-		// - Color scheme
-		// - Show faces
 
 		// Get HTML for like button
 		function Get_like_button($post, $box) {
@@ -3352,6 +3397,36 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= ' width="' . (empty($width) ? '500' : $width) . '"';
 			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
 			$content .= ' href="' . $link . '"></fb:comments>';
+			$content .= '</div>';
+
+			return $content;
+		}
+
+		// Get HTML face pile
+		function Get_face_pile($post) {
+			$user_ID = self::Get_user_ID($post);
+
+			// Get language
+			$lang = self::Get_locale($user_ID);
+			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+
+			// Get options
+			$size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
+			$width = get_user_meta($user_ID, c_al2fb_meta_pile_width, true);
+			$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
+			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+			if (empty($link))
+				$link = get_permalink($post->ID);
+
+			// Face pile
+			$content = '<div class="al2fb_face_pile">';
+			$content .= '<div id="fb-root"></div>';
+			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+			$content .= '<fb:facepile';
+			$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
+			$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
+			$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
+			$content .= ' href="' . $link . '"></fb:facepile>';
 			$content .= '</div>';
 
 			return $content;
@@ -3919,6 +3994,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Comments posts:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_comments_posts, true) . '</td></tr>';
 			$info .= '<tr><td>Comments width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_comments_width, true) . '</td></tr>';
 
+			$info .= '<tr><td>Facepile size:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_size, true) . '</td></tr>';
+			$info .= '<tr><td>Facepile width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_width, true) . '</td></tr>';
+			$info .= '<tr><td>Facepile rows:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_rows, true) . '</td></tr>';
+
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 			$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
@@ -4174,6 +4253,7 @@ class AL2FB_Widget extends WP_Widget {
 		$like_box = isset($instance['al2fb_like_box']) ? $instance['al2fb_like_box'] : false;
 		$send_button = isset($instance['al2fb_send_button']) ? $instance['al2fb_send_button'] : false;
 		$comments_plugin = isset($instance['al2fb_comments_plugin']) ? $instance['al2fb_comments_plugin'] : false;
+		$face_pile = isset($instance['al2fb_face_pile']) ? $instance['al2fb_face_pile'] : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 
 		// More settings
@@ -4208,7 +4288,7 @@ class AL2FB_Widget extends WP_Widget {
 			catch (Exception $e) {
 			}
 
-		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $profile) {
+		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $face_pile || $profile) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -4284,6 +4364,9 @@ class AL2FB_Widget extends WP_Widget {
 			if ($comments_plugin)
 				echo $wp_al2fb->Get_comments_plugin($post);
 
+			if ($face_pile)
+				echo $wp_al2fb->Get_face_pile($post);
+
 			// Profile
 			if ($profile)
 				echo $wp_al2fb->Get_profile_link($post);
@@ -4345,6 +4428,7 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['al2fb_like_box'] = $new_instance['al2fb_like_box'];
 		$instance['al2fb_send_button'] = $new_instance['al2fb_send_button'];
 		$instance['al2fb_comments_plugin'] = $new_instance['al2fb_comments_plugin'];
+		$instance['al2fb_face_pile'] = $new_instance['al2fb_face_pile'];
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
 		return $instance;
 	}
@@ -4366,6 +4450,8 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['al2fb_send_button'] = false;
 		if (empty($instance['al2fb_comments_plugin']))
 			$instance['al2fb_comments_plugin'] = false;
+		if (empty($instance['al2fb_face_pile']))
+			$instance['al2fb_face_pile'] = false;
 		if (empty($instance['al2fb_profile']))
 			$instance['al2fb_profile'] = false;
 
@@ -4376,6 +4462,7 @@ class AL2FB_Widget extends WP_Widget {
 		$chk_box = ($instance['al2fb_like_box'] ? ' checked ' : '');
 		$chk_send = ($instance['al2fb_send_button'] ? ' checked ' : '');
 		$chk_comments_plugin = ($instance['al2fb_comments_plugin'] ? ' checked ' : '');
+		$chk_face_pile = ($instance['al2fb_face_pile'] ? ' checked ' : '');
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
 		?>
 		<p>
@@ -4406,6 +4493,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_comments_plugin; ?> id="<?php echo $this->get_field_id('al2fb_comments_plugin'); ?>" name="<?php echo $this->get_field_name('al2fb_comments_plugin'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_comments_plugin'); ?>"><?php _e('Show Facebook comments plugin', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_face_pile; ?> id="<?php echo $this->get_field_id('al2fb_face_pile'); ?>" name="<?php echo $this->get_field_name('al2fb_face_pile'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_face_pile'); ?>"><?php _e('Show Facebook face pile', c_al2fb_text_domain); ?></label>
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_profile; ?> id="<?php echo $this->get_field_id('al2fb_profile'); ?>" name="<?php echo $this->get_field_name('al2fb_profile'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook image/link', c_al2fb_text_domain); ?></label>
