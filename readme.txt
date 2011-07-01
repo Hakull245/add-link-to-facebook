@@ -587,6 +587,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.85 (next release) =
+* New feature: Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
 
 = 1.84 =
