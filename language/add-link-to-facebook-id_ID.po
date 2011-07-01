@@ -8,57 +8,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-06-28 13:17+0100\n"
+"PO-Revision-Date: 2011-06-29 16:37+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
-"X-Poedit-Language: Norwegian\n"
-"X-Poedit-Country: NORWAY\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Settings updated"
-msgstr "Innstillinger oppdatert"
+msgstr "Pengaturan Diperbaharui"
 
 msgid "Authorized, go posting!"
-msgstr "Autorisert. Du kan postere!"
+msgstr "Diotorisasi, Silahkan posting!"
 
 msgid "needs configuration"
-msgstr "trenger konfigurering"
+msgstr "butuh konfugurasi"
 
 msgid "needs authorization"
-msgstr "trenger autorisasjon"
+msgstr "butuh otorisasi"
 
 msgid "Add Link to Facebook"
-msgstr "Tilføy link til Facebook"
+msgstr "Add Link to Facebook"
 
 msgid "Administration"
-msgstr "Administrasjon"
+msgstr "Administrasi"
 
 msgid "Your server may not allow external connections"
-msgstr "Din server tillater ikke eksterne tilkoblinger"
+msgstr "Server kamu mungkin tidak mengijinkan koneksi luar"
 
 msgid "Easy setup"
-msgstr "Enkelt oppsett"
+msgstr "Instalasi mudah"
 
 msgid "Use shared Facebook application:"
-msgstr "Bruk delt Facebook applikasjon:"
+msgstr "Gunakan aplikasi Facebook berbagi"
 
 msgid "Simple, but less secure"
-msgstr "Enkelt, men mindre sikker"
+msgstr "Simpel, tapi kurang aman"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "For å få en App-ID og App Secret må du lage en Facebook applikasjon"
+msgstr "Untuk mendapat App ID dan App Secret kamu harus membuat aplikasi Facebook"
 
 msgid "You have to fill in the following:"
-msgstr "Du må fylle ut følgende:"
+msgstr "Kamu harus mengisi di kolom berikut:"
 
 msgid "Click here to create"
-msgstr "Klikk her for å lage"
+msgstr "Klik disini untuk membuat"
 
 msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "Noe du liker, vil vises som \"via ... \" under meldingen"
+msgstr "Apapun kau suka, akan terlihat menjadi \"via ... \" dibawah pesannya"
 
 msgid "Web Site > Site URL:"
-msgstr "Web Site > Site URL:"
+msgstr "Website > URL Situs:"
 
 msgid "App ID:"
 msgstr "App ID:"
@@ -67,553 +67,553 @@ msgid "App Secret:"
 msgstr "App Secret:"
 
 msgid "Access token:"
-msgstr "Adgangstegn:"
+msgstr "Akses token:"
 
 msgid "App Name:"
-msgstr "App Navn:"
+msgstr "Nama App:"
 
 msgid "Share with all users on this site:"
-msgstr "Del med alle brukere på dette nettstedet:"
+msgstr "Berbagi dengan pengguna di situs ini:"
 
 msgid "Additional settings"
-msgstr "Flere innstillinger"
+msgstr "Pengaturan tambahan"
 
 msgid "Link picture:"
-msgstr "Link bilde:"
+msgstr "Tautan gambar:"
 
 msgid "WordPress logo"
-msgstr "WordPress logo"
+msgstr "Logo WordPress "
 
 msgid "First attached image"
-msgstr "Første vedlagt bilde"
+msgstr "Gambar pertama yang ditambahkan"
 
 msgid "Featured post image"
-msgstr "Utvalgt innlegg bilde"
+msgstr "Gambar Post Feature"
 
 msgid "Let Facebook select"
-msgstr "La Facebook velge"
+msgstr "Biarkan Facebook memilih"
 
 msgid "First image in the post"
-msgstr "Første bilde i innlegget"
+msgstr "Gambar pertama di post"
 
 msgid "Custom picture below"
-msgstr "Selvvalgt bilde nedenfor"
+msgstr "Gambar lain berikut"
 
 msgid "Custom picture URL:"
-msgstr "Selvvalgt bilde URL:"
+msgstr "URL Gambar lain :"
 
 msgid "At least 50 x 50 pixels"
-msgstr "Minst 50 x 50 piksler"
+msgstr "minimal 50 x 50 pixels"
 
 msgid "Add to page:"
-msgstr "Legg til side:"
+msgstr "tambahkan ke halaman:"
 
 msgid "Add as page owner:"
-msgstr "Legg til som side eier:"
+msgstr "Tambahkan sebagai pemilik halaman:"
 
 msgid "Requires manage pages permission"
-msgstr "Krever administrere sider tillatelse"
+msgstr "Diperlukan pengaturan izin pages"
 
 msgid "Use groups:"
-msgstr "Bruk grupper:"
+msgstr "Gunakan groups:"
 
 msgid "Requires user groups permission"
-msgstr "Krever brukergrupper tillatelse"
+msgstr "Diperlukan pengaturan izin group"
 
 msgid "Add to group:"
-msgstr "Legg til i gruppe:"
+msgstr "tambahkan ke group:"
 
 msgid "Use site title as caption:"
-msgstr "Bruk site tittel som bildetekst:"
+msgstr "Gunakan judul situs sebagai keterangan:"
 
 msgid "Use excerpt as message:"
-msgstr "Bruk utdrag som melding:"
+msgstr "Gunakan kutipan sebagai pesan:"
 
 msgid "Clean on deactivate:"
-msgstr "Rens ved deaktivering:"
+msgstr "Bersihkan saat dimatikan:"
 
 msgid "All data, except link id's"
-msgstr "Alle data, utenom link id's"
+msgstr "Semua data, kecuali id tautan"
 
 msgid "I have donated to this plugin:"
-msgstr "Jeg har donert til denne plugin:"
+msgstr "Saya telah berdonasi untuk plugin ini:"
 
 msgid "Administrator options"
-msgstr "Administrator alternativer"
+msgstr "Opsi Administrator"
 
 msgid "Do not display notices:"
-msgstr "Ikke vis merknader:"
+msgstr "Jangan tampilkan pemberitahuan:"
 
 msgid "Except on this page"
-msgstr "Bortsett fra på denne siden"
+msgstr "Kecuali halaman ini"
 
 msgid "Required capability to use plugin:"
-msgstr "Nødvendig tilgang til å bruke plugin:"
+msgstr "Dibutuhkan kemampuan untuk menggunakan plugin:"
 
 msgid "Debug options"
-msgstr "Debug alternativer"
+msgstr "Opsi Debug"
 
 msgid "Use site URL as request URI:"
-msgstr "Bruk nettstedets nettadresse som forespørsel URI:"
+msgstr "Gunakan URL situs sebagai URI request:"
 
 msgid "Do not use cURL:"
-msgstr "Ikke bruk cURL:"
+msgstr "Jangan gunakan cURL:"
 
 msgid "Save"
-msgstr "Lagre"
+msgstr "Simpan"
 
 msgid "Authorization"
-msgstr "Autorisasjon"
+msgstr "Otorisasi"
 
 msgid "Links will be added to"
-msgstr "Linker vil bli lagt til"
+msgstr "Tautan akan ditambahkan ke"
 
 msgid "Authorize"
-msgstr "Autoriser"
+msgstr "Terotorisasi"
 
 msgid "Privacy in the Sustainable Plugins Sponsorship Network"
-msgstr "Personvern i Sustainable Plugins Sponsing Network"
+msgstr "Privasi di Jaringan Pensponsor Plugin Berkelanjutan"
 
 msgid "Resources"
-msgstr "Ressurser"
+msgstr "Sumber"
 
 msgid "Frequently asked questions"
-msgstr "Ofte stilte spørsmål"
+msgstr "Pertanyaan yang sering ditanyakan"
 
 msgid "Facebook wall"
-msgstr "Facebook vegg"
+msgstr "Dinding Facebook"
 
 msgid "Support page"
-msgstr "Support side"
+msgstr "Halaman Bantuan"
 
 msgid "About the author"
-msgstr "Om forfatteren"
+msgstr "Tentang penulis"
 
 msgid "Other plugins"
-msgstr "Andre innstikk"
+msgstr "Plugin lain"
 
 msgid "Do not add link to Facebook"
-msgstr "Ikke legg til link til Facebook"
+msgstr "Jangan tambahkan tautan ke Facebook"
 
 msgid "Debug information"
-msgstr "Debug informasjon"
+msgstr "Informasi Debug"
 
 msgid "Yes"
-msgstr "Ja"
+msgstr "Ya"
 
 msgid "No"
-msgstr "Nei"
+msgstr "Tidak"
 
 msgid "No images in the media library for this post"
-msgstr "Ingen bilder i media biblioteket for dette innlegget"
+msgstr "Tidak ada gambar di pustaka media untuk post ini"
 
 msgid "Select link image:"
-msgstr "Velg link bildet:"
+msgstr "Pilih tautan gambar:"
 
 msgid "None"
-msgstr "Ingen"
+msgstr "Kosong"
 
 msgid "Name:"
-msgstr "Navn:"
+msgstr "Nama:"
 
 msgid "E-mail:"
-msgstr "E-post:"
+msgstr "Surel:"
 
 msgid "Message:"
-msgstr "Melding:"
+msgstr "Pesan:"
 
 msgid "Send"
-msgstr "Send"
+msgstr "Kirim"
 
 msgid "Debug information sent"
-msgstr "Debug informasjon sent"
+msgstr "Informasi debug terkirim"
 
 msgid "Sending debug information failed"
-msgstr "Sending av debug informasjon feilet"
+msgstr "Informasi debug gagal terkirim"
 
 msgid "Use short URL:"
-msgstr "Bruk kort URL:"
+msgstr "Gunakan pemendek URL:"
 
 msgid "If available"
-msgstr "Hvis tilgjengelig"
+msgstr "Jika tersedia"
 
 msgid "Delete existing Facebook link"
-msgstr "Slett eksisterende Facebook link"
+msgstr "Hapus tautan Facebook yang ada"
 
 msgid "Number of sentences to use:"
-msgstr "Antall setninger å bruke:"
+msgstr "Jumlah kalimat yang digunakan:"
 
 msgid "Leave blank to let Facebook choose"
-msgstr "La stå tomt for å la Facebook velge"
+msgstr "Kosongkan untuk membiarkan Facebook memilih"
 
 msgid "Text trailer:"
-msgstr "Tekst trailer:"
+msgstr "Trailer Text:"
 
 msgid "For example \"Read more ...\""
-msgstr "For eksempel \"Les mer ...\""
+msgstr "Contohnya \"Baca Terus ...\""
 
 msgid "Keep hyperlinks:"
-msgstr "Behold hyperkoblinger:"
+msgstr "Biarkan hyperlinks:"
 
 msgid "The hyperlink title will be removed"
-msgstr "Hyperkobling tittelen vil bli fjernet"
+msgstr "Judul hyperlink akan dihapus"
 
 msgid "Integrate comments from Facebook:"
-msgstr "Integrer kommentarer fra Facebook:"
+msgstr "Integrasikan komentar dari Facebook:"
 
 msgid "Integrate likes from Facebook:"
-msgstr "Integrer liker fra Facebook:"
+msgstr "Integrasikan suka dari Facebook:"
 
 msgid "Show likers below the post text:"
-msgstr "Vis likere under innlegg teksten:"
+msgstr "Tampilkan penyuka dibawah teks postingan:"
 
 msgid "Show Facebook like button:"
-msgstr "Vis Facebook liker knapp:"
+msgstr "Tampilkan tombol 'suka' Facebook:"
 
 msgid "Use Open Graph protocol:"
-msgstr "Bruk Open Graph protokollen:"
+msgstr "Gunakan protokol Open Graph:"
 
 msgid "Documentation"
-msgstr "Dokumentasjon"
+msgstr "Dokumentasi"
 
 msgid "on Facebook"
-msgstr "på Facebook"
+msgstr "di Facebook"
 
 msgid "Liked this post"
-msgstr "Likte dette innlegget"
+msgstr "Menyukai post ini"
 
 msgid "Refresh Facebook comments every:"
-msgstr "Oppdater Facebook kommentarer hvert:"
+msgstr "Perbaharui komentar Facebook setiap:"
 
 msgid "Minutes"
-msgstr "Minutt"
+msgstr "Menit"
 
 msgid "Default every 10 minutes"
-msgstr "Standard hvert 10. minutt"
+msgstr "Standar setiap 10 menit"
 
 msgid "Maximum Facebook text length:"
-msgstr "Maksimal Facebook tekst lengde:"
+msgstr "Maksimal panjang teks Facebook:"
 
 msgid "Characters"
-msgstr "Tegn"
+msgstr "Karakter"
 
 msgid "Default 256 characters"
-msgstr "Standard 256 tegn"
+msgstr "Standar 256 karakter"
 
 msgid "liked this post"
 msgid_plural "liked this post"
-msgstr[0] "likte dette innlegget"
-msgstr[1] "likte dette innlegget"
+msgstr[0] "Menyukai post ini"
+msgstr[1] "Menyukai post ini"
 
 msgid "Add 'Share' link:"
-msgstr "Legg til 'Del' link:"
+msgstr "Tambahkan tautan 'Berbagi':"
 
 msgid "Share"
-msgstr "Del"
+msgstr "'Berbagi"
 
 msgid "Default picture URL:"
-msgstr "Standard bilde URL:"
+msgstr "Standar URL gambar:"
 
 msgid "Default WordPress logo"
-msgstr "Standard WordPress logo"
+msgstr "Standar logo WordPress"
 
 msgid "Layout:"
-msgstr "Layout:"
+msgstr "Tampilan:"
 
 msgid "Standard"
-msgstr "Standard"
+msgstr "Standar"
 
 msgid "Button with count"
-msgstr "Knapp med telling"
+msgstr "Tombol dengan jumlah"
 
 msgid "Box with count"
-msgstr "Boks med telling"
+msgstr "Kotak dengan jumlah"
 
 msgid "Faces:"
-msgstr "Ansikter:"
+msgstr "Wajah:"
 
 msgid "Width:"
-msgstr "Bredde:"
+msgstr "Lebar:"
 
 msgid "Pixels"
-msgstr "Piksler"
+msgstr "Pixel"
 
 msgid "Action:"
-msgstr "Handling:"
+msgstr "Aksi:"
 
 msgid "Like"
-msgstr "Liker"
+msgstr "Suka"
 
 msgid "Recommend"
-msgstr "Anbefaler"
+msgstr "Direkomendasikan"
 
 msgid "Font:"
-msgstr "Skrifttype:"
+msgstr "Huruf:"
 
 msgid "Color scheme:"
-msgstr "Fargekart:"
+msgstr "Skema Warna:"
 
 msgid "Light"
-msgstr "Lys"
+msgstr "Cerah"
 
 msgid "Dark"
-msgstr "Mørk"
+msgstr "Gelap"
 
 msgid "Use publish_post action:"
-msgstr "Bruk publish_post handling:"
+msgstr "Gunakan aksi publish_post:"
 
 msgid "Link to:"
-msgstr "Link til:"
+msgstr "Tautan ke:"
 
 msgid "Default the post or page"
-msgstr "Standard innlegget eller side"
+msgstr "Standar postingan atau halaman"
 
 msgid "Do not show on the home page:"
-msgstr "Ikke vis på hjemmesiden:"
+msgstr "Jangan tampilkan di halaman awal:"
 
 msgid "Do not show on posts:"
-msgstr "Ikke vis på innlegg:"
+msgstr "Jangan tampilkan di postingan:"
 
 msgid "Do not show on pages:"
-msgstr "Ikke vis på sidene:"
+msgstr "Jangan tampilkan di halaman:"
 
 msgid "Exclude these custom post types:"
-msgstr "Utelukke disse tilpassede innleggstypene:"
+msgstr "Pengecualian tipe posting berikut:"
 
 msgid "Separate by commas"
-msgstr "Atskille med komma"
+msgstr "Dipisahkan oleh koma"
 
 msgid "Do not verify the peer's certificate:"
-msgstr "Ikke verifisere peer sertifikat:"
+msgstr "Jangan memverifikasi sertifikat peer:"
 
 msgid "Try this in case of cURL error 60"
-msgstr "Prøv dette i tilfelle av cURL feil 60"
+msgstr "Coba ini jika cURL mengalami error 60"
 
 msgid "Add links for new pages:"
-msgstr "Legg til linker for nye sider:"
+msgstr "Tambahkan tautan untuk halaman baru:"
 
 msgid "Do not show in archives:"
-msgstr "Ikke vis i arkiver:"
+msgstr "Jangan tampilkan di arsip:"
 
 msgid "Do not show in categories:"
-msgstr "Ikke vis i kategorier:"
+msgstr "Jangan tampilkan di kategori"
 
 msgid "Show at the top of the post:"
-msgstr "Vis på toppen av innlegget:"
+msgstr "Tampilkan diatas postingan"
 
 msgid "Open Graph protocol <em>og:type</em>:"
-msgstr "Open Graph protokoll <em>og:type</em>:"
+msgstr "Protokol Open Graph <em>og:type</em>:"
 
 msgid "Do not add link by default:"
-msgstr "Ikke legg til link som standard:"
+msgstr "Jangan tambah tautan secara standar:"
 
 msgid "Don't show a summary in the post list:"
-msgstr "Ikke vis en oppsummering i post listen:"
+msgstr "Jangan tampilkan ringkasan di daftar post:"
 
 msgid "comments"
-msgstr "kommentarer"
+msgstr "Komentar"
 
 msgid "likes"
-msgstr "liker"
+msgstr "Suka"
 
 msgid "Exclude these categories:"
-msgstr "Utelukk disse kategoriene:"
+msgstr "Kecuali kategori ini:"
 
 msgid "Image from User Photo plugin"
-msgstr "Bilde fra User Photo innstikk"
+msgstr "Gambar dari plugin User Photo"
 
 msgid "Facebook character encoding:"
-msgstr "Facebook tegnkoding:"
+msgstr "Karakter encoding Facebook:"
 
 msgid "Default UTF-8; do not change if no need"
-msgstr "Standard UTF-8; ikke forandre om ikke nødvendig"
+msgstr "Standar UTF-8; jangan diganti jika tidak perlu"
 
 msgid "Do not add like button"
-msgstr "Ikke legg til liker knapp"
+msgstr "Jangan tambahkan tombol suka"
 
 msgid "I have rated this plugin:"
-msgstr "Jeg har klassifisert denne plugin:"
+msgstr "Saya telah menilai plugin ini:"
 
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
-msgstr "Hvis du liker Tilføy link til Facebook innstikk, kan du klassifisere den på <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Hvis den gjennomsnittlige rating er lav, er det ingen mening å supportere dette innstikk lenger.<br />Du kan deaktivere denne notisen ved å merke av alternativet \"Jeg har klassifisert denne plugin\" på  <a href=\"[settings]\">innstillings siden</a>."
+msgstr "Jika kamu menyukai plugin Add Link to Facebook, Tolong nilai di <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Jika nilainya rendah, akan sia-sia untuk melanjutkan plugin ini<br />Kamu bisa menutup peringatan ini dengan menceklist opsi \"Saya telah menilai plugin ini:\" di <a href=\"[settings]\">halaman setting</a>."
 
 msgid "Custom exerpt"
-msgstr "Tilpasset utdrag"
+msgstr "Kutipan kostum"
 
 msgid "Use iframe in stead of XFBML:"
-msgstr "Bruk iframe i stedet for XFBML:"
+msgstr "Gunakan iframe daripada XFBML:"
 
 msgid "Post WordPress comments back to Facebook:"
-msgstr "Poster WordPress kommentarer tilbake til Facebook:"
+msgstr "Posting komentar WordPress kembali ke Facebook:"
 
 msgid "commented on"
-msgstr "kommenterte på"
+msgstr "berkomentar di"
 
 msgid "Show Facebook send button:"
-msgstr "Vis Facebook send knapp:"
+msgstr "Tampilkan tombol kirim Facebook:"
 
 msgid "Do not integrate comments"
-msgstr "Ikke integrer kommentarer"
+msgstr "Jangan mengintegrasi komentar"
 
 msgid "Copy comments from Facebook to WordPress:"
-msgstr "Kopier kommentarer fra Facebook til WordPress:"
+msgstr "Salin komentar dari Facebook ke WordPress:"
 
 msgid "Enables for example editing of Facebook comments"
-msgstr "Aktiverer for eksempel redigering av Facebook kommentar"
+msgstr "Aktifkan untuk contoh mengedit komentar Facebook"
 
 msgid "Show Facebook like button"
-msgstr "Vis Facebook liker knapp"
+msgstr "Tampilkan tombol suka Facebook:"
 
 msgid "Show Facebook send button"
-msgstr "Vis Facebook send knapp"
+msgstr "Tampilkan tombol kirim Facebook"
 
 msgid "Combine Facebook like and send buttons:"
-msgstr "Kombiner Facebook liker og send knapper:"
+msgstr "Kombinasikan tombol kirim dan suka Facebook:"
 
 msgid "Clear error messages"
-msgstr "Slett feilmeldinger"
+msgstr "Bersihkan pesan error"
 
 msgid "Show Facebook image/link"
-msgstr "Vis Facebook bilde/link"
+msgstr "Tampilkan gambar/tautan Facebook"
 
 msgid "Do not link to Facebook comment author:"
-msgstr "Ikke link til Facebook kommentar forfatteren:"
+msgstr "Jangan menunjukan tautan ke Facebook pengomentar:"
 
 msgid "Disables displaying of Facebook avatars too"
-msgstr "Deaktiverer visning av Facebook avatarer også"
+msgstr "Jangan tampilkan avatar Facebook juga"
 
 msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
-msgstr "og naviger til '<em>Mine Apps</em>' og deretter til '<em>Sett opp ny App</em>'"
+msgstr "dan pergi ke '<em>My Apps</em>' en dan naar '<em>Set Up New App</em>'"
 
 msgid "Facebook locale"
 msgstr "Facebook locale"
 
 msgid "Do not change if no need"
-msgstr "Ikke endre om ikke nødvendig"
+msgstr "Jangan diganti jika tidak perlu"
 
 msgid "Link Facebook comment to:"
-msgstr "Link Facebook kommentar til:"
+msgstr "Tautkan komentar Facebook ke:"
 
 msgid "Profile author"
-msgstr "Profil forfatter"
+msgstr "Profil Penulis"
 
 msgid "Added link"
-msgstr "Lagt til link"
+msgstr "Tautan yang ditambahkan"
 
 msgid "Link on Facebook"
-msgstr "Link på Facebook"
+msgstr "Tautan di Facebook"
 
 msgid "Link picture"
-msgstr "Link bilde"
+msgstr "Tautan gambar"
 
 msgid "Facebook page"
-msgstr "Facebook side"
+msgstr "Halaman Facebook"
 
 msgid "Facebook group"
-msgstr "Facebook gruppe"
+msgstr "Grup Facebook"
 
 msgid "Link appearance"
-msgstr "Link utseende"
+msgstr "Tampilan tautan"
 
 msgid "Facebook comments"
-msgstr "Facebook komentarer"
+msgstr "Komentar Facebook"
 
 msgid "Facebook like button"
-msgstr "Facebook liker knapp"
+msgstr "Tombol suka Facebook"
 
 msgid "Miscelaneous settings"
-msgstr "Diverse innstillinger"
+msgstr "Pengaturan lain"
 
 msgid "Maximum text length with trailer:"
-msgstr "Maksimal tekst lengde med trailer:"
+msgstr "Maksimal teks dengan trailer:"
 
 msgid "Default 10,000 characters"
-msgstr "Standard 10.000 tegn"
+msgstr "Standar 10.0000 karakter"
 
 msgid "Facebook communication timeout:"
-msgstr "Facebook kommunikasjon timeout:"
+msgstr "Waktu jeda komunikasi Facebook:"
 
 msgid "Seconds"
-msgstr "Sekunder"
+msgstr "Detik"
 
 msgid "Default 30 seconds"
-msgstr "Standard 30 sekunder"
+msgstr "Standar 30 detik"
 
 msgid "Please check if this is a correct, reachable e-mail address"
-msgstr "Vennligst sjekk om dette er en korrekt, tilgjengelig e-postadresse"
+msgstr "Harap periksa jika benar, alamat surel yang benar"
 
 msgid "Please describe your problem, even if you did before"
-msgstr "Beskriv ditt problem, selv om du har gjort det før"
+msgstr "Harap jelaskan permasalahan anda, bahkan jika sebelumnya anda lakukan"
 
 msgid "Show Facebook comments"
-msgstr "Vis Facebook kommentarer"
+msgstr "Tampilkan komentar Facebook"
 
 msgid "Show Facebook messages"
-msgstr "Vis Facebook meldinger"
+msgstr "Tampilkan pesan Facebook"
 
 msgid "Appearance depends on your theme!"
-msgstr "Utseende avhenger av ditt tema!"
+msgstr "Tampilan tergantung tema kamu!"
 
 msgid "Additional styling rules (CSS):"
-msgstr "Ekstra styling regler (CSS):"
+msgstr "Tambahan aturan tampilan (CSS):"
 
 msgid "Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!"
-msgstr "Vær oppmerksom på at kommentar integrering eller visning av Facebook-meldinger i widgeten kan skade privatlivet til andre Facebook-brukere!"
+msgstr "Harap diingat bahwa integrasi komentar atau menampilkan pesan Facebook dapan membahayakan privasi pengguna Facebook lain!"
 
 msgid "should be authorized again to show Facebook messages in the widget"
-msgstr "må bli autorisert igjen for å vise Facebook meldinger i widget"
+msgstr "Harus di otorisasi ulang untuk menampilkan pesan Facebook di widget"
 
 msgid "Plugin is authorized"
-msgstr "Innstikk er autorisert"
+msgstr "Plugin terotorisasi"
 
 msgid "Show comments on messages"
-msgstr "Vis kommentarer på meldinger"
+msgstr "Tampilkan komentar di pesan"
 
 msgid "Update existing Facebook link"
-msgstr "Oppdatere eksisterende Facebook link"
+msgstr "Perbaharui tautan Facebook yang ada"
 
 msgid "Comments and likes will be lost!"
-msgstr "Kommentarer og liker vil gå tapt!"
+msgstr "Komentar dan suka akan hilang!"
 
 msgid "Show Facebook like box"
-msgstr "Vis Facebook liker boks"
+msgstr "Tampilkan kotak suka Facebook"
 
 msgid "Disable like box header:"
-msgstr "Deaktiver liker boks overskrift:"
+msgstr "Nonaktifkan header kotak suka:"
 
 msgid "Disable like box stream:"
-msgstr "Deaktiver liker boks strøm:"
+msgstr "Nonaktifkan aliran kotak suka:"
 
 msgid "Avatar of author"
-msgstr "Avatar av forfatter"
+msgstr "Avatar penulis"
 
 msgid "Facebook administrators:"
-msgstr "Facebook administratorer:"
+msgstr "Administrator Facebook:"
 
 msgid "Separate multiple administrators by a comma without spaces"
-msgstr "Skill flere administratorer med komma uten mellomrom"
+msgstr "Pisahkan banyak administrator dengan koma tanpa spasi"
 
 msgid "Facebook like box"
-msgstr "Facebook liker boks"
+msgstr "Kotak suka Facebook"
 
 msgid "Border color:"
-msgstr "Kantfarge:"
+msgstr "Warna garis pinggir:"
 
 msgid "Facebook common"
-msgstr "Facebook felles"
+msgstr "Facebook umum"
 
 msgid "Facebook comments plugin"
-msgstr "Facebook kommentarer innstikk"
+msgstr "Plugin komentar Facebook"
 
 msgid "Number of posts:"
-msgstr "Antall innlegg:"
+msgstr "Jumlah postingan:"
 
 msgid "Show Facebook comments plugin"
-msgstr "Vis Facebook kommentarer innstikk"
+msgstr "Tampilkan plugin komentar Facebook"
 
 msgid "Go to dashboard"
-msgstr "Gå til kontrollpanel"
+msgstr "Menuju beranda"
 
 msgid "Do not collect statistics:"
-msgstr "Ikke samle statistikk:"
+msgstr "Jangan kumpulkan statistik:"
 

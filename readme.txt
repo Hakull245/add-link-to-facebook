@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.79
+Stable tag: 1.84
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -25,15 +25,15 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Additional features:**
 
-* Show the names of the people who liked your post on Facebook below the post text
+* Show the names of the people who liked your post on Facebook below the post/page text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names, like button and send button
+* Shortcodes and template tags for liker names, like button, like box, send button, Facepile and profile icon/link
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments/messages and/or like/send button, like box and/or a link to your Facebook profile
+* Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
 
 **Beta features:**
 
@@ -63,6 +63,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Vietnamese (vi\_VN) by [Crazywolfdl](http://mydalat.com "Crazywolfdl"), thanks!
 * Swedish (sv\_SE) by *JornB*, thanks!
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
+* Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -254,20 +255,35 @@ To show liker names:
 * [al2fb_likers]
 * [al2fb_likers post_id="123"]
 
-To show a like button:
+To show a Facebook like button:
 
 * [al2fb_like_button]
 * [al2fb_like_button post_id="123"]
 
-To show a like box:
+To show a Facebook like box:
 
 * [al2fb_like_box]
 * [al2fb_like_box post_id="123"]
 
-To show a send button:
+To show a Facebook send button:
 
 * [al2fb_send_button]
 * [al2fb_send_button post_id="123"]
+
+To show the Facebook comments plugin:
+
+* [al2fb_comments_plugin]
+* [al2fb_comments_plugin post_id="123"]
+
+To show the Facebook face pile:
+
+* [al2fb_face_pile]
+* [al2fb_face_pile post_id="123"]
+
+To show the Facebook profile icon/link:
+
+* [al2fb_profile_link]
+* [al2fb_profile_link post_id="123"]
 
 = U24 How can I use the template tags? =
 
@@ -281,6 +297,12 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_like_box')) al2fb_like_box(123);
 * if (function_exists('al2fb_send_button')) al2fb_send_button();
 * if (function_exists('al2fb_send_button')) al2fb_send_button(123);
+* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin();
+* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin(123);
+* if (function_exists('al2fb_face_pile')) al2fb_face_pile();
+* if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
+* if (function_exists('al2fb_profile_link')) al2fb_profile_link();
+* if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
 
 = U25 Can I add links to multiple walls? =
 
@@ -299,6 +321,14 @@ So, people that click on the like button are displayed within the like button (d
 
 Trash the comment, but leave it in the trash folder.
 If you delete the comment permanently, the plugin will copy the comment again from Facebook.
+
+= U28 Can I display the widget on every page? =
+
+This is not directly possible. The plugin is a multi-user plugin.
+Only on single posts/pages an author can be determined, which is needed to get the correct settings (layout, link, etc).
+
+However, there is a workaround: choose a post/page you want to tie the widget to and
+use one or more of the shortcodes to display what you want, see question U23 for more details.
 
 **--- Security ---**
 
@@ -405,16 +435,17 @@ You have probably entered a wrong *App Secret*.
 
 = E03 I get 'Given URL is not allowed by the Application configuration' =
 
-You have probably entered a wrong URL in the Facebook application setting *Web Site > Site URL*.
+You have probably entered a wrong URL in the Facebook application setting.
 
 Assuming you created a Facebook application successfully:
 
 * Go to the plugin page through the WordPress *Tools* menu
-* Copy the link after *Web Site > Site URL:*
+* Copy the link after *Web > Site URL & Domain*
 * Click on the *Click here to create* link
 * Navigate to *My Apps* and select the application you created before
-* Click on the *Edit Settings* link and select the tab *Web Site*
+* Click on the *Edit Settings* link and select the tab *Web* and then *Site URL & Domain*
 * Paste into the field *Site URL* and press *Save Changes*
+* The field *Site Domain* should be empty
 
 Now try to authorize again.
 
@@ -529,6 +560,15 @@ You can also tick the checkbox *Clear error messages* in the post submit box, ne
 In this way you can clear the error message without adding a link to Facebook
 (you'll probably want to check *Do not add link to Facebook* too in this case).
 
+= E20 I get 'Error validating access token: The session has been invalidated because the user has changed the password' =
+
+Authorizing the plugin again will most probably solve this problem.
+
+= E21 I get 'failed to open stream: no suitable wrapper could be found' =
+
+Your hosting server probably doesn't have the software installed or it isn't configured correctly to make a (secure) connection to the internet.
+Ask your provider to install and configure [cURL](http://www.php.net/manual/en/curl.setup.php "cURL").
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -546,8 +586,47 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.80 =
+= 1.85 (next release) =
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
+
+= 1.84 =
+* New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
+* New feature: option to enable shortcodes in widgets
+* Improvement: post/page titles will be filtered
+* Updated description, FAQ and [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
+
+= 1.83 =
+* Bugfix: correct user for EULA
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.82 =
+* Administrator option to disable collection of statistics
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.81 =
+* Bug fix: correct cached link for like box
 * Improvement: replace dash by underscore in WP locale
+* Improvement: reorganized Facebook like button/box settings
+* Improvement: *Link to* option applies also to like box
+* Improvement: added fb-root to Facebook plugins
+* Improvement: added div for styling like box
+* Improvement: Facebook common settings apply to all widget features
+* New feature: added options to set like box width and border
+* New feature: Facebook comments plugin widget/shortcode/template tag
+* New feature: Facebook profile icon/link shortcode/template tag
+* Added [End-user license agreement](http://al2fb.bokhorst.biz/eula "EULA")
+* Removed support for iframe Facebook plugins
+* Updated FAQ & [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.80 =
+* Beta version
 
 = 1.79 =
 * Bugfix: undefined function *get_plugins*
@@ -613,6 +692,18 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.84 =
+Two new features, one improvement, documentation and translation updates
+
+= 1.83 =
+One bugfix, translation updates
+
+= 1.82 =
+Option to disable collection of statistics
+
+= 1.81 =
+One bugfix, six improvements, three new features, EULA, documentation & translation updates
+
 = 1.79 =
 One bugfix, one improvement, translation update
 
@@ -655,7 +746,7 @@ Basically there are five steps to follow:
 	* Select *Set Up New App*
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
-	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
+	* Fill the URL which the plugin indicates in the yellow box into the tab *Web* > *Site URL & Domain*, field *Site URL*
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
@@ -880,7 +971,9 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* None
+* Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
+* Integrate posts from Facebook
 
 Realized features:
 
@@ -912,7 +1005,7 @@ Realized features:
 * Facebook comment moderation (version 1.54)
 * Update added links (version 1.74)
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
-
+* Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
 
 Feature which will not be realized, sorry:
 
