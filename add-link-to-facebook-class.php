@@ -1175,7 +1175,7 @@ if (!class_exists('WPAL2Facebook')) {
 					<td><span class="al2fb_data"><?php _e('Anything you like, will appear as "via ..." below the message', c_al2fb_text_domain); ?></span></td>
 				</tr>
 				<tr>
-					<td><span class="al2fb_label"><strong><?php _e('Web Site > Site URL:', c_al2fb_text_domain); ?></strong></span></td>
+					<td><span class="al2fb_label"><strong><?php _e('Web > Site URL & Domain:', c_al2fb_text_domain); ?></strong></span></td>
 					<td><span class="al2fb_data"><?php echo htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset); ?></span></td>
 				</tr>
 			</table>

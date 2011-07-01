@@ -428,16 +428,17 @@ You have probably entered a wrong *App Secret*.
 
 = E03 I get 'Given URL is not allowed by the Application configuration' =
 
-You have probably entered a wrong URL in the Facebook application setting *Web Site > Site URL*.
+You have probably entered a wrong URL in the Facebook application setting.
 
 Assuming you created a Facebook application successfully:
 
 * Go to the plugin page through the WordPress *Tools* menu
-* Copy the link after *Web Site > Site URL:*
+* Copy the link after *Web > Site URL & Domain*
 * Click on the *Click here to create* link
 * Navigate to *My Apps* and select the application you created before
-* Click on the *Edit Settings* link and select the tab *Web Site*
+* Click on the *Edit Settings* link and select the tab *Web* and then *Site URL & Domain*
 * Paste into the field *Site URL* and press *Save Changes*
+* The field *Site Domain* should be empty
 
 Now try to authorize again.
 
@@ -580,7 +581,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.84 (next release) =
 * Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
 
 = 1.83 =
 * Bugfix: correct user for EULA
@@ -728,7 +731,7 @@ Basically there are five steps to follow:
 	* Select *Set Up New App*
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
-	* Fill in the URL which the plugin indicates in the yellow box on the tab *Website* in the field *Site URL*
+	* Fill the URL which the plugin indicates in the yellow box into the tab *Web* > *Site URL & Domain*, field *Site URL*
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
