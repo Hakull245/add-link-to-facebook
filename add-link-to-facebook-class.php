@@ -3606,7 +3606,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$width = ''; // TODO
 			$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
 
-			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'User name','type':'text'},{'name':'password'}]";
+			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'},{'name':'password'}]";
 
 			$content = '<div class="al2fb_registration">';
 			$content .= '<div id="fb-root"></div>';

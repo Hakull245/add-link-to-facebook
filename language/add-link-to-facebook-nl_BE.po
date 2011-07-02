@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-07-02 09:12+0100\n"
+"PO-Revision-Date: 2011-07-02 14:00+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -643,4 +643,19 @@ msgstr "Toon Facebook registratie"
 
 msgid "Show Facebook login"
 msgstr "Toon Facebook login"
+
+msgid "WordPress user name"
+msgstr "WordPress gebruikersnaam"
+
+msgid "Facebook registration failed"
+msgstr "Facebook registratie mislukt"
+
+msgid "E-mail address in use"
+msgstr "E-mail adres in gebruik"
+
+msgid "User not found"
+msgstr "Gebruiker niet gevonden"
+
+msgid "Could not verify Facebook login"
+msgstr "Facebook login kon niet geverifierd worden"
 
