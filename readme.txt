@@ -607,7 +607,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.85 (next release) =
 * New feature: Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook login (including shortcode/template tag)
+* Improvement: Flatr script only on settings page
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
 
 = 1.84 =
