@@ -193,6 +193,7 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('manage_pages_custom_column', array(&$this, 'Manage_posts_custom_column'), 10, 2);
 				add_action('add_meta_boxes', array(&$this, 'Add_meta_boxes'));
 				add_action('save_post', array(&$this, 'Save_post'));
+				add_action('personal_options', array(&$this, 'Personal_options'));
 			}
 
 			add_action('transition_post_status', array(&$this, 'Transition_post_status'), 10, 3);
@@ -358,6 +359,25 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
+		function Login_by_email($email) {
+			$user = get_user_by_email($email);
+			if ($user) {
+				wp_set_current_user($user->ID, $user->user_login);
+				wp_set_auth_cookie($user->ID);
+				do_action('wp_login', $user->user_login);
+			}
+		}
+
+		function Personal_options($user) {
+			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
+			if ($fid) {
+				echo '<th scope="row">' . _('Facebook ID') . '</th>';
+				echo '<td>' . $fid . '</td>';
+				echo '</tr>';
+				echo '<tr>';
+			}
+		}
+
 		// Initialization
 		function Init() {
 			// Secret request
@@ -377,43 +397,62 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Facebook registration
 			if (isset($_REQUEST['al2fb_registration'])) {
-				header('Content-type: text/plain');
 				$reg = self::parse_signed_request($_REQUEST['user']);
-				if (email_exists($reg['registration']['email']))
-					echo 'e-mail in use!';
+				if ($reg == null) {
+					header('Content-type: text/plain');
+					echo 'Registration failed';
+				}
 				else {
-					$user_ID = wp_insert_user(array(
-						'first_name' => $reg['registration']['first_name'],
-						'last_name' => $reg['registration']['last_name'],
-						'user_email' => $reg['registration']['email'],
-						'user_login' => $reg['registration']['user_name'],
-						'user_pass' => $reg['registration']['password']
-					)) ;
-					if (is_wp_error($user_ID))
-						echo $user_ID->get_error_message();
+					if (email_exists($reg['registration']['email'])) {
+						header('Content-type: text/plain');
+						echo 'E-mail in use!';
+					}
 					else {
-						if (isset($reg['user_id']))
-							update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-						echo 'Accepted!';
+						$user_ID = wp_insert_user(array(
+							'first_name' => $reg['registration']['first_name'],
+							'last_name' => $reg['registration']['last_name'],
+							'user_email' => $reg['registration']['email'],
+							'user_login' => $reg['registration']['user_name'],
+							'user_pass' => $reg['registration']['password']
+						)) ;
+						if (is_wp_error($user_ID)) {
+							header('Content-type: text/plain');
+							echo $user_ID->get_error_message();
+						}
+						else {
+							if (isset($reg['user_id']))
+								update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+							self::Login_by_email($reg['registration']['email']);
+							wp_redirect(home_url() . $_REQUEST['uri']);
+						}
 					}
 				}
-				if ($this->debug)
-					print_r($reg);
 				exit();
 			}
 
 			// Facebook login
 			if (isset($_REQUEST['al2fb_login'])) {
-				header('Content-type: text/plain');
-				echo 'token=' . $_REQUEST['token'] . PHP_EOL;
-				echo 'uid=' . $_REQUEST['uid'] . PHP_EOL;
-
-				$url = 'https://graph.facebook.com/' . $_REQUEST['uid'];
-				$token = $_REQUEST['token'];
-				$query = http_build_query(array('access_token' => $token), '', '&');
-				$response = self::Request($url, $query, 'GET');
-				$me = json_decode($response);
-				print_r($me);
+				try {
+					$url = 'https://graph.facebook.com/' . $_REQUEST['uid'];
+					$query = http_build_query(array('access_token' => $_REQUEST['token']), '', '&');
+					$response = self::Request($url, $query, 'GET');
+					$me = json_decode($response);
+					if (!empty($me) && !empty($me->verified) && $me->verified) {
+						self::Login_by_email($me->email);
+						wp_redirect($_REQUEST['uri']);
+					}
+					else {
+						header('Content-type: text/plain');
+						if ($this->debug)
+							print_r($me);
+						else
+							echo 'Could not verify login';
+					}
+				}
+				catch (Exception $e) {
+					header('Content-type: text/plain');
+					echo $e->getMessage();
+				}
 				exit();
 			}
 
@@ -3495,6 +3534,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// http://developers.facebook.com/docs/plugins/registration/
 		function Get_registration($user_ID) {
+			if (is_user_logged_in())
+				return '';
+
 			// Get language
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
@@ -3507,7 +3549,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
 			$content .= '<fb:registration';
 			$content .= ' fields="' . $fields . '"';
-			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_registration=true&user=' . $user_ID . '"';
+			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_registration=true';
+			$content .= '&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
 			$content .= ' width="' . (empty($width) ? '530' : $width) . '">';
 			$content .= '</fb:registration>';
 			$content .= '</div>';
@@ -3517,6 +3560,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// http://developers.facebook.com/docs/reference/plugins/login/
 		function Get_login($user_ID) {
+			if (is_user_logged_in())
+				return '';
+
 			// Get language
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
@@ -3535,7 +3581,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '			alert("Please enable third-party cookies");' . PHP_EOL;
 			$content .= '		if (response.session)' . PHP_EOL;
 			$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
-			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid;' . PHP_EOL;
+			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.href);' . PHP_EOL;
 			$content .= '	});' . PHP_EOL;
 			$content .= '}' . PHP_EOL;
 			$content .= '</script>' . PHP_EOL;
@@ -4401,6 +4447,9 @@ class AL2FB_Widget extends WP_Widget {
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 		$registration = isset($instance['al2fb_registration']) ? $instance['al2fb_registration'] : false;
 		$login = isset($instance['al2fb_login']) ? $instance['al2fb_login'] : false;
+
+		$registration = $registration && !is_user_logged_in();
+		$login = $login && !is_user_logged_in();
 
 		// More settings
 		$charset = get_bloginfo('charset');
