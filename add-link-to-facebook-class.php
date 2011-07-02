@@ -410,7 +410,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Facebook registration
-			if (isset($_REQUEST['al2fb_registration'])) {
+			if (isset($_REQUEST['al2fb_reg'])) {
 				$reg = self::Parse_signed_request($_REQUEST['user']);
 				if ($reg == null) {
 					header('Content-type: text/plain');
@@ -1672,12 +1672,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_like_box_border"><?php _e('Border color:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_like_box_border" name="<?php echo c_al2fb_meta_like_box_border; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_like_box_border, true); ?>" />
-			</td></tr>
-
-			<tr valign="top"><th scope="row">
 				<label for="al2fb_box_noheader"><?php _e('Disable like box header:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_box_noheader" name="<?php echo c_al2fb_meta_like_box_noheader; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true)) echo ' checked="checked"'; ?> />
@@ -1734,12 +1728,6 @@ if (!class_exists('WPAL2Facebook')) {
 				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
-			<tr valign="top"><th scope="row">
-				<label for="al2fb_pile_rows"><?php _e('Maximum count of rows:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input class="al2fb_numeric" id="al2fb_pile_rows" name="<?php echo c_al2fb_meta_pile_rows; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_pile_rows, true); ?>" />
-			</td></tr>
-
 			</table>
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -1785,6 +1773,12 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_pile_rows"><?php _e('Maximum count of rows:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_pile_rows" name="<?php echo c_al2fb_meta_pile_rows; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_pile_rows, true); ?>" />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_like_font"><?php _e('Font:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<select id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
@@ -1803,6 +1797,12 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input type="radio" name="<?php echo c_al2fb_meta_like_colorscheme; ?>" value="light"<?php echo $like_color_light; ?>><?php _e('Light', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_like_colorscheme; ?>" value="dark"<?php echo $like_color_dark; ?>><?php _e('Dark', c_al2fb_text_domain); ?><br />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_like_box_border"><?php _e('Border color:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_like_box_border" name="<?php echo c_al2fb_meta_like_box_border; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_like_box_border, true); ?>" />
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
@@ -3604,6 +3604,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$width = ''; // TODO
+			$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
 
 			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'User name','type':'text'},{'name':'password'}]";
 
@@ -3612,9 +3613,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
 			$content .= '<fb:registration';
 			$content .= ' fields="' . $fields . '"';
-			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_registration=true';
-			$content .= '&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
-			$content .= ' width="' . (empty($width) ? '530' : $width) . '">';
+			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
+			$content .= ' width="' . (empty($width) ? '530' : $width) . '"';
+			$content .= ' border_color="' . (empty($border) ? '' : $border) . '">';
 			$content .= '</fb:registration>';
 			$content .= '</div>';
 
@@ -3631,10 +3632,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$regurl = 'google.com'; // TODO
+			$regurl = ''; // TODO
 			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
 			$width = ''; // TODO
-			$rows = ''; // TODO
+			$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 
 			$content = '<div class="al2fb_login">';
 			$content .= '<div id="fb-root"></div>';
