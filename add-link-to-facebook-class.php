@@ -425,7 +425,11 @@ if (!class_exists('WPAL2Facebook')) {
 					_e('Facebook registration failed', c_al2fb_text_domain);
 				}
 				else {
-					if (email_exists($reg['registration']['email'])) {
+					if (!get_option('users_can_register')) {
+						header('Content-type: text/plain');
+						_e('User registration disabled', c_al2fb_text_domain);
+					}
+					else if (email_exists($reg['registration']['email'])) {
 						header('Content-type: text/plain');
 						_e('E-mail address in use', c_al2fb_text_domain);
 					}
@@ -3665,6 +3669,8 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_registration($post) {
 			// Check if user logged in
 			if (is_user_logged_in())
+				return '';
+			if (!get_option('users_can_register'))
 				return '';
 
 			// Get data
