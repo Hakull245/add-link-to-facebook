@@ -461,7 +461,7 @@ if (!class_exists('WPAL2Facebook')) {
 					if (!empty($me) && !empty($me->verified) && $me->verified) {
 						if (self::Login_by_email($me->email)) {
 							//update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-							wp_redirect($_REQUEST['uri']);
+							wp_redirect(home_url() . $_REQUEST['uri']);
 						}
 						else {
 							header('Content-type: text/plain');
@@ -3646,7 +3646,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
 			$content .= '		if (response.session)' . PHP_EOL;
 			$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
-			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.href);' . PHP_EOL;
+			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.pathname + window.location.search);' . PHP_EOL;
 			$content .= '	});' . PHP_EOL;
 			$content .= '}' . PHP_EOL;
 			$content .= '</script>' . PHP_EOL;
