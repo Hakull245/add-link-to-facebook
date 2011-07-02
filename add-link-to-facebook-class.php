@@ -3466,6 +3466,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $likers;
 		}
 
+		// Get language code for Facebook
 		function Get_locale($user_ID) {
 			$locale = get_user_meta($user_ID, c_al2fb_meta_fb_locale, true);
 			if (empty($locale)) {
@@ -3480,155 +3481,167 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like button
 		function Get_like_button($post, $box) {
 			$user_ID = self::Get_user_ID($post);
+			if ($user_ID) {
+				// Get language
+				$lang = self::Get_locale($user_ID);
 
-			// Get language
-			$lang = self::Get_locale($user_ID);
-
-			// Get options
-			$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
-			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-			if ($box)
-				$width = get_user_meta($user_ID, c_al2fb_meta_like_box_width, true);
-			else
-				$width = get_user_meta($user_ID, c_al2fb_meta_like_width, true);
-			$action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
-			$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
-			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
-			$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
-			$noheader = get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true);
-			$nostream = get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true);
-
-			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
-			if (empty($link))
-				if ($box) {
-					// Get page
-					if (self::Is_authorized($user_ID) &&
-						!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
-						get_user_meta($user_ID, c_al2fb_meta_page, true))
-						try {
-							$page = self::Get_fb_me_cached($user_ID, false);
-							$link = $page->link;
-						}
-						catch (Exception $e) {
-						}
-				}
+				// Get options
+				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
+				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
+				if ($box)
+					$width = get_user_meta($user_ID, c_al2fb_meta_like_box_width, true);
 				else
-					$link = get_permalink($post->ID);
+					$width = get_user_meta($user_ID, c_al2fb_meta_like_width, true);
+				$action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
+				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
+				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+				$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
+				$noheader = get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true);
+				$nostream = get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true);
 
-			// Build content
-			$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
-			$content .= '<div id="fb-root"></div>';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
-			$content .= ($box ? '<fb:like-box' : '<fb:like');
-			$content .= ' href="' . $link . '"';
-			if (!$box && get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
-				$content .= ' send="true"';
-			if (!$box)
-				$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
-			$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
-			$content .= ' width="' . (empty($width) ? ($box ? '292' : '450') : $width) . '"';
-			if (!$box) {
-				$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
-				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
-			}
-			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
-			if (!$box)
-				$content .= ' ref="AL2FB"';
-			if ($box) {
-				$content .= ' border_color="' . $border . '"';
-				$content .= ' stream="' . ($nostream ? 'false' : 'true') . '"';
-				$content .= ' header="' . ($noheader ? 'false' : 'true') . '"';
-			}
-			$content .= ($box ? '></fb:like-box>' : '></fb:like>');
-			$content .= '</div>';
+				$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+				if (empty($link))
+					if ($box) {
+						// Get page
+						if (self::Is_authorized($user_ID) &&
+							!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
+							get_user_meta($user_ID, c_al2fb_meta_page, true))
+							try {
+								$page = self::Get_fb_me_cached($user_ID, false);
+								$link = $page->link;
+							}
+							catch (Exception $e) {
+							}
+					}
+					else
+						$link = get_permalink($post->ID);
 
-			return $content;
+				// Build content
+				$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+				$content .= ($box ? '<fb:like-box' : '<fb:like');
+				$content .= ' href="' . $link . '"';
+				if (!$box && get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
+					$content .= ' send="true"';
+				if (!$box)
+					$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
+				$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+				$content .= ' width="' . (empty($width) ? ($box ? '292' : '450') : $width) . '"';
+				if (!$box) {
+					$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
+					$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				}
+				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+				if (!$box)
+					$content .= ' ref="AL2FB"';
+				if ($box) {
+					$content .= ' border_color="' . $border . '"';
+					$content .= ' stream="' . ($nostream ? 'false' : 'true') . '"';
+					$content .= ' header="' . ($noheader ? 'false' : 'true') . '"';
+				}
+				$content .= ($box ? '></fb:like-box>' : '></fb:like>');
+				$content .= '</div>';
+
+				return $content;
+			}
+			else
+				return '';
 		}
 
 		// Get HTML for like button
 		function Get_send_button($post) {
 			$user_ID = self::Get_user_ID($post);
+			if ($user_ID) {
+				// Get language
+				$lang = self::Get_locale($user_ID);
 
-			// Get language
-			$lang = self::Get_locale($user_ID);
+				// Get options
+				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
+				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+				$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+				if (empty($link))
+					$link = get_permalink($post->ID);
 
-			// Get options
-			$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
-			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
-			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
-			if (empty($link))
-				$link = get_permalink($post->ID);
+				// Send button
+				$content = '<div class="al2fb_send_button">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+				$content .= '<fb:send ref="AL2FB"';
+				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+				$content .= ' href="' . $link . '"></fb:send>';
+				$content .= '</div>';
 
-			// Send button
-			$content = '<div class="al2fb_send_button">';
-			$content .= '<div id="fb-root"></div>';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
-			$content .= '<fb:send ref="AL2FB"';
-			$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
-			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
-			$content .= ' href="' . $link . '"></fb:send>';
-			$content .= '</div>';
-
-			return $content;
+				return $content;
+			}
+			else
+				return '';
 		}
 
 		// Get HTML for comments plugin
 		function Get_comments_plugin($post) {
 			$user_ID = self::Get_user_ID($post);
+			if ($user_ID) {
+				// Get language
+				$lang = self::Get_locale($user_ID);
 
-			// Get language
-			$lang = self::Get_locale($user_ID);
+				// Get options
+				$posts = get_user_meta($user_ID, c_al2fb_meta_comments_posts, true);
+				$width = get_user_meta($user_ID, c_al2fb_meta_comments_width, true);
+				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+				$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+				if (empty($link))
+					$link = get_permalink($post->ID);
 
-			// Get options
-			$posts = get_user_meta($user_ID, c_al2fb_meta_comments_posts, true);
-			$width = get_user_meta($user_ID, c_al2fb_meta_comments_width, true);
-			$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
-			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
-			if (empty($link))
-				$link = get_permalink($post->ID);
+				// Send button
+				$content = '<div class="al2fb_comments_plugin">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+				$content .= '<fb:comments';
+				$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
+				$content .= ' width="' . (empty($width) ? '500' : $width) . '"';
+				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+				$content .= ' href="' . $link . '"></fb:comments>';
+				$content .= '</div>';
 
-			// Send button
-			$content = '<div class="al2fb_comments_plugin">';
-			$content .= '<div id="fb-root"></div>';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
-			$content .= '<fb:comments';
-			$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
-			$content .= ' width="' . (empty($width) ? '500' : $width) . '"';
-			$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
-			$content .= ' href="' . $link . '"></fb:comments>';
-			$content .= '</div>';
-
-			return $content;
+				return $content;
+			}
+			else
+				return '';
 		}
 
 		// Get HTML face pile
 		function Get_face_pile($post) {
 			$user_ID = self::Get_user_ID($post);
+			if ($user_ID) {
+				// Get language
+				$lang = self::Get_locale($user_ID);
+				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 
-			// Get language
-			$lang = self::Get_locale($user_ID);
-			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+				// Get options
+				$size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
+				$width = get_user_meta($user_ID, c_al2fb_meta_pile_width, true);
+				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
+				$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
+				if (empty($link))
+					$link = get_permalink($post->ID);
 
-			// Get options
-			$size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
-			$width = get_user_meta($user_ID, c_al2fb_meta_pile_width, true);
-			$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
-			$link = get_user_meta($user_ID, c_al2fb_meta_like_link, true);
-			if (empty($link))
-				$link = get_permalink($post->ID);
+				// Face pile
+				$content = '<div class="al2fb_face_pile">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+				$content .= '<fb:facepile';
+				$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
+				$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
+				$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
+				$content .= ' href="' . $link . '"></fb:facepile>';
+				$content .= '</div>';
 
-			// Face pile
-			$content = '<div class="al2fb_face_pile">';
-			$content .= '<div id="fb-root"></div>';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
-			$content .= '<fb:facepile';
-			$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
-			$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
-			$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
-			$content .= ' href="' . $link . '"></fb:facepile>';
-			$content .= '</div>';
-
-			return $content;
+				return $content;
+			}
+			else
+				return '';
 		}
 
 		// Get HTML profile link
@@ -3656,25 +3669,29 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get data
 			$user_ID = self::Get_user_ID($post);
-			$lang = self::Get_locale($user_ID);
-			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$width = get_user_meta($user_ID, c_al2fb_meta_reg_width, true);
-			$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
-			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'},{'name':'password'}]";
+			if ($user_ID) {
+				$lang = self::Get_locale($user_ID);
+				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+				$width = get_user_meta($user_ID, c_al2fb_meta_reg_width, true);
+				$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
+				$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'},{'name':'password'}]";
 
-			// Build content
-			$content = '<div class="al2fb_registration">';
-			$content .= '<div id="fb-root"></div>';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
-			$content .= '<fb:registration';
-			$content .= ' fields="' . $fields . '"';
-			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
-			$content .= ' width="' . (empty($width) ? '530' : $width) . '"';
-			$content .= ' border_color="' . (empty($border) ? '' : $border) . '">';
-			$content .= '</fb:registration>';
-			$content .= '</div>';
+				// Build content
+				$content = '<div class="al2fb_registration">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+				$content .= '<fb:registration';
+				$content .= ' fields="' . $fields . '"';
+				$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
+				$content .= ' width="' . (empty($width) ? '530' : $width) . '"';
+				$content .= ' border_color="' . (empty($border) ? '' : $border) . '">';
+				$content .= '</fb:registration>';
+				$content .= '</div>';
 
-			return $content;
+				return $content;
+			}
+			else
+				return '';
 		}
 
 		// Get HTML Facebook login
@@ -3685,39 +3702,43 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get data
 			$user_ID = self::Get_user_ID($post);
-			$lang = self::Get_locale($user_ID);
-			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$regurl = get_user_meta($user_ID, c_al2fb_meta_login_regurl, true);
-			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-			$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
-			$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
+			if ($user_ID) {
+				$lang = self::Get_locale($user_ID);
+				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+				$regurl = get_user_meta($user_ID, c_al2fb_meta_login_regurl, true);
+				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
+				$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
+				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 
-			// Build content
-			$content = '<div class="al2fb_login">';
-			$content .= '<div id="fb-root"></div>';
-			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
-			$content .= '<script type="text/javascript">' . PHP_EOL;
-			$content .= 'function al2fb_login() {' . PHP_EOL;
-			$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
-			$content .= '		if (response.status == "unknown")' . PHP_EOL;
-			$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
-			$content .= '		if (response.session)' . PHP_EOL;
-			$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
-			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.pathname + window.location.search);' . PHP_EOL;
-			$content .= '	});' . PHP_EOL;
-			$content .= '}' . PHP_EOL;
-			$content .= '</script>' . PHP_EOL;
-			$content .= '<fb:login-button';
-			$content .= ' registration-url="' . $regurl . '"';
-			$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
-			$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
-			$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
-			$content .= ' perms=""';
-			$content .= ' onlogin="al2fb_login();">';
-			$content .= '</fb:login-button>';
-			$content .= '</div>';
+				// Build content
+				$content = '<div class="al2fb_login">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
+				$content .= '<script type="text/javascript">' . PHP_EOL;
+				$content .= 'function al2fb_login() {' . PHP_EOL;
+				$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
+				$content .= '		if (response.status == "unknown")' . PHP_EOL;
+				$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
+				$content .= '		if (response.session)' . PHP_EOL;
+				$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
+				$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.pathname + window.location.search);' . PHP_EOL;
+				$content .= '	});' . PHP_EOL;
+				$content .= '}' . PHP_EOL;
+				$content .= '</script>' . PHP_EOL;
+				$content .= '<fb:login-button';
+				$content .= ' registration-url="' . $regurl . '"';
+				$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+				$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
+				$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
+				$content .= ' perms=""';
+				$content .= ' onlogin="al2fb_login();">';
+				$content .= '</fb:login-button>';
+				$content .= '</div>';
 
-			return $content;
+				return $content;
+			}
+			else
+				return '';
 		}
 
 		// Modify comment list
