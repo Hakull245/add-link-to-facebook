@@ -34,6 +34,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
+* Facebook registration/login (development)
 
 **Beta features:**
 
@@ -285,6 +286,16 @@ To show the Facebook profile icon/link:
 * [al2fb_profile_link]
 * [al2fb_profile_link post_id="123"]
 
+To show the Facebook registration form (development):
+
+* [al2fb_registration]
+* [al2fb_registration post_id="123"]
+
+To show the Facebook login button (development):
+
+* [al2fb_login]
+* [al2fb_login post_id="123"]
+
 = U24 How can I use the template tags? =
 
 Put one of these lines somewhere in your theme:
@@ -303,6 +314,13 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link();
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
+
+Development:
+
+* if (function_exists('al2fb_registration')) al2fb_registration();
+* if (function_exists('al2fb_registration')) al2fb_registration(123);
+* if (function_exists('al2fb_login')) al2fb_login();
+* if (function_exists('al2fb_login')) al2fb_login(123);
 
 = U25 Can I add links to multiple walls? =
 

@@ -369,6 +369,7 @@ if (!class_exists('WPAL2Facebook')) {
 				wp_set_auth_cookie($user->ID);
 				do_action('wp_login', $user->user_login);
 			}
+			return $user;
 		}
 
 		// Decode Facebook registration response
@@ -430,13 +431,19 @@ if (!class_exists('WPAL2Facebook')) {
 						)) ;
 						if (is_wp_error($user_ID)) {
 							header('Content-type: text/plain');
-							echo $user_ID->get_error_message();
+							_e($user_ID->get_error_message());
 						}
 						else {
 							if (isset($reg['user_id']))
 								update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-							self::Login_by_email($reg['registration']['email']);
-							wp_redirect(home_url() . $_REQUEST['uri']);
+							if (self::Login_by_email($reg['registration']['email']))
+								wp_redirect(home_url() . $_REQUEST['uri']);
+							else {
+								header('Content-type: text/plain');
+								_e('User not found', c_al2fb_text_domain);
+								if ($this->debug)
+									print_r($me);
+							}
 						}
 					}
 				}
@@ -445,14 +452,23 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Facebook login
 			if (isset($_REQUEST['al2fb_login'])) {
+				header('Content-type: text/plain');
 				try {
 					$url = 'https://graph.facebook.com/' . $_REQUEST['uid'];
 					$query = http_build_query(array('access_token' => $_REQUEST['token']), '', '&');
 					$response = self::Request($url, $query, 'GET');
 					$me = json_decode($response);
 					if (!empty($me) && !empty($me->verified) && $me->verified) {
-						self::Login_by_email($me->email);
-						wp_redirect($_REQUEST['uri']);
+						if (self::Login_by_email($me->email)) {
+							//update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+							wp_redirect($_REQUEST['uri']);
+						}
+						else {
+							header('Content-type: text/plain');
+							_e('User not found', c_al2fb_text_domain);
+							if ($this->debug)
+								print_r($me);
+						}
 					}
 					else {
 						header('Content-type: text/plain');
@@ -538,7 +554,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
 			if ($fid) {
 				echo '<th scope="row">' . _('Facebook ID') . '</th>';
-				echo '<td>' . $fid . '</td>';
+				echo '<td><a href="http://www.facebook.com/profile.php?id=' . $fid . '" target="_blank">' . $fid . '</a></td>';
 				echo '</tr>';
 				echo '<tr>';
 			}
@@ -3615,7 +3631,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$regurl = self::Redirect_uri(); // TODO
+			$regurl = 'google.com'; // TODO
 			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
 			$width = ''; // TODO
 			$rows = ''; // TODO
@@ -3626,7 +3642,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '<script type="text/javascript">' . PHP_EOL;
 			$content .= 'function al2fb_login() {' . PHP_EOL;
 			$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
-			$content .= '	   if (response.status == "unknown")' . PHP_EOL;
+			$content .= '		if (response.status == "unknown")' . PHP_EOL;
 			$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
 			$content .= '		if (response.session)' . PHP_EOL;
 			$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
