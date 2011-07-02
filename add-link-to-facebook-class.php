@@ -375,9 +375,10 @@ if (!class_exists('WPAL2Facebook')) {
   				exit();
 			}
 
+			// Facebook registration
 			if (isset($_REQUEST['al2fb_registration'])) {
 				header('Content-type: text/plain');
-				$reg = self::parse_signed_request($_REQUEST['al2fb_userid']);
+				$reg = self::parse_signed_request($_REQUEST['user']);
 				if (email_exists($reg['registration']['email']))
 					echo 'e-mail in use!';
 				else {
@@ -391,12 +392,21 @@ if (!class_exists('WPAL2Facebook')) {
 					if (is_wp_error($user_ID))
 						echo $user_ID->get_error_message();
 					else {
-						update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+						if (isset($reg['user_id']))
+							update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
 						echo 'Accepted!';
 					}
 				}
 				if ($this->debug)
 					print_r($reg);
+				exit();
+			}
+
+			// Facebook login
+			if (isset($_REQUEST['al2fb_login'])) {
+				header('Content-type: text/plain');
+				echo 'token=' . $_REQUEST['token'] . PHP_EOL;
+				echo 'uid=' . $_REQUEST['uid'] . PHP_EOL;
 				exit();
 			}
 
@@ -3476,13 +3486,12 @@ if (!class_exists('WPAL2Facebook')) {
 			return $content;
 		}
 
+		// http://developers.facebook.com/docs/plugins/registration/
 		function Get_registration($user_ID) {
-			// http://developers.facebook.com/docs/plugins/registration/
-
 			// Get language
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$width = '';
+			$width = ''; // TODO
 
 			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'User name','type':'text'},{'name':'password'}]";
 
@@ -3491,10 +3500,62 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
 			$content .= '<fb:registration';
 			$content .= ' fields="' . $fields . '"';
-			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_registration=true&al2fb_userid=' . $user_ID . '"';
+			$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_registration=true&user=' . $user_ID . '"';
 			$content .= ' width="' . (empty($width) ? '530' : $width) . '">';
 			$content .= '</fb:registration>';
 			$content .= '</div>';
+
+			return $content;
+		}
+
+		// http://developers.facebook.com/docs/reference/plugins/login/
+		function Get_login($user_ID) {
+			// Get language
+			$lang = self::Get_locale($user_ID);
+			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+			$regurl = self::Redirect_uri(); // TODO
+			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
+			$width = '';
+			$rows = '';
+
+			$content = '<div class="al2fb_login">';
+			$content .= '<div id="fb-root"></div>';
+			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
+			$content .= '<script type="text/javascript">' . PHP_EOL;
+			$content .= 'function al2fb_login() {' . PHP_EOL;
+			$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
+			$content .= '	   if (response.status == "unknown")' . PHP_EOL;
+			$content .= '			alert("Please enable third-party cookies");' . PHP_EOL;
+			$content .= '		if (response.session)' . PHP_EOL;
+			$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
+			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid;' . PHP_EOL;
+			$content .= '	});' . PHP_EOL;
+			$content .= '}' . PHP_EOL;
+			$content .= '</script>' . PHP_EOL;
+			$content .= '<fb:login-button';
+			$content .= ' registration-url="' . $regurl . '"';
+			$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+			$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
+			$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
+			$content .= ' perms=""';
+			$content .= ' onlogin="al2fb_login();">';
+			$content .= '</fb:login-button>';
+			$content .= '</div>';
+
+			//response object:
+			//{
+			//	status: 'connected',
+			//	session: {
+			//		access_token: '...',
+			//		expires:'...',
+			//		secret:'...',
+			//		session_key:'...',
+			//		sig:'...',
+			//		uid:'...'
+			//	}
+			//}
+
+			$content .= '</script>';
 
 			return $content;
 		}
@@ -4332,6 +4393,7 @@ class AL2FB_Widget extends WP_Widget {
 		$face_pile = isset($instance['al2fb_face_pile']) ? $instance['al2fb_face_pile'] : false;
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 		$registration = isset($instance['al2fb_registration']) ? $instance['al2fb_registration'] : false;
+		$login = isset($instance['al2fb_login']) ? $instance['al2fb_login'] : false;
 
 		// More settings
 		$charset = get_bloginfo('charset');
@@ -4365,7 +4427,10 @@ class AL2FB_Widget extends WP_Widget {
 			catch (Exception $e) {
 			}
 
-		if ($fb_comments || $fb_messages || $like_button || $like_box || $send_button || $comments_plugin || $face_pile || $profile || $registration) {
+		if ($fb_comments || $fb_messages ||
+			$like_button || $like_box || $send_button ||
+			$comments_plugin || $face_pile ||
+			$profile || $registration || $login) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -4427,29 +4492,37 @@ class AL2FB_Widget extends WP_Widget {
 				echo '</ul></div>';
 			}
 
-			// Like button
+			// Facebook like button
 			if ($like_button)
 				echo $wp_al2fb->Get_like_button($post, false);
 
+			// Facebook like box
 			if ($like_box)
 				echo $wp_al2fb->Get_like_button($post, true);
 
-			// Send button
+			// Facebook send button
 			if ($send_button)
 				echo $wp_al2fb->Get_send_button($post);
 
+			// Facebook comments plugins
 			if ($comments_plugin)
 				echo $wp_al2fb->Get_comments_plugin($post);
 
+			// Facebook Face pile
 			if ($face_pile)
 				echo $wp_al2fb->Get_face_pile($post);
 
-			// Profile
+			// Facebook profile
 			if ($profile)
 				echo $wp_al2fb->Get_profile_link($post);
 
+			// Facebook registration
 			if ($registration)
 				echo $wp_al2fb->Get_registration($user_ID);
+
+			// Facebook login
+			if ($login)
+				echo $wp_al2fb->Get_login($user_ID);
 
 			echo $after_widget;
 		}
@@ -4511,6 +4584,7 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['al2fb_face_pile'] = $new_instance['al2fb_face_pile'];
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
 		$instance['al2fb_registration'] = $new_instance['al2fb_registration'];
+		$instance['al2fb_login'] = $new_instance['al2fb_login'];
 		return $instance;
 	}
 
@@ -4537,6 +4611,8 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['al2fb_profile'] = false;
 		if (empty($instance['al2fb_registration']))
 			$instance['al2fb_registration'] = false;
+		if (empty($instance['al2fb_login']))
+			$instance['al2fb_login'] = false;
 
 		$chk_comments = ($instance['al2fb_comments'] ? ' checked ' : '');
 		$chk_messages = ($instance['al2fb_messages'] ? ' checked ' : '');
@@ -4548,6 +4624,7 @@ class AL2FB_Widget extends WP_Widget {
 		$chk_face_pile = ($instance['al2fb_face_pile'] ? ' checked ' : '');
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
 		$chk_registration = ($instance['al2fb_registration'] ? ' checked ' : '');
+		$chk_login = ($instance['al2fb_login'] ? ' checked ' : '');
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
@@ -4586,6 +4663,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_registration; ?> id="<?php echo $this->get_field_id('al2fb_registration'); ?>" name="<?php echo $this->get_field_name('al2fb_registration'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook registration', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_login; ?> id="<?php echo $this->get_field_id('al2fb_login'); ?>" name="<?php echo $this->get_field_name('al2fb_login'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_login'); ?>"><?php _e('Show Facebook login', c_al2fb_text_domain); ?></label>
 		</p>
 		<?php
 	}

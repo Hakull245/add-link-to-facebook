@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-07-01 16:28+0100\n"
+"PO-Revision-Date: 2011-07-02 09:12+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -637,4 +637,10 @@ msgstr "Groot"
 
 msgid "Maximum count of rows:"
 msgstr "Maximaal aantal rijen:"
+
+msgid "Show Facebook registration"
+msgstr "Toon Facebook registratie"
+
+msgid "Show Facebook login"
+msgstr "Toon Facebook login"
 
