@@ -608,7 +608,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook login (including shortcode/template tag)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
 
 = 1.84 =
 * New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget

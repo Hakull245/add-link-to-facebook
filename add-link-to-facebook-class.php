@@ -84,6 +84,10 @@ define('c_al2fb_meta_comments_width', 'al2fb_comments_width');
 define('c_al2fb_meta_pile_size', 'al2fb_pile_size');
 define('c_al2fb_meta_pile_width', 'al2fb_pile_width');
 define('c_al2fb_meta_pile_rows', 'al2fb_pile_rows');
+define('c_al2fb_meta_reg_width', 'al2fb_reg_width');
+define('c_al2fb_meta_login_width', 'al2fb_login_width');
+define('c_al2fb_meta_login_regurl', 'al2fb_login_regurl');
+define('c_al2fb_meta_login_redir', 'al2fb_login_redir');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_open_graph_admins', 'al2fb_open_graph_admins');
@@ -348,6 +352,10 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_pile_size);
 				delete_user_meta($user_ID, c_al2fb_meta_pile_width);
 				delete_user_meta($user_ID, c_al2fb_meta_pile_rows);
+				delete_user_meta($user_ID, c_al2fb_meta_reg_width);
+				delete_user_meta($user_ID, c_al2fb_meta_login_width);
+				delete_user_meta($user_ID, c_al2fb_meta_login_regurl);
+				delete_user_meta($user_ID, c_al2fb_meta_login_redir);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_admins);
@@ -433,18 +441,18 @@ if (!class_exists('WPAL2Facebook')) {
 							header('Content-type: text/plain');
 							_e($user_ID->get_error_message());
 						}
-						else {
-							if (isset($reg['user_id']))
-								update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-							if (self::Login_by_email($reg['registration']['email']))
-								wp_redirect(home_url() . $_REQUEST['uri']);
+						else
+							if ($user) {
+								update_user_meta($user->ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+								$redir = get_user_meta($user->ID, c_al2fb_meta_login_redir, true);
+								wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
+							}
 							else {
 								header('Content-type: text/plain');
 								_e('User not found', c_al2fb_text_domain);
 								if ($this->debug)
 									print_r($me);
 							}
-						}
 					}
 				}
 				exit();
@@ -459,9 +467,11 @@ if (!class_exists('WPAL2Facebook')) {
 					$response = self::Request($url, $query, 'GET');
 					$me = json_decode($response);
 					if (!empty($me) && !empty($me->verified) && $me->verified) {
-						if (self::Login_by_email($me->email)) {
-							//update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-							wp_redirect(home_url() . $_REQUEST['uri']);
+						$user = self::Login_by_email($me->email);
+						if ($user) {
+							update_user_meta($user->ID, c_al2fb_meta_facebook_id, $me->id);
+							$redir = get_user_meta($user->ID, c_al2fb_meta_login_redir, true);
+							wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
 						}
 						else {
 							header('Content-type: text/plain');
@@ -696,6 +706,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_comments_width] = trim($_POST[c_al2fb_meta_comments_width]);
 			$_POST[c_al2fb_meta_pile_width] = trim($_POST[c_al2fb_meta_pile_width]);
 			$_POST[c_al2fb_meta_pile_rows] = trim($_POST[c_al2fb_meta_pile_rows]);
+			$_POST[c_al2fb_meta_reg_width] = trim($_POST[c_al2fb_meta_reg_width]);
+			$_POST[c_al2fb_meta_login_width] = trim($_POST[c_al2fb_meta_login_width]);
+			$_POST[c_al2fb_meta_login_regurl] = trim($_POST[c_al2fb_meta_login_regurl]);
+			$_POST[c_al2fb_meta_login_redir] = trim($_POST[c_al2fb_meta_login_redir]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
 			$_POST[c_al2fb_meta_open_graph_admins] = trim($_POST[c_al2fb_meta_open_graph_admins]);
 			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
@@ -778,6 +792,10 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_pile_size, $_POST[c_al2fb_meta_pile_size]);
 			update_user_meta($user_ID, c_al2fb_meta_pile_width, $_POST[c_al2fb_meta_pile_width]);
 			update_user_meta($user_ID, c_al2fb_meta_pile_rows, $_POST[c_al2fb_meta_pile_rows]);
+			update_user_meta($user_ID, c_al2fb_meta_reg_width, $_POST[c_al2fb_meta_reg_width]);
+			update_user_meta($user_ID, c_al2fb_meta_login_width, $_POST[c_al2fb_meta_login_width]);
+			update_user_meta($user_ID, c_al2fb_meta_login_regurl, $_POST[c_al2fb_meta_login_regurl]);
+			update_user_meta($user_ID, c_al2fb_meta_login_redir, $_POST[c_al2fb_meta_login_redir]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
@@ -1726,6 +1744,42 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input class="al2fb_numeric" id="al2fb_pile_width" name="<?php echo c_al2fb_meta_pile_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_pile_width, true); ?>" />
 				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
+
+			<h4><?php _e('Facebook login', c_al2fb_text_domain); ?></h4>
+			<table class="form-table al2fb_border">
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_reg_width"><?php _e('Registration width:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_reg_width" name="<?php echo c_al2fb_meta_reg_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_reg_width, true); ?>" />
+				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+				<br /><a class="al2fb_explanation" href="http://developers.facebook.com/docs/plugins/registration/" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_login_width"><?php _e('Login width:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_login_width" name="<?php echo c_al2fb_meta_login_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_width, true); ?>" />
+				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_login_regurl"><?php _e('Login registration URL:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_text" id="al2fb_login_regurl" name="<?php echo c_al2fb_meta_login_regurl; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_regurl, true); ?>" />
+				<br /><a class="al2fb_explanation" href="http://developers.facebook.com/docs/reference/plugins/login/" target="_blank"><?php _e('Documentation', c_al2fb_text_domain); ?></a>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_login_redir"><?php _e('Login redirect URL:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_text" id="al2fb_login_redir" name="<?php echo c_al2fb_meta_login_redir; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_redir, true); ?>" />
 			</td></tr>
 
 			</table>
@@ -3577,6 +3631,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $content;
 		}
 
+		// Get HTML profile link
 		function Get_profile_link($post) {
 			$content = '';
 			try {
@@ -3593,7 +3648,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $content;
 		}
 
-		// http://developers.facebook.com/docs/plugins/registration/
+		// Get HTML Facebook registration
 		function Get_registration($post) {
 			// Check if user logged in
 			if (is_user_logged_in())
@@ -3603,11 +3658,11 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$width = ''; // TODO
+			$width = get_user_meta($user_ID, c_al2fb_meta_reg_width, true);
 			$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
-
 			$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'},{'name':'password'}]";
 
+			// Build content
 			$content = '<div class="al2fb_registration">';
 			$content .= '<div id="fb-root"></div>';
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
@@ -3622,7 +3677,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $content;
 		}
 
-		// http://developers.facebook.com/docs/reference/plugins/login/
+		// Get HTML Facebook login
 		function Get_login($post) {
 			// Check if user logged in
 			if (is_user_logged_in())
@@ -3632,11 +3687,12 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-			$regurl = ''; // TODO
+			$regurl = get_user_meta($user_ID, c_al2fb_meta_login_regurl, true);
 			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-			$width = ''; // TODO
+			$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
 			$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 
+			// Build content
 			$content = '<div class="al2fb_login">';
 			$content .= '<div id="fb-root"></div>';
 			$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
@@ -4213,6 +4269,11 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Facepile size:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_size, true) . '</td></tr>';
 			$info .= '<tr><td>Facepile width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_width, true) . '</td></tr>';
 			$info .= '<tr><td>Facepile rows:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_rows, true) . '</td></tr>';
+
+			$info .= '<tr><td>Registration width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_reg_width, true) . '</td></tr>';
+			$info .= '<tr><td>Login width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_width, true) . '</td></tr>';
+			$info .= '<tr><td>Registration URL:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_regurl, true) . '</td></tr>';
+			$info .= '<tr><td>Redir URL:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_redir, true) . '</td></tr>';
 
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
