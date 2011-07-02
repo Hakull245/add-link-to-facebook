@@ -3677,21 +3677,21 @@ if (!class_exists('WPAL2Facebook')) {
 				$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'},{'name':'password'}]";
 
 				// Build content
-				$content = '<div class="al2fb_registration">';
-				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
-				$content .= '<fb:registration';
-				$content .= ' fields="' . $fields . '"';
-				$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
-				$content .= ' width="' . (empty($width) ? '530' : $width) . '"';
-				$content .= ' border_color="' . (empty($border) ? '' : $border) . '">';
-				$content .= '</fb:registration>';
-				$content .= '</div>';
-
-				return $content;
+				if ($appid) {
+					$content = '<div class="al2fb_registration">';
+					$content .= '<div id="fb-root"></div>';
+					$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+					$content .= '<fb:registration';
+					$content .= ' fields="' . $fields . '"';
+					$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
+					$content .= ' width="' . (empty($width) ? '530' : $width) . '"';
+					$content .= ' border_color="' . (empty($border) ? '' : $border) . '">';
+					$content .= '</fb:registration>';
+					$content .= '</div>';
+					return $content;
+				}
 			}
-			else
-				return '';
+			return '';
 		}
 
 		// Get HTML Facebook login
@@ -3711,34 +3711,34 @@ if (!class_exists('WPAL2Facebook')) {
 				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 
 				// Build content
-				$content = '<div class="al2fb_login">';
-				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
-				$content .= '<script type="text/javascript">' . PHP_EOL;
-				$content .= 'function al2fb_login() {' . PHP_EOL;
-				$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
-				$content .= '		if (response.status == "unknown")' . PHP_EOL;
-				$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
-				$content .= '		if (response.session)' . PHP_EOL;
-				$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
-				$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.pathname + window.location.search);' . PHP_EOL;
-				$content .= '	});' . PHP_EOL;
-				$content .= '}' . PHP_EOL;
-				$content .= '</script>' . PHP_EOL;
-				$content .= '<fb:login-button';
-				$content .= ' registration-url="' . $regurl . '"';
-				$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
-				$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
-				$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
-				$content .= ' perms=""';
-				$content .= ' onlogin="al2fb_login();">';
-				$content .= '</fb:login-button>';
-				$content .= '</div>';
-
-				return $content;
+				if ($appid) {
+					$content = '<div class="al2fb_login">';
+					$content .= '<div id="fb-root"></div>';
+					$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
+					$content .= '<script type="text/javascript">' . PHP_EOL;
+					$content .= 'function al2fb_login() {' . PHP_EOL;
+					$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
+					$content .= '		if (response.status == "unknown")' . PHP_EOL;
+					$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
+					$content .= '		if (response.session)' . PHP_EOL;
+					$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
+					$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.pathname + window.location.search);' . PHP_EOL;
+					$content .= '	});' . PHP_EOL;
+					$content .= '}' . PHP_EOL;
+					$content .= '</script>' . PHP_EOL;
+					$content .= '<fb:login-button';
+					$content .= ' registration-url="' . $regurl . '"';
+					$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+					$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
+					$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
+					$content .= ' perms=""';
+					$content .= ' onlogin="al2fb_login();">';
+					$content .= '</fb:login-button>';
+					$content .= '</div>';
+					return $content;
+				}
 			}
-			else
-				return '';
+			return '';
 		}
 
 		// Modify comment list
