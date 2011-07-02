@@ -3680,7 +3680,12 @@ if (!class_exists('WPAL2Facebook')) {
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_reg_width, true);
 				$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
-				$fields = "[{'name':'name'},{'name':'first_name'},{'name':'last_name'},{'name':'email'},{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'},{'name':'password'}]";
+				$fields = "[{'name':'name'}";
+				$fields .= ",{'name':'first_name'}";
+				$fields .= ",{'name':'last_name'}";
+				$fields .= ",{'name':'email'}";
+				$fields .= ",{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'}";
+				$fields .= ",{'name':'password'}]";
 
 				// Build content
 				if ($appid) {
@@ -3715,6 +3720,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
 				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
+				$permissions = '';
 
 				// Build content
 				if ($appid) {
@@ -3737,7 +3743,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
 					$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
 					$content .= ' max_rows="' . (empty($rows) ? '1' : $rows) . '"';
-					$content .= ' perms=""';
+					$content .= ' perms="' . $permissions . '"';
 					$content .= ' onlogin="al2fb_login();">';
 					$content .= '</fb:login-button>';
 					$content .= '</div>';
