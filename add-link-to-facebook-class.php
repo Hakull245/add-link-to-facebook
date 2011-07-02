@@ -3355,6 +3355,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_likers($post);
+			else
+				return '';
 		}
 
 		// Shortcode like button
@@ -3366,6 +3368,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_like_button($post, false);
+			else
+				return '';
 		}
 
 		// Shortcode like box
@@ -3377,6 +3381,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_like_button($post, true);
+			else
+				return '';
 		}
 
 		// Shortcode send button
@@ -3388,6 +3394,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_send_button($post);
+			else
+				return '';
 		}
 
 		// Shortcode comments plugin
@@ -3399,6 +3407,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_comments_plugin($post);
+			else
+				return '';
 		}
 
 		// Shortcode face pile
@@ -3410,6 +3420,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_face_pile($post);
+			else
+				return '';
 		}
 
 		// Shortcode profile link
@@ -3421,6 +3433,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_profile_link($post);
+			else
+				return '';
 		}
 
 		// Shortcode Facebook registration
@@ -3432,6 +3446,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_registration($post);
+			else
+				return '';
 		}
 
 		// Shortoce Facebook login
@@ -3443,6 +3459,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_login($post);
+			else
+				return '';
 		}
 
 		// Get HTML for likers
