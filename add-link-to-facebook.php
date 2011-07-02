@@ -58,7 +58,7 @@ if (!function_exists('al2fb_likers')) {
 	}
 }
 
-// Template tag for like button
+// Template tag for Facebook like button
 if (!function_exists('al2fb_like_button')) {
 	function al2fb_like_button($post_ID = null) {
 		global $wp_al2fb;
@@ -71,7 +71,7 @@ if (!function_exists('al2fb_like_button')) {
 	}
 }
 
-// Template tag for like button
+// Template tag for Facebook like box
 if (!function_exists('al2fb_like_box')) {
 	function al2fb_like_box($post_ID = null) {
 		global $wp_al2fb;
@@ -84,7 +84,7 @@ if (!function_exists('al2fb_like_box')) {
 	}
 }
 
-// Template tag for send button
+// Template tag for Facebook send button
 if (!function_exists('al2fb_send_button')) {
 	function al2fb_send_button($post_ID = null) {
 		global $wp_al2fb;
@@ -97,7 +97,7 @@ if (!function_exists('al2fb_send_button')) {
 	}
 }
 
-// Template tag for comments plugins
+// Template tag for Facebook comments plugins
 if (!function_exists('al2fb_comments_plugin')) {
 	function al2fb_comments_plugin($post_ID = null) {
 		global $wp_al2fb;
@@ -110,7 +110,7 @@ if (!function_exists('al2fb_comments_plugin')) {
 	}
 }
 
-// Template tag for comments plugins
+// Template tag for Facebook face pile
 if (!function_exists('al2fb_face_pile')) {
 	function al2fb_face_pile($post_ID = null) {
 		global $wp_al2fb;
@@ -133,6 +133,32 @@ if (!function_exists('al2fb_profile_link')) {
 			$post = get_post($post_ID);
 		if (isset($post))
 			echo $wp_al2fb->Get_profile_link($post);
+	}
+}
+
+// Template tag for Facebook registration
+if (!function_exists('al2fb_registration')) {
+	function al2fb_registration($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_registration($post);
+	}
+}
+
+// Template tag for Facebook login
+if (!function_exists('al2fb_login')) {
+	function al2fb_login($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_login($post);
 	}
 }
 

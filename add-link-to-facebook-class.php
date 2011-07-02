@@ -225,6 +225,8 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_comments_plugin', array(&$this, 'Shortcode_comments_plugin'));
 			add_shortcode('al2fb_face_pile', array(&$this, 'Shortcode_face_pile'));
 			add_shortcode('al2fb_profile_link', array(&$this, 'Shortcode_profile_link'));
+			add_shortcode('al2fb_registration', array(&$this, 'Shortcode_registration'));
+			add_shortcode('al2fb_login', array(&$this, 'Shortcode_login'));
 			if (get_option(c_al2fb_option_shortcode_widget))
 				add_filter('widget_text', 'do_shortcode');
 
@@ -359,6 +361,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
+		// Log WordPress user in using e-mail
 		function Login_by_email($email) {
 			$user = get_user_by_email($email);
 			if ($user) {
@@ -368,25 +371,35 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
-		function Personal_options($user) {
-			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
-			if ($fid) {
-				echo '<th scope="row">' . _('Facebook ID') . '</th>';
-				echo '<td>' . $fid . '</td>';
-				echo '</tr>';
-				echo '<tr>';
-			}
+		// Decode Facebook registration response
+		function Parse_signed_request($user_ID) {
+			$signed_request = $_REQUEST['signed_request'];
+			$secret = get_user_meta($user_ID, c_al2fb_meta_app_secret, true);
+
+			list($encoded_sig, $payload) = explode('.', $signed_request, 2);
+
+			// Decode the data
+			$sig = self::base64_url_decode($encoded_sig);
+			$data = json_decode(self::base64_url_decode($payload), true);
+
+			if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
+				return null;
+
+			// Check sig
+			$expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
+			if ($sig !== $expected_sig)
+				return null;
+
+			return $data;
+		}
+
+		// Helper: base64 decode url
+		function base64_url_decode($input) {
+			return base64_decode(strtr($input, '-_', '+/'));
 		}
 
 		// Initialization
 		function Init() {
-			// Secret request
-			if (isset($_REQUEST['al2fb_check'])) {
-				if ($_REQUEST['al2fb_check'] == self::Authorize_secret())
-					echo 'OK';
-				exit();
-			}
-
 			// Image request
 			if (isset($_GET['al2fb_image'])) {
 				$img = dirname(__FILE__) . '/wp-blue-s.png';
@@ -397,15 +410,15 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Facebook registration
 			if (isset($_REQUEST['al2fb_registration'])) {
-				$reg = self::parse_signed_request($_REQUEST['user']);
+				$reg = self::Parse_signed_request($_REQUEST['user']);
 				if ($reg == null) {
 					header('Content-type: text/plain');
-					echo 'Registration failed';
+					_e('Facebook registration failed', c_al2fb_text_domain);
 				}
 				else {
 					if (email_exists($reg['registration']['email'])) {
 						header('Content-type: text/plain');
-						echo 'E-mail in use!';
+						_e('E-mail address in use', c_al2fb_text_domain);
 					}
 					else {
 						$user_ID = wp_insert_user(array(
@@ -443,10 +456,9 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 					else {
 						header('Content-type: text/plain');
+						_e('Could not verify Facebook login', c_al2fb_text_domain);
 						if ($this->debug)
 							print_r($me);
-						else
-							echo 'Could not verify login';
 					}
 				}
 				catch (Exception $e) {
@@ -518,6 +530,17 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Handle Facebook authorization
 				self::Authorize();
+			}
+		}
+
+		// Profile personal options
+		function Personal_options($user) {
+			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
+			if ($fid) {
+				echo '<th scope="row">' . _('Facebook ID') . '</th>';
+				echo '<td>' . $fid . '</td>';
+				echo '</tr>';
+				echo '<tr>';
 			}
 		}
 
@@ -3326,6 +3349,28 @@ if (!class_exists('WPAL2Facebook')) {
 				return self::Get_profile_link($post);
 		}
 
+		// Shortcode Facebook registration
+		function Shortcode_registration($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_registration($post);
+		}
+
+		// Shortoce Facebook login
+		function Shortcode_login($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_login($post);
+		}
+
 		// Get HTML for likers
 		function Get_likers($post) {
 			$user_ID = self::Get_user_ID($post);
@@ -3533,11 +3578,13 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// http://developers.facebook.com/docs/plugins/registration/
-		function Get_registration($user_ID) {
+		function Get_registration($post) {
+			// Check if user logged in
 			if (is_user_logged_in())
 				return '';
 
-			// Get language
+			// Get data
+			$user_ID = self::Get_user_ID($post);
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$width = ''; // TODO
@@ -3559,17 +3606,19 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// http://developers.facebook.com/docs/reference/plugins/login/
-		function Get_login($user_ID) {
+		function Get_login($post) {
+			// Check if user logged in
 			if (is_user_logged_in())
 				return '';
 
-			// Get language
+			// Get data
+			$user_ID = self::Get_user_ID($post);
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$regurl = self::Redirect_uri(); // TODO
 			$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-			$width = '';
-			$rows = '';
+			$width = ''; // TODO
+			$rows = ''; // TODO
 
 			$content = '<div class="al2fb_login">';
 			$content .= '<div id="fb-root"></div>';
@@ -3578,7 +3627,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= 'function al2fb_login() {' . PHP_EOL;
 			$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
 			$content .= '	   if (response.status == "unknown")' . PHP_EOL;
-			$content .= '			alert("Please enable third-party cookies");' . PHP_EOL;
+			$content .= '			alert("' . __('Please enable third-party cookies', c_al2fb_text_domain) . '");' . PHP_EOL;
 			$content .= '		if (response.session)' . PHP_EOL;
 			$content .= '			window.location="' .  self::Redirect_uri() . '?al2fb_login=true';
 			$content .= '&token=" + response.session.access_token + "&uid=" + response.session.uid + "&uri=" + encodeURI(window.location.href);' . PHP_EOL;
@@ -3595,47 +3644,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$content .= '</fb:login-button>';
 			$content .= '</div>';
 
-			//response object:
-			//{
-			//	status: 'connected',
-			//	session: {
-			//		access_token: '...',
-			//		expires:'...',
-			//		secret:'...',
-			//		session_key:'...',
-			//		sig:'...',
-			//		uid:'...'
-			//	}
-			//}
-
-			$content .= '</script>';
-
 			return $content;
-		}
-
-		function parse_signed_request($user_ID) {
-			$signed_request = $_REQUEST['signed_request'];
-			$secret = get_user_meta($user_ID, c_al2fb_meta_app_secret, true);
-
-			list($encoded_sig, $payload) = explode('.', $signed_request, 2);
-
-			// decode the data
-			$sig = self::base64_url_decode($encoded_sig);
-			$data = json_decode(self::base64_url_decode($payload), true);
-
-			if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
-				return null;
-
-			// check sig
-			$expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
-			if ($sig !== $expected_sig)
-				return null;
-
-			return $data;
-		}
-
-		function base64_url_decode($input) {
-			return base64_decode(strtr($input, '-_', '+/'));
 		}
 
 		// Modify comment list
@@ -4574,11 +4583,11 @@ class AL2FB_Widget extends WP_Widget {
 
 			// Facebook registration
 			if ($registration)
-				echo $wp_al2fb->Get_registration($user_ID);
+				echo $wp_al2fb->Get_registration($post);
 
 			// Facebook login
 			if ($login)
-				echo $wp_al2fb->Get_login($user_ID);
+				echo $wp_al2fb->Get_login($post);
 
 			echo $after_widget;
 		}
