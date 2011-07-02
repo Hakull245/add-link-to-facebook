@@ -407,6 +407,13 @@ if (!class_exists('WPAL2Facebook')) {
 				header('Content-type: text/plain');
 				echo 'token=' . $_REQUEST['token'] . PHP_EOL;
 				echo 'uid=' . $_REQUEST['uid'] . PHP_EOL;
+
+				$url = 'https://graph.facebook.com/' . $_REQUEST['uid'];
+				$token = $_REQUEST['token'];
+				$query = http_build_query(array('access_token' => $token), '', '&');
+				$response = self::Request($url, $query, 'GET');
+				$me = json_decode($response);
+				print_r($me);
 				exit();
 			}
 
