@@ -3294,17 +3294,19 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Flattr script
 		function WP_print_scripts() {
-			echo '<script type="text/javascript">';
-			echo '/* <![CDATA[ */';
-			echo '(function() {';
-			echo "var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];";
-			echo "s.type = 'text/javascript';";
-			echo "s.async = true;";
-			echo "s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';";
-			echo "t.parentNode.insertBefore(s, t);";
-			echo '})();';
-			echo '/* ]]> */';
-			echo '</script>';
+			if (strpos(strtolower($_SERVER['REQUEST_URI']), 'add-link-to-facebook') !== false) {
+				echo '<script type="text/javascript">';
+				echo '/* <![CDATA[ */';
+				echo '(function() {';
+				echo "var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];";
+				echo "s.type = 'text/javascript';";
+				echo "s.async = true;";
+				echo "s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';";
+				echo "t.parentNode.insertBefore(s, t);";
+				echo '})();';
+				echo '/* ]]> */';
+				echo '</script>';
+			}
 		}
 
 		// Post content
