@@ -426,21 +426,29 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($reg == null) {
 					header('Content-type: text/plain');
 					_e('Facebook registration failed', c_al2fb_text_domain);
+					echo PHP_EOL;
 				}
 				else {
 					if (!get_option('users_can_register')) {
 						// Registration not enabled
 						header('Content-type: text/plain');
 						_e('User registration disabled', c_al2fb_text_domain);
+						echo PHP_EOL;
 					}
 					else if (empty($reg['registration']['email'])) {
 						header('Content-type: text/plain');
 						_e('Facebook e-mail address missing', c_al2fb_text_domain);
+						echo PHP_EOL;
+						if ($this->debug)
+							print_r($reg);
 					}
 					else if (email_exists($reg['registration']['email'])) {
 						// E-mail in use
 						header('Content-type: text/plain');
 						_e('E-mail address in use', c_al2fb_text_domain);
+						echo PHP_EOL;
+						if ($this->debug)
+							print_r($reg);
 					}
 					else {
 						// Create new WP user
@@ -456,14 +464,19 @@ if (!class_exists('WPAL2Facebook')) {
 						if (is_wp_error($user_ID)) {
 							header('Content-type: text/plain');
 							_e($user_ID->get_error_message());
+							echo PHP_EOL;
+							if ($this->debug)
+								print_r($reg);
 						}
 						else {
 							// Persist Facebook ID
-							update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+							if (!empty($reg['user_id']))
+								update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
 
 							// Redirect
+							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
 							$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
-							wp_redirect($redir ? $redir : (self::Redirect_uri() . $_REQUEST['uri']));
+							wp_redirect($redir ? $redir : $self);
 						}
 					}
 				}
@@ -479,37 +492,44 @@ if (!class_exists('WPAL2Facebook')) {
 					$query = http_build_query(array('access_token' => $_REQUEST['token']), '', '&');
 					$response = self::Request($url, $query, 'GET');
 					$me = json_decode($response);
-					if (!empty($me) && !empty($me->verified) && $me->verified) {
-						if (empty($me->email)) {
-							header('Content-type: text/plain');
-							_e('Facebook e-mail address missing', c_al2fb_text_domain);
+
+					// Workaround if not e-mail present
+					if (!empty($me) && empty($me->email)) {
+						$users = get_users(array('meta_key' => c_al2fb_meta_facebook_id, 'meta_value' => $me->id));
+						if (count($users) == 1)
+							$me->email = $users[0]->user_email;
+					}
+
+					// Check Facebook user
+					if (!empty($me) && !empty($me->verified) && $me->verified && !empty($me->email)) {
+						// Try to login
+						$user = self::Login_by_email($me->email);
+
+						// Check login
+						if ($user) {
+							// Persist Facebook ID
+							if (!empty($me->id))
+								update_user_meta($user->ID, c_al2fb_meta_facebook_id, $me->id);
+
+							// Redirect
+							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
+							$redir = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_redir, true);
+							wp_redirect($redir ? $redir : $self);
 						}
 						else {
-							// Try to login
-							$user = self::Login_by_email($me->email);
-
-							// Check login
-							if ($user) {
-								// Persist Facebook ID
-								update_user_meta($user->ID, c_al2fb_meta_facebook_id, $me->id);
-								$redir = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_redir, true);
-
-								// Redirect
-								wp_redirect($redir ? $redir : (self::Redirect_uri() . $_REQUEST['uri']));
-							}
-							else {
-								// User not found (anymore)
-								header('Content-type: text/plain');
-								_e('User not found', c_al2fb_text_domain);
-								if ($this->debug)
-									print_r($me);
-							}
+							// User not found (anymore)
+							header('Content-type: text/plain');
+							_e('User not found', c_al2fb_text_domain);
+							echo PHP_EOL;
+							if ($this->debug)
+								print_r($me);
 						}
 					}
 					else {
 						// Something went wrong
 						header('Content-type: text/plain');
 						_e('Could not verify Facebook login', c_al2fb_text_domain);
+						echo PHP_EOL;
 						if ($this->debug)
 							print_r($me);
 					}
@@ -518,6 +538,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// Communication error?
 					header('Content-type: text/plain');
 					echo $e->getMessage();
+					echo PHP_EOL;
 				}
 				exit();
 			}
@@ -1279,6 +1300,15 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
 <?php
+			if ($this->debug) {
+				echo '<pre>';
+				echo 'Server: ';
+				print_r($_SERVER);
+				echo 'Request: ';
+				print_r($_REQUEST);
+				echo '</pre>';
+			}
+
 			// Check connectivity
 			if (!ini_get('allow_url_fopen') && !function_exists('curl_init'))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
