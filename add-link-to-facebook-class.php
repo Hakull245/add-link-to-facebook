@@ -2976,6 +2976,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
 				$link = get_permalink($post->ID);
+			$link = apply_filters('al2fb_link', $link);
 
 			// Get processed texts
 			$texts = self::Get_texts($post);
@@ -2985,18 +2986,21 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get name
 			$name = self::Convert_encoding($user_ID, get_the_title($post->ID));
+			$name = apply_filters('al2fb_name', $name);
 
 			// Get caption
 			$caption = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 				$caption = self::Convert_encoding($user_ID, $caption);
+				$caption = apply_filters('al2fb_caption', $caption);
 			}
 
 			// Get link picture
 			$picture_info = self::Get_link_picture($post, $user_ID);
 			$picture = $picture_info['picture'];
 			$picture_type = $picture_info['picture_type'];
+			$picture = apply_filters('al2fb_picture', $picture);
 
 			// Get user note
 			$message = '';
@@ -3737,7 +3741,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$lang = self::Get_locale($user_ID);
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$regurl = get_user_meta($user_ID, c_al2fb_meta_login_regurl, true);
-				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
+				$faces = false;
 				$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
 				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 				$permissions = '';

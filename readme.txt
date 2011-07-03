@@ -608,6 +608,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook login (including shortcode/template tag)
 * Improvement: Flatr script only on settings page
+* Improvement: filters for link, name, caption and picture
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
@@ -999,6 +1000,7 @@ In no particular order:
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
 * Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
 * Integrate posts from Facebook
+* <Title> by <Author>
 
 Realized features:
 
@@ -1031,6 +1033,7 @@ Realized features:
 * Update added links (version 1.74)
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
 * Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
+* Filters for link, name, caption and picture (version 1.85)
 
 Feature which will not be realized, sorry:
 
