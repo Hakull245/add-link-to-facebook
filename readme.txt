@@ -350,6 +350,17 @@ Only on single posts/pages an author can be determined, which is needed to get t
 However, there is a workaround: choose a post/page you want to tie the widget to and
 use one or more of the shortcodes to display what you want, see question U23 for more details.
 
+= U29 How can I use Facebook registration/login? =
+
+First read the previous question and [this documentation](http://developers.facebook.com/docs/user_registration/flows/ "User Registration Flows") for some background information.
+
+* Create a page and add the shortcode *[al2fb_registration]* to it; this is the registration page
+* Add the shortcode *[al2fb_login post_id="xxx"]* to a (text) widget; replace *xxx* by the page number of the registration page
+* Let the option *Login registration URL* point to your registration page
+* Enable the option *Execute shortcodes in widgets*
+
+Optionally create a landing page for logged in users and set the plugin option *Login registration URL* to it.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
