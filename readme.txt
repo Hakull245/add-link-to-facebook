@@ -352,14 +352,15 @@ use one or more of the shortcodes to display what you want, see question U23 for
 
 You probably want to enable the option *Execute shortcodes in widgets*.
 
-= U29 How can I use Facebook registration/login? =
+= U29 How can I use the Facebook registration form/login button? =
 
 First read the previous question and [this documentation](http://developers.facebook.com/docs/user_registration/flows/ "User Registration Flows") for some background information.
 
 * Create a page and add the shortcode *[al2fb_registration]* to it; this is the registration page
 * Add the shortcode *[al2fb_login post_id="xxx"]* to a (text) widget; replace *xxx* by the page number of the registration page
-* Let the option *Login registration URL* point to your registration page
-* Enable the option *Execute shortcodes in widgets*
+* Let the plugin option *Login registration URL* point to your registration page
+* Enable the plugin option *Execute shortcodes in widgets*
+* Enable the WordPress option *General* > *Membership* > *Anyone can register*
 
 Optionally create a landing page for logged in users and set the plugin option *Login redirect URL* to it.
 
