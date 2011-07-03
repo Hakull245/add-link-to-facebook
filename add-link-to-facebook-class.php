@@ -1545,6 +1545,7 @@ if (!class_exists('WPAL2Facebook')) {
 						</th><td>
 							<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
 							<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
+							<br /><span class="al2fb_explanation"><?php _e('When checked links will be added as the page', c_al2fb_text_domain); ?></span>
 						</td></tr>
 						</table>
 						<p class="submit">
