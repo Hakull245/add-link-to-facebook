@@ -361,7 +361,7 @@ First read the previous question and [this documentation](http://developers.face
 * Let the option *Login registration URL* point to your registration page
 * Enable the option *Execute shortcodes in widgets*
 
-Optionally create a landing page for logged in users and set the plugin option *Login registration URL* to it.
+Optionally create a landing page for logged in users and set the plugin option *Login redirect URL* to it.
 
 **--- Security ---**
 
