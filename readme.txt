@@ -609,6 +609,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Facebook login (including shortcode/template tag)
 * Improvement: Flatr script only on settings page
 * Improvement: filters for link, name, caption and picture
+* Removed *Sustainable Plugins Sponsorship Network*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")

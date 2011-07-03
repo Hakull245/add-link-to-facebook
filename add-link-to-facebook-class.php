@@ -1250,7 +1250,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$pile_size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
 
 			// Sustainable Plugins Sponsorship Network
-			self::Render_sponsorship();
+			//self::Render_sponsorship();
 ?>
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
