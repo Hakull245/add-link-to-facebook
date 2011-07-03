@@ -634,7 +634,7 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
 				if ($this->debug)
 					echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
-				echo '<a href="http://www.facebook.com/profile.php?id=' . $fid . '" target="_blank">' . $fid . '</a></td>';
+				echo '<a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td>';
 				echo '</tr>';
 			}
 		}
@@ -2974,6 +2974,12 @@ if (!class_exists('WPAL2Facebook')) {
 			);
 		}
 
+		function Get_fb_profilelink($id) {
+			if (empty($id))
+				return '';
+			return 'http://www.facebook.com/profile.php?id=' . $id;
+		}
+
 		function Get_fb_permalink($link_id) {
 			if (empty($link_id))
 				return '';
@@ -3550,7 +3556,7 @@ if (!class_exists('WPAL2Facebook')) {
 					if (!empty($likers))
 						$likers .= ', ';
 					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) == 'author') {
-						$link = 'http://www.facebook.com/profile.php?id=' . $fb_like->id;
+						$link = self::Get_fb_profilelink($fb_like->id);
 						$likers .= '<a href="' . $link . '" rel="nofollow">' . htmlspecialchars($fb_like->name, ENT_QUOTES, $charset) . '</a>';
 					}
 					else
@@ -3889,7 +3895,7 @@ if (!class_exists('WPAL2Facebook')) {
 									'comment_post_ID' => $post_ID,
 									'comment_author' => $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain),
 									'comment_author_email' => '',
-									'comment_author_url' => 'http://www.facebook.com/profile.php?id=' . $fb_comment->from->id,
+									'comment_author_url' => self::Get_fb_profilelink($fb_comment->from->id),
 									'comment_author_IP' => '',
 									'comment_date' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off),
 									'comment_date_gmt' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time)),
@@ -3954,7 +3960,7 @@ if (!class_exists('WPAL2Facebook')) {
 					if ($fb_likes)
 						foreach ($fb_likes->data as $fb_like) {
 							// Create new virtual comment
-							$link = 'http://www.facebook.com/profile.php?id=' . $fb_like->id;
+							$link = self::Get_fb_profilelink($fb_like->id);
 							$new = null;
 							$new->comment_ID = $fb_like->id;
 							$new->comment_post_ID = $post_ID;
@@ -4397,10 +4403,12 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Facepile width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_width, true) . '</td></tr>';
 			$info .= '<tr><td>Facepile rows:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_rows, true) . '</td></tr>';
 
+			$fid = get_user_meta($user_ID, c_al2fb_meta_facebook_id, true);
 			$info .= '<tr><td>Registration width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_reg_width, true) . '</td></tr>';
 			$info .= '<tr><td>Login width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_width, true) . '</td></tr>';
-			$info .= '<tr><td>Registration URL:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_regurl, true) . '</td></tr>';
-			$info .= '<tr><td>Redir URL:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_redir, true) . '</td></tr>';
+			$info .= '<tr><td>Registration URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_regurl, true) . '" target="_blank">Link</a></td></tr>';
+			$info .= '<tr><td>Redir URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_redir, true) . '" target="_blank">Link</a></td></tr>';
+			$info .= '<tr><td>Facebook ID:</td><td><a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td></tr>';
 
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
@@ -4736,7 +4744,7 @@ class AL2FB_Widget extends WP_Widget {
 						if ($comments_nolink == 'link')
 							echo '<a href="' . $wp_al2fb->Get_fb_permalink($fb_message->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
 						else if ($comments_nolink == 'author')
-							echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_message->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
+							echo '<a href="' . $wp_al2fb->Get_fb_profilelink($fb_message->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
 						else
 							echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</span>';
 
@@ -4826,7 +4834,7 @@ class AL2FB_Widget extends WP_Widget {
 			if ($comments_nolink == 'link')
 				echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 			else if ($comments_nolink == 'author')
-				echo '<a href="http://www.facebook.com/profile.php?id=' . $fb_comment->from->id . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
+				echo '<a href="' . $wp_al2fb->Get_fb_profilelink($fb_comment->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 			else
 				echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</span>';
 
