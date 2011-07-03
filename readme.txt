@@ -350,6 +350,8 @@ Only on single posts/pages an author can be determined, which is needed to get t
 However, there is a workaround: choose a post/page you want to tie the widget to and
 use one or more of the shortcodes to display what you want, see question U23 for more details.
 
+You probably want to enable the option *Execute shortcodes in widgets*.
+
 = U29 How can I use Facebook registration/login? =
 
 First read the previous question and [this documentation](http://developers.facebook.com/docs/user_registration/flows/ "User Registration Flows") for some background information.
