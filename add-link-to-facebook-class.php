@@ -198,6 +198,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_action('add_meta_boxes', array(&$this, 'Add_meta_boxes'));
 				add_action('save_post', array(&$this, 'Save_post'));
 				add_action('personal_options', array(&$this, 'Personal_options'));
+				add_action('personal_options_update', array(&$this, 'Personal_options_update'));
+				add_action('edit_user_profile_update', array(&$this, 'Personal_options_update'));
 			}
 
 			add_action('transition_post_status', array(&$this, 'Transition_post_status'), 10, 3);
@@ -503,7 +505,12 @@ if (!class_exists('WPAL2Facebook')) {
 							'meta_key' => c_al2fb_meta_facebook_id,
 							'meta_value' => $me->id
 						));
-						if (count($users) == 1)
+						if (count($users) == 0) {
+							$regurl = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_regurl, true);
+							if (!empty($regurl))
+								wp_redirect($regurl);
+						}
+						else if (count($users) == 1)
 							$me->email = $users[0]->user_email;
 					}
 
@@ -624,11 +631,17 @@ if (!class_exists('WPAL2Facebook')) {
 		function Personal_options($user) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
 			if ($fid) {
-				echo '<th scope="row">' . _('Facebook ID') . '</th>';
-				echo '<td><a href="http://www.facebook.com/profile.php?id=' . $fid . '" target="_blank">' . $fid . '</a></td>';
+				echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
+				if ($this->debug)
+					echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
+				echo '<a href="http://www.facebook.com/profile.php?id=' . $fid . '" target="_blank">' . $fid . '</a></td>';
 				echo '</tr>';
-				echo '<tr>';
 			}
+		}
+
+		function Personal_options_update($user_id) {
+			if ($this->debug)
+				update_user_meta($user_id, c_al2fb_meta_facebook_id, trim($_REQUEST[c_al2fb_meta_facebook_id]));
 		}
 
 		// Display admin messages
@@ -1312,15 +1325,6 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
 <?php
-			if ($this->debug) {
-				echo '<pre>';
-				echo 'Server: ';
-				print_r($_SERVER);
-				echo 'Request: ';
-				print_r($_REQUEST);
-				echo '</pre>';
-			}
-
 			// Check connectivity
 			if (!ini_get('allow_url_fopen') && !function_exists('curl_init'))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
@@ -2158,7 +2162,6 @@ if (!class_exists('WPAL2Facebook')) {
 <?php		} ?>
 
 			</form>
-
 			</div>
 			</div>
 <?php
@@ -4528,6 +4531,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '</table></div>';
+
+			$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
+
 			return $info;
 		}
 
