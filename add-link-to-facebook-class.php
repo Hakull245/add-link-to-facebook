@@ -436,6 +436,7 @@ if (!class_exists('WPAL2Facebook')) {
 						echo PHP_EOL;
 					}
 					else if (empty($reg['registration']['email'])) {
+						// E-mail missing
 						header('Content-type: text/plain');
 						_e('Facebook e-mail address missing', c_al2fb_text_domain);
 						echo PHP_EOL;
@@ -473,6 +474,9 @@ if (!class_exists('WPAL2Facebook')) {
 							if (!empty($reg['user_id']))
 								update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
 
+							// Log user in
+							$user = self::Login_by_email($reg['registration']['email']);
+
 							// Redirect
 							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
 							$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
@@ -493,15 +497,18 @@ if (!class_exists('WPAL2Facebook')) {
 					$response = self::Request($url, $query, 'GET');
 					$me = json_decode($response);
 
-					// Workaround if not e-mail present
+					// Workaround if no e-mail present
 					if (!empty($me) && empty($me->email)) {
-						$users = get_users(array('meta_key' => c_al2fb_meta_facebook_id, 'meta_value' => $me->id));
+						$users = get_users(array(
+							'meta_key' => c_al2fb_meta_facebook_id,
+							'meta_value' => $me->id
+						));
 						if (count($users) == 1)
 							$me->email = $users[0]->user_email;
 					}
 
 					// Check Facebook user
-					if (!empty($me) && !empty($me->verified) && $me->verified && !empty($me->email)) {
+					if (!empty($me) && !empty($me->email)) {
 						// Try to login
 						$user = self::Login_by_email($me->email);
 
@@ -528,7 +535,10 @@ if (!class_exists('WPAL2Facebook')) {
 					else {
 						// Something went wrong
 						header('Content-type: text/plain');
-						_e('Could not verify Facebook login', c_al2fb_text_domain);
+						if (empty($me))
+							_e('Could not verify Facebook login', c_al2fb_text_domain);
+						else
+							_e('Facebook e-mail address missing', c_al2fb_text_domain);
 						echo PHP_EOL;
 						if ($this->debug)
 							print_r($me);
@@ -537,6 +547,8 @@ if (!class_exists('WPAL2Facebook')) {
 				catch (Exception $e) {
 					// Communication error?
 					header('Content-type: text/plain');
+					_e('Could not verify Facebook login', c_al2fb_text_domain);
+					echo PHP_EOL;
 					echo $e->getMessage();
 					echo PHP_EOL;
 				}
