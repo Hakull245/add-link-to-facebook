@@ -296,6 +296,8 @@ To show the Facebook login button (development):
 * [al2fb_login]
 * [al2fb_login post_id="123"]
 
+If you want to use shortcodes in a (text) widget, you should enable the option *Execute shortcodes in widgets*.
+
 = U24 How can I use the template tags? =
 
 Put one of these lines somewhere in your theme:
@@ -903,10 +905,10 @@ You can disable comment integration for individual posts/pages by selecting *Do 
 
 *Standard Facebook buttons*
 
-The plugin can as an extra add a standard Facebook like and/or send button to your post.
+The plugin can as an extra add a standard Facebook like button/box and/or send button to your post.
 The layout is mostly determined by Facebook.
 You can only control the general layout, if there will be faces, the width, the action (like or recommend), the font and color scheme.
-See for details [the Facebook documentation](http://developers.facebook.com/docs/reference/plugins/like/ "Like button").
+See for details [the Facebook documentation](http://developers.facebook.com/docs/plugins/ "Social plugins").
 
 By default the buttons will be shown below your post/page text, but you can change that by checking *Show at the top of the post*.
 If you want more control over the location of the buttons, you can use a shortcode or template tag.
@@ -922,10 +924,6 @@ If you use a Facebook like button, you should enable the [Open Graph protocol](h
 (unless you use another plugin for this purpose).
 Most problems with the like button do find its cause in not using the Open Graph protocol.
 
-The Facebook like button doesn't look right for some themes.
-To remedy this, you can *Use iframe in stead of XFBML*.
-Please note that the like/send button combination is not supported for the iframes version.
-
 *Other options*
 
 If you explicitly want to select when to add, check the option *Do not add link by default*.
@@ -937,8 +935,8 @@ I have never had a report about it, but if you have problems displaying the corr
 
 When you don't want to use the plugin anymore, you can check *Clean on deactivate* before deactivating the plugin to erase all options. This doesn't erase the administrator option, however.
 
-Checking the option *I have donated to this plugin* will remove the sponsorship messages and all the donate buttons and links.
-Developing this plugin took many hours. A small donation as your appreciation is always welcome.
+Checking the option *I have donated to this plugin* will remove all the donate buttons and links.
+Developing this plugin took many hours. A small donation as a token of your appreciation is always welcome.
 
 Please let me know if you think this plugin is good or bad by rating it.
 Checking *I have rated this plugin* will remove the rating reminder message.
