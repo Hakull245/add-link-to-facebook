@@ -605,8 +605,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = 1.85 (next release) =
-* New feature: Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
-* New feature: Facebook login (including shortcode/template tag)
+* New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
+* New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
 * Improvement: Flatr script only on settings page
 * Improvement: filters for link, name, caption and picture
 * Removed *Sustainable Plugins Sponsorship Network*
