@@ -433,6 +433,10 @@ if (!class_exists('WPAL2Facebook')) {
 						header('Content-type: text/plain');
 						_e('User registration disabled', c_al2fb_text_domain);
 					}
+					else if (empty($reg['registration']['email'])) {
+						header('Content-type: text/plain');
+						_e('Facebook e-mail address missing', c_al2fb_text_domain);
+					}
 					else if (email_exists($reg['registration']['email'])) {
 						// E-mail in use
 						header('Content-type: text/plain');
@@ -459,7 +463,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 							// Redirect
 							$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
-							wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
+							wp_redirect($redir ? $redir : (self::Redirect_uri() . $_REQUEST['uri']));
 						}
 					}
 				}
@@ -476,24 +480,30 @@ if (!class_exists('WPAL2Facebook')) {
 					$response = self::Request($url, $query, 'GET');
 					$me = json_decode($response);
 					if (!empty($me) && !empty($me->verified) && $me->verified) {
-						// Try to login
-						$user = self::Login_by_email($me->email);
-
-						// Check login
-						if ($user) {
-							// Persist Facebook ID
-							update_user_meta($user->ID, c_al2fb_meta_facebook_id, $me->id);
-							$redir = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_redir, true);
-
-							// Redirect
-							wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
+						if (empty($me->email)) {
+							header('Content-type: text/plain');
+							_e('Facebook e-mail address missing', c_al2fb_text_domain);
 						}
 						else {
-							// User not found (anymore)
-							header('Content-type: text/plain');
-							_e('User not found', c_al2fb_text_domain);
-							if ($this->debug)
-								print_r($me);
+							// Try to login
+							$user = self::Login_by_email($me->email);
+
+							// Check login
+							if ($user) {
+								// Persist Facebook ID
+								update_user_meta($user->ID, c_al2fb_meta_facebook_id, $me->id);
+								$redir = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_redir, true);
+
+								// Redirect
+								wp_redirect($redir ? $redir : (self::Redirect_uri() . $_REQUEST['uri']));
+							}
+							else {
+								// User not found (anymore)
+								header('Content-type: text/plain');
+								_e('User not found', c_al2fb_text_domain);
+								if ($this->debug)
+									print_r($me);
+							}
 						}
 					}
 					else {
