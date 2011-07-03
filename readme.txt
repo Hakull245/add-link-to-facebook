@@ -609,7 +609,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.85 (next release) =
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
-* Improvement: Flatr script only on settings page
+* Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
 * Improvement: filters for link, name, caption and picture
 * Removed *Sustainable Plugins Sponsorship Network*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
