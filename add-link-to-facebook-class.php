@@ -419,21 +419,27 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Facebook registration
 			if (isset($_REQUEST['al2fb_reg'])) {
+				// Decode Facebook data
 				$reg = self::Parse_signed_request($_REQUEST['user']);
+
+				// Check Facebook data
 				if ($reg == null) {
 					header('Content-type: text/plain');
 					_e('Facebook registration failed', c_al2fb_text_domain);
 				}
 				else {
 					if (!get_option('users_can_register')) {
+						// Registration not enabled
 						header('Content-type: text/plain');
 						_e('User registration disabled', c_al2fb_text_domain);
 					}
 					else if (email_exists($reg['registration']['email'])) {
+						// E-mail in use
 						header('Content-type: text/plain');
 						_e('E-mail address in use', c_al2fb_text_domain);
 					}
 					else {
+						// Create new WP user
 						$user_ID = wp_insert_user(array(
 							'first_name' => $reg['registration']['first_name'],
 							'last_name' => $reg['registration']['last_name'],
@@ -441,22 +447,20 @@ if (!class_exists('WPAL2Facebook')) {
 							'user_login' => $reg['registration']['user_name'],
 							'user_pass' => $reg['registration']['password']
 						)) ;
+
+						// Check result
 						if (is_wp_error($user_ID)) {
 							header('Content-type: text/plain');
 							_e($user_ID->get_error_message());
 						}
-						else
-							if ($user) {
-								update_user_meta($user->ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-								$redir = get_user_meta($user->ID, c_al2fb_meta_login_redir, true);
-								wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
-							}
-							else {
-								header('Content-type: text/plain');
-								_e('User not found', c_al2fb_text_domain);
-								if ($this->debug)
-									print_r($me);
-							}
+						else {
+							// Persist Facebook ID
+							update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
+
+							// Redirect
+							$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
+							wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
+						}
 					}
 				}
 				exit();
@@ -466,18 +470,26 @@ if (!class_exists('WPAL2Facebook')) {
 			if (isset($_REQUEST['al2fb_login'])) {
 				header('Content-type: text/plain');
 				try {
+					// Check token
 					$url = 'https://graph.facebook.com/' . $_REQUEST['uid'];
 					$query = http_build_query(array('access_token' => $_REQUEST['token']), '', '&');
 					$response = self::Request($url, $query, 'GET');
 					$me = json_decode($response);
 					if (!empty($me) && !empty($me->verified) && $me->verified) {
+						// Try to login
 						$user = self::Login_by_email($me->email);
+
+						// Check login
 						if ($user) {
+							// Persist Facebook ID
 							update_user_meta($user->ID, c_al2fb_meta_facebook_id, $me->id);
 							$redir = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_redir, true);
+
+							// Redirect
 							wp_redirect($redir ? $redir : (home_url() . $_REQUEST['uri']));
 						}
 						else {
+							// User not found (anymore)
 							header('Content-type: text/plain');
 							_e('User not found', c_al2fb_text_domain);
 							if ($this->debug)
@@ -485,6 +497,7 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 					}
 					else {
+						// Something went wrong
 						header('Content-type: text/plain');
 						_e('Could not verify Facebook login', c_al2fb_text_domain);
 						if ($this->debug)
@@ -492,6 +505,7 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 				}
 				catch (Exception $e) {
+					// Communication error?
 					header('Content-type: text/plain');
 					echo $e->getMessage();
 				}
@@ -4592,8 +4606,8 @@ class AL2FB_Widget extends WP_Widget {
 		$registration = isset($instance['al2fb_registration']) ? $instance['al2fb_registration'] : false;
 		$login = isset($instance['al2fb_login']) ? $instance['al2fb_login'] : false;
 
-		$registration = $registration && !is_user_logged_in();
-		$login = $login && !is_user_logged_in();
+		$registration = ($registration && !is_user_logged_in() && get_option('users_can_register'));
+		$login = ($login && !is_user_logged_in());
 
 		// More settings
 		$charset = get_bloginfo('charset');

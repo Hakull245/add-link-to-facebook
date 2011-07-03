@@ -364,6 +364,9 @@ First read the previous question and [this documentation](http://developers.face
 
 Optionally create a landing page for logged in users and set the plugin option *Login redirect URL* to it.
 
+Note that the registration form and login button are not shown when you are logged in.
+The registration form is also not shown if users cannot register.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
