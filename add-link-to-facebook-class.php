@@ -3582,13 +3582,19 @@ if (!class_exists('WPAL2Facebook')) {
 			return $locale;
 		}
 
+		function Get_fb_script($user_ID) {
+			$lang = self::Get_locale($user_ID);
+			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+			if ($appid)
+				return 'http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1';
+			else
+				return 'http://connect.facebook.net/' . $lang . '/all.js#xfbml=1';
+		}
+
 		// Get HTML for like button
 		function Get_like_button($post, $box) {
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
-				// Get language
-				$lang = self::Get_locale($user_ID);
-
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
@@ -3623,7 +3629,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build content
 				$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= ($box ? '<fb:like-box' : '<fb:like');
 				$content .= ' href="' . $link . '"';
 				if (!$box && get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true))
@@ -3657,9 +3663,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_send_button($post) {
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
-				// Get language
-				$lang = self::Get_locale($user_ID);
-
 				// Get options
 				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
@@ -3670,7 +3673,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Send button
 				$content = '<div class="al2fb_send_button">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:send ref="AL2FB"';
 				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
 				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
@@ -3687,9 +3690,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_comments_plugin($post) {
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
-				// Get language
-				$lang = self::Get_locale($user_ID);
-
 				// Get options
 				$posts = get_user_meta($user_ID, c_al2fb_meta_comments_posts, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_comments_width, true);
@@ -3701,7 +3701,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Send button
 				$content = '<div class="al2fb_comments_plugin">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#xfbml=1" type="text/javascript"></script>';
+				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:comments';
 				$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
 				$content .= ' width="' . (empty($width) ? '500' : $width) . '"';
@@ -3719,10 +3719,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_face_pile($post) {
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
-				// Get language
-				$lang = self::Get_locale($user_ID);
-				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
-
 				// Get options
 				$size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_pile_width, true);
@@ -3734,7 +3730,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Face pile
 				$content = '<div class="al2fb_face_pile">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:facepile';
 				$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
 				$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
@@ -3776,7 +3772,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get data
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
-				$lang = self::Get_locale($user_ID);
+				// Get options
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_reg_width, true);
 				$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
@@ -3791,7 +3787,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($appid) {
 					$content = '<div class="al2fb_registration">';
 					$content .= '<div id="fb-root"></div>';
-					$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>';
+					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 					$content .= '<fb:registration';
 					$content .= ' fields="' . $fields . '"';
 					$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
@@ -3814,7 +3810,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get data
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
-				$lang = self::Get_locale($user_ID);
+				// Get options
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$regurl = get_user_meta($user_ID, c_al2fb_meta_login_regurl, true);
 				$faces = false;
@@ -3826,7 +3822,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($appid) {
 					$content = '<div class="al2fb_login">';
 					$content .= '<div id="fb-root"></div>';
-					$content .= '<script src="http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1" type="text/javascript"></script>' . PHP_EOL;
+					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>' . PHP_EOL;
 					$content .= '<script type="text/javascript">' . PHP_EOL;
 					$content .= 'function al2fb_login() {' . PHP_EOL;
 					$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
