@@ -354,6 +354,8 @@ You probably want to enable the option *Execute shortcodes in widgets*.
 
 = U29 How can I use the Facebook registration form/login button? =
 
+(development version)
+
 First read the previous question and [this documentation](http://developers.facebook.com/docs/user_registration/flows/ "User Registration Flows") for some background information.
 
 * Create a page and add the shortcode *[al2fb_registration]* to it; this is the registration page
