@@ -1029,9 +1029,10 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
-* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
 * Integrate posts from Facebook
 * <Title> by <Author>
+* Comment with Facebook login
+* Shortcode / template tag for number of likers
 
 Realized features:
 
@@ -1065,6 +1066,7 @@ Realized features:
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
 * Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
 * Filters for link, name, caption and picture (version 1.85)
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.85)
 
 Feature which will not be realized, sorry:
 
@@ -1076,7 +1078,6 @@ Feature which will not be realized, sorry:
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
-* Comment with Facebook login: no feasible solution
 * Other social buttons: too far from the core function of the plugin
 * Like button at the bottom and top: there are already enough like buttons in the world
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
