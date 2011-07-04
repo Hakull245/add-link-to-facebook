@@ -34,7 +34,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
-* Facebook registration/login (development)
+* Facebook registration/login (testing, see [changelog](http://wordpress.org/extend/plugins/add-link-to-facebook/changelog/ "Changelog"))
 
 **Beta features:**
 
@@ -286,12 +286,12 @@ To show the Facebook profile icon/link:
 * [al2fb_profile_link]
 * [al2fb_profile_link post_id="123"]
 
-To show the Facebook registration form (development):
+To show the Facebook registration form:
 
 * [al2fb_registration]
 * [al2fb_registration post_id="123"]
 
-To show the Facebook login button (development):
+To show the Facebook login button:
 
 * [al2fb_login]
 * [al2fb_login post_id="123"]
@@ -316,9 +316,6 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link();
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
-
-Development:
-
 * if (function_exists('al2fb_registration')) al2fb_registration();
 * if (function_exists('al2fb_registration')) al2fb_registration(123);
 * if (function_exists('al2fb_login')) al2fb_login();
@@ -354,8 +351,6 @@ You probably want to enable the option *Execute shortcodes in widgets*.
 
 = U29 How can I use the Facebook registration form/login button? =
 
-(development version)
-
 First read the previous question and [this documentation](http://developers.facebook.com/docs/user_registration/flows/ "User Registration Flows") for some background information.
 
 * Create a page and add the shortcode *[al2fb_registration]* to it; this is the registration page
@@ -369,6 +364,8 @@ Optionally create a landing page for logged in users and set the plugin option *
 
 Note that the registration form and login button are not shown when you are logged in.
 The registration form is also not shown if users cannot register.
+
+Question E22 describes possible errors.
 
 **--- Security ---**
 
@@ -641,6 +638,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
 * Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thorougly!
+* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
 * Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
 * Improvement: filters for link, name, caption and picture
 * Removed *Sustainable Plugins Sponsorship Network*
@@ -819,6 +817,8 @@ Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
 If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php "Confirm phone").
+
+Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
