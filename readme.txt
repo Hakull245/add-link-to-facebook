@@ -637,7 +637,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.85 (next release) =
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
-* Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thorougly!
+* Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thoroughly!
 * See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
 * Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
 * Improvement: filters for link, name, caption and picture
