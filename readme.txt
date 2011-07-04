@@ -611,13 +611,14 @@ Ask your provider to install and configure [cURL](http://www.php.net/manual/en/c
 
 = E22 What errors can occur during Facebook registration and login? =
 
-* Facebook registration failed: the data Facebook sent could not be decoded
-* User registration disabled: WordPress option *General* > *Membership* > *Anyone can register* is disabled
-* Facebook e-mail address missing: Facebook didn't sent an e-mail address while registering
-* E-mail address in use: e-mail addresses must be unique for WordPress users
-* Facebook user ID missing: Facebook didn't sent an user ID while logging in
-* User not found: no WordPress user with the ID Facebook sent was found (user not registered?)
-* Could not verify Facebook login: Facebook user profile could not be retrieved (could be transient, so try again)
+* **Facebook registration failed**: the data Facebook sent could not be decoded
+* **User registration disabled**: WordPress option *General* > *Membership* > *Anyone can register* is disabled
+* **Facebook e-mail address missing**: Facebook didn't sent an e-mail address while registering
+* **E-mail address in use**: e-mail addresses must be unique for WordPress users
+* **Facebook user ID missing**: Facebook didn't sent an user ID while logging in
+* **User not found**: no WordPress user with the ID Facebook sent was found (user not registered?)
+* **Could not verify Facebook login**: Facebook user profile could not be retrieved (could be transient, so try again)
+* WordPress user registration errors, most notably **This username is already registered.**
 
 **--- Support ---**
 
