@@ -365,7 +365,24 @@ Optionally create a landing page for logged in users and set the plugin option *
 Note that the registration form and login button are not shown when you are logged in.
 The registration form is also not shown if users cannot register.
 
-Question E22 describes possible errors.
+Advanced use: you can set what to display when a user has logged in using the option *Text or HTML when logged in* (default behavior is to display nothing).
+It is possible to use shortcodes, for example defined using the [Shortcode Exec PHP](http://wordpress.org/extend/plugins/shortcode-exec-php/ "Shortcode Exec PHP") plugin.
+[Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") developed the following shortcode
+to display a little welcome message along with the first name and avatar of the logged in user:
+
+`echo '<p>';
+global $current_user;
+wp_get_current_user();
+echo 'Welcome <br />' . $current_user->user_firstname . '<br />';
+echo '<div id="avatar">';
+echo get_avatar(get_the_author_meta('user_email'), 32);
+echo '</div>';
+echo '<a href="' . get_bloginfo('wpurl') . '/wp-admin/profile.php">Profile</a><br />';
+echo '<a href="';
+echo wp_logout_url(home_url());
+echo '" title="Logout">Logout</a></p>';`
+
+Question E22 describes possible errors for the Facebook registration form / login button.
 
 **--- Security ---**
 
