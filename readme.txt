@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.85
+Stable tag: 1.86
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -653,20 +653,22 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.86 (next release) =
-* New feature: custom link text
+= 1.87 (next release) =
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+
+= 1.86 =
+* New feature: custom link text (meta box)
+* New feature: filters for link, name, caption and picture
 * New feature: Shortcode / template tag for number of likers
-* New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
-* New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
-* Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thoroughly!
-* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
+* New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Facebook registration") (including widget/shortcode/template tag)
+* New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Facebook login button") (including widget/shortcode/template tag)
+* Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing Facebook registration/login thoroughly!
+* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for settig up Facebook registration/login
 * Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
-* Improvement: filters for link, name, caption and picture
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
 
 = 1.85 =
 * Bugfix: Facebook avatar messed up in some cases
@@ -774,6 +776,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.86 =
+Five new features, one improvement, documentation and translation updates
 
 = 1.85 =
 One bugfix
@@ -1091,9 +1096,10 @@ Realized features:
 * Update added links (version 1.74)
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
 * Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
+* Custom link text (meta box) (version 1.86)
 * Filters for link, name, caption and picture (version 1.86)
-* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
 * Shortcode / template tag for number of likers (version 1.86)
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
 
 Feature which will not be realized, sorry:
 
