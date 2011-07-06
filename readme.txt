@@ -370,17 +370,12 @@ It is possible to use shortcodes, for example defined using the [Shortcode Exec 
 [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") developed the following shortcode
 to display a little welcome message along with the first name and avatar of the logged in user:
 
-`echo '<p>';
-global $current_user;
+`global $current_user;
 wp_get_current_user();
-echo 'Welcome <br />' . $current_user->user_firstname . '<br />';
-echo '<div id="avatar">';
-echo get_avatar(get_the_author_meta('user_email'), 32);
-echo '</div>';
+echo '<p>Welcome <br />' . $current_user->user_firstname . '<br />';
+echo '<div id="avatar">' . get_avatar(get_the_author_meta('user_email'), 32) . '</div>';
 echo '<a href="' . get_bloginfo('wpurl') . '/wp-admin/profile.php">Profile</a><br />';
-echo '<a href="';
-echo wp_logout_url(home_url());
-echo '" title="Logout">Logout</a></p>';`
+echo '<a href="' . wp_logout_url(home_url()) . '" title="Logout">Logout</a></p>';`
 
 Question E22 describes possible errors for the Facebook registration form / login button.
 
