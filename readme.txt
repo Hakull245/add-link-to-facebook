@@ -659,11 +659,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.86 =
 * New feature: custom link text (meta box)
 * New feature: filters for link, name, caption and picture
-* New feature: Shortcode / template tag for number of likers
+* New feature: shortcode / template tag for number of likers
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Facebook registration") (including widget/shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Facebook login button") (including widget/shortcode/template tag)
 * Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing Facebook registration/login thoroughly!
-* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for settig up Facebook registration/login
+* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setting up Facebook registration/login
 * Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
