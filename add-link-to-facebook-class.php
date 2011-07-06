@@ -3674,13 +3674,14 @@ if (!class_exists('WPAL2Facebook')) {
 						$fb_picture_url = self::Get_fb_picture_url_cached($id[1], 'normal');
 
 						// Build avatar image
-						if ($fb_picture_url)
+						if ($fb_picture_url) {
 							$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
 							$avatar .= ' src="' . $fb_picture_url . '"';
 							$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
 							$avatar .= ' height="' . $size . '"';
 							$avatar .= ' width="' . $size . '"';
 							$avatar .= ' />';
+						}
 					}
 				}
 			}

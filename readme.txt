@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.84
+Stable tag: 1.85
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -34,6 +34,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
+* Facebook registration/login (testing, see [changelog](http://wordpress.org/extend/plugins/add-link-to-facebook/changelog/ "Changelog"))
 
 **Beta features:**
 
@@ -285,6 +286,18 @@ To show the Facebook profile icon/link:
 * [al2fb_profile_link]
 * [al2fb_profile_link post_id="123"]
 
+To show the Facebook registration form:
+
+* [al2fb_registration]
+* [al2fb_registration post_id="123"]
+
+To show the Facebook login button:
+
+* [al2fb_login]
+* [al2fb_login post_id="123"]
+
+If you want to use shortcodes in a (text) widget, you should enable the option *Execute shortcodes in widgets*.
+
 = U24 How can I use the template tags? =
 
 Put one of these lines somewhere in your theme:
@@ -303,6 +316,10 @@ Put one of these lines somewhere in your theme:
 * if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link();
 * if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
+* if (function_exists('al2fb_registration')) al2fb_registration();
+* if (function_exists('al2fb_registration')) al2fb_registration(123);
+* if (function_exists('al2fb_login')) al2fb_login();
+* if (function_exists('al2fb_login')) al2fb_login(123);
 
 = U25 Can I add links to multiple walls? =
 
@@ -329,6 +346,26 @@ Only on single posts/pages an author can be determined, which is needed to get t
 
 However, there is a workaround: choose a post/page you want to tie the widget to and
 use one or more of the shortcodes to display what you want, see question U23 for more details.
+
+You probably want to enable the option *Execute shortcodes in widgets*.
+
+= U29 How can I use the Facebook registration form/login button? =
+
+First read the previous question and [this documentation](http://developers.facebook.com/docs/user_registration/flows/ "User Registration Flows") for some background information.
+
+* Create a page and add the shortcode *[al2fb_registration]* to it; this is the registration page
+* Add a (text) widget to for example your side bar
+* Add the shortcode *[al2fb_login post_id="xxx"]* to the widget; replace *xxx* by the page number of the registration page
+* Let the plugin option *Login registration URL* point to your registration page
+* Enable the plugin option *Execute shortcodes in widgets*
+* Enable the WordPress option *General* > *Membership* > *Anyone can register*
+
+Optionally create a landing page for logged in users and set the plugin option *Login redirect URL* to it.
+
+Note that the registration form and login button are not shown when you are logged in.
+The registration form is also not shown if users cannot register.
+
+Question E22 describes possible errors.
 
 **--- Security ---**
 
@@ -569,6 +606,17 @@ Authorizing the plugin again will most probably solve this problem.
 Your hosting server probably doesn't have the software installed or it isn't configured correctly to make a (secure) connection to the internet.
 Ask your provider to install and configure [cURL](http://www.php.net/manual/en/curl.setup.php "cURL").
 
+= E22 What errors can occur during Facebook registration and login? =
+
+* **Facebook registration failed**: the data Facebook sent could not be decoded
+* **User registration disabled**: WordPress option *General* > *Membership* > *Anyone can register* is disabled
+* **Facebook e-mail address missing**: Facebook didn't sent an e-mail address while registering
+* **E-mail address in use**: e-mail addresses must be unique for WordPress users
+* **Facebook user ID missing**: Facebook didn't sent an user ID while logging in
+* **User not found**: no WordPress user with the ID Facebook sent was found (user not registered?)
+* **Could not verify Facebook login**: Facebook user profile could not be retrieved (could be transient, so try again)
+* WordPress user registration errors, most notably **This username is already registered.**
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -586,8 +634,23 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.85 (next release) =
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version")
+= 1.86 (next release) =
+* New feature: custom link text
+* New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
+* New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
+* Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thoroughly!
+* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
+* Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
+* Improvement: filters for link, name, caption and picture
+* Removed *Sustainable Plugins Sponsorship Network*
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+
+= 1.85 =
+* Bugfix: Facebook avatar messed up in some cases
 
 = 1.84 =
 * New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
@@ -692,6 +755,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.85 =
+One bugfix
+
 = 1.84 =
 Two new features, one improvement, documentation and translation updates
 
@@ -758,6 +824,8 @@ Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
 If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php "Confirm phone").
+
+Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
@@ -876,10 +944,10 @@ You can disable comment integration for individual posts/pages by selecting *Do 
 
 *Standard Facebook buttons*
 
-The plugin can as an extra add a standard Facebook like and/or send button to your post.
+The plugin can as an extra add a standard Facebook like button/box and/or send button to your post.
 The layout is mostly determined by Facebook.
 You can only control the general layout, if there will be faces, the width, the action (like or recommend), the font and color scheme.
-See for details [the Facebook documentation](http://developers.facebook.com/docs/reference/plugins/like/ "Like button").
+See for details [the Facebook documentation](http://developers.facebook.com/docs/plugins/ "Social plugins").
 
 By default the buttons will be shown below your post/page text, but you can change that by checking *Show at the top of the post*.
 If you want more control over the location of the buttons, you can use a shortcode or template tag.
@@ -895,10 +963,6 @@ If you use a Facebook like button, you should enable the [Open Graph protocol](h
 (unless you use another plugin for this purpose).
 Most problems with the like button do find its cause in not using the Open Graph protocol.
 
-The Facebook like button doesn't look right for some themes.
-To remedy this, you can *Use iframe in stead of XFBML*.
-Please note that the like/send button combination is not supported for the iframes version.
-
 *Other options*
 
 If you explicitly want to select when to add, check the option *Do not add link by default*.
@@ -910,8 +974,8 @@ I have never had a report about it, but if you have problems displaying the corr
 
 When you don't want to use the plugin anymore, you can check *Clean on deactivate* before deactivating the plugin to erase all options. This doesn't erase the administrator option, however.
 
-Checking the option *I have donated to this plugin* will remove the sponsorship messages and all the donate buttons and links.
-Developing this plugin took many hours. A small donation as your appreciation is always welcome.
+Checking the option *I have donated to this plugin* will remove all the donate buttons and links.
+Developing this plugin took many hours. A small donation as a token of your appreciation is always welcome.
 
 Please let me know if you think this plugin is good or bad by rating it.
 Checking *I have rated this plugin* will remove the rating reminder message.
@@ -972,8 +1036,10 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
-* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration")
 * Integrate posts from Facebook
+* <Title> by <Author>
+* Comment with Facebook login
+* Shortcode / template tag for number of likers
 
 Realized features:
 
@@ -1006,6 +1072,8 @@ Realized features:
 * Update added links (version 1.74)
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
 * Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
+* Filters for link, name, caption and picture (version 1.86)
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
 
 Feature which will not be realized, sorry:
 
@@ -1017,7 +1085,6 @@ Feature which will not be realized, sorry:
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
-* Comment with Facebook login: no feasible solution
 * Other social buttons: too far from the core function of the plugin
 * Like button at the bottom and top: there are already enough like buttons in the world
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
