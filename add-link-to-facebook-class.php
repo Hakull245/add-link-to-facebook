@@ -3619,7 +3619,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($user_ID) {
 				// Check if user logged in
 				if (is_user_logged_in())
-					return get_user_meta($user_ID, c_al2fb_meta_login_html, true);
+					return do_shortcode(get_user_meta($user_ID, c_al2fb_meta_login_html, true));
 
 				// Get options
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
@@ -3657,7 +3657,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($user_ID) {
 				// Check if user logged in
 				if (is_user_logged_in())
-					return get_user_meta($user_ID, c_al2fb_meta_login_html, true);
+					return do_shortcode(get_user_meta($user_ID, c_al2fb_meta_login_html, true));
 
 				// Get options
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
