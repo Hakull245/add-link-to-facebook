@@ -34,7 +34,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
-* Facebook registration/login (testing, see [changelog](http://wordpress.org/extend/plugins/add-link-to-facebook/changelog/ "Changelog"))
+* Facebook registration/login
 
 **Beta features:**
 
@@ -659,7 +659,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.86 =
 * New feature: custom link text (meta box)
 * New feature: filters for link, name, caption and picture
-* New feature: shortcode / template tag for number of likers
+* New feature: shortcode/template tag for number of likers
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Facebook registration") (including widget/shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Facebook login button") (including widget/shortcode/template tag)
 * Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing Facebook registration/login thoroughly!
