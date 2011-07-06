@@ -634,7 +634,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.85 (next release) =
+= 1.86 (next release) =
+* New feature: custom link text
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
 * Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thoroughly!
@@ -647,6 +648,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+
+= 1.85 =
+* Bugfix: avatar messed up in some cases
 
 = 1.84 =
 * New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
@@ -750,6 +754,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.85 =
+One bugfix
 
 = 1.84 =
 Two new features, one improvement, documentation and translation updates
@@ -1065,8 +1072,8 @@ Realized features:
 * Update added links (version 1.74)
 * [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
 * Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
-* Filters for link, name, caption and picture (version 1.85)
-* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.85)
+* Filters for link, name, caption and picture (version 1.86)
+* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
 
 Feature which will not be realized, sorry:
 

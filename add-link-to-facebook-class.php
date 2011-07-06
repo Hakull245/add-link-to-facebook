@@ -88,6 +88,7 @@ define('c_al2fb_meta_reg_width', 'al2fb_reg_width');
 define('c_al2fb_meta_login_width', 'al2fb_login_width');
 define('c_al2fb_meta_login_regurl', 'al2fb_login_regurl');
 define('c_al2fb_meta_login_redir', 'al2fb_login_redir');
+define('c_al2fb_meta_login_html', 'al2fb_login_html');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_open_graph_admins', 'al2fb_open_graph_admins');
@@ -110,6 +111,7 @@ define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
 define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
 define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
 define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
+define('c_al2fb_meta_text', 'al2fb_facebook_text');
 
 define('c_al2fb_action_update', 'al2fb_action_update');
 define('c_al2fb_action_delete', 'al2fb_action_delete');
@@ -358,6 +360,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_login_width);
 				delete_user_meta($user_ID, c_al2fb_meta_login_regurl);
 				delete_user_meta($user_ID, c_al2fb_meta_login_redir);
+				delete_user_meta($user_ID, c_al2fb_meta_login_html);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_admins);
@@ -598,6 +601,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_login_width] = trim($_POST[c_al2fb_meta_login_width]);
 			$_POST[c_al2fb_meta_login_regurl] = trim($_POST[c_al2fb_meta_login_regurl]);
 			$_POST[c_al2fb_meta_login_redir] = trim($_POST[c_al2fb_meta_login_redir]);
+			$_POST[c_al2fb_meta_login_html] = trim($_POST[c_al2fb_meta_login_html]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
 			$_POST[c_al2fb_meta_open_graph_admins] = trim($_POST[c_al2fb_meta_open_graph_admins]);
 			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
@@ -684,6 +688,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_login_width, $_POST[c_al2fb_meta_login_width]);
 			update_user_meta($user_ID, c_al2fb_meta_login_regurl, $_POST[c_al2fb_meta_login_regurl]);
 			update_user_meta($user_ID, c_al2fb_meta_login_redir, $_POST[c_al2fb_meta_login_redir]);
+			update_user_meta($user_ID, c_al2fb_meta_login_html, $_POST[c_al2fb_meta_login_html]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
@@ -1343,7 +1348,7 @@ if (!class_exists('WPAL2Facebook')) {
 						<tr valign="top"><th scope="row">
 							<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
 						</th><td>
-							<select id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
+							<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
 							if ($me != null)
 								echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</option>';
@@ -1352,6 +1357,8 @@ if (!class_exists('WPAL2Facebook')) {
 									echo '<option value="' . $page->id . '"';
 									if ($page->id == $selected_page)
 										echo ' selected';
+									if (empty($page->name))
+										$page->name = '?';
 									echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' - ' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . '</option>';
 								}
 ?>
@@ -1387,7 +1394,7 @@ if (!class_exists('WPAL2Facebook')) {
 						<tr valign="top"><th scope="row">
 							<label for="al2fb_group"><?php _e('Add to group:', c_al2fb_text_domain); ?></label>
 						</th><td>
-							<select id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
+							<select class="al2db_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
 <?php
 							echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 							if ($groups->data)
@@ -1622,7 +1629,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_pile_size"><?php _e('Size:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<select id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
+				<select class="al2db_select" id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
 				<option value="small" <?php echo $pile_size == 'small' ? 'selected' : ''; ?>><?php _e('Small', c_al2fb_text_domain); ?></option>
 				<option value="large" <?php echo $pile_size == 'large' ? 'selected' : ''; ?>><?php _e('Large', c_al2fb_text_domain); ?></option>
 				</select>
@@ -1669,6 +1676,13 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_login_redir"><?php _e('Login redirect URL:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input class="al2fb_text" id="al2fb_login_redir" name="<?php echo c_al2fb_meta_login_redir; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_redir, true); ?>" />
+			</td></tr>
+
+			<tr valign="top"><th scope="row" colspan="2">
+				<label for="al2fb_login_html"><?php _e('Text or HTML when logged in:', c_al2fb_text_domain); ?></label>
+				<br />
+				<textarea id="al2fb_login_html" name="<?php echo c_al2fb_meta_login_html; ?>" cols="75" rows="10"><?php echo get_user_meta($user_ID, c_al2fb_meta_login_html, true); ?></textarea>
+			</th><td>
 			</td></tr>
 
 			</table>
@@ -1724,7 +1738,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_like_font"><?php _e('Font:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<select id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
+				<select class="al2db_select" id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
 				<option value="" <?php echo empty($like_font) ? 'selected' : ''; ?>></option>
 				<option value="arial" <?php echo $like_font == 'arial' ? 'selected' : ''; ?>>arial</option>
 				<option value="lucida grande" <?php echo $like_font == 'lucida grande' ? 'selected' : ''; ?>>lucida grande</option>
@@ -1854,7 +1868,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_min_cap"><?php _e('Required capability to use plugin:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<select id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
+					<select class="al2db_select" id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
 <?php
 					// Get list of capabilities
 					global $wp_roles;
@@ -2534,10 +2548,17 @@ if (!class_exists('WPAL2Facebook')) {
 			else
 				echo 'wp_get_attachment_image_src does not exist';
 
+			// Custom excerpt
 			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
 			echo '<h4>' . __('Custom exerpt', c_al2fb_text_domain) . '</h4>';
 			echo '<textarea id="al2fb_excerpt" name="al2fb_excerpt" cols="40" rows="1" class="attachmentlinks">';
 			echo $excerpt . '</textarea>';
+
+			// Custom text
+			$text = get_post_meta($post->ID, c_al2fb_meta_text, true);
+			echo '<h4>' . __('Custom text', c_al2fb_text_domain) . '</h4>';
+			echo '<textarea id="al2fb_text" name="al2fb_text" cols="40" rows="1" class="attachmentlinks">';
+			echo $text . '</textarea>';
 		}
 
 		// Save indications & selected attached image
@@ -2582,7 +2603,14 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post_id, c_al2fb_meta_image_id, $_POST['al2fb_image_id']);
 
 			if (isset($_POST['al2fb_excerpt']) && !empty($_POST['al2fb_excerpt']))
-				update_post_meta($post_id, c_al2fb_meta_excerpt, $_POST['al2fb_excerpt']);
+				update_post_meta($post_id, c_al2fb_meta_excerpt, trim($_POST['al2fb_excerpt']));
+			else
+				delete_post_meta($post_id, c_al2fb_meta_excerpt);
+
+			if (isset($_POST['al2fb_text']) && !empty($_POST['al2fb_text']))
+				update_post_meta($post_id, c_al2fb_meta_text, trim($_POST['al2fb_text']));
+			else
+				delete_post_meta($post_id, c_al2fb_meta_text);
 		}
 
 		// Remote publish & custom action
@@ -2664,12 +2692,17 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_texts($post) {
 			$user_ID = self::Get_user_ID($post);
 
-			// Filter texts
+			// Filter excerpt
 			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
 			if (empty($excerpt))
 				$excerpt = $post->post_excerpt;
 			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
-			$content = apply_filters('al2fb_content', $post->post_content, $post);
+
+			// Filter post text
+			$content = get_post_meta($post->ID, c_al2fb_meta_text, true);
+			if (empty($content))
+				$content = $post->post_content;
+			$content = apply_filters('al2fb_content', $content, $post);
 
 			// Get body
 			$description = '';
@@ -3577,15 +3610,17 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get HTML Facebook registration
 		function Get_registration($post) {
-			// Check if user logged in
-			if (is_user_logged_in())
-				return '';
+			// Check if registration enabled
 			if (!get_option('users_can_register'))
 				return '';
 
 			// Get data
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
+				// Check if user logged in
+				if (is_user_logged_in())
+					return get_user_meta($user_ID, c_al2fb_meta_login_html, true);
+
 				// Get options
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_reg_width, true);
@@ -3617,13 +3652,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get HTML Facebook login
 		function Get_login($post) {
-			// Check if user logged in
-			if (is_user_logged_in())
-				return '';
-
 			// Get data
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
+				// Check if user logged in
+				if (is_user_logged_in())
+					return get_user_meta($user_ID, c_al2fb_meta_login_html, true);
+
 				// Get options
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$regurl = get_user_meta($user_ID, c_al2fb_meta_login_regurl, true);
@@ -4100,13 +4135,14 @@ if (!class_exists('WPAL2Facebook')) {
 						$fb_picture_url = self::Get_fb_picture_url_cached($id[1], 'normal');
 
 						// Build avatar image
-						if ($fb_picture_url)
+						if ($fb_picture_url) {
 							$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
 							$avatar .= ' src="' . $fb_picture_url . '"';
 							$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
 							$avatar .= ' height="' . $size . '"';
 							$avatar .= ' width="' . $size . '"';
 							$avatar .= ' />';
+						}
 					}
 				}
 			}
@@ -4424,11 +4460,13 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Facepile width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_width, true) . '</td></tr>';
 			$info .= '<tr><td>Facepile rows:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_rows, true) . '</td></tr>';
 
-			$fid = get_user_meta($user_ID, c_al2fb_meta_facebook_id, true);
 			$info .= '<tr><td>Registration width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_reg_width, true) . '</td></tr>';
 			$info .= '<tr><td>Login width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_width, true) . '</td></tr>';
 			$info .= '<tr><td>Registration URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_regurl, true) . '" target="_blank">Link</a></td></tr>';
 			$info .= '<tr><td>Redir URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_redir, true) . '" target="_blank">Link</a></td></tr>';
+			$info .= '<tr><td>Login text/HTML:</td><td><a href="' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_login_html, true), ENT_QUOTES, $charset) . '" target="_blank">Link</a></td></tr>';
+
+			$fid = get_user_meta($user_ID, c_al2fb_meta_facebook_id, true);
 			$info .= '<tr><td>Facebook ID:</td><td><a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td></tr>';
 
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
