@@ -642,7 +642,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setup instructions
 * Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
 * Improvement: filters for link, name, caption and picture
-* Removed *Sustainable Plugins Sponsorship Network*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
@@ -651,6 +650,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.85 =
 * Bugfix: Facebook avatar messed up in some cases
+* Removed *Sustainable Plugins Sponsorship Network*
 
 = 1.84 =
 * New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
