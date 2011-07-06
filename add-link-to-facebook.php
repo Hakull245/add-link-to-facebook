@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://wordpress.org/extend/plugins/add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 1.79
+Version: 1.86
 Author: Marcel Bokhorst
 Author URI: http://blog.bokhorst.biz/about/
 */
@@ -58,7 +58,20 @@ if (!function_exists('al2fb_likers')) {
 	}
 }
 
-// Template tag for like button
+// Template tag for like count
+if (!function_exists('al2fb_like_count')) {
+	function al2fb_like_count($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_like_count($post);
+	}
+}
+
+// Template tag for Facebook like button
 if (!function_exists('al2fb_like_button')) {
 	function al2fb_like_button($post_ID = null) {
 		global $wp_al2fb;
@@ -71,7 +84,7 @@ if (!function_exists('al2fb_like_button')) {
 	}
 }
 
-// Template tag for like button
+// Template tag for Facebook like box
 if (!function_exists('al2fb_like_box')) {
 	function al2fb_like_box($post_ID = null) {
 		global $wp_al2fb;
@@ -84,7 +97,7 @@ if (!function_exists('al2fb_like_box')) {
 	}
 }
 
-// Template tag for like button
+// Template tag for Facebook send button
 if (!function_exists('al2fb_send_button')) {
 	function al2fb_send_button($post_ID = null) {
 		global $wp_al2fb;
@@ -94,6 +107,71 @@ if (!function_exists('al2fb_send_button')) {
 			$post = get_post($post_ID);
 		if (isset($post))
 			echo $wp_al2fb->Get_send_button($post);
+	}
+}
+
+// Template tag for Facebook comments plugins
+if (!function_exists('al2fb_comments_plugin')) {
+	function al2fb_comments_plugin($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_comments_plugin($post);
+	}
+}
+
+// Template tag for Facebook face pile
+if (!function_exists('al2fb_face_pile')) {
+	function al2fb_face_pile($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_face_pile($post);
+	}
+}
+
+// Template tag for profile link
+if (!function_exists('al2fb_profile_link')) {
+	function al2fb_profile_link($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_profile_link($post);
+	}
+}
+
+// Template tag for Facebook registration
+if (!function_exists('al2fb_registration')) {
+	function al2fb_registration($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_registration($post);
+	}
+}
+
+// Template tag for Facebook login
+if (!function_exists('al2fb_login')) {
+	function al2fb_login($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_login($post);
 	}
 }
 
