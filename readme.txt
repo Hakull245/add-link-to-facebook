@@ -29,7 +29,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names, like button, like box, send button, Facepile and profile icon/link
+* Shortcodes and template tags for liker names, like count, like button, like box, send button, Facepile and profile icon/link
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
@@ -256,6 +256,11 @@ To show liker names:
 * [al2fb_likers]
 * [al2fb_likers post_id="123"]
 
+To show the number of likers:
+
+* [al2fb_like_count]
+* [al2fb_like_count post_id="123"]
+
 To show a Facebook like button:
 
 * [al2fb_like_button]
@@ -304,6 +309,8 @@ Put one of these lines somewhere in your theme:
 
 * if (function_exists('al2fb_likers')) al2fb_likers();
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
+* if (function_exists('al2fb_likers')) al2fb_like_count();
+* if (function_exists('al2fb_likers')) al2fb_like_count(123);
 * if (function_exists('al2fb_like_button')) al2fb_like_button();
 * if (function_exists('al2fb_like_button')) al2fb_like_button(123);
 * if (function_exists('al2fb_like_box')) al2fb_like_box();
@@ -373,7 +380,7 @@ to display a little welcome message along with the first name and avatar of the 
 `global $current_user;
 wp_get_current_user();
 echo '<p>Welcome <br />' . $current_user->user_firstname . '<br />';
-echo '<div id="avatar">' . get_avatar(get_the_author_meta('user_email'), 32) . '</div>';
+echo '<div id="avatar">' . get_avatar($current_user->user_email, 32) . '</div>';
 echo '<a href="' . get_bloginfo('wpurl') . '/wp-admin/profile.php">Profile</a><br />';
 echo '<a href="' . wp_logout_url(home_url()) . '" title="Logout">Logout</a></p>';`
 
@@ -648,6 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.86 (next release) =
 * New feature: custom link text
+* New feature: Shortcode / template tag for number of likers
 * New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Registration") (including shortcode/template tag)
 * New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Login button") (including shortcode/template tag)
 * Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing the new features thoroughly!
@@ -1051,7 +1059,6 @@ In no particular order:
 * Integrate posts from Facebook
 * <Title> by <Author>
 * Comment with Facebook login
-* Shortcode / template tag for number of likers
 
 Realized features:
 
@@ -1086,6 +1093,7 @@ Realized features:
 * Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
 * Filters for link, name, caption and picture (version 1.86)
 * Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
+* Shortcode / template tag for number of likers (version 1.86)
 
 Feature which will not be realized, sorry:
 
