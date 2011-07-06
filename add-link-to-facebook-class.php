@@ -1103,9 +1103,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Face pile
 			$pile_size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
-
-			// Sustainable Plugins Sponsorship Network
-			self::Render_sponsorship();
 ?>
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
@@ -1914,21 +1911,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</div>
 			</div>
 <?php
-		}
-
-		function Render_sponsorship() {
-			global $user_ID;
-			get_currentuserinfo();
-			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) {
-?>
-				<script type="text/javascript">
-				var psHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-				document.write(unescape("%3Cscript src='" + psHost + "pluginsponsors.com/direct/spsn/display.php?client=add-link-to-facebook&spot=' type='text/javascript'%3E%3C/script%3E"));
-				</script>
-				<a class="al2fb_sponsorship" href="http://pluginsponsors.com/privacy.html" target="_blank">
-				<?php _e('Privacy in the Sustainable Plugins Sponsorship Network', c_al2fb_text_domain); ?></a>
-<?php
-			}
 		}
 
 		function Render_resources() {
