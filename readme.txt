@@ -381,8 +381,8 @@ to display a little welcome message along with the first name and avatar of the 
 wp_get_current_user();
 echo '<p>Welcome <br />' . $current_user->user_firstname . '<br />';
 echo '<div id="avatar">' . get_avatar($current_user->user_email, 32) . '</div>';
-echo '<a href="' . get_bloginfo('wpurl') . '/wp-admin/profile.php">Profile</a><br />';
-echo '<a href="' . wp_logout_url(home_url()) . '" title="Logout">Logout</a></p>';`
+echo '<a href="' . admin_url('profile.php') . '">Profile</a><br />';
+echo '<a href="' . wp_logout_url(home_url()) . '">Logout</a></p>';`
 
 Question E22 describes possible errors for the Facebook registration form / login button.
 
