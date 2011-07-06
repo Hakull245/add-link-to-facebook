@@ -58,6 +58,19 @@ if (!function_exists('al2fb_likers')) {
 	}
 }
 
+// Template tag for like count
+if (!function_exists('al2fb_like_count')) {
+	function al2fb_like_count($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_like_count($post);
+	}
+}
+
 // Template tag for Facebook like button
 if (!function_exists('al2fb_like_button')) {
 	function al2fb_like_button($post_ID = null) {

@@ -227,6 +227,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Shortcodes
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
+			add_shortcode('al2fb_like_count', array(&$this, 'Shortcode_like_count'));
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
 			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
@@ -3288,6 +3289,19 @@ if (!class_exists('WPAL2Facebook')) {
 				return '';
 		}
 
+		// Shortcode like count
+		function Shortcode_like_count($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_like_count($post);
+			else
+				return '';
+		}
+
 		// Shortcode like button
 		function Shortcode_like_button($atts) {
 			extract(shortcode_atts(array('post_id' => null), $atts));
@@ -3415,6 +3429,16 @@ if (!class_exists('WPAL2Facebook')) {
 				$likers = '<div class="al2fb_likers">' . $likers . '</div>';
 			}
 			return $likers;
+		}
+
+		// Get HTML for like count
+		function Get_like_count($post) {
+			$user_ID = self::Get_user_ID($post);
+			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+			$fb_likes = self::Get_comments_or_likes($post, true);
+			if ($fb_likes && count($fb_likes->data) > 0)
+				return '<div class="al2fb_like_count"><a href="' . self::Get_fb_permalink($link_id) . '" rel="nofollow">' . count($fb_likes->data) . ' ' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</a></div>';
+			return '';
 		}
 
 		// Get language code for Facebook
