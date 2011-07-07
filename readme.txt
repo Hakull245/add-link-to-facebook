@@ -1063,7 +1063,6 @@ In no particular order:
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
 * Integrate posts from Facebook
 * <Title> by <Author>
-* Comment with Facebook login
 
 Realized features:
 
@@ -1100,6 +1099,7 @@ Realized features:
 * Filters for link, name, caption and picture (version 1.86)
 * Shortcode / template tag for number of likers (version 1.86)
 * Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
+* Comment with Facebook login: requires permissions
 
 Feature which will not be realized, sorry:
 
