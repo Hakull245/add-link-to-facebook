@@ -3853,9 +3853,9 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 					}
 					else {
+						$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
 						$regurl = get_user_meta($_REQUEST['user'], c_al2fb_meta_login_regurl, true);
-						if (!empty($regurl))
-							wp_redirect($regurl);
+						wp_redirect($regurl ? $regurl : $self);
 					}
 				}
 				else {
@@ -3918,7 +3918,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Profile personal options
 		function Personal_options($user) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
-			if ($fid) {
+			if ($fid || $this->debug) {
 				echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
 				if ($this->debug)
 					echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
