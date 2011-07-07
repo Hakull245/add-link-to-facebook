@@ -1061,8 +1061,6 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
-* Integrate posts from Facebook
-* <Title> by <Author>
 
 Realized features:
 
@@ -1099,7 +1097,6 @@ Realized features:
 * Filters for link, name, caption and picture (version 1.86)
 * Shortcode / template tag for number of likers (version 1.86)
 * Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
-* Comment with Facebook login: requires permissions
 
 Feature which will not be realized, sorry:
 
@@ -1114,6 +1111,9 @@ Feature which will not be realized, sorry:
 * Other social buttons: too far from the core function of the plugin
 * Like button at the bottom and top: there are already enough like buttons in the world
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
+* Comment with Facebook login: requires permissions
+* Integrate posts from Facebook: WordPress centric plugin
+* <Title> by <Author>: each author should authorize
 
 == Facebook Authorization ==
 
