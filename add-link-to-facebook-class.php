@@ -112,6 +112,7 @@ define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
 define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
 define('c_al2fb_meta_excerpt', 'al2fb_facebook_excerpt');
 define('c_al2fb_meta_text', 'al2fb_facebook_text');
+define('c_al2fb_meta_log', 'al2fb_log');
 
 define('c_al2fb_action_update', 'al2fb_action_update');
 define('c_al2fb_action_delete', 'al2fb_action_delete');
@@ -2505,8 +2506,6 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span><br />';
 				else {
 					// Display image selector
-					$disabled = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-					$disabled = (empty($disabled) ? '' : ' disabled');
 					$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
 
 					// Header
@@ -2518,7 +2517,6 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_0"';
 					if (empty($image_id))
 						echo ' checked';
-					echo $disabled;
 					echo ' value="0">';
 					echo '<br />';
 					echo '<label for="al2fb_image_0">';
@@ -2534,7 +2532,6 @@ if (!class_exists('WPAL2Facebook')) {
 							echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
 							if ($attachment_id == $image_id)
 								echo ' checked';
-							echo $disabled;
 							echo ' value="' . $attachment_id . '">';
 							echo '<br />';
 							echo '<label for="al2fb_image_' . $attachment_id . '">';
@@ -2758,6 +2755,9 @@ if (!class_exists('WPAL2Facebook')) {
 			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
 				$picture_type = 'meta';
 				$picture = wp_get_attachment_thumb_url($image_id);
+				// Workaround
+				if (strpos($picture, 'http') === false)
+					$picture = content_url($picture);
 			}
 
 			if (empty($picture)) {
@@ -2871,10 +2871,12 @@ if (!class_exists('WPAL2Facebook')) {
 			$text = preg_replace('/<[^>]*>/', '', $text);
 
 			// Truncate text
-			$maxtext = get_option(c_al2fb_option_max_text);
-			if (!$maxtext)
-				$maxtext = 10000;
-			$text = substr($text, 0, $maxtext);
+			if (!empty($text)) {
+				$maxtext = get_option(c_al2fb_option_max_text);
+				if (!$maxtext)
+					$maxtext = 10000;
+				$text = substr($text, 0, $maxtext);
+			}
 
 			return $text;
 		}
@@ -2963,11 +2965,21 @@ if (!class_exists('WPAL2Facebook')) {
 					$query_array['actions'] = json_encode($actions);
 				}
 
-				// http://developers.facebook.com/docs/reference/api/link/
+				// Build request
 				$query = http_build_query($query_array, '', '&');
+
+				// Log request
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, 'request=' . $query);
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
+
+				// Log response
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, 'response=' . $response);
+
+				// Decode response
 				$fb_link = json_decode($response);
 
 				// Register link/date
