@@ -2902,7 +2902,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
 				$link = get_permalink($post->ID);
-			$link = apply_filters('al2fb_link', $link);
+			$link = apply_filters('al2fb_link', $link, $post);
 
 			// Get processed texts
 			$texts = self::Get_texts($post);
@@ -2912,21 +2912,21 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get name
 			$name = self::Convert_encoding($user_ID, get_the_title($post->ID));
-			$name = apply_filters('al2fb_name', $name);
+			$name = apply_filters('al2fb_name', $name, $post);
 
 			// Get caption
 			$caption = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 				$caption = self::Convert_encoding($user_ID, $caption);
-				$caption = apply_filters('al2fb_caption', $caption);
+				$caption = apply_filters('al2fb_caption', $caption, $post);
 			}
 
 			// Get link picture
 			$picture_info = self::Get_link_picture($post, $user_ID);
 			$picture = $picture_info['picture'];
 			$picture_type = $picture_info['picture_type'];
-			$picture = apply_filters('al2fb_picture', $picture);
+			$picture = apply_filters('al2fb_picture', $picture, $post);
 
 			// Get user note
 			$message = '';
