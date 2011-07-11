@@ -99,6 +99,8 @@ define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
 define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated', 'al2fb_rated');
+define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
+
 define('c_al2fb_meta_service', 'al2fb_service');
 
 // Post meta
@@ -373,6 +375,8 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_clean);
 				delete_user_meta($user_ID, c_al2fb_meta_donated);
 				delete_user_meta($user_ID, c_al2fb_meta_rated);
+				delete_user_meta($user_ID, c_al2fb_meta_nospsn);
+				delete_user_meta($user_ID, c_al2fb_meta_service);
 			}
 		}
 
@@ -585,6 +589,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_donated] = null;
 			if (empty($_POST[c_al2fb_meta_rated]))
 				$_POST[c_al2fb_meta_rated] = null;
+			if (empty($_POST[c_al2fb_meta_nospsn]))
+				$_POST[c_al2fb_meta_nospsn] = null;
 
 			$_POST[c_al2fb_meta_client_id] = trim($_POST[c_al2fb_meta_client_id]);
 			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
@@ -701,6 +707,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
+			update_user_meta($user_ID, c_al2fb_meta_nospsn, $_POST[c_al2fb_meta_nospsn]);
 
 			if (isset($_REQUEST['debug'])) {
 				if (empty($_POST[c_al2fb_meta_access_token]))
@@ -1141,7 +1148,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$pile_size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
 
 			// Sustainable Plugins Sponsorship Network
-			//self::Render_sponsorship();
+			self::Render_SPSN();
 ?>
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
@@ -1797,6 +1804,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
 
+			<a name="misc"></a>
 			<h4><?php _e('Miscelaneous settings', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1842,6 +1850,12 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_rated"><?php _e('I have rated this plugin:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_rated" name="<?php echo c_al2fb_meta_rated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_rated, true)) echo ' checked="checked"'; ?> />
+			</td>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_nospsn"><?php _e('I don\'t want to support this plugin with the Sustainable Plugins Sponsorship Network:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_nospsn" name="<?php echo c_al2fb_meta_nospsn; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_nospsn, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 			</table>
 			<p class="submit">
@@ -1997,10 +2011,10 @@ if (!class_exists('WPAL2Facebook')) {
 <?php
 		}
 
-		function Render_sponsorship() {
+		function Render_SPSN() {
 			global $user_ID;
 			get_currentuserinfo();
-			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) {
+			if (!get_user_meta($user_ID, c_al2fb_meta_nospsn, true)) {
 ?>
 				<script type="text/javascript">
 				var psHost = (("https:" == document.location.protocol) ? "https://" : "http://");
@@ -2008,6 +2022,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</script>
 				<a class="al2fb_sponsorship" href="http://pluginsponsors.com/privacy.html" target="_blank">
 				<?php _e('Privacy in the Sustainable Plugins Sponsorship Network', c_al2fb_text_domain); ?></a>
+				<a class="al2fb_sponsorship" href="#misc"><?php _e('Disable', c_al2fb_text_domain); ?></a>
 <?php
 			}
 		}
@@ -3930,19 +3945,15 @@ if (!class_exists('WPAL2Facebook')) {
 		// Profile personal options
 		function Personal_options($user) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
-			if ($fid || $this->debug) {
-				echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
-				if ($this->debug)
-					echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
-				echo '<a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td>';
-				echo '</tr>';
-			}
+			echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
+			echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
+			echo '<a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td>';
+			echo '</tr>';
 		}
 
 		// Handle personal options change
 		function Personal_options_update($user_id) {
-			if ($this->debug)
-				update_user_meta($user_id, c_al2fb_meta_facebook_id, trim($_REQUEST[c_al2fb_meta_facebook_id]));
+			update_user_meta($user_id, c_al2fb_meta_facebook_id, trim($_REQUEST[c_al2fb_meta_facebook_id]));
 		}
 
 		// Modify comment list
