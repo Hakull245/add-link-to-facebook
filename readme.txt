@@ -1079,6 +1079,7 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
+* Facebook avatar after Facebook login
 
 Realized features:
 
