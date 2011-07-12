@@ -662,6 +662,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: static [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") button
 * Improvement: [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/ "SPSN") with opt-out option
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
 
