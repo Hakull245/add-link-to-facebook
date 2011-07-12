@@ -1083,6 +1083,8 @@ In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
 * Facebook avatar after Facebook login
+* Single sign-off
+* [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 
 Realized features:
 
