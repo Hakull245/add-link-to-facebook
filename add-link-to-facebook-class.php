@@ -410,16 +410,24 @@ if (!class_exists('WPAL2Facebook')) {
 			load_plugin_textdomain(c_al2fb_text_domain, false, dirname(plugin_basename(__FILE__)) . '/language/');
 
 			// Enqueue style sheet
-			$upload_dir = wp_upload_dir();
-			$css_name = $this->Change_extension(basename($this->main_file), '.css');
-			if (file_exists($upload_dir['basedir'] . '/' . $css_name))
-				$css_url = $upload_dir['baseurl'] . '/' . $css_name;
-			else if (file_exists(TEMPLATEPATH . '/' . $css_name))
-				$css_url = get_bloginfo('template_directory') . '/' . $css_name;
-			else
+			if (is_admin()) {
+				$css_name = $this->Change_extension(basename($this->main_file), '-admin.css');
 				$css_url = $this->plugin_url . '/' . $css_name;
-			wp_register_style('al2fb_style', $css_url);
-			wp_enqueue_style('al2fb_style');
+				wp_register_style('al2fb_style', $css_url);
+				wp_enqueue_style('al2fb_style');
+			}
+			else {
+				$upload_dir = wp_upload_dir();
+				$css_name = $this->Change_extension(basename($this->main_file), '.css');
+				if (file_exists($upload_dir['basedir'] . '/' . $css_name))
+					$css_url = $upload_dir['baseurl'] . '/' . $css_name;
+				else if (file_exists(TEMPLATEPATH . '/' . $css_name))
+					$css_url = get_bloginfo('template_directory') . '/' . $css_name;
+				else
+					$css_url = $this->plugin_url . '/' . $css_name;
+				wp_register_style('al2fb_style', $css_url);
+				wp_enqueue_style('al2fb_style');
+			}
 
 			// Check user capability
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
@@ -2020,9 +2028,9 @@ if (!class_exists('WPAL2Facebook')) {
 				var psHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 				document.write(unescape("%3Cscript src='" + psHost + "pluginsponsors.com/direct/spsn/display.php?client=add-link-to-facebook&spot=' type='text/javascript'%3E%3C/script%3E"));
 				</script>
-				<a class="al2fb_sponsorship" href="http://pluginsponsors.com/privacy.html" target="_blank">
+				<a class="al2fb_spsn" href="http://pluginsponsors.com/privacy.html" target="_blank">
 				<?php _e('Privacy in the Sustainable Plugins Sponsorship Network', c_al2fb_text_domain); ?></a>
-				<a class="al2fb_sponsorship" href="#misc"><?php _e('Disable', c_al2fb_text_domain); ?></a>
+				<a class="al2fb_spsn" href="#misc"><?php _e('Disable', c_al2fb_text_domain); ?></a>
 <?php
 			}
 		}
@@ -3199,10 +3207,8 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 
-					if (is_single()) {
-						$texts = self::Get_texts($post);
-						echo '<meta property="og:description" content="' . htmlspecialchars($texts['description'], ENT_QUOTES, $charset) . '" />' . PHP_EOL;
-					}
+					$texts = self::Get_texts($post);
+					echo '<meta property="og:description" content="' . htmlspecialchars($texts['description'], ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 
 					$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 					if (!empty($appid))
@@ -3211,28 +3217,6 @@ if (!class_exists('WPAL2Facebook')) {
 					$admins = get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true);
 					if (!empty($admins))
 						echo '<meta property="fb:admins" content="' . $admins . '" />' . PHP_EOL;
-				}
-			}
-
-			else if (is_home())
-			{
-				// Check if any user has enabled the OGP
-				global $wpdb;
-				$opg = false;
-				$rows = $wpdb->get_results("SELECT meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='" . c_al2fb_meta_open_graph . "'");
-				foreach ($rows as $row)
-					if ($row->meta_value) {
-						$opg = true;
-						break;
-					}
-
-				// Generate meta tags
-				if ($opg) {
-					$charset = get_bloginfo('charset');
-					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
-					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
-					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
-					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
 				}
 			}
 		}
@@ -3947,7 +3931,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
 			echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
 			echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
-			echo '<a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td>';
+			if ($fid)
+				echo '<a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td>';
+			else
+				echo '<a href="http://apps.facebook.com/whatismyid/" target="_blank">' . __('What is my Facebook ID?', c_al2fb_text_domain) . '</a></td>';
 			echo '</tr>';
 		}
 
@@ -4745,7 +4732,7 @@ class AL2FB_Widget extends WP_Widget {
 		global $wp_al2fb;
 
 		// Get current post
-		if (!is_single())
+		if (!is_single() && !is_page())
 			return;
 		if (!empty($GLOBALS['post']))
 			$post = $GLOBALS['post'];
