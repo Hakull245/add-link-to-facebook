@@ -655,6 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.89 (next release) =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
+* Bugfix: removed *fb-root*
 * Improvement: post object passed to new filters
 * Improvement: set Facebook ID without debug mode
 * Improvement: removed incomplete OGP from home page

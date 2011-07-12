@@ -3489,7 +3489,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Build content
 				$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
-				$content .= '<div id="fb-root"></div>';
+				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= ($box ? '<fb:like-box' : '<fb:like');
 				$content .= ' href="' . $link . '"';
@@ -3533,7 +3533,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Send button
 				$content = '<div class="al2fb_send_button">';
-				$content .= '<div id="fb-root"></div>';
+				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:send ref="AL2FB"';
 				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
@@ -3561,7 +3561,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Send button
 				$content = '<div class="al2fb_comments_plugin">';
-				$content .= '<div id="fb-root"></div>';
+				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:comments';
 				$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
@@ -3590,7 +3590,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Face pile
 				$content = '<div class="al2fb_face_pile">';
-				$content .= '<div id="fb-root"></div>';
+				//$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:facepile';
 				$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
@@ -3649,7 +3649,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build content
 				if ($appid) {
 					$content = '<div class="al2fb_registration">';
-					$content .= '<div id="fb-root"></div>';
+					//$content .= '<div id="fb-root"></div>';
 					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 					$content .= '<fb:registration';
 					$content .= ' fields="' . $fields . '"';
@@ -3684,7 +3684,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build content
 				if ($appid) {
 					$content = '<div class="al2fb_login">';
-					$content .= '<div id="fb-root"></div>';
+					//$content .= '<div id="fb-root"></div>';
 					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>' . PHP_EOL;
 					$content .= '<script type="text/javascript">' . PHP_EOL;
 					$content .= 'function al2fb_login() {' . PHP_EOL;
