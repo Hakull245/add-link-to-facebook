@@ -735,67 +735,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.80 =
-* Beta version
-
-= 1.79 =
-* Bugfix: undefined function *get_plugins*
-* Improvement: check length of WP locale
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.78 =
-* New feature: option to specify Facebook administrators for Open Graph Protocol
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.77 =
-* New feature: avatar of post author as link picture
-* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.76 =
-* Bugfix: html error in iframe Facebook plugins
-* New feature: option to disable like box header/stream
-* Improvement: better profile link/like box performance
-* Improvement: added [Bitcoin](http://www.bitcoin.org/ "Bitcoin") wallet
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.75 =
-* New feature: statistics
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.74 =
-* Bugfix: check if personal wall exists
-* Bugfix: using correct charset for text trailer
-* New feature: update added links
-* New feature: like box in widget
-* New feature: template tag/shortcode for like box
-* Improvement: removed debug logging
-* Improvement: better error handling
-* Updated description & FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.73 =
-* Bugfix: no timezone correction for comments in widget
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.72 =
-* Bugfix: incorrect display of *should be authorized again* message
-
-= 1.71 =
-* Bugfix: incorrect display of *should be authorized again* message
-
-= 1.70 =
-* Improvement: link to discussion for Facebook widget
-* Improvement: showing icon for Facebook messages in widget
-* Improvement: option to show comments on Facebook messages in widget
-* Improvement: extended debug information with active plugins
-* Updated [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions are always compatible with older versions
@@ -831,36 +770,6 @@ Option to disable collection of statistics
 
 = 1.81 =
 One bugfix, six improvements, three new features, EULA, documentation & translation updates
-
-= 1.79 =
-One bugfix, one improvement, translation update
-
-= 1.78 =
-One new feature, translation updates
-
-= 1.77 =
-One new feature, translation update
-
-= 1.76 =
-One bugfix, one new feature, two improvements, translation update
-
-= 1.75 =
-One new feature, translation update
-
-= 1.74 =
-Two bugixes, three new features, two improvements, translation updates
-
-= 1.73 =
-One bugfix, translation updates
-
-= 1.72 =
-One bugfix
-
-= 1.71 =
-One bugfix
-
-= 1.70 =
-Three improvements, translation update
 
 == Setup guide ==
 
