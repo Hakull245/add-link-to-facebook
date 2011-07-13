@@ -222,7 +222,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
-			add_action('loop_start', array(&$this, 'Loop_start'));
+			//add_action('loop_start', array(&$this, 'Loop_start'));
 			add_filter('the_content', array(&$this, 'The_content'), 999);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
