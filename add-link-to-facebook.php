@@ -36,7 +36,7 @@ if (version_compare(PHP_VERSION, '5.0.0', '<'))
 require_once('plugin-update-checker.php');
 global $updates_al2fb;
 if (empty($updates_al2fb))
-	$updates_al2fb = new PluginUpdateChecker('http://updates.bokhorst.biz/?action=update&plugin=al2fb', __FILE__, 'al2fb');
+	$updates_al2fb = new PluginUpdateChecker('http://updates.bokhorst.biz/?action=update&plugin=al2fb', __FILE__, 'add-link-to-facebook');
 
 // Include support class
 require_once('add-link-to-facebook-class.php');
