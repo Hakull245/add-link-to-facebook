@@ -1169,3 +1169,9 @@ Feature which will not be realized, sorry:
 * Plugin adds links with access token
 
 1. Workaround for Microsoft Internet Explorer
+
+= Acknowledgements =
+
+This plugin uses the automatic upgrade script published [here](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/ "Automatic Updates")
+
+"*This library is licensed under the [GPL](http://www.gnu.org/licenses/gpl.html "GPL") and is distributed free of charge.*"
