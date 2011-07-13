@@ -3216,20 +3216,43 @@ if (!class_exists('WPAL2Facebook')) {
 						echo '<meta property="fb:admins" content="' . $admins . '" />' . PHP_EOL;
 				}
 			}
-		}
 
-		function Loop_start() {
-			echo '<div id="fb-root"></div>';
+			else if (is_home())
+			{
+				// Check if any user has enabled the OGP
+				global $wpdb;
+				$opg = false;
+				$rows = $wpdb->get_results("SELECT meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='" . c_al2fb_meta_open_graph . "'");
+				foreach ($rows as $row)
+					if ($row->meta_value) {
+						$opg = true;
+						break;
+					}
+
+				// Generate meta tags
+				if ($opg) {
+					$charset = get_bloginfo('charset');
+					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
+					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
+				}
+			}
 		}
 
 		// Additional styles
 		function WP_print_styles() {
 			$css = get_option(c_al2fb_option_css);
 			if (!empty($css)) {
-				echo '<style type="text/css">' . PHP_EOL;
+				echo '<style type="text/css" media="screen">' . PHP_EOL;
 				echo $css;
 				echo '</style>' . PHP_EOL;
 			}
+		}
+
+		// One Facebook root
+		function Loop_start() {
+			echo '<div id="fb-root"></div>' . PHP_EOL;
 		}
 
 		// Post content

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.88
+Stable tag: 1.89
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -653,19 +653,20 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.89 (next release) =
+= 1.90 (next release) =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
-* Bugfix: removed *fb-root*
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+
+= 1.89 =
+* Bugfix: one *fb-root*
 * Improvement: post object passed to new filters
 * Improvement: set Facebook ID without debug mode
-* Improvement: removed incomplete OGP from home page
 * Improvement: splitted css admin/front
 * Improvement: static [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") button
 * Improvement: [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/ "SPSN") with opt-out option
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.88 =
 * Bugfix: prevent false for empty message
@@ -796,6 +797,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.89 =
+One bugfix, five improvements
 
 = 1.88 =
 Two bugfixes, two improvements
