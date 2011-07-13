@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.86
+Stable tag: 1.89
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -653,8 +653,29 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.87 (next release) =
+= 1.90 (next release) =
+* [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+
+= 1.89 =
+* Bugfix: one *fb-root*
+* Improvement: post object passed to new filters
+* Improvement: set Facebook ID without debug mode
+* Improvement: splitted css admin/front
+* Improvement: static [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") button
+* Improvement: [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/ "SPSN") with opt-out option
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.88 =
+* Bugfix: prevent false for empty message
+* Bugfix: workaround for bug in *wp_get_attachment_thumb_url*
+* Improvement: enabled image changing when link added
+* Improvement: debug Facebook communication
+
+= 1.87 =
+* Bugfix: redirect Facebook login
 
 = 1.86 =
 * New feature: custom link text (meta box)
@@ -776,6 +797,15 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions are always compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.89 =
+One bugfix, five improvements
+
+= 1.88 =
+Two bugfixes, two improvements
+
+= 1.87 =
+One bugfix
 
 = 1.86 =
 Five new features, one improvement, documentation and translation updates
@@ -1061,9 +1091,9 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
-* Integrate posts from Facebook
-* <Title> by <Author>
-* Comment with Facebook login
+* Facebook avatar after Facebook login
+* Single sign-off
+* [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 
 Realized features:
 
@@ -1114,6 +1144,9 @@ Feature which will not be realized, sorry:
 * Other social buttons: too far from the core function of the plugin
 * Like button at the bottom and top: there are already enough like buttons in the world
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
+* Comment with Facebook login: requires permissions
+* Integrate posts from Facebook: WordPress centric plugin
+* <Title> by <Author>: each author should authorize
 
 == Facebook Authorization ==
 
