@@ -1170,7 +1170,7 @@ Feature which will not be realized, sorry:
 
 1. Workaround for Microsoft Internet Explorer
 
-= Acknowledgements =
+== Acknowledgements ==
 
 This plugin uses the automatic upgrade script published [here](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/ "Automatic Updates")
 
