@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.91
+Stable tag: 1.92
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -653,17 +653,22 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.92 (next release) =
+= 1.93 (next release) =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+
+= 1.92 =
+* Bugfix: restored *fb-root* elements
+* Improvement: check for updates every hour
+* Improvement: added filter for comments
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.91 =
 * Bugfix: removed *loop_start* action
 * Improvement: alternate update server
 
 = 1.89 =
-* Bugfix: one *fb-root*
+* Bugfix: one *fb-root* element
 * Improvement: post object passed to new filters
 * Improvement: set Facebook ID without debug mode
 * Improvement: splitted css admin/front
@@ -717,30 +722,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Administrator option to disable collection of statistics
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.81 =
-* Bug fix: correct cached link for like box
-* Improvement: replace dash by underscore in WP locale
-* Improvement: reorganized Facebook like button/box settings
-* Improvement: *Link to* option applies also to like box
-* Improvement: added fb-root to Facebook plugins
-* Improvement: added div for styling like box
-* Improvement: Facebook common settings apply to all widget features
-* New feature: added options to set like box width and border
-* New feature: Facebook comments plugin widget/shortcode/template tag
-* New feature: Facebook profile icon/link shortcode/template tag
-* Added [End-user license agreement](http://al2fb.bokhorst.biz/eula "EULA")
-* Removed support for iframe Facebook plugins
-* Updated FAQ & [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
-* Newer versions are always compatible with older versions
+* Newer versions should always be compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.92 =
+One bugfix, two improvements, translation update
 
 = 1.91 =
 One bugfix
@@ -768,9 +757,6 @@ One bugfix, translation updates
 
 = 1.82 =
 Option to disable collection of statistics
-
-= 1.81 =
-One bugfix, six improvements, three new features, EULA, documentation & translation updates
 
 == Setup guide ==
 
