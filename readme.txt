@@ -428,6 +428,7 @@ Yes, both in the excerpt and the post text.
 = C04 Are multi-user and network sites supported? =
 
 Yes, each user can configure his/her own wall or page or group.
+You should enable the plugin from the network admin panel thru "Plugins".
 See also question U25.
 
 = C05 Is remote publishing supported? =
