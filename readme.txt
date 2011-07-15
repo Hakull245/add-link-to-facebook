@@ -35,6 +35,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
 * Facebook registration/login
+* Filters for all information sent to Facebook
 
 **Beta features:**
 
@@ -305,28 +306,22 @@ If you want to use shortcodes in a (text) widget, you should enable the option *
 
 = U24 How can I use the template tags? =
 
-Put one of these lines somewhere in your theme:
+Example:
 
 * if (function_exists('al2fb_likers')) al2fb_likers();
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
-* if (function_exists('al2fb_likers')) al2fb_like_count();
-* if (function_exists('al2fb_likers')) al2fb_like_count(123);
-* if (function_exists('al2fb_like_button')) al2fb_like_button();
-* if (function_exists('al2fb_like_button')) al2fb_like_button(123);
-* if (function_exists('al2fb_like_box')) al2fb_like_box();
-* if (function_exists('al2fb_like_box')) al2fb_like_box(123);
-* if (function_exists('al2fb_send_button')) al2fb_send_button();
-* if (function_exists('al2fb_send_button')) al2fb_send_button(123);
-* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin();
-* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin(123);
-* if (function_exists('al2fb_face_pile')) al2fb_face_pile();
-* if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
-* if (function_exists('al2fb_profile_link')) al2fb_profile_link();
-* if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
-* if (function_exists('al2fb_registration')) al2fb_registration();
-* if (function_exists('al2fb_registration')) al2fb_registration(123);
-* if (function_exists('al2fb_login')) al2fb_login();
-* if (function_exists('al2fb_login')) al2fb_login(123);
+
+All template tags:
+
+* al2fb_likers
+* al2fb_like_button
+* al2fb_like_box
+* al2fb_send_button
+* al2fb_comments_plugin
+* al2fb_face_pile
+* al2fb_profile_link
+* al2fb_registration
+* al2fb_login
 
 = U25 Can I add links to multiple walls? =
 
@@ -385,6 +380,16 @@ echo '<a href="' . admin_url('profile.php') . '">Profile</a><br />';
 echo '<a href="' . wp_logout_url(home_url()) . '">Logout</a></p>';`
 
 Question E22 describes possible errors for the Facebook registration form / login button.
+
+= U30 Which filters can I use? =
+
+* al2fb_excerpt: $excerpt, $post
+* al2fb_content: $content, $post
+* al2fb_link: $link, $post
+* al2fb_name: $name, $post
+* al2fb_caption: $caption, $post
+* al2fb_picture: $picture, $post
+* al2fb_comment: $message, $comment, $post
 
 **--- Security ---**
 
@@ -661,6 +666,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: restored *fb-root* elements
 * Improvement: check for updates every hour
 * Improvement: added filter for comments
+* Updated documentation
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.91 =
