@@ -35,11 +35,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
 * Facebook registration/login
-* Filters for all information sent to Facebook
-
-**Beta features:**
-
-* Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -664,7 +660,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.92 =
 * Bugfix: restored *fb-root* elements
-* Improvement: check for updates every hour
 * Improvement: added filter for comments
 * Updated documentation
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
@@ -735,7 +730,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.92 =
-One bugfix, two improvements, translation update
+One bugfix, one improvement, translation update
 
 = 1.91 =
 One bugfix

@@ -38,7 +38,7 @@ require_once('plugin-update-checker.php');
 global $updates_al2fb;
 if (empty($updates_al2fb)) {
 	$updates_url = 'http://updates.bokhorst.biz/al2fb?action=update&plugin=al2fb';
-	$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook', 1);
+	$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook');
 }
 
 // Include support class
