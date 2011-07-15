@@ -660,7 +660,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.92 =
 * Bugfix: restored *fb-root* elements
-* Improvement: check for updates every hour
 * Improvement: added filter for comments
 * Updated documentation
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
@@ -731,7 +730,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.92 =
-One bugfix, two improvements, translation update
+One bugfix, one improvement, translation update
 
 = 1.91 =
 One bugfix
