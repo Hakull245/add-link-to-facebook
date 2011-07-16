@@ -35,14 +35,14 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
 * Facebook registration/login
-* Filters for all information sent to Facebook
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
 Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
-**This plugin requires PHP 5 and WordPress 3.0 or better.**
+**This plugin requires PHP 5 and WordPress 3.0 or better**
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
@@ -657,6 +657,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Next release =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
+* Improvement: fake e-mail address for imported Facebook comments for spam filtering
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
 
 = 1.92 =
