@@ -411,8 +411,8 @@ if (!class_exists('WPAL2Facebook')) {
 			if (is_admin()) {
 				$css_name = $this->Change_extension(basename($this->main_file), '-admin.css');
 				$css_url = $this->plugin_url . '/' . $css_name;
-				wp_register_style('al2fb_style', $css_url);
-				wp_enqueue_style('al2fb_style');
+				wp_register_style('al2fb_style_admin', $css_url);
+				wp_enqueue_style('al2fb_style_admin');
 			}
 			else {
 				$upload_dir = wp_upload_dir();
