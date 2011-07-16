@@ -380,6 +380,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Initialization
 		function Init() {
+			// I18n
+			load_plugin_textdomain(c_al2fb_text_domain, false, dirname(plugin_basename(__FILE__)) . '/language/');
+
 			// Image request
 			if (isset($_GET['al2fb_image'])) {
 				$img = dirname(__FILE__) . '/wp-blue-s.png';
@@ -403,9 +406,6 @@ if (!class_exists('WPAL2Facebook')) {
 			// Set default capability
 			if (!get_option(c_al2fb_option_min_cap))
 				update_option(c_al2fb_option_min_cap, 'edit_posts');
-
-			// I18n
-			load_plugin_textdomain(c_al2fb_text_domain, false, dirname(plugin_basename(__FILE__)) . '/language/');
 
 			// Enqueue style sheet
 			if (is_admin()) {
