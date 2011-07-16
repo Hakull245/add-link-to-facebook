@@ -3986,7 +3986,7 @@ if (!class_exists('WPAL2Facebook')) {
 								$commentdata = array(
 									'comment_post_ID' => $post_ID,
 									'comment_author' => $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain),
-									'comment_author_email' => '',
+									'comment_author_email' => $fb_comment->from->id . '@facebook.com',
 									'comment_author_url' => self::Get_fb_profilelink($fb_comment->from->id),
 									'comment_author_IP' => '',
 									'comment_date' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off),
