@@ -408,6 +408,12 @@ if (!class_exists('WPAL2Facebook')) {
 			if (!get_option(c_al2fb_option_min_cap))
 				update_option(c_al2fb_option_min_cap, 'edit_posts');
 
+			// Disable shorcodes if Mingle forum is used
+			$mingle = 'mingle-forum/wpf-main.php';
+			$plugins = get_option('active_plugins');
+			if (in_array($mingle, $plugins))
+				update_option(c_al2fb_option_noshortcode, true);
+
 			// Enqueue style sheet
 			if (is_admin()) {
 				$css_name = $this->Change_extension(basename($this->main_file), '-admin.css');
@@ -3226,7 +3232,9 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 
 					$texts = self::Get_texts($post);
-					echo '<meta property="og:description" content="' . htmlspecialchars($texts['description'], ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					$maxlen = get_option(c_al2fb_option_max_descr);
+					$description = substr($texts['description'], 0, $maxlen ? $maxlen : 256);
+					echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 
 					$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 					if (!empty($appid))

@@ -658,6 +658,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Next release =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
+* Improvement: auto disable shortcodes when Mingle active
+* Improvement: truncate description for Open Graph Protocol
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.93 =
