@@ -1128,7 +1128,9 @@ if (!class_exists('WPAL2Facebook')) {
 				$shared_user_ID = get_option(c_al2fb_option_app_share);
 			if ($shared_user_ID && $shared_user_ID != $user_ID) {
 				$userdata = get_userdata($shared_user_ID);
-				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Only this user can access the settings:', c_al2fb_text_domain) . ' ' . $userdata->user_login . '</p></div>';
+				echo '<div id="message" class="error fade al2fb_error"><p>';
+				echo __('Only this user can access the settings:', c_al2fb_text_domain);
+				echo ' ' . $userdata->user_login . ' (id=' . $shared_user_ID . ')</p></div>';
 				echo '</div>';
 				return;
 			}
