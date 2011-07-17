@@ -21,6 +21,7 @@ define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
+define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
 define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
@@ -222,7 +223,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
-			//add_action('loop_start', array(&$this, 'Loop_start'));
 			add_filter('the_content', array(&$this, 'The_content'), 999);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
@@ -381,6 +381,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Initialization
 		function Init() {
+			// I18n
+			load_plugin_textdomain(c_al2fb_text_domain, false, dirname(plugin_basename(__FILE__)) . '/language/');
+
 			// Image request
 			if (isset($_GET['al2fb_image'])) {
 				$img = dirname(__FILE__) . '/wp-blue-s.png';
@@ -405,15 +408,12 @@ if (!class_exists('WPAL2Facebook')) {
 			if (!get_option(c_al2fb_option_min_cap))
 				update_option(c_al2fb_option_min_cap, 'edit_posts');
 
-			// I18n
-			load_plugin_textdomain(c_al2fb_text_domain, false, dirname(plugin_basename(__FILE__)) . '/language/');
-
 			// Enqueue style sheet
 			if (is_admin()) {
 				$css_name = $this->Change_extension(basename($this->main_file), '-admin.css');
 				$css_url = $this->plugin_url . '/' . $css_name;
-				wp_register_style('al2fb_style', $css_url);
-				wp_enqueue_style('al2fb_style');
+				wp_register_style('al2fb_style_admin', $css_url);
+				wp_enqueue_style('al2fb_style_admin');
 			}
 			else {
 				$upload_dir = wp_upload_dir();
@@ -744,6 +744,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_noverifypeer] = null;
 				if (empty($_POST[c_al2fb_option_shortcode_widget]))
 					$_POST[c_al2fb_option_shortcode_widget] = null;
+				if (empty($_POST[c_al2fb_option_noshortcode]))
+					$_POST[c_al2fb_option_noshortcode] = null;
 				if (empty($_POST[c_al2fb_option_optout]))
 					$_POST[c_al2fb_option_optout] = null;
 
@@ -764,6 +766,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
+				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
 				update_option(c_al2fb_option_optout, $_POST[c_al2fb_option_optout]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
@@ -865,8 +868,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
 			if ($msgs)
 				foreach ($msgs as $msg)
-					if ($msg->id == $_POST['al2fb_msgid'])
-						if ($msg->report && (isset($msg->userid) ? $msg->userid == $user_ID : true))
+					if ($msg['id'] == $_POST['al2fb_msgid'])
+						if ($msg['report'] && (isset($msg['userid']) ? $msg['userid'] == $user_ID : true))
 							try {
 								// Send report
 								$query = http_build_query(array(
@@ -885,16 +888,16 @@ if (!class_exists('WPAL2Facebook')) {
 									$text = __('Settings updated', c_al2fb_text_domain);
 									$func = null;
 									if ($_POST['al2fb_choice'] == 'yes') {
-										if (isset($msg->yes_text))
-											$text = $msg->yes_text;
-										if (isset($msg->yes_func))
-											$func = array(&$this, $msg->yes_func);
+										if (isset($msg['yes_text']))
+											$text = $msg['yes_text'];
+										if (isset($msg['yes_func']))
+											$func = array(&$this, $msg['yes_func']);
 									}
 									else {
-										if (isset($msg->no_text))
-											$text = $msg->no_text;
-										if (isset($msg->no_func))
-											$func = array(&$this, $msg->no_func);
+										if (isset($msg['no_text']))
+											$text = $msg['no_text'];
+										if (isset($msg['no_func']))
+											$func = array(&$this, $msg['no_func']);
 									}
 
 									// Do action
@@ -1000,21 +1003,31 @@ if (!class_exists('WPAL2Facebook')) {
 				echo $msg . '</p></div>';
 			}
 
-			// Check for messages
+			// Get messages
 			$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
+
+			// Convert messages
+			for ($i = 0; $i < count($msgs); $i++)
+				if (is_object($msgs[$i])) {
+					delete_user_meta($user_ID, c_al2fb_meta_service, $msgs[$i]);
+					$msgs[$i] = json_decode(json_encode($msgs[$i]), true);
+					add_user_meta($user_ID, c_al2fb_meta_service, $msgs[$i]);
+				}
+
+			// Display messages
 			if ($msgs)
 				foreach ($msgs as $msg) {
 ?>
 					<div class="updated fade al2fb_service"><p>
 					<h3><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h3>
-					<span class="al2fb_service_msg"><?php echo $msg->text; ?></span>
+					<span class="al2fb_service_msg"><?php echo $msg['text']; ?></span>
 
 					<table><tr>
 
 					<td><form method="post" action="<?php echo $url; ?>">
 					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 					<input type="hidden" name="al2fb_action" value="service">
-					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg->id; ?>">
+					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg['id']; ?>">
 					<input type="hidden" name="al2fb_choice" value="yes">
 					<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e('Yes', c_al2fb_text_domain) ?>" />
@@ -1024,7 +1037,7 @@ if (!class_exists('WPAL2Facebook')) {
 					<td><form method="post" action="<?php echo $url; ?>">
 					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 					<input type="hidden" name="al2fb_action" value="service">
-					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg->id; ?>">
+					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg['id']; ?>">
 					<input type="hidden" name="al2fb_choice" value="no">
 					<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e('No', c_al2fb_text_domain) ?>" />
@@ -1033,7 +1046,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					</tr></table>
 
-					<span class="al2fb_service_time"><?php echo $msg->time; echo $msg->report; ?></span>
+					<span class="al2fb_service_time"><?php echo $msg['time']; ?></span>
 
 					</p></div>
 <?php
@@ -1965,6 +1978,12 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_noshortcode"><?php _e('Do not execute shortcodes for texts:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_noshortcode" name="<?php echo c_al2fb_option_noshortcode; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noshortcode)) echo ' checked="checked"'; ?> />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_optout"><?php _e('Do not collect statistics:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input id="al2fb_optout" name="<?php echo c_al2fb_option_optout; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_optout)) echo ' checked="checked"'; ?> />
@@ -2870,7 +2889,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$text = self::Convert_encoding($user_ID, $text);
 
 			// Execute shortcodes
-			$text = do_shortcode($text);
+			if (!get_option(c_al2fb_option_noshortcode))
+				$text = do_shortcode($text);
 
 			// http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
 
@@ -3118,6 +3138,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$message = $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
 			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
 			$message .= $comment->comment_content;
+			$message = apply_filters('al2fb_comment', $message, $comment, $post);
 			$message = self::Convert_encoding($user_ID, $message);
 
 			// Do not disturb WordPress
@@ -3248,11 +3269,6 @@ if (!class_exists('WPAL2Facebook')) {
 				echo $css;
 				echo '</style>' . PHP_EOL;
 			}
-		}
-
-		// One Facebook root
-		function Loop_start() {
-			echo '<div id="fb-root"></div>' . PHP_EOL;
 		}
 
 		// Post content
@@ -3517,7 +3533,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Build content
 				$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
-				//$content .= '<div id="fb-root"></div>';
+				$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= ($box ? '<fb:like-box' : '<fb:like');
 				$content .= ' href="' . $link . '"';
@@ -3561,7 +3577,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Send button
 				$content = '<div class="al2fb_send_button">';
-				//$content .= '<div id="fb-root"></div>';
+				$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:send ref="AL2FB"';
 				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
@@ -3589,7 +3605,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Send button
 				$content = '<div class="al2fb_comments_plugin">';
-				//$content .= '<div id="fb-root"></div>';
+				$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:comments';
 				$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
@@ -3618,7 +3634,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Face pile
 				$content = '<div class="al2fb_face_pile">';
-				//$content .= '<div id="fb-root"></div>';
+				$content .= '<div id="fb-root"></div>';
 				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 				$content .= '<fb:facepile';
 				$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
@@ -3677,7 +3693,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build content
 				if ($appid) {
 					$content = '<div class="al2fb_registration">';
-					//$content .= '<div id="fb-root"></div>';
+					$content .= '<div id="fb-root"></div>';
 					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
 					$content .= '<fb:registration';
 					$content .= ' fields="' . $fields . '"';
@@ -3712,7 +3728,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build content
 				if ($appid) {
 					$content = '<div class="al2fb_login">';
-					//$content .= '<div id="fb-root"></div>';
+					$content .= '<div id="fb-root"></div>';
 					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>' . PHP_EOL;
 					$content .= '<script type="text/javascript">' . PHP_EOL;
 					$content .= 'function al2fb_login() {' . PHP_EOL;
@@ -3991,7 +4007,7 @@ if (!class_exists('WPAL2Facebook')) {
 								$commentdata = array(
 									'comment_post_ID' => $post_ID,
 									'comment_author' => $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain),
-									'comment_author_email' => '',
+									'comment_author_email' => $fb_comment->from->id . '@facebook.com',
 									'comment_author_url' => self::Get_fb_profilelink($fb_comment->from->id),
 									'comment_author_IP' => '',
 									'comment_date' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off),
@@ -4524,6 +4540,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>No shortcode:</td><td>' . (get_option(c_al2fb_option_noshortcode) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No statistics:</td><td>' . (get_option(c_al2fb_option_optout) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site URL:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_siteurl), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
@@ -4678,7 +4695,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'hash' => $hash
 				), '', '&');
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
-				$service = json_decode($response);
+				$service = json_decode($response, true);
 
 				if (isset($service->id)) {
 					$user_ID = self::Get_user_ID($post);
@@ -4687,7 +4704,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
 					if ($msgs)
 						foreach ($msgs as $msg)
-							if ($msg->id == $service->id)
+							if (is_object($msg) ? $msg->id == $service['id'] : $msg['id'] == $service['id'])
 								delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
 
 					// Add new message

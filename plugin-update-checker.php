@@ -246,7 +246,13 @@ class PluginUpdateChecker {
 			return $result;
 		}
 		
-		$pluginInfo = $this->requestInfo();
+		$key = 'info-' . $this->slug;
+		$pluginInfo = get_transient($key);
+		if ($pluginInfo === false) {
+			$pluginInfo = $this->requestInfo();
+			set_transient($key, $pluginInfo, $this->checkPeriod * 3600);
+		}
+
 		if ($pluginInfo){
 			return $pluginInfo->toWpFormat();
 		}

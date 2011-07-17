@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.91
+Stable tag: 1.93
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -35,10 +35,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
 * Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile and/or a link to your Facebook profile
 * Facebook registration/login
-
-**Beta features:**
-
-* Add *Share* link, thanks to [Micha](http://www.styloweb.de/ "Micha")!
+* Filters for all information sent to Facebook
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -305,28 +302,22 @@ If you want to use shortcodes in a (text) widget, you should enable the option *
 
 = U24 How can I use the template tags? =
 
-Put one of these lines somewhere in your theme:
+Example:
 
 * if (function_exists('al2fb_likers')) al2fb_likers();
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
-* if (function_exists('al2fb_likers')) al2fb_like_count();
-* if (function_exists('al2fb_likers')) al2fb_like_count(123);
-* if (function_exists('al2fb_like_button')) al2fb_like_button();
-* if (function_exists('al2fb_like_button')) al2fb_like_button(123);
-* if (function_exists('al2fb_like_box')) al2fb_like_box();
-* if (function_exists('al2fb_like_box')) al2fb_like_box(123);
-* if (function_exists('al2fb_send_button')) al2fb_send_button();
-* if (function_exists('al2fb_send_button')) al2fb_send_button(123);
-* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin();
-* if (function_exists('al2fb_comments_plugin')) al2fb_comments_plugin(123);
-* if (function_exists('al2fb_face_pile')) al2fb_face_pile();
-* if (function_exists('al2fb_face_pile')) al2fb_face_pile(123);
-* if (function_exists('al2fb_profile_link')) al2fb_profile_link();
-* if (function_exists('al2fb_profile_link')) al2fb_profile_link(123);
-* if (function_exists('al2fb_registration')) al2fb_registration();
-* if (function_exists('al2fb_registration')) al2fb_registration(123);
-* if (function_exists('al2fb_login')) al2fb_login();
-* if (function_exists('al2fb_login')) al2fb_login(123);
+
+All template tags:
+
+* al2fb_likers
+* al2fb_like_button
+* al2fb_like_box
+* al2fb_send_button
+* al2fb_comments_plugin
+* al2fb_face_pile
+* al2fb_profile_link
+* al2fb_registration
+* al2fb_login
 
 = U25 Can I add links to multiple walls? =
 
@@ -386,6 +377,16 @@ echo '<a href="' . wp_logout_url(home_url()) . '">Logout</a></p>';`
 
 Question E22 describes possible errors for the Facebook registration form / login button.
 
+= U30 Which filters can I use? =
+
+* al2fb_excerpt: $excerpt, $post
+* al2fb_content: $content, $post
+* al2fb_link: $link, $post
+* al2fb_name: $name, $post
+* al2fb_caption: $caption, $post
+* al2fb_picture: $picture, $post
+* al2fb_comment: $message, $comment, $post
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -414,11 +415,12 @@ Auto posting plugins will work if one of the following actions is used:
 * <em>app_publish_post</em>
 * <em>al2fb_publish</em>
 
-This plugin is known to be incompatible with:
+This plugins are known to be incompatible with:
 
 * Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 * Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
 * [WP-FB-AutoConnect](http://wordpress.org/extend/plugins/wp-fb-autoconnect/ "WP-FB-AutoConnect")
+* [Mingle forum](http://wordpress.org/extend/plugins/mingle-forum/ "Mingle forum"): enable the option *Do not execute shortcodes for texts*
 
 = C03 Are shortcodes being processed? =
 
@@ -427,6 +429,7 @@ Yes, both in the excerpt and the post text.
 = C04 Are multi-user and network sites supported? =
 
 Yes, each user can configure his/her own wall or page or group.
+You should enable the plugin from the network admin panel thru "Plugins".
 See also question U25.
 
 = C05 Is remote publishing supported? =
@@ -653,17 +656,31 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= 1.92 (next release) =
+= Next release =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+
+= 1.93 =
+* Bugfix: I18n for Facebook login/registration
+* Bugfix: workaround for [this bug](http://core.trac.wordpress.org/ticket/9640 "bug") in WordPress
+* Improvement: fake e-mail addresses for imported Facebook comments for spam filtering
+* Improvement: caching for update checks
+* Improvement: update check every 3 hours
+* Improvement: option to disable shortcodes for texts (Mingle forum users should enable this)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.92 =
+* Bugfix: restored *fb-root* elements
+* Improvement: added filter for comments
+* Updated documentation
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
 
 = 1.91 =
 * Bugfix: removed *loop_start* action
 * Improvement: alternate update server
 
 = 1.89 =
-* Bugfix: one *fb-root*
+* Bugfix: one *fb-root* element
 * Improvement: post object passed to new filters
 * Improvement: set Facebook ID without debug mode
 * Improvement: splitted css admin/front
@@ -717,30 +734,17 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Administrator option to disable collection of statistics
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.81 =
-* Bug fix: correct cached link for like box
-* Improvement: replace dash by underscore in WP locale
-* Improvement: reorganized Facebook like button/box settings
-* Improvement: *Link to* option applies also to like box
-* Improvement: added fb-root to Facebook plugins
-* Improvement: added div for styling like box
-* Improvement: Facebook common settings apply to all widget features
-* New feature: added options to set like box width and border
-* New feature: Facebook comments plugin widget/shortcode/template tag
-* New feature: Facebook profile icon/link shortcode/template tag
-* Added [End-user license agreement](http://al2fb.bokhorst.biz/eula "EULA")
-* Removed support for iframe Facebook plugins
-* Updated FAQ & [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
-* Newer versions are always compatible with older versions
+* Newer versions should always be compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.93 =
+Two bugfixes, four improvements
+
+= 1.92 =
+One bugfix, one improvement, translation update
 
 = 1.91 =
 One bugfix
@@ -768,9 +772,6 @@ One bugfix, translation updates
 
 = 1.82 =
 Option to disable collection of statistics
-
-= 1.81 =
-One bugfix, six improvements, three new features, EULA, documentation & translation updates
 
 == Setup guide ==
 
