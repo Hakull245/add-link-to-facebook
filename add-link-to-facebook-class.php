@@ -864,8 +864,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
 			if ($msgs)
 				foreach ($msgs as $msg)
-					if ($msg->id == $_POST['al2fb_msgid'])
-						if ($msg->report && (isset($msg->userid) ? $msg->userid == $user_ID : true))
+					if ($msg['id'] == $_POST['al2fb_msgid'])
+						if ($msg['report'] && (isset($msg['userid']) ? $msg['userid'] == $user_ID : true))
 							try {
 								// Send report
 								$query = http_build_query(array(
@@ -884,16 +884,16 @@ if (!class_exists('WPAL2Facebook')) {
 									$text = __('Settings updated', c_al2fb_text_domain);
 									$func = null;
 									if ($_POST['al2fb_choice'] == 'yes') {
-										if (isset($msg->yes_text))
-											$text = $msg->yes_text;
-										if (isset($msg->yes_func))
-											$func = array(&$this, $msg->yes_func);
+										if (isset($msg['yes_text']))
+											$text = $msg['yes_text'];
+										if (isset($msg['yes_func']))
+											$func = array(&$this, $msg['yes_func']);
 									}
 									else {
-										if (isset($msg->no_text))
-											$text = $msg->no_text;
-										if (isset($msg->no_func))
-											$func = array(&$this, $msg->no_func);
+										if (isset($msg['no_text']))
+											$text = $msg['no_text'];
+										if (isset($msg['no_func']))
+											$func = array(&$this, $msg['no_func']);
 									}
 
 									// Do action
@@ -999,21 +999,31 @@ if (!class_exists('WPAL2Facebook')) {
 				echo $msg . '</p></div>';
 			}
 
-			// Check for messages
+			// Get messages
 			$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
+
+			// Convert messages
+			for ($i = 0; $i < count($msgs); $i++)
+				if (is_object($msgs[$i])) {
+					delete_user_meta($user_ID, c_al2fb_meta_service, $msgs[$i]);
+					$msgs[$i] = json_decode(json_encode($msgs[$i]), true);
+					add_user_meta($user_ID, c_al2fb_meta_service, $msgs[$i]);
+				}
+
+			// Display messages
 			if ($msgs)
 				foreach ($msgs as $msg) {
 ?>
 					<div class="updated fade al2fb_service"><p>
 					<h3><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h3>
-					<span class="al2fb_service_msg"><?php echo $msg->text; ?></span>
+					<span class="al2fb_service_msg"><?php echo $msg['text']; ?></span>
 
 					<table><tr>
 
 					<td><form method="post" action="<?php echo $url; ?>">
 					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 					<input type="hidden" name="al2fb_action" value="service">
-					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg->id; ?>">
+					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg['id']; ?>">
 					<input type="hidden" name="al2fb_choice" value="yes">
 					<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e('Yes', c_al2fb_text_domain) ?>" />
@@ -1023,7 +1033,7 @@ if (!class_exists('WPAL2Facebook')) {
 					<td><form method="post" action="<?php echo $url; ?>">
 					<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 					<input type="hidden" name="al2fb_action" value="service">
-					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg->id; ?>">
+					<input type="hidden" name="al2fb_msgid" value="<?php echo $msg['id']; ?>">
 					<input type="hidden" name="al2fb_choice" value="no">
 					<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e('No', c_al2fb_text_domain) ?>" />
@@ -1032,7 +1042,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					</tr></table>
 
-					<span class="al2fb_service_time"><?php echo $msg->time; echo $msg->report; ?></span>
+					<span class="al2fb_service_time"><?php echo $msg['time']; ?></span>
 
 					</p></div>
 <?php
@@ -4673,7 +4683,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'hash' => $hash
 				), '', '&');
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
-				$service = json_decode($response);
+				$service = json_decode($response, true);
 
 				if (isset($service->id)) {
 					$user_ID = self::Get_user_ID($post);
@@ -4682,7 +4692,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$msgs = get_user_meta($user_ID, c_al2fb_meta_service, false);
 					if ($msgs)
 						foreach ($msgs as $msg)
-							if ($msg->id == $service->id)
+							if (is_object($msg) ? $msg->id == $service['id'] : $msg['id'] == $service['id'])
 								delete_user_meta($user_ID, c_al2fb_meta_service, $msg);
 
 					// Add new message
