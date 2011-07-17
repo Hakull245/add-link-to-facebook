@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.92
+Stable tag: 1.93
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -415,11 +415,12 @@ Auto posting plugins will work if one of the following actions is used:
 * <em>app_publish_post</em>
 * <em>al2fb_publish</em>
 
-This plugin is known to be incompatible with:
+This plugins are known to be incompatible with:
 
 * Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 * Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
 * [WP-FB-AutoConnect](http://wordpress.org/extend/plugins/wp-fb-autoconnect/ "WP-FB-AutoConnect")
+* [Mingle forum](http://wordpress.org/extend/plugins/mingle-forum/ "Mingle forum"): enable the option *Do not execute shortcodes for texts*
 
 = C03 Are shortcodes being processed? =
 
@@ -657,10 +658,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Next release =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+
+= 1.93 =
 * Bugfix: I18n for Facebook login/registration
 * Bugfix: workaround for [this bug](http://core.trac.wordpress.org/ticket/9640 "bug") in WordPress
-* Improvement: fake e-mail address for imported Facebook comments for spam filtering
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue you have
+* Improvement: fake e-mail addresses for imported Facebook comments for spam filtering
+* Improvement: caching for update checks
+* Improvement: update check every 3 hours
+* Improvement: option to disable shortcodes for texts (Mingle forum users should enable this)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.92 =
 * Bugfix: restored *fb-root* elements
@@ -732,6 +739,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.93 =
+Two bugfixes, four improvements
 
 = 1.92 =
 One bugfix, one improvement, translation update

@@ -21,6 +21,7 @@ define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
+define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
 define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
@@ -743,6 +744,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_noverifypeer] = null;
 				if (empty($_POST[c_al2fb_option_shortcode_widget]))
 					$_POST[c_al2fb_option_shortcode_widget] = null;
+				if (empty($_POST[c_al2fb_option_noshortcode]))
+					$_POST[c_al2fb_option_noshortcode] = null;
 				if (empty($_POST[c_al2fb_option_optout]))
 					$_POST[c_al2fb_option_optout] = null;
 
@@ -763,6 +766,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
+				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
 				update_option(c_al2fb_option_optout, $_POST[c_al2fb_option_optout]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
@@ -1974,6 +1978,12 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_noshortcode"><?php _e('Do not execute shortcodes for texts:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_noshortcode" name="<?php echo c_al2fb_option_noshortcode; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noshortcode)) echo ' checked="checked"'; ?> />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_optout"><?php _e('Do not collect statistics:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input id="al2fb_optout" name="<?php echo c_al2fb_option_optout; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_optout)) echo ' checked="checked"'; ?> />
@@ -2879,7 +2889,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$text = self::Convert_encoding($user_ID, $text);
 
 			// Execute shortcodes
-			$text = do_shortcode($text);
+			if (!get_option(c_al2fb_option_noshortcode))
+				$text = do_shortcode($text);
 
 			// http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
 
@@ -4529,6 +4540,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>No shortcode:</td><td>' . (get_option(c_al2fb_option_noshortcode) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No statistics:</td><td>' . (get_option(c_al2fb_option_optout) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site URL:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_siteurl), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
