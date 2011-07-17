@@ -741,7 +741,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.93 =
-Two bugfixes, four improvements
+Two bugfixes, four improvements, translation update
 
 = 1.92 =
 One bugfix, one improvement, translation update
