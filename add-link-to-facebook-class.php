@@ -1065,14 +1065,6 @@ if (!class_exists('WPAL2Facebook')) {
 			global $user_ID;
 			get_currentuserinfo();
 
-			// Check for app share
-			if (is_multisite())
-				$shared_user_ID = get_site_option(c_al2fb_option_app_share);
-			else
-				$shared_user_ID = get_option(c_al2fb_option_app_share);
-			if ($shared_user_ID && $shared_user_ID != $user_ID)
-				return;
-
 			if (function_exists('add_management_page'))
 				add_management_page(
 					__('Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
@@ -1119,10 +1111,29 @@ if (!class_exists('WPAL2Facebook')) {
 			if (!current_user_can(get_option(c_al2fb_option_min_cap)))
 				die('Unauthorized');
 
+			// Sustainable Plugins Sponsorship Network
+			self::Render_SPSN();
+?>
+			<div class="wrap">
+			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
+<?php
 			// Get current user
 			global $user_ID;
 			get_currentuserinfo();
 
+			// Check for app share
+			if (is_multisite())
+				$shared_user_ID = get_site_option(c_al2fb_option_app_share);
+			else
+				$shared_user_ID = get_option(c_al2fb_option_app_share);
+			if ($shared_user_ID && $shared_user_ID != $user_ID) {
+				$userdata = get_userdata($shared_user_ID);
+				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Only this user can access the settings:', c_al2fb_text_domain) . ' ' . $userdata->user_login . '</p></div>';
+				echo '</div>';
+				return;
+			}
+
+			// Get settings
 			$charset = get_bloginfo('charset');
 			$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 			if (isset($_REQUEST['debug']))
@@ -1173,12 +1184,6 @@ if (!class_exists('WPAL2Facebook')) {
 			// Face pile
 			$pile_size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
 
-			// Sustainable Plugins Sponsorship Network
-			self::Render_SPSN();
-?>
-			<div class="wrap">
-			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
-<?php
 			// Check connectivity
 			if (!ini_get('allow_url_fopen') && !function_exists('curl_init'))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
@@ -2533,11 +2538,12 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Display attached image selector
 		function Meta_box() {
+			global $post;
+
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
 			if ($this->debug) {
-				global $post;
 				$texts = self::Get_texts($post);
 				echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
 				echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
@@ -2545,7 +2551,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			if (function_exists('wp_get_attachment_image_src')) {
 				// Get attached images
-				global $post;
 				$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
 				if (empty($images))
 					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span><br />';
