@@ -196,7 +196,6 @@ if (!class_exists('WPAL2Facebook')) {
 				add_filter('plugin_action_links', array(&$this, 'Plugin_action_links'), 10, 2);
 				add_action('admin_notices', array(&$this, 'Admin_notices'));
 				add_action('post_submitbox_misc_actions', array(&$this, 'Post_submitbox_misc_actions'));
-				add_action('post_submitbox_start', array(&$this, 'Post_submitbox'));
 				add_filter('manage_posts_columns', array(&$this, 'Manage_posts_columns'));
 				add_action('manage_posts_custom_column', array(&$this, 'Manage_posts_custom_column'), 10, 2);
 				add_filter('manage_pages_columns', array(&$this, 'Manage_posts_columns'));
@@ -2415,16 +2414,16 @@ if (!class_exists('WPAL2Facebook')) {
 				return false;
 		}
 
-		function Post_submitbox_misc_actions() {
-			self::Post_submit();
-		}
-
-		function Post_submitbox() {
-		}
-
 		// Add checkboxes
-		function Post_submit() {
+		function Post_submitbox_misc_actions() {
 			global $post;
+
+			// Check exclusion
+			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+			if (in_array($post->post_type, $ex_custom_types))
+				return;
+
+			// Get user
 			$user_ID = self::Get_user_ID($post);
 
 			// Get exclude indication
@@ -2623,6 +2622,12 @@ if (!class_exists('WPAL2Facebook')) {
 			// Skip auto save
 			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
 				return $post_id;
+
+			// Check exclusion
+			$post = get_post($post_id);
+			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+			if (in_array($post->post_type, $ex_custom_types))
+				return;
 
 			// Process exclude indication
 			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
