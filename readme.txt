@@ -663,6 +663,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: truncate description for Open Graph Protocol
 * Improvement: message when settings only available to another admin
 * Improvement: no post submit box for excluded post types
+* Improvement: using site URL in stead of home URL for redirect URI for new installs
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 

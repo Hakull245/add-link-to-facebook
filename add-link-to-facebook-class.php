@@ -256,6 +256,8 @@ if (!class_exists('WPAL2Facebook')) {
 		function Activate() {
 			global $wpdb;
 			$version = get_option(c_al2fb_option_version);
+			if (empty($version))
+				update_option(c_al2fb_option_siteurl, true);
 			if ($version <= 1) {
 				delete_option(c_al2fb_meta_client_id);
 				delete_option(c_al2fb_meta_app_secret);
