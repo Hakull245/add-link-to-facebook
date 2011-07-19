@@ -522,7 +522,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Default values
 			if (empty($_POST[c_al2fb_meta_picture_type]))
-				$_POST[c_al2fb_meta_picture_type] = 'wordpress';
+				$_POST[c_al2fb_meta_picture_type] = 'post';
 			if (empty($_POST[c_al2fb_meta_page]))
 				$_POST[c_al2fb_meta_page] = null;
 			if (empty($_POST[c_al2fb_meta_page_owner]))
@@ -2849,7 +2849,7 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 				else if ($picture_type == 'facebook')
 					$picture = '';
-				else if ($picture_type == 'post') {
+				else if ($picture_type == 'post' || empty($picture_type)) {
 					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
 						$picture = $matches[1];
 				}
