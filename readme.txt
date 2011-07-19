@@ -415,7 +415,7 @@ Auto posting plugins will work if one of the following actions is used:
 * <em>app_publish_post</em>
 * <em>al2fb_publish</em>
 
-This plugins are known to be incompatible with:
+This plugin is known to be incompatible with:
 
 * Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
 * Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
@@ -638,6 +638,11 @@ Ask your provider to install and configure [cURL](http://www.php.net/manual/en/c
 * **User not found**: no WordPress user with the ID Facebook sent was found (user not registered?)
 * **Could not verify Facebook login**: Facebook user profile could not be retrieved (could be transient, so try again)
 * WordPress user registration errors, most notably **This username is already registered.**
+
+= E23 I get 'The post's links must direct to the application's connect or canvas URL' =
+
+You are probably using an existing Facebook application.
+You can solve this problem by going into application settings and setting the Stream post URL security to disabled under advanced.
 
 **--- Support ---**
 
