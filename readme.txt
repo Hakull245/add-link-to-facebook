@@ -584,10 +584,10 @@ Since version 1.32 of the plugin, you can use the *Clear error messages* checkbo
 
 = E15 I get 'Error validating access token' =
 
-The access token the plugin acquired during the authorization process may be revoked.
+Most often this happen when you changed your Facebook password.
+The access token the plugin acquired during the authorization process may be revoked by Facebook.
 Maybe because there was a security problem with your Facebook application or Facebook account.
-Re-authorizing will probably solve this problem. If you know why you got this error,
-please leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+Re-authorizing will probably solve this problem.
 You could also try to reset your application secret [here](http://www.facebook.com/developers/apps.php) and enter the new secret in the plugin settings.
 
 = E16 I get 'You failed to provide a valid list of administators' =
