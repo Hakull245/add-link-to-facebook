@@ -31,7 +31,12 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget, shortcodes and template tags for Facebook comments/messages, like/send button, like box, comments plugin, Facepile, registration/login, activity feed and/or a link to your Facebook profile
+* Sidebar widget, shortcodes and template tags for Facebook comments/messages, Like/send button,
+[Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box"),
+[Comments box](http://developers.facebook.com/docs/reference/plugins/comments/ "Comments box"),
+[Facepile](http://developers.facebook.com/docs/reference/plugins/facepile/ "Facepile"),
+[Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
+[Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Filters for all information sent to Facebook.
 
