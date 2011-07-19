@@ -640,10 +640,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: using site URL in stead of home URL for redirect URI for new installs
 * Improvement: removed caching from update checks
 * Improvement: default link picture first in post for new installs
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.93 =
 * Bugfix: I18n for Facebook login/registration
