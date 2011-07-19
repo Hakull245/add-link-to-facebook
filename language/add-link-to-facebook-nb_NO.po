@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-07-17 18:25+0100\n"
+"PO-Revision-Date: 2011-07-19 12:43+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -700,4 +700,16 @@ msgstr "Ikke utføre kortkoder for tekster:"
 
 msgid "Only this user can access the settings:"
 msgstr "Bare denne brukeren kan få tilgang til innstillinger:"
+
+msgid "Facebook activity feed"
+msgstr "Facebook aktivitet feed"
+
+msgid "Show header:"
+msgstr "Vis overskrift:"
+
+msgid "Show recommendations:"
+msgstr "Vis anbefalinger:"
+
+msgid "Show Facebook activity feed"
+msgstr "Vis Facebook aktivitet feed"
 
