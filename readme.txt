@@ -246,57 +246,24 @@ Note that if you checked the option *Share with all users on this site*, only th
 
 = U23 How can I use the shortcodes? =
 
-Just put one of the shortcodes below in your post or page text.
-
-To show liker names:
+Example to show liker names:
 
 * [al2fb_likers]
 * [al2fb_likers post_id="123"]
 
-To show the number of likers:
+All shortcodes:
 
+* [al2fb_likers]
 * [al2fb_like_count]
-* [al2fb_like_count post_id="123"]
-
-To show a Facebook like button:
-
 * [al2fb_like_button]
-* [al2fb_like_button post_id="123"]
-
-To show a Facebook like box:
-
 * [al2fb_like_box]
-* [al2fb_like_box post_id="123"]
-
-To show a Facebook send button:
-
 * [al2fb_send_button]
-* [al2fb_send_button post_id="123"]
-
-To show the Facebook comments plugin:
-
 * [al2fb_comments_plugin]
-* [al2fb_comments_plugin post_id="123"]
-
-To show the Facebook face pile:
-
 * [al2fb_face_pile]
-* [al2fb_face_pile post_id="123"]
-
-To show the Facebook profile icon/link:
-
 * [al2fb_profile_link]
-* [al2fb_profile_link post_id="123"]
-
-To show the Facebook registration form:
-
 * [al2fb_registration]
-* [al2fb_registration post_id="123"]
-
-To show the Facebook login button:
-
 * [al2fb_login]
-* [al2fb_login post_id="123"]
+* [al2fb_activity_feed]
 
 If you want to use shortcodes in a (text) widget, you should enable the option *Execute shortcodes in widgets*.
 
@@ -318,6 +285,7 @@ All template tags:
 * al2fb_profile_link
 * al2fb_registration
 * al2fb_login
+* al2fb_activity_feed
 
 = U25 Can I add links to multiple walls? =
 
@@ -664,6 +632,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Next release =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 * Bugfix: custom excerpt/text not appearing in rare circumstances
+* New feature: Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
 * Improvement: auto disable shortcodes when Mingle active
 * Improvement: truncate description for Open Graph Protocol
 * Improvement: message when settings only available to another admin
@@ -672,6 +641,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: removed caching from update checks
 * Improvement: default link picture first in post for new installs
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.93 =
@@ -1022,9 +993,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
-* Facebook avatar after Facebook login
-* Single sign-off
+* Single sign-off (Facebook and WordPress)
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 
 Realized features:
@@ -1062,6 +1031,7 @@ Realized features:
 * Filters for link, name, caption and picture (version 1.86)
 * Shortcode / template tag for number of likers (version 1.86)
 * Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
+* Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed") (version 1.94)
 
 Feature which will not be realized, sorry:
 
@@ -1079,6 +1049,7 @@ Feature which will not be realized, sorry:
 * Comment with Facebook login: requires permissions
 * Integrate posts from Facebook: WordPress centric plugin
 * <Title> by <Author>: each author should authorize
+* Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 
 == Facebook Authorization ==
 

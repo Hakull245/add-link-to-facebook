@@ -184,6 +184,19 @@ if (!function_exists('al2fb_login')) {
 	}
 }
 
+// Template tag for Facebook activity feed
+if (!function_exists('al2fb_activity_feed')) {
+	function al2fb_activity_feed($post_ID = null) {
+		global $wp_al2fb;
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo $wp_al2fb->Get_activity_feed($post);
+	}
+}
+
 // That's it!
 
 if (!function_exists('al2fb_comment_example')) {

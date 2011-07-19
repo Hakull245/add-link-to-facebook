@@ -90,6 +90,10 @@ define('c_al2fb_meta_login_width', 'al2fb_login_width');
 define('c_al2fb_meta_login_regurl', 'al2fb_login_regurl');
 define('c_al2fb_meta_login_redir', 'al2fb_login_redir');
 define('c_al2fb_meta_login_html', 'al2fb_login_html');
+define('c_al2fb_meta_act_width', 'al2fb_act_width');
+define('c_al2fb_meta_act_height', 'al2fb_act_height');
+define('c_al2fb_meta_act_header', 'al2fb_act_header');
+define('c_al2fb_meta_act_recommend', 'al2fb_act_recommend');
 define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_open_graph_admins', 'al2fb_open_graph_admins');
@@ -239,6 +243,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_profile_link', array(&$this, 'Shortcode_profile_link'));
 			add_shortcode('al2fb_registration', array(&$this, 'Shortcode_registration'));
 			add_shortcode('al2fb_login', array(&$this, 'Shortcode_login'));
+			add_shortcode('al2fb_activity_feed', array(&$this, 'Shortcode_activity_feed'));
 			if (get_option(c_al2fb_option_shortcode_widget))
 				add_filter('widget_text', 'do_shortcode');
 
@@ -365,6 +370,10 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_login_regurl);
 				delete_user_meta($user_ID, c_al2fb_meta_login_redir);
 				delete_user_meta($user_ID, c_al2fb_meta_login_html);
+				delete_user_meta($user_ID, c_al2fb_meta_act_width);
+				delete_user_meta($user_ID, c_al2fb_meta_act_height);
+				delete_user_meta($user_ID, c_al2fb_meta_act_header);
+				delete_user_meta($user_ID, c_al2fb_meta_act_recommend);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
 				delete_user_meta($user_ID, c_al2fb_meta_open_graph_admins);
@@ -591,6 +600,10 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_like_box_nostream] = null;
 			if (empty($_POST[c_al2fb_meta_pile_size]))
 				$_POST[c_al2fb_meta_pile_size] = null;
+			if (empty($_POST[c_al2fb_meta_act_header]))
+				$_POST[c_al2fb_meta_act_header] = null;
+			if (empty($_POST[c_al2fb_meta_act_recommend]))
+				$_POST[c_al2fb_meta_act_recommend] = null;
 			if (empty($_POST[c_al2fb_meta_open_graph]))
 				$_POST[c_al2fb_meta_open_graph] = null;
 			if (empty($_POST[c_al2fb_meta_exclude_default]))
@@ -624,6 +637,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$_POST[c_al2fb_meta_login_regurl] = trim($_POST[c_al2fb_meta_login_regurl]);
 			$_POST[c_al2fb_meta_login_redir] = trim($_POST[c_al2fb_meta_login_redir]);
 			$_POST[c_al2fb_meta_login_html] = trim($_POST[c_al2fb_meta_login_html]);
+			$_POST[c_al2fb_meta_act_width] = trim($_POST[c_al2fb_meta_act_width]);
+			$_POST[c_al2fb_meta_act_height] = trim($_POST[c_al2fb_meta_act_height]);
 			$_POST[c_al2fb_meta_open_graph_type] = trim($_POST[c_al2fb_meta_open_graph_type]);
 			$_POST[c_al2fb_meta_open_graph_admins] = trim($_POST[c_al2fb_meta_open_graph_admins]);
 			$_POST[c_al2fb_meta_fb_encoding] = trim($_POST[c_al2fb_meta_fb_encoding]);
@@ -711,6 +726,10 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_login_regurl, $_POST[c_al2fb_meta_login_regurl]);
 			update_user_meta($user_ID, c_al2fb_meta_login_redir, $_POST[c_al2fb_meta_login_redir]);
 			update_user_meta($user_ID, c_al2fb_meta_login_html, $_POST[c_al2fb_meta_login_html]);
+			update_user_meta($user_ID, c_al2fb_meta_act_width, $_POST[c_al2fb_meta_act_width]);
+			update_user_meta($user_ID, c_al2fb_meta_act_height, $_POST[c_al2fb_meta_act_height]);
+			update_user_meta($user_ID, c_al2fb_meta_act_header, $_POST[c_al2fb_meta_act_header]);
+			update_user_meta($user_ID, c_al2fb_meta_act_recommend, $_POST[c_al2fb_meta_act_recommend]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph, $_POST[c_al2fb_meta_open_graph]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
@@ -1725,6 +1744,40 @@ if (!class_exists('WPAL2Facebook')) {
 				<br />
 				<textarea id="al2fb_login_html" name="<?php echo c_al2fb_meta_login_html; ?>" cols="75" rows="10"><?php echo get_user_meta($user_ID, c_al2fb_meta_login_html, true); ?></textarea>
 			</th><td>
+			</td></tr>
+
+			</table>
+			<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+			</p>
+
+			<h4><?php _e('Facebook activity feed', c_al2fb_text_domain); ?></h4>
+			<table class="form-table al2fb_border">
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_act_width"><?php _e('Width:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_act_width" name="<?php echo c_al2fb_meta_act_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_act_width, true); ?>" />
+				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_act_height"><?php _e('Height:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input class="al2fb_numeric" id="al2fb_act_height" name="<?php echo c_al2fb_meta_act_height; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_act_height, true); ?>" />
+				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_act_header"><?php _e('Show header:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_act_header" name="<?php echo c_al2fb_meta_act_header; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_act_header, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_act_recommend"><?php _e('Show recommendations:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_act_recommend" name="<?php echo c_al2fb_meta_act_recommend; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_act_recommend, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 
 			</table>
@@ -3449,7 +3502,7 @@ if (!class_exists('WPAL2Facebook')) {
 				return '';
 		}
 
-		// Shortoce Facebook login
+		// Shortcode Facebook login
 		function Shortcode_login($atts) {
 			extract(shortcode_atts(array('post_id' => null), $atts));
 			if (empty($post_id))
@@ -3458,6 +3511,19 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_login($post);
+			else
+				return '';
+		}
+
+		// Shortcode Facebook activity feed
+		function Shortcode_activity_feed($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return self::Get_activity_feed($post);
 			else
 				return '';
 		}
@@ -3774,6 +3840,42 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= '</div>';
 					return $content;
 				}
+			}
+			return '';
+		}
+
+		// Get HTML Facebook activity feed
+		function Get_activity_feed($post) {
+			// Get data
+			$user_ID = self::Get_user_ID($post);
+			if ($user_ID) {
+
+				// Get options
+				$domain = $_SERVER['HTTP_HOST'];
+				$width = get_user_meta($user_ID, c_al2fb_meta_act_width, true);
+				$height = get_user_meta($user_ID, c_al2fb_meta_act_height, true);
+				$header = get_user_meta($user_ID, c_al2fb_meta_act_header, true);
+				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
+				$border = get_user_meta($user_ID, c_al2fb_meta_like_box_border, true);
+				$recommend = get_user_meta($user_ID, c_al2fb_meta_act_recommend, true);
+
+				// Build content
+				$content = '<div class="al2fb_activity_feed">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>' . PHP_EOL;
+				$content .= '<fb:activity';
+				$content .= ' site="' . $domain . '"';
+				$content .= ' width="' . (empty($width) ? '300' : $width) . '"';
+				$content .= ' height="' . (empty($height) ? '300' : $height) . '"';
+				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+				$content .= ' header="' . ($header ? 'true' : 'false') . '"';
+				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				$content .= ' border_color="' . (empty($border) ? '' : $border) . '"';
+				$content .= ' recommendations="' . ($recommend ? 'true' : 'false') . '">';
+				$content .= '</fb:activity>';
+				$content .= '</div>';
+				return $content;
 			}
 			return '';
 		}
@@ -4545,6 +4647,11 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Redir URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_redir, true) . '" target="_blank">Link</a></td></tr>';
 			$info .= '<tr><td>Login text/HTML:</td><td><a href="' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_login_html, true), ENT_QUOTES, $charset) . '" target="_blank">Link</a></td></tr>';
 
+			$info .= '<tr><td>Activity width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_act_width, true) . '</td></tr>';
+			$info .= '<tr><td>Activity height:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_act_height, true) . '</td></tr>';
+			$info .= '<tr><td>Activity header:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_act_header, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>Activity recommend:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_act_recommend, true) ? 'Yes' : 'No') . '</td></tr>';
+
 			$fid = get_user_meta($user_ID, c_al2fb_meta_facebook_id, true);
 			$info .= '<tr><td>Facebook ID:</td><td><a href="' . self::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td></tr>';
 
@@ -4811,7 +4918,9 @@ class AL2FB_Widget extends WP_Widget {
 		$profile = isset($instance['al2fb_profile']) ? $instance['al2fb_profile'] : false;
 		$registration = isset($instance['al2fb_registration']) ? $instance['al2fb_registration'] : false;
 		$login = isset($instance['al2fb_login']) ? $instance['al2fb_login'] : false;
+		$activity = isset($instance['al2fb_activity']) ? $instance['al2fb_activity'] : false;
 
+		// Logged in?
 		$registration = ($registration && !is_user_logged_in() && get_option('users_can_register'));
 		$login = ($login && !is_user_logged_in());
 
@@ -4850,7 +4959,7 @@ class AL2FB_Widget extends WP_Widget {
 		if ($fb_comments || $fb_messages ||
 			$like_button || $like_box || $send_button ||
 			$comments_plugin || $face_pile ||
-			$profile || $registration || $login) {
+			$profile || $registration || $login || $activity) {
 			// Get values
 			extract($args);
 			$title = apply_filters('widget_title', $instance['title']);
@@ -4944,6 +5053,10 @@ class AL2FB_Widget extends WP_Widget {
 			if ($login)
 				echo $wp_al2fb->Get_login($post);
 
+			// Facebook activity feed
+			if ($activity)
+				echo $wp_al2fb->Get_activity_feed($post);
+
 			echo $after_widget;
 		}
 	}
@@ -5005,6 +5118,7 @@ class AL2FB_Widget extends WP_Widget {
 		$instance['al2fb_profile'] = $new_instance['al2fb_profile'];
 		$instance['al2fb_registration'] = $new_instance['al2fb_registration'];
 		$instance['al2fb_login'] = $new_instance['al2fb_login'];
+		$instance['al2fb_activity'] = $new_instance['al2fb_activity'];
 		return $instance;
 	}
 
@@ -5033,6 +5147,8 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['al2fb_registration'] = false;
 		if (empty($instance['al2fb_login']))
 			$instance['al2fb_login'] = false;
+		if (empty($instance['al2fb_activity']))
+			$instance['al2fb_activity'] = false;
 
 		$chk_comments = ($instance['al2fb_comments'] ? ' checked ' : '');
 		$chk_messages = ($instance['al2fb_messages'] ? ' checked ' : '');
@@ -5045,6 +5161,7 @@ class AL2FB_Widget extends WP_Widget {
 		$chk_profile = ($instance['al2fb_profile'] ? ' checked ' : '');
 		$chk_registration = ($instance['al2fb_registration'] ? ' checked ' : '');
 		$chk_login = ($instance['al2fb_login'] ? ' checked ' : '');
+		$chk_activity = ($instance['al2fb_activity'] ? ' checked ' : '');
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
@@ -5086,6 +5203,9 @@ class AL2FB_Widget extends WP_Widget {
 			<br />
 			<input class="checkbox" type="checkbox" <?php echo $chk_login; ?> id="<?php echo $this->get_field_id('al2fb_login'); ?>" name="<?php echo $this->get_field_name('al2fb_login'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_login'); ?>"><?php _e('Show Facebook login', c_al2fb_text_domain); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $chk_activity; ?> id="<?php echo $this->get_field_id('al2fb_activity'); ?>" name="<?php echo $this->get_field_name('al2fb_activity'); ?>" />
+			<label for="<?php echo $this->get_field_id('al2fb_activity'); ?>"><?php _e('Show Facebook activity feed', c_al2fb_text_domain); ?></label>
 		</p>
 		<?php
 	}
