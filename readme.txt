@@ -28,13 +28,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Show the names of the people who liked your post on Facebook below the post/page text
 * Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
 * Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
-* Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Shortcodes and template tags for liker names, like count, like button, like box, send button, Facepile, activity feed, profile icon/link
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
-* Sidebar widget for Facebook comments/messages and/or like/send button, like box, comments plugin, Facepile, activity feed and/or a link to your Facebook profile
-* Facebook registration/login
+* Sidebar widget, shortcodes and template tags for Facebook comments/messages, like/send button, like box, comments plugin, Facepile, registration/login, activity feed and/or a link to your Facebook profile
+* Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
