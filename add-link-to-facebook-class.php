@@ -3353,7 +3353,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Excluded post types
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
-				return;
+				return $content;
 
 			$user_ID = self::Get_user_ID($post);
 			if (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
