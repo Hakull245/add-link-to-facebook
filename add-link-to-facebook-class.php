@@ -3350,6 +3350,11 @@ if (!class_exists('WPAL2Facebook')) {
 		function The_content($content = '') {
 			global $post;
 
+			// Excluded post types
+			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+			if (in_array($post->post_type, $ex_custom_types))
+				return;
+
 			$user_ID = self::Get_user_ID($post);
 			if (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) &&
@@ -4884,14 +4889,20 @@ class AL2FB_Widget extends WP_Widget {
 	function widget($args, $instance) {
 		global $wp_al2fb;
 
-		// Get current post
 		if (!is_single() && !is_page())
 			return;
+
+		// Get current post
 		if (!empty($GLOBALS['post']))
 			$post = $GLOBALS['post'];
 		if (empty($post->ID) && !empty($post['post_id']))
 			$post = get_post($post['post_id']);
 		if (empty($post) || empty($post->ID))
+			return;
+
+		// Excluded post types
+		$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+		if (in_array($post->post_type, $ex_custom_types))
 			return;
 
 		// Get user

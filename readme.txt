@@ -639,7 +639,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: auto disable shortcodes when Mingle active
 * Improvement: truncate description for Open Graph Protocol
 * Improvement: message when settings only available to another admin
-* Improvement: no post submit box for excluded post types
+* Improvement: no post submit box, widget, likers, like/send button for excluded post types
 * Improvement: using site URL in stead of home URL for redirect URI for new installs
 * Improvement: removed caching from update checks
 * Improvement: default link picture first in post for new installs
