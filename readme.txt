@@ -65,7 +65,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Swedish (sv\_SE) by *JornB*, thanks!
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
-* Latvian (lv\_LV) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
+* Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -644,7 +644,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: using site URL in stead of home URL for redirect URI for new installs
 * Improvement: removed caching from update checks
 * Improvement: default link picture first in post for new installs
-* Added Latvian (lv\_LV) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
+* Added Latvian (lv) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
