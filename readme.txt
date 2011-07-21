@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -65,6 +65,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Swedish (sv\_SE) by *JornB*, thanks!
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
+* Latvian (lv\_LV) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Your translation ...
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -639,10 +640,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: auto disable shortcodes when Mingle active
 * Improvement: truncate description for Open Graph Protocol
 * Improvement: message when settings only available to another admin
-* Improvement: no post submit box, widget, likers, like/send button for excluded post types.
+* Improvement: no post submit box, widget, likers, like/send button for excluded post types
 * Improvement: using site URL in stead of home URL for redirect URI for new installs
 * Improvement: removed caching from update checks
 * Improvement: default link picture first in post for new installs
+* Added Latvian (lv\_LV) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
