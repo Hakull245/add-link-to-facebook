@@ -4520,6 +4520,12 @@ if (!class_exists('WPAL2Facebook')) {
 				$app = get_user_meta($user_ID, c_al2fb_meta_client_id, true) . ': ' . $e->getMessage();
 			}
 
+			// Sharing
+			if (is_multisite())
+				$shared_user_ID = get_site_option(c_al2fb_option_app_share);
+			else
+				$shared_user_ID = get_option(c_al2fb_option_app_share);
+
 			// Get page
 			try {
 				if (self::Is_authorized($user_ID)) {
@@ -4591,6 +4597,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>mb_convert_encoding:</td><td>' . (function_exists('mb_convert_encoding') ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Application:</td><td>' . $app . '</td></tr>';
+			$info .= '<tr><td>Shared user ID:</td><td>' . $shared_user_ID . '</td></tr>';
 
 			$info .= '<tr><td>Picture type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_picture_type, true) . '</td></tr>';
 			$info .= '<tr><td>Custom picture URL:</td><td>' . $picture . '</td></tr>';
