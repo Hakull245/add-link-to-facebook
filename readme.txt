@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.93
+Stable tag: 1.94
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -635,21 +635,24 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Next release =
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+
+= 1.94 =
 * Bugfix: custom excerpt/text not appearing in rare circumstances
 * New feature: Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
 * Improvement: auto disable shortcodes when Mingle active
 * Improvement: truncate description for Open Graph Protocol
-* Improvement: message when settings only available to another admin
+* Improvement: notice if settings only available to another admin
 * Improvement: no post submit box, widget, likers, like/send button for excluded post types
 * Improvement: using site URL in stead of home URL for redirect URI for new installs
 * Improvement: removed caching from update checks
 * Improvement: default link picture first in post for new installs
+* Improvement: more debug info
+* Updated description & FAQ
 * Added Latvian (lv) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
-* Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.93 =
 * Bugfix: I18n for Facebook login/registration
@@ -730,6 +733,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with older versions
 
 == Upgrade Notice ==
+
+= 1.94 =
+One bugfix, one new feature, eight improvements, new/updated translations
 
 = 1.93 =
 Two bugfixes, four improvements, translation update
@@ -999,7 +1005,6 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Single sign-off (Facebook and WordPress)
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 
 Realized features:
@@ -1056,6 +1061,7 @@ Feature which will not be realized, sorry:
 * Integrate posts from Facebook: WordPress centric plugin
 * <Title> by <Author>: each author should authorize
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
+* Single sign-off (Facebook and WordPress): not possible
 
 == Facebook Authorization ==
 

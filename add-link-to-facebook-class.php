@@ -1294,7 +1294,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</tr>
 				<tr>
 					<td><span class="al2fb_label"><strong><?php _e('Web > Site URL & Domain:', c_al2fb_text_domain); ?></strong></span></td>
-					<td><span class="al2fb_data"><?php echo htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset); ?></span></td>
+					<td><span class="al2fb_data" style="color: red;"><strong><?php echo htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset); ?></strong></span></td>
 				</tr>
 			</table>
 			<a href="http://developers.facebook.com/" target="_blank"><?php _e('Click here to create', c_al2fb_text_domain); ?></a>
