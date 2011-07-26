@@ -247,12 +247,15 @@ Assuming that you have configured and authorize the plugin, you can check this:
 
 In the WordPress menu *Tools*.
 Note that if you checked the option *Share with all users on this site*, only the adminstrator that checked this option can access the settings.
-If you cannot access the other administrator account for some reason, add these lines of code to *add-link-to-facebook.php* temporarily:
+If you cannot access the other administrator account for some reason,
+add these lines of code to the end of the file *add-link-to-facebook-class.php* (before `?>`):
 
 `if (is_multisite())
 	delete_site_option(c_al2fb_option_app_share);
 else
 	delete_option(c_al2fb_option_app_share);`
+
+This code resets the option *Share with all users on this site*.
 
 = U23 How can I use the shortcodes? =
 
