@@ -2805,13 +2805,13 @@ if (!class_exists('WPAL2Facebook')) {
 			// Filter excerpt
 			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
 			if (empty($excerpt))
-				$excerpt = $post->post_excerpt;
+				$excerpt = apply_filters('the_excerpt', $post->post_excerpt);
 			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
 
 			// Filter post text
 			$content = get_post_meta($post->ID, c_al2fb_meta_text, true);
 			if (empty($content))
-				$content = $post->post_content;
+				$content = apply_filters('the_content', $post->post_content);
 			$content = apply_filters('al2fb_content', $content, $post);
 
 			// Get body
@@ -2903,7 +2903,8 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($picture_type == 'facebook')
 					$picture = '';
 				else if ($picture_type == 'post' || empty($picture_type)) {
-					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
+					$content = apply_filters('the_content', $post->post_content);
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
 						$picture = $matches[1];
 				}
 				else if ($picture_type == 'avatar') {
@@ -4733,7 +4734,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// First picture in post
 				$post_picture = null;
-				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($posts->post->post_content), $matches))
+				$content = apply_filters('the_content', $posts->post->post_content);
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
 					$post_picture = $matches[1];
 
 				// Author avatar
@@ -4750,7 +4752,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a>';
 				$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
 				$info .= ' @ ' . $posts->post->post_date;
-				$info .= ' <a href="' . $picture['picture'] . '" target="_blank">' . $picture['picture_type'] . '</a>';
+				$info .= ' <a href="' . $picture['picture'] . '" target="_blank">result:' . $picture['picture_type'] . '</a>';
 				if (!empty($selected_picture))
 					$info .= ' <a href="' . $selected_picture . '" target="_blank">selected</a>';
 				if (!empty($attached_picture))
