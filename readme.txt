@@ -661,6 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Latvian (lv) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.93 =
@@ -716,27 +717,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.85 =
-* Bugfix: Facebook avatar messed up in some cases
-* Removed *Sustainable Plugins Sponsorship Network*
-
-= 1.84 =
-* New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
-* New feature: option to enable shortcodes in widgets
-* Improvement: post/page titles will be filtered
-* Updated description, FAQ and [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
-
-= 1.83 =
-* Bugfix: correct user for EULA
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.82 =
-* Administrator option to disable collection of statistics
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with older versions
@@ -766,18 +746,6 @@ One bugfix
 
 = 1.86 =
 Five new features, one improvement, documentation and translation updates
-
-= 1.85 =
-One bugfix
-
-= 1.84 =
-Two new features, one improvement, documentation and translation updates
-
-= 1.83 =
-One bugfix, translation updates
-
-= 1.82 =
-Option to disable collection of statistics
 
 == Setup guide ==
 
