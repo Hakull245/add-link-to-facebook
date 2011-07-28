@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.94
+Stable tag: 1.95
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -247,6 +247,15 @@ Assuming that you have configured and authorize the plugin, you can check this:
 
 In the WordPress menu *Tools*.
 Note that if you checked the option *Share with all users on this site*, only the adminstrator that checked this option can access the settings.
+If you cannot access the other administrator account for some reason,
+add these lines of code to the end of the file *add-link-to-facebook-class.php* (before `?>`):
+
+`if (is_multisite())
+	delete_site_option(c_al2fb_option_app_share);
+else
+	delete_option(c_al2fb_option_app_share);`
+
+This code resets the option *Share with all users on this site*.
 
 = U23 How can I use the shortcodes? =
 
@@ -637,6 +646,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
+= 1.95 =
+* Improvement: apply WordPress filters on content and excerpt
+* Improvement: display link picture in post meta box
+* Improvement: Facebook login with *remember me*
+* Improvement: more debug info
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.94 =
 * Bugfix: custom excerpt/text not appearing in rare circumstances
 * New feature: Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
@@ -652,6 +669,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Latvian (lv) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.93 =
@@ -707,32 +725,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.85 =
-* Bugfix: Facebook avatar messed up in some cases
-* Removed *Sustainable Plugins Sponsorship Network*
-
-= 1.84 =
-* New feature: Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") widget
-* New feature: option to enable shortcodes in widgets
-* Improvement: post/page titles will be filtered
-* Updated description, FAQ and [User Guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "User Guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Added Indonesian translation (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky")
-
-= 1.83 =
-* Bugfix: correct user for EULA
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.82 =
-* Administrator option to disable collection of statistics
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
-* Newer versions should always be compatible with older versions
+* Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.95 =
+Four improvements
 
 = 1.94 =
 One bugfix, one new feature, eight improvements, new/updated translations
@@ -757,18 +757,6 @@ One bugfix
 
 = 1.86 =
 Five new features, one improvement, documentation and translation updates
-
-= 1.85 =
-One bugfix
-
-= 1.84 =
-Two new features, one improvement, documentation and translation updates
-
-= 1.83 =
-One bugfix, translation updates
-
-= 1.82 =
-Option to disable collection of statistics
 
 == Setup guide ==
 

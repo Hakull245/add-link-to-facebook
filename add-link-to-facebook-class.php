@@ -2595,6 +2595,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Display attached image selector
 		function Meta_box() {
 			global $post;
+			$user_ID = self::Get_user_ID($post);
 
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
@@ -2603,6 +2604,11 @@ if (!class_exists('WPAL2Facebook')) {
 				$texts = self::Get_texts($post);
 				echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
 				echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
+				echo '<strong>Picture:</strong> ';
+				$content = apply_filters('the_content', $post->post_content);
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
+					echo $matches[1];
+				echo '<br />';
 			}
 
 			if (function_exists('wp_get_attachment_image_src')) {
@@ -2663,6 +2669,13 @@ if (!class_exists('WPAL2Facebook')) {
 			echo '<h4>' . __('Custom text', c_al2fb_text_domain) . '</h4>';
 			echo '<textarea id="al2fb_text" name="al2fb_text" cols="40" rows="1" class="attachmentlinks">';
 			echo $text . '</textarea>';
+
+			echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
+
+			$picture_info = self::Get_link_picture($post, $user_ID);
+			echo '<img src="' . $picture_info['picture'] . '" alt="">';
+			if ($this->debug)
+				echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
 		}
 
 		// Save indications & selected attached image
@@ -2805,13 +2818,13 @@ if (!class_exists('WPAL2Facebook')) {
 			// Filter excerpt
 			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
 			if (empty($excerpt))
-				$excerpt = $post->post_excerpt;
+				$excerpt = apply_filters('the_excerpt', $post->post_excerpt);
 			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
 
 			// Filter post text
 			$content = get_post_meta($post->ID, c_al2fb_meta_text, true);
 			if (empty($content))
-				$content = $post->post_content;
+				$content = apply_filters('the_content', $post->post_content);
 			$content = apply_filters('al2fb_content', $content, $post);
 
 			// Get body
@@ -2903,7 +2916,8 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($picture_type == 'facebook')
 					$picture = '';
 				else if ($picture_type == 'post' || empty($picture_type)) {
-					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($post->post_content), $matches))
+					$content = apply_filters('the_content', $post->post_content);
+					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
 						$picture = $matches[1];
 				}
 				else if ($picture_type == 'avatar') {
@@ -3950,7 +3964,7 @@ if (!class_exists('WPAL2Facebook')) {
 						update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
 
 						// Log user in
-						$user = self::Login_by_email($reg['registration']['email']);
+						$user = self::Login_by_email($reg['registration']['email'], true);
 
 						// Redirect
 						$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
@@ -3997,7 +4011,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// Check if found one
 					if (count($users) == 1) {
 						// Try to login
-						$user = self::Login_by_email($users[0]->user_email);
+						$user = self::Login_by_email($users[0]->user_email, true);
 
 						// Check login
 						if ($user) {
@@ -4041,12 +4055,16 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Log WordPress user in using e-mail
-		function Login_by_email($email) {
-			$user = get_user_by_email($email);
-			if ($user) {
-				wp_set_current_user($user->ID, $user->user_login);
-				wp_set_auth_cookie($user->ID);
-				do_action('wp_login', $user->user_login);
+		function Login_by_email($email, $rememberme) {
+			global $user;
+			$user = null;
+
+			$userdata = get_user_by_email($email);
+			if ($userdata) {
+				$user = new WP_User($userdata->ID);
+				wp_set_current_user($userdata->ID, $userdata->user_login);
+				wp_set_auth_cookie($userdata->ID, $rememberme);
+				do_action('wp_login', $userdata->user_login);
 			}
 			return $user;
 		}
@@ -4733,7 +4751,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// First picture in post
 				$post_picture = null;
-				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', do_shortcode($posts->post->post_content), $matches))
+				$content = apply_filters('the_content', $posts->post->post_content);
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
 					$post_picture = $matches[1];
 
 				// Author avatar
@@ -4750,7 +4769,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a>';
 				$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
 				$info .= ' @ ' . $posts->post->post_date;
-				$info .= ' <a href="' . $picture['picture'] . '" target="_blank">' . $picture['picture_type'] . '</a>';
+				$info .= ' <a href="' . $picture['picture'] . '" target="_blank">result:' . $picture['picture_type'] . '</a>';
 				if (!empty($selected_picture))
 					$info .= ' <a href="' . $selected_picture . '" target="_blank">selected</a>';
 				if (!empty($attached_picture))
