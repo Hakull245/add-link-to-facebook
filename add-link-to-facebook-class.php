@@ -3963,7 +3963,7 @@ if (!class_exists('WPAL2Facebook')) {
 						update_user_meta($user_ID, c_al2fb_meta_facebook_id, $reg['user_id']);
 
 						// Log user in
-						$user = self::Login_by_email($reg['registration']['email']);
+						$user = self::Login_by_email($reg['registration']['email'], true);
 
 						// Redirect
 						$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
@@ -4010,7 +4010,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// Check if found one
 					if (count($users) == 1) {
 						// Try to login
-						$user = self::Login_by_email($users[0]->user_email);
+						$user = self::Login_by_email($users[0]->user_email, true);
 
 						// Check login
 						if ($user) {
@@ -4054,12 +4054,16 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Log WordPress user in using e-mail
-		function Login_by_email($email) {
-			$user = get_user_by_email($email);
-			if ($user) {
-				wp_set_current_user($user->ID, $user->user_login);
-				wp_set_auth_cookie($user->ID);
-				do_action('wp_login', $user->user_login);
+		function Login_by_email($email, $rememberme) {
+			global $user;
+			$user = null;
+
+			$userdata = get_user_by_email($email);
+			if ($userdata) {
+				$user = new WP_User($userdata->ID);
+				wp_set_current_user($userdata->ID, $userdata->user_login);
+				wp_set_auth_cookie($userdata->ID, $rememberme);
+				do_action('wp_login', $userdata->user_login);
 			}
 			return $user;
 		}

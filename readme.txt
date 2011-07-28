@@ -646,6 +646,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * [Protest: no updates for this plugin the next 30 days](http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days "Protest")
 * Improvement: apply WordPress filters on content and excerpt
 * Improvement: display link picture in post meta box
+* Improvement: Facebook login with *remember me*
 * Improvement: more debug info
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
