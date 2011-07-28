@@ -2595,6 +2595,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Display attached image selector
 		function Meta_box() {
 			global $post;
+			$user_ID = self::Get_user_ID($post);
 
 			// Security
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
@@ -2603,6 +2604,11 @@ if (!class_exists('WPAL2Facebook')) {
 				$texts = self::Get_texts($post);
 				echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
 				echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
+				echo '<strong>Picture:</strong> ';
+				$content = apply_filters('the_content', $post->post_content);
+				if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
+					echo $matches[1];
+				echo '<br />';
 			}
 
 			if (function_exists('wp_get_attachment_image_src')) {
@@ -2663,6 +2669,12 @@ if (!class_exists('WPAL2Facebook')) {
 			echo '<h4>' . __('Custom text', c_al2fb_text_domain) . '</h4>';
 			echo '<textarea id="al2fb_text" name="al2fb_text" cols="40" rows="1" class="attachmentlinks">';
 			echo $text . '</textarea>';
+
+			echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
+
+			$picture_info = self::Get_link_picture($post, $user_ID);
+			echo '<img src="' . $picture_info['picture'] . '" alt=""><br />';
+			echo '<span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
 		}
 
 		// Save indications & selected attached image
