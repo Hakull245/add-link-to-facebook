@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -368,6 +368,11 @@ Question E22 describes possible errors for the Facebook registration form / logi
 * al2fb_picture: $picture, $post
 * al2fb_comment: $message, $comment, $post
 
+= U31 Can I change/remove 'xxx seconds ago via ...'? =
+
+No, this can't be removed or changed for automatically added links.
+The only thing that can be changed is the Facebook application name after 'via'.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -559,9 +564,7 @@ Can not happen anymore in recent versions.
 = E14 I get '(#100) Invalid parameter' =
 
 You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
-Go to the post with the error, enabled *Custom fields* with the *Screen Options* in the upper right corner if needed,
-now scroll down to the *Custom Fields* section and delete the values starting with *al2fb_* to remove the error.
-Since version 1.32 of the plugin, you can use the *Clear error messages* checkbox.
+See question E19 for how to remove the error message and question U09 for how to add a link for an existing post.
 
 = E15 I get 'Error validating access token' =
 
