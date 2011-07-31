@@ -1061,24 +1061,3 @@ Feature which will not be realized, sorry:
 * <Title> by <Author>: each author should authorize
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
-
-== Facebook Authorization ==
-
-[Server-side flow](http://developers.facebook.com/docs/authentication/ "Authentication")
-
-* Authorize button posts to server
-* Server checks for Facebook error when [safe mode](http://php.net/manual/en/features.safe-mode.php "safe mode") off (1)
-* Server redirects to Facebook (or to self when error)
-* Facebook login (if needed)
-* Facebook authorization (if needed)
-* Facebook redirects to plugin
-* Plugin stores Facebook access token
-* Plugin adds links with access token
-
-1. Workaround for Microsoft Internet Explorer
-
-== Acknowledgements ==
-
-This plugin uses the automatic upgrade script published [here](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/ "Automatic Updates")
-
-"*This library is licensed under the [GPL](http://www.gnu.org/licenses/gpl.html "GPL") and is distributed free of charge.*"
