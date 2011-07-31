@@ -2997,6 +2997,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get plain texts
 			$text = preg_replace('/<[^>]*>/', '', $text);
 
+			// Decode HTML entities
+			$text = html_entity_decode($text, ENT_QUOTES, get_bloginfo('charset'));
+
 			// Truncate text
 			if (!empty($text)) {
 				$maxtext = get_option(c_al2fb_option_max_text);
