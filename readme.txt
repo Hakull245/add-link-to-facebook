@@ -651,6 +651,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.96 =
 * Bugfix: *html_entity_decode* for texts
 * Improvement: removed alternate update server
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.95 =
 * Improvement: apply WordPress filters on content and excerpt
