@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://wordpress.org/extend/plugins/add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 1.95
+Version: 1.96
 Author: Marcel Bokhorst
 Author URI: http://blog.bokhorst.biz/about/
 */
@@ -31,15 +31,6 @@ Author URI: http://blog.bokhorst.biz/about/
 // Check PHP version
 if (version_compare(PHP_VERSION, '5.0.0', '<'))
 	die('Add Link to Facebook requires at least PHP 5, installed version is ' . PHP_VERSION);
-
-// Update checker
-require_once('plugin-update-checker.php');
-
-global $updates_al2fb;
-if (empty($updates_al2fb)) {
-	$updates_url = 'http://updates.bokhorst.biz/al2fb?action=update&plugin=al2fb';
-	$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook');
-}
 
 // Include support class
 require_once('add-link-to-facebook-class.php');
