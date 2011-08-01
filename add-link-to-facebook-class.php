@@ -138,6 +138,8 @@ define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
+define('c_al2fb_last_request', 'al2fb_last_request');
+define('c_al2fb_last_response', 'al2fb_last_response');
 
 // User meta
 define('c_al2fb_meta_facebook_id', 'al2fb_facebook_id');
@@ -3099,13 +3101,15 @@ if (!class_exists('WPAL2Facebook')) {
 				$query = http_build_query($query_array, '', '&');
 
 				// Log request
+				update_option(c_al2fb_last_request, print_r($query_array, true) . $query);
 				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, 'request=' . $query);
+					add_post_meta($post->ID, c_al2fb_meta_log, 'request=' . print_r($query_array, true));
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
 
 				// Log response
+				update_option(c_al2fb_last_response, $response);
 				if ($this->debug)
 					add_post_meta($post->ID, c_al2fb_meta_log, 'response=' . $response);
 
@@ -4818,6 +4822,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Last request:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_request), ENT_QUOTES, $charset) . '</pre></td></tr>';
+			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '</table></div>';
 
 			$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
