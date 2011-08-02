@@ -140,6 +140,7 @@ define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
 define('c_al2fb_last_request', 'al2fb_last_request');
 define('c_al2fb_last_response', 'al2fb_last_response');
+define('c_al2fb_last_texts', 'al2fb_last_texts');
 
 // User meta
 define('c_al2fb_meta_facebook_id', 'al2fb_facebook_id');
@@ -3002,6 +3003,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Decode HTML entities
 			$text = html_entity_decode($text, ENT_QUOTES, get_bloginfo('charset'));
 
+			// Prevent starting with with space
+			$text = trim($text);
+
 			// Truncate text
 			if (!empty($text)) {
 				$maxtext = get_option(c_al2fb_option_max_text);
@@ -3102,8 +3106,11 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Log request
 				update_option(c_al2fb_last_request, print_r($query_array, true) . $query);
-				if ($this->debug)
+				update_option(c_al2fb_last_texts, print_r($texts, true) . $query);
+				if ($this->debug) {
 					add_post_meta($post->ID, c_al2fb_meta_log, 'request=' . print_r($query_array, true));
+					add_post_meta($post->ID, c_al2fb_meta_log, 'texts=' . print_r($texts, true));
+				}
 
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
@@ -4824,6 +4831,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last request:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_request), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
+			$info .= '<tr><td>Last texts:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_texts), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '</table></div>';
 
 			$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
