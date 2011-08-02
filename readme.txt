@@ -646,6 +646,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Next release =
+* Bugfix: workaround for blank texts
 * Improvement: more debug info
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
