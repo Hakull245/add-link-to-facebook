@@ -478,7 +478,7 @@ If you didn't create a Facebook application yet, you should follow the instructi
 
 You have probably entered a wrong *App Secret*.
 
-= E03 I get 'Given URL is not allowed by the Application configuration' =
+= E03 I get 'Invalid redirect_uri: Given URL is not allowed by the Application configuration' =
 
 You have probably entered a wrong URL in the Facebook application setting.
 
