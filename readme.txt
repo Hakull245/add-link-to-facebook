@@ -652,6 +652,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: option to enable/disable WordPress filters
 * Improvement: shortcodes and WordPress filters by default not applied
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.97 =
