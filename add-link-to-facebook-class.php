@@ -224,9 +224,10 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_option(c_al2fb_option_use_pp))
 				add_action('publish_post', array(&$this, 'Remote_publish'));
 
-			add_action('comment_post', array(&$this, 'Comment_post'));
+			add_action('comment_post', array(&$this, 'Comment_post'), 999);
 			add_action('comment_unapproved_to_approved', array(&$this, 'Comment_approved'));
 			add_action('comment_approved_to_unapproved', array(&$this, 'Comment_unapproved'));
+			add_action('delete_comment', array(&$this, 'Delete_comment'));
 
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
@@ -3227,6 +3228,17 @@ if (!class_exists('WPAL2Facebook')) {
 			self::Delete_fb_link_comment($comment);
 		}
 
+		// Permanently delete comment
+		function Delete_comment($comment_ID) {
+			// Get data
+			$comment = get_comment($comment_ID);
+			$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+
+			// Save Facebook ID
+			if (!empty($fb_comment_id))
+				add_post_meta($comment->comment_post_ID, c_al2fb_meta_fb_comment_id, $fb_comment_id, false);
+		}
+
 		// Add comment to link
 		function Add_fb_link_comment($comment) {
 			// Get data
@@ -4159,6 +4171,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$stored_comments = array_merge(
 							get_comments('post_id=' . $post->ID),
 							get_comments('status=spam&post_id=' . $post->ID));
+						$deleted_fb_comment_ids = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
 
 						foreach ($fb_comments->data as $fb_comment) {
 							// Check if stored comment
@@ -4171,6 +4184,7 @@ if (!class_exists('WPAL2Facebook')) {
 										break;
 									}
 								}
+							$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
 
 							// Create new comment
 							if (!$stored) {

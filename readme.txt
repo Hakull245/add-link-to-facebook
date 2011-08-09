@@ -628,6 +628,12 @@ Ask your provider to install and configure [cURL](http://www.php.net/manual/en/c
 You are probably using an existing Facebook application.
 You can solve this problem by going into application settings and setting the Stream post URL security to disabled under advanced.
 
+= E24 I get 'file_get_contents ... No such file or directory' =
+
+Your hosting provider does not provide *cURL* and *file_get_contents* isn't working too.
+So, the plugin isn't able to communicate to the internet.
+You should ask your hosting provider to install and configure cURL.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -646,6 +652,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Next release =
+* Improvement: process new comments as last plugin
+* Improvement: record imported and deleted Facebook comments
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.98 =
