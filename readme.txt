@@ -532,21 +532,18 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 
 = E11 I get 'cURL error ...' =
 
-Please help me to find out the cause by sending me the debug information, see the last question for instructions.
-You can find the cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
+You can find all cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
 
-cURL errors encountered so far:
+cURL errors commonly reported:
 
 * Error 1: *The URL you passed to libcurl used a protocol that this libcurl does not support*: the hosting server may not support secure connections (https)
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server, you can try to increase the setting *Facebook communication timeout*
-* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated
+* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate*
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
-For above cURL errors you need to contact your hosting provider.
-
-Error 60: try enabling the option *Do not verify the peer's certificate* (since version 1.2).
+For most cURL errors you need support from your hosting provider.
 
 = E12 I get 'HTTP 400 Bad Request' =
 
