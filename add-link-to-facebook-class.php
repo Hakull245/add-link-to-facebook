@@ -15,6 +15,7 @@ define('c_al2fb_option_timeout', 'al2fb_timeout');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 define('c_al2fb_option_min_cap', 'al2fb_min_cap');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
+define('c_al2fb_option_msg_maxage', 'al2fb_msg_maxage');
 define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
@@ -780,6 +781,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_optout] = null;
 
 				$_POST[c_al2fb_option_msg_refresh] = trim($_POST[c_al2fb_option_msg_refresh]);
+				$_POST[c_al2fb_option_msg_maxage] = trim($_POST[c_al2fb_option_msg_maxage]);
 				$_POST[c_al2fb_option_max_descr] = trim($_POST[c_al2fb_option_max_descr]);
 				$_POST[c_al2fb_option_max_text] = trim($_POST[c_al2fb_option_max_text]);
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
@@ -790,6 +792,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
+				update_option(c_al2fb_option_msg_maxage, $_POST[c_al2fb_option_msg_maxage]);
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
@@ -2007,6 +2010,14 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_maxage"><?php _e('Refresh Facebook comments for:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_numeric" id="al2fb_maxage" name="<?php echo c_al2fb_option_msg_maxage; ?>" type="text" value="<?php echo get_option(c_al2fb_option_msg_maxage); ?>" />
+					<span><?php _e('Days', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Default 30 days', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_max_descr"><?php _e('Maximum text length with trailer:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_numeric" id="al2fb_max_descr" name="<?php echo c_al2fb_option_max_descr; ?>" type="text" value="<?php echo get_option(c_al2fb_option_max_descr); ?>" />
@@ -2570,20 +2581,28 @@ if (!class_exists('WPAL2Facebook')) {
 
 				if ($link_id) {
 					$post = get_post($post_ID);
-					$user_ID = self::Get_user_ID($post);
 
-					// Show number of comments
-					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-						$fb_comments = self::Get_comments_or_likes($post, false);
-						if (!empty($fb_comments))
-							echo '<br /><span>' . count($fb_comments->data) . ' ' . __('comments', c_al2fb_text_domain) . '</span>';
-					}
+					// Maximum age for Facebook comments/likes
+					$maxage = intval(get_option(c_al2fb_option_msg_maxage));
+					if (!$maxage)
+						$maxage = 30;
+					$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
+					if (!$old) {
+						$user_ID = self::Get_user_ID($post);
 
-					// Show number of likes
-					if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
-						$fb_likes = self::Get_comments_or_likes($post, true);
-						if (!empty($fb_likes))
-							echo '<br /><span>' . count($fb_comments->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
+						// Show number of comments
+						if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+							$fb_comments = self::Get_comments_or_likes($post, false);
+							if (!empty($fb_comments))
+								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('comments', c_al2fb_text_domain) . '</span>';
+						}
+
+						// Show number of likes
+						if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+							$fb_likes = self::Get_comments_or_likes($post, true);
+							if (!empty($fb_likes))
+								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
+						}
 					}
 				}
 			}
@@ -4163,8 +4182,14 @@ if (!class_exists('WPAL2Facebook')) {
 				else
 					$tz_off = $tz_off * 3600;
 
+				// Maximum age for Facebook comments/likes
+				$maxage = intval(get_option(c_al2fb_option_msg_maxage));
+				if (!$maxage)
+					$maxage = 30;
+				$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
+
 				// Get Facebook comments
-				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+				if (!$old && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
 						// Get WordPress comments
@@ -4253,7 +4278,7 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Get likes
-				if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+				if (!$old && get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 					$fb_likes = self::Get_comments_or_likes($post, true);
 					if ($fb_likes)
 						foreach ($fb_likes->data as $fb_like) {
@@ -4322,36 +4347,43 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
 				return $count;
 
-			$user_ID = self::Get_user_ID($post);
+			// Maximum age for Facebook comments/likes
+			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
+			if (!$maxage)
+				$maxage = 30;
+			$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
+			if (!$old) {
+				$user_ID = self::Get_user_ID($post);
 
-			// Comment count
-			if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-				$fb_comments = self::Get_comments_or_likes($post, false);
-				if ($fb_comments) {
-					$stored_comments = get_comments('post_id=' . $post_ID);
+				// Comment count
+				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+					$fb_comments = self::Get_comments_or_likes($post, false);
+					if ($fb_comments) {
+						$stored_comments = get_comments('post_id=' . $post_ID);
 
-					foreach ($fb_comments->data as $fb_comment)
-						if (!empty($fb_comments)) {
-							$stored = false;
-							if ($stored_comments)
-								foreach ($stored_comments as $comment) {
-									$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-									if ($fb_comment_id == $fb_comment->id) {
-										$stored = true;
-										break;
+						foreach ($fb_comments->data as $fb_comment)
+							if (!empty($fb_comments)) {
+								$stored = false;
+								if ($stored_comments)
+									foreach ($stored_comments as $comment) {
+										$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+										if ($fb_comment_id == $fb_comment->id) {
+											$stored = true;
+											break;
+										}
 									}
-								}
-							if (!$stored)
-								$count++;
-						}
+								if (!$stored)
+									$count++;
+							}
+					}
 				}
-			}
 
-			// Like count
-			if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true))
-				$fb_likes = self::Get_comments_or_likes($post, true);
-			if (!empty($fb_likes))
-				$count += count($fb_likes->data);
+				// Like count
+				if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true))
+					$fb_likes = self::Get_comments_or_likes($post, true);
+				if (!empty($fb_likes))
+					$count += count($fb_likes->data);
+			}
 
 			return $count;
 		}
@@ -4731,6 +4763,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Min. capability:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Refresh comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_refresh), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Refresh age:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_maxage), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Max. length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_descr), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Max. text length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_text), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';

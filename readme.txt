@@ -652,6 +652,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Next release =
+* Improvement: option to limit duration of Facebook integration
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.99 =
