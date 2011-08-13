@@ -631,6 +631,12 @@ Your hosting provider does not provide *cURL* and *file_get_contents* isn't work
 So, the plugin isn't able to communicate to the internet.
 You should ask your hosting provider to install and configure cURL.
 
+= E25 I get 'Error validating verification code' =
+
+Your WordPress installation is probably configured incorrectly.
+In most cases there is a second colon in the site URL that shouldn't be there.
+See [here](http://codex.wordpress.org/Changing_The_Site_URL) for how to change your WordPress configuration.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
