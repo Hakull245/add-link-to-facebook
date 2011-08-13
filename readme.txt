@@ -507,10 +507,9 @@ You have probably reset the *App Secret*. You should re-enter it.
 
 = E06 I get 'Error validating verification code' =
 
-You have probably deleted the Facebook application.
-You should delete the *App ID* and *App Secret* from the plugin settings and create a new Facebook application.
-This should not happen if you didn't delete the application.
-In that case please send me the debug information, see the last question for instructions.
+Your WordPress installation is probably configured incorrectly.
+In most cases there is a second colon in the site URL that shouldn't be there.
+See [here](http://codex.wordpress.org/Changing_The_Site_URL) for how to change your WordPress configuration.
 
 = E07 I get 'This API call requires a valid app_id' =
 
@@ -630,12 +629,6 @@ You can solve this problem by going into application settings and setting the St
 Your hosting provider does not provide *cURL* and *file_get_contents* isn't working too.
 So, the plugin isn't able to communicate to the internet.
 You should ask your hosting provider to install and configure cURL.
-
-= E25 I get 'Error validating verification code' =
-
-Your WordPress installation is probably configured incorrectly.
-In most cases there is a second colon in the site URL that shouldn't be there.
-See [here](http://codex.wordpress.org/Changing_The_Site_URL) for how to change your WordPress configuration.
 
 **--- Support ---**
 
