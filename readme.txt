@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook.
+* Filters for all information sent to Facebook
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -629,6 +629,10 @@ You can solve this problem by going into application settings and setting the St
 Your hosting provider does not provide *cURL* and *file_get_contents* isn't working too.
 So, the plugin isn't able to communicate to the internet.
 You should ask your hosting provider to install and configure cURL.
+
+= E25 I get 'This API call requires a valid app_id' =
+
+Try to authorize the plugin again.
 
 **--- Support ---**
 
