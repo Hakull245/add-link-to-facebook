@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -385,28 +385,16 @@ Since version 0.11 administrators can change this using the setting *Required ca
 = C01 Is this plugin compatible with my theme? =
 
 Most likely yes, but featured images can only be used as link picture when your theme supports this.
-
-This plugin is known to be incompatible with:
-
-* [Geo Places](http://templatic.com/news/geo-places-city-directory-wordpress-theme "Geo Places"): publishing from the front-end doesn't add links
+See also the next question.
 
 = C02 Is this plugin compatible with plugin xxx? =
 
-Probably yes, but it all depends on how the plugin works.
-
-Auto posting plugins will work if one of the following actions is used:
-
-* <em>transition_post_status</em>
-* <em>xmlrpc_publish_post</em>
-* <em>app_publish_post</em>
-* <em>al2fb_publish</em>
-
-This plugin is known to be incompatible with:
-
-* Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
-* Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
-* [WP-FB-AutoConnect](http://wordpress.org/extend/plugins/wp-fb-autoconnect/ "WP-FB-AutoConnect")
-* [Mingle forum](http://wordpress.org/extend/plugins/mingle-forum/ "Mingle forum"): enable the option *Do not execute shortcodes for texts*
+The question is more: is plugin (or theme) xxx written in a compatible way.
+I have looked dozens of times to other plugins (and themes), mostly with the conclusion that the plugin doesn't behave as it should.
+For example adding pictures or altering texts after a post have been published.
+Because of this I don't give support on compatibility with other plugins anymore.
+You should contact the author of the other plugin.
+The author of the other plugin is free to contact me if needed.
 
 = C03 Are shortcodes being processed? =
 
@@ -766,7 +754,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.101 =
-One improvements
+One improvement
 
 = 1.99 =
 Two improvements
