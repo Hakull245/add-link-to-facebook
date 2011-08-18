@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
@@ -139,6 +139,8 @@ Since version 0.56 you can enable the Open Graph protocol using the plugin setti
 
 Maybe because it is smaller than 50 x 50 pixels.
 Facebook might also have had trouble accessing the image.
+Another common cause is an incompatible plugin or theme.
+See also question C01 and C02.
 
 = U07 I don't want a link picture =
 
@@ -317,6 +319,7 @@ So, people that click on the like button are displayed within the like button (d
 
 Trash the comment, but leave it in the trash folder.
 If you delete the comment permanently, the plugin will copy the comment again from Facebook.
+From version 1.99 comments can be deleted permanently.
 
 = U28 Can I display the widget on every page? =
 
@@ -391,10 +394,10 @@ See also the next question.
 
 The question is more: is plugin (or theme) xxx written in a compatible way.
 I have looked dozens of times to other plugins (and themes), mostly with the conclusion that the plugin doesn't behave as it should.
-For example adding pictures or altering texts after a post have been published.
-Because of this I don't give support on compatibility with other plugins anymore.
-You should contact the author of the other plugin.
-The author of the other plugin is free to contact me if needed.
+For example by adding pictures or altering texts *after* a post have been published.
+Because of this I don't give support on compatibility with other plugins and themes anymore.
+You should contact the author of the other plugin or theme.
+The author of the other plugin or theme is free to contact me if needed.
 
 = C03 Are shortcodes being processed? =
 
@@ -455,6 +458,10 @@ This field indicates that the like button shouldn't be show for the post or page
 
 This fields holds the custom excerpt that will be used in stead of the WordPress excerpt.
 
+= V09 What is the custom field 'al2fb_facebook_comment_id' for? =
+
+This field records deleted imported Facebook comments.
+
 **--- Error messages ---**
 
 = E01 I get 'Error validating application' =
@@ -468,7 +475,8 @@ You have probably entered a wrong *App Secret*.
 
 = E03 I get 'Invalid redirect_uri: Given URL is not allowed by the Application configuration' =
 
-You have probably entered a wrong URL in the Facebook application setting.
+You have probably entered no or a wrong URL in the Facebook application settings,
+because you skipped a step of the setup guide.
 
 Assuming you created a Facebook application successfully:
 
@@ -519,7 +527,8 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 
 = E11 I get 'cURL error ...' =
 
-You can find all cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
+cURL errors are almost always caused by internet connection problems.
+For most cURL errors you need support from your hosting provider.
 
 cURL errors commonly reported:
 
@@ -527,10 +536,11 @@ cURL errors commonly reported:
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server, you can try to increase the setting *Facebook communication timeout*
+* Error 56: *Failure with receiving network data*: maybe the internet connection went down, try again
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate*, but be aware this is less secure
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
-For most cURL errors you need support from your hosting provider.
+You can find all cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
 
 = E12 I get 'HTTP 400 Bad Request' =
 
@@ -630,7 +640,7 @@ You can open a topic in the [support forum](http://forum.bokhorst.biz/add-link-t
 
 = S02 How can I send the debug information? =
 
-Please go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
+Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
 Optionally fill in your name and describe the problem as accurate as possible and press the *Send* button.
 
 == Screenshots ==
@@ -645,6 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.102 =
 * Bugfix: trashed imported comments reappearing
 * Bugfix: incorrect comment count when imported comments trashed
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.101 =
 * Improvement: option to limit duration of Facebook integration
@@ -717,40 +728,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: removed *loop_start* action
 * Improvement: alternate update server
 
-= 1.89 =
-* Bugfix: one *fb-root* element
-* Improvement: post object passed to new filters
-* Improvement: set Facebook ID without debug mode
-* Improvement: splitted css admin/front
-* Improvement: static [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") button
-* Improvement: [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/ "SPSN") with opt-out option
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.88 =
-* Bugfix: prevent false for empty message
-* Bugfix: workaround for bug in *wp_get_attachment_thumb_url*
-* Improvement: enabled image changing when link added
-* Improvement: debug Facebook communication
-
-= 1.87 =
-* Bugfix: redirect Facebook login
-
-= 1.86 =
-* New feature: custom link text (meta box)
-* New feature: filters for link, name, caption and picture
-* New feature: shortcode/template tag for number of likers
-* New feature: Facebook [registration](http://developers.facebook.com/docs/plugins/registration "Facebook registration") (including widget/shortcode/template tag)
-* New feature: Facebook [login button](http://developers.facebook.com/docs/reference/plugins/login/ "Facebook login button") (including widget/shortcode/template tag)
-* Special thanks to [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen") for testing Facebook registration/login thoroughly!
-* See question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for setting up Facebook registration/login
-* Improvement: [Flattr](https://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin "Flattr") script only on settings page
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -789,18 +766,6 @@ One bugfix, one improvement, translation update
 
 = 1.91 =
 One bugfix
-
-= 1.89 =
-One bugfix, five improvements
-
-= 1.88 =
-Two bugfixes, two improvements
-
-= 1.87 =
-One bugfix
-
-= 1.86 =
-Five new features, one improvement, documentation and translation updates
 
 == Setup guide ==
 
@@ -849,6 +814,7 @@ Common problems:
 
 * To create an application you have to verify your account
 * Error *Given URL is not allowed by the Application configuration*: see question E03 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
+* cURL error: see question E11 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 For administrators (capability *manage\_options*) there is one option in this section:
 
