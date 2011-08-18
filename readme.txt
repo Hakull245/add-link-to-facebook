@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.101
+Stable tag: 1.102
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -642,6 +642,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Next release =
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
+= 1.102 =
+* Bugfix: trashed imported comments reappearing
+* Bugfix: incorrect comment count when imported comments trashed
+
 = 1.101 =
 * Improvement: option to limit duration of Facebook integration
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -752,6 +756,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.102 =
+Two bugfixes
 
 = 1.101 =
 One improvement
