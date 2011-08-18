@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.99
+Stable tag: 1.102
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -385,28 +385,16 @@ Since version 0.11 administrators can change this using the setting *Required ca
 = C01 Is this plugin compatible with my theme? =
 
 Most likely yes, but featured images can only be used as link picture when your theme supports this.
-
-This plugin is known to be incompatible with:
-
-* [Geo Places](http://templatic.com/news/geo-places-city-directory-wordpress-theme "Geo Places"): publishing from the front-end doesn't add links
+See also the next question.
 
 = C02 Is this plugin compatible with plugin xxx? =
 
-Probably yes, but it all depends on how the plugin works.
-
-Auto posting plugins will work if one of the following actions is used:
-
-* <em>transition_post_status</em>
-* <em>xmlrpc_publish_post</em>
-* <em>app_publish_post</em>
-* <em>al2fb_publish</em>
-
-This plugin is known to be incompatible with:
-
-* Maybe [WP Robot](http://wprobot.net/ "WP Robot"): links will not be added
-* Maybe [FeedWordPress](http://feedwordpress.radgeek.com/ "FeedWordPress"): no links are added for syndicated posts
-* [WP-FB-AutoConnect](http://wordpress.org/extend/plugins/wp-fb-autoconnect/ "WP-FB-AutoConnect")
-* [Mingle forum](http://wordpress.org/extend/plugins/mingle-forum/ "Mingle forum"): enable the option *Do not execute shortcodes for texts*
+The question is more: is plugin (or theme) xxx written in a compatible way.
+I have looked dozens of times to other plugins (and themes), mostly with the conclusion that the plugin doesn't behave as it should.
+For example adding pictures or altering texts after a post have been published.
+Because of this I don't give support on compatibility with other plugins anymore.
+You should contact the author of the other plugin.
+The author of the other plugin is free to contact me if needed.
 
 = C03 Are shortcodes being processed? =
 
@@ -507,10 +495,9 @@ You have probably reset the *App Secret*. You should re-enter it.
 
 = E06 I get 'Error validating verification code' =
 
-You have probably deleted the Facebook application.
-You should delete the *App ID* and *App Secret* from the plugin settings and create a new Facebook application.
-This should not happen if you didn't delete the application.
-In that case please send me the debug information, see the last question for instructions.
+Your WordPress installation is probably configured incorrectly.
+In most cases there is a second colon in the site URL that shouldn't be there.
+See [here](http://codex.wordpress.org/Changing_The_Site_URL) for how to change your WordPress configuration.
 
 = E07 I get 'This API call requires a valid app_id' =
 
@@ -540,7 +527,7 @@ cURL errors commonly reported:
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server, you can try to increase the setting *Facebook communication timeout*
-* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate*
+* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate*, but be aware this is less secure
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
 For most cURL errors you need support from your hosting provider.
@@ -631,6 +618,10 @@ Your hosting provider does not provide *cURL* and *file_get_contents* isn't work
 So, the plugin isn't able to communicate to the internet.
 You should ask your hosting provider to install and configure cURL.
 
+= E25 I get 'This API call requires a valid app_id' =
+
+Try to authorize the plugin again.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -649,9 +640,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Next release =
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+
+= 1.102 =
+* Bugfix: trashed imported comments reappearing
+* Bugfix: incorrect comment count when imported comments trashed
+
+= 1.101 =
 * Improvement: option to limit duration of Facebook integration
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.99 =
 * Improvement: process comments as last plugin
@@ -758,6 +756,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.102 =
+Two bugfixes
+
+= 1.101 =
+One improvement
 
 = 1.99 =
 Two improvements
