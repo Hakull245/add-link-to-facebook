@@ -109,6 +109,7 @@ define('c_al2fb_meta_rated', 'al2fb_rated');
 define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
 
 define('c_al2fb_meta_service', 'al2fb_service');
+define('c_al2fb_meta_noeula', 'al2fb_noeula');
 
 // Post meta
 define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
@@ -956,10 +957,12 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function eula_yes($msg) {
+			update_user_meta($msg['userid'], c_al2fb_meta_noeula, false);
 			return true;
 		}
 
 		function eula_no($msg) {
+			update_user_meta($msg['userid'], c_al2fb_meta_noeula, true);
 			return true;
 		}
 
@@ -3062,8 +3065,16 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add Link to Facebook
 		function Add_fb_link($post) {
-			// Get url
 			$user_ID = self::Get_user_ID($post);
+
+			// Check if EULA agreed
+			if (get_user_meta($user_ID, c_al2fb_meta_noeula, true)) {
+				// Update stats
+				$this->Update_statistics('add', $post);
+				return;
+			}
+
+			// Get url
 			if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true))
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
@@ -4775,6 +4786,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 			$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
+
+			$info .= '<tr><td>No SPSN:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_nospsn, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>No EULA:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_noeula, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Timeout:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_timeout), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
