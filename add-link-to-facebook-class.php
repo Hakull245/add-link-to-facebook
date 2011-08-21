@@ -4370,9 +4370,11 @@ if (!class_exists('WPAL2Facebook')) {
 							get_comments('status=trash&post_id=' . $post->ID));
 						$stored_comments =  array_merge($stored_comments,
 							get_comments('status=hold&post_id=' . $post->ID));
+						$deleted_fb_comment_ids = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
 
 						foreach ($fb_comments->data as $fb_comment)
 							if (!empty($fb_comments)) {
+								// Check if comment in database
 								$stored = false;
 								if ($stored_comments)
 									foreach ($stored_comments as $comment) {
@@ -4382,6 +4384,11 @@ if (!class_exists('WPAL2Facebook')) {
 											break;
 										}
 									}
+
+								// Check if comment deleted
+								$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
+
+								// Only count if not in database or deleted
 								if (!$stored)
 									$count++;
 							}
