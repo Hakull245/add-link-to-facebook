@@ -1968,7 +1968,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</th><td>
 					<input class="al2fb_numeric" id="al2fb_timeout" name="<?php echo c_al2fb_option_timeout; ?>" type="text" value="<?php echo get_option(c_al2fb_option_timeout); ?>" />
 					<span><?php _e('Seconds', c_al2fb_text_domain); ?></span>
-					<br /><span class="al2fb_explanation"><?php _e('Default 30 seconds', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Default 15 seconds', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -2468,7 +2468,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
 				$timeout = get_option(c_al2fb_option_timeout);
 				if (!$timeout)
-					$timeout = 30;
+					$timeout = 15;
 
 				$c = curl_init();
 				curl_setopt($c, CURLOPT_URL, $url);
@@ -3068,11 +3068,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Check if EULA agreed
-			if (get_user_meta($user_ID, c_al2fb_meta_noeula, true)) {
-				// Update stats
-				$this->Update_statistics('add', $post);
+			if (get_user_meta($user_ID, c_al2fb_meta_noeula, true))
 				return;
-			}
 
 			// Get url
 			if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true))
@@ -4484,7 +4481,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get timeout
 			$timeout = get_option(c_al2fb_option_timeout);
 			if (!$timeout)
-				$timeout = 30;
+				$timeout = 15;
 
 			// Use cURL if available
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl))
