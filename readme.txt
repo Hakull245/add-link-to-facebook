@@ -652,6 +652,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Next release =
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Improvement: default Facebook communication time-out 15 seconds
+* Improvement: more debug info (memory usage, max. execution time)
 * The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.103 =
