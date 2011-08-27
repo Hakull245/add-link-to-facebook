@@ -2468,7 +2468,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
 				$timeout = get_option(c_al2fb_option_timeout);
 				if (!$timeout)
-					$timeout = 15;
+					$timeout = 25;
 
 				$c = curl_init();
 				curl_setopt($c, CURLOPT_URL, $url);
@@ -4481,7 +4481,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get timeout
 			$timeout = get_option(c_al2fb_option_timeout);
 			if (!$timeout)
-				$timeout = 15;
+				$timeout = 25;
 
 			// Use cURL if available
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl))
