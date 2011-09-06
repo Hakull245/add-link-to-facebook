@@ -14,6 +14,7 @@ define('c_al2fb_option_version', 'al2fb_version');
 define('c_al2fb_option_timeout', 'al2fb_timeout');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 define('c_al2fb_option_min_cap', 'al2fb_min_cap');
+define('c_al2fb_option_min_cap_comment', 'al2fb_min_cap_comment');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
 define('c_al2fb_option_msg_maxage', 'al2fb_msg_maxage');
 define('c_al2fb_option_max_descr', 'al2fb_max_msg');
@@ -770,6 +771,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_nonotice] = null;
 				if (empty($_POST[c_al2fb_option_min_cap]))
 					$_POST[c_al2fb_option_min_cap] = null;
+				if (empty($_POST[c_al2fb_option_min_cap_comment]))
+					$_POST[c_al2fb_option_min_cap_comment] = null;
 				if (empty($_POST[c_al2fb_option_noverifypeer]))
 					$_POST[c_al2fb_option_noverifypeer] = null;
 				if (empty($_POST[c_al2fb_option_shortcode_widget]))
@@ -792,6 +795,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_timeout, $_POST[c_al2fb_option_timeout]);
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
+				update_option(c_al2fb_option_min_cap_comment, $_POST[c_al2fb_option_min_cap_comment]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
 				update_option(c_al2fb_option_msg_maxage, $_POST[c_al2fb_option_msg_maxage]);
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
@@ -1994,6 +1998,27 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// List capabilities and select current
 					$min_cap = get_option(c_al2fb_option_min_cap);
+					foreach ($capabilities as $cap) {
+						echo '<option value="' . $cap . '"';
+						if ($cap == $min_cap)
+							echo ' selected';
+						echo '>' . $cap . '</option>';
+					}
+?>
+					</select>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_min_cap_comment"><?php _e('Required capability to view Facebook comments:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<select class="al2db_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">
+<?php
+					// List capabilities and select current
+					$min_cap = get_option(c_al2fb_option_min_cap_comment);
+					echo '<option value=""';
+					if (empty($min_cap))
+						echo ' selected';
+					echo '>' . __('None', c_al2fb_text_domain) . '</option>';
 					foreach ($capabilities as $cap) {
 						echo '<option value="' . $cap . '"';
 						if ($cap == $min_cap)
@@ -4343,6 +4368,14 @@ if (!class_exists('WPAL2Facebook')) {
 								$comment->comment_author_url = $link;
 			}
 
+			// Permission to view?
+			$min_cap = get_option(c_al2fb_option_min_cap_comment);
+			if ($min_cap && !current_user_can($min_cap))
+				if ($comments)
+					for ($i = 0 ; $i < count($comments) ; $i++)
+						if ($comments[$i]->comment_agent == 'AL2FB')
+							unset($comments[$i]);
+
 			return $comments;
 		}
 
@@ -4354,6 +4387,16 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get comment count with FB comments/likes
 		function Get_comments_number($count, $post_ID) {
 			$post = get_post($post_ID);
+
+			// Permission to view?
+			$min_cap = get_option(c_al2fb_option_min_cap_comment);
+			if ($min_cap && !current_user_can($min_cap)) {
+				$stored_comments = get_comments('post_id=' . $post->ID);
+				if ($stored_comments)
+					foreach ($stored_comments as $comment)
+						if ($comment->comment_agent == 'AL2FB')
+							$count--;
+			}
 
 			// Integration turned off?
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
@@ -4371,7 +4414,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
-						$stored_comments = get_comments('post_id=' . $post->ID);
+						//$stored_comments = get_comments('post_id=' . $post->ID);
 						$stored_comments = array_merge($stored_comments,
 							get_comments('status=spam&post_id=' . $post->ID));
 						$stored_comments =  array_merge($stored_comments,
@@ -4790,6 +4833,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Timeout:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_timeout), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Min. capability:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Min. capability comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap_comment), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Refresh comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_refresh), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Refresh age:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_maxage), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Max. length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_descr), ENT_QUOTES, $charset) . '</td></tr>';

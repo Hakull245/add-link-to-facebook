@@ -4,13 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.103
+Stable tag: 1.104
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
 == Description ==
 
-Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized. This plugin comes with full support.
+Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
@@ -376,6 +376,11 @@ Question E22 describes possible errors for the Facebook registration form / logi
 No, this can't be removed or changed for automatically added links.
 The only thing that can be changed is the Facebook application name after 'via'.
 
+= U32 Is video or audio supported? =
+
+No, but depending on how videos are embedded, it is sometimes possible to have the preview image of a video as link picture.
+Set the link picture option to first image in the post for this.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -650,10 +655,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Next release =
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+
+= 1.104 =
+* New feature: required capability to view Facebook comments
 * Improvement: default Facebook communication time-out 25 seconds
 * Improvement: more debug info (memory usage, max. execution time)
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.103 =
 * Bugfix: incorrect comment count when imported comments deleted
@@ -739,6 +748,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.104 =
+One new feature, two improvements, translation updates
 
 = 1.103 =
 One bugfix
