@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-08-03 14:07+0100\n"
+"PO-Revision-Date: 2011-08-12 12:17+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -724,4 +724,13 @@ msgstr "Tekst eller HTML når logget inn:"
 
 msgid "Custom text"
 msgstr "Tilpasset tekst"
+
+msgid "Refresh Facebook comments for:"
+msgstr "Oppdater Facebook kommentarer for:"
+
+msgid "Days"
+msgstr "Dager"
+
+msgid "Default 30 days"
+msgstr "Standard 30 dager"
 
