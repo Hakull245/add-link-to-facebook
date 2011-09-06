@@ -4414,7 +4414,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
-						//$stored_comments = get_comments('post_id=' . $post->ID);
+						$stored_comments = get_comments('post_id=' . $post->ID);
 						$stored_comments = array_merge($stored_comments,
 							get_comments('status=spam&post_id=' . $post->ID));
 						$stored_comments =  array_merge($stored_comments,
