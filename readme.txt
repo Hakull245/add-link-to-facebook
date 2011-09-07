@@ -41,7 +41,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 * Filters for all information sent to Facebook
 
 If you find this plugin useful, please rate it accordingly.
-If you rate this plugin low, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+If you rate this plugin low, please let me know why.
 Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
@@ -427,6 +427,11 @@ Don't forget to enable remote publishing using the WordPress menu *Settings > Wr
 
 Yes, but the custom post type should support custom values for it to work.
 
+= C07 How can I use an image of NextGEN Gallery as link picture? =
+
+Set the option *Link Picture* to *First image in the post*.
+Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
+
 **--- Custom values ---**
 
 = V01 What is the custom field 'al2fb_facebook_link_id' for? =
@@ -553,8 +558,7 @@ You are probably using Microsoft Internet Explorer.
 This browser has the bad habit not to display the content
 when there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
 Actually you are most probably having one of the above errors, but you cannot see which one.
-You can switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox") or
-if you don't want that you can [send me](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") the address in the address bar.
+You could temporarily switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox").
 
 = E13 I get 'Javascript not enabled' =
 
@@ -653,9 +657,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
-
-= Next release =
-* The development version is available [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip "Development Version"), please [report](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") any issue
 
 = 1.105 =
 * Bugfix: warning *array_merge*
