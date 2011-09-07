@@ -658,6 +658,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= Next release =
+* Bugfix: filter *al2fb_picture* called earlier
+* Improvement: added [php-console](http://code.google.com/p/php-console/ "php-console")
+* Improvement: made a few functions static
+
 = 1.105 =
 * Bugfix: warning *array_merge*
 

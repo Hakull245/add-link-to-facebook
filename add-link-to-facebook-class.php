@@ -3003,6 +3003,8 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 			}
 
+			$picture = apply_filters('al2fb_picture', $picture, $post);
+
 			return array(
 				'picture' => $picture,
 				'picture_type' => $picture_type
@@ -3125,7 +3127,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$picture_info = self::Get_link_picture($post, $user_ID);
 			$picture = $picture_info['picture'];
 			$picture_type = $picture_info['picture_type'];
-			$picture = apply_filters('al2fb_picture', $picture, $post);
 
 			// Get user note
 			$message = '';
@@ -5030,7 +5031,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Check environment
-		function Check_prerequisites() {
+		static function Check_prerequisites() {
 			// Check WordPress version
 			global $wp_version;
 			if (version_compare($wp_version, '3.0') < 0)
@@ -5046,7 +5047,7 @@ if (!class_exists('WPAL2Facebook')) {
 			self::Check_function('md5');
 		}
 
-		function Check_function($name) {
+		static function Check_function($name) {
 			if (!function_exists($name))
 				die('Required WordPress function "' . $name . '" does not exist');
 		}
