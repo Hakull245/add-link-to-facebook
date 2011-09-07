@@ -662,7 +662,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: filter *al2fb_picture* called earlier
 * Improvement: added [php-console](http://code.google.com/p/php-console/ "php-console")
 * Improvement: made a few functions static
-* New feature: option to add meta box for other custom post types
+* New feature: option to add meta box for custom post types
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.105 =
