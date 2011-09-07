@@ -21,6 +21,7 @@ define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
+define('c_al2fb_option_metabox_type', 'al2fb_metabox_type');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
 define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
@@ -790,6 +791,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_max_text] = trim($_POST[c_al2fb_option_max_text]);
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
 				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
+				$_POST[c_al2fb_option_metabox_type] = trim($_POST[c_al2fb_option_metabox_type]);
 				$_POST[c_al2fb_option_css] = trim($_POST[c_al2fb_option_css]);
 
 				update_option(c_al2fb_option_timeout, $_POST[c_al2fb_option_timeout]);
@@ -802,6 +804,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
+				update_option(c_al2fb_option_metabox_type, $_POST[c_al2fb_option_metabox_type]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
 				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
@@ -2076,6 +2079,13 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_metabox_type"><?php _e('Add meta box for these custom post types:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_text" id="al2fb_metabox_type" name="<?php echo c_al2fb_option_metabox_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_metabox_type); ?>" />
+					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_noverifypeer"><?php _e('Do not verify the peer\'s certificate:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input id="al2fb_noverifypeer" name="<?php echo c_al2fb_option_noverifypeer; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noverifypeer)) echo ' checked="checked"'; ?> />
@@ -2638,16 +2648,15 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add post meta box
 		function Add_meta_boxes() {
-			add_meta_box(
-				'al2fb_meta',
-				__('Add Link to Facebook', c_al2fb_text_domain),
-				array(&$this, 'Meta_box'),
-				'post');
-			add_meta_box(
-				'al2fb_meta',
-				__('Add Link to Facebook', c_al2fb_text_domain),
-				array(&$this, 'Meta_box'),
-				'page');
+			$types = explode(',', get_option(c_al2fb_option_metabox_type));
+			$types[] = 'post';
+			$types[] = 'page';
+			foreach ($types as $type)
+				add_meta_box(
+					'al2fb_meta',
+					__('Add Link to Facebook', c_al2fb_text_domain),
+					array(&$this, 'Meta_box'),
+					$type);
 		}
 
 		// Display attached image selector
@@ -4841,6 +4850,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Max. text length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_text), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Meta box:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_metabox_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No shortcode:</td><td>' . (get_option(c_al2fb_option_noshortcode) ? 'Yes' : 'No') . '</td></tr>';
