@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-08-12 09:37+0100\n"
+"PO-Revision-Date: 2011-09-07 15:06+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -733,4 +733,10 @@ msgstr "Dagen"
 
 msgid "Default 30 days"
 msgstr "Standaard 30 dagen"
+
+msgid "Required capability to view Facebook comments:"
+msgstr "Vereiste capability om Facebook commentaar te zien:"
+
+msgid "Add meta box for these custom post types:"
+msgstr "Voeg meta box voor deze maatwerk berichttypes toe:"
 

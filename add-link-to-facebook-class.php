@@ -14,12 +14,14 @@ define('c_al2fb_option_version', 'al2fb_version');
 define('c_al2fb_option_timeout', 'al2fb_timeout');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 define('c_al2fb_option_min_cap', 'al2fb_min_cap');
+define('c_al2fb_option_min_cap_comment', 'al2fb_min_cap_comment');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
 define('c_al2fb_option_msg_maxage', 'al2fb_msg_maxage');
 define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
+define('c_al2fb_option_metabox_type', 'al2fb_metabox_type');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
 define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
@@ -109,6 +111,7 @@ define('c_al2fb_meta_rated', 'al2fb_rated');
 define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
 
 define('c_al2fb_meta_service', 'al2fb_service');
+define('c_al2fb_meta_noeula', 'al2fb_noeula');
 
 // Post meta
 define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
@@ -769,6 +772,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_nonotice] = null;
 				if (empty($_POST[c_al2fb_option_min_cap]))
 					$_POST[c_al2fb_option_min_cap] = null;
+				if (empty($_POST[c_al2fb_option_min_cap_comment]))
+					$_POST[c_al2fb_option_min_cap_comment] = null;
 				if (empty($_POST[c_al2fb_option_noverifypeer]))
 					$_POST[c_al2fb_option_noverifypeer] = null;
 				if (empty($_POST[c_al2fb_option_shortcode_widget]))
@@ -786,17 +791,20 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_max_text] = trim($_POST[c_al2fb_option_max_text]);
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
 				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
+				$_POST[c_al2fb_option_metabox_type] = trim($_POST[c_al2fb_option_metabox_type]);
 				$_POST[c_al2fb_option_css] = trim($_POST[c_al2fb_option_css]);
 
 				update_option(c_al2fb_option_timeout, $_POST[c_al2fb_option_timeout]);
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
+				update_option(c_al2fb_option_min_cap_comment, $_POST[c_al2fb_option_min_cap_comment]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
 				update_option(c_al2fb_option_msg_maxage, $_POST[c_al2fb_option_msg_maxage]);
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
+				update_option(c_al2fb_option_metabox_type, $_POST[c_al2fb_option_metabox_type]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
 				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
@@ -956,10 +964,12 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function eula_yes($msg) {
+			update_user_meta($msg['userid'], c_al2fb_meta_noeula, false);
 			return true;
 		}
 
 		function eula_no($msg) {
+			update_user_meta($msg['userid'], c_al2fb_meta_noeula, true);
 			return true;
 		}
 
@@ -1965,7 +1975,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</th><td>
 					<input class="al2fb_numeric" id="al2fb_timeout" name="<?php echo c_al2fb_option_timeout; ?>" type="text" value="<?php echo get_option(c_al2fb_option_timeout); ?>" />
 					<span><?php _e('Seconds', c_al2fb_text_domain); ?></span>
-					<br /><span class="al2fb_explanation"><?php _e('Default 30 seconds', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Default 15 seconds', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -1991,6 +2001,27 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// List capabilities and select current
 					$min_cap = get_option(c_al2fb_option_min_cap);
+					foreach ($capabilities as $cap) {
+						echo '<option value="' . $cap . '"';
+						if ($cap == $min_cap)
+							echo ' selected';
+						echo '>' . $cap . '</option>';
+					}
+?>
+					</select>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_min_cap_comment"><?php _e('Required capability to view Facebook comments:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<select class="al2db_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">
+<?php
+					// List capabilities and select current
+					$min_cap = get_option(c_al2fb_option_min_cap_comment);
+					echo '<option value=""';
+					if (empty($min_cap))
+						echo ' selected';
+					echo '>' . __('None', c_al2fb_text_domain) . '</option>';
 					foreach ($capabilities as $cap) {
 						echo '<option value="' . $cap . '"';
 						if ($cap == $min_cap)
@@ -2044,6 +2075,13 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_exclude_cat"><?php _e('Exclude these categories:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_text" id="al2fb_exclude_cat" name="<?php echo c_al2fb_option_exclude_cat; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_cat); ?>" />
+					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_metabox_type"><?php _e('Add meta box for these custom post types:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_text" id="al2fb_metabox_type" name="<?php echo c_al2fb_option_metabox_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_metabox_type); ?>" />
 					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
@@ -2465,7 +2503,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
 				$timeout = get_option(c_al2fb_option_timeout);
 				if (!$timeout)
-					$timeout = 30;
+					$timeout = 25;
 
 				$c = curl_init();
 				curl_setopt($c, CURLOPT_URL, $url);
@@ -2610,16 +2648,15 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add post meta box
 		function Add_meta_boxes() {
-			add_meta_box(
-				'al2fb_meta',
-				__('Add Link to Facebook', c_al2fb_text_domain),
-				array(&$this, 'Meta_box'),
-				'post');
-			add_meta_box(
-				'al2fb_meta',
-				__('Add Link to Facebook', c_al2fb_text_domain),
-				array(&$this, 'Meta_box'),
-				'page');
+			$types = explode(',', get_option(c_al2fb_option_metabox_type));
+			$types[] = 'post';
+			$types[] = 'page';
+			foreach ($types as $type)
+				add_meta_box(
+					'al2fb_meta',
+					__('Add Link to Facebook', c_al2fb_text_domain),
+					array(&$this, 'Meta_box'),
+					$type);
 		}
 
 		// Display attached image selector
@@ -2975,6 +3012,8 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 			}
 
+			$picture = apply_filters('al2fb_picture', $picture, $post);
+
 			return array(
 				'picture' => $picture,
 				'picture_type' => $picture_type
@@ -3062,8 +3101,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add Link to Facebook
 		function Add_fb_link($post) {
-			// Get url
 			$user_ID = self::Get_user_ID($post);
+
+			// Check if EULA agreed
+			if (get_user_meta($user_ID, c_al2fb_meta_noeula, true))
+				return;
+
+			// Get url
 			if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true))
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
@@ -3092,7 +3136,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$picture_info = self::Get_link_picture($post, $user_ID);
 			$picture = $picture_info['picture'];
 			$picture_type = $picture_info['picture_type'];
-			$picture = apply_filters('al2fb_picture', $picture, $post);
 
 			// Get user note
 			$message = '';
@@ -4193,9 +4236,13 @@ if (!class_exists('WPAL2Facebook')) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
 						// Get WordPress comments
-						$stored_comments = array_merge(
-							get_comments('post_id=' . $post->ID),
+						$stored_comments = get_comments('post_id=' . $post->ID);
+						$stored_comments = array_merge($stored_comments,
 							get_comments('status=spam&post_id=' . $post->ID));
+						$stored_comments =  array_merge($stored_comments,
+							get_comments('status=trash&post_id=' . $post->ID));
+						$stored_comments =  array_merge($stored_comments,
+							get_comments('status=hold&post_id=' . $post->ID));
 						$deleted_fb_comment_ids = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
 
 						foreach ($fb_comments->data as $fb_comment) {
@@ -4331,6 +4378,14 @@ if (!class_exists('WPAL2Facebook')) {
 								$comment->comment_author_url = $link;
 			}
 
+			// Permission to view?
+			$min_cap = get_option(c_al2fb_option_min_cap_comment);
+			if ($min_cap && !current_user_can($min_cap))
+				if ($comments)
+					for ($i = 0 ; $i < count($comments) ; $i++)
+						if ($comments[$i]->comment_agent == 'AL2FB')
+							unset($comments[$i]);
+
 			return $comments;
 		}
 
@@ -4342,6 +4397,16 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get comment count with FB comments/likes
 		function Get_comments_number($count, $post_ID) {
 			$post = get_post($post_ID);
+
+			// Permission to view?
+			$min_cap = get_option(c_al2fb_option_min_cap_comment);
+			if ($min_cap && !current_user_can($min_cap)) {
+				$stored_comments = get_comments('post_id=' . $post->ID);
+				if ($stored_comments)
+					foreach ($stored_comments as $comment)
+						if ($comment->comment_agent == 'AL2FB')
+							$count--;
+			}
 
 			// Integration turned off?
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
@@ -4359,10 +4424,18 @@ if (!class_exists('WPAL2Facebook')) {
 				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
-						$stored_comments = get_comments('post_id=' . $post_ID);
+						$stored_comments = get_comments('post_id=' . $post->ID);
+						$stored_comments = array_merge($stored_comments,
+							get_comments('status=spam&post_id=' . $post->ID));
+						$stored_comments =  array_merge($stored_comments,
+							get_comments('status=trash&post_id=' . $post->ID));
+						$stored_comments =  array_merge($stored_comments,
+							get_comments('status=hold&post_id=' . $post->ID));
+						$deleted_fb_comment_ids = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
 
 						foreach ($fb_comments->data as $fb_comment)
 							if (!empty($fb_comments)) {
+								// Check if comment in database
 								$stored = false;
 								if ($stored_comments)
 									foreach ($stored_comments as $comment) {
@@ -4372,6 +4445,11 @@ if (!class_exists('WPAL2Facebook')) {
 											break;
 										}
 									}
+
+								// Check if comment deleted
+								$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
+
+								// Only count if not in database or deleted
 								if (!$stored)
 									$count++;
 							}
@@ -4456,7 +4534,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get timeout
 			$timeout = get_option(c_al2fb_option_timeout);
 			if (!$timeout)
-				$timeout = 30;
+				$timeout = 25;
 
 			// Use cURL if available
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl))
@@ -4759,15 +4837,20 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 			$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
 
+			$info .= '<tr><td>No SPSN:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_nospsn, true) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>No EULA:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_noeula, true) ? 'Yes' : 'No') . '</td></tr>';
+
 			$info .= '<tr><td>Timeout:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_timeout), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Min. capability:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Min. capability comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap_comment), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Refresh comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_refresh), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Refresh age:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_msg_maxage), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Max. length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_descr), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Max. text length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_text), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Meta box:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_metabox_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No shortcode:</td><td>' . (get_option(c_al2fb_option_noshortcode) ? 'Yes' : 'No') . '</td></tr>';
@@ -4785,6 +4868,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>theme - post-thumbnails:</td><td>' . (current_theme_supports('post-thumbnails') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>get_post_thumbnail_id:</td><td>' . (function_exists('get_post_thumbnail_id') ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>wp_get_attachment_image_src:</td><td>' . (function_exists('wp_get_attachment_image_src') ? 'Yes' : 'No') . '</td></tr>';
+
+			$info .= '<tr><td>Max exec time:</td><td>' . ini_get('max_execution_time') . '</td></tr>';
+			$info .= '<tr><td>Memory usage:</td><td>' . memory_get_usage() . '/' . ini_get('memory_limit') . '</td></tr>';
 
 			// Last posts
 			$posts = new WP_Query(array('posts_per_page' => 10));
@@ -4955,7 +5041,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Check environment
-		function Check_prerequisites() {
+		static function Check_prerequisites() {
 			// Check WordPress version
 			global $wp_version;
 			if (version_compare($wp_version, '3.0') < 0)
@@ -4971,7 +5057,7 @@ if (!class_exists('WPAL2Facebook')) {
 			self::Check_function('md5');
 		}
 
-		function Check_function($name) {
+		static function Check_function($name) {
 			if (!function_exists($name))
 				die('Required WordPress function "' . $name . '" does not exist');
 		}
