@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.105
+Stable tag: 1.106
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -431,6 +431,7 @@ Yes, but the custom post type should support custom values for it to work.
 
 Set the option *Link Picture* to *First image in the post*.
 Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
+Leave the option *Do not execute shortcodes for texts* enabled.
 
 **--- Custom values ---**
 
@@ -658,11 +659,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Next release =
+= 1.106 =
 * Bugfix: filter *al2fb_picture* called earlier
-* Improvement: added [php-console](http://code.google.com/p/php-console/ "php-console")
+* Improvement: added [php-console](http://code.google.com/p/php-console/ "php-console") in debug mode
 * Improvement: made a few functions static
 * New feature: option to add meta box for custom post types
+* Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -690,77 +692,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.99 =
-* Improvement: process comments as last plugin
-* Improvement: record imported and deleted Facebook comments
-
-= 1.98 =
-* Improvement: option to enable/disable WordPress filters
-* Improvement: shortcodes and WordPress filters by default not applied
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.97 =
-* Bugfix: workaround for blank texts in some cases
-* Improvement: more debug info
-
-= 1.96 =
-* Bugfix: *html_entity_decode* for texts
-* Improvement: removed alternate update server
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.95 =
-* Improvement: apply WordPress filters on content and excerpt
-* Improvement: display link picture in post meta box
-* Improvement: Facebook login with *remember me*
-* Improvement: more debug info
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.94 =
-* Bugfix: custom excerpt/text not appearing in rare circumstances
-* New feature: Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed")
-* Improvement: auto disable shortcodes when Mingle active
-* Improvement: truncate description for Open Graph Protocol
-* Improvement: notice if settings only available to another admin
-* Improvement: no post submit box, widget, likers, like/send button for excluded post types
-* Improvement: using site URL in stead of home URL for redirect URI for new installs
-* Improvement: removed caching from update checks
-* Improvement: default link picture first in post for new installs
-* Improvement: more debug info
-* Updated description & FAQ
-* Added Latvian (lv) translation by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.93 =
-* Bugfix: I18n for Facebook login/registration
-* Bugfix: workaround for [this bug](http://core.trac.wordpress.org/ticket/9640 "bug") in WordPress
-* Improvement: fake e-mail addresses for imported Facebook comments for spam filtering
-* Improvement: caching for update checks
-* Improvement: update check every 3 hours
-* Improvement: option to disable shortcodes for texts (Mingle forum users should enable this)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.92 =
-* Bugfix: restored *fb-root* elements
-* Improvement: added filter for comments
-* Updated documentation
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.91 =
-* Bugfix: removed *loop_start* action
-* Improvement: alternate update server
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.106 =
+One bugfix, two improvements, one new feature, translation updates
 
 = 1.105 =
 One bugfix
@@ -776,33 +715,6 @@ Two bugfixes
 
 = 1.101 =
 One improvement
-
-= 1.99 =
-Two improvements
-
-= 1.98 =
-Two improvements
-
-= 1.97 =
-One bugfix, one improvement
-
-= 1.96 =
-One bugfix, one improvement
-
-= 1.95 =
-Four improvements
-
-= 1.94 =
-One bugfix, one new feature, eight improvements, new/updated translations
-
-= 1.93 =
-Two bugfixes, four improvements, translation update
-
-= 1.92 =
-One bugfix, one improvement, translation update
-
-= 1.91 =
-One bugfix
 
 == Setup guide ==
 
