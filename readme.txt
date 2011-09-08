@@ -661,7 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.106 =
 * Bugfix: filter *al2fb_picture* called earlier
-* Improvement: added [php-console](http://code.google.com/p/php-console/ "php-console") in debug mode
+* Improvement: added [PHP Console](http://code.google.com/p/php-console/ "PHP Console") in debug mode
 * Improvement: made a few functions static
 * New feature: option to add meta box for custom post types
 * Updated FAQ
