@@ -664,6 +664,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: made a few functions static
 * New feature: option to add meta box for custom post types
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.105 =
 * Bugfix: warning *array_merge*
