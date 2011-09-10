@@ -3159,9 +3159,11 @@ if (!class_exists('WPAL2Facebook')) {
 					'name' => $name,
 					'caption' => $caption,
 					'description' => $description,
-					'picture' => $picture,
 					'message' => $message
 				);
+
+				if ($picture)
+					$query_array['picture'] = $picture;
 
 				// Add share link
 				if (get_user_meta($user_ID, c_al2fb_meta_share_link, true)) {
