@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook
+* Filters for all information sent to Facebook.
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
@@ -66,7 +66,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
-* Your translation ...
+* Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -661,6 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.107 =
 * Bugfix: error *img objects must have valid 'src' and 'href' attributes*
+* Added Czech (cs\_CZ) translation by [Artemian](http://www.artemian.cz/ "Artemian")
 
 = 1.106 =
 * Bugfix: filter *al2fb_picture* called earlier
