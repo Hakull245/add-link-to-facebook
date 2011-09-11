@@ -66,7 +66,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
-* Your translation ...
+* Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -661,6 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.107 =
 * Bugfix: error *img objects must have valid 'src' and 'href' attributes*
+* Added Czech (cs\_CZ) translation by [Artemian](http://www.artemian.cz/ "Artemian")
 
 = 1.106 =
 * Bugfix: filter *al2fb_picture* called earlier
