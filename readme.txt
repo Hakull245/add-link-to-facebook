@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.107
+Stable tag: 1.108
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -668,6 +668,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= 1.108 =
+* Added notice end of support
+* Removed sending debug info
 
 = 1.107 =
 * Bugfix: error *img objects must have valid 'src' and 'href' attributes*
