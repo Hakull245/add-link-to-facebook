@@ -381,6 +381,14 @@ The only thing that can be changed is the Facebook application name after 'via'.
 No, but depending on how videos are embedded, it is sometimes possible to have the preview image of a video as link picture.
 Set the link picture option to first image in the post for this.
 
+= U33 The like/send button doesn't look/behave as I want =
+
+The plugin just adds the standard Facebook like/send button.
+Facebook doesn't allow any change to the like/send button, except for a very few things.
+The most important thing that can be controlled is the link the like button is associated with.
+The default is the current post and page, which is almost always what you want.
+Likes for this post or page are counted.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
