@@ -514,6 +514,10 @@ if (!class_exists('WPAL2Facebook')) {
 					else if ($_REQUEST['al2fb_action'] == 'authorize')
 						self::Action_authorize();
 
+					// Mail debug info
+					else if ($_REQUEST['al2fb_action'] == 'mail')
+						self::Action_mail();
+
 					else if ($_REQUEST['al2fb_action'] == 'service')
 						self::Action_service();
 				}
@@ -870,6 +874,29 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 		}
 
+		// Send debug info
+		function Action_mail() {
+			// Check security
+			check_admin_referer(c_al2fb_nonce_form);
+
+			// Build headers
+			$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . '<' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
+			$headers .= 'X-Mailer: AL2FB' . "\r\n";
+			$headers .= 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
+
+			// Build message
+			$message = '<html><head><title>Add Link to Facebook</title></head><body>';
+			$message .= '<p>' . nl2br(htmlspecialchars(stripslashes($_POST[c_al2fb_mail_msg]), ENT_QUOTES, get_bloginfo('charset'))) . '</p>';
+			$message .= '<hr />';
+			$message .= self::Debug_info();
+			$message .= '</body></html>';
+			if (mail('marcel@bokhorst.biz', '[Add Link to Facebook] Debug information', $message, $headers))
+				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
+			else
+				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Sending debug information failed', c_al2fb_text_domain) . '</p></div>';
+		}
+
 		// Handle service message
 		function Action_service() {
 			// Security check
@@ -964,10 +991,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$donotice = ($nonotice ? strpos($uri, $url) !== false : true);
 
 			if ($donotice) {
-				echo '<div class="error fade al2fb_error"><p>';
-				_e('Add Link to Facebook', c_al2fb_text_domain);
-				echo '- This plugin is no longer supported, read <a href="http://wordpress.org/support/topic/protest-no-updates-for-this-plugin-the-next-30-days/page/2#post-2334777">here</a> why</p></div>';
-
 				if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) ||
 					!get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
 					$notice = __('needs configuration', c_al2fb_text_domain);
@@ -2191,7 +2214,36 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 				<hr />
 				<h3><?php _e('Debug information', c_al2fb_text_domain) ?></h3>
+				<form method="post" action="">
+				<input type="hidden" name="al2fb_action" value="mail">
+				<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 
+				<table class="form-table">
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_debug_name"><strong><?php _e('Name:', c_al2fb_text_domain); ?></strong></label>
+				</th><td>
+					<input id="al2fb_debug_name" class="" name="<?php echo c_al2fb_mail_name; ?>" type="text" value="<?php echo $user_identity; ?>" />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_debug_email"><strong><?php _e('E-mail:', c_al2fb_text_domain); ?></strong></label>
+				</th><td>
+					<input id="al2fb_debug_email" class="" name="<?php echo c_al2fb_mail_email; ?>" type="text" value="<?php echo $user_email; ?>" />
+					<br><strong><?php _e('Please check if this is a correct, reachable e-mail address', c_al2fb_text_domain); ?></strong>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_debug_msg"><strong><?php _e('Message:', c_al2fb_text_domain); ?></strong></label>
+				</th><td>
+					<textarea id="al2fb_debug_msg" name="<?php echo c_al2fb_mail_msg; ?>" rows="10" cols="50"></textarea>
+					<br><strong><?php _e('Please describe your problem, even if you did before', c_al2fb_text_domain); ?></strong>
+				</td></tr>
+				</table>
+
+				<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
+				</p>
+				</form>
 <?php
 				echo self::Debug_info();
 			}
