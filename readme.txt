@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.107
+Stable tag: 1.109
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -66,7 +66,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Spanish (es\_ES) by [Marcelo Cannobbio Guillard](http://nubecolor.es "Marcelo Cannobbio Guillard"), thanks!
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
-* Your translation ...
+* Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -381,6 +381,14 @@ The only thing that can be changed is the Facebook application name after 'via'.
 No, but depending on how videos are embedded, it is sometimes possible to have the preview image of a video as link picture.
 Set the link picture option to first image in the post for this.
 
+= U33 The like/send button doesn't look/behave as I want =
+
+The plugin just adds the standard Facebook like/send button.
+Facebook doesn't allow any change to the like/send button, except for a very few things.
+The most important thing that can be controlled is the link the like button is associated with.
+The default is the current post and page, which is almost always what you want.
+Likes for this post or page are counted.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -659,8 +667,16 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.109 =
+* Reverted changes of version 1.108
+
+= 1.108 =
+* Added notice end of support
+* Removed sending debug info
+
 = 1.107 =
 * Bugfix: error *img objects must have valid 'src' and 'href' attributes*
+* Added Czech (cs\_CZ) translation by [Artemian](http://www.artemian.cz/ "Artemian")
 
 = 1.106 =
 * Bugfix: filter *al2fb_picture* called earlier
@@ -701,6 +717,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.109 =
+Reverted v1.108
 
 = 1.107 =
 One bugfix
