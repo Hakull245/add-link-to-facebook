@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.109
+Stable tag: 1.111
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -44,6 +44,15 @@ If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
 Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
+
+**Beta:**
+
+[Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy"):
+
+* Facebook may or may not allow it
+* Works only on single pages
+* Doesn't work with combined like/send button
+* German icon, a language neutral icon is welcome!
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
@@ -667,6 +676,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.111 =
+* New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
 = 1.109 =
 * Reverted changes of version 1.108
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
@@ -718,6 +731,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.111 =
+One new feature, translation update
 
 = 1.109 =
 Reverted v1.108
@@ -1036,3 +1052,11 @@ Feature which will not be realized, sorry:
 * <Title> by <Author>: each author should authorize
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
+
+== Acknowledgements ==
+
+This plugin uses:
+
+* [PHP Console](http://code.google.com/p/php-console "PHP Console") licensed under GNU Lesser GPL
+* [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
+* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT
