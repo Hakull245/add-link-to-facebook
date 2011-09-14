@@ -669,6 +669,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.109 =
 * Reverted changes of version 1.108
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.108 =
 * Added notice end of support
