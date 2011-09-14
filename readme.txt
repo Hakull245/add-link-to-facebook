@@ -767,11 +767,11 @@ The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
-	* Navigate to *My Apps*
-	* Select *Set Up New App*
+	* Navigate to *Apps*
+	* Select *Create New App*
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
-	* Fill the URL which the plugin indicates in the yellow box into the tab *Web* > *Site URL & Domain*, field *Site URL*
+	* Fill the URL which the plugin indicates in the yellow box into the field *Website* (click it) > *Site URL*
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
