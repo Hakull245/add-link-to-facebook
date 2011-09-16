@@ -587,6 +587,12 @@ Can not happen anymore in recent versions.
 You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
 See question E19 for how to remove the error message and question U09 for how to add a link for an existing post.
 
+You might need to manually remove the link information of the plugin.
+On the post edit page click *Screen Options* (upper right) and tick *Custom fields*.
+Scroll down to the meta box *Custom fields*
+(you may have to 'open' it by clicking on the far right part of the caption bar)
+and delete the value *al2fb_facebook_link_id*.
+
 = E15 I get 'Error validating access token' =
 
 Most often this happen when you changed your Facebook password.
