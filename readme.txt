@@ -996,7 +996,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* ...
+* Limit number of messages/comments widget
 
 Realized features:
 
