@@ -679,6 +679,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.111 =
 * New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.109 =
 * Reverted changes of version 1.108
