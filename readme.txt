@@ -1068,4 +1068,4 @@ This plugin uses:
 
 * [PHP Console](http://code.google.com/p/php-console "PHP Console") licensed under GNU Lesser GPL
 * [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
-* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT
+* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT License
