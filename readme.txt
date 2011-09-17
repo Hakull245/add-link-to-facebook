@@ -779,6 +779,7 @@ Basically there are five steps to follow:
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
 	* Fill the URL which the plugin indicates in the yellow box into the field *Website* (click it) > *Site URL*
+	* **Don't confuse this with the field *App Domain*, this field should be empty**
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
