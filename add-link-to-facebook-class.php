@@ -2880,6 +2880,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 					$ex_custom_types[] = 'nav_menu_item';
+					$ex_custom_types[] = 'recipe';
+					$ex_custom_types[] = 'recipeingredient';
+					$ex_custom_types[] = 'recipestep';
+					$ex_custom_types[] = 'wpcf7_contact_form';
 
 					// Check if public post
 					if (empty($post->post_password) &&

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.111
+Stable tag: 1.112
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -682,6 +682,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.112 =
+* Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
+* Improvement: compatibility with [Contact Form 7 Version 3](http://wordpress.org/extend/plugins/contact-form-7/)
+
 = 1.111 =
 * New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -738,6 +742,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.112 =
+Two improvements
 
 = 1.111 =
 One new feature, translation update
