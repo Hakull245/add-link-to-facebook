@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.111
+Stable tag: 1.112
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -16,7 +16,7 @@ The link title will be the post title. The link description will be the excerpt,
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
 
-[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
+**[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")**
 
 There is support for multi-user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
@@ -587,6 +587,12 @@ Can not happen anymore in recent versions.
 You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
 See question E19 for how to remove the error message and question U09 for how to add a link for an existing post.
 
+You might need to manually remove the link information of the plugin.
+On the post edit page click *Screen Options* (upper right) and tick *Custom fields*.
+Scroll down to the meta box *Custom fields*
+(you may have to 'open' it by clicking on the far right part of the caption bar)
+and delete the value *al2fb_facebook_link_id*.
+
 = E15 I get 'Error validating access token' =
 
 Most often this happen when you changed your Facebook password.
@@ -676,6 +682,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= 1.112 =
+* Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
+* Improvement: compatibility with [Contact Form 7 Version 3](http://wordpress.org/extend/plugins/contact-form-7/)
+
 = 1.111 =
 * New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -733,6 +743,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.112 =
+Two improvements
+
 = 1.111 =
 One new feature, translation update
 
@@ -773,6 +786,7 @@ Basically there are five steps to follow:
 2. Create the Facebook application:
 	* Give it any name you like (will appear as *via* below the added links)
 	* Fill the URL which the plugin indicates in the yellow box into the field *Website* (click it) > *Site URL*
+	* **Don't confuse this with the field *App Domain*, this field should be empty**
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
@@ -996,7 +1010,8 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* ...
+* Shortcode messages/comments
+* Limit number of messages/comments widget
 
 Realized features:
 
@@ -1060,4 +1075,4 @@ This plugin uses:
 
 * [PHP Console](http://code.google.com/p/php-console "PHP Console") licensed under GNU Lesser GPL
 * [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
-* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT
+* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT License
