@@ -685,6 +685,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = 1.112 =
 * Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
 * Improvement: compatibility with [Contact Form 7 Version 3](http://wordpress.org/extend/plugins/contact-form-7/)
+* Improvement: compatibility with [Grunion contact](http://wordpress.org/extend/plugins/grunion-contact-form/)
 
 = 1.111 =
 * New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
@@ -744,7 +745,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.112 =
-Two improvements
+Three improvements
 
 = 1.111 =
 One new feature, translation update

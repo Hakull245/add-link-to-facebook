@@ -2884,6 +2884,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$ex_custom_types[] = 'recipeingredient';
 					$ex_custom_types[] = 'recipestep';
 					$ex_custom_types[] = 'wpcf7_contact_form';
+					$ex_custom_types[] = 'feedback';
+					$ex_custom_types[] = 'spam';
 
 					// Check if public post
 					if (empty($post->post_password) &&
