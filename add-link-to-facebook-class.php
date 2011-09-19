@@ -2885,6 +2885,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$ex_custom_types[] = 'wpcf7_contact_form';
 					$ex_custom_types[] = 'feedback';
 					$ex_custom_types[] = 'spam';
+					$ex_custom_types[] = 'twitter';
 
 					// Check if public post
 					if (empty($post->post_password) &&
