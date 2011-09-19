@@ -399,6 +399,16 @@ The default is the current post and page, which is almost always what you want.
 Likes for this post or page are counted.
 If the like/send button doesn't work correctly (anymore), only Facebook can solve that.
 
+= U34 How do I prevent adding links for special post types? =
+
+Some plugins use [custom post types](http://codex.wordpress.org/Post_Types) to store information,
+for example some contact forms and twitter plugins.
+For these custom post types a link will be added to Facebook too.
+Sometimes this is desirable and sometimes not.
+If this is not wanted, you will have to find out the name(s) of the custom post types
+and to put them into the plugin option *Exclude these custom post types* (admin only).
+The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
