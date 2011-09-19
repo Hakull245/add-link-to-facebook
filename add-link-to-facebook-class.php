@@ -3765,6 +3765,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$combine = get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true);
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$lang = $this->Get_locale($user_ID);
+				$info = (empty($action) || $action == 'like' ? __('Like', c_al2fb_text_domain) : __('Recommend', c_al2fb_text_domain));
 
 				// Build content
 				if ($appid && !$combine && !$box && get_option(c_al2fb_option_use_ssp)) {
@@ -3778,7 +3779,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= '		 			"app_id" : "' . $appid . '",' . PHP_EOL;
 					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_facebook.png",' . PHP_EOL;
 					if ($lang != 'de_DE') {
-						$content .= '					"txt_info" : "' . __('Like', c_al2fb_text_domain) . '",';
+						$content .= '					"txt_info" : "' . $info . '",';
 						$content .= '					"txt_fb_off" : "",';
 						$content .= '					"txt_fb_on" : "",';
 					}
