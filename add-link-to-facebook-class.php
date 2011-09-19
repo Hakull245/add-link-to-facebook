@@ -454,8 +454,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Social share privacy
 			if (get_option(c_al2fb_option_use_ssp)) {
 				wp_enqueue_script('jquery');
-				$plugin_dir = '/' . PLUGINDIR .  '/' . basename(dirname($this->main_file));
-				wp_enqueue_script('socialshareprivacy', $plugin_dir . '/js/jquery.socialshareprivacy.js');
+				wp_enqueue_script('socialshareprivacy', $this->plugin_url . '/js/jquery.socialshareprivacy.js', array('jquery'));
 			}
 
 			// Check user capability
