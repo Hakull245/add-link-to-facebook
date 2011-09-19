@@ -397,6 +397,7 @@ Facebook doesn't allow any change to the like/send button, except for a very few
 The most important thing that can be controlled is the link the like button is associated with.
 The default is the current post and page, which is almost always what you want.
 Likes for this post or page are counted.
+If the like/send button doesn't work correctly (anymore), only Facebook can solve that.
 
 **--- Security ---**
 
@@ -681,6 +682,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 1. Added Link on Facebook
 
 == Changelog ==
+
+= Development version =
+* Improvement: updated Heise social share privacy to version 1.1
+* Improvement: Heise: preserve German texts if German language (de\_DE)
+* Improvement: Heise: added like/recommend option
+* Improvement: Heise: works for non-single pages now (support in version 1.1)
+* Update FAQ
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.112 =
 * Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)

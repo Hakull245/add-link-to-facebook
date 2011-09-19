@@ -2,7 +2,7 @@
 <html lang="de-DE">
 <head>
     <title>Dokumentation &ndash; heise &bdquo;socialSharePrivacy&ldquo;&ndash;Plug-In</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="author" content="Hilko Holweg, Sebastian Hilbig, Nicolas Heiringhoff, Juergen Schmidt - Heise Zeitschriften Verlag GbmH &amp; Co. KG" />
     <meta name="description" content="Dokumentation und Einbindung des heise SocialSharePrivacy-Plug-Ins" />
     <style type="text/css">
@@ -36,6 +36,7 @@
         }
         ol li, p, td, th {
             font: normal 14px/20px "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, sans-serif; 
+            clear: both;
         }
         nav {
             display: block; 
@@ -74,6 +75,9 @@
             display: table;
             margin: 20px 0;
         }
+        ol#structure li ol.changelog li {
+            margin: 5px 0;
+        }
         table caption {
             text-align: left; 
             font-size: 18px; 
@@ -101,13 +105,14 @@
 
     <h3>Download des jQuery-Plug-Ins:</h3>
     <p>
-        <a href="http://www.heise.de/extras/socialshareprivacy/jquery.socialshareprivacy.zip">jquery.socialshareprivacy.zip</a></li></br>
+        <a href="http://www.heise.de/extras/socialshareprivacy/jquery.socialshareprivacy.zip">jquery.socialshareprivacy.zip</a><br />
         <a href="http://www.heise.de/extras/socialshareprivacy/jquery.socialshareprivacy.tar.gz">jquery.socialshareprivacy.tar.gz</a>
     </p>
-    
+        
     <nav>
         <h2>Navigation</h2>
         <ol>
+            <li><a href="#changelog">Change-Log</a></li>
             <li><a href="#files">Dateien</a></li>
             <li><a href="#pre">Voraussetzungen und Einschränkungen</a></li>
             <li><a href="#dimensions">Ausmaße</a></li>
@@ -125,6 +130,13 @@
                     <li><a href="#options_gplus">Google+</a></li>
                 </ol>
             </li>
+            <li><a href="#examples">Beispiel-Einbindungen</a>
+                <ol>
+                    <li><a href="#only_fb">Nur Facebook einbinden</a></li>
+                    <li><a href="#no_perma">Keine Option zum dauerhaften Aktivieren anbieten</a></li>
+                    <li><a href="#only_gplus_css_path">Nur Google+ anbieten und eigenen Pfad für die CSS-Datei angeben.</a></li>
+                </ol>
+            </li>
             <li><a href="#url">URL</a></li>
             <li><a href="#perma_option">Einstellung merken</a></li>
             <li><a href="#fb_app-id">Hinweis zur Facebook App-ID</a></li>
@@ -134,6 +146,50 @@
     </nav>
     
     <ol id="structure">
+        <li>
+            <h2 id="changelog">Change-Log</h2>
+            <ol class="changelog">
+                <li>
+                    <h3>Version 1.1</h3>
+                    <ul>
+                        <li>
+                            CSS: Bei diversen Elementen haben wir mehr Angaben hinzugefuegt, um die Nacharbeiten, bei der Integration in eigene Seiten, geringer zu halten. Vor allem haben wir <code>margin</code>-, <code>padding</code>-, <code>width</code>- und <code>height</code>-Angaben hinzugefügt.
+                        </li>
+                        <li>
+                            Die Doku wurde um einen Beispiele- und diesen Change-Log-Bereich erweitert. 
+                        </li>
+                        <li>
+                            Das Plug-In wurde inhaltlich etwas umgestellt und einige Code-Abkürzungen vorgenommen.
+                        </li>
+                        <li>
+                            JS-Bug Korrektur: Es gab einen Fehler, wenn es in der Seite ein <code>canonical</code>-Attribut gab, das aber einen leeren Wert hatte.
+                        </li>
+                        <li>
+                            JS-Bug Korrektur: Bei den Optionen von Google+ gab es eine Angabe, die später im Script nie abgefragt wurde.
+                        </li>
+                        <li>
+                            JS-Bug Korrektur: Die Perma-Option von Google+ wurde nur angezeigt, wenn auch die Perma-Option von Twitter aktiviert war.
+                        </li>
+                        <li>
+                            Twitter: Wenn aktiviert war das iFrame zu groß und überlagerte darunter liegende Links. <code>&lt;iframe ...style="width:130px; height:25px;">&lt;/iframe></code> ergänzt.
+                        </li>
+                        <li>Allgemein: Wenn die Option css_path leer ist, wird kein &lt;link>-Tag mit leerem href in die Seite eingebaut.</li>
+                        <li>Allgemein: Die von den Buttons verwendete URI kann jetzt über die Option <code>uri</code> gesteuert werden. Es ist sowohl ein fester Wert, wie auch eine Function möglich. Default ist die enthaltene Funktion <code>getURI</code></li>
+                        <li><strong>Neue Features:</strong>
+                            <ul>
+                                <li>Facebook: Die Beschriftungsvarianten des Buttons "Empfehlen" und "Gefällt mir" kann über die neue Option "action" gesteuert werden. Werte sind "<code>recommend</code>" (default) und "<code>like</code>".</li>
+                                <li>Twitter: Parameter "<code>language</code>" (default "<code>en</code>") jetzt auch für Twitter.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h3>Version 1.0</h3>
+                    <ul>
+                        <li>Erstes öffentliches Release</li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+
         <li>
             <h2 id="files">Dateien</h2>
             <p>Zu unserem Plug-In gehören folgende Dateien:</p>
@@ -209,7 +265,7 @@
 &lt;script type="text/javascript" src="jquery.socialshareprivacy.js"&gt;&lt;/script&gt;</code>
 </pre>
                     <p>
-                        Die erste Zeile bindet das JavaScript-Framework &bdquo;JQuery&ldquo; (<a href="http://jquery.com/">http://jquery.com/</a>) ein, die zweite Zeile unser Plug-In.
+                        Die erste Zeile bindet das JavaScript-Framework &bdquo;JQuery&ldquo; (<a href="http://jquery.com/">http://jquery.com/</a>) ein, die zweite Zeile unser Plug-In. jQuery liegt unserem Paket <strong>nicht</strong> bei, Sie müssen es erst noch selbst von der eben genannten Website herunterladen.
                     </p>
 
 <pre>
@@ -307,7 +363,12 @@
                             <tr>
                                 <td>css_path</td>
                                 <td>socialshareprivacy/socialshareprivacy.css</td>
-                                <td>Pfad zur CSS-Datei</td>
+                                <td>Pfad zur CSS-Datei, wenn leer wird kein Stylesheet eingebaut</td>
+                            </tr>
+                            <tr>
+                                <td>uri</td>
+                                <td>getURI</td>
+                                <td>Die URI, die von den Buttons weitergegeben werden soll. Möglich ist ein fester Wert (z.B. <code>"http://www.heise.de"</code>) oder eine Funktion (siehe <code>function getURI()</code> im Plug-In-Quellcode)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -373,6 +434,11 @@
                                 <td>de_DE</td>
                                 <td>Spracheinstellung</td>
                             </tr>
+                            <tr>
+                                <td>action</td>
+                                <td>recommend</td>
+                                <td>Beschriftung des Buttons: Empfehlen (<code>recommend</code>) oder Gefällt mir (<code>like</code>)</td>
+                            </tr>
                         </tbody>
                     </table>
                 </li>
@@ -435,6 +501,11 @@
                                     Diese Option kann mit einem eigenen Text (<code>typeof == string</code>) überschrieben werden oder mit einer eigenen Funktion (<code>typeof == function</code>), die den Text generiert.<br />
                                     Der übergebene Texte wird immer auf 120 Zeichen gekürzt und beim letzten Leerzeichen mit &hellip; ersetzt.
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>language</td>
+                                <td>en</td>
+                                <td>Spracheinstellung (Default: "<code>en</code>" ja, uns gefällt Tweet besser als Twittern)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -501,9 +572,69 @@
             </ol>
         </li>
         <li>
+            <h2 id="examples">Beispiel-Einbindungen</h2>
+            <p>
+                Im Folgenden sehen Sie ein paar beispielhafte Einbindungen von gängigen Konfigurationen. Die in diesen Beispielen verwendete Facebook App-ID (<samp>0123456789</samp>) muss natürlich durch Ihre eigene ersetzt werden.
+            </p>
+            <ul>
+                <li>
+                    <h3 id="only_fb">Nur Facebook einbinden</h3>
+<pre>
+<code>$('#socialshareprivacy').socialSharePrivacy({
+    services : {
+        facebook : {
+            'app_id' : '0123456789'
+        }, 
+        twitter : {
+            'status' : 'off'
+        },
+        gplus : {
+            'status' : 'off'
+        }
+    }
+});</code>
+</pre>
+                </li>
+                <li>
+                    <h3 id="no_perma">Keine Option zum dauerhaften Aktivieren anbieten</h3>
+<pre>
+<code>$('#socialshareprivacy').socialSharePrivacy({
+    services : {
+        facebook : {
+            'app_id'        : '0123456789',
+            'perma_option'  : 'off'
+        }, 
+        twitter : {
+            'perma_option' : 'off'
+        },
+        gplus : {
+            'perma_option' : 'off'
+        }
+    }
+});</code>
+</pre>
+                </li>
+                <li>
+                    <h3 id="only_gplus_css_path">Nur Google+ anbieten und eigenen Pfad für die CSS-Datei angeben.</h3>
+<pre>
+<code>$('#socialshareprivacy').socialSharePrivacy({
+    services : {
+        facebook : {
+            'status' : 'off'
+        }, 
+        twitter : {
+            'status' : 'off'
+        }
+    },
+    'css_path' : '/style/plugins/socialshareprivacy.css'
+});</code>
+</pre>
+            </ul>
+        </li>
+        <li>
             <h2 id="url">URL</h2>
             <p>
-                Standardmäßig wird den Services die URL der aktuellen Seite übergeben (<code>document.location.href</code>), ist jedoch eine kanonische URL hinterlegt (<code>&lt;link rel="canonical"&gt;</code>), wird diese genommen.
+                Die URL, die den Services übergeben wird, kann über eine Option gesteuert werden.<br />Standardmäßig wird eine Funktion innerhalb des Plug-Ins verwendet, die die URL der aktuellen Seite aus <code>document.location.href</code> ermittelt, ist jedoch eine kanonische URL hinterlegt (<code>&lt;link rel="canonical"&gt;</code>), wird diese genommen.
             </p>
         </li>
         <li>
