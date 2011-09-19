@@ -690,6 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: Heise: works for non-single pages too (version 1.1)
 * Improvement: Heise: dependency on jQuery / better URL composition
 * Improvement: Heise: workaround for referrer track (removed)
+* Improvement: compatibility with [WordTwit (Pro)](http://wordpress.org/extend/plugins/wordtwit/)
 * Updated FAQ
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
