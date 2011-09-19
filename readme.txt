@@ -687,8 +687,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: updated Heise social share privacy to version 1.1
 * Improvement: Heise: preserve German texts if German language (de\_DE)
 * Improvement: Heise: added like/recommend option
-* Improvement: Heise: works for non-single pages now (support in version 1.1)
-* Update FAQ
+* Improvement: Heise: works for non-single pages too (version 1.1)
+* Updated FAQ
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.112 =
