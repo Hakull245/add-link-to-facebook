@@ -804,16 +804,16 @@ The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
-	* Navigate to *Apps*
-	* Select *Create New App*
+	* Navigate to *Apps* (top)
+	* Select *Create New App* (button at top)
 2. Create the Facebook application:
-	* Give it any name you like (will appear as *via* below the added links)
-	* Fill the URL which the plugin indicates in the yellow box into the field *Website* (click it) > *Site URL*
+	* Give it any display name you like (will appear as *via* below the added links)
+	* Fill in the red URL which the plugin indicates into the field *Website* (click the word) > *Site URL*
 	* **Don't confuse this with the field *App Domain*, this field should be empty**
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
-5. Press the *Authorize* button to allow the plugin to add links to Facebook
+5. Press the *Authorize* button, login if needed and allow the plugin to add links to Facebook
 
 Note that you don't have to submit the Facebook application to the *App Directory* to use it.
 
