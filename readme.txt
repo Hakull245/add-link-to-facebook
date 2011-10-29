@@ -3,7 +3,7 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.3
 Stable tag: 1.113
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
@@ -708,6 +708,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Hebrew (he\_IL) translation by [Sagive](http://www.sagive.co.il/ "Sagive")
 * Update FAQ
 * Updated Setup Guide
+* Tested with WordPress 3.3
 
 = 1.112 =
 * Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
