@@ -34,6 +34,11 @@ define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 define('c_al2fb_option_use_pp', 'al2fb_use_pp');
 define('c_al2fb_option_debug', 'al2fb_debug');
 
+define('c_al2fb_option_cron_time', 'al2fb_cron_time');
+define('c_al2fb_option_cron_posts', 'al2fb_cron_posts');
+define('c_al2fb_option_cron_comments', 'al2fb_cron_comments');
+define('c_al2fb_option_cron_likes', 'al2fb_cron_likes');
+
 // Site options
 define('c_al2fb_option_app_share', 'al2fb_app_share');
 
@@ -265,6 +270,9 @@ if (!class_exists('WPAL2Facebook')) {
 			add_action('widgets_init', create_function('', 'return register_widget("AL2FB_Widget");'));
 			if (!is_admin())
 				add_action('wp_print_styles', array(&$this, 'WP_print_styles'));
+
+			// Cron
+			add_filter('cron_schedules', array(&$this, 'Cron_schedules'));
 		}
 
 		// Handle plugin activation
@@ -4506,26 +4514,25 @@ if (!class_exists('WPAL2Facebook')) {
 							get_comments('status=hold&post_id=' . $post->ID));
 						$deleted_fb_comment_ids = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
 
-						foreach ($fb_comments->data as $fb_comment)
-							if (!empty($fb_comments)) {
-								// Check if comment in database
-								$stored = false;
-								if ($stored_comments)
-									foreach ($stored_comments as $comment) {
-										$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-										if ($fb_comment_id == $fb_comment->id) {
-											$stored = true;
-											break;
-										}
+						foreach ($fb_comments->data as $fb_comment) {
+							// Check if comment in database
+							$stored = false;
+							if ($stored_comments)
+								foreach ($stored_comments as $comment) {
+									$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+									if ($fb_comment_id == $fb_comment->id) {
+										$stored = true;
+										break;
 									}
+								}
 
-								// Check if comment deleted
-								$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
+							// Check if comment deleted
+							$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
 
-								// Only count if not in database or deleted
-								if (!$stored)
-									$count++;
-							}
+							// Only count if not in database or deleted
+							if (!$stored)
+								$count++;
+						}
 					}
 				}
 
@@ -4804,8 +4811,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Theme name:</td><td>' . '<a href="' . $theme_data['URI'] . '" target="_blank">' . htmlspecialchars($theme_data['Name'], ENT_QUOTES, $charset) . '</a>' . '</td></tr>';
 			$info .= '<tr><td>Theme version:</td><td>' . htmlspecialchars($theme_data['Version'], ENT_QUOTES, $charset) . '</td></tr>';
 
-			foreach (get_plugins() as $plugin_data)
-				$info .= '<tr><td>Active plugin:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . '</a></td></tr>';
+			$active  = get_option('active_plugins', array());
+			foreach (get_plugins() as $plugin_tag => $plugin_data)
+				if (in_array($plugin_tag, $active))
+					$info .= '<tr><td>Active plugin:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . '</a></td></tr>';
 
 			$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 			$info .= '<tr><td>Settings version:</td><td>' . get_option(c_al2fb_option_version) . '</td></tr>';
@@ -5051,6 +5060,12 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Last request:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_request), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '<tr><td>Last texts:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_texts), ENT_QUOTES, $charset) . '</pre></td></tr>';
+
+			$info .= '<tr><td>Cron time:</td><td>' . get_option(c_al2fb_option_cron_time) . '</td></tr>';
+			$info .= '<tr><td>Cron posts:</td><td>' . get_option(c_al2fb_option_cron_posts) . '</td></tr>';
+			$info .= '<tr><td>Cron comments:</td><td>' . get_option(c_al2fb_option_cron_comments) . '</td></tr>';
+			$info .= '<tr><td>Cron likes:</td><td>' . get_option(c_al2fb_option_cron_likes) . '</td></tr>';
+
 			$info .= '</table></div>';
 
 			$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
@@ -5111,6 +5126,66 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($this->debug)
 					print_r($e);
 			}
+		}
+
+		// Add cron schedule
+		function Cron_schedules($schedules) {
+			$duration = intval(get_option(c_al2fb_option_msg_refresh));
+			if (!$duration)
+				$duration = 10;
+			$schedules['al2fb_schedule'] = array(
+				'interval' => $duration * 60,
+				'display' => __('Add Link to Facebook', c_al2fb_text_domain));
+			return $schedules;
+		}
+
+		function Cron_filter($where = '') {
+			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
+			if (!$maxage)
+				$maxage = 30;
+
+			return $where . " AND post_date > '" . date('Y-m-d', strtotime('-' . $maxage . ' days')) . "'";
+		}
+
+		function Cron() {
+			$posts = 0;
+			$comments = 0;
+			$likes = 0;
+
+			// Integration?
+			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
+				// Query recent posts
+				add_filter('posts_where', array(&$this, 'Cron_filter'));
+				$query = new WP_Query('post_type=any&meta_key=' . c_al2fb_meta_link_id);
+				remove_filter('posts_where', array(&$this, 'Cron_filter'));
+
+				while ($query->have_posts()) {
+					$posts++;
+					$query->the_post();
+					$post = $query->post;
+					$user_ID = self::Get_user_ID($post);
+
+					// Get Facebook comments
+					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+						$fb_comments = self::Get_comments_or_likes($post, false);
+						$comments += count($fb_comments->data);
+					}
+
+					// Get likes
+					if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+						$fb_likes = self::Get_comments_or_likes($post, true);
+						$likes += count($fb_likes->data);
+					}
+
+					$log .= ' ' . $post->ID;
+				}
+			}
+
+			// Debug info
+			update_option(c_al2fb_option_cron_time, date('c'));
+			update_option(c_al2fb_option_cron_posts, $posts);
+			update_option(c_al2fb_option_cron_comments, $comments);
+			update_option(c_al2fb_option_cron_likes, $likes);
 		}
 
 		// Check environment
