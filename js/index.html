@@ -139,7 +139,6 @@
             </li>
             <li><a href="#url">URL</a></li>
             <li><a href="#perma_option">Einstellung merken</a></li>
-            <li><a href="#fb_app-id">Hinweis zur Facebook App-ID</a></li>
             <li><a href="#licence">Lizenz</a></li>
             <li><a href="#logo">Logo</a></li>
         </ol>
@@ -150,7 +149,15 @@
             <h2 id="changelog">Change-Log</h2>
             <ol class="changelog">
                 <li>
-                    <h3>Version 1.1</h3>
+                    <h3 id="v1-2">Version 1.2</h3>
+                    <ul>
+                        <li>
+                            JS: Facebook App-ID entfernt, da diese nicht mehr noetig ist, um den Like/Recommend-Button zu nutzen.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3 id="v1-1">Version 1.1</h3>
                     <ul>
                         <li>
                             CSS: Bei diversen Elementen haben wir mehr Angaben hinzugefuegt, um die Nacharbeiten, bei der Integration in eigene Seiten, geringer zu halten. Vor allem haben wir <code>margin</code>-, <code>padding</code>-, <code>width</code>- und <code>height</code>-Angaben hinzugefügt.
@@ -182,7 +189,9 @@
                             </ul>
                         </li>
                     </ul>
-                    <h3>Version 1.0</h3>
+                </li>
+                <li>
+                    <h3 id="v1-0">Version 1.0</h3>
                     <ul>
                         <li>Erstes öffentliches Release</li>
                     </ul>
@@ -223,7 +232,7 @@
                 Das dauerhafte Aktivieren der Services funktioniert im Internet Explorer erst ab Version 8, da die Vorgängerversionen kein JSON unterstützen. Daher fehlt im IE &lt;= 7 diese Funktion. Der Rest des Plug-Ins ist davon nicht betroffen.
             </p>
             <p>
-                Für Facebook ist zwingend eine eigene App-ID notwendig, siehe dazu <a href="#fb_app-id">Hinweis zur Facebook App-ID</a>.
+                <del datetime="2011-10-04" cite="http://www.heise.de/extras/socialshareprivacy/#v1-2">Für Facebook ist zwingend eine eigene App-ID notwendig, siehe dazu <a href="#fb_app-id">Hinweis zur Facebook App-ID</a>.</del>
             </p>
         </li>
         <li>
@@ -305,7 +314,6 @@
 <code>$('#socialshareprivacy').socialSharePrivacy({
   services : {
     facebook : {
-      'app_id'      : '0123456789', 
       'perma_option': 'off'
     }, 
     twitter : {
@@ -390,9 +398,9 @@
                                 <td>Der User hat Facebook zur Auswahl</td>
                             </tr>
                             <tr>
-                                <td>app_id</td>
-                                <td>__FB_APP-ID__</td>
-                                <td>Facebook App-ID; Sie ist nötig um den <em>Empfehlen</em>-Button von Facebook nutzen zu können. Ist sie nicht angegeben, wird dem User Facebook trotz <code>'status' : 'on'</code> <strong>nicht</strong> angeboten. In der JavaScript-Konsole wird dem Entwickler ein entsprechender Hinweis ausgegeben.</td>
+                                <td><del datetime="2011-10-04" cite="http://www.heise.de/extras/socialshareprivacy/#v1-2">app_id</del></td>
+                                <td><em>entfallen (seit Version 1.2)</em></td>
+                                <td><del datetime="2011-10-04" cite="http://www.heise.de/extras/socialshareprivacy/#v1-2">Facebook App-ID; Sie ist nötig um den <em>Empfehlen</em>-Button von Facebook nutzen zu können. Ist sie nicht angegeben, wird dem User Facebook trotz <code>'status' : 'on'</code> <strong>nicht</strong> angeboten. In der JavaScript-Konsole wird dem Entwickler ein entsprechender Hinweis ausgegeben.</del></td>
                             </tr>
                             <tr>
                                 <td>dummy_img</td>
@@ -574,7 +582,7 @@
         <li>
             <h2 id="examples">Beispiel-Einbindungen</h2>
             <p>
-                Im Folgenden sehen Sie ein paar beispielhafte Einbindungen von gängigen Konfigurationen. Die in diesen Beispielen verwendete Facebook App-ID (<samp>0123456789</samp>) muss natürlich durch Ihre eigene ersetzt werden.
+                Im Folgenden sehen Sie ein paar beispielhafte Einbindungen von gängigen Konfigurationen.
             </p>
             <ul>
                 <li>
@@ -582,9 +590,6 @@
 <pre>
 <code>$('#socialshareprivacy').socialSharePrivacy({
     services : {
-        facebook : {
-            'app_id' : '0123456789'
-        }, 
         twitter : {
             'status' : 'off'
         },
@@ -601,7 +606,6 @@
 <code>$('#socialshareprivacy').socialSharePrivacy({
     services : {
         facebook : {
-            'app_id'        : '0123456789',
             'perma_option'  : 'off'
         }, 
         twitter : {
@@ -643,24 +647,6 @@
                 Bevor das Cookie abgefragt wird, wie die Einstellungen des Users sind, wird erstmal geprüft, wie das Plug-In konfiguriert ist. Ist das Plug-In eventuell nachträglich umgestellt worden hat der User dadurch keine Nachteile.<br />
                 Wurde für alle Services die Merken-Funktion ausgeschaltet (<code>'perma_option' : 'off'</code>) wird auch das Einstellungsmenü nicht mehr angezeigt.
             </p>
-        </li>
-        <li>
-            <h2 id="fb_app-id">Hinweis zur Facebook App-ID</h2>
-            <p>
-                Für den &bdquo;Empfehlen&ldquo;-Button von Facebook benötigt man eine Facebook App-ID. Diese kann man sich mit seinem verifizierten Facebook-Konto auf den Developer-Seiten erzeugen.
-            </p>
-            <ol id="fb_app_id_step_by_step">
-                <li>Einloggen bei Facebook</li>
-                <li>Konto verifizieren mittels Handy-Nummer (oder Kreditkartendaten)<br />
-                    <a href="https://www.facebook.com/settings?tab=mobile">https://www.facebook.com/settings?tab=mobile</a>
-                    Option Handy-Nr.:<br />
-                    Handy-Nr. eintragen und anschließend per SMS empfangenen Bestätigungscode in das Feld auf der rechten Seite eintragen.
-                </li>
-                <li>Entwickler-Seite aufrufen<br />
-                    <a href="http://developers.facebook.com/docs/reference/plugins/like/">http://developers.facebook.com/docs/reference/plugins/like/</a><br />
-                    Dort in der Box unter "Step 1" auf "Get Code" klicken und die App-ID aus dem angezeigten Code-Teil entnehmen.
-                </li>
-            </ol>
         </li>
         <li>
             <h2 id="licence">Lizenz</h2>

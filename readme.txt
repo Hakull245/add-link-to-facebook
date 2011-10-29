@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.112
+Stable tag: 1.113
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -76,6 +76,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
+* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive")
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -694,15 +695,19 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Improvement: updated Heise social share privacy to version 1.1
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.113 =
+* Improvement: updated Heise social share privacy to version 1.2
 * Improvement: Heise: preserve German texts if German language (de\_DE)
 * Improvement: Heise: added like/recommend option
 * Improvement: Heise: works for non-single pages too (version 1.1)
 * Improvement: Heise: dependency on jQuery / better URL composition
 * Improvement: Heise: workaround for referrer track (removed)
 * Improvement: compatibility with [WordTwit (Pro)](http://wordpress.org/extend/plugins/wordtwit/)
-* Updated FAQ
-* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+* Added Hebrew (he\_IL) translation by [Sagive](http://www.sagive.co.il/ "Sagive")
+* Update FAQ
+* Updated Setup Guide
 
 = 1.112 =
 * Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
@@ -765,6 +770,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.113 =
+Seven improvements
 
 = 1.112 =
 Three improvements

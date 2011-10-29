@@ -2774,7 +2774,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_id);
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
-				return;
+				return $post_id;
 
 			// Process exclude indication
 			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
@@ -3776,7 +3776,6 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= '			services : {' . PHP_EOL;
 					$content .= '				facebook : {' . PHP_EOL;
 					$content .= '					"status" : "on",' . PHP_EOL;
-					$content .= '		 			"app_id" : "' . $appid . '",' . PHP_EOL;
 					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_facebook.png",' . PHP_EOL;
 					if ($lang != 'de_DE') {
 						$content .= '					"txt_info" : "' . $info . '",';

@@ -85,7 +85,6 @@
             'services' : {
                 'facebook' : {
                     'status'            : 'on',
-                    'app_id'            : '__FB_APP-ID__',
                     'dummy_img'         : 'socialshareprivacy/images/dummy_facebook.png',
                     'txt_info'          : '2 Klicks f&uuml;r mehr Datenschutz: Erst wenn Sie hier klicken, wird der Button aktiv und Sie k&ouml;nnen Ihre Empfehlung an Facebook senden. Schon beim Aktivieren werden Daten an Dritte &uuml;bertragen &ndash; siehe <em>i</em>.',
                     'txt_fb_off'        : 'nicht mit Facebook verbunden',
@@ -133,19 +132,25 @@
         // Standardwerte des Plug-Ings mit den vom User angegebenen Optionen ueberschreiben
         var options = $.extend(true, defaults, settings);
 
-        var facebook_on = (options.services.facebook.status === 'on' && options.services.facebook.app_id !== '__FB_APP-ID__');
+        var facebook_on = (options.services.facebook.status === 'on');
         var twitter_on  = (options.services.twitter.status  === 'on');
         var gplus_on    = (options.services.gplus.status    === 'on');
 
-        // check if at least one service is "on" and FB-App-ID is set if needed
+        // check if at least one service is "on"
         if (!facebook_on && !twitter_on && !gplus_on) {
             return;
         }
 
         // insert stylesheet into document and prepend target element
         if (options.css_path.length > 0) {
-            $('head').append('<link rel="stylesheet" type="text/css" href="' + options.css_path + '" />');
+            // IE fix (noetig fuer IE < 9 - wird hier aber fuer alle IE gemacht)
+            if (document.createStyleSheet) {
+                document.createStyleSheet(options.css_path);
+            } else {
+                $('head').append('<link rel="stylesheet" type="text/css" href="' + options.css_path + '" />');
+            }
         }
+
         $(this).prepend('<ul class="social_share_privacy_area"></ul>');
         var context = $('.social_share_privacy_area', this);
 
@@ -160,31 +165,26 @@
             //
             // Facebook
             //
-            if (options.services.facebook.status === 'on') {
-                // Kontrolle ob Facebook App-ID hinterlegt ist, da diese noetig fuer den Empfehlen-Button ist
-                if (options.services.facebook.app_id === '__FB_APP-ID__') {
-                    try { console.log('Fehler: Es ist keine Facebook App-ID hinterlegt.'); } catch (e) { }
-                } else {
-                    var fb_enc_uri = encodeURIComponent(uri + options.services.facebook.referrer_track);
-                    var fb_code = '<iframe src="http://www.facebook.com/plugins/like.php?locale=' + options.services.facebook.language + '&amp;app_id=' + options.services.facebook.app_id + '&amp;href=' + fb_enc_uri + '&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=' + options.services.facebook.action + '&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:145px; height:21px;" allowTransparency="true"></iframe>';
-                    var fb_dummy_btn = '<img src="' + options.services.facebook.dummy_img + '" alt="Facebook &quot;Like&quot;-Dummy" class="fb_like_privacy_dummy" />';
+            if (facebook_on) {
+                var fb_enc_uri = encodeURIComponent(uri + options.services.facebook.referrer_track);
+                var fb_code = '<iframe src="http://www.facebook.com/plugins/like.php?locale=' + options.services.facebook.language + '&amp;href=' + fb_enc_uri + '&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=' + options.services.facebook.action + '&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:145px; height:21px;" allowTransparency="true"></iframe>';
+                var fb_dummy_btn = '<img src="' + options.services.facebook.dummy_img + '" alt="Facebook &quot;Like&quot;-Dummy" class="fb_like_privacy_dummy" />';
 
-                    context.append('<li class="facebook help_info"><span class="info">' + options.services.facebook.txt_info + '</span><span class="switch off">' + options.services.facebook.txt_fb_off + '</span><div class="fb_like dummy_btn">' + fb_dummy_btn + '</div></li>');
+                context.append('<li class="facebook help_info"><span class="info">' + options.services.facebook.txt_info + '</span><span class="switch off">' + options.services.facebook.txt_fb_off + '</span><div class="fb_like dummy_btn">' + fb_dummy_btn + '</div></li>');
 
-                    var $container_fb = $('li.facebook', context);
+                var $container_fb = $('li.facebook', context);
 
-                    $('li.facebook div.fb_like img.fb_like_privacy_dummy,li.facebook span.switch', context).live('click', function () {
-                        if ($container_fb.find('span.switch').hasClass('off')) {
-                            $container_fb.addClass('info_off');
-                            $container_fb.find('span.switch').addClass('on').removeClass('off').html(options.services.facebook.txt_fb_on);
-                            $container_fb.find('img.fb_like_privacy_dummy').replaceWith(fb_code);
-                        } else {
-                            $container_fb.removeClass('info_off');
-                            $container_fb.find('span.switch').addClass('off').removeClass('on').html(options.services.facebook.txt_fb_off);
-                            $container_fb.find('.fb_like').html(fb_dummy_btn);
-                        }
-                    });
-                }
+                $('li.facebook div.fb_like img.fb_like_privacy_dummy,li.facebook span.switch', context).live('click', function () {
+                    if ($container_fb.find('span.switch').hasClass('off')) {
+                        $container_fb.addClass('info_off');
+                        $container_fb.find('span.switch').addClass('on').removeClass('off').html(options.services.facebook.txt_fb_on);
+                        $container_fb.find('img.fb_like_privacy_dummy').replaceWith(fb_code);
+                    } else {
+                        $container_fb.removeClass('info_off');
+                        $container_fb.find('span.switch').addClass('off').removeClass('on').html(options.services.facebook.txt_fb_off);
+                        $container_fb.find('.fb_like').html(fb_dummy_btn);
+                    }
+                });
             }
 
             //
