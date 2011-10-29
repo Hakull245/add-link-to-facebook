@@ -697,6 +697,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: using WordPress cron to refresh Facebook comments/likes
 * Bugfix: active plugins in debug info
+* Improvement: using *get_user_by* (WordPress 3.3 compatibility)
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.113 =
