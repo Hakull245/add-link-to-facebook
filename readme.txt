@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.111
+Stable tag: 1.113
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -16,7 +16,7 @@ The link title will be the post title. The link description will be the excerpt,
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
 
-[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
+**[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")**
 
 There is support for multi-user and network sites and shortcodes will be processed.
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
@@ -76,6 +76,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
+* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive")
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -397,6 +398,17 @@ Facebook doesn't allow any change to the like/send button, except for a very few
 The most important thing that can be controlled is the link the like button is associated with.
 The default is the current post and page, which is almost always what you want.
 Likes for this post or page are counted.
+If the like/send button doesn't work correctly (anymore), only Facebook can solve that.
+
+= U34 How do I prevent adding links for special post types? =
+
+Some plugins use [custom post types](http://codex.wordpress.org/Post_Types) to store information,
+for example some contact forms and twitter plugins.
+For these custom post types a link will be added to Facebook too.
+Sometimes this is desirable and sometimes not.
+If this is not wanted, you will have to find out the name(s) of the custom post types
+and to put them into the plugin option *Exclude these custom post types* (admin only).
+The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
 
 **--- Security ---**
 
@@ -587,6 +599,12 @@ Can not happen anymore in recent versions.
 You may have deleted a link on Facebook that was added by the plugin and also tried to delete it using the plugin.
 See question E19 for how to remove the error message and question U09 for how to add a link for an existing post.
 
+You might need to manually remove the link information of the plugin.
+On the post edit page click *Screen Options* (upper right) and tick *Custom fields*.
+Scroll down to the meta box *Custom fields*
+(you may have to 'open' it by clicking on the far right part of the caption bar)
+and delete the value *al2fb_facebook_link_id*.
+
 = E15 I get 'Error validating access token' =
 
 Most often this happen when you changed your Facebook password.
@@ -676,6 +694,26 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
+= Development version =
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.113 =
+* Improvement: updated Heise social share privacy to version 1.2
+* Improvement: Heise: preserve German texts if German language (de\_DE)
+* Improvement: Heise: added like/recommend option
+* Improvement: Heise: works for non-single pages too (version 1.1)
+* Improvement: Heise: dependency on jQuery / better URL composition
+* Improvement: Heise: workaround for referrer track (removed)
+* Improvement: compatibility with [WordTwit (Pro)](http://wordpress.org/extend/plugins/wordtwit/)
+* Added Hebrew (he\_IL) translation by [Sagive](http://www.sagive.co.il/ "Sagive")
+* Update FAQ
+* Updated Setup Guide
+
+= 1.112 =
+* Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
+* Improvement: compatibility with [Contact Form 7 Version 3](http://wordpress.org/extend/plugins/contact-form-7/)
+* Improvement: compatibility with [Grunion contact](http://wordpress.org/extend/plugins/grunion-contact-form/)
+
 = 1.111 =
 * New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -733,6 +771,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.113 =
+Seven improvements
+
+= 1.112 =
+Three improvements
+
 = 1.111 =
 One new feature, translation update
 
@@ -768,15 +812,16 @@ The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
-	* Navigate to *Apps*
-	* Select *Create New App*
+	* Navigate to *Apps* (top)
+	* Select *Create New App* (button at top)
 2. Create the Facebook application:
-	* Give it any name you like (will appear as *via* below the added links)
-	* Fill the URL which the plugin indicates in the yellow box into the field *Website* (click it) > *Site URL*
+	* Give it any display name you like (will appear as *via* below the added links)
+	* Fill in the red URL which the plugin indicates into the field *Website* (click the word) > *Site URL*
+	* **Don't confuse this with the field *App Domain*, this field should be empty**
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
-5. Press the *Authorize* button to allow the plugin to add links to Facebook
+5. Press the *Authorize* button, login if needed and allow the plugin to add links to Facebook
 
 Note that you don't have to submit the Facebook application to the *App Directory* to use it.
 
@@ -996,7 +1041,8 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* ...
+* Shortcode messages/comments
+* Limit number of messages/comments widget
 
 Realized features:
 
@@ -1060,4 +1106,4 @@ This plugin uses:
 
 * [PHP Console](http://code.google.com/p/php-console "PHP Console") licensed under GNU Lesser GPL
 * [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
-* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT
+* [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT License

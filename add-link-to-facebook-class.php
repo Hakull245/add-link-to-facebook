@@ -454,8 +454,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Social share privacy
 			if (get_option(c_al2fb_option_use_ssp)) {
 				wp_enqueue_script('jquery');
-				$plugin_dir = '/' . PLUGINDIR .  '/' . basename(dirname($this->main_file));
-				wp_enqueue_script('socialshareprivacy', $plugin_dir . '/js/jquery.socialshareprivacy.js');
+				wp_enqueue_script('socialshareprivacy', $this->plugin_url . '/js/jquery.socialshareprivacy.js', array('jquery'));
 			}
 
 			// Check user capability
@@ -2775,7 +2774,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_id);
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
-				return;
+				return $post_id;
 
 			// Process exclude indication
 			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
@@ -2880,6 +2879,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 					$ex_custom_types[] = 'nav_menu_item';
+					$ex_custom_types[] = 'recipe';
+					$ex_custom_types[] = 'recipeingredient';
+					$ex_custom_types[] = 'recipestep';
+					$ex_custom_types[] = 'wpcf7_contact_form';
+					$ex_custom_types[] = 'feedback';
+					$ex_custom_types[] = 'spam';
+					$ex_custom_types[] = 'twitter';
 
 					// Check if public post
 					if (empty($post->post_password) &&
@@ -3758,9 +3764,11 @@ if (!class_exists('WPAL2Facebook')) {
 
 				$combine = get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true);
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+				$lang = $this->Get_locale($user_ID);
+				$info = (empty($action) || $action == 'like' ? __('Like', c_al2fb_text_domain) : __('Recommend', c_al2fb_text_domain));
 
 				// Build content
-				if (is_single() && $appid && !$combine && !$box && get_option(c_al2fb_option_use_ssp)) {
+				if ($appid && !$combine && !$box && get_option(c_al2fb_option_use_ssp)) {
 					$content = '<div id="al2fb_ssp' . $post->ID . '"></div>' . PHP_EOL;
 					$content .= '<script type="text/javascript">' . PHP_EOL;
 					$content .= '	jQuery(document).ready(function($) {' . PHP_EOL;
@@ -3768,22 +3776,34 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= '			services : {' . PHP_EOL;
 					$content .= '				facebook : {' . PHP_EOL;
 					$content .= '					"status" : "on",' . PHP_EOL;
-					$content .= '		 			"app_id" : "' . $appid . '",' . PHP_EOL;
 					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_facebook.png",' . PHP_EOL;
-					$content .= '					"txt_info" : "' . __('Like', c_al2fb_text_domain) . '",';
-					$content .= '					"txt_fb_off" : "",';
-					$content .= '					"txt_fb_on" : "",';
+					if ($lang != 'de_DE') {
+						$content .= '					"txt_info" : "' . $info . '",';
+						$content .= '					"txt_fb_off" : "",';
+						$content .= '					"txt_fb_on" : "",';
+					}
 					$content .= '					"perma_option" : "off",' . PHP_EOL;
-					$content .= '					"display_name" : "Facebook",' . PHP_EOL;
-					$content .= '					"referrer_track" : "AL2FB",' . PHP_EOL;
-					$content .= '					"language" : "' . $this->Get_locale($user_ID) . '"' . PHP_EOL;
+					if ($lang != 'de_DE')
+						$content .= '					"display_name" : "Facebook",' . PHP_EOL;
+					$content .= '					"referrer_track" : "",' . PHP_EOL;
+					$content .= '					"language" : "' . $lang . '",' . PHP_EOL;
+					$content .= '					"action" : "' . (empty($action) ? 'like' : $action) . '"' . PHP_EOL;
 					$content .= '				},';
-					$content .= '				twitter : { "status" : "off" },' . PHP_EOL;
-					$content .= '				gplus : {  "status" : "off" }' . PHP_EOL;
+					$content .= '				twitter : {' . PHP_EOL;
+					$content .= '					"status" : "off",' . PHP_EOL;
+					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_twitter.png"' . PHP_EOL;
+					$content .= '				 },' . PHP_EOL;
+					$content .= '				gplus : {' . PHP_EOL;
+					$content .= '					"status" : "off",' . PHP_EOL;
+					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_gplus.png"' . PHP_EOL;
+					$content .= '				 },' . PHP_EOL;
 					$content .= '			},';
-					$content .= '			"info_link" : "http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook",';
-					$content .= '			"txt_help" : "' . __('Information', c_al2fb_text_domain) . '",';
-					$content .= '			"css_path" : "' . $this->plugin_url . '/js/socialshareprivacy/socialshareprivacy.css"' . PHP_EOL;
+					if ($lang != 'de_DE') {
+						$content .= '			"info_link" : "http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook",';
+						$content .= '			"txt_help" : "' . __('Information', c_al2fb_text_domain) . '",' . PHP_EOL;
+					}
+					$content .= '			"css_path" : "' . $this->plugin_url . '/js/socialshareprivacy/socialshareprivacy.css",' . PHP_EOL;
+					$content .= '			"uri" : "' . $link . '"' . PHP_EOL;
 					$content .= '		});' . PHP_EOL;
 					$content .= '	});' . PHP_EOL;
 					$content .= '</script>' . PHP_EOL;
