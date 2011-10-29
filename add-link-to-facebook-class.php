@@ -4238,7 +4238,7 @@ if (!class_exists('WPAL2Facebook')) {
 			global $user;
 			$user = null;
 
-			$userdata = get_user_by_email($email);
+			$userdata = get_user_by('email', $email);
 			if ($userdata) {
 				$user = new WP_User($userdata->ID);
 				wp_set_current_user($userdata->ID, $userdata->user_login);
