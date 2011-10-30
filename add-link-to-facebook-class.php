@@ -34,6 +34,7 @@ define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 define('c_al2fb_option_use_pp', 'al2fb_use_pp');
 define('c_al2fb_option_debug', 'al2fb_debug');
 
+define('c_al2fb_option_cron_enabled', 'al2fb_cron_enabled');
 define('c_al2fb_option_cron_time', 'al2fb_cron_time');
 define('c_al2fb_option_cron_posts', 'al2fb_cron_posts');
 define('c_al2fb_option_cron_comments', 'al2fb_cron_comments');
@@ -789,6 +790,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_min_cap] = null;
 				if (empty($_POST[c_al2fb_option_min_cap_comment]))
 					$_POST[c_al2fb_option_min_cap_comment] = null;
+				if (empty($_POST[c_al2fb_option_cron_enabled]))
+					$_POST[c_al2fb_option_cron_enabled] = null;
 				if (empty($_POST[c_al2fb_option_noverifypeer]))
 					$_POST[c_al2fb_option_noverifypeer] = null;
 				if (empty($_POST[c_al2fb_option_shortcode_widget]))
@@ -817,6 +820,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_min_cap_comment, $_POST[c_al2fb_option_min_cap_comment]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
 				update_option(c_al2fb_option_msg_maxage, $_POST[c_al2fb_option_msg_maxage]);
+				update_option(c_al2fb_option_cron_enabled, $_POST[c_al2fb_option_cron_enabled]);
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
@@ -2067,6 +2071,14 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_cron"><?php _e('Refresh Facebook comments in the background:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_cron" name="<?php echo c_al2fb_option_cron_enabled; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_cron_enabled)) echo ' checked="checked"'; ?> />
+					<strong>Beta!</strong>
+					<br /><span class="al2fb_explanation"><?php _e('Using Wordress cron', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_max_descr"><?php _e('Maximum text length with trailer:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_numeric" id="al2fb_max_descr" name="<?php echo c_al2fb_option_max_descr; ?>" type="text" value="<?php echo get_option(c_al2fb_option_max_descr); ?>" />
@@ -2429,11 +2441,11 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get comments and cache
-		function Get_fb_comments_cached($user_ID, $link_id) {
+		function Get_fb_comments_cached($user_ID, $link_id, $cached = true) {
 			// Get (cached) comments
 			$fb_key = c_al2fb_transient_cache . md5( 'c' . $link_id);
 			$fb_comments = get_transient($fb_key);
-			if ($this->debug)
+			if ($this->debug || !$cached)
 				$fb_comments = false;
 			if ($fb_comments === false) {
 				$fb_comments = self::Get_fb_comments($user_ID, $link_id);
@@ -2441,6 +2453,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$duration = intval(get_option(c_al2fb_option_msg_refresh));
 				if (!$duration)
 					$duration = 10;
+				if (get_option(c_al2fb_option_cron_enabled))
+					$duration += 10;
 				set_transient($fb_key, $fb_comments, $duration * 60);
 			}
 			return $fb_comments;
@@ -2458,11 +2472,11 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get likes and cache
-		function Get_fb_likes_cached($user_ID, $link_id) {
+		function Get_fb_likes_cached($user_ID, $link_id, $cached = true) {
 			// Get (cached) likes
 			$fb_key = c_al2fb_transient_cache . md5('l' . $link_id);
 			$fb_likes = get_transient($fb_key);
-			if ($this->debug)
+			if ($this->debug || !$cached)
 				$fb_likes = false;
 			if ($fb_likes === false) {
 				$fb_likes = self::Get_fb_likes($user_ID, $link_id);
@@ -2470,6 +2484,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$duration = intval(get_option(c_al2fb_option_msg_refresh));
 				if (!$duration)
 					$duration = 10;
+				if (get_option(c_al2fb_option_cron_enabled))
+					$duration += 10;
 				set_transient($fb_key, $fb_likes, $duration * 60);
 			}
 			return $fb_likes;
@@ -4581,15 +4597,15 @@ if (!class_exists('WPAL2Facebook')) {
 			return $avatar;
 		}
 
-		function Get_comments_or_likes($post, $likes) {
+		function Get_comments_or_likes($post, $likes, $cached = true) {
 			$user_ID = self::Get_user_ID($post);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 			if ($link_id)
 				try {
 					if ($likes)
-						return self::Get_fb_likes_cached($user_ID, $link_id);
+						return self::Get_fb_likes_cached($user_ID, $link_id, $cached);
 					else
-						return self::Get_fb_comments_cached($user_ID, $link_id);
+						return self::Get_fb_comments_cached($user_ID, $link_id, $cached);
 				}
 				catch (Exception $e) {
 					if ($this->debug)
@@ -5061,6 +5077,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '<tr><td>Last texts:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_texts), ENT_QUOTES, $charset) . '</pre></td></tr>';
 
+			$info .= '<tr><td>Cron enabled:</td><td>' . (get_option(c_al2fb_option_cron_enabled) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Cron time:</td><td>' . get_option(c_al2fb_option_cron_time) . '</td></tr>';
 			$info .= '<tr><td>Cron posts:</td><td>' . get_option(c_al2fb_option_cron_posts) . '</td></tr>';
 			$info .= '<tr><td>Cron comments:</td><td>' . get_option(c_al2fb_option_cron_comments) . '</td></tr>';
@@ -5130,12 +5147,14 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Add cron schedule
 		function Cron_schedules($schedules) {
-			$duration = intval(get_option(c_al2fb_option_msg_refresh));
-			if (!$duration)
-				$duration = 10;
-			$schedules['al2fb_schedule'] = array(
-				'interval' => $duration * 60,
-				'display' => __('Add Link to Facebook', c_al2fb_text_domain));
+			if (get_option(c_al2fb_option_cron_enabled)) {
+				$duration = intval(get_option(c_al2fb_option_msg_refresh));
+				if (!$duration)
+					$duration = 10;
+				$schedules['al2fb_schedule'] = array(
+					'interval' => $duration * 60,
+					'display' => __('Add Link to Facebook', c_al2fb_text_domain));
+			}
 			return $schedules;
 		}
 
@@ -5167,17 +5186,15 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Get Facebook comments
 					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-						$fb_comments = self::Get_comments_or_likes($post, false);
+						$fb_comments = self::Get_comments_or_likes($post, false, false);
 						$comments += count($fb_comments->data);
 					}
 
 					// Get likes
 					if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
-						$fb_likes = self::Get_comments_or_likes($post, true);
+						$fb_likes = self::Get_comments_or_likes($post, true, false);
 						$likes += count($fb_likes->data);
 					}
-
-					$log .= ' ' . $post->ID;
 				}
 			}
 

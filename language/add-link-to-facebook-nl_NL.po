@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-09-14 18:40+0100\n"
+"PO-Revision-Date: 2011-10-30 08:52+0100\n"
 "Last-Translator: Marcel Bokhorst <marcel@bokhorst.biz>\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -283,7 +283,7 @@ msgid "Liked this post"
 msgstr "Vond dit bericht leuk"
 
 msgid "Refresh Facebook comments every:"
-msgstr "Ververs Facebook commentaar elke:"
+msgstr "Ververs Facebook berichten elke:"
 
 msgid "Minutes"
 msgstr "Minuten"
@@ -745,4 +745,10 @@ msgstr "Gebruik Heise social share privacy:"
 
 msgid "Information"
 msgstr "Informatie"
+
+msgid "Refresh Facebook comments in the background:"
+msgstr "Ververs Facebook berichten op de achtergrond:"
+
+msgid "Using Wordress cron"
+msgstr "Met WordPress cron"
 

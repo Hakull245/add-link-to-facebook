@@ -52,10 +52,14 @@ if (empty($wp_al2fb)) {
 }
 
 // Schedule cron if needed
-if (!wp_next_scheduled('al2fb_cron')) {
-	$min = intval(time() / 60) + 1;
-	wp_schedule_event($min * 60, 'al2fb_schedule', 'al2fb_cron');
+if (get_option(c_al2fb_option_cron_enabled)) {
+	if (!wp_next_scheduled('al2fb_cron')) {
+		$min = intval(time() / 60) + 1;
+		wp_schedule_event($min * 60, 'al2fb_schedule', 'al2fb_cron');
+	}
 }
+else
+	wp_clear_scheduled_hook('al2fb_cron');
 
 add_action('al2fb_cron', 'al2fb_cron');
 if (!function_exists('al2fb_cron')) {
