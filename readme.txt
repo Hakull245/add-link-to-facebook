@@ -701,6 +701,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: using WordPress cron to refresh Facebook comments/likes
 * Bugfix: active plugins in debug info
 * Improvement: using *get_user_by* (WordPress 3.3 compatibility)
+* Improvement: Heise *perma_option* default *off*
+* New feature: new filter *al2fb_heise*
+* New feature: new option to set Heise privacy policy
 * Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)

@@ -28,6 +28,7 @@ define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
 define('c_al2fb_option_nofilter', 'al2fb_nofilter');
 define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_use_ssp', 'al2fb_use_ssp');
+define('c_al2fb_option_ssp_info', 'al2fb_ssp_info');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
@@ -812,6 +813,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
 				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
 				$_POST[c_al2fb_option_metabox_type] = trim($_POST[c_al2fb_option_metabox_type]);
+				$_POST[c_al2fb_option_ssp_info] = trim($_POST[c_al2fb_option_ssp_info]);
 				$_POST[c_al2fb_option_css] = trim($_POST[c_al2fb_option_css]);
 
 				update_option(c_al2fb_option_timeout, $_POST[c_al2fb_option_timeout]);
@@ -832,6 +834,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_nofilter, $_POST[c_al2fb_option_nofilter]);
 				update_option(c_al2fb_option_optout, $_POST[c_al2fb_option_optout]);
 				update_option(c_al2fb_option_use_ssp, $_POST[c_al2fb_option_use_ssp]);
+				update_option(c_al2fb_option_ssp_info, $_POST[c_al2fb_option_ssp_info]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
 				if (isset($_REQUEST['debug'])) {
@@ -2151,6 +2154,12 @@ if (!class_exists('WPAL2Facebook')) {
 				</th><td>
 					<input id="al2fb_use ssp" name="<?php echo c_al2fb_option_use_ssp; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_use_ssp)) echo ' checked="checked"'; ?> />
 					<strong>Beta!</strong>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_ssp_info"><?php _e('Heise privacy policy URL:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_text" id="al2fb_ssp_info" name="<?php echo c_al2fb_option_ssp_info; ?>" type="text" value="<?php echo get_option(c_al2fb_option_ssp_info); ?>" />
 				</td></tr>
 
 				<tr valign="top"><th scope="row" colspan="2">
@@ -3789,7 +3798,10 @@ if (!class_exists('WPAL2Facebook')) {
 				$combine = get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true);
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 				$lang = $this->Get_locale($user_ID);
-				$info = (empty($action) || $action == 'like' ? __('Like', c_al2fb_text_domain) : __('Recommend', c_al2fb_text_domain));
+				$txtinfo = (empty($action) || $action == 'like' ? __('Like', c_al2fb_text_domain) : __('Recommend', c_al2fb_text_domain));
+				$infolink = get_option(c_al2fb_option_ssp_info);
+				if (empty($infolink))
+					$infolink = 'http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook';
 
 				// Build content
 				if ($appid && !$combine && !$box && get_option(c_al2fb_option_use_ssp)) {
@@ -3802,7 +3814,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= '					"status" : "on",' . PHP_EOL;
 					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_facebook.png",' . PHP_EOL;
 					if ($lang != 'de_DE') {
-						$content .= '					"txt_info" : "' . $info . '",';
+						$content .= '					"txt_info" : "' . $txtinfo . '",';
 						$content .= '					"txt_fb_off" : "",';
 						$content .= '					"txt_fb_on" : "",';
 					}
@@ -3815,22 +3827,24 @@ if (!class_exists('WPAL2Facebook')) {
 					$content .= '				},';
 					$content .= '				twitter : {' . PHP_EOL;
 					$content .= '					"status" : "off",' . PHP_EOL;
-					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_twitter.png"' . PHP_EOL;
+					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_twitter.png",' . PHP_EOL;
+					$content .= '					"perma_option" : "off"' . PHP_EOL;
 					$content .= '				 },' . PHP_EOL;
 					$content .= '				gplus : {' . PHP_EOL;
 					$content .= '					"status" : "off",' . PHP_EOL;
-					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_gplus.png"' . PHP_EOL;
+					$content .= '					"dummy_img" : "' . $this->plugin_url . '/js/socialshareprivacy/images/dummy_gplus.png",' . PHP_EOL;
+					$content .= '					"perma_option" : "off"' . PHP_EOL;
 					$content .= '				 },' . PHP_EOL;
 					$content .= '			},';
-					if ($lang != 'de_DE') {
-						$content .= '			"info_link" : "http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook",';
+					$content .= '			"info_link" : "' . $infolink . '",';
+					if ($lang != 'de_DE')
 						$content .= '			"txt_help" : "' . __('Information', c_al2fb_text_domain) . '",' . PHP_EOL;
-					}
 					$content .= '			"css_path" : "' . $this->plugin_url . '/js/socialshareprivacy/socialshareprivacy.css",' . PHP_EOL;
 					$content .= '			"uri" : "' . $link . '"' . PHP_EOL;
 					$content .= '		});' . PHP_EOL;
 					$content .= '	});' . PHP_EOL;
 					$content .= '</script>' . PHP_EOL;
+					$content = apply_filters('al2fb_heise', $content);
 				}
 				else {
 					$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
@@ -4958,7 +4972,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Use publish_post:</td><td>' . (get_option(c_al2fb_option_use_pp) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Debug:</td><td>' . (get_option(c_al2fb_option_debug) ? 'Yes' : 'No') . '</td></tr>';
-			$info .= '<tr><td>ssp:</td><td>' . (get_option(c_al2fb_option_use_ssp) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>SSP:</td><td>' . (get_option(c_al2fb_option_use_ssp) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>SSP info:</td><td><a href="' . get_option(c_al2fb_option_ssp_info) . '">link</a></td></tr>';
 			$info .= '<tr><td>CSS:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_css), ENT_QUOTES, $charset) . '</td></tr>';
 
 			$info .= '<tr><td>wp_get_attachment_thumb_url:</td><td>' . (function_exists('wp_get_attachment_thumb_url') ? 'Yes' : 'No') . '</td></tr>';
