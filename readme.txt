@@ -702,6 +702,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: active plugins in debug info
 * Improvement: using *get_user_by* (WordPress 3.3 compatibility)
 * Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.113 =
