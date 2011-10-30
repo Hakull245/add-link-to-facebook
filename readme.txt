@@ -78,8 +78,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
-* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive")
-* Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
+* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive"), thanks!
+* Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
