@@ -79,6 +79,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive")
+* Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -700,6 +701,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: using WordPress cron to refresh Facebook comments/likes
 * Bugfix: active plugins in debug info
 * Improvement: using *get_user_by* (WordPress 3.3 compatibility)
+* Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.113 =
