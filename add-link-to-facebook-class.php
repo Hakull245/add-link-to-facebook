@@ -2070,7 +2070,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</th><td>
 					<input class="al2fb_numeric" id="al2fb_maxage" name="<?php echo c_al2fb_option_msg_maxage; ?>" type="text" value="<?php echo get_option(c_al2fb_option_msg_maxage); ?>" />
 					<span><?php _e('Days', c_al2fb_text_domain); ?></span>
-					<br /><span class="al2fb_explanation"><?php _e('Default 30 days', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Default 7 days', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -2673,7 +2673,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// Maximum age for Facebook comments/likes
 					$maxage = intval(get_option(c_al2fb_option_msg_maxage));
 					if (!$maxage)
-						$maxage = 30;
+						$maxage = 7;
 					$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
 					if (!$old) {
 						$user_ID = self::Get_user_ID($post);
@@ -4339,7 +4339,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Maximum age for Facebook comments/likes
 				$maxage = intval(get_option(c_al2fb_option_msg_maxage));
 				if (!$maxage)
-					$maxage = 30;
+					$maxage = 7;
 				$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
 
 				// Get Facebook comments
@@ -4526,7 +4526,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Maximum age for Facebook comments/likes
 			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
 			if (!$maxage)
-				$maxage = 30;
+				$maxage = 7;
 			$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
 			if (!$old) {
 				$user_ID = self::Get_user_ID($post);
@@ -5176,7 +5176,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Cron_filter($where = '') {
 			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
 			if (!$maxage)
-				$maxage = 30;
+				$maxage = 7;
 
 			return $where . " AND post_date > '" . date('Y-m-d', strtotime('-' . $maxage . ' days')) . "'";
 		}
