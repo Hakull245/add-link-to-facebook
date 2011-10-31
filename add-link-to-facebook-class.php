@@ -437,6 +437,12 @@ if (!class_exists('WPAL2Facebook')) {
 				exit();
 			}
 
+			// Facebook subscription
+			if (isset($_REQUEST['al2fb_subscription'])) {
+				self::Handle_fb_subscription();
+				exit();
+			}
+
 			// Set default capability
 			if (!get_option(c_al2fb_option_min_cap))
 				update_option(c_al2fb_option_min_cap, 'edit_posts');
@@ -1183,6 +1189,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get current user
 			global $user_ID;
 			get_currentuserinfo();
+
+			// Test
+			//print_r(self::Subscribe_fb_page($user_ID));
 
 			// Check for app share
 			if (is_multisite())
@@ -2511,13 +2520,15 @@ if (!class_exists('WPAL2Facebook')) {
 			return $likes;
 		}
 
+		// Get messages
 		function Get_fb_feed($user_ID) {
-			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
-			if (empty($page_id))
-				$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
-			if (empty($page_id))
-				$page_id = 'me';
+			$page_id = self::Get_page_id($user_ID, false);
+			//if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
+			//	$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
+			//if (empty($page_id))
+			//	$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
+			//if (empty($page_id))
+			//	$page_id = 'me';
 			$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 			$token = self::Get_access_token_by_page($user_ID, $page_id);
 			if (empty($token))
@@ -2544,6 +2555,63 @@ if (!class_exists('WPAL2Facebook')) {
 				set_transient($fb_key, $fb_url, $duration * 60);
 			}
 			return $fb_url;
+		}
+
+		// Subscribe comments
+		function Subscribe_fb_page($user_ID) {
+			// http://developers.facebook.com/docs/reference/api/realtime/
+			$token = get_user_meta($user_ID, c_al2fb_meta_access_token, true);
+			if (empty($token))
+				return null;
+
+			// Get application data
+			$app_id = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+			$app_secret = get_user_meta($user_ID, c_al2fb_meta_app_secret, true);
+
+			// Get application  token
+			$url = 'https://graph.facebook.com/oauth/access_token';
+			$query = http_build_query(array(
+				'client_id' => $app_id,
+				'client_secret' => $app_secret,
+				'grant_type' => 'client_credentials'
+			), '', '&');
+			$response = self::Request($url, $query, 'GET');
+
+			// Decode application token
+			$key = 'access_token=';
+			$token = substr($response, strpos($response, $key) + strlen($key));
+			$token = explode('&', $token);
+			$token = $token[0];
+
+			// Subscribe request
+			$url = 'https://graph.facebook.com/' . $app_id . '/subscriptions';
+			$query = http_build_query(array(
+				'access_token' => $token,
+				'object' => 'user',
+				'fields' => 'feed,likes',
+				'callback_url' => self::Redirect_uri() . '?al2fb_subscription=true',
+				'verify_token' => self::Authorize_secret()
+			), '', '&');
+			self::Request($url, $query, 'POST'); // no response
+
+			// Check subscription
+			$query = http_build_query(array('access_token' => $token), '', '&');
+			$response = self::Request($url, $query, 'GET');
+			$subscription = json_decode($response);
+			return $subscription;
+		}
+
+		function Handle_fb_subscription() {
+			if (isset($_REQUEST['hub_mode']) && $_REQUEST['hub_mode'] == 'subscribe') {
+				if ($_REQUEST['hub_verify_token'] == self::Authorize_secret()) {
+					header('Content-type: text/plain');
+					echo $_REQUEST['hub_challenge'];
+					exit();
+				}
+			}
+			else {
+				// Real-time update
+			}
 		}
 
 		// Get Facebook picture
@@ -5334,6 +5402,7 @@ class AL2FB_Widget extends WP_Widget {
 				$fb_messages = $wp_al2fb->Get_fb_feed($user_ID);
 			}
 			catch (Exception $e) {
+				print_r($e);
 			}
 
 		if ($fb_comments || $fb_messages ||
@@ -5361,7 +5430,7 @@ class AL2FB_Widget extends WP_Widget {
 			if ($fb_messages) {
 				echo '<div class="al2fb_widget_messages"><ul>';
 				foreach ($fb_messages->data as $fb_message)
-					if ($fb_message->type == 'status') {
+					if ($fb_message->type == 'status' && isset($fb_message->message)) {
 						echo '<li>';
 
 						// Image
