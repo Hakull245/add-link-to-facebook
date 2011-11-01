@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.113
+Stable tag: 1.114
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -698,6 +698,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.114 =
 * Bugfix: active plugins in debug info
 * Bugfix: filter comments to remove HTML
 * Improvement: using *get_user_by* (WordPress 3.3 compatibility)
@@ -705,11 +708,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: *urlencode* client id
 * Improvement: Heise: *perma_option* default *off*
 * New feature: Heise: filter *al2fb_heise*
-* New feature: Heise: option to set privacy policy
+* New feature: Heise: option to set privacy policy URL
 * New feature: option to use WordPress cron to refresh Facebook comments/likes (to improve performance on big/busy websites)
 * Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.113 =
 * Improvement: Heise: updated to version 1.2
@@ -785,6 +787,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.114 =
+Two bugfix, four improvements, three new features, new/updated translations
 
 = 1.113 =
 Seven improvements
