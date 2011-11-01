@@ -699,6 +699,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: active plugins in debug info
+* Bugfix: filter comments to remove HTML
 * Improvement: using *get_user_by* (WordPress 3.3 compatibility)
 * Improvement: refreshing Facebook comments/likes for default 7 days
 * Improvement: *urlencode* client id
