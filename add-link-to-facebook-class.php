@@ -267,6 +267,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Custom filters
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
 			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 2);
+			add_filter('al2fb_comment', array(&$this, 'Filter_comment'), 10, 3);
 
 			// Widget
 			add_action('widgets_init', create_function('', 'return register_widget("AL2FB_Widget");'));
@@ -3166,6 +3167,10 @@ if (!class_exists('WPAL2Facebook')) {
 			return self::Filter_standard($content, $post);
 		}
 
+		function Filter_comment($message, $comment, $post) {
+			return self::Filter_standard($message, $post);
+		}
+
 		function Filter_standard($text, $post) {
 			$user_ID = self::Get_user_ID($post);
 
@@ -3451,7 +3456,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
 			$message .= $comment->comment_content;
 			$message = apply_filters('al2fb_comment', $message, $comment, $post);
-			$message = self::Convert_encoding($user_ID, $message);
 
 			// Do not disturb WordPress
 			try {
