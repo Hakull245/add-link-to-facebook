@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
-Tested up to: 3.2
-Stable tag: 1.113
+Tested up to: 3.3
+Stable tag: 1.114
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -54,6 +54,8 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 * Doesn't work with combined like/send button
 * German icon, a language neutral icon is welcome!
 
+WordPress cron to refresh Facebook comments and likes
+
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
@@ -76,7 +78,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
-* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive")
+* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive"), thanks!
+* Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -697,8 +700,21 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
+= 1.114 =
+* Bugfix: active plugins in debug info
+* Bugfix: filter comments to remove HTML
+* Improvement: using *get_user_by* (WordPress 3.3 compatibility)
+* Improvement: refreshing Facebook comments/likes for default 7 days
+* Improvement: *urlencode* client id
+* Improvement: Heise: *perma_option* default *off*
+* New feature: Heise: filter *al2fb_heise*
+* New feature: Heise: option to set privacy policy URL
+* New feature: option to use WordPress cron to refresh Facebook comments/likes (to improve performance on big/busy websites)
+* Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.113 =
-* Improvement: updated Heise social share privacy to version 1.2
+* Improvement: Heise: updated to version 1.2
 * Improvement: Heise: preserve German texts if German language (de\_DE)
 * Improvement: Heise: added like/recommend option
 * Improvement: Heise: works for non-single pages too (version 1.1)
@@ -708,6 +724,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Hebrew (he\_IL) translation by [Sagive](http://www.sagive.co.il/ "Sagive")
 * Update FAQ
 * Updated Setup Guide
+* Tested with WordPress 3.3
 
 = 1.112 =
 * Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
@@ -770,6 +787,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.114 =
+Two bugfix, four improvements, three new features, new/updated translations
 
 = 1.113 =
 Seven improvements
