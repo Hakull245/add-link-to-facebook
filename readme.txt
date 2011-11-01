@@ -736,52 +736,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
-= 1.109 =
-* Reverted changes of version 1.108
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.108 =
-* Added notice end of support
-* Removed sending debug info
-
-= 1.107 =
-* Bugfix: error *img objects must have valid 'src' and 'href' attributes*
-* Added Czech (cs\_CZ) translation by [Artemian](http://www.artemian.cz/ "Artemian")
-
-= 1.106 =
-* Bugfix: filter *al2fb_picture* called earlier
-* Improvement: added [PHP Console](http://code.google.com/p/php-console/ "PHP Console") in debug mode
-* Improvement: made a few functions static
-* New feature: option to add meta box for custom post types
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.105 =
-* Bugfix: warning *array_merge*
-
-= 1.104 =
-* New feature: required capability to view Facebook comments
-* Improvement: default Facebook communication time-out 25 seconds
-* Improvement: more debug info (memory usage, max. execution time)
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.103 =
-* Bugfix: incorrect comment count when imported comments deleted
-
-= 1.102 =
-* Bugfix: trashed imported comments reappearing
-* Bugfix: incorrect comment count when imported comments trashed
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.101 =
-* Improvement: option to limit duration of Facebook integration
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -799,30 +753,6 @@ Three improvements
 
 = 1.111 =
 One new feature, translation update
-
-= 1.109 =
-Reverted v1.108
-
-= 1.107 =
-One bugfix
-
-= 1.106 =
-One bugfix, two improvements, one new feature, translation updates
-
-= 1.105 =
-One bugfix
-
-= 1.104 =
-One new feature, two improvements, translation updates
-
-= 1.103 =
-One bugfix
-
-= 1.102 =
-Two bugfixes
-
-= 1.101 =
-One improvement
 
 == Setup guide ==
 
