@@ -706,7 +706,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: Heise: *perma_option* default *off*
 * New feature: Heise: filter *al2fb_heise*
 * New feature: Heise: option to set privacy policy
-* New feature: option to use WordPress cron to refresh Facebook comments/likes
+* New feature: option to use WordPress cron to refresh Facebook comments/likes (to improve performance on big/busy websites)
 * Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
