@@ -3251,7 +3251,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$description = $texts['description'];
 
 			// Get name
-			$name = self::Convert_encoding($user_ID, get_the_title($post->ID));
+			$name = html_entity_decode(get_the_title($post->ID));
+			$name = self::Convert_encoding($user_ID, $name);
 			$name = apply_filters('al2fb_name', $name, $post);
 
 			// Get caption
