@@ -519,20 +519,8 @@ You have probably entered a wrong *App Secret*.
 
 = E03 I get 'Invalid redirect_uri: Given URL is not allowed by the Application configuration' =
 
-You have probably entered no or a wrong URL in the Facebook application settings,
-because you skipped a step of the setup guide.
-
-Assuming you created a Facebook application successfully:
-
-* Go to the plugin page through the WordPress *Tools* menu
-* Copy the link after *Web > Site URL & Domain*
-* Click on the *Click here to create* link
-* Navigate to *My Apps* and select the application you created before
-* Click on the *Edit Settings* link and select the tab *Web* and then *Site URL & Domain*
-* Paste into the field *Site URL* and press *Save Changes*
-* The field *Site Domain* should be empty
-
-Now try to authorize again.
+You have most probably skipped the settings part of step 2 of the
+[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide").
 
 = E04 I get 'The user hasn't authorized the application to perform this action' =
 
