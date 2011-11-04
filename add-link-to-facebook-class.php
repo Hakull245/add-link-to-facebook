@@ -117,6 +117,7 @@ define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated', 'al2fb_rated');
 define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
+define('c_al2fb_meta_stat', 'al2fb_stat');
 
 define('c_al2fb_meta_service', 'al2fb_service');
 define('c_al2fb_meta_noeula', 'al2fb_noeula');
@@ -152,7 +153,9 @@ define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
 define('c_al2fb_last_request', 'al2fb_last_request');
+define('c_al2fb_last_request_time', 'al2fb_last_request_time');
 define('c_al2fb_last_response', 'al2fb_last_response');
+define('c_al2fb_last_response_time', 'al2fb_last_response_time');
 define('c_al2fb_last_texts', 'al2fb_last_texts');
 
 // User meta
@@ -3312,6 +3315,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Log request
 				update_option(c_al2fb_last_request, print_r($query_array, true) . $query);
+				update_option(c_al2fb_last_request_time, date('c'));
 				update_option(c_al2fb_last_texts, print_r($texts, true) . $query);
 				if ($this->debug) {
 					add_post_meta($post->ID, c_al2fb_meta_log, 'request=' . print_r($query_array, true));
@@ -3323,6 +3327,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Log response
 				update_option(c_al2fb_last_response, $response);
+				update_option(c_al2fb_last_response_time, date('c'));
 				if ($this->debug)
 					add_post_meta($post->ID, c_al2fb_meta_log, 'response=' . $response);
 
@@ -5057,6 +5062,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info .= '<tr><td>Max exec time:</td><td>' . ini_get('max_execution_time') . '</td></tr>';
 			$info .= '<tr><td>Memory usage:</td><td>' . memory_get_usage() . '/' . ini_get('memory_limit') . '</td></tr>';
+			$info .= '<tr><td>Links added:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_stat, true) . '</td></tr>';
 
 			// Last posts
 			$posts = new WP_Query(array('posts_per_page' => 10));
@@ -5162,7 +5168,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last request:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_request), ENT_QUOTES, $charset) . '</pre></td></tr>';
+			$info .= '<tr><td>Last request time:</td><td>' . get_option(c_al2fb_last_request_time) . '</td></tr>';
 			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
+			$info .= '<tr><td>Last response time:</td><td>' . get_option(c_al2fb_last_response_time) . '</td></tr>';
 			$info .= '<tr><td>Last texts:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_texts), ENT_QUOTES, $charset) . '</pre></td></tr>';
 
 			$info .= '<tr><td>Cron enabled:</td><td>' . (get_option(c_al2fb_option_cron_enabled) ? 'Yes' : 'No') . '</td></tr>';
@@ -5182,8 +5190,22 @@ if (!class_exists('WPAL2Facebook')) {
 		function Update_statistics($action, $post) {
 			if (get_option(c_al2fb_option_optout))
 				return;
+			if ($action != 'add')
+				return;
 
 			try {
+				$user_ID = self::Get_user_ID($post);
+
+				// Update counter
+				$count = get_user_meta($user_ID, c_al2fb_meta_stat, true);
+				if (empty($count))
+					$count = 1;
+				else
+					$count++;
+				update_user_meta($user_ID, c_al2fb_meta_stat, $count);
+				if ($count % 10)
+					return;
+
 				$uri = self::Redirect_uri();
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 
@@ -5192,6 +5214,8 @@ if (!class_exists('WPAL2Facebook')) {
 					require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 				$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 				$plugin_version = $plugin_folder[basename($this->main_file)]['Version'];
+				if (empty($plugin_version))
+					$plugin_version = '?';
 
 				// Security
 				$hash = md5(AUTH_KEY ? AUTH_KEY : get_bloginfo('url'));
@@ -5201,18 +5225,28 @@ if (!class_exists('WPAL2Facebook')) {
 					'action' => $action,
 					'api' => 1,
 					'url' => $uri,
-					'userid' => self::Get_user_ID($post),
+					'userid' => $user_ID,
 					'charset' => get_bloginfo('charset'),
 					'lang' => get_bloginfo('language'),
-					'dir' => get_bloginfo('text_direction'),
+					'dir' => (is_rtl() ? 'rtl' : 'ltr'),
 					'zone' => get_option('gmt_offset'),
 					'ver' => $plugin_version,
 					'title' => $title,
-					'hash' => $hash
+					'hash' => $hash,
+					'count' => 10
 				), '', '&');
+				if ($this->debug) {
+					update_option(c_al2fb_last_request, $query);
+					update_option(c_al2fb_last_request_time, date('c'));
+				}
 				$response = self::Request('http://al2fb.bokhorst.biz/', $query, 'POST');
+				if ($this->debug) {
+					update_option(c_al2fb_last_response, $response);
+					update_option(c_al2fb_last_response_time, date('c'));
+				}
 				$service = json_decode($response, true);
 
+				// Check for service message
 				if (isset($service->id)) {
 					$user_ID = self::Get_user_ID($post);
 
