@@ -94,6 +94,7 @@ define('c_al2fb_meta_like_box_noheader', 'al2fb_box_noheader');
 define('c_al2fb_meta_like_box_nostream', 'al2fb_box_nostream');
 define('c_al2fb_meta_comments_posts', 'al2fb_comments_posts');
 define('c_al2fb_meta_comments_width', 'al2fb_comments_width');
+define('c_al2fb_meta_comments_auto', 'al2fb_comments_auto');
 define('c_al2fb_meta_pile_size', 'al2fb_pile_size');
 define('c_al2fb_meta_pile_width', 'al2fb_pile_width');
 define('c_al2fb_meta_pile_rows', 'al2fb_pile_rows');
@@ -247,6 +248,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
 			add_filter('the_content', array(&$this, 'The_content'), 999);
+			add_filter('comment_form_before', array(&$this, 'Comment_form_before'));
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
 			add_filter('comment_class', array(&$this, 'Comment_class'));
@@ -389,6 +391,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_like_box_nostream);
 				delete_user_meta($user_ID, c_al2fb_meta_comments_posts);
 				delete_user_meta($user_ID, c_al2fb_meta_comments_width);
+				delete_user_meta($user_ID, c_al2fb_meta_comments_auto);
 				delete_user_meta($user_ID, c_al2fb_meta_pile_size);
 				delete_user_meta($user_ID, c_al2fb_meta_pile_width);
 				delete_user_meta($user_ID, c_al2fb_meta_pile_rows);
@@ -631,6 +634,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_like_box_noheader] = null;
 			if (empty($_POST[c_al2fb_meta_like_box_nostream]))
 				$_POST[c_al2fb_meta_like_box_nostream] = null;
+			if (empty($_POST[c_al2fb_meta_comments_auto]))
+				$_POST[c_al2fb_meta_comments_auto] = null;
 			if (empty($_POST[c_al2fb_meta_pile_size]))
 				$_POST[c_al2fb_meta_pile_size] = null;
 			if (empty($_POST[c_al2fb_meta_act_header]))
@@ -751,6 +756,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_box_nostream, $_POST[c_al2fb_meta_like_box_nostream]);
 			update_user_meta($user_ID, c_al2fb_meta_comments_posts, $_POST[c_al2fb_meta_comments_posts]);
 			update_user_meta($user_ID, c_al2fb_meta_comments_width, $_POST[c_al2fb_meta_comments_width]);
+			update_user_meta($user_ID, c_al2fb_meta_comments_auto, $_POST[c_al2fb_meta_comments_auto]);
 			update_user_meta($user_ID, c_al2fb_meta_pile_size, $_POST[c_al2fb_meta_pile_size]);
 			update_user_meta($user_ID, c_al2fb_meta_pile_width, $_POST[c_al2fb_meta_pile_width]);
 			update_user_meta($user_ID, c_al2fb_meta_pile_rows, $_POST[c_al2fb_meta_pile_rows]);
@@ -1733,6 +1739,12 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input class="al2fb_numeric" id="al2fb_comments_width" name="<?php echo c_al2fb_meta_comments_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_comments_width, true); ?>" />
 				<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_comments_auto"><?php _e('Display automatically before comment form:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_comments_auto" name="<?php echo c_al2fb_meta_comments_auto; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
 
 			</table>
@@ -3639,6 +3651,14 @@ if (!class_exists('WPAL2Facebook')) {
 			return $content;
 		}
 
+		function Comment_form_before() {
+			global $post;
+			$user_ID = self::Get_user_ID($post);
+			if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true))
+				if (is_single() || is_page())
+					echo self::Get_comments_plugin($post);
+		}
+
 		// Shortcode likers names
 		function Shortcode_likers($atts) {
 			extract(shortcode_atts(array('post_id' => null), $atts));
@@ -5004,6 +5024,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info .= '<tr><td>Comments posts:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_comments_posts, true) . '</td></tr>';
 			$info .= '<tr><td>Comments width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_comments_width, true) . '</td></tr>';
+			$info .= '<tr><td>Comments auto:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Facepile size:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_size, true) . '</td></tr>';
 			$info .= '<tr><td>Facepile width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_pile_width, true) . '</td></tr>';
