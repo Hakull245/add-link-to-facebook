@@ -55,7 +55,10 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 * Doesn't work with combined like/send button
 * German icon, a language neutral icon is welcome!
 
-WordPress cron to refresh Facebook comments and likes
+Other:
+
+* WordPress cron to refresh Facebook comments and likes
+* Automatically display the Facebook comments plugin (option)
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
@@ -686,7 +689,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: display Facebook comment plugin automatically (option)
+* New feature: display Facebook comments plugin automatically (option)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
