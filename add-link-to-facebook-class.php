@@ -1745,6 +1745,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_comments_auto"><?php _e('Display automatically before comment form:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_comments_auto" name="<?php echo c_al2fb_meta_comments_auto; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true)) echo ' checked="checked"'; ?> />
+				<strong>Beta!</strong>
 			</td></tr>
 
 			</table>
