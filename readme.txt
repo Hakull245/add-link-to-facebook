@@ -169,7 +169,6 @@ else a new link will be added. See also the next question.
 = U09 How can I add a link to an existing post? =
 
 Change the post status temporarily to draft, update the post and publish the post again.
-If you want to add a link again, you should remove the custom field *al2fb_facebook_link_id* first.
 
 = U10 Will links for future posts be added? =
 
@@ -688,6 +687,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: HTML entity decode post title
+* Improvement: more debug info
+* Improvement: less statistics reports
+* Updated FAQ
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.114 =
