@@ -248,7 +248,6 @@ if (!class_exists('WPAL2Facebook')) {
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
 			add_filter('the_content', array(&$this, 'The_content'), 999);
-			add_filter('comment_form_before', array(&$this, 'Comment_form_before'));
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
 			add_filter('comment_class', array(&$this, 'Comment_class'));
@@ -1742,7 +1741,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_comments_auto"><?php _e('Display automatically before comment form:', c_al2fb_text_domain); ?></label>
+				<label for="al2fb_comments_auto"><?php _e('Display automatically:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_comments_auto" name="<?php echo c_al2fb_meta_comments_auto; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true)) echo ' checked="checked"'; ?> />
 				<strong>Beta!</strong>
@@ -3647,17 +3646,13 @@ if (!class_exists('WPAL2Facebook')) {
 						$content = $button . $content;
 					else
 						$content .= $button;
+
+				// Show comments plugin
+				if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true))
+					$content .= self::Get_comments_plugin($post);
 			}
 
 			return $content;
-		}
-
-		function Comment_form_before() {
-			global $post;
-			$user_ID = self::Get_user_ID($post);
-			if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true))
-				if (is_single() || is_page())
-					echo self::Get_comments_plugin($post);
 		}
 
 		// Shortcode likers names
