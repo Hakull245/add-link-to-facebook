@@ -58,7 +58,7 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 Other:
 
 * WordPress cron to refresh Facebook comments and likes
-* Automatically display the Facebook comments plugin (option)
+* Automatically display the Facebook comments plugin
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
