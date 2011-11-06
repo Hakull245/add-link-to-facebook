@@ -3555,8 +3555,8 @@ if (!class_exists('WPAL2Facebook')) {
 					// Generate meta tags
 					echo '<meta property="og:title" content="' . htmlspecialchars(get_the_title($post->ID), ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="' . $ogp_type . '" />' . PHP_EOL;
-					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
+					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 
 					$texts = self::Get_texts($post);
@@ -3578,21 +3578,39 @@ if (!class_exists('WPAL2Facebook')) {
 			{
 				// Check if any user has enabled the OGP
 				global $wpdb;
-				$opg = false;
-				$rows = $wpdb->get_results("SELECT meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='" . c_al2fb_meta_open_graph . "'");
+				$opg = 0;
+				$user_ID = null;
+				$rows = $wpdb->get_results("SELECT user_id, meta_value FROM " . $wpdb->usermeta . " WHERE meta_key='" . c_al2fb_meta_open_graph . "'");
 				foreach ($rows as $row)
 					if ($row->meta_value) {
-						$opg = true;
-						break;
+						$opg++;
+						$user_ID = $row->user_id;
 					}
 
 				// Generate meta tags
 				if ($opg) {
 					$charset = get_bloginfo('charset');
-					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, $charset);
+					$picture = self::Redirect_uri() . '?al2fb_image=1';
+					$description = get_bloginfo('description');
 					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
+					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
+					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					if (!empty($description))
+						echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+
+					// Single user blog
+					if ($opg == 1) {
+						$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+						if (!empty($appid))
+							echo '<meta property="fb:app_id" content="' . $appid . '" />' . PHP_EOL;
+
+						$admins = get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true);
+						if (!empty($admins))
+							echo '<meta property="fb:admins" content="' . $admins . '" />' . PHP_EOL;
+					}
 				}
 			}
 		}
