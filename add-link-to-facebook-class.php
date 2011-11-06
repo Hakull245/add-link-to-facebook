@@ -5458,7 +5458,8 @@ class AL2FB_Widget extends WP_Widget {
 				$fb_messages = $wp_al2fb->Get_fb_feed($user_ID);
 			}
 			catch (Exception $e) {
-				print_r($e);
+				if ($wp_al2fb->debug)
+					print_r($e);
 			}
 
 		if ($fb_comments || $fb_messages ||
@@ -5482,48 +5483,11 @@ class AL2FB_Widget extends WP_Widget {
 				echo '</div>';
 			}
 
-			// Messages
+			// Status messages
 			if ($fb_messages) {
-				echo '<div class="al2fb_widget_messages"><ul>';
-				foreach ($fb_messages->data as $fb_message)
-					if ($fb_message->type == 'status' && isset($fb_message->message)) {
-						echo '<li>';
-
-						// Image
-						if ($comments_nolink == 'author')
-							echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_message->from->id, 'small') . '" />';
-
-						// Author
-						if ($comments_nolink == 'link')
-							echo '<a href="' . $wp_al2fb->Get_fb_permalink($fb_message->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
-						else if ($comments_nolink == 'author')
-							echo '<a href="' . $wp_al2fb->Get_fb_profilelink($fb_message->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
-						else
-							echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</span>';
-
-						// Message
-						echo ' ';
-						echo '<span class="al2fb_widget_message">' .  htmlspecialchars($fb_message->message, ENT_QUOTES, $charset) . '</span>';
-
-						// Time
-						echo ' ';
-						$fb_time = strtotime($fb_message->created_time) + $tz_off;
-						echo '<span class="al2fb_widget_date">' . date(get_option('date_format') . ' ' . get_option('time_format'), $fb_time) . '</span>';
-
-						// Comments
-						if ($messages_comments)
-							try {
-								$fb_message_comments = $wp_al2fb->Get_fb_comments_cached($user_ID, $fb_message->id);
-								if ($fb_message_comments)
-									self::Render_fb_comments($fb_message_comments, $comments_nolink, $fb_message->id);
-							}
-							catch (Exception $e) {
-								$error = $e->getMessage();
-							}
-
-						echo '</li>';
-					}
-				echo '</ul></div>';
+				echo '<div class="al2fb_widget_messages">';
+				self::Render_fb_messages($fb_messages, $comments_nolink, $link_id, $messages_comments);
+				echo '</div>';
 			}
 
 			// Facebook like button
@@ -5606,6 +5570,60 @@ class AL2FB_Widget extends WP_Widget {
 
 			echo '</li>';
 		}
+		echo '</ul>';
+	}
+
+	// Helper render Facebook status messages
+	function Render_fb_messages($fb_messages, $comments_nolink, $link_id, $messages_comments) {
+		global $wp_al2fb;
+		$charset = get_bloginfo('charset');
+
+		// Get time zone offset
+		$tz_off = get_option('gmt_offset');
+		if (empty($tz_off))
+			$tz_off = 0;
+		else
+			$tz_off = $tz_off * 3600;
+
+		echo '<ul>';
+		foreach ($fb_messages->data as $fb_message)
+			if ($fb_message->type == 'status' && isset($fb_message->message)) {
+				echo '<li>';
+
+				// Picture
+				if ($comments_nolink == 'author')
+					echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_message->from->id, 'small') . '" />';
+
+				// Author
+				if ($comments_nolink == 'link')
+					echo '<a href="' . $wp_al2fb->Get_fb_permalink($fb_message->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
+				else if ($comments_nolink == 'author')
+					echo '<a href="' . $wp_al2fb->Get_fb_profilelink($fb_message->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
+				else
+					echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</span>';
+
+				// Message
+				echo ' ';
+				echo '<span class="al2fb_widget_message">' .  htmlspecialchars($fb_message->message, ENT_QUOTES, $charset) . '</span>';
+
+				// Time
+				echo ' ';
+				$fb_time = strtotime($fb_message->created_time) + $tz_off;
+				echo '<span class="al2fb_widget_date">' . date(get_option('date_format') . ' ' . get_option('time_format'), $fb_time) . '</span>';
+
+				// Comments on message
+				if ($messages_comments)
+					try {
+						$fb_message_comments = $wp_al2fb->Get_fb_comments_cached($user_ID, $fb_message->id);
+						if ($fb_message_comments)
+							self::Render_fb_comments($fb_message_comments, $comments_nolink, $fb_message->id);
+					}
+					catch (Exception $e) {
+						$error = $e->getMessage();
+					}
+
+				echo '</li>';
+			}
 		echo '</ul>';
 	}
 
