@@ -58,7 +58,7 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 Other:
 
 * WordPress cron to refresh Facebook comments and likes
-* Automatically display the Facebook comments plugin
+* Automatically display the Facebook comments plugin (option)
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
@@ -994,8 +994,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Shortcode messages/comments
-* Limit number of messages/comments widget
+* ...
 
 Realized features:
 
