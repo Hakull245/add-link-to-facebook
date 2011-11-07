@@ -34,8 +34,8 @@ if (version_compare(PHP_VERSION, '5.0.0', '<'))
 
 // Debug console
 if (get_option('al2fb_debug')) {
-	require_once('PhpConsole.php');
-	PhpConsole::start();
+	//require_once('PhpConsole.php');
+	//PhpConsole::start();
 }
 
 // Include support class

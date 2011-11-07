@@ -2869,7 +2869,8 @@ if (!class_exists('WPAL2Facebook')) {
 			echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
 
 			$picture_info = self::Get_link_picture($post, $user_ID);
-			echo '<img src="' . $picture_info['picture'] . '" alt="">';
+			if (!empty($picture_info['picture']))
+				echo '<img src="' . $picture_info['picture'] . '" alt="">';
 			if ($this->debug)
 				echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
 		}
