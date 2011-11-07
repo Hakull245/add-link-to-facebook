@@ -51,7 +51,6 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy"):
 
 * Facebook may or may not allow it
-* Works only on single pages
 * Doesn't work with combined like/send button
 * German icon, a language neutral icon is welcome!
 
