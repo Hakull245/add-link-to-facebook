@@ -3545,11 +3545,11 @@ if (!class_exists('WPAL2Facebook')) {
 					if (empty($link_picture)) {
 						$picture_info = self::Get_link_picture($post, $user_ID);
 						$picture = $picture_info['picture'];
-						if (empty($picture))
-							$picture = self::Redirect_uri() . '?al2fb_image=1';
 					}
 					else
 						$picture = substr($link_picture, strpos($link_picture, '=') + 1);
+					if (empty($picture))
+						$picture = self::Redirect_uri() . '?al2fb_image=1';
 
 					// Get type
 					$ogp_type = get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true);
@@ -3557,6 +3557,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$ogp_type = 'article';
 
 					// Generate meta tags
+					echo '<!-- Start AL2FB OGP -->' . PHP_EOL;
 					echo '<meta property="og:title" content="' . htmlspecialchars(get_the_title($post->ID), ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="' . $ogp_type . '" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
@@ -3575,6 +3576,10 @@ if (!class_exists('WPAL2Facebook')) {
 					$admins = get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true);
 					if (!empty($admins))
 						echo '<meta property="fb:admins" content="' . $admins . '" />' . PHP_EOL;
+
+					// Facebook i18n
+					echo '<meta property="og:locale" content="' . self::Get_locale($user_ID) . '" />' . PHP_EOL;
+					echo '<!-- End AL2FB OGP -->' . PHP_EOL;
 				}
 			}
 
@@ -3591,12 +3596,14 @@ if (!class_exists('WPAL2Facebook')) {
 						$user_ID = $row->user_id;
 					}
 
-				// Generate meta tags
 				if ($opg) {
 					$charset = get_bloginfo('charset');
 					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, $charset);
 					$picture = self::Redirect_uri() . '?al2fb_image=1';
 					$description = get_bloginfo('description');
+
+					// Generate meta tags
+					echo '<!-- Start AL2FB OGP -->' . PHP_EOL;
 					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
@@ -3614,7 +3621,11 @@ if (!class_exists('WPAL2Facebook')) {
 						$admins = get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true);
 						if (!empty($admins))
 							echo '<meta property="fb:admins" content="' . $admins . '" />' . PHP_EOL;
+
+						// Facebook i18n
+						echo '<meta property="og:locale" content="' . self::Get_locale($user_ID) . '" />' . PHP_EOL;
 					}
+					echo '<!-- End AL2FB OGP -->' . PHP_EOL;
 				}
 			}
 		}
@@ -3623,6 +3634,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function WP_print_styles() {
 			$css = get_option(c_al2fb_option_css);
 			if (!empty($css)) {
+				echo '<!-- AL2FB CSS -->' . PHP_EOL;
 				echo '<style type="text/css" media="screen">' . PHP_EOL;
 				echo $css;
 				echo '</style>' . PHP_EOL;

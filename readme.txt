@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.115
+Stable tag: 1.116
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -688,14 +688,19 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.116 =
 * New feature: display Facebook comments plugin automatically (option)
 * Bugfix: do not add link for custom post types
 * Bugfix: display no link picture when Facebook selects
+* Bugfix: default link picture OGP meta tag when Facebook selects
 * Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
+* Improvement: added *og:locale* OPG meta tag (fixes Facebook warning)
 * Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
 * Improvement: less statistics reports
+* Improvement: added comments to OPG and CSS output
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.115 =
 * Bugfix: HTML entity decode post title
@@ -745,6 +750,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.116 =
+One new feature, three bugfixes, five improvements
 
 = 1.115 =
 One bugfix, three improvements
