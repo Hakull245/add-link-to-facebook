@@ -119,6 +119,7 @@ define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated', 'al2fb_rated');
 define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
 define('c_al2fb_meta_stat', 'al2fb_stat');
+define('c_al2fb_meta_week', 'al2fb_week');
 
 define('c_al2fb_meta_service', 'al2fb_service');
 define('c_al2fb_meta_noeula', 'al2fb_noeula');
@@ -2952,7 +2953,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
-			self::Save_post($post_id);
+			self::Save_post($post->ID);
 
 			$user_ID = self::Get_user_ID($post);
 			$update = (isset($_POST[c_al2fb_action_update]) && $_POST[c_al2fb_action_update]);
@@ -5101,6 +5102,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Max exec time:</td><td>' . ini_get('max_execution_time') . '</td></tr>';
 			$info .= '<tr><td>Memory usage:</td><td>' . memory_get_usage() . '/' . ini_get('memory_limit') . '</td></tr>';
 			$info .= '<tr><td>Links added:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_stat, true) . '</td></tr>';
+			$info .= '<tr><td>Current week:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_week, true) . '</td></tr>';
 
 			// Last posts
 			$posts = new WP_Query(array('posts_per_page' => 10));
@@ -5234,16 +5236,28 @@ if (!class_exists('WPAL2Facebook')) {
 			try {
 				$user_ID = self::Get_user_ID($post);
 
+				// Get week
+				$cur_week = date('W');
+				$last_week = get_user_meta($user_ID, c_al2fb_meta_week, true);
+				if (empty($last_week) || $last_week != $cur_week)
+					update_user_meta($user_ID, c_al2fb_meta_week, $cur_week);
+
 				// Update counter
 				$count = get_user_meta($user_ID, c_al2fb_meta_stat, true);
-				if (empty($count))
+				if (empty($count) || $last_week != $cur_week)
 					$count = 1;
 				else
 					$count++;
 				update_user_meta($user_ID, c_al2fb_meta_stat, $count);
-				if ($count % 10)
-					return;
+				if ($count == 1)
+					$increment = 1;
+				else
+					if ($count % 10 || $count < 50)
+						return;
+					else
+						$increment = ($count == 50 ? 49 : 10);
 
+				// Get data
 				$uri = self::Redirect_uri();
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 
@@ -5271,7 +5285,7 @@ if (!class_exists('WPAL2Facebook')) {
 					'ver' => $plugin_version,
 					'title' => $title,
 					'hash' => $hash,
-					'count' => 10
+					'count' => $increment
 				), '', '&');
 				if ($this->debug) {
 					update_option(c_al2fb_last_request, $query);
