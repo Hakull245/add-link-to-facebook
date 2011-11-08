@@ -749,6 +749,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.116 =
+One new feature, three bugfixes, five improvements
+
 = 1.115 =
 One bugfix, three improvements
 
