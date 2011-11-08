@@ -692,9 +692,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = 1.116 =
 * New feature: display Facebook comments plugin automatically (option)
-* Bugfix: do not add link for custom post types
-* Bugfix: display no link picture when Facebook selects
-* Bugfix: default link picture OGP meta tag when Facebook selects
+* Bugfix: do not add link checkbox for custom post types
+* Bugfix: display no link picture when 'Facebook selects'
+* Bugfix: default link picture OGP meta tag when 'Facebook selects'
 * Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
 * Improvement: added *og:locale* OPG meta tag (fixes Facebook warning)
 * Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
