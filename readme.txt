@@ -693,7 +693,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: display no link picture when Facebook selects
 * Bugfix: default link picture OGP meta tag when Facebook selects
 * Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
-* Improvement: added *og:locale* OPG meta tag (fixes Facebook debug warning)
+* Improvement: added *og:locale* OPG meta tag (fixes Facebook warning)
 * Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
 * Improvement: less statistics reports
 * Improvement: added comments to OPG and CSS output
