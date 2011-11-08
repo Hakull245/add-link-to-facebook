@@ -693,6 +693,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: display no link picture when Facebook selects
 * Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
 * Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
+* Improvement: less statistics reports
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
