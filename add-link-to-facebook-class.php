@@ -225,7 +225,7 @@ if (!class_exists('WPAL2Facebook')) {
 				add_filter('manage_pages_columns', array(&$this, 'Manage_posts_columns'));
 				add_action('manage_pages_custom_column', array(&$this, 'Manage_posts_custom_column'), 10, 2);
 				add_action('add_meta_boxes', array(&$this, 'Add_meta_boxes'));
-				add_action('save_post', array(&$this, 'Save_post'));
+				//add_action('save_post', array(&$this, 'Save_post'));
 				add_action('personal_options', array(&$this, 'Personal_options'));
 				add_action('personal_options_update', array(&$this, 'Personal_options_update'));
 				add_action('edit_user_profile_update', array(&$this, 'Personal_options_update'));
@@ -2952,6 +2952,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
+			self::Save_post($post_id);
+
 			$user_ID = self::Get_user_ID($post);
 			$update = (isset($_POST[c_al2fb_action_update]) && $_POST[c_al2fb_action_update]);
 			$delete = (isset($_POST[c_al2fb_action_delete]) && $_POST[c_al2fb_action_delete]);
