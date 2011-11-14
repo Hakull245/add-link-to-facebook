@@ -5215,13 +5215,28 @@ if (!class_exists('WPAL2Facebook')) {
 				else
 					$count++;
 				update_user_meta($user_ID, c_al2fb_meta_stat, $count);
+
 				if ($count == 1)
 					$increment = 1;
-				else
-					if ($count % 10 || $count < 50)
+				else if ($count < 50)
+					return;
+				else if ($count == 50)
+					$increment = 49;
+				else if ($count <= 100)
+					if ($count % 10)
 						return;
 					else
-						$increment = ($count == 50 ? 49 : 10);
+						$increment = 10;
+				else if ($count <= 1000)
+					if ($count % 100)
+						return;
+					else
+						$increment = 100;
+				else
+					if ($count % 1000)
+						return;
+					else
+						$increment = 1000;
 
 				// Get data
 				$uri = self::Redirect_uri();
