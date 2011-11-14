@@ -30,6 +30,7 @@ define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_use_ssp', 'al2fb_use_ssp');
 define('c_al2fb_option_ssp_info', 'al2fb_ssp_info');
 define('c_al2fb_option_filter_prio', 'al2fb_filter_prio');
+define('c_al2fb_option_clean', 'al2fb_clean');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
@@ -115,7 +116,6 @@ define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
 define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
 define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
-define('c_al2fb_meta_clean', 'al2fb_clean');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated', 'al2fb_rated');
 define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
@@ -301,7 +301,6 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_option(c_al2fb_meta_picture_type);
 				delete_option(c_al2fb_meta_picture);
 				delete_option(c_al2fb_meta_page);
-				delete_option(c_al2fb_meta_clean);
 				delete_option(c_al2fb_meta_donated);
 			}
 			if ($version <= 2) {
@@ -345,82 +344,21 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin deactivation
 		function Deactivate() {
-			global $user_ID;
-			get_currentuserinfo();
+			// Stop cron job
+			wp_clear_scheduled_hook('al2fb_cron');
 
-			// Cleanup if requested
-			if (get_user_meta($user_ID, c_al2fb_meta_clean, true)) {
-				delete_user_meta($user_ID, c_al2fb_meta_client_id);
-				delete_user_meta($user_ID, c_al2fb_meta_app_secret);
-				delete_user_meta($user_ID, c_al2fb_meta_access_token);
-				delete_user_meta($user_ID, c_al2fb_meta_picture_type);
-				delete_user_meta($user_ID, c_al2fb_meta_picture);
-				delete_user_meta($user_ID, c_al2fb_meta_picture_default);
-				delete_user_meta($user_ID, c_al2fb_meta_page);
-				delete_user_meta($user_ID, c_al2fb_meta_page_owner);
-				delete_user_meta($user_ID, c_al2fb_meta_use_groups);
-				delete_user_meta($user_ID, c_al2fb_meta_group);
-				delete_user_meta($user_ID, c_al2fb_meta_caption);
-				delete_user_meta($user_ID, c_al2fb_meta_msg);
-				delete_user_meta($user_ID, c_al2fb_meta_shortlink);
-				delete_user_meta($user_ID, c_al2fb_meta_add_new_page);
-				delete_user_meta($user_ID, c_al2fb_meta_trailer);
-				delete_user_meta($user_ID, c_al2fb_meta_hyperlink);
-				delete_user_meta($user_ID, c_al2fb_meta_share_link);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_comments);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_postback);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_copy);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_likes);
-				delete_user_meta($user_ID, c_al2fb_meta_post_likers);
-				delete_user_meta($user_ID, c_al2fb_meta_post_like_button);
-				delete_user_meta($user_ID, c_al2fb_meta_like_nohome);
-				delete_user_meta($user_ID, c_al2fb_meta_like_noposts);
-				delete_user_meta($user_ID, c_al2fb_meta_like_nopages);
-				delete_user_meta($user_ID, c_al2fb_meta_like_noarchives);
-				delete_user_meta($user_ID, c_al2fb_meta_like_nocategories);
-				delete_user_meta($user_ID, c_al2fb_meta_like_layout);
-				delete_user_meta($user_ID, c_al2fb_meta_like_faces);
-				delete_user_meta($user_ID, c_al2fb_meta_like_width);
-				delete_user_meta($user_ID, c_al2fb_meta_like_action);
-				delete_user_meta($user_ID, c_al2fb_meta_like_font);
-				delete_user_meta($user_ID, c_al2fb_meta_like_colorscheme);
-				delete_user_meta($user_ID, c_al2fb_meta_like_link);
-				delete_user_meta($user_ID, c_al2fb_meta_like_top);
-				delete_user_meta($user_ID, c_al2fb_meta_like_iframe);
-				delete_user_meta($user_ID, c_al2fb_meta_post_send_button);
-				delete_user_meta($user_ID, c_al2fb_meta_post_combine_buttons);
-				delete_user_meta($user_ID, c_al2fb_meta_like_box_width);
-				delete_user_meta($user_ID, c_al2fb_meta_like_box_border);
-				delete_user_meta($user_ID, c_al2fb_meta_like_box_noheader);
-				delete_user_meta($user_ID, c_al2fb_meta_like_box_nostream);
-				delete_user_meta($user_ID, c_al2fb_meta_comments_posts);
-				delete_user_meta($user_ID, c_al2fb_meta_comments_width);
-				delete_user_meta($user_ID, c_al2fb_meta_comments_auto);
-				delete_user_meta($user_ID, c_al2fb_meta_pile_size);
-				delete_user_meta($user_ID, c_al2fb_meta_pile_width);
-				delete_user_meta($user_ID, c_al2fb_meta_pile_rows);
-				delete_user_meta($user_ID, c_al2fb_meta_reg_width);
-				delete_user_meta($user_ID, c_al2fb_meta_login_width);
-				delete_user_meta($user_ID, c_al2fb_meta_login_regurl);
-				delete_user_meta($user_ID, c_al2fb_meta_login_redir);
-				delete_user_meta($user_ID, c_al2fb_meta_login_html);
-				delete_user_meta($user_ID, c_al2fb_meta_act_width);
-				delete_user_meta($user_ID, c_al2fb_meta_act_height);
-				delete_user_meta($user_ID, c_al2fb_meta_act_header);
-				delete_user_meta($user_ID, c_al2fb_meta_act_recommend);
-				delete_user_meta($user_ID, c_al2fb_meta_open_graph);
-				delete_user_meta($user_ID, c_al2fb_meta_open_graph_type);
-				delete_user_meta($user_ID, c_al2fb_meta_open_graph_admins);
-				delete_user_meta($user_ID, c_al2fb_meta_exclude_default);
-				delete_user_meta($user_ID, c_al2fb_meta_not_post_list);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_encoding);
-				delete_user_meta($user_ID, c_al2fb_meta_fb_locale);
-				delete_user_meta($user_ID, c_al2fb_meta_clean);
-				delete_user_meta($user_ID, c_al2fb_meta_donated);
-				delete_user_meta($user_ID, c_al2fb_meta_rated);
-				delete_user_meta($user_ID, c_al2fb_meta_nospsn);
-				delete_user_meta($user_ID, c_al2fb_meta_service);
+			// Cleanup data
+			if (get_option(c_al2fb_option_clean)) {
+				global $wpdb;
+				// Delete options
+				$rows = $wpdb->get_results("SELECT option_name FROM " . $wpdb->options . " WHERE option_name LIKE 'al2fb_%'");
+				foreach ($rows as $row)
+					delete_option($row->option_name);
+
+				// Delete user meta values
+				$rows = $wpdb->get_results("SELECT user_id, meta_key FROM " . $wpdb->usermeta . " WHERE meta_key LIKE 'al2fb_%'");
+				foreach ($rows as $row)
+					delete_user_meta($row->user_id, $row->meta_key);
 			}
 		}
 
@@ -653,8 +591,6 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_exclude_default] = null;
 			if (empty($_POST[c_al2fb_meta_not_post_list]))
 				$_POST[c_al2fb_meta_not_post_list] = null;
-			if (empty($_POST[c_al2fb_meta_clean]))
-				$_POST[c_al2fb_meta_clean] = null;
 			if (empty($_POST[c_al2fb_meta_donated]))
 				$_POST[c_al2fb_meta_donated] = null;
 			if (empty($_POST[c_al2fb_meta_rated]))
@@ -781,7 +717,6 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
-			update_user_meta($user_ID, c_al2fb_meta_clean, $_POST[c_al2fb_meta_clean]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
 			update_user_meta($user_ID, c_al2fb_meta_nospsn, $_POST[c_al2fb_meta_nospsn]);
@@ -826,6 +761,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_optout] = null;
 				if (empty($_POST[c_al2fb_option_use_ssp]))
 					$_POST[c_al2fb_option_use_ssp] = null;
+				if (empty($_POST[c_al2fb_option_clean]))
+					$_POST[c_al2fb_option_clean] = null;
 
 				$_POST[c_al2fb_option_msg_refresh] = trim($_POST[c_al2fb_option_msg_refresh]);
 				$_POST[c_al2fb_option_msg_maxage] = trim($_POST[c_al2fb_option_msg_maxage]);
@@ -858,6 +795,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_use_ssp, $_POST[c_al2fb_option_use_ssp]);
 				update_option(c_al2fb_option_ssp_info, $_POST[c_al2fb_option_ssp_info]);
 				update_option(c_al2fb_option_filter_prio, $_POST[c_al2fb_option_filter_prio]);
+				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
 				if (isset($_REQUEST['debug'])) {
@@ -1996,13 +1934,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
-				<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_clean" name="<?php echo c_al2fb_meta_clean; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_clean, true)) echo ' checked="checked"'; ?> />
-				<br /><span class="al2fb_explanation"><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
-			</td></tr>
-
-			<tr valign="top"><th scope="row">
 				<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
@@ -2199,6 +2130,14 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_filter_prio"><?php _e('Priority filter \'the_content\':', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_text" id="al2fb_filter_prio" name="<?php echo c_al2fb_option_filter_prio; ?>" type="text" value="<?php echo get_option(c_al2fb_option_filter_prio); ?>" />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
+					<br /><span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?><strong></span>
+				</th><td>
+					<input id="al2fb_clean" name="<?php echo c_al2fb_option_clean; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_clean)) echo ' checked="checked"'; ?> />
+					<br /><span class="al2fb_explanation"><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row" colspan="2">
@@ -5117,6 +5056,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>SSP:</td><td>' . (get_option(c_al2fb_option_use_ssp) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>SSP info:</td><td><a href="' . get_option(c_al2fb_option_ssp_info) . '">link</a></td></tr>';
 			$info .= '<tr><td>Filter prio:</td><td>' . intval(get_option(c_al2fb_option_filter_prio)) . '</td></tr>';
+			$info .= '<tr><td>Clean:</td><td>' . (get_option(c_al2fb_option_clean) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>CSS:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_css), ENT_QUOTES, $charset) . '</td></tr>';
 
 			$info .= '<tr><td>wp_get_attachment_thumb_url:</td><td>' . (function_exists('wp_get_attachment_thumb_url') ? 'Yes' : 'No') . '</td></tr>';
