@@ -84,7 +84,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
