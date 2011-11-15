@@ -690,6 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: option to change *the_content* filter priority
 * Improvement: global clean on deactivate (option)
+* Improvement: default/custom picture on home page for single user blogs
 * Improvement: less statistics reports
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
