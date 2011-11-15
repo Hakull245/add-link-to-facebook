@@ -3551,8 +3551,17 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($opg) {
 					$charset = get_bloginfo('charset');
 					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, $charset);
-					$picture = self::Redirect_uri() . '?al2fb_image=1';
 					$description = get_bloginfo('description');
+
+					// Get link picture
+					$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
+					if ($picture_type == 'custom')
+						$picture = get_user_meta($user_ID, c_al2fb_meta_picture, true);
+					if (empty($picture)) {
+						$picture = get_user_meta($user_ID, c_al2fb_meta_picture_default, true);
+						if (empty($picture))
+							$picture = self::Redirect_uri() . '?al2fb_image=1';
+					}
 
 					// Generate meta tags
 					echo '<!-- Start AL2FB OGP -->' . PHP_EOL;
