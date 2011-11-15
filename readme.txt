@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.115
+Stable tag: 1.117
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -688,14 +688,26 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: display Facebook comments plugin automatically (option)
-* Bugfix: do not add link for custom post types
-* Bugfix: display no link picture when Facebook selects
-* Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
-* Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.117 =
+* New feature: option to change *the_content* filter priority
+* Improvement: global clean on deactivate (option)
+* Improvement: default/custom picture URL [OGP meta tag](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
 * Improvement: less statistics reports
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.116 =
+* New feature: display Facebook comments plugin automatically (option)
+* Bugfix: do not add link checkbox for custom post types
+* Bugfix: display no link picture when 'Facebook selects'
+* Bugfix: default link picture OGP meta tag when 'Facebook selects'
+* Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
+* Improvement: added *og:locale* OPG meta tag (fixes Facebook warning)
+* Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
+* Improvement: less statistics reports
+* Improvement: added comments to OPG and CSS output
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.115 =
 * Bugfix: HTML entity decode post title
@@ -730,21 +742,17 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Setup Guide
 * Tested with WordPress 3.3
 
-= 1.112 =
-* Improvement: compatibility with [GetMeCooking Recipe Template](http://wordpress.org/extend/plugins/getmecooking-recipe-template/)
-* Improvement: compatibility with [Contact Form 7 Version 3](http://wordpress.org/extend/plugins/contact-form-7/)
-* Improvement: compatibility with [Grunion contact](http://wordpress.org/extend/plugins/grunion-contact-form/)
-
-= 1.111 =
-* New feature: [Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy") (beta!)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.117 =
+One new feature, three improvements
+
+= 1.116 =
+One new feature, three bugfixes, five improvements
 
 = 1.115 =
 One bugfix, three improvements
@@ -754,12 +762,6 @@ Two bugfix, four improvements, three new features, new/updated translations
 
 = 1.113 =
 Seven improvements
-
-= 1.112 =
-Three improvements
-
-= 1.111 =
-One new feature, translation update
 
 == Setup guide ==
 
