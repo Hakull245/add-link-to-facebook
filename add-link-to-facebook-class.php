@@ -152,6 +152,7 @@ define('c_al2fb_log_redir_time', 'al2fb_redir_time');
 define('c_al2fb_log_redir_ref', 'al2fb_redir_ref');
 define('c_al2fb_log_redir_from', 'al2fb_redir_from');
 define('c_al2fb_log_redir_to', 'al2fb_redir_to');
+define('c_al2fb_log_get_token', 'al2fb_get_token');
 define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
@@ -1414,6 +1415,13 @@ if (!class_exists('WPAL2Facebook')) {
 						<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
 						<table class="form-table al2fb_border">
 						<tr valign="top"><th scope="row">
+							<label for="al2fb_page_owner"><?php _e('See all pages:', c_al2fb_text_domain); ?></label>
+						</th><td>
+							<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
+							<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
+						</td></tr>
+
+						<tr valign="top"><th scope="row">
 							<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
 						</th><td>
 							<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
@@ -1431,14 +1439,6 @@ if (!class_exists('WPAL2Facebook')) {
 								}
 ?>
 							</select>
-						</td></tr>
-
-						<tr valign="top"><th scope="row">
-							<label for="al2fb_page_owner"><?php _e('Add as page owner:', c_al2fb_text_domain); ?></label>
-						</th><td>
-							<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
-							<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
-							<br /><span class="al2fb_explanation"><?php _e('When checked links will be added as the page', c_al2fb_text_domain); ?></span>
 						</td></tr>
 						</table>
 						<p class="submit">
@@ -2339,6 +2339,7 @@ if (!class_exists('WPAL2Facebook')) {
 				'client_secret' => get_user_meta($user_ID, c_al2fb_meta_app_secret, true),
 				'code' => $_REQUEST['code']
 			), '', '&');
+			update_option(c_al2fb_log_get_token, $url . '?' . $query);
 			$response = self::Request($url, $query, 'GET');
 			$key = 'access_token=';
 			$access_token = substr($response, strpos($response, $key) + strlen($key));
@@ -4951,6 +4952,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Redirect referer:</td><td><a href="' . get_option(c_al2fb_log_redir_ref) . '" target="_blank">' . htmlspecialchars(get_option(c_al2fb_log_redir_ref), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>Redirect from:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_from), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Redirect to:</td><td><a href="' . get_option(c_al2fb_log_redir_to) . '" target="_blank">' . htmlspecialchars(get_option(c_al2fb_log_redir_to), ENT_QUOTES, $charset) . '</a></td></tr>';
+			$info .= '<tr><td>Get token:</td><td><a href="' . get_option(c_al2fb_log_get_token) . '" target="_blank">' . htmlspecialchars(get_option(c_al2fb_log_get_token), ENT_QUOTES, $charset) . '</a></td></tr>';
 			$info .= '<tr><td>Authorized:</td><td>' . (self::Is_authorized($user_ID) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Authorized time:</td><td>' . get_option(c_al2fb_log_auth_time) . '</td></tr>';
 			$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
