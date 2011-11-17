@@ -5213,41 +5213,31 @@ if (!class_exists('WPAL2Facebook')) {
 			try {
 				$user_ID = self::Get_user_ID($post);
 
-				// Get week
-				$cur_week = date('W');
+				// Get ISO 8601 year/week
+				$year = date('o');
+				$week = date('W');
 				$last_week = get_user_meta($user_ID, c_al2fb_meta_week, true);
-				if (empty($last_week) || $last_week != $cur_week)
-					update_user_meta($user_ID, c_al2fb_meta_week, $cur_week);
+				if (empty($last_week) || $last_week != $week)
+					update_user_meta($user_ID, c_al2fb_meta_week, $week);
 
 				// Update counter
 				$count = get_user_meta($user_ID, c_al2fb_meta_stat, true);
-				if (empty($count) || $last_week != $cur_week)
+				if (empty($count) || $last_week != $week)
 					$count = 1;
 				else
 					$count++;
 				update_user_meta($user_ID, c_al2fb_meta_stat, $count);
 
-				if ($count == 1)
-					$increment = 1;
-				else if ($count < 50)
-					return;
-				else if ($count == 50)
-					$increment = 49;
-				else if ($count <= 100)
-					if ($count % 10)
+				// Restrict reporting
+				if ($count > 3)
+					if ($count < 50)
 						return;
-					else
-						$increment = 10;
-				else if ($count <= 1000)
-					if ($count % 100)
+					else if ($count <= 100 && $count % 10)
 						return;
-					else
-						$increment = 100;
-				else
-					if ($count % 1000)
+					else if ($count <= 1000 && $count % 100)
 						return;
-					else
-						$increment = 1000;
+					else if ($count % 1000)
+						return;
 
 				// Get data
 				$uri = self::Redirect_uri();
@@ -5277,7 +5267,9 @@ if (!class_exists('WPAL2Facebook')) {
 					'ver' => $plugin_version,
 					'title' => $title,
 					'hash' => $hash,
-					'count' => $increment
+					'year' => $year,
+					'week' => $week,
+					'count' => $count
 				), '', '&');
 				if ($this->debug) {
 					update_option(c_al2fb_last_request, $query);
