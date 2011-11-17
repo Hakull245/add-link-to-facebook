@@ -689,6 +689,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Improvement: *See all pages* option (was before: *Add as page owner*)
+* Improvement: Heise: updated to version 1.3
 * Improvement: more debug info
 * Improvement: better statistics reports
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -733,24 +734,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.113 =
-* Improvement: Heise: updated to version 1.2
-* Improvement: Heise: preserve German texts if German language (de\_DE)
-* Improvement: Heise: added like/recommend option
-* Improvement: Heise: works for non-single pages too (version 1.1)
-* Improvement: Heise: dependency on jQuery / better URL composition
-* Improvement: Heise: workaround for referrer track (removed)
-* Improvement: compatibility with [WordTwit (Pro)](http://wordpress.org/extend/plugins/wordtwit/)
-* Added Hebrew (he\_IL) translation by [Sagive](http://www.sagive.co.il/ "Sagive")
-* Update FAQ
-* Updated Setup Guide
-* Tested with WordPress 3.3
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.118 =
+Four improvements
 
 = 1.117 =
 One new feature, three improvements
@@ -763,9 +754,6 @@ One bugfix, three improvements
 
 = 1.114 =
 Two bugfix, four improvements, three new features, new/updated translations
-
-= 1.113 =
-Seven improvements
 
 == Setup guide ==
 

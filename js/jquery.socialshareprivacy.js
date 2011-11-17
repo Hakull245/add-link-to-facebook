@@ -151,16 +151,16 @@
             }
         }
 
-        $(this).prepend('<ul class="social_share_privacy_area"></ul>');
-        var context = $('.social_share_privacy_area', this);
-
-        // canonical uri that will be shared
-        var uri = options.uri;
-        if (typeof uri === 'function') {
-            uri = uri();
-        }
-
         return this.each(function () {
+
+            $(this).prepend('<ul class="social_share_privacy_area"></ul>');
+            var context = $('.social_share_privacy_area', this);
+
+            // canonical uri that will be shared
+            var uri = options.uri;
+            if (typeof uri === 'function') {
+                uri = uri(context);
+            }
 
             //
             // Facebook
