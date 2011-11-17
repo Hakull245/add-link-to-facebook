@@ -5228,17 +5228,6 @@ if (!class_exists('WPAL2Facebook')) {
 					$count++;
 				update_user_meta($user_ID, c_al2fb_meta_stat, $count);
 
-				// Restrict reporting
-				if ($count > 3)
-					if ($count < 50)
-						return;
-					else if ($count <= 100 && $count % 10)
-						return;
-					else if ($count <= 1000 && $count % 100)
-						return;
-					else if ($count % 1000)
-						return;
-
 				// Get data
 				$uri = self::Redirect_uri();
 				$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
