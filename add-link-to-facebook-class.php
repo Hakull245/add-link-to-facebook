@@ -1305,12 +1305,12 @@ if (!class_exists('WPAL2Facebook')) {
 					<td><span class="al2fb_data"><?php _e('Anything you like, will appear as "via ..." below the message', c_al2fb_text_domain); ?></span></td>
 				</tr>
 				<tr>
-					<td><span class="al2fb_label"><strong><?php _e('Web > Site URL & Domain:', c_al2fb_text_domain); ?></strong></span></td>
+					<td><span class="al2fb_label"><strong><?php _e('Website > Site URL:', c_al2fb_text_domain); ?></strong></span></td>
 					<td><span class="al2fb_data" style="color: red;"><strong><?php echo htmlspecialchars(self::Redirect_uri(), ENT_QUOTES, $charset); ?></strong></span></td>
 				</tr>
 			</table>
 			<a href="http://developers.facebook.com/" target="_blank"><?php _e('Click here to create', c_al2fb_text_domain); ?></a>
-			<span><?php _e('and navigate to \'<em>My Apps</em>\' and then to \'<em>Set Up New App</em>\'', c_al2fb_text_domain); ?></span>
+			<span><?php _e('and navigate to \'<em>Apps</em>\' and then to \'<em>Create New App</em>\'', c_al2fb_text_domain); ?></span>
 			</div>
 
 			<table class="form-table al2fb_border">
