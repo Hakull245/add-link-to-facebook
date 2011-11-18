@@ -30,6 +30,7 @@ define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_use_ssp', 'al2fb_use_ssp');
 define('c_al2fb_option_ssp_info', 'al2fb_ssp_info');
 define('c_al2fb_option_filter_prio', 'al2fb_filter_prio');
+define('c_al2fb_option_noscript', 'al2fb_noscript');
 define('c_al2fb_option_clean', 'al2fb_clean');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');
@@ -762,6 +763,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_optout] = null;
 				if (empty($_POST[c_al2fb_option_use_ssp]))
 					$_POST[c_al2fb_option_use_ssp] = null;
+				if (empty($_POST[c_al2fb_option_noscript]))
+					$_POST[c_al2fb_option_noscript] = null;
 				if (empty($_POST[c_al2fb_option_clean]))
 					$_POST[c_al2fb_option_clean] = null;
 
@@ -796,6 +799,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_use_ssp, $_POST[c_al2fb_option_use_ssp]);
 				update_option(c_al2fb_option_ssp_info, $_POST[c_al2fb_option_ssp_info]);
 				update_option(c_al2fb_option_filter_prio, $_POST[c_al2fb_option_filter_prio]);
+				update_option(c_al2fb_option_noscript, $_POST[c_al2fb_option_noscript]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
@@ -2130,6 +2134,13 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_filter_prio"><?php _e('Priority filter \'the_content\':', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_text" id="al2fb_filter_prio" name="<?php echo c_al2fb_option_filter_prio; ?>" type="text" value="<?php echo get_option(c_al2fb_option_filter_prio); ?>" />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_noscript"><?php _e('Do not include Facebook script:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_noscript" name="<?php echo c_al2fb_option_noscript; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noscript)) echo ' checked="checked"'; ?> />
+					<br /><span class="al2fb_explanation"><?php _e('In case of conflicts with other Facebook plugins', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -3842,12 +3853,15 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Get_fb_script($user_ID) {
+			if (get_option(c_al2fb_option_noscript))
+				return '<!-- AL2FB no script -->';
 			$lang = self::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			if ($appid)
-				return 'http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1';
+				$url = 'http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1';
 			else
-				return 'http://connect.facebook.net/' . $lang . '/all.js#xfbml=1';
+				$url = 'http://connect.facebook.net/' . $lang . '/all.js#xfbml=1';
+			return '<script src="' . $url . '" type="text/javascript"></script>' . PHP_EOL;
 		}
 
 		// Get HTML for like button
@@ -3939,7 +3953,7 @@ if (!class_exists('WPAL2Facebook')) {
 				else {
 					$content = ($box ? '<div class="al2fb_like_box">' : '<div class="al2fb_like_button">');
 					$content .= '<div id="fb-root"></div>';
-					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
+					$content .= self::Get_fb_script($user_ID);
 					$content .= ($box ? '<fb:like-box' : '<fb:like');
 					$content .= ' href="' . $link . '"';
 					if (!$box && $combine)
@@ -3984,7 +3998,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Send button
 				$content = '<div class="al2fb_send_button">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
+				$content .= self::Get_fb_script($user_ID);
 				$content .= '<fb:send ref="AL2FB"';
 				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
 				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
@@ -4012,7 +4026,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Send button
 				$content = '<div class="al2fb_comments_plugin">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
+				$content .= self::Get_fb_script($user_ID);
 				$content .= '<fb:comments';
 				$content .= ' num_posts="' . (empty($posts) ? '2' : $posts) . '"';
 				$content .= ' width="' . (empty($width) ? '500' : $width) . '"';
@@ -4041,7 +4055,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Face pile
 				$content = '<div class="al2fb_face_pile">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
+				$content .= self::Get_fb_script($user_ID);
 				$content .= '<fb:facepile';
 				$content .= ' size="' . (empty($size) ? 'small' : $size) . '"';
 				$content .= ' width="' . (empty($width) ? '200' : $width) . '"';
@@ -4100,7 +4114,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($appid) {
 					$content = '<div class="al2fb_registration">';
 					$content .= '<div id="fb-root"></div>';
-					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>';
+					$content .= self::Get_fb_script($user_ID);
 					$content .= '<fb:registration';
 					$content .= ' fields="' . $fields . '"';
 					$content .= ' redirect-uri="' . self::Redirect_uri() . '?al2fb_reg=true&user=' . $user_ID . '&uri=' . urlencode($_SERVER['REQUEST_URI']) . '"';
@@ -4135,7 +4149,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($appid) {
 					$content = '<div class="al2fb_login">';
 					$content .= '<div id="fb-root"></div>';
-					$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>' . PHP_EOL;
+					$content .= self::Get_fb_script($user_ID);
 					$content .= '<script type="text/javascript">' . PHP_EOL;
 					$content .= 'function al2fb_login() {' . PHP_EOL;
 					$content .= '	FB.getLoginStatus(function(response) {' . PHP_EOL;
@@ -4181,7 +4195,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Build content
 				$content = '<div class="al2fb_activity_feed">';
 				$content .= '<div id="fb-root"></div>';
-				$content .= '<script src="' . self::Get_fb_script($user_ID) . '" type="text/javascript"></script>' . PHP_EOL;
+				$content .= self::Get_fb_script($user_ID);
 				$content .= '<fb:activity';
 				$content .= ' site="' . $domain . '"';
 				$content .= ' width="' . (empty($width) ? '300' : $width) . '"';
@@ -5067,6 +5081,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>SSP:</td><td>' . (get_option(c_al2fb_option_use_ssp) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>SSP info:</td><td><a href="' . get_option(c_al2fb_option_ssp_info) . '">link</a></td></tr>';
 			$info .= '<tr><td>Filter prio:</td><td>' . intval(get_option(c_al2fb_option_filter_prio)) . '</td></tr>';
+			$info .= '<tr><td>No script:</td><td>' . (get_option(c_al2fb_option_noscript) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Clean:</td><td>' . (get_option(c_al2fb_option_clean) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>CSS:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_css), ENT_QUOTES, $charset) . '</td></tr>';
 
