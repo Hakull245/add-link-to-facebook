@@ -688,6 +688,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: option to disable Facebook script include
 * Improvement: *See all pages* option (was before: *Add as page owner*)
 * Improvement: Heise: updated to version 1.3
 * Improvement: more debug info
@@ -742,7 +743,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.118 =
-Four improvements
+One new feature, four improvements, translation updates
 
 = 1.117 =
 One new feature, three improvements
