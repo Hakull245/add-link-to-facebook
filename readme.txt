@@ -18,7 +18,7 @@ It is possible to exclude individual post links from being added to your wall, p
 
 **[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")**
 
-There is support for multi-user and network sites and shortcodes will be processed.
+There is support for multi-user and network sites and shortcodes will be processed (option).
 It works for remote publishing too, for example from [Android](http://android.wordpress.org/ "Android") or [iOS](http://ios.wordpress.org/ "iOS") (iPhone, iPad) powered devices
 or using [Window Live Writer](http://explore.live.com/windows-live-writer "Window Live Writer")
 or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo](http://blogilo.gnufolks.org/ "Blogilo").
@@ -39,7 +39,8 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
 * Filters for all information sent to Facebook
-* WordPress cron to refresh imported Facebook comments/likes (option)
+* WordPress cron to refresh imported Facebook comments and likes (option)
+* Automatically display the Facebook comments plugin (option)
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
@@ -53,11 +54,6 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 * Facebook may or may not allow it
 * Doesn't work with combined like/send button
 * German icon, a language neutral icon is welcome!
-
-Other:
-
-* WordPress cron to refresh Facebook comments and likes (option)
-* Automatically display the Facebook comments plugin (option)
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
@@ -688,7 +684,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: tab pages for setup
 * New feature: option to disable Facebook script include
+* Bugfix: admin HTML/CSS
 * Improvement: *See all pages* option (was before: *Add as page owner*)
 * Improvement: Heise: updated to version 1.3
 * Improvement: more debug info
