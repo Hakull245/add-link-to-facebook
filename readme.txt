@@ -684,7 +684,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: tab pages for setup
+* New feature: tab pages for the plugin options
 * New feature: option to disable Facebook script include
 * Bugfix: admin HTML/CSS
 * Improvement: *See all pages* option (was before: *Add as page owner*)
