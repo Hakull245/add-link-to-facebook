@@ -419,11 +419,12 @@ if (!class_exists('WPAL2Facebook')) {
 				wp_enqueue_style('al2fb_style');
 			}
 
-			// Social share privacy
-			if (get_option(c_al2fb_option_use_ssp)) {
+			if (get_option(c_al2fb_option_use_ssp) || is_admin())
 				wp_enqueue_script('jquery');
+
+			// Social share privacy
+			if (get_option(c_al2fb_option_use_ssp))
 				wp_enqueue_script('socialshareprivacy', $this->plugin_url . '/js/jquery.socialshareprivacy.js', array('jquery'));
-			}
 
 			// Check user capability
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
@@ -1295,7 +1296,6 @@ if (!class_exists('WPAL2Facebook')) {
 			<input type="hidden" name="al2fb_action" value="config">
 			<?php wp_nonce_field(c_al2fb_nonce_form); ?>
 
-			<div id="al2fb_app_private">
 			<div class="al2fb_instructions">
 			<h4><?php _e('To get an App ID and App Secret you have to create a Facebook application', c_al2fb_text_domain); ?></h4>
 			<span><strong><?php _e('You have to fill in the following:', c_al2fb_text_domain); ?></strong></span>
@@ -1361,7 +1361,6 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 ?>
 			</table>
-			</div>
 
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -1370,6 +1369,24 @@ if (!class_exists('WPAL2Facebook')) {
 			<hr />
 			<h3><?php _e('Additional settings', c_al2fb_text_domain); ?></h3>
 
+			<ul class="tabs">
+				<li><a href="#tab_picture"><?php _e('Picture', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_page_group"><?php _e('Page/group', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_appearance"><?php _e('Appearance', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_comments"><?php _e('Comments', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_like_button"><?php _e('Like button', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_like_box"><?php _e('Like box', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_comments_plugin"><?php _e('Comments plugin', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_face_pile"><?php _e('Face pile', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_login"><?php _e('Login', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_activity_feed"><?php _e('Activity feed', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_common"><?php _e('Common', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_misc"><?php _e('Misc.', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#tab_admin"><?php _e('Admin', c_al2fb_text_domain); ?></a></li>
+			</ul>
+
+			<div class="tab_container">
+			<div id="tab_picture" class="tab_content">
 			<h4><?php _e('Link picture', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1402,8 +1419,11 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
+
+			<div id="tab_page_group" class="tab_content">
 <?php
-			if (self::Is_authorized($user_ID))
+			if (self::Is_authorized($user_ID)) {
 				try {
 					if (!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ||
 						!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
@@ -1491,7 +1511,13 @@ if (!class_exists('WPAL2Facebook')) {
 				catch (Exception $e) {
 					echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
 				}
-?>
+			}
+			else { ?>
+				<h4><?php _e('First authorize the plugin', c_al2fb_text_domain); ?></h4>
+<?php		} ?>
+			</div>
+
+			<div id="tab_appearance" class="tab_content">
 			<h4><?php _e('Link appearance', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1544,7 +1570,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_comments" class="tab_content">
 			<h4><?php _e('Facebook comments', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1591,7 +1619,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_like_button" class="tab_content">
 			<h4><?php _e('Facebook like button', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1646,7 +1676,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_like_box" class="tab_content">
 			<h4><?php _e('Facebook like box', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1673,7 +1705,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_comments_plugin" class="tab_content">
 			<h4><?php _e('Facebook comments plugin', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1694,14 +1728,15 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_comments_auto"><?php _e('Display automatically after post:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_comments_auto" name="<?php echo c_al2fb_meta_comments_auto; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true)) echo ' checked="checked"'; ?> />
-				<strong>Beta!</strong>
 			</td></tr>
 
 			</table>
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_face_pile" class="tab_content">
 			<h4><?php _e('Facebook face pile', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1725,7 +1760,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_login" class="tab_content">
 			<h4><?php _e('Facebook login', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1768,7 +1805,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_activity_feed" class="tab_content">
 			<h4><?php _e('Facebook activity feed', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1802,7 +1841,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_common" class="tab_content">
 			<h4><?php _e('Facebook common', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1907,7 +1948,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_misc" class="tab_content">
 			<a name="misc"></a>
 			<h4><?php _e('Miscelaneous settings', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
@@ -1947,7 +1990,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_rated"><?php _e('I have rated this plugin:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_rated" name="<?php echo c_al2fb_meta_rated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_rated, true)) echo ' checked="checked"'; ?> />
-			</td>
+			</td></tr>
 
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_nospsn"><?php _e('I don\'t want to support this plugin with the Sustainable Plugins Sponsorship Network:', c_al2fb_text_domain); ?></label>
@@ -1958,10 +2001,11 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+			</div>
 
+			<div id="tab_admin" class="tab_content">
 <?php		if (current_user_can('manage_options')) { ?>
-				<h3><?php _e('Administrator options', c_al2fb_text_domain); ?></h3>
-
+				<h4><?php _e('Administrator options', c_al2fb_text_domain); ?></h4>
 				<table class="form-table al2fb_border">
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_timeout"><?php _e('Facebook communication timeout:', c_al2fb_text_domain); ?></label>
@@ -2045,7 +2089,6 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_cron"><?php _e('Refresh Facebook comments in the background:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input id="al2fb_cron" name="<?php echo c_al2fb_option_cron_enabled; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_cron_enabled)) echo ' checked="checked"'; ?> />
-					<strong>Beta!</strong>
 					<br /><span class="al2fb_explanation"><?php _e('Using Wordress cron', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
@@ -2145,7 +2188,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
-					<br /><span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?><strong></span>
+					<br />
+					<span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?></strong></span>
 				</th><td>
 					<input id="al2fb_clean" name="<?php echo c_al2fb_option_clean; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_clean)) echo ' checked="checked"'; ?> />
 					<br /><span class="al2fb_explanation"><?php _e('All data, except link id\'s', c_al2fb_text_domain); ?></span>
@@ -2160,7 +2204,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</table>
 
 <?php			if (isset($_REQUEST['debug'])) { ?>
-					<h3><?php _e('Debug options', c_al2fb_text_domain); ?></h3>
+					<h4><?php _e('Debug options', c_al2fb_text_domain); ?></h4>
 					<table class="form-table al2fb_border">
 					<tr valign="top"><th scope="row">
 						<label for="al2fb_siteurl"><?php _e('Use site URL as request URI:', c_al2fb_text_domain); ?></label>
@@ -2190,12 +2234,34 @@ if (!class_exists('WPAL2Facebook')) {
 				<p class="submit">
 				<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 				</p>
+<?php
+			}
+			else { ?>
+				<h4><?php _e('Only for administrators', c_al2fb_text_domain); ?></h4>
 <?php		} ?>
+			</div>
 
+			</div>
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					$('.tab_content').hide();
+					$('ul.tabs li:first').addClass('active').show();
+					$('.tab_content:first').show();
+					$('ul.tabs li').click(function() {
+						$('ul.tabs li').removeClass('active');
+						$(this).addClass('active');
+						$('.tab_content').hide();
+						var activeTab = $(this).find('a').attr('href');
+						$(activeTab).show();
+						return false;
+					});
+				});
+			</script>
 			</form>
 			</div>
 			</div>
 <?php
+			// http://www.sohtanaka.com/web-design/simple-tabs-w-css-jquery/
 		}
 
 		function Render_SPSN() {
