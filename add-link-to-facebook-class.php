@@ -1173,6 +1173,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 			if (isset($_REQUEST['debug']))
 				$config_url .= '&debug=1';
+			if (isset($_REQUEST['tabs']))
+				$config_url .= '&tabs=0';
 
 			// Decode picture type
 			$pic_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
@@ -2242,36 +2244,45 @@ if (!class_exists('WPAL2Facebook')) {
 			</div>
 
 			</div>
+			<a href="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)) . '&tabs=0'; ?>"><?php _e('No tabs', c_al2fb_text_domain); ?></a>
+
 			<script type="text/javascript">
 				jQuery(document).ready(function($) {
-					$('.al2fb_tab_content').hide();
-					if (window.location.search.substr(window.location.search.length - 4) == 'rate') {
-						$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
-						$('#al2fb_tab_misc').show();
-						$('html, body').animate({scrollTop: $("#al2fb_tab_settings").offset().top}, 2000);
+					if (window.location.search.substr(window.location.search.length - 6) == 'tabs=0') {
+						$('#al2fb_tab_settings').hide();
+						$('.al2fb_tab_container').removeClass('al2fb_tab_container');
+						$('.al2fb_tab_content').removeClass('al2fb_tab_content');
 					}
 					else {
-						$('ul.al2fb_tabs li:first').addClass('active').show();
-						$('.al2fb_tab_content:first').show();
+						$('.al2fb_tab_content').hide();
+						if (window.location.search.substr(window.location.search.length - 4) == 'rate') {
+							$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
+							$('#al2fb_tab_misc').show();
+							$('html, body').animate({scrollTop: $('#al2fb_tab_settings').offset().top}, 2000);
+						}
+						else {
+							$('ul.al2fb_tabs li:first').addClass('active').show();
+							$('.al2fb_tab_content:first').show();
+						}
+
+						$('ul.al2fb_tabs li').click(function() {
+							$('ul.al2fb_tabs li').removeClass('active');
+							$(this).addClass('active');
+							$('.al2fb_tab_content').hide();
+							var activeTab = $(this).find('a').attr('href');
+							$(activeTab).show();
+							return false;
+						});
+
+						$('#al2fb_spsn').click(function() {
+							$('ul.al2fb_tabs li').removeClass('active');
+							$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
+							$('.al2fb_tab_content').hide();
+							$('#al2fb_tab_misc').show();
+							$('html, body').animate({scrollTop: $('#al2fb_tab_settings').offset().top}, 2000);
+							return false;
+						});
 					}
-
-					$('ul.al2fb_tabs li').click(function() {
-						$('ul.al2fb_tabs li').removeClass('active');
-						$(this).addClass('active');
-						$('.al2fb_tab_content').hide();
-						var activeTab = $(this).find('a').attr('href');
-						$(activeTab).show();
-						return false;
-					});
-
-					$('#al2fb_spsn').click(function() {
-						$('ul.al2fb_tabs li').removeClass('active');
-						$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
-						$('.al2fb_tab_content').hide();
-						$('#al2fb_tab_misc').show();
-						$('html, body').animate({scrollTop: $("#al2fb_tab_settings").offset().top}, 2000);
-						return false;
-					});
 				});
 			</script>
 			</form>
