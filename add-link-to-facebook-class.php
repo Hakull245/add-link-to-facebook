@@ -2244,7 +2244,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</div>
 
 			</div>
-			<a href="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)) . '&tabs=0'; ?>"><?php _e('No tabs', c_al2fb_text_domain); ?></a>
+			<a href="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)) . '&tabs=0'; ?>"><?php _e('No tab pages', c_al2fb_text_domain); ?></a>
 
 			<script type="text/javascript">
 				jQuery(document).ready(function($) {
