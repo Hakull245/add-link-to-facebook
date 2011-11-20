@@ -1035,7 +1035,7 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<div id="message" class="error fade al2fb_error"><p>';
 				$msg = __('If you like the Add Link to Facebook plugin, please rate it on <a href="[wordpress]" target="_blank">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option "I have rated this plugin" on the <a href="[settings]">settings page</a>.', c_al2fb_text_domain);
 				$msg = str_replace('[wordpress]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/', $msg);
-				$msg = str_replace('[settings]', $url, $msg);
+				$msg = str_replace('[settings]', $url . '&rate', $msg);
 				echo $msg . '</p></div>';
 			}
 
@@ -1173,6 +1173,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 			if (isset($_REQUEST['debug']))
 				$config_url .= '&debug=1';
+			if (isset($_REQUEST['tabs']))
+				$config_url .= '&tabs=0';
 
 			// Decode picture type
 			$pic_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
@@ -1369,24 +1371,24 @@ if (!class_exists('WPAL2Facebook')) {
 			<hr />
 			<h3><?php _e('Additional settings', c_al2fb_text_domain); ?></h3>
 
-			<ul class="tabs">
-				<li><a href="#tab_picture"><?php _e('Picture', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_page_group"><?php _e('Page/group', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_appearance"><?php _e('Appearance', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_comments"><?php _e('Comments', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_like_button"><?php _e('Like button', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_like_box"><?php _e('Like box', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_comments_plugin"><?php _e('Comments plugin', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_face_pile"><?php _e('Face pile', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_login"><?php _e('Login', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_activity_feed"><?php _e('Activity feed', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_common"><?php _e('Common', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_misc"><?php _e('Misc.', c_al2fb_text_domain); ?></a></li>
-				<li><a href="#tab_admin"><?php _e('Admin', c_al2fb_text_domain); ?></a></li>
+			<ul class="al2fb_tabs" id="al2fb_tab_settings">
+				<li><a href="#al2fb_tab_picture"><?php _e('Picture', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_page_group"><?php _e('Page/group', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_appearance"><?php _e('Appearance', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_comments"><?php _e('Comments', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_like_button"><?php _e('Like button', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_like_box"><?php _e('Like box', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_comments_plugin"><?php _e('Comments plugin', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_face_pile"><?php _e('Face pile', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_login"><?php _e('Login', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_activity_feed"><?php _e('Activity feed', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_common"><?php _e('Common', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_misc"><?php _e('Misc.', c_al2fb_text_domain); ?></a></li>
+				<li><a href="#al2fb_tab_admin"><?php _e('Admin', c_al2fb_text_domain); ?></a></li>
 			</ul>
 
-			<div class="tab_container">
-			<div id="tab_picture" class="tab_content">
+			<div class="al2fb_tab_container">
+			<div id="al2fb_tab_picture" class="al2fb_tab_content">
 			<h4><?php _e('Link picture', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1398,7 +1400,9 @@ if (!class_exists('WPAL2Facebook')) {
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br />
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="avatar"<?php echo $pic_avatar; ?>><?php _e('Avatar of author', c_al2fb_text_domain); ?><br />
-				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br />
+<?php 			if ($pic_type == 'userphoto' || $this->debug) { ?>
+					<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br />
+<?php			} ?>
 				<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br />
 			</td></tr>
 
@@ -1421,7 +1425,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_page_group" class="tab_content">
+			<div id="al2fb_tab_page_group" class="al2fb_tab_content">
 <?php
 			if (self::Is_authorized($user_ID)) {
 				try {
@@ -1517,7 +1521,7 @@ if (!class_exists('WPAL2Facebook')) {
 <?php		} ?>
 			</div>
 
-			<div id="tab_appearance" class="tab_content">
+			<div id="al2fb_tab_appearance" class="al2fb_tab_content">
 			<h4><?php _e('Link appearance', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1572,7 +1576,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_comments" class="tab_content">
+			<div id="al2fb_tab_comments" class="al2fb_tab_content">
 			<h4><?php _e('Facebook comments', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1621,7 +1625,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_like_button" class="tab_content">
+			<div id="al2fb_tab_like_button" class="al2fb_tab_content">
 			<h4><?php _e('Facebook like button', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1678,7 +1682,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_like_box" class="tab_content">
+			<div id="al2fb_tab_like_box" class="al2fb_tab_content">
 			<h4><?php _e('Facebook like box', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1707,7 +1711,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_comments_plugin" class="tab_content">
+			<div id="al2fb_tab_comments_plugin" class="al2fb_tab_content">
 			<h4><?php _e('Facebook comments plugin', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1736,7 +1740,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_face_pile" class="tab_content">
+			<div id="al2fb_tab_face_pile" class="al2fb_tab_content">
 			<h4><?php _e('Facebook face pile', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1762,7 +1766,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_login" class="tab_content">
+			<div id="al2fb_tab_login" class="al2fb_tab_content">
 			<h4><?php _e('Facebook login', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1807,7 +1811,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_activity_feed" class="tab_content">
+			<div id="al2fb_tab_activity_feed" class="al2fb_tab_content">
 			<h4><?php _e('Facebook activity feed', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1843,7 +1847,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_common" class="tab_content">
+			<div id="al2fb_tab_common" class="al2fb_tab_content">
 			<h4><?php _e('Facebook common', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 
@@ -1950,7 +1954,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_misc" class="tab_content">
+			<div id="al2fb_tab_misc" class="al2fb_tab_content">
 			<a name="misc"></a>
 			<h4><?php _e('Miscelaneous settings', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
@@ -2003,7 +2007,7 @@ if (!class_exists('WPAL2Facebook')) {
 			</p>
 			</div>
 
-			<div id="tab_admin" class="tab_content">
+			<div id="al2fb_tab_admin" class="al2fb_tab_content">
 <?php		if (current_user_can('manage_options')) { ?>
 				<h4><?php _e('Administrator options', c_al2fb_text_domain); ?></h4>
 				<table class="form-table al2fb_border">
@@ -2242,26 +2246,51 @@ if (!class_exists('WPAL2Facebook')) {
 			</div>
 
 			</div>
+			<a href="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)) . '&tabs=0'; ?>"><?php _e('No tab pages', c_al2fb_text_domain); ?></a>
+
 			<script type="text/javascript">
 				jQuery(document).ready(function($) {
-					$('.tab_content').hide();
-					$('ul.tabs li:first').addClass('active').show();
-					$('.tab_content:first').show();
-					$('ul.tabs li').click(function() {
-						$('ul.tabs li').removeClass('active');
-						$(this).addClass('active');
-						$('.tab_content').hide();
-						var activeTab = $(this).find('a').attr('href');
-						$(activeTab).show();
-						return false;
-					});
+					if (window.location.search.substr(window.location.search.length - 6) == 'tabs=0') {
+						$('#al2fb_tab_settings').hide();
+						$('.al2fb_tab_container').removeClass('al2fb_tab_container');
+						$('.al2fb_tab_content').removeClass('al2fb_tab_content');
+					}
+					else {
+						$('.al2fb_tab_content').hide();
+						if (window.location.search.substr(window.location.search.length - 4) == 'rate') {
+							$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
+							$('#al2fb_tab_misc').show();
+							$('html, body').animate({scrollTop: $('#al2fb_tab_settings').offset().top}, 2000);
+						}
+						else {
+							$('ul.al2fb_tabs li:first').addClass('active').show();
+							$('.al2fb_tab_content:first').show();
+						}
+
+						$('ul.al2fb_tabs li').click(function() {
+							$('ul.al2fb_tabs li').removeClass('active');
+							$(this).addClass('active');
+							$('.al2fb_tab_content').hide();
+							var activeTab = $(this).find('a').attr('href');
+							$(activeTab).show();
+							return false;
+						});
+
+						$('#al2fb_spsn').click(function() {
+							$('ul.al2fb_tabs li').removeClass('active');
+							$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
+							$('.al2fb_tab_content').hide();
+							$('#al2fb_tab_misc').show();
+							$('html, body').animate({scrollTop: $('#al2fb_tab_settings').offset().top}, 2000);
+							return false;
+						});
+					}
 				});
 			</script>
 			</form>
 			</div>
 			</div>
 <?php
-			// http://www.sohtanaka.com/web-design/simple-tabs-w-css-jquery/
 		}
 
 		function Render_SPSN() {
@@ -2275,7 +2304,7 @@ if (!class_exists('WPAL2Facebook')) {
 				</script>
 				<a class="al2fb_spsn" href="http://pluginsponsors.com/privacy.html" target="_blank">
 				<?php _e('Privacy in the Sustainable Plugins Sponsorship Network', c_al2fb_text_domain); ?></a>
-				<a class="al2fb_spsn" href="#misc"><?php _e('Disable', c_al2fb_text_domain); ?></a>
+				<a class="al2fb_spsn" href="#misc" id="al2fb_spsn"><?php _e('Disable', c_al2fb_text_domain); ?></a>
 <?php
 			}
 		}
@@ -2287,6 +2316,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="al2fb_resources">
 			<h3><?php _e('Resources', c_al2fb_text_domain); ?></h3>
 			<ul>
+			<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/" target="_blank"><?php _e('Setup guide & user manual', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
 			<li><a href="http://forum.bokhorst.biz/add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
 			<li><a href="<?php echo 'tools.php?page=' . plugin_basename($this->main_file) . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
