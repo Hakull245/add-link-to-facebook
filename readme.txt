@@ -13,7 +13,7 @@ Automatically add links to published posts or pages to your Facebook wall, pages
 Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
-It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
+It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image, avatar of the author or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
 
 **[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")**
