@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-11-19 11:40+0100\n"
+"PO-Revision-Date: 2011-11-20 22:42+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -485,8 +485,8 @@ msgstr "Zet ook het tonen van Facebook avatars uit"
 msgid "and navigate to '<em>Apps</em>' and then to '<em>Create New App</em>'"
 msgstr "en navigeer naar '<em>Apps</em>' en dan naar '<em>Create New App</em>'"
 
-msgid "Facebook locale"
-msgstr "Facebook locale"
+msgid "Facebook locale:"
+msgstr "Facebook locale:"
 
 msgid "Do not change if no need"
 msgstr "Niet veranderen wanneer niet nodig"
@@ -536,8 +536,8 @@ msgstr "Facebook communicatie timeout:"
 msgid "Seconds"
 msgstr "Seconden"
 
-msgid "Default 30 seconds"
-msgstr "Standaard 30 seconden"
+msgid "Default 15 seconds"
+msgstr "Standaard 15 seconden"
 
 msgid "Please check if this is a correct, reachable e-mail address"
 msgstr "Controleer a.u.b. of dit een juist, bereikbaar e-mail adres is"
@@ -823,4 +823,7 @@ msgstr "Handleidingen"
 
 msgid "No tab pages"
 msgstr "Geen tab pagina's"
+
+msgid "Debug:"
+msgstr "Debug:"
 
