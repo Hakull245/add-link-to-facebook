@@ -685,6 +685,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.118 =
