@@ -4109,6 +4109,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get HTML for comments plugin
 		function Get_comments_plugin($post) {
+			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return '';
+
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
 				// Get options
