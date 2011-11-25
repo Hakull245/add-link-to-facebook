@@ -684,7 +684,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: *Do not integrate comments* works for auto comments plugin too
+* New feature: *Exclude these tags*
+* Bugfix: *Do not integrate comments* for cron
+* Improvement: *Do not integrate comments* for auto comments plugin
+* Improvement: honor *Discussion / Allow comments* for comment integration
+* Improvement: *Add links for new pages* moved to *Miscelaneous*
 * Improvement: better debug info
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")

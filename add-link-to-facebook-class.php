@@ -21,6 +21,7 @@ define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
+define('c_al2fb_option_exclude_tag', 'al2fb_exclude_tag');
 define('c_al2fb_option_metabox_type', 'al2fb_metabox_type');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
@@ -775,6 +776,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_max_text] = trim($_POST[c_al2fb_option_max_text]);
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
 				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
+				$_POST[c_al2fb_option_exclude_tag] = trim($_POST[c_al2fb_option_exclude_tag]);
 				$_POST[c_al2fb_option_metabox_type] = trim($_POST[c_al2fb_option_metabox_type]);
 				$_POST[c_al2fb_option_ssp_info] = trim($_POST[c_al2fb_option_ssp_info]);
 				$_POST[c_al2fb_option_filter_prio] = trim($_POST[c_al2fb_option_filter_prio]);
@@ -791,6 +793,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
+				update_option(c_al2fb_option_exclude_tag, $_POST[c_al2fb_option_exclude_tag]);
 				update_option(c_al2fb_option_metabox_type, $_POST[c_al2fb_option_metabox_type]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
@@ -1564,12 +1567,6 @@ if (!class_exists('WPAL2Facebook')) {
 				<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
 				<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
 			</td></tr>
-
-			<tr valign="top"><th scope="row">
-				<label for="al2fb_add_new_page"><?php _e('Add links for new pages:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_add_new_page" name="<?php echo c_al2fb_meta_add_new_page; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_add_new_page, true)) echo ' checked="checked"'; ?> />
-			</td></tr>
 			</table>
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -1971,6 +1968,12 @@ if (!class_exists('WPAL2Facebook')) {
 			</td></tr>
 
 			<tr valign="top"><th scope="row">
+				<label for="al2fb_add_new_page"><?php _e('Add links for new pages:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<input id="al2fb_add_new_page" name="<?php echo c_al2fb_meta_add_new_page; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_add_new_page, true)) echo ' checked="checked"'; ?> />
+			</td></tr>
+
+			<tr valign="top"><th scope="row">
 				<label for="al2fb_fb_encoding"><?php _e('Facebook character encoding:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_fb_encoding" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_encoding; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true); ?>" />
@@ -2123,6 +2126,13 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_exclude_cat"><?php _e('Exclude these categories:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_text" id="al2fb_exclude_cat" name="<?php echo c_al2fb_option_exclude_cat; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_cat); ?>" />
+					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_exclude_tag"><?php _e('Exclude these tags:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input class="al2fb_text" id="al2fb_exclude_tag" name="<?php echo c_al2fb_option_exclude_tag; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_tag); ?>" />
 					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
@@ -3050,6 +3060,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$add_new_page = get_user_meta($user_ID, c_al2fb_meta_add_new_page, true);
 
+					// Exclude categories
 					$exclude_category = false;
 					$categories = get_the_category($post->ID);
 					$excluding_categories = explode(',', get_option(c_al2fb_option_exclude_cat));
@@ -3058,6 +3069,7 @@ if (!class_exists('WPAL2Facebook')) {
 							if (in_array($category->cat_ID, $excluding_categories))
 								$exclude_category = true;
 
+					// Compatibility
 					$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 					$ex_custom_types[] = 'nav_menu_item';
 					$ex_custom_types[] = 'recipe';
@@ -3068,11 +3080,20 @@ if (!class_exists('WPAL2Facebook')) {
 					$ex_custom_types[] = 'spam';
 					$ex_custom_types[] = 'twitter';
 
+					// Exclude tags
+					$exclude_tag = false;
+					$tags = get_the_tags($post->ID);
+					$excluding_tags = explode(',', get_option(c_al2fb_option_exclude_tag));
+					if ($tags)
+						foreach ($tags as $tag)
+							if (in_array($tag->name, $excluding_tags))
+								$exclude_tag = true;
+
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
 						!in_array($post->post_type, $ex_custom_types) &&
-						!$exclude_category)
+						!$exclude_category && !$exclude_tag)
 						self::Add_fb_link($post);
 				}
 			}
@@ -3528,6 +3549,8 @@ if (!class_exists('WPAL2Facebook')) {
 			if (empty($link_id))
 				return;
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return;
+			if (!get_post_meta($post->ID, 'allow_comments', true))
 				return;
 			$user_ID = self::Get_user_ID($post);
 			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
@@ -4111,6 +4134,8 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_comments_plugin($post) {
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
 				return '';
+			if (!get_post_meta($post->ID, 'allow_comments', true))
+				return '';
 
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
@@ -4531,7 +4556,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Integration?
-			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
+			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
+				get_post_meta($post->ID, 'allow_comments', true)) {
 				// Get time zone offset
 				$tz_off = get_option('gmt_offset');
 				if (empty($tz_off))
@@ -4724,6 +4750,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Integration turned off?
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+				return $count;
+			if (!get_post_meta($post->ID, 'allow_comments', true))
 				return $count;
 
 			// Maximum age for Facebook comments/likes
@@ -5167,6 +5195,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Max. text length:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_max_text), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Exclude tags:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_tag), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Meta box:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_metabox_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
@@ -5432,17 +5461,19 @@ if (!class_exists('WPAL2Facebook')) {
 			$comments = 0;
 			$likes = 0;
 
-			// Integration?
-			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
-				// Query recent posts
-				add_filter('posts_where', array(&$this, 'Cron_filter'));
-				$query = new WP_Query('post_type=any&meta_key=' . c_al2fb_meta_link_id);
-				remove_filter('posts_where', array(&$this, 'Cron_filter'));
+			// Query recent posts
+			add_filter('posts_where', array(&$this, 'Cron_filter'));
+			$query = new WP_Query('post_type=any&meta_key=' . c_al2fb_meta_link_id);
+			remove_filter('posts_where', array(&$this, 'Cron_filter'));
 
-				while ($query->have_posts()) {
-					$posts++;
-					$query->the_post();
-					$post = $query->post;
+			while ($query->have_posts()) {
+				$posts++;
+				$query->the_post();
+				$post = $query->post;
+
+				// Integration?
+				if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
+					get_post_meta($post->ID, 'allow_comments', true)) {
 					$user_ID = self::Get_user_ID($post);
 
 					// Get Facebook comments
