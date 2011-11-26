@@ -687,7 +687,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: *Exclude these tags*
 * Bugfix: *Do not integrate comments* for cron
 * Improvement: *Do not integrate comments* for auto comments plugin
-* Improvement: honor *Discussion / Allow comments* for comment integration
 * Improvement: *Add links for new pages* moved to *Miscelaneous*
 * Improvement: better debug info
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
