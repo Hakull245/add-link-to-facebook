@@ -22,6 +22,7 @@ define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_exclude_tag', 'al2fb_exclude_tag');
+define('c_al2fb_option_exclude_author', 'al2fb_exclude_author');
 define('c_al2fb_option_metabox_type', 'al2fb_metabox_type');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
@@ -777,6 +778,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_option_exclude_type] = trim($_POST[c_al2fb_option_exclude_type]);
 				$_POST[c_al2fb_option_exclude_cat] = trim($_POST[c_al2fb_option_exclude_cat]);
 				$_POST[c_al2fb_option_exclude_tag] = trim($_POST[c_al2fb_option_exclude_tag]);
+				$_POST[c_al2fb_option_exclude_author] = trim($_POST[c_al2fb_option_exclude_author]);
 				$_POST[c_al2fb_option_metabox_type] = trim($_POST[c_al2fb_option_metabox_type]);
 				$_POST[c_al2fb_option_ssp_info] = trim($_POST[c_al2fb_option_ssp_info]);
 				$_POST[c_al2fb_option_filter_prio] = trim($_POST[c_al2fb_option_filter_prio]);
@@ -794,6 +796,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_exclude_tag, $_POST[c_al2fb_option_exclude_tag]);
+				update_option(c_al2fb_option_exclude_author, $_POST[c_al2fb_option_exclude_author]);
 				update_option(c_al2fb_option_metabox_type, $_POST[c_al2fb_option_metabox_type]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
@@ -2124,6 +2127,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_exclude_cat"><?php _e('Exclude these categories:', c_al2fb_text_domain); ?></label>
+					<br /><span class="al2fb_explanation"><?php _e('Use category ID\'s', c_al2fb_text_domain); ?></span>
 				</th><td>
 					<input class="al2fb_text" id="al2fb_exclude_cat" name="<?php echo c_al2fb_option_exclude_cat; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_cat); ?>" />
 					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
@@ -2133,6 +2137,14 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_exclude_tag"><?php _e('Exclude these tags:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input class="al2fb_text" id="al2fb_exclude_tag" name="<?php echo c_al2fb_option_exclude_tag; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_tag); ?>" />
+					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_exclude_author"><?php _e('Exclude these authors:', c_al2fb_text_domain); ?></label>
+					<br /><span class="al2fb_explanation"><?php _e('Use login names', c_al2fb_text_domain); ?></span>
+				</th><td>
+					<input class="al2fb_text" id="al2fb_exclude_author" name="<?php echo c_al2fb_option_exclude_author; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_author); ?>" />
 					<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
@@ -3089,11 +3101,16 @@ if (!class_exists('WPAL2Facebook')) {
 							if (in_array($tag->name, $excluding_tags))
 								$exclude_tag = true;
 
+					// Exclude authors
+					$excluding_authors = explode(',', get_option(c_al2fb_option_exclude_author));
+					$author = get_the_author_meta('user_login', $post->post_author);
+					$exclude_author = in_array($author, $excluding_authors);
+
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
 						!in_array($post->post_type, $ex_custom_types) &&
-						!$exclude_category && !$exclude_tag)
+						!$exclude_category && !$exclude_tag && !$exclude_author)
 						self::Add_fb_link($post);
 				}
 			}
@@ -5189,6 +5206,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Exclude post types:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude categories:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_cat), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Exclude tags:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_tag), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Exclude authors:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_exclude_author), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Meta box:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_metabox_type), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>No verify peer:</td><td>' . (get_option(c_al2fb_option_noverifypeer) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';

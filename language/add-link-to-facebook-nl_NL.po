@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-11-25 20:29+0100\n"
+"PO-Revision-Date: 2011-11-26 10:35+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -422,6 +422,9 @@ msgstr "Sluit deze categorieën uit:"
 msgid "Exclude these tags:"
 msgstr "Sluit deze sleutelwoorden uit:"
 
+msgid "Exclude these authors:"
+msgstr "Sluit deze auteurs uit:"
+
 msgid "Image from User Photo plugin"
 msgstr "Afbeelding van User Photo plugin"
 
@@ -829,4 +832,10 @@ msgstr "Geen tab pagina's"
 
 msgid "Debug:"
 msgstr "Debug:"
+
+msgid "Use category ID's"
+msgstr "Gebruik categorie ID's"
+
+msgid "Use login names"
+msgstr "Gebruik login namen"
 
