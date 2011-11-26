@@ -3550,8 +3550,6 @@ if (!class_exists('WPAL2Facebook')) {
 				return;
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
 				return;
-			if (!get_post_meta($post->ID, 'allow_comments', true))
-				return;
 			$user_ID = self::Get_user_ID($post);
 			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
 				return;
@@ -4134,8 +4132,6 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_comments_plugin($post) {
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
 				return '';
-			if (!get_post_meta($post->ID, 'allow_comments', true))
-				return '';
 
 			$user_ID = self::Get_user_ID($post);
 			if ($user_ID) {
@@ -4556,8 +4552,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Integration?
-			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
-				get_post_meta($post->ID, 'allow_comments', true)) {
+			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
 				// Get time zone offset
 				$tz_off = get_option('gmt_offset');
 				if (empty($tz_off))
@@ -4750,8 +4745,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Integration turned off?
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
-				return $count;
-			if (!get_post_meta($post->ID, 'allow_comments', true))
 				return $count;
 
 			// Maximum age for Facebook comments/likes
@@ -5472,8 +5465,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = $query->post;
 
 				// Integration?
-				if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
-					get_post_meta($post->ID, 'allow_comments', true)) {
+				if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
 					$user_ID = self::Get_user_ID($post);
 
 					// Get Facebook comments
