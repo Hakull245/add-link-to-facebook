@@ -685,6 +685,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: *Exclude these tags*
+* New feature: *Exclude these authors*
 * Bugfix: *Do not integrate comments* for cron
 * Improvement: *Do not integrate comments* for auto comments plugin
 * Improvement: *Add links for new pages* moved to *Miscelaneous*
