@@ -182,7 +182,7 @@ This option is only available *after* you have authorized, since information fro
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
-Maybe you want to check the option *Add as page owner* too.
+Be sure to check the option *'<em>See all pages</em>'*.
 If you do that, you have to re-authorize one time more, because an extra Facebook permission is required for that.
 Note that pages and groups exclude each other.
 
@@ -825,8 +825,7 @@ For administrators (capability *manage\_options*) there is one option in this se
 The default is that each user of your weblog has to setup/authorize the plugin.
 If you check this option all users will use your access token.
 After checking this option the setup page of the plugin will be accessible only to the administrator that enabled this option.
-Note that all users will use your name, which might not be so bad if you use the option *Add as page owner* (see below).
-You may want to choose *Avatar of author* as link picture (see below).
+Note that all users will use your name. You may want to choose *Avatar of author* as link picture (see below).
 
 **Additional settings**
 
