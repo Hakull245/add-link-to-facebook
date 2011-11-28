@@ -690,7 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: *Do not integrate comments* for auto comments plugin
 * Improvement: *Add links for new pages* moved to *Miscelaneous*
 * Improvement: better debug info
-* **Removed [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/), please read "[Automattic Dishes up Bullying and Intimidation for Thanksgiving"](http://gregsplugins.com/lib/2011/11/26/automattic-bullies/)**
+* Removed [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
