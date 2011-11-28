@@ -174,12 +174,6 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 define('USERPHOTO_APPROVED', 2);
 
-// To Do
-// - Check app permissions? not possible :-(
-// - target="_blank"? how to do?
-// - Update meta box after update media gallery?
-// - Improve cleaning
-
 // Define class
 if (!class_exists('WPAL2Facebook')) {
 	class WPAL2Facebook {
@@ -5079,7 +5073,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>mb_convert_encoding:</td><td>' . (function_exists('mb_convert_encoding') ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Application:</td><td>' . $app . '</td></tr>';
-			$info .= '<tr><td>Shared user ID:</td><td>' . $shared_user_ID . '</td></tr>';
+			$info .= '<tr><td>User:</td><td>' . $user_ID . '=' . get_the_author_meta('user_login', $user_ID) . '</td></tr>';
+			$info .= '<tr><td>Shared user:</td><td>' . $shared_user_ID . '=' . get_the_author_meta('user_login', $shared_user_ID) . '</td></tr>';
 
 			$info .= '<tr><td>Picture type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_picture_type, true) . '</td></tr>';
 			$info .= '<tr><td>Custom picture URL:</td><td>' . $picture . '</td></tr>';
