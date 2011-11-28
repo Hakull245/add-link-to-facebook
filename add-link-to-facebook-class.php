@@ -121,7 +121,6 @@ define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated', 'al2fb_rated');
-define('c_al2fb_meta_nospsn', 'al2fb_nospsn');
 define('c_al2fb_meta_stat', 'al2fb_stat');
 define('c_al2fb_meta_week', 'al2fb_week');
 
@@ -600,8 +599,6 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_donated] = null;
 			if (empty($_POST[c_al2fb_meta_rated]))
 				$_POST[c_al2fb_meta_rated] = null;
-			if (empty($_POST[c_al2fb_meta_nospsn]))
-				$_POST[c_al2fb_meta_nospsn] = null;
 
 			$_POST[c_al2fb_meta_client_id] = trim($_POST[c_al2fb_meta_client_id]);
 			$_POST[c_al2fb_meta_app_secret] = trim($_POST[c_al2fb_meta_app_secret]);
@@ -724,7 +721,6 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
-			update_user_meta($user_ID, c_al2fb_meta_nospsn, $_POST[c_al2fb_meta_nospsn]);
 
 			if (isset($_REQUEST['debug'])) {
 				if (empty($_POST[c_al2fb_meta_access_token]))
@@ -1146,9 +1142,6 @@ if (!class_exists('WPAL2Facebook')) {
 			// Security check
 			if (!current_user_can(get_option(c_al2fb_option_min_cap)))
 				die('Unauthorized');
-
-			// Sustainable Plugins Sponsorship Network
-			self::Render_SPSN();
 ?>
 			<div class="wrap">
 			<h2><?php _e('Add Link to Facebook', c_al2fb_text_domain); ?></h2>
@@ -2001,12 +1994,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</th><td>
 				<input id="al2fb_rated" name="<?php echo c_al2fb_meta_rated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_rated, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
-
-			<tr valign="top"><th scope="row">
-				<label for="al2fb_nospsn"><?php _e('I don\'t want to support this plugin with the Sustainable Plugins Sponsorship Network:', c_al2fb_text_domain); ?></label>
-			</th><td>
-				<input id="al2fb_nospsn" name="<?php echo c_al2fb_meta_nospsn; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_nospsn, true)) echo ' checked="checked"'; ?> />
-			</td></tr>
 			</table>
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -2297,15 +2284,6 @@ if (!class_exists('WPAL2Facebook')) {
 							$(activeTab).show();
 							return false;
 						});
-
-						$('#al2fb_spsn').click(function() {
-							$('ul.al2fb_tabs li').removeClass('active');
-							$('ul.al2fb_tabs li:has(a[href=#al2fb_tab_misc])').addClass('active').show();
-							$('.al2fb_tab_content').hide();
-							$('#al2fb_tab_misc').show();
-							$('html, body').animate({scrollTop: $('#al2fb_tab_settings').offset().top}, 2000);
-							return false;
-						});
 					}
 				});
 			</script>
@@ -2313,22 +2291,6 @@ if (!class_exists('WPAL2Facebook')) {
 			</div>
 			</div>
 <?php
-		}
-
-		function Render_SPSN() {
-			global $user_ID;
-			get_currentuserinfo();
-			if (!get_user_meta($user_ID, c_al2fb_meta_nospsn, true)) {
-?>
-				<script type="text/javascript">
-				var psHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-				document.write(unescape("%3Cscript src='" + psHost + "pluginsponsors.com/direct/spsn/display.php?client=add-link-to-facebook&spot=' type='text/javascript'%3E%3C/script%3E"));
-				</script>
-				<a class="al2fb_spsn" href="http://pluginsponsors.com/privacy.html" target="_blank">
-				<?php _e('Privacy in the Sustainable Plugins Sponsorship Network', c_al2fb_text_domain); ?></a>
-				<a class="al2fb_spsn" href="#misc" id="al2fb_spsn"><?php _e('Disable', c_al2fb_text_domain); ?></a>
-<?php
-			}
 		}
 
 		function Render_resources() {
@@ -5192,7 +5154,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 			$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
 
-			$info .= '<tr><td>No SPSN:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_nospsn, true) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No EULA:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_noeula, true) ? 'Yes' : 'No') . '</td></tr>';
 
 			$info .= '<tr><td>Timeout:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_timeout), ENT_QUOTES, $charset) . '</td></tr>';
