@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.117
+Stable tag: 1.119
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -13,7 +13,7 @@ Automatically add links to published posts or pages to your Facebook wall, pages
 Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
-It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image or custom image) or you can let Facebook select one automatically.
+It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image, avatar of the author or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
 
 **[Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")**
@@ -182,7 +182,7 @@ This option is only available *after* you have authorized, since information fro
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
-Maybe you want to check the option *Add as page owner* too.
+Be sure to check the option *'<em>See all pages</em>'*.
 If you do that, you have to re-authorize one time more, because an extra Facebook permission is required for that.
 Note that pages and groups exclude each other.
 
@@ -684,17 +684,32 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: tab pages for setup
+* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+= 1.119 =
+* New feature: *Exclude these tags*
+* New feature: *Exclude these authors*
+* Bugfix: *Do not integrate comments* for cron
+* Improvement: *Do not integrate comments* for auto comments plugin
+* Improvement: *Add links for new pages* moved to *Miscelaneous*
+* Improvement: better debug info
+* Removed [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.118 =
+* New feature: tab pages to organize the plugin options
 * New feature: option to disable Facebook script include
 * Bugfix: admin HTML/CSS
 * Improvement: *See all pages* option (was before: *Add as page owner*)
 * Improvement: Heise: updated to version 1.3
 * Improvement: more debug info
 * Improvement: better statistics reports
+* Deprecated user photo image as link picture, use avatars instead
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.117 =
 * New feature: option to change *the_content* filter priority
@@ -741,8 +756,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Upgrade Notice ==
 
+= 1.119 =
+Two new features, one bugfix, three improvements, translation updates
+
 = 1.118 =
-One new feature, four improvements, translation updates
+Two new features, one bugfix, four improvements, translation updates
 
 = 1.117 =
 One new feature, three improvements
@@ -813,8 +831,7 @@ For administrators (capability *manage\_options*) there is one option in this se
 The default is that each user of your weblog has to setup/authorize the plugin.
 If you check this option all users will use your access token.
 After checking this option the setup page of the plugin will be accessible only to the administrator that enabled this option.
-Note that all users will use your name, which might not be so bad if you use the option *Add as page owner* (see below).
-You may want to choose *Avatar of author* as link picture (see below).
+Note that all users will use your name. You may want to choose *Avatar of author* as link picture (see below).
 
 **Additional settings**
 
