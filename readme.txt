@@ -80,7 +80,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
@@ -684,6 +684,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* Bugfix: html entity decode share link title
+* Improvement: more debug info (import errors)
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.119 =
@@ -737,24 +739,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: less statistics reports
 * Updated FAQ
 
-= 1.114 =
-* Bugfix: active plugins in debug info
-* Bugfix: filter comments to remove HTML
-* Improvement: using *get_user_by* (WordPress 3.3 compatibility)
-* Improvement: refreshing Facebook comments/likes for default 7 days
-* Improvement: *urlencode* client id
-* Improvement: Heise: *perma_option* default *off*
-* New feature: Heise: filter *al2fb_heise*
-* New feature: Heise: option to set privacy policy URL
-* New feature: option to use WordPress cron to refresh Facebook comments/likes (to improve performance on big/busy websites)
-* Added Belorussian (be\_BY) translation by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.120 =
+One bugfix, one improvement
 
 = 1.119 =
 Two new features, one bugfix, three improvements, translation updates
@@ -770,9 +762,6 @@ One new feature, three bugfixes, five improvements
 
 = 1.115 =
 One bugfix, three improvements
-
-= 1.114 =
-Two bugfix, four improvements, three new features, new/updated translations
 
 == Setup guide ==
 
