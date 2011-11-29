@@ -158,6 +158,8 @@ define('c_al2fb_log_get_token', 'al2fb_get_token');
 define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
+define('c_al2fb_last_import_error', 'al2fb_last_import_error');
+define('c_al2fb_last_import_error_time', 'al2fb_last_import_error_time');
 define('c_al2fb_last_request', 'al2fb_last_request');
 define('c_al2fb_last_request_time', 'al2fb_last_request_time');
 define('c_al2fb_last_response', 'al2fb_last_response');
@@ -3375,7 +3377,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
 					$actions = array(
 						'name' => __('Share', c_al2fb_text_domain),
-						'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . urlencode(get_the_title($post->ID))
+						'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . urlencode($name)
 					);
 					$query_array['actions'] = json_encode($actions);
 				}
@@ -4819,6 +4821,8 @@ if (!class_exists('WPAL2Facebook')) {
 						return self::Get_fb_comments_cached($user_ID, $link_id, $cached);
 				}
 				catch (Exception $e) {
+					update_option(c_al2fb_last_import_error, $e->getMessage());
+					update_option(c_al2fb_last_import_error_time, date('c'));
 					if ($this->debug)
 						echo htmlspecialchars($e->getMessage());
 					return null;
@@ -5294,6 +5298,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Last import error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_import_error), ENT_QUOTES, $charset) . '</td></tr>';
+			$info .= '<tr><td>Last import error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_import_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last request:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_request), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '<tr><td>Last request time:</td><td>' . get_option(c_al2fb_last_request_time) . '</td></tr>';
 			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
