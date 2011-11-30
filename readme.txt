@@ -684,8 +684,11 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: do not filter comments (option)
 * Bugfix: html entity decode share link title
+* Improvement: comment import period relative to added link time
 * Improvement: more debug info (import errors)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 
 = 1.119 =
