@@ -28,6 +28,7 @@ define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
 define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
 define('c_al2fb_option_nofilter', 'al2fb_nofilter');
+define('c_al2fb_option_nofilter_comments', 'al2fb_nofilter_comments');
 define('c_al2fb_option_optout', 'al2fb_optout');
 define('c_al2fb_option_use_ssp', 'al2fb_use_ssp');
 define('c_al2fb_option_ssp_info', 'al2fb_ssp_info');
@@ -754,6 +755,8 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_option_noshortcode] = null;
 				if (empty($_POST[c_al2fb_option_nofilter]))
 					$_POST[c_al2fb_option_nofilter] = null;
+				if (empty($_POST[c_al2fb_option_nofilter_comments]))
+					$_POST[c_al2fb_option_nofilter_comments] = null;
 				if (empty($_POST[c_al2fb_option_optout]))
 					$_POST[c_al2fb_option_optout] = null;
 				if (empty($_POST[c_al2fb_option_use_ssp]))
@@ -794,6 +797,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
 				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
 				update_option(c_al2fb_option_nofilter, $_POST[c_al2fb_option_nofilter]);
+				update_option(c_al2fb_option_nofilter_comments, $_POST[c_al2fb_option_nofilter_comments]);
 				update_option(c_al2fb_option_optout, $_POST[c_al2fb_option_optout]);
 				update_option(c_al2fb_option_use_ssp, $_POST[c_al2fb_option_use_ssp]);
 				update_option(c_al2fb_option_ssp_info, $_POST[c_al2fb_option_ssp_info]);
@@ -2164,6 +2168,12 @@ if (!class_exists('WPAL2Facebook')) {
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
+					<label for="al2fb_nofilter"><?php _e('Do not execute filters for comments:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<input id="al2fb_nofilter" name="<?php echo c_al2fb_option_nofilter_comments; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_nofilter_comments)) echo ' checked="checked"'; ?> />
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
 					<label for="al2fb_optout"><?php _e('Do not collect statistics:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<input id="al2fb_optout" name="<?php echo c_al2fb_option_optout; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_optout)) echo ' checked="checked"'; ?> />
@@ -2783,6 +2793,22 @@ if (!class_exists('WPAL2Facebook')) {
 			return $posts_columns;
 		}
 
+		function is_recent($post) {
+			// Maximum age for Facebook comments/likes
+			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
+			if (!$maxage)
+				$maxage = 7;
+
+			// Link added time
+			$link_time = strtotime(get_post_meta($post->ID, c_al2fb_meta_link_time, true));
+			if ($link_time <= 0)
+				$link_time = strtotime($post->post_date_gmt);
+
+			$old = ($link_time + ($maxage * 24 * 60 * 60) < time());
+
+			return !$old;
+		}
+
 		// Populate post facebook column
 		function Manage_posts_custom_column($column_name, $post_ID) {
 			if ($column_name == 'al2fb') {
@@ -2794,13 +2820,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				if ($link_id) {
 					$post = get_post($post_ID);
-
-					// Maximum age for Facebook comments/likes
-					$maxage = intval(get_option(c_al2fb_option_msg_maxage));
-					if (!$maxage)
-						$maxage = 7;
-					$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
-					if (!$old) {
+					if (self::is_recent($post)) {
 						$user_ID = self::Get_user_ID($post);
 
 						// Show number of comments
@@ -4535,14 +4555,8 @@ if (!class_exists('WPAL2Facebook')) {
 				else
 					$tz_off = $tz_off * 3600;
 
-				// Maximum age for Facebook comments/likes
-				$maxage = intval(get_option(c_al2fb_option_msg_maxage));
-				if (!$maxage)
-					$maxage = 7;
-				$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
-
 				// Get Facebook comments
-				if (!$old && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+				if (self::is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
 						// Get WordPress comments
@@ -4591,9 +4605,13 @@ if (!class_exists('WPAL2Facebook')) {
 								// Copy Facebook comment to WordPress database
 								if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) {
 									// Apply filters
-									$commentdata = apply_filters('preprocess_comment', $commentdata);
-									$commentdata = wp_filter_comment($commentdata);
-									$commentdata['comment_approved'] = wp_allow_comment($commentdata);
+									if (get_option(c_al2fb_option_nofilter_comments))
+										$commentdata['comment_approved'] = '1';
+									else {
+										$commentdata = apply_filters('preprocess_comment', $commentdata);
+										$commentdata = wp_filter_comment($commentdata);
+										$commentdata['comment_approved'] = wp_allow_comment($commentdata);
+									}
 
 									// Insert comment in database
 									$comment_ID = wp_insert_comment($commentdata);
@@ -4635,7 +4653,7 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Get likes
-				if (!$old && get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+				if (self::is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 					$fb_likes = self::Get_comments_or_likes($post, true);
 					if ($fb_likes)
 						foreach ($fb_likes->data as $fb_like) {
@@ -4722,12 +4740,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
 				return $count;
 
-			// Maximum age for Facebook comments/likes
-			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
-			if (!$maxage)
-				$maxage = 7;
-			$old = (strtotime($post->post_date_gmt) + ($maxage * 24 * 60 * 60) < time());
-			if (!$old) {
+			if (self::is_recent($post)) {
 				$user_ID = self::Get_user_ID($post);
 
 				// Comment count
@@ -5172,6 +5185,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$info .= '<tr><td>Shortcode/widget:</td><td>' . (get_option(c_al2fb_option_shortcode_widget) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No shortcode:</td><td>' . (get_option(c_al2fb_option_noshortcode) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No filter:</td><td>' . (get_option(c_al2fb_option_nofilter) ? 'Yes' : 'No') . '</td></tr>';
+			$info .= '<tr><td>No filter comments:</td><td>' . (get_option(c_al2fb_option_nofilter_comments) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>No statistics:</td><td>' . (get_option(c_al2fb_option_optout) ? 'Yes' : 'No') . '</td></tr>';
 			$info .= '<tr><td>Site URL:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_siteurl), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
