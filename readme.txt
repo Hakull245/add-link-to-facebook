@@ -77,7 +77,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Indonesian (id\_ID) by [Mokhamad Oky](http://rainerflame.com/ "Mokhamad Oky"), thanks!
 * Latvian (lv) by [Edgars Bergs](http://www.yourwebagency.co.uk/ "Edgars Bergs"), thanks!
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
-* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive"), thanks!
+* Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive") and [Yossi Jana](www.webist.co.il "Yossi Jana"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
@@ -689,6 +689,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: comment import period relative to added link time
 * Improvement: more debug info (import errors)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Hebrew (he\_IL) translation by [Yossi Jana](www.webist.co.il "Yossi Jana")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
