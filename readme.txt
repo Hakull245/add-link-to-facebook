@@ -661,6 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Installing:
+
 1. Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
 1. Go to *Plugins* on your WordPress dashboard
 1. *Deactivate* Add Link to Facebook
