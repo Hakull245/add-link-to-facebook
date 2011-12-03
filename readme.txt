@@ -650,7 +650,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: *Do not filter comments* (default enabled option)
-* New feature: permanent delete post will remove link on Facebook
+* New feature: permanently delete post will remove link on Facebook
 * Bugfix: html entity decode share link title
 * Improvement: comment import period relative to added link time
 * Improvement: more debug info (import errors)
