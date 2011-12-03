@@ -25,35 +25,25 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Additional features:**
 
-* Show the names of the people who liked your post on Facebook below the post/page text
-* Show the standard [Facebook like button](http://developers.facebook.com/docs/reference/plugins/like/ "Facebook like button"); this button is not connected to added links
-* Show the standard [Facebook send button](http://developers.facebook.com/docs/reference/plugins/send/ "Facebook send button"); this button is not connected to added links
 * Integrate Facebook comments and likes on added links into Wordpress
 * Post WordPress comments back to Facebook
 * Copy Facebook comments to the WordPress database (for archiving, editing, replying, moderation, etc)
+* Show the standard Facebook
+[Like](http://developers.facebook.com/docs/reference/plugins/like/) and
+[Send](http://developers.facebook.com/docs/reference/plugins/send/) buttons
+* Show the names of the people who liked your post on Facebook above/below the post/page text
 * Sidebar widget, shortcodes and template tags for Facebook comments/messages, Like/send button,
 [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box"),
 [Comments box](http://developers.facebook.com/docs/reference/plugins/comments/ "Comments box"),
 [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile/ "Facepile"),
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
-* Support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol")
-* Filters for all information sent to Facebook
-* WordPress cron to refresh imported Facebook comments and likes (option)
-* Automatically display the Facebook comments plugin (option)
+* And much more!
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
 Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-
-**Beta:**
-
-[Heise social share privacy](http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook "Heise socialshareprivacy"):
-
-* Facebook may or may not allow it
-* Doesn't work with combined like/send button
-* German icon, a language neutral icon is welcome!
 
 **This plugin requires PHP 5 and WordPress 3.0 or better**
 
@@ -140,19 +130,17 @@ Selecting an image this way takes precedence over the other settings.
 
 Always to the wall of the post author, if configured.
 Even if somebody else is editing the post.
+You can add links to pages and groups too, see question U12 and U13.
 
 = U05 Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
-It also depends on support for the [Open Graph protocol](http://developers.facebook.com/docs/opengraph/ "Open Graph protocol") by your theme.
-Since version 0.56 you can enable the Open Graph protocol using the plugin settings.
 
 = U06 Why doesn't Facebook display my link picture? =
 
 Maybe because it is smaller than 50 x 50 pixels.
 Facebook might also have had trouble accessing the image.
 Another common cause is an incompatible plugin or theme.
-See also question C01 and C02.
 
 = U07 I don't want a link picture =
 
@@ -183,7 +171,7 @@ This option is only available *after* you have authorized, since information fro
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
 Be sure to check the option *'<em>See all pages</em>'*.
-If you do that, you have to re-authorize one time more, because an extra Facebook permission is required for that.
+If you do that, you have to re-authorize one time more, because an extra Facebook permission is required.
 Note that pages and groups exclude each other.
 
 = U13 I want to add links to a group =
@@ -208,12 +196,8 @@ So you have to choose if you want the hyperlink text (the default) or the hyperl
 * Install and configure an URL shortener plugin
 * [URL Shortener](http://wordpress.org/extend/plugins/url-shortener/ "URL Shortener") is known to work
 * Any short URL plugin that supports the filter *pre_get_shortlink* or *get_shortlink* will work
-* Enable the option *Use short URL* (available since version 0.32)
+* Enable the option *Use short URL*
 * You probably want to enable the option *Use site title as caption* too
-
-= U16 I don't like the gear wheel application icon =
-
-You can change it in the Facebook application settings.
 
 = U17 Why is the option "add 'Share' link" experimental? =
 
@@ -230,16 +214,11 @@ After saving the file, you can translate it by using a text editor or [Poedit](h
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
 Please use the [contact form](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") to send me the new .po file.
 
-= U19 How can I change the styling? =
-
-1. Copy *add-link-to-facebook.css* to your upload directory to prevent it from being overwritten by an update
-2. Change the style sheet to your wishes; the style sheet contains documentation
-
 = U20 How can I setup one wall for all users? =
 
 An administrator can setup his wall (personal/page/group) for all users of one site by checking the option *Share with all users on this site*.
-The other users cannot configure their own wall amymore if this option is used.
-Only the same administrator can undo this.
+The other users cannot configure their own wall amymore, if this option is used.
+Only the **same** administrator can undo this.
 
 = U21 I don't see a link to my post on Facebook =
 
@@ -251,10 +230,8 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Is the post password protected? See also question U11.
 * Was the post published before using the plugin? See also question U09.
 * Was there already a link added? See also question U09.
-* Did you check the *Most Recent* link on Facebook?
 * Are you logged into the correct Facebook account?
-* Are you looking at the correct personal/page/group wall?
-* If you are publishing to a page: check the Facebook tab *Others*. See also question U12.
+* Are you looking at the correct personal/page/group wall/profile?
 
 = U22 Where are the settings of the plugin? =
 
@@ -322,15 +299,9 @@ It may also be a violation of the [Facebook Platform Policies](http://developers
 = U26 Why are liker names not displayed? =
 
 The option *Show likers below the post text* shows the names of the people that liked the *link* the plugin added on Facebook.
-The like button is a standard Facebook like button which is not connect to links added by the plugin (this is not possible).
+The like button is a standard Facebook like button which is not connect to links added by the plugin.
 The like button is connected to the *page* on which it is displayed.
-So, people that click on the like button are displayed within the like button (depending on how the like button is setup), but not as people that liked an added link.
-
-= U27 I don't want to display a single comment from Facebook on WordPress =
-
-Trash the comment, but leave it in the trash folder.
-If you delete the comment permanently, the plugin will copy the comment again from Facebook.
-From version 1.99 comments can be deleted permanently.
+So, people that click on the like button are displayed within the like button, but not as people that liked an added link.
 
 = U28 Can I display the widget on every page? =
 
@@ -381,6 +352,7 @@ Question E22 describes possible errors for the Facebook registration form / logi
 * al2fb_caption: $caption, $post
 * al2fb_picture: $picture, $post
 * al2fb_comment: $message, $comment, $post
+* al2fb_heise: $content
 
 = U31 Can I change/remove 'xxx seconds ago via ...'? =
 
@@ -436,7 +408,7 @@ The author of the other plugin or theme is free to contact me if needed.
 
 = C03 Are shortcodes being processed? =
 
-Yes, both in the excerpt and the post text.
+This is an option, when enabled shortcodes will be processed.
 
 = C04 Are multi-user and network sites supported? =
 
@@ -461,7 +433,7 @@ Yes, but the custom post type should support custom values for it to work.
 
 Set the option *Link Picture* to *First image in the post*.
 Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
-Leave the option *Do not execute shortcodes for texts* enabled.
+Enable the option *Do not execute shortcodes for texts*.
 
 **--- Custom values ---**
 
@@ -577,11 +549,7 @@ You are probably using Microsoft Internet Explorer.
 This browser has the bad habit not to display the content
 when there is an [HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol "HTTP") error.
 Actually you are most probably having one of the above errors, but you cannot see which one.
-You could temporarily switch to [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox").
-
-= E13 I get 'Javascript not enabled' =
-
-Can not happen anymore in recent versions.
+You could temporarily switch to [Chrome](http://www.google.com/chrome) or [Mozilla Firefox](http://www.mozilla.com/ "Mozilla Firefox").
 
 = E14 I get '(#100) Invalid parameter' =
 
@@ -590,17 +558,14 @@ See question E19 for how to remove the error message and question U09 for how to
 
 You might need to manually remove the link information of the plugin.
 On the post edit page click *Screen Options* (upper right) and tick *Custom fields*.
-Scroll down to the meta box *Custom fields*
-(you may have to 'open' it by clicking on the far right part of the caption bar)
-and delete the value *al2fb_facebook_link_id*.
+Scroll down to the meta box *Custom fields* and delete the value *al2fb_facebook_link_id*.
 
 = E15 I get 'Error validating access token' =
 
 Most often this happen when you changed your Facebook password.
 The access token the plugin acquired during the authorization process may be revoked by Facebook.
-Maybe because there was a security problem with your Facebook application or Facebook account.
+Maybe because there was a security problem with your Facebook application or account.
 Re-authorizing will probably solve this problem.
-You could also try to reset your application secret [here](http://www.facebook.com/developers/apps.php) and enter the new secret in the plugin settings.
 
 = E16 I get 'You failed to provide a valid list of administators' =
 
@@ -684,15 +649,26 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: do not filter comments (option)
+* New feature: *Do not filter comments* (default enabled option)
+* New feature: permanent delete post will remove link on Facebook
 * Bugfix: html entity decode share link title
 * Improvement: comment import period relative to added link time
 * Improvement: more debug info (import errors)
+* Updated description and FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Hebrew (he\_IL) translation by [Yossi Jana](http://www.webist.co.il "Yossi Jana")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* You can download the development version [here](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+
+Installing:
+1. Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+1. Go to *Plugins* on your WordPress dashboard
+1. *Deactivate* Add Link to Facebook
+1. *Delete* Add Link to Facebook (*Yes, delete these files*)
+1. Click *Add New*
+1. Click *Upload* (a link at the top)
+1. Click *Choose file* and find the file downloaded in step 1
+1. Click *Install*, then *Activate Plugin*
 
 = 1.119 =
 * New feature: *Exclude these tags*
@@ -738,13 +714,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: added comments to OPG and CSS output
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.115 =
-* Bugfix: HTML entity decode post title
-* Improvement: using *is_rtl* instead of *get_bloginfo*
-* Improvement: more debug info
-* Improvement: less statistics reports
-* Updated FAQ
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -752,7 +721,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Upgrade Notice ==
 
 = 1.120 =
-One bugfix, one improvement
+Two new features, one bugfix, two improvements, translation updates
 
 = 1.119 =
 Two new features, one bugfix, three improvements, translation updates
@@ -765,9 +734,6 @@ One new feature, three improvements
 
 = 1.116 =
 One new feature, three bugfixes, five improvements
-
-= 1.115 =
-One bugfix, three improvements
 
 == Setup guide ==
 
@@ -1006,43 +972,6 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * ...
-
-Realized features:
-
-* Disable Facebook yes/no column in post list (version 1.5)
-* Facebook comment and like count in post list (version 1.5)
-* Default *Do not add link to Facebook* option (version 1.5)
-* Add link to Facebook for new pages (version 1.5)
-* A choice list for *og:type*; new default: *article* (version 1.5)
-* Template tag/shortcode for likers/like button (version 1.5)
-* Stop showing Facebook links on posts in archives and categories (version 1.5)
-* Change location of like button: option to show at top of post (version 1.5)
-* Facebook comment styling (*class="facebook-comment"*) (version 1.5)
-* Filters for content (*al2fb_content*) and excerpt (*al2fb_excerpt*) (version 1.5)
-* Facebook comments with Avatars (version 1.6)
-* Settings link in plugin list (version 1.6)
-* Filter by category (version 1.6)
-* Div around like button for styling purposes (version 1.8)
-* New feature: remove scripts from post/page text (version 1.8)
-* Get picture from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin (version 1.9)
-* Exclude like button on individual pages (version 1.10)
-* Custom exerpt text (version 1.14)
-* Option to choose between XFBML and iframe [like button](http://developers.facebook.com/docs/reference/plugins/like/ "like button") (version 1.14)
-* Option to post WordPress comments back to Facebook (version 1.21)
-* Facebook send button (version 1.25)
-* Disable comments integration per post/page (version 1.28)
-* Copy Facebook comments into WordPress database (version 1.29)
-* Option to not link to Facebook comment author (version 1.36)
-* Link back to Facebook wall from comments (version 1.46)
-* Facebook comment moderation (version 1.54)
-* Update added links (version 1.74)
-* [Like box](http://developers.facebook.com/docs/reference/plugins/like-box/ "Like box") in widget (version 1.74)
-* Facebook [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile "Facepile") (version 1.84)
-* Custom link text (meta box) (version 1.86)
-* Filters for link, name, caption and picture (version 1.86)
-* Shortcode / template tag for number of likers (version 1.86)
-* Facebook [Registration](http://developers.facebook.com/docs/plugins/registration "Registration") (version 1.86)
-* Facebook [Activity Feed](http://developers.facebook.com/docs/reference/plugins/activity "Activity Feed") (version 1.94)
 
 Feature which will not be realized, sorry:
 

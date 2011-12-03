@@ -237,6 +237,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_action('xmlrpc_publish_post', array(&$this, 'Remote_publish'));
 			add_action('app_publish_post', array(&$this, 'Remote_publish'));
 			add_action('future_to_publish', array(&$this, 'Future_to_publish'));
+			add_action('before_delete_post', array(&$this, 'Before_delete_post'));
 			add_action('al2fb_publish', array(&$this, 'Remote_publish'));
 
 			if (get_option(c_al2fb_option_use_pp))
@@ -339,7 +340,10 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_noshortcode, true);
 				update_option(c_al2fb_option_nofilter, true);
 			}
-			update_option(c_al2fb_option_version, 8);
+			if ($version <= 8)
+				update_option(c_al2fb_option_nofilter_comments, true);
+
+			update_option(c_al2fb_option_version, 9);
 		}
 
 		// Handle plugin deactivation
@@ -1258,14 +1262,14 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 				}
 ?>
-				<table>
-				<tr><td>
-				<form method="get" action="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)); ?>">
-				<input type="hidden" name="al2fb_action" value="init">
-				<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
-				</p>
-				</form>
+				<table><tr>
+				<td>
+					<form method="get" action="<?php echo admin_url('tools.php?page=' . plugin_basename($this->main_file)); ?>">
+					<input type="hidden" name="al2fb_action" value="init">
+					<p class="submit">
+					<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
+					</p>
+					</form>
 				</td>
 
 <?php			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
@@ -1280,13 +1284,12 @@ if (!class_exists('WPAL2Facebook')) {
 						<a href="http://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin" target="_blank">
 						<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
 					</td>
-<?php			} ?>
-				</tr>
-				</table>
-<?php			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
-					<span><a href="http://www.bitcoin.org/">Bitcoin</a>: <code>19Y8QKKK4cpBMZ64UtAT4C6MEwknUerNDe</code></span>
+					<td>
+						<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=marcel%40bokhorst%2ebiz&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20plugin&item_number=Marcel%20Bokhorst&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><?php _e('Donate in EUR', c_al2fb_text_domain) ?></a>
+					</td>
 <?php			} ?>
 
+				</tr></table>
 <?php		} ?>
 
 			<hr />
@@ -2183,7 +2186,6 @@ if (!class_exists('WPAL2Facebook')) {
 					<label for="al2fb_use_ssp"><a href="http://yro.slashdot.org/story/11/09/03/0115241/Heises-Two-Clicks-For-More-Privacy-vs-Facebook"><?php _e('Use Heise social share privacy:', c_al2fb_text_domain); ?></a></label>
 				</th><td>
 					<input id="al2fb_use ssp" name="<?php echo c_al2fb_option_use_ssp; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_use_ssp)) echo ' checked="checked"'; ?> />
-					<strong>Beta!</strong>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -2322,6 +2324,8 @@ if (!class_exists('WPAL2Facebook')) {
 				<br />
 				<a href="http://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin" target="_blank">
 				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
+				<br />
+				<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=marcel%40bokhorst%2ebiz&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20plugin&item_number=Marcel%20Bokhorst&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><?php _e('Donate in EUR', c_al2fb_text_domain) ?></a>
 <?php		} ?>
 			</div>
 <?php
@@ -3009,6 +3013,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Delegate
 			self::Transition_post_status('publish', 'future', $post);
+		}
+		function Before_delete_post($post_ID) {
+			$post = get_post($post_ID);
+			$user_ID = self::Get_user_ID($post);
+			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+			if (!empty($link_id) && self::Is_authorized($user_ID))
+				self::Delete_fb_link($post);
 		}
 
 		// Handle post status change
