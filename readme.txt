@@ -662,14 +662,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 Installing:
 
-1. Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
-1. Go to *Plugins* on your WordPress dashboard
-1. *Deactivate* Add Link to Facebook
-1. *Delete* Add Link to Facebook (*Yes, delete these files*)
-1. Click *Add New*
-1. Click *Upload* (a link at the top)
-1. Click *Choose file* and find the file downloaded in step 1
-1. Click *Install*, then *Activate Plugin*
+* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+* Go to *Plugins* on your WordPress dashboard
+* *Deactivate* Add Link to Facebook
+* *Delete* Add Link to Facebook (*Yes, delete these files*)
+* Click *Add New*
+* Click *Upload* (a link at the top)
+* Click *Choose file* and select the file you downloaded before
+* Click *Install*, then *Activate Plugin*
 
 = 1.119 =
 * New feature: *Exclude these tags*
