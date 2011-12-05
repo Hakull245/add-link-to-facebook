@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.119
+Stable tag: 1.120
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -649,6 +649,20 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* ...
+
+Follow these steps to install the development version:
+
+* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+* Go to *Plugins* on your WordPress dashboard
+* *Deactivate* Add Link to Facebook
+* *Delete* Add Link to Facebook (*Yes, delete these files*)
+* Click *Add New*
+* Click *Upload* (a link at the top)
+* Click *Choose file* and select the file you downloaded before
+* Click *Install*, then *Activate Plugin*
+
+= 1.120 =
 * New feature: *Do not filter comments* (default enabled option)
 * New feature: permanently delete post will remove link on Facebook
 * Bugfix: html entity decode share link title
@@ -659,17 +673,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Hebrew (he\_IL) translation by [Yossi Jana](http://www.webist.co.il "Yossi Jana")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-Installing:
-
-* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
-* Go to *Plugins* on your WordPress dashboard
-* *Deactivate* Add Link to Facebook
-* *Delete* Add Link to Facebook (*Yes, delete these files*)
-* Click *Add New*
-* Click *Upload* (a link at the top)
-* Click *Choose file* and select the file you downloaded before
-* Click *Install*, then *Activate Plugin*
 
 = 1.119 =
 * New feature: *Exclude these tags*
