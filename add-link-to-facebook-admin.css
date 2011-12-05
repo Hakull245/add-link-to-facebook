@@ -137,7 +137,7 @@
 }
 
 /* Tabs */
-ul.tabs {
+ul.al2fb_tabs {
 	margin: 0;
 	padding: 0;
 	float: left;
@@ -148,7 +148,7 @@ ul.tabs {
 	width: 100%;
 }
 
-ul.tabs li {
+ul.al2fb_tabs li {
 	float: left;
 	margin: 0;
 	padding: 0;
@@ -162,7 +162,7 @@ ul.tabs li {
 	background: #e0e0e0;
 }
 
-ul.tabs li a {
+ul.al2fb_tabs li a {
 	text-decoration: none;
 	color: #000;
 	display: block;
@@ -172,17 +172,17 @@ ul.tabs li a {
 	font-size: smaller;
 }
 
-ul.tabs li a:hover {
+ul.al2fb_tabs li a:hover {
 	background: #ccc;
 }
 
-html ul.tabs li.active, html ul.tabs li.active a:hover  {
+html ul.al2fb_tabs li.active, html ul.al2fb_tabs li.active a:hover {
 	background: #fff;
 	border-bottom: 1px solid #fff;
 }
 
 /* Tab content */
-.tab_container {
+.al2fb_tab_container {
 	border: 1px solid #999;
 	border-top: none;
 	overflow: hidden;
@@ -191,6 +191,6 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 	background: #fff;
 }
 
-.tab_content {
+.al2fb_tab_content {
 	padding: 0 10px;
 }

@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-11-18 14:26+0100\n"
+"PO-Revision-Date: 2011-11-30 18:45+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -57,8 +57,8 @@ msgstr "Klikk her for å lage"
 msgid "Anything you like, will appear as \"via ...\" below the message"
 msgstr "Noe du liker, vil vises som \"via ... \" under meldingen"
 
-msgid "Web Site > Site URL:"
-msgstr "Web Site > Site URL:"
+msgid "Website > Site URL:"
+msgstr "Webside > Side URL:"
 
 msgid "App ID:"
 msgstr "App ID:"
@@ -419,6 +419,12 @@ msgstr "liker"
 msgid "Exclude these categories:"
 msgstr "Utelukk disse kategoriene:"
 
+msgid "Exclude these tags:"
+msgstr "Utelukke disse taggene:"
+
+msgid "Exclude these authors:"
+msgstr "Utelukke disse forfatterne:"
+
 msgid "Image from User Photo plugin"
 msgstr "Bilde fra User Photo innstikk"
 
@@ -485,8 +491,8 @@ msgstr "Deaktiverer visning av Facebook avatarer også"
 msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
 msgstr "og naviger til '<em>Mine Apps</em>' og deretter til '<em>Sett opp ny App</em>'"
 
-msgid "Facebook locale"
-msgstr "Facebook locale"
+msgid "Facebook locale:"
+msgstr "Facebook locale:"
 
 msgid "Do not change if no need"
 msgstr "Ikke endre om ikke nødvendig"
@@ -536,8 +542,8 @@ msgstr "Facebook kommunikasjon tidsavbrudd:"
 msgid "Seconds"
 msgstr "Sekunder"
 
-msgid "Default 30 seconds"
-msgstr "Standard 30 sekunder"
+msgid "Default 15 seconds"
+msgstr "Standard 15 sekunder"
 
 msgid "Please check if this is a correct, reachable e-mail address"
 msgstr "Vennligst sjekk om dette er en korrekt, tilgjengelig e-postadresse"
@@ -701,6 +707,9 @@ msgstr "Ikke utføre kortkoder for tekster:"
 msgid "Do not execute filters for texts:"
 msgstr "Ikke utføre filtre for tekster:"
 
+msgid "Do not execute filters for comments:"
+msgstr "Ikke utføre filtre for kommentarer:"
+
 msgid "Only this user can access the settings:"
 msgstr "Bare denne brukeren kan få tilgang til innstillinger:"
 
@@ -731,8 +740,8 @@ msgstr "Oppdater Facebook kommentarer for:"
 msgid "Days"
 msgstr "Dager"
 
-msgid "Default 30 days"
-msgstr "Standard 30 dager"
+msgid "Default 7 days"
+msgstr "Standard 7 dager"
 
 msgid "Required capability to view Facebook comments:"
 msgstr "Nødvendig evne til å vise Facebook-kommentarer:"
@@ -817,4 +826,19 @@ msgstr "Autoriser innstikket først"
 
 msgid "Only for administrators"
 msgstr "Kun for administratorer"
+
+msgid "Setup guide & user manual"
+msgstr "Veiledninger"
+
+msgid "No tab pages"
+msgstr "Ingen tab sider"
+
+msgid "Debug:"
+msgstr "Debug:"
+
+msgid "Use category ID's"
+msgstr "Bruk kategori ID'er"
+
+msgid "Use login names"
+msgstr "Bruk logg inn navn"
 
