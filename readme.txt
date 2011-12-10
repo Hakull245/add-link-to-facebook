@@ -383,6 +383,11 @@ If this is not wanted, you will have to find out the name(s) of the custom post 
 and to put them into the plugin option *Exclude these custom post types* (admin only).
 The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
 
+= U35 Why are the number likes on Facebook and WordPress not added? =
+
+The likes on Facebook are for the added link and the likes on WordPress are for the post/page.
+Facebook considers these as different objects.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -649,6 +654,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* Improvement: hide authorization / easy setup when authorized
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:
@@ -709,18 +717,6 @@ Follow these steps to install the development version:
 * Improvement: less statistics reports
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.116 =
-* New feature: display Facebook comments plugin automatically (option)
-* Bugfix: do not add link checkbox for custom post types
-* Bugfix: display no link picture when 'Facebook selects'
-* Bugfix: default link picture OGP meta tag when 'Facebook selects'
-* Improvement: more [OGP meta tags](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
-* Improvement: added *og:locale* OPG meta tag (fixes Facebook warning)
-* Improvement: disabled PhpConsole until [this issue](http://code.google.com/p/php-console/issues/detail?id=13) is fixed
-* Improvement: less statistics reports
-* Improvement: added comments to OPG and CSS output
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -741,9 +737,6 @@ Two new features, one bugfix, four improvements, translation updates
 
 = 1.117 =
 One new feature, three improvements
-
-= 1.116 =
-One new feature, three bugfixes, five improvements
 
 == Setup guide ==
 
