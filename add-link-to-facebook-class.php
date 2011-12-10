@@ -121,7 +121,8 @@ define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
 define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
 define('c_al2fb_meta_donated', 'al2fb_donated');
-define('c_al2fb_meta_rated', 'al2fb_rated');
+define('c_al2fb_meta_rated0', 'al2fb_rated');
+define('c_al2fb_meta_rated', 'al2fb_rated1');
 define('c_al2fb_meta_stat', 'al2fb_stat');
 define('c_al2fb_meta_week', 'al2fb_week');
 
@@ -722,6 +723,8 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
+			if ($_POST[c_al2fb_meta_rated])
+				delete_user_meta($user_ID, c_al2fb_meta_rated0);
 
 			if (isset($_REQUEST['debug'])) {
 				if (empty($_POST[c_al2fb_meta_access_token]))
@@ -1040,6 +1043,11 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($donotice && !get_user_meta($user_ID, c_al2fb_meta_rated, true)) {
 				echo '<div id="message" class="error fade al2fb_error"><p>';
 				$msg = __('If you like the Add Link to Facebook plugin, please rate it on <a href="[wordpress]" target="_blank">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option "I have rated this plugin" on the <a href="[settings]">settings page</a>.', c_al2fb_text_domain);
+				if (get_user_meta($user_ID, c_al2fb_meta_rated0, true)) {
+					$msg .= '<br /><br /><em>';
+					$msg .= __('Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you\'ve rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin agian, I\'d appreciate it. Thanks!', c_al2fb_text_domain);
+					$msg .= '</em>';
+				}
 				$msg = str_replace('[wordpress]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/', $msg);
 				$msg = str_replace('[settings]', $url . '&rate', $msg);
 				echo $msg . '</p></div>';
@@ -1243,6 +1251,8 @@ if (!class_exists('WPAL2Facebook')) {
 				<hr />
 				<a name="authorize"></a>
 				<h3><?php _e('Authorization', c_al2fb_text_domain); ?></h3>
+
+				<div id="al2fb_auth">
 <?php
 				if (self::Is_authorized($user_ID)) {
 					echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
@@ -1290,6 +1300,23 @@ if (!class_exists('WPAL2Facebook')) {
 <?php			} ?>
 
 				</tr></table>
+
+				</div>
+				<a href="#" id="al2fb_auth_show"><?php _e('Show', c_al2fb_text_domain) ?></a>
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						if (<?php echo self::Is_authorized($user_ID) && get_user_meta($user_ID, c_al2fb_meta_donated, true) ? 'true' : 'false'; ?>)
+							$('#al2fb_auth').hide();
+						else
+							$('#al2fb_auth_show').hide();
+
+						$('#al2fb_auth_show').click(function() {
+							$('#al2fb_auth').show();
+							$('#al2fb_auth_show').hide();
+							return false;
+						});
+					});
+				</script>
 <?php		} ?>
 
 			<hr />
@@ -1299,6 +1326,8 @@ if (!class_exists('WPAL2Facebook')) {
 			<form method="post" action="<?php echo $config_url; ?>">
 			<input type="hidden" name="al2fb_action" value="config">
 			<?php wp_nonce_field(c_al2fb_nonce_form); ?>
+
+			<div id="al2fb_config">
 
 			<div class="al2fb_instructions">
 			<h4><?php _e('To get an App ID and App Secret you have to create a Facebook application', c_al2fb_text_domain); ?></h4>
@@ -1369,6 +1398,23 @@ if (!class_exists('WPAL2Facebook')) {
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
+
+			</div>
+			<a href="#" id="al2fb_config_show"><?php _e('Show', c_al2fb_text_domain) ?></a>
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					if (<?php echo self::Is_authorized($user_ID) ? 'true' : 'false'; ?>)
+						$('#al2fb_config').hide();
+					else
+						$('#al2fb_config_show').hide();
+
+					$('#al2fb_config_show').click(function() {
+						$('#al2fb_config').show();
+						$('#al2fb_config_show').hide();
+						return false;
+					});
+				});
+			</script>
 
 			<hr />
 			<h3><?php _e('Additional settings', c_al2fb_text_domain); ?></h3>
