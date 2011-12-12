@@ -3403,7 +3403,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$description = $texts['description'];
 
 			// Get name
-			$name = html_entity_decode(get_the_title($post->ID));
+			$name = html_entity_decode(get_the_title($post->ID), ENT_QUOTES, get_bloginfo('charset'));
 			$name = self::Convert_encoding($user_ID, $name);
 			$name = apply_filters('al2fb_name', $name, $post);
 
