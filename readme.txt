@@ -70,7 +70,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive") and [Yossi Jana](http://www.webist.co.il "Yossi Jana"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
@@ -655,6 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: HTML entities decode post title (again)
+* Bugfix: empty post text handling
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
