@@ -3401,6 +3401,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$excerpt = $texts['excerpt'];
 			$content = $texts['content'];
 			$description = $texts['description'];
+			if (!$description)
+				$description = ' ';
 
 			// Get name
 			$name = html_entity_decode(get_the_title($post->ID), ENT_QUOTES, get_bloginfo('charset'));
