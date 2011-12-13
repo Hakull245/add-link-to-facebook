@@ -1045,7 +1045,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$msg = __('If you like the Add Link to Facebook plugin, please rate it on <a href="[wordpress]" target="_blank">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option "I have rated this plugin" on the <a href="[settings]">settings page</a>.', c_al2fb_text_domain);
 				if (get_user_meta($user_ID, c_al2fb_meta_rated0, true)) {
 					$msg .= '<br /><br /><em>';
-					$msg .= __('Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you\'ve rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin agian, I\'d appreciate it. Thanks!', c_al2fb_text_domain);
+					$msg .= __('Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you\'ve rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin again, I\'d appreciate it. Thanks!', c_al2fb_text_domain);
 					$msg .= '</em>';
 				}
 				$msg = str_replace('[wordpress]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/', $msg);
