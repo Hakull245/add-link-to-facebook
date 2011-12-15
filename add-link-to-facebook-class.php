@@ -892,7 +892,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$message .= '<hr />';
 			$message .= self::Debug_info();
 			$message .= '</body></html>';
-			if (mail('marcel@bokhorst.biz', '[Add Link to Facebook] Debug information', $message, $headers))
+			if (wp_mail('al2fb@bokhorst.biz', '[Add Link to Facebook] Debug information', $message, $headers))
 				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
 			else
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Sending debug information failed', c_al2fb_text_domain) . '</p></div>';
@@ -2406,14 +2406,21 @@ if (!class_exists('WPAL2Facebook')) {
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_debug_msg"><strong><?php _e('Message:', c_al2fb_text_domain); ?></strong></label>
 				</th><td>
-					<textarea id="al2fb_debug_msg" name="<?php echo c_al2fb_mail_msg; ?>" rows="10" cols="50"></textarea>
+					<textarea id="al2fb_debug_msg" name="<?php echo c_al2fb_mail_msg; ?>" rows="10" cols="80"></textarea>
 					<br><strong><?php _e('Please describe your problem, even if you did before', c_al2fb_text_domain); ?></strong>
 				</td></tr>
 				</table>
 
+<?php
+				$msg = __('Did you check if your problem is described in <a href="[FAQ]" target="_blank">the FAQ</a> ?', c_al2fb_text_domain);
+				$msg = str_replace('[FAQ]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/', $msg);
+				echo '<br /><strong><span style="color: red;">' . $msg . '</span></strong>';
+?>
+
 				<p class="submit">
 				<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
 				</p>
+
 				</form>
 <?php
 				echo self::Debug_info();
