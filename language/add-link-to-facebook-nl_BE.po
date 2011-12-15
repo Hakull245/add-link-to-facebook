@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-11-18 12:29+0100\n"
+"PO-Revision-Date: 2011-12-15 09:25+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -49,7 +49,7 @@ msgid "To get an App ID and App Secret you have to create a Facebook application
 msgstr "Voor een Toepassings-ID en App Secret moet u een Facebook applicatie maken"
 
 msgid "You have to fill in the following:"
-msgstr "U moet het volgende invullen:"
+msgstr "U dient het volgende in te vullen:"
 
 msgid "Click here to create"
 msgstr "Klik hier om te creëren"
@@ -419,6 +419,12 @@ msgstr "vind ik leuk"
 msgid "Exclude these categories:"
 msgstr "Sluit deze categorieën uit:"
 
+msgid "Exclude these tags:"
+msgstr "Sluit deze sleutelwoorden uit:"
+
+msgid "Exclude these authors:"
+msgstr "Sluit deze auteurs uit:"
+
 msgid "Image from User Photo plugin"
 msgstr "Afbeelding van User Photo plugin"
 
@@ -436,6 +442,9 @@ msgstr "Ik heb deze plugin beoordeeld:"
 
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
 msgstr "Als u de Add Link to Facebook plugin goed vindt, beoordeelt u hem dan alstublieft op <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Als de gemiddelde beoordeling laag is, is het niet zinvol om deze plugin te ondersteunen.<br />U kunt deze melding uitzetten door de optie \"Ik heb deze plugin beoordeeld\" op de  <a href=\"[settings]\">instellingen pagina</a>."
+
+msgid "Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you've rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin again, I'd appreciate it. Thanks!"
+msgstr "Door een ongeluk op de WordPress.org systemen, zijn de vorige beoordelingen voor de plugin verloren gegaan.<br />Uw eerdere beoordeling werd per ongeluk verwijderd.<br />Ik zou het het op prijs stellen als u zo vriendelijk wilt zijn om de plugin opnieuw te beoordelen. Bedankt!"
 
 msgid "Custom exerpt"
 msgstr "Maatwerk samenvatting"
@@ -482,11 +491,11 @@ msgstr "Koppel niet naar de auteur van Facebook commentaar:"
 msgid "Disables displaying of Facebook avatars too"
 msgstr "Zet ook het tonen van Facebook avatars uit"
 
-msgid "and navigate to '<em>My Apps</em>' and then to '<em>Set Up New App</em>'"
-msgstr "en navigeer naar '<em>My Apps</em>' en dan naar '<em>Set Up New App</em>'"
+msgid "and navigate to '<em>Apps</em>' and then to '<em>Create New App</em>'"
+msgstr "en navigeer naar '<em>Apps</em>' en dan naar '<em>Create New App</em>'"
 
-msgid "Facebook locale"
-msgstr "Facebook locale"
+msgid "Facebook locale:"
+msgstr "Facebook locale:"
 
 msgid "Do not change if no need"
 msgstr "Niet veranderen wanneer niet nodig"
@@ -536,8 +545,8 @@ msgstr "Facebook communicatie timeout:"
 msgid "Seconds"
 msgstr "Seconden"
 
-msgid "Default 30 seconds"
-msgstr "Standaard 30 seconden"
+msgid "Default 15 seconds"
+msgstr "Standaard 15 seconden"
 
 msgid "Please check if this is a correct, reachable e-mail address"
 msgstr "Controleer a.u.b. of dit een juist, bereikbaar e-mail adres is"
@@ -707,6 +716,9 @@ msgstr "Voer geen shortcodes voor teksten uit:"
 msgid "Do not execute filters for texts:"
 msgstr "Voer geen filters voor teksten uit:"
 
+msgid "Do not execute filters for comments:"
+msgstr "Voer geen filters voor commentaar uit:"
+
 msgid "Only this user can access the settings:"
 msgstr "Alleen deze gebruiker kan bij de instellingen:"
 
@@ -817,4 +829,28 @@ msgstr "Authoriseer eerst de plugin"
 
 msgid "Only for administrators"
 msgstr "Alleen voor administrateurs"
+
+msgid "Setup guide & user manual"
+msgstr "Handleidingen"
+
+msgid "No tab pages"
+msgstr "Geen tab pagina's"
+
+msgid "Debug:"
+msgstr "Debug:"
+
+msgid "Use category ID's"
+msgstr "Gebruik categorie ID's"
+
+msgid "Use login names"
+msgstr "Gebruik login namen"
+
+msgid "Donate in EUR"
+msgstr "Doneer in EUR"
+
+msgid "Show"
+msgstr "Toon"
+
+msgid "Did you check if your problem is described in <a href=\"[FAQ]\" target=\"_blank\">the FAQ</a> ?"
+msgstr "Heeft u gecontroleerd of uw probleem is beschreven in <a href=\"[FAQ]\" target=\"_blank\">de FAQ</a> ?"
 
