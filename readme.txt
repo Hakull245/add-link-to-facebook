@@ -655,7 +655,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Add Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
+* Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:
 
@@ -722,13 +723,6 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.117 =
-* New feature: option to change *the_content* filter priority
-* Improvement: global clean on deactivate (option)
-* Improvement: default/custom picture URL [OGP meta tag](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
-* Improvement: less statistics reports
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -752,9 +746,6 @@ Two new features, one bugfix, three improvements, translation updates
 
 = 1.118 =
 Two new features, one bugfix, four improvements, translation updates
-
-= 1.117 =
-One new feature, three improvements
 
 == Setup guide ==
 
