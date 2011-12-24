@@ -657,6 +657,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: number of comments/messages in widget
 * Improvement: newest comment first in widget
+* Improvement: better error handling import errors
 * Updated FAQ
 * Updated forum link
 * Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")

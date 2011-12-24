@@ -160,8 +160,6 @@ define('c_al2fb_log_get_token', 'al2fb_get_token');
 define('c_al2fb_log_auth_time', 'al2fb_auth_time');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
-define('c_al2fb_last_import_error', 'al2fb_last_import_error');
-define('c_al2fb_last_import_error_time', 'al2fb_last_import_error_time');
 define('c_al2fb_last_request', 'al2fb_last_request');
 define('c_al2fb_last_request_time', 'al2fb_last_request_time');
 define('c_al2fb_last_response', 'al2fb_last_response');
@@ -3503,7 +3501,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$this->Update_statistics('add', $post);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
+				add_post_meta($post->ID, c_al2fb_meta_error, 'Add link: ' . $e->getMessage());
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 			}
@@ -3535,7 +3533,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$this->Update_statistics('del', $post);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
+				add_post_meta($post->ID, c_al2fb_meta_error, 'Delete link: ' . $e->getMessage());
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 			}
 		}
@@ -3566,7 +3564,8 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
+				add_post_meta($post->ID, c_al2fb_meta_error, 'Delete comment: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 			}
 		}
 
@@ -3642,7 +3641,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, $e->getMessage());
+				add_post_meta($post->ID, c_al2fb_meta_error, 'Add comment: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 			}
 		}
 
@@ -4901,10 +4901,8 @@ if (!class_exists('WPAL2Facebook')) {
 						return self::Get_fb_comments_cached($user_ID, $link_id, $cached);
 				}
 				catch (Exception $e) {
-					update_option(c_al2fb_last_import_error, $e->getMessage());
-					update_option(c_al2fb_last_import_error_time, date('c'));
-					if ($this->debug)
-						echo htmlspecialchars($e->getMessage());
+					add_post_meta($post->ID, c_al2fb_meta_error, 'Import comment: ' . $e->getMessage());
+					update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 					return null;
 				}
 			return null;
@@ -5379,8 +5377,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			$info .= '<tr><td>Last error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_error_time), ENT_QUOTES, $charset) . '</td></tr>';
-			$info .= '<tr><td>Last import error:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_import_error), ENT_QUOTES, $charset) . '</td></tr>';
-			$info .= '<tr><td>Last import error time:</td><td>' . htmlspecialchars(get_option(c_al2fb_last_import_error_time), ENT_QUOTES, $charset) . '</td></tr>';
 			$info .= '<tr><td>Last request:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_request), ENT_QUOTES, $charset) . '</pre></td></tr>';
 			$info .= '<tr><td>Last request time:</td><td>' . get_option(c_al2fb_last_request_time) . '</td></tr>';
 			$info .= '<tr><td>Last response:</td><td><pre>' . htmlspecialchars(get_option(c_al2fb_last_response), ENT_QUOTES, $charset) . '</pre></td></tr>';
