@@ -5618,7 +5618,9 @@ class AL2FB_Widget extends WP_Widget {
 
 		// Get settings
 		$comments = isset($instance['al2fb_comments']) ? $instance['al2fb_comments'] : false;
+		$comments_count = isset($instance['al2fb_comments_count']) ? $instance['al2fb_comments_count'] : false;
 		$messages = isset($instance['al2fb_messages']) ? $instance['al2fb_messages'] : false;
+		$messages_count = isset($instance['al2fb_messages_count']) ? $instance['al2fb_messages_count'] : false;
 		$messages_comments = isset($instance['al2fb_messages_comments']) ? $instance['al2fb_messages_comments'] : false;
 		$like_button = isset($instance['al2fb_like_button']) ? $instance['al2fb_like_button'] : false;
 		$like_box = isset($instance['al2fb_like_box']) ? $instance['al2fb_like_box'] : false;
@@ -5685,14 +5687,14 @@ class AL2FB_Widget extends WP_Widget {
 			// Comments
 			if ($fb_comments) {
 				echo '<div class="al2fb_widget_comments">';
-				self::Render_fb_comments($fb_comments, $comments_nolink, $link_id);
+				self::Render_fb_comments($fb_comments, $comments_nolink, $link_id, $comments_count);
 				echo '</div>';
 			}
 
 			// Status messages
 			if ($fb_messages) {
 				echo '<div class="al2fb_widget_messages">';
-				self::Render_fb_messages($fb_messages, $comments_nolink, $link_id, $messages_comments);
+				self::Render_fb_messages($fb_messages, $comments_nolink, $link_id, $messages_count, $messages_comments);
 				echo '</div>';
 			}
 
@@ -5737,7 +5739,7 @@ class AL2FB_Widget extends WP_Widget {
 	}
 
 	// Helper render Facebook comments
-	function Render_fb_comments($fb_comments, $comments_nolink, $link_id) {
+	function Render_fb_comments($fb_comments, $comments_nolink, $link_id, $max_count) {
 		global $wp_al2fb;
 		$charset = get_bloginfo('charset');
 
@@ -5748,8 +5750,13 @@ class AL2FB_Widget extends WP_Widget {
 		else
 			$tz_off = $tz_off * 3600;
 
+		$fb_comments->data = array_reverse($fb_comments->data);
+
+		$count = 0;
 		echo '<ul>';
 		foreach ($fb_comments->data as $fb_comment) {
+			if ($max_count && ++$count > $max_count)
+				break;
 			echo '<li>';
 
 			// Picture
@@ -5780,7 +5787,7 @@ class AL2FB_Widget extends WP_Widget {
 	}
 
 	// Helper render Facebook status messages
-	function Render_fb_messages($fb_messages, $comments_nolink, $link_id, $messages_comments) {
+	function Render_fb_messages($fb_messages, $comments_nolink, $link_id, $max_count, $messages_comments) {
 		global $wp_al2fb;
 		$charset = get_bloginfo('charset');
 
@@ -5791,9 +5798,12 @@ class AL2FB_Widget extends WP_Widget {
 		else
 			$tz_off = $tz_off * 3600;
 
+		$count = 0;
 		echo '<ul>';
 		foreach ($fb_messages->data as $fb_message)
 			if ($fb_message->type == 'status' && isset($fb_message->message)) {
+				if ($max_count && ++$count > $max_count)
+					break;
 				echo '<li>';
 
 				// Picture
@@ -5822,7 +5832,7 @@ class AL2FB_Widget extends WP_Widget {
 					try {
 						$fb_message_comments = $wp_al2fb->Get_fb_comments_cached($user_ID, $fb_message->id);
 						if ($fb_message_comments)
-							self::Render_fb_comments($fb_message_comments, $comments_nolink, $fb_message->id);
+							self::Render_fb_comments($fb_message_comments, $comments_nolink, $fb_message->id, $messages_comments);
 					}
 					catch (Exception $e) {
 						$error = $e->getMessage();
@@ -5837,7 +5847,9 @@ class AL2FB_Widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['al2fb_comments'] = $new_instance['al2fb_comments'];
+		$instance['al2fb_comments_count'] = $new_instance['al2fb_comments_count'];
 		$instance['al2fb_messages'] = $new_instance['al2fb_messages'];
+		$instance['al2fb_messages_count'] = $new_instance['al2fb_messages_count'];
 		$instance['al2fb_messages_comments'] = $new_instance['al2fb_messages_comments'];
 		$instance['al2fb_like_button'] = $new_instance['al2fb_like_button'];
 		$instance['al2fb_like_box'] = $new_instance['al2fb_like_box'];
@@ -5856,8 +5868,12 @@ class AL2FB_Widget extends WP_Widget {
 			$instance['title'] = null;
 		if (empty($instance['al2fb_comments']))
 			$instance['al2fb_comments'] = false;
+		if (empty($instance['al2fb_comments_count']))
+			$instance['al2fb_comments_count'] = null;
 		if (empty($instance['al2fb_messages']))
 			$instance['al2fb_messages'] = false;
+		if (empty($instance['al2fb_messages_count']))
+			$instance['al2fb_messages_count'] = null;
 		if (empty($instance['al2fb_messages_comments']))
 			$instance['al2fb_messages_comments'] = false;
 		if (empty($instance['al2fb_like_button']))
@@ -5896,43 +5912,61 @@ class AL2FB_Widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($instance['title']); ?>" />
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_comments; ?> id="<?php echo $this->get_field_id('al2fb_comments'); ?>" name="<?php echo $this->get_field_name('al2fb_comments'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_comments'); ?>"><?php _e('Show Facebook comments', c_al2fb_text_domain); ?></label>
 			<br />
+			<label for="<?php echo $this->get_field_id('al2fb_comments_count'); ?>"><?php _e('Maximum number:'); ?></label>
+			<input class="al2fb_numeric" id="<?php echo $this->get_field_id('al2fb_comments_count'); ?>" name="<?php echo $this->get_field_name('al2fb_comments_count'); ?>" type="text" value="<?php echo esc_attr($instance['al2fb_comments_count']); ?>" />
+			<br />
 			<strong><?php _e('Appearance depends on your theme!', c_al2fb_text_domain); ?></strong>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_messages; ?> id="<?php echo $this->get_field_id('al2fb_messages'); ?>" name="<?php echo $this->get_field_name('al2fb_messages'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_messages'); ?>"><?php _e('Show Facebook messages', c_al2fb_text_domain); ?></label>
 			<br />
+			<label for="<?php echo $this->get_field_id('al2fb_messages_count'); ?>"><?php _e('Maximum number:'); ?></label>
+			<input class="al2fb_numeric" id="<?php echo $this->get_field_id('al2fb_messages_count'); ?>" name="<?php echo $this->get_field_name('al2fb_messages_count'); ?>" type="text" value="<?php echo esc_attr($instance['al2fb_messages_count']); ?>" />
+			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_messages_comments; ?> id="<?php echo $this->get_field_id('al2fb_messages_comments'); ?>" name="<?php echo $this->get_field_name('al2fb_messages_comments'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_messages_comments'); ?>"><?php _e('Show comments on messages', c_al2fb_text_domain); ?></label>
 			<br />
 			<strong><?php _e('Appearance depends on your theme!', c_al2fb_text_domain); ?></strong>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_like; ?> id="<?php echo $this->get_field_id('al2fb_like_button'); ?>" name="<?php echo $this->get_field_name('al2fb_like_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_like_button'); ?>"><?php _e('Show Facebook like button', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_box; ?> id="<?php echo $this->get_field_id('al2fb_like_box'); ?>" name="<?php echo $this->get_field_name('al2fb_like_box'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_like_box'); ?>"><?php _e('Show Facebook like box', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_send; ?> id="<?php echo $this->get_field_id('al2fb_send_button'); ?>" name="<?php echo $this->get_field_name('al2fb_send_button'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_send_button'); ?>"><?php _e('Show Facebook send button', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_comments_plugin; ?> id="<?php echo $this->get_field_id('al2fb_comments_plugin'); ?>" name="<?php echo $this->get_field_name('al2fb_comments_plugin'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_comments_plugin'); ?>"><?php _e('Show Facebook comments plugin', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_face_pile; ?> id="<?php echo $this->get_field_id('al2fb_face_pile'); ?>" name="<?php echo $this->get_field_name('al2fb_face_pile'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_face_pile'); ?>"><?php _e('Show Facebook face pile', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_profile; ?> id="<?php echo $this->get_field_id('al2fb_profile'); ?>" name="<?php echo $this->get_field_name('al2fb_profile'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook image/link', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_registration; ?> id="<?php echo $this->get_field_id('al2fb_registration'); ?>" name="<?php echo $this->get_field_name('al2fb_registration'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_profile'); ?>"><?php _e('Show Facebook registration', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_login; ?> id="<?php echo $this->get_field_id('al2fb_login'); ?>" name="<?php echo $this->get_field_name('al2fb_login'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_login'); ?>"><?php _e('Show Facebook login', c_al2fb_text_domain); ?></label>
 			<br />
+
 			<input class="checkbox" type="checkbox" <?php echo $chk_activity; ?> id="<?php echo $this->get_field_id('al2fb_activity'); ?>" name="<?php echo $this->get_field_name('al2fb_activity'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_activity'); ?>"><?php _e('Show Facebook activity feed', c_al2fb_text_domain); ?></label>
 		</p>

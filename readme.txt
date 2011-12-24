@@ -655,6 +655,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: number of comments/messages in widget
+* Improvement: newest comment first in widget
+* Updated FAQ
 * Updated forum link
 * Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
