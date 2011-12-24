@@ -5916,7 +5916,7 @@ class AL2FB_Widget extends WP_Widget {
 			<input class="checkbox" type="checkbox" <?php echo $chk_comments; ?> id="<?php echo $this->get_field_id('al2fb_comments'); ?>" name="<?php echo $this->get_field_name('al2fb_comments'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_comments'); ?>"><?php _e('Show Facebook comments', c_al2fb_text_domain); ?></label>
 			<br />
-			<label for="<?php echo $this->get_field_id('al2fb_comments_count'); ?>"><?php _e('Maximum number:'); ?></label>
+			<label for="<?php echo $this->get_field_id('al2fb_comments_count'); ?>"><?php _e('Maximum number:', c_al2fb_text_domain); ?></label>
 			<input class="al2fb_numeric" id="<?php echo $this->get_field_id('al2fb_comments_count'); ?>" name="<?php echo $this->get_field_name('al2fb_comments_count'); ?>" type="text" value="<?php echo esc_attr($instance['al2fb_comments_count']); ?>" />
 			<br />
 			<strong><?php _e('Appearance depends on your theme!', c_al2fb_text_domain); ?></strong>
@@ -5925,7 +5925,7 @@ class AL2FB_Widget extends WP_Widget {
 			<input class="checkbox" type="checkbox" <?php echo $chk_messages; ?> id="<?php echo $this->get_field_id('al2fb_messages'); ?>" name="<?php echo $this->get_field_name('al2fb_messages'); ?>" />
 			<label for="<?php echo $this->get_field_id('al2fb_messages'); ?>"><?php _e('Show Facebook messages', c_al2fb_text_domain); ?></label>
 			<br />
-			<label for="<?php echo $this->get_field_id('al2fb_messages_count'); ?>"><?php _e('Maximum number:'); ?></label>
+			<label for="<?php echo $this->get_field_id('al2fb_messages_count'); ?>"><?php _e('Maximum number:', c_al2fb_text_domain); ?></label>
 			<input class="al2fb_numeric" id="<?php echo $this->get_field_id('al2fb_messages_count'); ?>" name="<?php echo $this->get_field_name('al2fb_messages_count'); ?>" type="text" value="<?php echo esc_attr($instance['al2fb_messages_count']); ?>" />
 			<br />
 
