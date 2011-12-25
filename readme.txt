@@ -660,6 +660,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: better error handling import errors
 * Updated FAQ
 * Updated forum link
+* Removed statistics
 * Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
@@ -734,6 +735,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.124 =
+One new feature, two improvements, new/updated translation/documentation
 
 = 1.123 =
 Two bugfixes, one improvement, translation updates
