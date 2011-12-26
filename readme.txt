@@ -670,6 +670,7 @@ Follow these steps to install the development version:
 
 = 1.125 =
 * Bugfix: remove statistics
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.124 =
 * New feature: number of comments/messages in widget
@@ -710,31 +711,6 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.119 =
-* New feature: *Exclude these tags*
-* New feature: *Exclude these authors*
-* Bugfix: *Do not integrate comments* for cron
-* Improvement: *Do not integrate comments* for auto comments plugin
-* Improvement: *Add links for new pages* moved to *Miscelaneous*
-* Improvement: better debug info
-* Removed [Sustainable Plugins Sponsorship Network](http://pluginsponsors.com/)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.118 =
-* New feature: tab pages to organize the plugin options
-* New feature: option to disable Facebook script include
-* Bugfix: admin HTML/CSS
-* Improvement: *See all pages* option (was before: *Add as page owner*)
-* Improvement: Heise: updated to version 1.3
-* Improvement: more debug info
-* Improvement: better statistics reports
-* Deprecated user photo image as link picture, use avatars instead
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -758,12 +734,6 @@ Re-release of 1.120
 
 = 1.120 =
 Two new features, one bugfix, two improvements, translation updates
-
-= 1.119 =
-Two new features, one bugfix, three improvements, translation updates
-
-= 1.118 =
-Two new features, one bugfix, four improvements, translation updates
 
 == Setup guide ==
 
