@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.123
+Stable tag: 1.124
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -655,15 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: number of comments/messages in widget
-* Improvement: newest comment first in widget
-* Improvement: better error handling import errors
-* Updated FAQ
-* Updated forum link
-* Removed statistics
-* Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* ...
 
 Follow these steps to install the development version:
 
@@ -675,6 +667,16 @@ Follow these steps to install the development version:
 * Click *Upload* (a link at the top)
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
+
+= 1.124 =
+* New feature: number of comments/messages in widget
+* Improvement: newest comments first in widget
+* Improvement: better error handling import errors
+* Updated forum link & FAQ
+* Removed statistics
+* Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.123 =
 * Bugfix: HTML entities decode post title (again)
