@@ -671,6 +671,7 @@ Follow these steps to install the development version:
 = 1.125 =
 * Bugfix: remove statistics
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.124 =
 * New feature: number of comments/messages in widget
