@@ -3342,9 +3342,6 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
-
-				// Update stats
-				$this->Update_statistics('add', $post);
 			}
 			catch (Exception $e) {
 				add_post_meta($post->ID, c_al2fb_meta_error, 'Add link: ' . $e->getMessage());
@@ -3374,9 +3371,6 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_post_meta($post->ID, c_al2fb_meta_link_time);
 				delete_post_meta($post->ID, c_al2fb_meta_link_picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
-
-				// Update stats
-				$this->Update_statistics('del', $post);
 			}
 			catch (Exception $e) {
 				add_post_meta($post->ID, c_al2fb_meta_error, 'Delete link: ' . $e->getMessage());
