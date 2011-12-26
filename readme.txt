@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.123
+Stable tag: 1.125
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -69,6 +69,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive") and [Yossi Jana](http://www.webist.co.il "Yossi Jana"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
+* Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -542,7 +543,7 @@ cURL errors commonly reported:
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server, you can try to increase the setting *Facebook communication timeout*
-* Error 56: *Failure with receiving network data*: maybe the internet connection went down, try again
+* Error 56: *Failure with receiving network data*: this error may be caused by using a CDN or caching solutions like CloudFare
 * Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate*, but be aware this is less secure
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
@@ -667,6 +668,19 @@ Follow these steps to install the development version:
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
 
+= 1.125 =
+* Bugfix: remove statistics
+
+= 1.124 =
+* New feature: number of comments/messages in widget
+* Improvement: newest comments first in widget
+* Improvement: better error handling import errors
+* Updated forum link & FAQ
+* Removed statistics
+* Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+
 = 1.123 =
 * Bugfix: HTML entities decode post title (again)
 * Bugfix: empty post text handling
@@ -721,18 +735,17 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.117 =
-* New feature: option to change *the_content* filter priority
-* Improvement: global clean on deactivate (option)
-* Improvement: default/custom picture URL [OGP meta tag](https://developers.facebook.com/docs/opengraph/) on home page for single user blogs
-* Improvement: less statistics reports
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.125 =
+One bugfix
+
+= 1.124 =
+One new feature, two improvements, new/updated translation/documentation
 
 = 1.123 =
 Two bugfixes, one improvement, translation updates
@@ -751,9 +764,6 @@ Two new features, one bugfix, three improvements, translation updates
 
 = 1.118 =
 Two new features, one bugfix, four improvements, translation updates
-
-= 1.117 =
-One new feature, three improvements
 
 == Setup guide ==
 
