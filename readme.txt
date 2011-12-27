@@ -658,6 +658,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: no new link after error
 * Improvement: remove import error after successful import
 * Improvement: register/display error time
+* Improvement: empty post meta box if no post (workaround for blogroll)
 
 Follow these steps to install the development version:
 
