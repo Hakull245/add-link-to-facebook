@@ -2766,83 +2766,86 @@ if (!class_exists('WPAL2Facebook')) {
 		// Display attached image selector
 		function Meta_box() {
 			global $post;
-			$user_ID = self::Get_user_ID($post);
+			if (!empty($post)) {
+				$user_ID = self::Get_user_ID($post);
 
-			// Security
-			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+				// Security
+				wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
-			if ($this->debug) {
-				$texts = self::Get_texts($post);
-				echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
-				echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
-			}
-
-			if (function_exists('wp_get_attachment_image_src')) {
-				// Get attached images
-				$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
-				if (empty($images))
-					echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span><br />';
-				else {
-					// Display image selector
-					$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-
-					// Header
-					echo '<h4>' . __('Select link image:', c_al2fb_text_domain) . '</h4>';
-					echo '<div class="al2fb_images">';
-
-					// None
-					echo '<div class="al2fb_image">';
-					echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_0"';
-					if (empty($image_id))
-						echo ' checked';
-					echo ' value="0">';
-					echo '<br />';
-					echo '<label for="al2fb_image_0">';
-					echo __('None', c_al2fb_text_domain) . '</label>';
-					echo '</div>';
-
-					// Images
-					if ($images)
-						foreach ($images as $attachment_id => $attachment) {
-							$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
-
-							echo '<div class="al2fb_image">';
-							echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
-							if ($attachment_id == $image_id)
-								echo ' checked';
-							echo ' value="' . $attachment_id . '">';
-							echo '<br />';
-							echo '<label for="al2fb_image_' . $attachment_id . '">';
-							echo '<img src="' . $picture[0] . '" alt=""></label>';
-							echo '<br />';
-							echo '<span>' . $picture[1] . ' x ' . $picture[2] . '</span>';
-							echo '</div>';
-						}
-					echo '</div>';
+				if ($this->debug) {
+					echo '<strong>Type:</strong> ' . $post->post_type . '<br />';;
+					$texts = self::Get_texts($post);
+					echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
+					echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
 				}
+
+				if (function_exists('wp_get_attachment_image_src')) {
+					// Get attached images
+					$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
+					if (empty($images))
+						echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span><br />';
+					else {
+						// Display image selector
+						$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
+
+						// Header
+						echo '<h4>' . __('Select link image:', c_al2fb_text_domain) . '</h4>';
+						echo '<div class="al2fb_images">';
+
+						// None
+						echo '<div class="al2fb_image">';
+						echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_0"';
+						if (empty($image_id))
+							echo ' checked';
+						echo ' value="0">';
+						echo '<br />';
+						echo '<label for="al2fb_image_0">';
+						echo __('None', c_al2fb_text_domain) . '</label>';
+						echo '</div>';
+
+						// Images
+						if ($images)
+							foreach ($images as $attachment_id => $attachment) {
+								$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+
+								echo '<div class="al2fb_image">';
+								echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
+								if ($attachment_id == $image_id)
+									echo ' checked';
+								echo ' value="' . $attachment_id . '">';
+								echo '<br />';
+								echo '<label for="al2fb_image_' . $attachment_id . '">';
+								echo '<img src="' . $picture[0] . '" alt=""></label>';
+								echo '<br />';
+								echo '<span>' . $picture[1] . ' x ' . $picture[2] . '</span>';
+								echo '</div>';
+							}
+						echo '</div>';
+					}
+				}
+				else
+					echo 'wp_get_attachment_image_src does not exist';
+
+				// Custom excerpt
+				$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
+				echo '<h4>' . __('Custom exerpt', c_al2fb_text_domain) . '</h4>';
+				echo '<textarea id="al2fb_excerpt" name="al2fb_excerpt" cols="40" rows="1" class="attachmentlinks">';
+				echo $excerpt . '</textarea>';
+
+				// Custom text
+				$text = get_post_meta($post->ID, c_al2fb_meta_text, true);
+				echo '<h4>' . __('Custom text', c_al2fb_text_domain) . '</h4>';
+				echo '<textarea id="al2fb_text" name="al2fb_text" cols="40" rows="1" class="attachmentlinks">';
+				echo $text . '</textarea>';
+
+				echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
+
+				$picture_info = self::Get_link_picture($post, $user_ID);
+				if (!empty($picture_info['picture']))
+					echo '<img src="' . $picture_info['picture'] . '" alt="">';
+				if ($this->debug)
+					echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
 			}
-			else
-				echo 'wp_get_attachment_image_src does not exist';
-
-			// Custom excerpt
-			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
-			echo '<h4>' . __('Custom exerpt', c_al2fb_text_domain) . '</h4>';
-			echo '<textarea id="al2fb_excerpt" name="al2fb_excerpt" cols="40" rows="1" class="attachmentlinks">';
-			echo $excerpt . '</textarea>';
-
-			// Custom text
-			$text = get_post_meta($post->ID, c_al2fb_meta_text, true);
-			echo '<h4>' . __('Custom text', c_al2fb_text_domain) . '</h4>';
-			echo '<textarea id="al2fb_text" name="al2fb_text" cols="40" rows="1" class="attachmentlinks">';
-			echo $text . '</textarea>';
-
-			echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
-
-			$picture_info = self::Get_link_picture($post, $user_ID);
-			if (!empty($picture_info['picture']))
-				echo '<img src="' . $picture_info['picture'] . '" alt="">';
-			if ($this->debug)
-				echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
 		}
 
 		// Save indications & selected attached image
@@ -4744,9 +4747,9 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($link_id)
 				try {
 					if ($likes)
-						return self::Get_fb_likes_cached($user_ID, $link_id, $cached);
+						$result = self::Get_fb_likes_cached($user_ID, $link_id, $cached);
 					else
-						return self::Get_fb_comments_cached($user_ID, $link_id, $cached);
+						$result = self::Get_fb_comments_cached($user_ID, $link_id, $cached);
 
 					// Remove previous errors
 					$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
@@ -4754,6 +4757,8 @@ if (!class_exists('WPAL2Facebook')) {
 						delete_post_meta($post->ID, c_al2fb_meta_error, $error);
 						delete_post_meta($post->ID, c_al2fb_meta_error_time);
 					}
+
+					return $result;
 				}
 				catch (Exception $e) {
 					update_post_meta($post->ID, c_al2fb_meta_error, 'Import comment: ' . $e->getMessage());
