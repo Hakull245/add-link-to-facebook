@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.125
+Stable tag: 1.126
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -655,10 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: no new link after error
-* Improvement: remove import error after successful import
-* Improvement: register/display error time
-* Improvement: empty post meta box if no post (workaround for blogroll)
+* ...
 
 Follow these steps to install the development version:
 
@@ -670,6 +667,12 @@ Follow these steps to install the development version:
 * Click *Upload* (a link at the top)
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
+
+= 1.126 =
+* Bugfix: no new link after error
+* Improvement: remove import error after successful import
+* Improvement: register/display error time
+* Improvement: empty post meta box if no post (workaround for blogroll)
 
 = 1.125 =
 * Bugfix: remove statistics
@@ -720,6 +723,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.126 =
+One bugfix, three improvements
 
 = 1.125 =
 One bugfix
