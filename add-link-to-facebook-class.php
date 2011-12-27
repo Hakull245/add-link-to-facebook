@@ -131,6 +131,7 @@ define('c_al2fb_meta_link_time', 'al2fb_facebook_link_time');
 define('c_al2fb_meta_link_picture', 'al2fb_facebook_link_picture');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
+define('c_al2fb_meta_error_time', 'al2fb_facebook_error_time');
 define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
 define('c_al2fb_meta_nolike', 'al2fb_facebook_nolike');
 define('c_al2fb_meta_nointegrate', 'al2fb_facebook_nointegrate');
@@ -947,7 +948,9 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<div id="message" class="error fade al2fb_error"><p>';
 					echo __('Add Link to Facebook', c_al2fb_text_domain) . ' - ';
 					edit_post_link(get_the_title($posts->post->ID), null, null, $posts->post->ID);
-					echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset')) . '</p></div>';
+					echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset'));
+					echo '@ ' . get_post_meta($posts->post->ID, c_al2fb_meta_error_time, true);
+					echo '</p></div>';
 				}
 			}
 
@@ -2880,8 +2883,10 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_post_meta($post_id, c_al2fb_meta_nointegrate);
 
 			// Clear errors
-			if (isset($_POST[c_al2fb_action_clear]) && $_POST[c_al2fb_action_clear])
+			if (isset($_POST[c_al2fb_action_clear]) && $_POST[c_al2fb_action_clear]) {
 				delete_post_meta($post_id, c_al2fb_meta_error);
+				delete_post_meta($post_id, c_al2fb_meta_error_time);
+			}
 
 			// Persist data
 			if (empty($_POST['al2fb_image_id']))
@@ -2931,18 +2936,19 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$update = (isset($_POST[c_al2fb_action_update]) && $_POST[c_al2fb_action_update]);
 			$delete = (isset($_POST[c_al2fb_action_delete]) && $_POST[c_al2fb_action_delete]);
+			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 
 			// Security check
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
 				// Add, update or delete link
 				if ($update || $delete) {
-					$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 					if (!empty($link_id) && self::Is_authorized($user_ID))
 						self::Delete_fb_link($post);
 				}
 				if (!$delete) {
 					// Check post status
-					if ($new_status == 'publish' &&
+					if (empty($link_id) &&
+						$new_status == 'publish' &&
 						($new_status != $old_status || $update ||
 						get_post_meta($post->ID, c_al2fb_meta_error, true)))
 						self::Publish_post($post);
@@ -3342,10 +3348,11 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
+				delete_post_meta($post->ID, c_al2fb_meta_error_time);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, 'Add link: ' . $e->getMessage());
-				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+				update_post_meta($post->ID, c_al2fb_meta_error, 'Add link: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 			}
 		}
@@ -3371,10 +3378,11 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_post_meta($post->ID, c_al2fb_meta_link_time);
 				delete_post_meta($post->ID, c_al2fb_meta_link_picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
+				delete_post_meta($post->ID, c_al2fb_meta_error_time);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, 'Delete link: ' . $e->getMessage());
-				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+				update_post_meta($post->ID, c_al2fb_meta_error, 'Delete link: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 			}
 		}
 
@@ -3404,8 +3412,8 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, 'Delete comment: ' . $e->getMessage());
-				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+				update_post_meta($post->ID, c_al2fb_meta_error, 'Delete comment: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 			}
 		}
 
@@ -3481,8 +3489,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
 			}
 			catch (Exception $e) {
-				add_post_meta($post->ID, c_al2fb_meta_error, 'Add comment: ' . $e->getMessage());
-				update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+				update_post_meta($post->ID, c_al2fb_meta_error, 'Add comment: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 			}
 		}
 
@@ -4739,10 +4747,17 @@ if (!class_exists('WPAL2Facebook')) {
 						return self::Get_fb_likes_cached($user_ID, $link_id, $cached);
 					else
 						return self::Get_fb_comments_cached($user_ID, $link_id, $cached);
+
+					// Remove previous errors
+					$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
+					if (strpos($error, 'Import comment: ') !== false) {
+						delete_post_meta($post->ID, c_al2fb_meta_error, $error);
+						delete_post_meta($post->ID, c_al2fb_meta_error_time);
+					}
 				}
 				catch (Exception $e) {
-					add_post_meta($post->ID, c_al2fb_meta_error, 'Import comment: ' . $e->getMessage());
-					update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
+					update_post_meta($post->ID, c_al2fb_meta_error, 'Import comment: ' . $e->getMessage());
+					update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 					return null;
 				}
 			return null;
@@ -5206,7 +5221,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$info .= '<tr><td>Error:</td>';
 					$info .= '<td>' . htmlspecialchars($error, ENT_QUOTES, $charset) . '</td></tr>';
 					$info .= '<tr><td>Error time:</td>';
-					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_link_time, true), ENT_QUOTES, $charset) . '</td></tr>';
+					$info .= '<td>' . htmlspecialchars(get_post_meta($posts->post->ID, c_al2fb_meta_error_time, true), ENT_QUOTES, $charset) . '</td></tr>';
 					$info .= '<tr><td>Error post:</td>';
 					$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a></td></tr>';
 				}

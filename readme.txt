@@ -655,7 +655,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: no new link after error
+* Improvement: remove import error after successful import
+* Improvement: register/display error time
 
 Follow these steps to install the development version:
 
