@@ -657,6 +657,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: e-mail headers debug info
 * Improvement: splitted main file to reduce memory usage
+* Improvement: generalized option checking
 
 Follow these steps to install the development version:
 
