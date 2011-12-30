@@ -173,8 +173,6 @@ define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 define('USERPHOTO_APPROVED', 2);
 
-require_once('add-link-to-facebook-widget.php');
-
 // Define class
 if (!class_exists('WPAL2Facebook')) {
 	class WPAL2Facebook {

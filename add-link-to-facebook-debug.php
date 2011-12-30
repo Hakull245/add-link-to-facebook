@@ -1,5 +1,10 @@
 <?php
 
+/*
+	Support class Add Link to Facebook debug info
+	Copyright (c) 2011 by Marcel Bokhorst
+*/
+
 // Generate debug info
 function al2fb_debug_info($al2fb) {
 	// Get current user

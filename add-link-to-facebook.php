@@ -38,6 +38,14 @@ if (get_option('al2fb_debug')) {
 	//PhpConsole::start();
 }
 
+// Auto load widget class
+function __autoload($class_name) {
+	if ($class_name == 'AL2FB_Widget')
+		require_once('add-link-to-facebook-widget.php');
+}
+if (version_compare(PHP_VERSION, '5.1.2', '>='))
+	spl_autoload_register('__autoload');
+
 // Include support class
 require_once('add-link-to-facebook-class.php');
 

@@ -1,5 +1,10 @@
 <?php
 
+/*
+	Support class Add Link to Facebook admin
+	Copyright (c) 2011 by Marcel Bokhorst
+*/
+
 function al2fb_render_admin($al2fb)
 {
 ?>

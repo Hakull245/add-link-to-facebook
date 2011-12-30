@@ -1,5 +1,10 @@
 <?php
 
+/*
+	Support class Add Link to Facebook widget
+	Copyright (c) 2011 by Marcel Bokhorst
+*/
+
 class AL2FB_Widget extends WP_Widget {
 	function AL2FB_Widget() {
 		$widget_ops = array('classname' => 'widget_al2fb', 'description' => '');
