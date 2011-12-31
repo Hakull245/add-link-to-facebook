@@ -1527,6 +1527,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle post status change
 		function Transition_post_status($new_status, $old_status, $post) {
+			if ($this->debug)
+				add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' ' . $old_status . '->' . $new_status);
+
 			self::Save_post($post->ID);
 
 			$user_ID = self::Get_user_ID($post);
@@ -1923,8 +1926,8 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_last_request_time, date('c'));
 				update_option(c_al2fb_last_texts, print_r($texts, true) . $query);
 				if ($this->debug) {
-					add_post_meta($post->ID, c_al2fb_meta_log, 'request=' . print_r($query_array, true));
-					add_post_meta($post->ID, c_al2fb_meta_log, 'texts=' . print_r($texts, true));
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' request=' . print_r($query_array, true));
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' texts=' . print_r($texts, true));
 				}
 
 				// Execute request
@@ -1934,7 +1937,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_last_response, $response);
 				update_option(c_al2fb_last_response_time, date('c'));
 				if ($this->debug)
-					add_post_meta($post->ID, c_al2fb_meta_log, 'response=' . $response);
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' response=' . $response);
 
 				// Decode response
 				$fb_link = json_decode($response);

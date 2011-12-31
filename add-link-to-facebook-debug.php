@@ -320,6 +320,20 @@ function al2fb_debug_info($al2fb) {
 		}
 	}
 
+	// Last logs
+	$posts = new WP_Query(array('meta_key' => c_al2fb_meta_log, 'posts_per_page' => 10));
+	while ($posts->have_posts()) {
+		$posts->next_post();
+		$info .= '<tr><td>Log post:</td>';
+		$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a></td></tr>';
+		$logs = get_post_meta($posts->post->ID, c_al2fb_meta_log, false);
+		if (!empty($logs))
+			foreach ($logs as $log) {
+				$info .= '<tr><td>Log:</td>';
+				$info .= '<td>' . htmlspecialchars($log, ENT_QUOTES, $charset) . '</td></tr>';
+			}
+	}
+
 	// Last errors
 	$posts = new WP_Query(array('meta_key' => c_al2fb_meta_error, 'posts_per_page' => 10));
 	while ($posts->have_posts()) {
