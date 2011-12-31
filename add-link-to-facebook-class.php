@@ -1,8 +1,8 @@
 <?php
 
 /*
-	Support class Add Link to Facebook Plugin
-	Copyright (c) 2011 by Marcel Bokhorst
+	Support class Add Link to Facebook plugin
+	Copyright (c) 2011, 2012 by Marcel Bokhorst
 */
 
 // Define constants
@@ -724,7 +724,6 @@ if (!class_exists('WPAL2Facebook')) {
 			// Build headers
 			$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
 			$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-			//$headers .= 'X-Mailer: AL2FB' . "\r\n";
 			//$headers .= 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
 
@@ -1369,8 +1368,8 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($this->debug) {
 					echo '<strong>Type:</strong> ' . $post->post_type . '<br />';;
 					$texts = self::Get_texts($post);
-					echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content) . '<br />';
-					echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content']) . '<br />';
+					echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content, ENT_QUOTES, get_bloginfo('charset')) . '<br />';
+					echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content'], ENT_QUOTES, get_bloginfo('charset')) . '<br />';
 				}
 
 				if (function_exists('wp_get_attachment_image_src')) {
@@ -1911,7 +1910,7 @@ if (!class_exists('WPAL2Facebook')) {
 					// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
 					$actions = array(
 						'name' => __('Share', c_al2fb_text_domain),
-						'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . urlencode($name)
+						'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . rawurlencode($name)
 					);
 					$query_array['actions'] = json_encode($actions);
 				}
@@ -2127,6 +2126,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (get_user_meta($user_ID, c_al2fb_meta_open_graph, true)) {
 					$charset = get_bloginfo('charset');
 					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+					$post_title = html_entity_decode(get_the_title($post->ID), ENT_QUOTES, get_bloginfo('charset'));
 
 					// Get link picture
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
@@ -2146,16 +2146,16 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Generate meta tags
 					echo '<!-- Start AL2FB OGP -->' . PHP_EOL;
-					echo '<meta property="og:title" content="' . htmlspecialchars(get_the_title($post->ID), ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:title" content="' . htmlspecialchars($post_title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="' . $ogp_type . '" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
-					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					$texts = self::Get_texts($post);
 					$maxlen = get_option(c_al2fb_option_max_descr);
 					$description = substr($texts['description'], 0, $maxlen ? $maxlen : 256);
-					echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 					if (!empty($appid))
@@ -2187,7 +2187,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($opg) {
 					$charset = get_bloginfo('charset');
 					$title = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, $charset);
-					$description = get_bloginfo('description');
+					$description = html_entity_decode(get_bloginfo('description'), ENT_QUOTES, $charset);
 
 					// Get link picture
 					$picture_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
@@ -2201,13 +2201,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Generate meta tags
 					echo '<!-- Start AL2FB OGP -->' . PHP_EOL;
-					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
-					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 					if (!empty($description))
-						echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_QUOTES, $charset) . '" />' . PHP_EOL;
+						echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					// Single user blog
 					if ($opg == 1) {

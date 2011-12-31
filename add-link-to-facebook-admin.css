@@ -1,6 +1,7 @@
 
 /*
-	Style sheet Add Link to Facebook WordPress Plugin
+	Style sheet Add Link to Facebook plugin
+	Copyright (c) 2011, 2012 by Marcel Bokhorst
 */
 
 /* Error/warning messages */
@@ -11,23 +12,6 @@
 /* Informational messages */
 .al2fb_notice {
 	font-weight: bold;
-}
-
-/* Service messages */
-.al2fb_service {
-}
-
-.al2fb_service_msg {
-}
-
-.al2fb_service_time {
-	font-size: smaller;
-	color: gray;
-}
-
-/* Privacy notice top */
-.al2fb_spsn {
-	font-size: smaller;
 }
 
 /* Resources panel right */
