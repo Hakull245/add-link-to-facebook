@@ -656,6 +656,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: e-mail headers debug info
+* Bugfix: html entity decode OGP post title
+* Bugfix: html entity decode OGP blog description
+* Improvement: allow ' in OGP meta tags (workaround Facebook bug)
+* Improvement: allow -_.~ in share links (workaround Facebook bug)
 * Improvement: generalized option checking
 * Improvement: splitted main file to reduce memory usage
 * Improvement: auto load widget class to reduce memory usage
