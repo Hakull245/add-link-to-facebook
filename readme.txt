@@ -663,6 +663,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: generalized option checking
 * Improvement: splitted main file to reduce memory usage
 * Improvement: auto load widget class to reduce memory usage
+* Improvement: post status transition debug info
 
 Follow these steps to install the development version:
 
