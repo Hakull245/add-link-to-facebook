@@ -1443,6 +1443,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Save indications & selected attached image
 		function Save_post($post_id) {
+			if ($this->debug)
+				add_post_meta($post_id, c_al2fb_meta_log, date('c') . ' Save post');
+
 			// Security checks
 			$nonce = (isset($_POST[c_al2fb_nonce_form]) ? $_POST[c_al2fb_nonce_form] : null);
 			if (!wp_verify_nonce($nonce, plugin_basename(__FILE__)))
@@ -1503,6 +1506,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Remote publish & custom action
 		function Remote_publish($post_ID) {
+			if ($this->debug)
+				add_post_meta($post_ID, c_al2fb_meta_log, date('c') . ' Remote publish');
+
 			$post = get_post($post_ID);
 
 			// Only if published
@@ -1512,12 +1518,18 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Workaround
 		function Future_to_publish($post_ID) {
+			if ($this->debug)
+				add_post_meta($post_ID, c_al2fb_meta_log, date('c') . ' Future to publish');
+
 			$post = get_post($post_ID);
 
 			// Delegate
 			self::Transition_post_status('publish', 'future', $post);
 		}
 		function Before_delete_post($post_ID) {
+			if ($this->debug)
+				add_post_meta($post_ID, c_al2fb_meta_log, date('c') . ' Before delete post');
+
 			$post = get_post($post_ID);
 			$user_ID = self::Get_user_ID($post);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
@@ -1557,6 +1569,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle publish post / XML-RPC publish post
 		function Publish_post($post) {
+			if ($this->debug)
+				add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' Publish');
+
 			$user_ID = self::Get_user_ID($post);
 
 			// Checks
@@ -1969,8 +1984,14 @@ if (!class_exists('WPAL2Facebook')) {
 					'method' => 'delete'
 				), '', '&');
 
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' request=' . print_r($query_array, true));
+
 				// Execute request
 				$response = self::Request($url, $query, 'POST');
+
+				if ($this->debug)
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' response=' . $response);
 
 				// Delete meta data
 				delete_post_meta($post->ID, c_al2fb_meta_link_id);
