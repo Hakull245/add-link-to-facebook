@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 1.126
+Stable tag: 1.127
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -668,6 +668,18 @@ Follow these steps to install the development version:
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
 
+= 1.127 =
+* Happy New Year!
+* Bugfix: e-mail headers debug info
+* Bugfix: html entity decode OGP post title
+* Bugfix: html entity decode OGP blog description
+* Improvement: allow ' in OGP meta tags (workaround Facebook bug)
+* Improvement: allow -_.~ in share links (workaround Facebook bug)
+* Improvement: generalized option checking
+* Improvement: splitted main file to reduce memory usage
+* Improvement: auto load widget class to reduce memory usage
+* Improvement: post status transition debug info
+
 = 1.126 =
 * Bugfix: no new link after error
 * Improvement: remove import error after successful import
@@ -697,32 +709,14 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.122 =
-* Improvement: hide easy setup when authorized
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.121 =
-* Re-release of 1.120 because 1.120 shows as 1.12 on wordpress.org
-
-= 1.120 =
-* New feature: *Do not filter comments* (default enabled option)
-* New feature: permanently delete post will remove link on Facebook
-* Bugfix: html entity decode share link title
-* Improvement: comment import period relative to added link time
-* Improvement: more debug info (import errors)
-* Updated description and FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Hebrew (he\_IL) translation by [Yossi Jana](http://www.webist.co.il "Yossi Jana")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.127 =
+Three bugfixes, six improvements
 
 = 1.126 =
 One bugfix, three improvements
@@ -735,15 +729,6 @@ One new feature, two improvements, new/updated translation/documentation
 
 = 1.123 =
 Two bugfixes, one improvement, translation updates
-
-= 1.122 =
-One improvement
-
-= 1.121 =
-Re-release of 1.120
-
-= 1.120 =
-Two new features, one bugfix, two improvements, translation updates
 
 == Setup guide ==
 
