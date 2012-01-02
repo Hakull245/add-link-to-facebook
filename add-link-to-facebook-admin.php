@@ -571,6 +571,13 @@ function al2fb_render_admin($al2fb)
 		<input id="al2fb_combine" name="<?php echo c_al2fb_meta_post_combine_buttons; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true)) echo ' checked="checked"'; ?> />
 	</td></tr>
 
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_like_fb_link"><?php _e('Like link on Facebook:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_like_fb_link" name="<?php echo c_al2fb_meta_like_fb_link; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_fb_link, true)) echo ' checked="checked"'; ?> />
+		<span class="al2fb_explanation"><?php _e('If not enabled, then WordPress post will be liked', c_al2fb_text_domain); ?></span><br />
+	</td></tr>
+
 	</table>
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />

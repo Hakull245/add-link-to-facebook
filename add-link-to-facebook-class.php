@@ -93,6 +93,7 @@ define('c_al2fb_meta_like_top', 'al2fb_like_top');
 define('c_al2fb_meta_like_iframe', 'al2fb_like_iframe');
 define('c_al2fb_meta_post_send_button', 'al2fb_post_send_button');
 define('c_al2fb_meta_post_combine_buttons', 'al2fb_post_combine_buttons');
+define('c_al2fb_meta_like_fb_link', 'al2fb_like_fb_link');
 define('c_al2fb_meta_like_box_width', 'al2fb_box_width');
 define('c_al2fb_meta_like_box_border', 'al2fb_box_border');
 define('c_al2fb_meta_like_box_noheader', 'al2fb_box_noheader');
@@ -587,6 +588,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_like_top, $_POST[c_al2fb_meta_like_top]);
 			update_user_meta($user_ID, c_al2fb_meta_post_send_button, $_POST[c_al2fb_meta_post_send_button]);
 			update_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, $_POST[c_al2fb_meta_post_combine_buttons]);
+			update_user_meta($user_ID, c_al2fb_meta_like_fb_link, $_POST[c_al2fb_meta_like_fb_link]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_width, $_POST[c_al2fb_meta_like_box_width]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_border, $_POST[c_al2fb_meta_like_box_border]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_noheader, $_POST[c_al2fb_meta_like_box_noheader]);
@@ -2544,8 +2546,17 @@ if (!class_exists('WPAL2Facebook')) {
 							catch (Exception $e) {
 							}
 					}
-					else
-						$link = get_permalink($post->ID);
+					else {
+						// Like button
+						if (get_user_meta($user_ID, c_al2fb_meta_like_fb_link, true)) {
+							$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+							$link = self::Get_fb_permalink($link_id);
+							if (empty($link))
+								return '';
+						}
+						else
+							$link = get_permalink($post->ID);
+					}
 
 				$combine = get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true);
 				$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);

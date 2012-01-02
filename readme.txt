@@ -655,7 +655,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: option to like link on Facebook
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
