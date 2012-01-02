@@ -388,6 +388,8 @@ The author of the plugin will probably know the name(s), else you will have to l
 
 The likes on Facebook are for the added link and the likes on WordPress are for the post/page.
 Facebook considers these as different objects.
+You can use the option *Like link on Facebook* on the settings tab *Like button* to merge the likes,
+but be aware that this means that the added links on Facebook will be liked and not your posts/pages.
 
 **--- Security ---**
 
