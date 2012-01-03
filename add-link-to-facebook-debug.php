@@ -162,7 +162,6 @@ function al2fb_debug_info($al2fb) {
 
 	$info .= '<tr><td>Send button:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Combine buttons:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true) ? 'Yes' : 'No') . '</td></tr>';
-	$info .= '<tr><td>Like FB link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_fb_link, true) ? 'Yes' : 'No') . '</td></tr>';
 
 	$info .= '<tr><td>Like box width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_box_width, true) . '</td></tr>';
 	$info .= '<tr><td>Like box border:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_box_border, true) . '</td></tr>';
