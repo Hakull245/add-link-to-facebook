@@ -655,7 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Improvement: extra check for comment integration loop
 
 Follow these steps to install the development version:
 

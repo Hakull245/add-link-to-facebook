@@ -2040,13 +2040,14 @@ if (!class_exists('WPAL2Facebook')) {
 		// New comment
 		function Comment_post($comment_ID) {
 			$comment = get_comment($comment_ID);
-			if ($comment->comment_approved == '1')
+			if ($comment->comment_approved == '1' && $comment->comment_agent != 'AL2FB')
 				self::Add_fb_link_comment($comment);
 		}
 
 		// Approved comment
 		function Comment_approved($comment) {
-			self::Add_fb_link_comment($comment);
+			if ($comment->comment_agent != 'AL2FB')
+				self::Add_fb_link_comment($comment);
 		}
 
 		// Disapproved comment
