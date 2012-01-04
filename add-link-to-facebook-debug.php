@@ -367,6 +367,13 @@ function al2fb_debug_info($al2fb) {
 
 	$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
 
+	$comments = get_comments('number=10');
+	foreach ($comments as $comment) {
+		$fb_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
+		$comment->fb_comment_id = $fb_id;
+	}
+	$info .= '<pre>' . print_r($comments, true) . '</pre>';
+
 	return $info;
 }
 
