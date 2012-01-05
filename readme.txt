@@ -657,6 +657,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Improvement: extra check for comment integration loop
 * Improvement: added comments to debug info
+* Improvement: checking for empty Facebook comment IDs
 
 Follow these steps to install the development version:
 
