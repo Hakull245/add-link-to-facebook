@@ -658,6 +658,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: extra check to prevent comment integration loop
 * Improvement: added comments to debug info
 * Improvement: checking for empty Facebook comment ID's
+* Improvement: no authorization pre-check when in debug mode
 
 Follow these steps to install the development version:
 

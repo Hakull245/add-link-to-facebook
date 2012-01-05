@@ -440,7 +440,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$auth_url = self::Authorize_url($user_ID);
 						try {
 							// Check
-							if (ini_get('safe_mode') || ini_get('open_basedir'))
+							if (ini_get('safe_mode') || ini_get('open_basedir') || $this->debug)
 								update_option(c_al2fb_log_redir_check, 'No');
 							else {
 								$response = self::Request($auth_url, '', 'GET');
