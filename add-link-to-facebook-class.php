@@ -2107,9 +2107,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				// Process response
 				$fb_comment = json_decode($response);
-				if (!add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id))
-					if ($this->debug)
-						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' Send comment meta failed: ' . print_r($fb_comment, true));
+				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
 			}
 			catch (Exception $e) {
 				update_post_meta($post->ID, c_al2fb_meta_error, 'Add comment: ' . $e->getMessage());
@@ -3155,9 +3153,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 										// Insert comment in database
 										$comment_ID = wp_insert_comment($commentdata);
-										if (!add_comment_meta($comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id))
-											if ($this->debug)
-												add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' Import comment meta failed: ' . print_r($fb_comment, true));
+										add_comment_meta($comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
 										do_action('comment_post', $comment_ID, $commentdata['comment_approved']);
 
 										// Notify
