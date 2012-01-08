@@ -1550,10 +1550,11 @@ if (!class_exists('WPAL2Facebook')) {
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 
 			// Security check
-			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
+			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
+				self::Is_authorized($user_ID)) {
 				// Add, update or delete link
-				if ($update || $delete) {
-					if (!empty($link_id) && self::Is_authorized($user_ID))
+				if ($update || $delete || $new_status == 'trash') {
+					if (!empty($link_id))
 						self::Delete_fb_link($post);
 				}
 				if (!$delete) {
