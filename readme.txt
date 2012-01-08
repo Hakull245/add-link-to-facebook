@@ -655,7 +655,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: delete link when move to trash
 
 Follow these steps to install the development version:
 
