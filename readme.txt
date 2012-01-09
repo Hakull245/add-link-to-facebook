@@ -71,7 +71,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 * Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
@@ -656,7 +656,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: delete link when move to trash
-* Improvement: no Facebook comment import when comments closed
+* Improvement: no Facebook comment import when comments closed.
 
 Follow these steps to install the development version:
 
