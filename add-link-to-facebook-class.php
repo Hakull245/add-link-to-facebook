@@ -3085,7 +3085,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Integration?
-			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
+			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
+				$post->comment_status == 'open') {
 				// Get time zone offset
 				$tz_off = get_option('gmt_offset');
 				if (empty($tz_off))
