@@ -656,7 +656,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: delete link when move to trash
-* Improvement: no Facebook comment import when comments closed
+* Improvement: no Facebook comment import when comments closed.
 
 Follow these steps to install the development version:
 

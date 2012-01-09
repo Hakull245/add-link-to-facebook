@@ -3280,7 +3280,8 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Integration turned off?
-			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))
+			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ||
+				$post->comment_status != 'open')
 				return $count;
 
 			if (self::is_recent($post)) {
@@ -3564,7 +3565,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = $query->post;
 
 				// Integration?
-				if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true)) {
+				if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
+					$post->comment_status == 'open') {
 					$user_ID = self::Get_user_ID($post);
 
 					// Get Facebook comments
