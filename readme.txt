@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 1.126
+Tested up to: 3.3.1
+Stable tag: 1.129
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -537,6 +537,14 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 cURL errors are almost always caused by internet connection problems.
 For most cURL errors you need support from your hosting provider.
 
+Recent versions of the plugin report cURL errors encountered while importing Facebook comments and likes too:
+*Import comment: cURL error ...*
+These error messages will be removed automatically after a next successful import for the same post/page.
+If these errors appear now and then, don't worry about them.
+This just means the internet connection from your hosting server isn't perfect.
+If this happens frequently and Facebook comments and likes are not imported at all because of these errors,
+it is time to contact your hosting provider.
+
 cURL errors commonly reported:
 
 * Error 1: *The URL you passed to libcurl used a protocol that this libcurl does not support*: the hosting server may not support secure connections (https)
@@ -668,6 +676,30 @@ Follow these steps to install the development version:
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
 
+= 1.129 =
+* Updated FAQ
+* New feature: delete added link when move to trash
+* Improvement: no Facebook comment import when comments closed.
+
+= 1.128 =
+* Bugfix: __autoload clash other plugin(s)
+* Improvement: extra check to prevent comment integration loop
+* Improvement: added comments to debug info
+* Improvement: checking for empty Facebook comment ID's
+* Improvement: no authorization pre-check when in debug mode
+
+= 1.127 =
+* Happy New Year!
+* Bugfix: e-mail headers debug info
+* Bugfix: html entity decode OGP post title
+* Bugfix: html entity decode OGP blog description
+* Improvement: allow ' in OGP meta tags (workaround Facebook bug)
+* Improvement: allow -_.~ in share links (workaround Facebook bug)
+* Improvement: generalized option checking
+* Improvement: splitted main file to reduce memory usage
+* Improvement: auto load widget class to reduce memory usage
+* Improvement: post status transition debug info
+
 = 1.126 =
 * Bugfix: no new link after error
 * Improvement: remove import error after successful import
@@ -689,40 +721,20 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
-= 1.123 =
-* Bugfix: HTML entities decode post title (again)
-* Bugfix: empty post text handling
-* Improvement: using wp_mail instead of PHP mail (debug info)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.122 =
-* Improvement: hide easy setup when authorized
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.121 =
-* Re-release of 1.120 because 1.120 shows as 1.12 on wordpress.org
-
-= 1.120 =
-* New feature: *Do not filter comments* (default enabled option)
-* New feature: permanently delete post will remove link on Facebook
-* Bugfix: html entity decode share link title
-* Improvement: comment import period relative to added link time
-* Improvement: more debug info (import errors)
-* Updated description and FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Hebrew (he\_IL) translation by [Yossi Jana](http://www.webist.co.il "Yossi Jana")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.129 =
+One new feature, one improvement
+
+= 1.128 =
+One bugfix, four improvements
+
+= 1.127 =
+Three bugfixes, six improvements
 
 = 1.126 =
 One bugfix, three improvements
@@ -732,18 +744,6 @@ One bugfix
 
 = 1.124 =
 One new feature, two improvements, new/updated translation/documentation
-
-= 1.123 =
-Two bugfixes, one improvement, translation updates
-
-= 1.122 =
-One improvement
-
-= 1.121 =
-Re-release of 1.120
-
-= 1.120 =
-Two new features, one bugfix, two improvements, translation updates
 
 == Setup guide ==
 
