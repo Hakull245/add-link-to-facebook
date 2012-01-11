@@ -537,6 +537,14 @@ and that [cURL](http://php.net/manual/en/book.curl.php "cURL") is not available 
 cURL errors are almost always caused by internet connection problems.
 For most cURL errors you need support from your hosting provider.
 
+Recent versions of the plugin report cURL errors encountered while importing Facebook comments and likes too:
+*Import comment: cURL error ...*
+These error messages will be removed automatically after a next successful import for the same post/page.
+If these errors appear now and then, don't worry about them.
+This just means the internet connection from your hosting server isn't perfect.
+If this happens frequently and Facebook comments and likes are not imported at all because of these errors,
+it is time to contact your hosting provider.
+
 cURL errors commonly reported:
 
 * Error 1: *The URL you passed to libcurl used a protocol that this libcurl does not support*: the hosting server may not support secure connections (https)
@@ -655,6 +663,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* Updated FAQ
 * New feature: delete link when move to trash
 * Improvement: no Facebook comment import when comments closed.
 
@@ -709,14 +718,6 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
-= 1.123 =
-* Bugfix: HTML entities decode post title (again)
-* Bugfix: empty post text handling
-* Improvement: using wp_mail instead of PHP mail (debug info)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -737,9 +738,6 @@ One bugfix
 
 = 1.124 =
 One new feature, two improvements, new/updated translation/documentation
-
-= 1.123 =
-Two bugfixes, one improvement, translation updates
 
 == Setup guide ==
 
