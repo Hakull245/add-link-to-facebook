@@ -341,6 +341,7 @@ function al2fb_render_admin($al2fb)
 				$pages = $al2fb->Get_fb_pages($user_ID);
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 ?>
+				<div id="al2fb_pages">
 				<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
 				<table class="form-table al2fb_border">
 				<tr valign="top"><th scope="row">
@@ -348,6 +349,7 @@ function al2fb_render_admin($al2fb)
 				</th><td>
 					<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
 					<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
+					<br /><span class="al2fb_explanation"><?php _e('Check this too if you want to add as page owner', c_al2fb_text_domain); ?></span>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
@@ -373,7 +375,19 @@ function al2fb_render_admin($al2fb)
 				<p class="submit">
 				<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 				</p>
-<?php				} ?>
+				</div>
+<?php
+				if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+?>
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							$('#al2fb_pages').hide();
+						});
+					</script>
+<?php
+				}
+			}
+?>
 
 			<h4><?php _e('Facebook group', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
@@ -384,7 +398,7 @@ function al2fb_render_admin($al2fb)
 				<br /><span class="al2fb_explanation"><?php _e('Requires user groups permission', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
-<?php				if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+<?php		if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
 				$groups = $al2fb->Get_fb_groups($user_ID);
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
 ?>
