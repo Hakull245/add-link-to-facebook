@@ -1184,7 +1184,8 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Get Facebook picture
-		// Returns a HTTP 302 with the URL of the user's profile picture (use ?type=square | small | normal | large to request a different photo)
+		// Returns a HTTP 302 with the URL of the user's profile picture
+		// (use ?type=square | small | normal | large to request a different photo)
 		function Get_fb_picture_url($id, $size) {
 			$url = 'https://graph.facebook.com/' . $id . '/picture?' . $size;
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
@@ -1295,7 +1296,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $posts_columns;
 		}
 
-		function is_recent($post) {
+		function Is_recent($post) {
 			// Maximum age for Facebook comments/likes
 			$maxage = intval(get_option(c_al2fb_option_msg_maxage));
 			if (!$maxage)
@@ -1322,7 +1323,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				if ($link_id) {
 					$post = get_post($post_ID);
-					if (self::is_recent($post)) {
+					if (self::Is_recent($post)) {
 						$user_ID = self::Get_user_ID($post);
 
 						// Show number of comments
@@ -1593,16 +1594,8 @@ if (!class_exists('WPAL2Facebook')) {
 							if (in_array($category->cat_ID, $excluding_categories))
 								$exclude_category = true;
 
-					// Compatibility
-					$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
-					$ex_custom_types[] = 'nav_menu_item';
-					$ex_custom_types[] = 'recipe';
-					$ex_custom_types[] = 'recipeingredient';
-					$ex_custom_types[] = 'recipestep';
-					$ex_custom_types[] = 'wpcf7_contact_form';
-					$ex_custom_types[] = 'feedback';
-					$ex_custom_types[] = 'spam';
-					$ex_custom_types[] = 'twitter';
+					// Exclude post types
+					$exclude_type = self::Is_excluded_post_type($post);
 
 					// Exclude tags
 					$exclude_tag = false;
@@ -1621,11 +1614,30 @@ if (!class_exists('WPAL2Facebook')) {
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
-						!in_array($post->post_type, $ex_custom_types) &&
-						!$exclude_category && !$exclude_tag && !$exclude_author)
+						!$exclude_type && !$exclude_category && !$exclude_tag && !$exclude_author)
 						self::Add_fb_link($post);
 				}
 			}
+		}
+
+		function Is_excluded_post_type($post) {
+			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
+
+			// Compatibility
+			$ex_custom_types[] = 'nav_menu_item';
+			$ex_custom_types[] = 'recipe';
+			$ex_custom_types[] = 'recipeingredient';
+			$ex_custom_types[] = 'recipestep';
+			$ex_custom_types[] = 'wpcf7_contact_form';
+			$ex_custom_types[] = 'feedback';
+			$ex_custom_types[] = 'spam';
+			$ex_custom_types[] = 'twitter';
+			// bbPress
+			$ex_custom_types[] = 'forum';
+			$ex_custom_types[] = 'topic';
+			$ex_custom_types[] = 'reply';
+
+			return in_array($post->post_type, $ex_custom_types);
 		}
 
 		// Build texts for link/ogp
@@ -2084,6 +2096,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
 				return;
+			if (self::Is_excluded_post_type($post))
+				return;
 
 			// Build message
 			$message = $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
@@ -2269,8 +2283,7 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 
 			// Excluded post types
-			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
-			if (in_array($post->post_type, $ex_custom_types))
+			if (self::Is_excluded_post_type($post))
 				return $content;
 
 			$user_ID = self::Get_user_ID($post);
@@ -2457,25 +2470,27 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get HTML for likers
 		function Get_likers($post) {
-			$user_ID = self::Get_user_ID($post);
 			$likers = '';
-			$charset = get_bloginfo('charset');
-			$fb_likes = self::Get_comments_or_likes($post, true);
-			if ($fb_likes)
-				foreach ($fb_likes->data as $fb_like) {
-					if (!empty($likers))
-						$likers .= ', ';
-					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) == 'author') {
-						$link = self::Get_fb_profilelink($fb_like->id);
-						$likers .= '<a href="' . $link . '" rel="nofollow">' . htmlspecialchars($fb_like->name, ENT_QUOTES, $charset) . '</a>';
+			$user_ID = self::Get_user_ID($post);
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
+				$charset = get_bloginfo('charset');
+				$fb_likes = self::Get_comments_or_likes($post, true);
+				if ($fb_likes)
+					foreach ($fb_likes->data as $fb_like) {
+						if (!empty($likers))
+							$likers .= ', ';
+						if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true) == 'author') {
+							$link = self::Get_fb_profilelink($fb_like->id);
+							$likers .= '<a href="' . $link . '" rel="nofollow">' . htmlspecialchars($fb_like->name, ENT_QUOTES, $charset) . '</a>';
+						}
+						else
+							$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
 					}
-					else
-						$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
-				}
 
-			if (!empty($likers)) {
-				$likers .= ' <span class="al2fb_liked">' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</span>';
-				$likers = '<div class="al2fb_likers">' . $likers . '</div>';
+				if (!empty($likers)) {
+					$likers .= ' <span class="al2fb_liked">' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</span>';
+					$likers = '<div class="al2fb_likers">' . $likers . '</div>';
+				}
 			}
 			return $likers;
 		}
@@ -2483,10 +2498,12 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like count
 		function Get_like_count($post) {
 			$user_ID = self::Get_user_ID($post);
-			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-			$fb_likes = self::Get_comments_or_likes($post, true);
-			if ($fb_likes && count($fb_likes->data) > 0)
-				return '<div class="al2fb_like_count"><a href="' . self::Get_fb_permalink($link_id) . '" rel="nofollow">' . count($fb_likes->data) . ' ' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</a></div>';
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				$fb_likes = self::Get_comments_or_likes($post, true);
+				if ($fb_likes && count($fb_likes->data) > 0)
+					return '<div class="al2fb_like_count"><a href="' . self::Get_fb_permalink($link_id) . '" rel="nofollow">' . count($fb_likes->data) . ' ' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</a></div>';
+			}
 			return '';
 		}
 
@@ -2517,7 +2534,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like button
 		function Get_like_button($post, $box) {
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
@@ -2637,7 +2654,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like button
 		function Get_send_button($post) {
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 				// Get options
 				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
@@ -2667,7 +2684,7 @@ if (!class_exists('WPAL2Facebook')) {
 				return '';
 
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 				// Get options
 				$posts = get_user_meta($user_ID, c_al2fb_meta_comments_posts, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_comments_width, true);
@@ -2696,7 +2713,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML face pile
 		function Get_face_pile($post) {
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 				// Get options
 				$size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_pile_width, true);
@@ -2747,7 +2764,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get data
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 				// Check if user logged in
 				if (is_user_logged_in())
 					return do_shortcode(get_user_meta($user_ID, c_al2fb_meta_login_html, true));
@@ -2785,7 +2802,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_login($post) {
 			// Get data
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 				// Check if user logged in
 				if (is_user_logged_in())
 					return do_shortcode(get_user_meta($user_ID, c_al2fb_meta_login_html, true));
@@ -2833,7 +2850,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_activity_feed($post) {
 			// Get data
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID) {
+			if ($user_ID && !self::Is_excluded_post_type($post)) {
 
 				// Get options
 				$domain = $_SERVER['HTTP_HOST'];
@@ -3085,8 +3102,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Integration?
-			if (!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
+			if ($user_ID && !self::Is_excluded_post_type($post) &&
+				!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
 				$post->comment_status == 'open') {
+
 				// Get time zone offset
 				$tz_off = get_option('gmt_offset');
 				if (empty($tz_off))
@@ -3095,7 +3114,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$tz_off = $tz_off * 3600;
 
 				// Get Facebook comments
-				if (self::is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+				if (self::Is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
 					if ($fb_comments) {
 						// Get WordPress comments
@@ -3196,7 +3215,7 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Get likes
-				if (self::is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+				if (self::Is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 					$fb_likes = self::Get_comments_or_likes($post, true);
 					if ($fb_likes)
 						foreach ($fb_likes->data as $fb_like) {
@@ -3268,6 +3287,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get comment count with FB comments/likes
 		function Get_comments_number($count, $post_ID) {
 			$post = get_post($post_ID);
+			$user_ID = self::Get_user_ID($post);
 
 			// Permission to view?
 			$min_cap = get_option(c_al2fb_option_min_cap_comment);
@@ -3280,13 +3300,12 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Integration turned off?
-			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ||
+			if (!$user_ID || self::Is_excluded_post_type($post) ||
+				get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ||
 				$post->comment_status != 'open')
 				return $count;
 
-			if (self::is_recent($post)) {
-				$user_ID = self::Get_user_ID($post);
-
+			if (self::Is_recent($post)) {
 				// Comment count
 				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = self::Get_comments_or_likes($post, false);
