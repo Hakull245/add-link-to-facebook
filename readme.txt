@@ -665,6 +665,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Improvement: clarified option *See all pages*
 * Improvement: hiding page selection when groups enabled
+* Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
+* Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
