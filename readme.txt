@@ -667,6 +667,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: hiding page selection when groups enabled
 * Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
 * Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
+* Improvement: new filter: *al2fb_excluded_post_types*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
