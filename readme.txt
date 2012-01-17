@@ -435,7 +435,7 @@ Yes, but the custom post type should support custom values for it to work.
 
 = C07 How can I use an image of NextGEN Gallery as link picture? =
 
-Set the option *Link Picture* to *First image in the post*.
+Assuming that you embed a NextGEN Gallery into a post, set the option *Link Picture* to *First image in the post*.
 Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
 Enable the option *Do not execute shortcodes for texts*.
 
@@ -667,8 +667,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
 * Improvement: new filter: *al2fb_excluded_post_types*
 * Improvement: new filter: *al2fb_url*
+* Improvement: forum topic link debug info
 * Updated required WordPress version to version 3.2
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Licensed under MIT License or GNU General Public License (GPL) Version 3
 
 Follow these steps to install the development version:
