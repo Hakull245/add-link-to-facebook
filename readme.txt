@@ -671,7 +671,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated required WordPress version to version 3.2
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Licensed under MIT License or GNU General Public License (GPL) Version 3
 
 Follow these steps to install the development version:
 
