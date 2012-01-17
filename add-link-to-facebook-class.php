@@ -5,6 +5,52 @@
 	Copyright (c) 2011, 2012 by Marcel Bokhorst
 */
 
+/*
+	GNU General Public License version 3
+
+	Copyright (c) 2011, 2012 Marcel Bokhorst
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+/*
+	MIT License
+
+	Copyright (c) 2011, 2012 Marcel Bokhorst
+
+	Permission is hereby granted, free of charge, to any person
+	obtaining a copy of this software and associated documentation files
+	(the "Software"), to deal in the Software without restriction,
+	including without limitation the rights to use, copy, modify, merge,
+	publish, distribute, sublicense, and/or sell copies of the Software,
+	and to permit persons to whom the Software is furnished to do so,
+	subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be
+	included in all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+	NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+	BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+	ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+	CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+*/
+
 // Define constants
 define('c_al2fb_text_domain', 'add-link-to-facebook');
 define('c_al2fb_nonce_form', 'al2fb-nonce-form');
@@ -876,10 +922,9 @@ if (!class_exists('WPAL2Facebook')) {
 		function Authorize_url($user_ID) {
 			// http://developers.facebook.com/docs/authentication/permissions
 			$url = 'https://graph.facebook.com/oauth/authorize';
-
+			$url = apply_filters('al2fb_url', $url);
 			$url .= '?client_id=' . urlencode(get_user_meta($user_ID, c_al2fb_meta_client_id, true));
 			$url .= '&redirect_uri=' . urlencode(self::Redirect_uri());
-
 			$url .= '&scope=read_stream,publish_stream,offline_access';
 
 			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
@@ -932,6 +977,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Request token
 		function Get_fb_token($user_ID) {
 			$url = 'https://graph.facebook.com/oauth/access_token';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'client_id' => get_user_meta($user_ID, c_al2fb_meta_client_id, true),
 				'redirect_uri' => self::Redirect_uri(),
@@ -951,6 +997,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_fb_application($user_ID) {
 			$app_id = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 			$url = 'https://graph.facebook.com/' . $app_id;
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
 			), '', '&');
@@ -980,6 +1027,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_fb_me($user_ID, $self) {
 			$page_id = self::Get_page_id($user_ID, $self);
 			$url = 'https://graph.facebook.com/' . $page_id;
+			$url = apply_filters('al2fb_url', $url);
 			$token = self::Get_access_token_by_page($user_ID, $page_id);
 			if (empty($token))
 				return null;
@@ -1008,6 +1056,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get page list
 		function Get_fb_pages($user_ID) {
 			$url = 'https://graph.facebook.com/me/accounts';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
 			), '', '&');
@@ -1019,6 +1068,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get group list
 		function Get_fb_groups($user_ID) {
 			$url = 'https://graph.facebook.com/me/groups';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
 			), '', '&');
@@ -1050,6 +1100,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get comments
 		function Get_fb_comments($user_ID, $id) {
 			$url = 'https://graph.facebook.com/' . $id . '/comments';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
 			), '', '&');
@@ -1081,6 +1132,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get likes
 		function Get_fb_likes($user_ID, $id) {
 			$url = 'https://graph.facebook.com/' . $id . '/likes';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'access_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
 			), '', '&');
@@ -1099,6 +1151,7 @@ if (!class_exists('WPAL2Facebook')) {
 			//if (empty($page_id))
 			//	$page_id = 'me';
 			$url = 'https://graph.facebook.com/' . $page_id . '/feed';
+			$url = apply_filters('al2fb_url', $url);
 			$token = self::Get_access_token_by_page($user_ID, $page_id);
 			if (empty($token))
 				return null;
@@ -1139,6 +1192,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get application  token
 			$url = 'https://graph.facebook.com/oauth/access_token';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'client_id' => $app_id,
 				'client_secret' => $app_secret,
@@ -1154,6 +1208,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Subscribe request
 			$url = 'https://graph.facebook.com/' . $app_id . '/subscriptions';
+			$url = apply_filters('al2fb_url', $url);
 			$query = http_build_query(array(
 				'access_token' => $token,
 				'object' => 'user',
@@ -1188,6 +1243,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// (use ?type=square | small | normal | large to request a different photo)
 		function Get_fb_picture_url($id, $size) {
 			$url = 'https://graph.facebook.com/' . $id . '/picture?' . $size;
+			$url = apply_filters('al2fb_url', $url);
 			if (function_exists('curl_init') && !get_option(c_al2fb_option_nocurl)) {
 				$timeout = get_option(c_al2fb_option_timeout);
 				if (!$timeout)
@@ -1924,6 +1980,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (empty($page_id))
 					$page_id = 'me';
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
+				$url = apply_filters('al2fb_url', $url);
 
 				$query_array = array(
 					'access_token' => self::Get_access_token_by_post($post),
@@ -1994,6 +2051,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// http://developers.facebook.com/docs/reference/api/link/
 				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 				$url = 'https://graph.facebook.com/' . $link_id;
+				$url = apply_filters('al2fb_url', $url);
 				$query = http_build_query(array(
 					'access_token' => self::Get_access_token_by_post($post),
 					'method' => 'delete'
@@ -2035,6 +2093,7 @@ if (!class_exists('WPAL2Facebook')) {
 			try {
 				// Build request
 				$url = 'https://graph.facebook.com/' . $fb_comment_id;
+				$url = apply_filters('al2fb_url', $url);
 				$query = http_build_query(array(
 					'access_token' => self::Get_access_token_by_post($post),
 					'method' => 'delete'
@@ -2110,6 +2169,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Do not disturb WordPress
 			try {
 				$url = 'https://graph.facebook.com/' . $link_id . '/comments';
+				$url = apply_filters('al2fb_url', $url);
 
 				$query_array = array(
 					'access_token' => self::Get_access_token_by_post($post),
@@ -2966,6 +3026,7 @@ if (!class_exists('WPAL2Facebook')) {
 			try {
 				// Check token
 				$url = 'https://graph.facebook.com/' . $_REQUEST['uid'];
+				$url = apply_filters('al2fb_url', $url);
 				$query = http_build_query(array('access_token' => $_REQUEST['token']), '', '&');
 				$response = self::Request($url, $query, 'GET');
 				$me = json_decode($response);

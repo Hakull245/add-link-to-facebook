@@ -2,7 +2,7 @@
 Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
-Requires at least: 3.0
+Requires at least: 3.2
 Tested up to: 3.3.1
 Stable tag: 1.129
 
@@ -44,8 +44,6 @@ If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
 Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-
-**This plugin requires PHP 5 and WordPress 3.0 or better**
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
@@ -668,7 +666,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
 * Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
 * Improvement: new filter: *al2fb_excluded_post_types*
+* Improvement: new filter: *al2fb_url*
+* Updated required WordPress version to version 3.2
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Licensed under MIT License or GNU General Public License (GPL) Version 3
 
 Follow these steps to install the development version:
 
