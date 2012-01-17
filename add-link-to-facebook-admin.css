@@ -74,6 +74,11 @@
 	font-size: smaller;
 }
 
+/* Debug info */
+#al2fb_debug_topic, #al2fb_debug_msg {
+	width: 420px;
+}
+
 /* Option borders */
 .al2fb_border {
 	border-width: 1px;

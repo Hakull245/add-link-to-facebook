@@ -1266,6 +1266,13 @@ function al2fb_render_debug_info($al2fb) {
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_debug_topic"><strong><a href="http://forum.bokhorst.biz/"><?php _e('Forum topic link:', c_al2fb_text_domain); ?></a></strong></label>
+		</th><td>
+			<input id="al2fb_debug_topic" class="" name="<?php echo c_al2fb_mail_topic; ?>" type="text" />
+			<br><strong><?php _e('Mandatory', c_al2fb_text_domain); ?></strong>
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_debug_msg"><strong><?php _e('Message:', c_al2fb_text_domain); ?></strong></label>
 		</th><td>
 			<textarea id="al2fb_debug_msg" name="<?php echo c_al2fb_mail_msg; ?>" rows="10" cols="80"></textarea>

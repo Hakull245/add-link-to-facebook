@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-01-14 09:18+0100\n"
+"PO-Revision-Date: 2012-01-17 19:22+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -219,11 +219,20 @@ msgstr "Naam:"
 msgid "E-mail:"
 msgstr "E-mail:"
 
+msgid "Forum topic link:"
+msgstr "Forum onderwerp koppeling:"
+
+msgid "Mandatory"
+msgstr "Verplicht"
+
 msgid "Message:"
 msgstr "Bericht:"
 
 msgid "Send"
 msgstr "Stuur"
+
+msgid "Forum topic link is mandatory"
+msgstr "Forum onderwerp koppeling is verplicht"
 
 msgid "Debug information sent"
 msgstr "Debug informatie verzonden"

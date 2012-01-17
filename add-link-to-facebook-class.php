@@ -215,6 +215,7 @@ define('c_al2fb_meta_facebook_id', 'al2fb_facebook_id');
 // Mail
 define('c_al2fb_mail_name', 'al2fb_debug_name');
 define('c_al2fb_mail_email', 'al2fb_debug_email');
+define('c_al2fb_mail_topic', 'al2fb_debug_topic');
 define('c_al2fb_mail_msg', 'al2fb_debug_msg');
 
 define('USERPHOTO_APPROVED', 2);
@@ -767,26 +768,31 @@ if (!class_exists('WPAL2Facebook')) {
 			check_admin_referer(c_al2fb_nonce_form);
 			require_once('add-link-to-facebook-debug.php');
 
-			// Build headers
-			$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-			$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-			//$headers .= 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
+			if (empty($_POST[c_al2fb_mail_topic]))
+				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
+			else {
+				// Build headers
+				$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
+				$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
+				//$headers .= 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
 
-			// Build message
-			$message = '<html><head><title>Add Link to Facebook</title></head><body>';
-			$message .= '<p>' . nl2br(htmlspecialchars(stripslashes($_POST[c_al2fb_mail_msg]), ENT_QUOTES, get_bloginfo('charset'))) . '</p>';
-			$message .= '<hr />';
-			$message .= al2fb_debug_info($this);
-			$message .= '<hr />';
-			$message .= '</body></html>';
-			if (wp_mail('al2fb@bokhorst.biz', '[Add Link to Facebook] Debug information', $message, $headers)) {
-				echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
-				if ($this->debug)
-					echo '<pre>' . nl2br(htmlspecialchars($headers, ENT_QUOTES, get_bloginfo('charset'))) . '</pre>';
+				// Build message
+				$message = '<html><head><title>Add Link to Facebook</title></head><body>';
+				$message .= '<p>' . nl2br(htmlspecialchars(stripslashes($_POST[c_al2fb_mail_msg]), ENT_QUOTES, get_bloginfo('charset'))) . '</p>';
+				$message .= '<a href="' . stripslashes($_POST[c_al2fb_mail_topic]) . '">' . stripslashes($_POST[c_al2fb_mail_topic]) . '</a>';
+				$message .= '<hr />';
+				$message .= al2fb_debug_info($this);
+				$message .= '<hr />';
+				$message .= '</body></html>';
+				if (wp_mail('al2fb@bokhorst.biz', '[Add Link to Facebook] Debug information', $message, $headers)) {
+					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
+					if ($this->debug)
+						echo '<pre>' . nl2br(htmlspecialchars($headers, ENT_QUOTES, get_bloginfo('charset'))) . '</pre>';
+				}
+				else
+					echo '<div id="message" class="error fade al2fb_error"><p>' . __('Sending debug information failed', c_al2fb_text_domain) . '</p></div>';
 			}
-			else
-				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Sending debug information failed', c_al2fb_text_domain) . '</p></div>';
 		}
 
 		// Display notices
