@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-01-18 09:22+0100\n"
+"PO-Revision-Date: 2012-01-18 16:15+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -219,11 +219,20 @@ msgstr "Navn:"
 msgid "E-mail:"
 msgstr "E-post:"
 
+msgid "Forum topic link:"
+msgstr "Forum emne link:"
+
+msgid "Mandatory"
+msgstr "Obligatorisk"
+
 msgid "Message:"
 msgstr "Melding:"
 
 msgid "Send"
 msgstr "Send"
+
+msgid "Forum topic link is mandatory"
+msgstr "Forumemne koblingen er obligatorisk"
 
 msgid "Debug information sent"
 msgstr "Debug informasjon sent"
@@ -381,7 +390,7 @@ msgid "Exclude these custom post types:"
 msgstr "Utelukke disse tilpassede innleggstypene:"
 
 msgid "Separate by commas"
-msgstr "Atskille med komma"
+msgstr "Avskille med komma"
 
 msgid "Do not verify the peer's certificate:"
 msgstr "Ikke verifisere peer sertifikat:"
@@ -438,7 +447,7 @@ msgid "Do not add like button"
 msgstr "Ikke legg til liker knapp"
 
 msgid "I have rated this plugin:"
-msgstr "Jeg har klassifisert denne plugin:"
+msgstr "Jeg har klassifisert dette innstikk:"
 
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
 msgstr "Hvis du liker Tilføy link til Facebook innstikk, kan du klassifisere den på <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Hvis den gjennomsnittlige rating er lav, er det ingen mening å supportere dette innstikk lenger.<br />Du kan deaktivere denne notisen ved å merke av alternativet \"Jeg har klassifisert denne plugin\" på  <a href=\"[settings]\">innstillings siden</a>."
@@ -446,7 +455,10 @@ msgstr "Hvis du liker Tilføy link til Facebook innstikk, kan du klassifisere de
 msgid "Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you've rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin again, I'd appreciate it. Thanks!"
 msgstr "Ved et uhell på WordPress.org systemene, gikk tidligere rangeringer for dette innstikket tapt. <br /> Hvis du har rangert innstikket i det siste, er rangeringen din ved et uhell fjernet. <br /> Så hvis du ville være så snill å rangere innstikket igjen, vil jeg sette pris på det. Takk!"
 
-msgid "Custom excerpt"
+msgid "Generated excerpt"
+msgstr "Generert utdrag"
+
+msgid "Custom exerpt"
 msgstr "Tilpasset utdrag"
 
 msgid "Use iframe in stead of XFBML:"
@@ -778,6 +790,9 @@ msgstr "Oppgradering deaktiverer innstikk!"
 
 msgid "See all pages:"
 msgstr "Se alle sider:"
+
+msgid "Check this too if you want to add as page owner"
+msgstr "Sjekk denne også hvis du vil legge til som sideeier"
 
 msgid "Do not include Facebook script:"
 msgstr "Ikke inkluder Facebook skript:"
