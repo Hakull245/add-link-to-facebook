@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-26 10:36+0100\n"
-"PO-Revision-Date: 2011-12-26 11:24+0100\n"
+"PO-Revision-Date: 2012-01-18 09:22+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Björn Deutschmann <cooleisbaer.funpic.de>\n"
 "MIME-Version: 1.0\n"
@@ -1023,7 +1023,7 @@ msgid "Select link image:"
 msgstr "Linkbild wählen:"
 
 #: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2826
-msgid "Custom exerpt"
+msgid "Custom excerpt"
 msgstr "Individueller Linktext"
 
 #: C:\Users\Wolfgang\Desktop\translation\add-link-to-facebook.1.37/add-link-to-facebook/add-link-to-facebook-class.php:2832

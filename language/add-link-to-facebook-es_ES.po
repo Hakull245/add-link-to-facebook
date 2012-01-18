@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook en Español\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-08 17:34+0100\n"
-"PO-Revision-Date: 2011-11-05 17:41+0100\n"
+"PO-Revision-Date: 2012-01-18 09:22+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcelo Cannobbio Guillard | nubecolor.es <info@nubecolor.es>\n"
 "MIME-Version: 1.0\n"
@@ -687,7 +687,7 @@ msgid "Select link image:"
 msgstr "Seleccionar imagen de enlace:"
 
 #: add-link-to-facebook-class.php:2111
-msgid "Custom exerpt"
+msgid "Custom excerpt"
 msgstr "Extracto personalizado"
 
 #: add-link-to-facebook-class.php:2539

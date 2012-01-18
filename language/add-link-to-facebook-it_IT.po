@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook in italiano\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-17 07:05+0100\n"
-"PO-Revision-Date: 2012-01-17 19:08+0100\n"
+"PO-Revision-Date: 2012-01-18 09:23+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Gianni Diurno | gidibao.net & charmingpress.com\n"
 "MIME-Version: 1.0\n"
@@ -1027,7 +1027,7 @@ msgid "Select link image:"
 msgstr "Seleziona link immagine:"
 
 #: add-link-to-facebook-class.php:1481
-msgid "Custom exerpt"
+msgid "Custom excerpt"
 msgstr "Riassunto personalizzato"
 
 #: add-link-to-facebook-class.php:1487

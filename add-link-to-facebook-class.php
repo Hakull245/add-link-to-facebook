@@ -1398,6 +1398,7 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 			if (!empty($post)) {
 				$user_ID = self::Get_user_ID($post);
+				$texts = self::Get_texts($post);
 
 				// Security
 				wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
@@ -1456,9 +1457,12 @@ if (!class_exists('WPAL2Facebook')) {
 				else
 					echo 'wp_get_attachment_image_src does not exist';
 
+				if ($this->debug)
+					echo '<p>' . print_r($texts, true) . '</p>';
+
 				// Custom excerpt
 				$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
-				echo '<h4>' . __('Custom exerpt', c_al2fb_text_domain) . '</h4>';
+				echo '<h4>' . __('Custom excerpt', c_al2fb_text_domain) . '</h4>';
 				echo '<textarea id="al2fb_excerpt" name="al2fb_excerpt" cols="40" rows="1" class="attachmentlinks">';
 				echo $excerpt . '</textarea>';
 
@@ -1472,7 +1476,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				$picture_info = self::Get_link_picture($post, $user_ID);
 				if (!empty($picture_info['picture']))
-					echo '<img src="' . $picture_info['picture'] . '" alt="">';
+					echo '<img src="' . $picture_info['picture'] . '" alt="Link picture">';
 				if ($this->debug)
 					echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
 			}
@@ -1780,9 +1784,15 @@ if (!class_exists('WPAL2Facebook')) {
 						function_exists('wp_get_attachment_image_src')) {
 						$picture_id = get_post_thumbnail_id($post->ID);
 						if ($picture_id) {
-							$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
-							if ($picture && $picture[0])
-								$picture = $picture[0];
+							if (stripos($picture_id, 'ngg-') !== false && class_exists('nggdb')) {
+								$nggMeta = new nggMeta(str_replace('ngg-', '', $picture_id));
+								$picture = $nggMeta->image->imageURL;
+							}
+							else {
+								$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
+								if ($picture && $picture[0])
+									$picture = $picture[0];
+							}
 						}
 					}
 				}
