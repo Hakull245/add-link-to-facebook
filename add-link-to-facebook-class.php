@@ -207,7 +207,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Constructor
 		function __construct() {
-			global $wp_version;
+			global $wp_version, $blog_id;
 
 			// Get main file name
 			$this->main_file = str_replace('-class', '', __FILE__);
@@ -224,9 +224,8 @@ if (!class_exists('WPAL2Facebook')) {
 			if (is_multisite()) {
 				$current_site = get_current_site();
 				$this->site_id = $current_site->id;
-				global $blog_id;
-				$this->blog_id = $blog_id;
 			}
+			$this->blog_id = $blog_id;
 
 			// register activation actions
 			//register_activation_hook($this->main_file, array(&$this, 'Activate'));

@@ -235,6 +235,41 @@ if (!function_exists('al2fb_activity_feed')) {
 	}
 }
 
+// User meta per blog (multi site installs)
+
+add_filter('add_user_metadata', 'al2fb_add_user_metadata', 10, 5);
+add_filter('update_user_metadata', 'al2fb_update_user_metadata', 10, 5);
+add_filter('delete_user_metadata', 'al2fb_delete_user_metadata', 10, 4);
+add_filter('get_user_metadata', 'al2fb_get_user_metadata', 10, 4);
+
+function al2fb_add_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value, $unique = false) {
+	global $blog_id;
+	if (!empty($blog_id) && $blog_id > 1 && strpos($meta_key, 'al2fb_') === 0)
+		return add_user_meta($user_id, 'blog_' . $blog_id . '_' . $meta_key, $meta_value, $unique);
+	return null;
+}
+
+function al2fb_update_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value, $prev_value = '') {
+	global $blog_id;
+	if (!empty($blog_id) && $blog_id > 1 && strpos($meta_key, 'al2fb_') === 0)
+		return update_user_meta($user_id, 'blog_' . $blog_id . '_' . $meta_key, $meta_value, $prev_value);
+	return null;
+}
+
+function al2fb_delete_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value = '') {
+	global $blog_id;
+	if (!empty($blog_id) && $blog_id > 1 && strpos($meta_key, 'al2fb_') === 0)
+		return delete_user_meta($user_id, 'blog_' . $blog_id . '_' . $meta_key, $meta_value);
+	return null;
+}
+
+function al2fb_get_user_metadata($meta_type = null, $user_id, $meta_key, $single = false) {
+	global $blog_id;
+	if (!empty($blog_id) && $blog_id > 1 && strpos($meta_key, 'al2fb_') === 0)
+		return get_user_meta($user_id, 'blog_' . $blog_id . '_' . $meta_key, $single);
+	return null;
+}
+
 // That's it!
 
 ?>
