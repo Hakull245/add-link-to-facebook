@@ -661,7 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: support for multi site installs (settings per user/blog)
 
 Follow these steps to install the development version:
 
