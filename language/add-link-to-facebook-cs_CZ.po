@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook v1.107\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-11-05 17:41+0100\n"
+"PO-Revision-Date: 2012-01-18 09:22+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Artemian.cz\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1110,7 +1110,7 @@ msgstr "Vyberte obrázek odkazu:"
 
 #@ add-link-to-facebook
 #: add-link-to-facebook-class.php:2725
-msgid "Custom exerpt"
+msgid "Custom excerpt"
 msgstr "Vlastní výpis"
 
 #@ add-link-to-facebook

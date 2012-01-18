@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.129
+Stable tag: 1.131
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -661,16 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Improvement: clarified option *See all pages*
-* Improvement: hiding page selection when groups enabled
-* Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
-* Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
-* Improvement: new filter: *al2fb_excluded_post_types*
-* Improvement: new filter: *al2fb_url*
-* Improvement: forum topic link debug info
-* Updated required WordPress version to version 3.2
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* ...
 
 Follow these steps to install the development version:
 
@@ -682,6 +673,19 @@ Follow these steps to install the development version:
 * Click *Upload* (a link at the top)
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
+
+= 1.131 =
+* Improvement: clarified option *See all pages*
+* Improvement: hiding page selection when groups enabled
+* Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
+* Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
+* Improvement: new filter: *al2fb_excluded_post_types*
+* Improvement: new filter: *al2fb_url*
+* Improvement: NextGEN featured image compatibility
+* Improvement: forum topic link debug info
+* Updated required WordPress version to version 3.2
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.129 =
 * Updated FAQ
@@ -718,21 +722,14 @@ Follow these steps to install the development version:
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.124 =
-* New feature: number of comments/messages in widget
-* Improvement: newest comments first in widget
-* Improvement: better error handling import errors
-* Updated forum link & FAQ
-* Removed statistics
-* Added Brazilian Portuguese (pt\_BR) translation by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.131 =
+Eight improvements, translation updates
 
 = 1.129 =
 One new feature, one improvement
@@ -748,9 +745,6 @@ One bugfix, three improvements
 
 = 1.125 =
 One bugfix
-
-= 1.124 =
-One new feature, two improvements, new/updated translation/documentation
 
 == Setup guide ==
 
