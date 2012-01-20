@@ -1671,6 +1671,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$ex_custom_types[] = 'feedback';
 			$ex_custom_types[] = 'spam';
 			$ex_custom_types[] = 'twitter';
+			$ex_custom_types[] = 'mscr_ban';
 			// bbPress
 			$ex_custom_types[] = 'forum';
 			$ex_custom_types[] = 'topic';

@@ -662,6 +662,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: support for multi site installs (settings per user/blog)
+* Improvement: exluding custom post type of [Mute Screamer](http://wordpress.org/extend/plugins/mute-screamer/ "Mute Screamer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
