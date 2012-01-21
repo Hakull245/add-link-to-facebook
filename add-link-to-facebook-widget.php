@@ -89,7 +89,7 @@ class AL2FB_Widget extends WP_Widget {
 		$fb_messages = false;
 		if ($messages)
 			try {
-				$fb_messages = $wp_al2fb->Get_fb_feed($user_ID);
+				$fb_messages = $wp_al2fb->Get_fb_feed_cached($user_ID);
 			}
 			catch (Exception $e) {
 				if ($wp_al2fb->debug)

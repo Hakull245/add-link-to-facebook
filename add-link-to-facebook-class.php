@@ -993,10 +993,8 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($me === false) {
 				$me = self::Get_fb_me($user_ID, $self);
 				if ($me != null) {
-					$duration = intval(get_option(c_al2fb_option_msg_refresh));
-					if (!$duration)
-						$duration = 10;
-					set_transient($me_key, $me, $duration * 60);
+					$duration = self::Get_duration(false);
+					set_transient($me_key, $me, $duration);
 				}
 			}
 			return $me;
@@ -1058,20 +1056,14 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get comments and cache
 		function Get_fb_comments_cached($user_ID, $link_id, $cached = true) {
-			// Get (cached) comments
 			$fb_key = c_al2fb_transient_cache . md5( 'c' . $link_id);
 			$fb_comments = get_transient($fb_key);
 			if ($this->debug || !$cached)
 				$fb_comments = false;
 			if ($fb_comments === false) {
 				$fb_comments = self::Get_fb_comments($user_ID, $link_id);
-
-				$duration = intval(get_option(c_al2fb_option_msg_refresh));
-				if (!$duration)
-					$duration = 10;
-				if (get_option(c_al2fb_option_cron_enabled))
-					$duration += 10;
-				set_transient($fb_key, $fb_comments, $duration * 60);
+				$duration = self::Get_duration(true);
+				set_transient($fb_key, $fb_comments, $duration);
 			}
 			return $fb_comments;
 		}
@@ -1090,20 +1082,14 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get likes and cache
 		function Get_fb_likes_cached($user_ID, $link_id, $cached = true) {
-			// Get (cached) likes
 			$fb_key = c_al2fb_transient_cache . md5('l' . $link_id);
 			$fb_likes = get_transient($fb_key);
 			if ($this->debug || !$cached)
 				$fb_likes = false;
 			if ($fb_likes === false) {
 				$fb_likes = self::Get_fb_likes($user_ID, $link_id);
-
-				$duration = intval(get_option(c_al2fb_option_msg_refresh));
-				if (!$duration)
-					$duration = 10;
-				if (get_option(c_al2fb_option_cron_enabled))
-					$duration += 10;
-				set_transient($fb_key, $fb_likes, $duration * 60);
+				$duration = self::Get_duration(true);
+				set_transient($fb_key, $fb_likes, $duration);
 			}
 			return $fb_likes;
 		}
@@ -1120,15 +1106,24 @@ if (!class_exists('WPAL2Facebook')) {
 			return $likes;
 		}
 
+		// Get messages and cache
+		function Get_fb_feed_cached($user_ID) {
+			$page_id = self::Get_page_id($user_ID, false);
+			$fb_key = c_al2fb_transient_cache . md5( 'f' . $user_ID . $page_id);
+			$fb_feed = get_transient($fb_key);
+			if ($this->debug)
+				$fb_feed = false;
+			if ($fb_feed === false) {
+				$fb_feed = self::Get_fb_feed($user_ID);
+				$duration = self::Get_duration(false);
+				set_transient($fb_key, $fb_feed, $duration);
+			}
+			return $fb_feed;
+		}
+
 		// Get messages
 		function Get_fb_feed($user_ID) {
 			$page_id = self::Get_page_id($user_ID, false);
-			//if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-			//	$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
-			//if (empty($page_id))
-			//	$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
-			//if (empty($page_id))
-			//	$page_id = 'me';
 			$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 			$url = apply_filters('al2fb_url', $url);
 			$token = self::Get_access_token_by_page($user_ID, $page_id);
@@ -1149,11 +1144,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$fb_url = false;
 			if ($fb_url === false) {
 				$fb_url = self::Get_fb_picture_url($id, 'normal');
-
-				$duration = intval(get_option(c_al2fb_option_msg_refresh));
-				if (!$duration)
-					$duration = 10;
-				set_transient($fb_key, $fb_url, $duration * 60);
+				$duration = self::Get_duration(false);
+				set_transient($fb_key, $fb_url, $duration);
 			}
 			return $fb_url;
 		}
@@ -1250,6 +1242,16 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			else
 				return false;
+		}
+
+		// Get cache duration
+		function Get_duration($cron = false) {
+			$duration = intval(get_option(c_al2fb_option_msg_refresh));
+			if (!$duration)
+				$duration = 10;
+			if ($cron && get_option(c_al2fb_option_cron_enabled))
+				$duration += 10;
+			return $duration * 60;
 		}
 
 		// Add checkboxes
@@ -3603,11 +3605,9 @@ if (!class_exists('WPAL2Facebook')) {
 		// Add cron schedule
 		function Cron_schedules($schedules) {
 			if (get_option(c_al2fb_option_cron_enabled)) {
-				$duration = intval(get_option(c_al2fb_option_msg_refresh));
-				if (!$duration)
-					$duration = 10;
+				$duration = self::Get_duration(false);
 				$schedules['al2fb_schedule'] = array(
-					'interval' => $duration * 60,
+					'interval' => $duration,
 					'display' => __('Add Link to Facebook', c_al2fb_text_domain));
 			}
 			return $schedules;
