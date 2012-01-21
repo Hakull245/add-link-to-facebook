@@ -1077,6 +1077,7 @@ if (!class_exists('WPAL2Facebook')) {
 			), '', '&');
 			$response = self::Request($url, $query, 'GET');
 			$comments = json_decode($response);
+			$comments = apply_filters('al2fb_fb_comments', $comments);
 			return $comments;
 		}
 
@@ -1103,6 +1104,7 @@ if (!class_exists('WPAL2Facebook')) {
 			), '', '&');
 			$response = self::Request($url, $query, 'GET');
 			$likes = json_decode($response);
+			$likes = apply_filters('al2fb_fb_likes', $likes);
 			return $likes;
 		}
 
@@ -1133,6 +1135,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$query = http_build_query(array('access_token' => $token), '', '&');
 			$response = self::Request($url, $query, 'GET');
 			$posts = json_decode($response);
+			$posts = apply_filters('al2fb_fb_feed', $posts);
 			return $posts;
 		}
 
@@ -1228,15 +1231,21 @@ if (!class_exists('WPAL2Facebook')) {
 				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
 				$headers = curl_exec($c);
 				curl_close ($c);
-				if (preg_match('/Location: (.*)/', $headers, $location))
-					return trim($location[1]);
+				if (preg_match('/Location: (.*)/', $headers, $location)) {
+					$location = trim($location[1]);
+					$location = apply_filters('al2fb_fb_picture', $location);
+					return $location;
+				}
 				else
 					return false;
 			}
 			else if (function_exists('get_header') && ini_get('allow_url_fopen')) {
 				$headers = get_headers($url, true);
-				if (isset($headers['Location']))
-					return $headers['Location'];
+				if (isset($headers['Location'])) {
+					$location = $headers['Location'];
+					$location = apply_filters('al2fb_fb_picture', $location);
+					return $location;
+				}
 				else
 					return false;
 			}
