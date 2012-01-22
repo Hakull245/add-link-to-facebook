@@ -295,6 +295,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
 			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 2);
 			add_filter('al2fb_comment', array(&$this, 'Filter_comment'), 10, 3);
+			add_filter('al2fb_fb_feed', array(&$this, 'Filter_feed'), 10, 1);
 
 			// Widget
 			add_action('widgets_init', create_function('', 'return register_widget("AL2FB_Widget");'));
@@ -1137,6 +1138,15 @@ if (!class_exists('WPAL2Facebook')) {
 			$posts = json_decode($response);
 			$posts = apply_filters('al2fb_fb_feed', $posts);
 			return $posts;
+		}
+
+		// Filter messages
+		function Filter_feed($fb_messages) {
+			if (isset($fb_messages) && isset($fb_messages->data))
+				for ($i = 0; $i < count($fb_messages->data); $i++)
+					if ($fb_messages->data[$i]->type != 'status')
+						unset($fb_messages->data[$i]);
+			return $fb_messages;
 		}
 
 		// Get Facebook picture
@@ -3336,7 +3346,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$min_cap = get_option(c_al2fb_option_min_cap_comment);
 			if ($min_cap && !current_user_can($min_cap))
 				if ($comments)
-					for ($i = 0 ; $i < count($comments) ; $i++)
+					for ($i = 0; $i < count($comments); $i++)
 						if ($comments[$i]->comment_agent == 'AL2FB')
 							unset($comments[$i]);
 

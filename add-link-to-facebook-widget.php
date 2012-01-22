@@ -227,7 +227,7 @@ class AL2FB_Widget extends WP_Widget {
 		$count = 0;
 		echo '<ul>';
 		foreach ($fb_messages->data as $fb_message)
-			if ($fb_message->type == 'status' && isset($fb_message->message)) {
+			if (isset($fb_message->message)) {
 				if ($max_count && ++$count > $max_count)
 					break;
 				echo '<li>';
