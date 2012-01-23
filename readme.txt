@@ -665,6 +665,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: exluding custom post type of [Mute Screamer](http://wordpress.org/extend/plugins/mute-screamer/ "Mute Screamer")
 * Improvement: cache widget messages
 * Improvement: new (default) filters: *al2fb_fb_comments*, *al2fb_fb_likes*, *al2fb_fb_feed*, *al2fb_fb_picture*
+* Improvement: enable all error reporting when in debug mode
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:

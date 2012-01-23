@@ -742,7 +742,9 @@ if (!class_exists('WPAL2Facebook')) {
 			check_admin_referer(c_al2fb_nonce_form);
 			require_once('add-link-to-facebook-debug.php');
 
-			if (empty($_POST[c_al2fb_mail_topic]))
+			if (empty($_POST[c_al2fb_mail_topic]) ||
+				!(strpos($_POST[c_al2fb_mail_topic], 'http://') === 0 ||
+				strpos($_POST[c_al2fb_mail_topic], 'https://') === 0))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
 			else {
 				// Build headers

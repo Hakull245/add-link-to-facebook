@@ -28,7 +28,9 @@ Author URI: http://blog.bokhorst.biz/about/
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#error_reporting(E_ALL);
+// Enabled all notices
+if (get_option(c_al2fb_option_debug))
+	error_reporting(E_ALL);
 
 // Check PHP version
 if (version_compare(PHP_VERSION, '5.0.0', '<'))
