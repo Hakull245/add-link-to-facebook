@@ -661,7 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: Update existing Facebook link
+* Bugfix: update existing Facebook link
 * Improvement: further memory usage reduction by splitting things up
 * Improvement: fixed notices when saving settings
 * Improvement: excluded post types, tags, categories and authors apply to all plugins
