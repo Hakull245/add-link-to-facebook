@@ -346,6 +346,17 @@ if (!class_exists('WPAL2Int')) {
 			return 'http://www.facebook.com/permalink.php?story_fbid=' . $ids[1] . '&id=' . $ids[0];
 		}
 
+		static function Get_fb_anchor($post) {
+			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+			if (empty($link_id))
+				return '';
+
+			$link = WPAL2Int::Get_fb_permalink($link_id);
+			$title = __('Facebook', c_al2fb_text_domain);
+			$title = apply_filters('al2fb_anchor', $title, $post);
+			return '<div class="al2fb_anchor"><a href="' . $link . '" target="_blank">' . $title . '</div></a>';
+		}
+
 		// Add Link to Facebook
 		static function Add_fb_link($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);

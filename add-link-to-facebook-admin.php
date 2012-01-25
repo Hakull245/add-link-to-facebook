@@ -884,6 +884,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_show_permalink"><?php _e('Show link to the added link on Facebook:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_show_permalink" name="<?php echo c_al2fb_meta_show_permalink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_show_permalink, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_fb_encoding"><?php _e('Facebook character encoding:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_encoding" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_encoding; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true); ?>" />

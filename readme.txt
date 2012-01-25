@@ -662,11 +662,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: update existing Facebook link
-* Improvement: further memory usage reduction by splitting things up
+* New feature: show link on WordPress to Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
+* Improvement: further memory usage reduction by splitting source code in more files
 * Improvement: fixed notices when saving settings
-* Improvement: excluded post types, tags, categories and authors apply to all plugins
+* Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
 * Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*
-* Planned: link from WordPress to Facebook
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
@@ -724,22 +725,14 @@ Follow these steps to install the development version:
 * Improvement: auto load widget class to reduce memory usage
 * Improvement: post status transition debug info
 
-= 1.126 =
-* Bugfix: no new link after error
-* Improvement: remove import error after successful import
-* Improvement: register/display error time
-* Improvement: empty post meta box if no post (workaround for blogroll)
-
-= 1.125 =
-* Bugfix: remove statistics
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.133
+One bugfix, one new feature, four improvements, translation update
 
 = 1.132 =
 One new feature, four improvements, translation update

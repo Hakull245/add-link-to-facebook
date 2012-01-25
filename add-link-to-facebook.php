@@ -109,6 +109,18 @@ if (!function_exists('al2fb_likers')) {
 	}
 }
 
+// Template tag for anchor
+if (!function_exists('al2fb_anchor')) {
+	function al2fb_anchor($post_ID = null) {
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo WPAL2Int::Get_fb_anchor($post);
+	}
+}
+
 // Template tag for like count
 if (!function_exists('al2fb_like_count')) {
 	function al2fb_like_count($post_ID = null) {

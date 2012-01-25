@@ -110,6 +110,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Shortcodes
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
+			add_shortcode('al2fb_anchor', array(&$this, 'Shortcode_anchor'));
 			add_shortcode('al2fb_like_count', array(&$this, 'Shortcode_like_count'));
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
 			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
@@ -415,6 +416,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_add_new_page, $_POST[c_al2fb_meta_add_new_page]);
+			update_user_meta($user_ID, c_al2fb_meta_show_permalink, $_POST[c_al2fb_meta_show_permalink]);
 			update_user_meta($user_ID, c_al2fb_meta_trailer, $_POST[c_al2fb_meta_trailer]);
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_share_link, $_POST[c_al2fb_meta_share_link]);
@@ -1586,6 +1588,15 @@ if (!class_exists('WPAL2Facebook')) {
 							$content .= $likers;
 				}
 
+				// Show permalink
+				if (get_user_meta($user_ID, c_al2fb_meta_show_permalink, true)) {
+					$anchor = WPAL2Int::Get_fb_anchor($post);
+					if (get_user_meta($user_ID, c_al2fb_meta_like_top, true))
+						$content = $anchor . $content;
+					else
+						$content .= $anchor;
+				}
+
 				// Show like button
 				if (!get_post_meta($post->ID, c_al2fb_meta_nolike, true)) {
 					if (get_user_meta($user_ID, c_al2fb_meta_post_like_button, true))
@@ -1617,6 +1628,19 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return self::Get_likers($post);
+			else
+				return '';
+		}
+
+		// Shortcode amchor
+		function Shortcode_anchor($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return WPAL2Int::Get_fb_anchor($post);
 			else
 				return '';
 		}
