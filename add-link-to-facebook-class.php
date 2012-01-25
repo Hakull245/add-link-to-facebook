@@ -290,7 +290,7 @@ if (!class_exists('WPAL2Facebook')) {
 						get_currentuserinfo();
 
 						// Redirect
-						$auth_url = self::Authorize_url($user_ID);
+						$auth_url = WPAL2Int::Authorize_url($user_ID);
 						try {
 							// Check
 							if (ini_get('safe_mode') || ini_get('open_basedir') || $this->debug)
@@ -363,7 +363,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$consts = get_defined_constants(true);
 			foreach ($consts['user'] as $name => $value) {
 				if (strpos($value, 'al2fb_') === 0 && $value != c_al2fb_meta_trailer)
-					if (is_string($_POST[$value]))
+					if (isset($_POST[$value]) && is_string($_POST[$value]))
 						$_POST[$value] = trim($_POST[$value]);
 					else if (empty($_POST[$value]))
 						$_POST[$value] = null;
@@ -1107,39 +1107,21 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$add_new_page = get_user_meta($user_ID, c_al2fb_meta_add_new_page, true);
 
-					// Exclude categories
-					$exclude_category = false;
-					$categories = get_the_category($post->ID);
-					$excluding_categories = explode(',', get_option(c_al2fb_option_exclude_cat));
-					if ($categories)
-						foreach ($categories as $category)
-							if (in_array($category->cat_ID, $excluding_categories))
-								$exclude_category = true;
-
-					// Exclude post types
-					$exclude_type = self::Is_excluded_post_type($post);
-
-					// Exclude tags
-					$exclude_tag = false;
-					$tags = get_the_tags($post->ID);
-					$excluding_tags = explode(',', get_option(c_al2fb_option_exclude_tag));
-					if ($tags)
-						foreach ($tags as $tag)
-							if (in_array($tag->name, $excluding_tags))
-								$exclude_tag = true;
-
-					// Exclude authors
-					$excluding_authors = explode(',', get_option(c_al2fb_option_exclude_author));
-					$author = get_the_author_meta('user_login', $post->post_author);
-					$exclude_author = in_array($author, $excluding_authors);
-
 					// Check if public post
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
-						!$exclude_type && !$exclude_category && !$exclude_tag && !$exclude_author)
+						!self::Is_excluded($post))
 						WPAL2Int::Add_fb_link($post);
 				}
 			}
+		}
+
+		function Is_excluded($post) {
+			return
+				self::Is_excluded_post_type($post) ||
+				self::Is_excluded_tag($post) ||
+				self::Is_excluded_category($post) ||
+				self::Is_excluded_author($post);
 		}
 
 		function Is_excluded_post_type($post) {
@@ -1163,6 +1145,38 @@ if (!class_exists('WPAL2Facebook')) {
 			$ex_custom_types = apply_filters('al2fb_excluded_post_types', $ex_custom_types);
 
 			return in_array($post->post_type, $ex_custom_types);
+		}
+
+		function Is_excluded_tag($post) {
+			// Exclude tags
+			$exclude_tag = false;
+			$tags = get_the_tags($post->ID);
+			$excluding_tags = explode(',', get_option(c_al2fb_option_exclude_tag));
+			$excluding_tags = apply_filters('al2fb_excluded_tags', $excluding_tags);
+			if ($tags)
+				foreach ($tags as $tag)
+					if (in_array($tag->name, $excluding_tags))
+						$exclude_tag = true;
+			return $exclude_tag;
+		}
+
+		function Is_excluded_category($post) {
+			$exclude_category = false;
+			$categories = get_the_category($post->ID);
+			$excluding_categories = explode(',', get_option(c_al2fb_option_exclude_cat));
+			$excluding_categories = apply_filters('al2fb_excluded_categories', $excluding_categories);
+			if ($categories)
+				foreach ($categories as $category)
+					if (in_array($category->cat_ID, $excluding_categories))
+						$exclude_category = true;
+			return $exclude_category;
+		}
+
+		function Is_excluded_author($post) {
+			$excluding_authors = explode(',', get_option(c_al2fb_option_exclude_author));
+			$excluding_authors = apply_filters('al2fb_excluded_authors', $excluding_authors);
+			$author = get_the_author_meta('user_login', $post->post_author);
+			return in_array($author, $excluding_authors);
 		}
 
 		// Build texts for link/ogp
@@ -1554,12 +1568,9 @@ if (!class_exists('WPAL2Facebook')) {
 		function The_content($content = '') {
 			global $post;
 
-			// Excluded post types
-			if (self::Is_excluded_post_type($post))
-				return $content;
-
 			$user_ID = self::Get_user_ID($post);
-			if (!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
+			if (!self::Is_excluded($post) &&
+				!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_noposts, true) && is_single()) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_nopages, true) && is_page()) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_noarchives, true) && is_archive()) &&
@@ -1744,7 +1755,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_likers($post) {
 			$likers = '';
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID && !self::Is_excluded_post_type($post)) {
+			if ($user_ID && !self::Is_excluded($post)) {
 				$charset = get_bloginfo('charset');
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if ($fb_likes)
@@ -1770,7 +1781,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like count
 		function Get_like_count($post) {
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID && !self::Is_excluded_post_type($post)) {
+			if ($user_ID && !self::Is_excluded($post)) {
 				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if ($fb_likes && count($fb_likes->data) > 0)
@@ -1802,7 +1813,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Integration?
-			if ($user_ID && !self::Is_excluded_post_type($post) &&
+			if ($user_ID && !self::Is_excluded($post) &&
 				!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
 				$post->comment_status == 'open') {
 
@@ -2000,7 +2011,7 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			// Integration turned off?
-			if (!$user_ID || self::Is_excluded_post_type($post) ||
+			if (!$user_ID || self::Is_excluded($post) ||
 				get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ||
 				$post->comment_status != 'open')
 				return $count;

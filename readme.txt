@@ -663,7 +663,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: Update existing Facebook link
 * Improvement: Further memory usage reduction
-* Work in progress: **do not install development version!**
+* Improvement: fixed notices when saving settings
+* Improvement: excluded post types, tags, categories and authors apply to all plugins
+* Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*
+* Planned: link from WordPress to Facebook
 
 Follow these steps to install the development version:
 
