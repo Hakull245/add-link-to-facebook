@@ -15,9 +15,6 @@ function al2fb_render_admin($al2fb)
 	global $user_ID;
 	get_currentuserinfo();
 
-	// Test
-	//print_r($al2fb->Subscribe_fb_page($user_ID));
-
 	// Check for app share
 	if (is_multisite())
 		$shared_user_ID = get_site_option(c_al2fb_option_app_share);
@@ -111,7 +108,7 @@ function al2fb_render_admin($al2fb)
 			echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
 			// Get page name
 			try {
-				$me = $al2fb->Get_fb_me($user_ID, false);
+				$me = WPAL2Int::Get_fb_me($user_ID, false);
 				if ($me != null) {
 					_e('Links will be added to', c_al2fb_text_domain);
 					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
@@ -192,7 +189,7 @@ function al2fb_render_admin($al2fb)
 		</tr>
 		<tr>
 			<td><span class="al2fb_label"><strong><?php _e('Website > Site URL:', c_al2fb_text_domain); ?></strong></span></td>
-			<td><span class="al2fb_data" style="color: red;"><strong><?php echo htmlspecialchars($al2fb->Redirect_uri(), ENT_QUOTES, $charset); ?></strong></span></td>
+			<td><span class="al2fb_data" style="color: red;"><strong><?php echo htmlspecialchars(WPAL2Int::Redirect_uri(), ENT_QUOTES, $charset); ?></strong></span></td>
 		</tr>
 	</table>
 	<a href="http://developers.facebook.com/" target="_blank"><?php _e('Click here to create', c_al2fb_text_domain); ?></a>
@@ -223,7 +220,7 @@ function al2fb_render_admin($al2fb)
 
 	if ($al2fb->Is_authorized($user_ID))
 		try {
-			$app = $al2fb->Get_fb_application($user_ID);
+			$app = WPAL2Int::Get_fb_application($user_ID);
 ?>
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
@@ -333,12 +330,12 @@ function al2fb_render_admin($al2fb)
 			if (!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ||
 				!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
 				try {
-					$me = $al2fb->Get_fb_me($user_ID, true);
+					$me = WPAL2Int::Get_fb_me($user_ID, true);
 				}
 				catch (Exception $e) {
 					$me = null;
 				}
-				$pages = $al2fb->Get_fb_pages($user_ID);
+				$pages = WPAL2Int::Get_fb_pages($user_ID);
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 ?>
 				<div id="al2fb_pages">
@@ -399,7 +396,7 @@ function al2fb_render_admin($al2fb)
 			</td></tr>
 
 <?php		if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
-				$groups = $al2fb->Get_fb_groups($user_ID);
+				$groups = WPAL2Int::Get_fb_groups($user_ID);
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
 ?>
 				<tr valign="top"><th scope="row">

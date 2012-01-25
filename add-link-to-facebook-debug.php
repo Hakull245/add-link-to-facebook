@@ -28,7 +28,7 @@ function al2fb_debug_info($al2fb) {
 	// Get application
 	try {
 		if ($al2fb->Is_authorized($user_ID)) {
-			$a = $al2fb->Get_fb_application($user_ID);
+			$a = WPAL2Int::Get_fb_application($user_ID);
 			$app = '<a href="' . $a->link . '" target="_blank">' . $a->name . '</a>';
 		}
 		else
@@ -47,7 +47,7 @@ function al2fb_debug_info($al2fb) {
 	// Get page
 	try {
 		if ($al2fb->Is_authorized($user_ID)) {
-			$me = $al2fb->Get_fb_me($user_ID, false);
+			$me = WPAL2Int::Get_fb_me($user_ID, false);
 			if ($me == null)
 				$page = 'n/a';
 			else {
@@ -76,6 +76,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Server software:</td><td>' . htmlspecialchars($_SERVER['SERVER_SOFTWARE'], ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>SAPI:</td><td>' . htmlspecialchars(php_sapi_name(), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>PHP version:</td><td>' . PHP_VERSION . '</td></tr>';
+	$info .= '<tr><td>spl_autoload_register:</td><td>' . (version_compare(PHP_VERSION, '5.1.2', '>=') ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>safe_mode:</td><td>' . (ini_get('safe_mode') ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>open_basedir:</td><td>' . ini_get('open_basedir') . '</td></tr>';
 	$info .= '<tr><td>User agent:</td><td>' . htmlspecialchars($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, $charset) . '</td></tr>';
@@ -96,8 +97,8 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Number of users:</td><td>' . $users . '</td></tr>';
 	$info .= '<tr><td>Blog address (home):</td><td><a href="' . get_home_url() . '" target="_blank">' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 	$info .= '<tr><td>WordPress address (site):</td><td><a href="' . get_site_url() . '" target="_blank">' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
-	$info .= '<tr><td>Redirect URI:</td><td><a href="' . $al2fb->Redirect_uri() . '" target="_blank">' . htmlspecialchars($al2fb->Redirect_uri(), ENT_QUOTES, $charset) . '</a></td></tr>';
-	$info .= '<tr><td>Authorize URL:</td><td><a href="' . $al2fb->Authorize_url($user_ID) . '" target="_blank">' . htmlspecialchars($al2fb->Authorize_url($user_ID), ENT_QUOTES, $charset) . '</a></td></tr>';
+	$info .= '<tr><td>Redirect URI:</td><td><a href="' . WPAL2Int::Redirect_uri() . '" target="_blank">' . htmlspecialchars(WPAL2Int::Redirect_uri(), ENT_QUOTES, $charset) . '</a></td></tr>';
+	$info .= '<tr><td>Authorize URL:</td><td><a href="' . WPAL2Int::Authorize_url($user_ID) . '" target="_blank">' . htmlspecialchars(WPAL2Int::Authorize_url($user_ID), ENT_QUOTES, $charset) . '</a></td></tr>';
 	$info .= '<tr><td>Authorization init:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_init), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Authorization check:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_check), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Redirect time:</td><td>' . htmlspecialchars(get_option(c_al2fb_log_redir_time), ENT_QUOTES, $charset) . '</td></tr>';
@@ -114,7 +115,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Encoding:</td><td>' . htmlspecialchars(get_option('blog_charset'), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Facebook:</td><td>' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Locale:</td><td>' . htmlspecialchars(WPLANG, ENT_QUOTES, $charset) . '</td></tr>';
-	$info .= '<tr><td>Facebook:</td><td>' . htmlspecialchars($al2fb->Get_locale($user_ID), ENT_QUOTES, $charset) . '</td></tr>';
+	$info .= '<tr><td>Facebook:</td><td>' . htmlspecialchars(WPAL2Int::Get_locale($user_ID), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>mb_convert_encoding:</td><td>' . (function_exists('mb_convert_encoding') ? 'Yes' : 'No') . '</td></tr>';
 
 	$info .= '<tr><td>Application:</td><td>' . $app . '</td></tr>';
@@ -188,7 +189,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Activity recommend:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_act_recommend, true) ? 'Yes' : 'No') . '</td></tr>';
 
 	$fid = get_user_meta($user_ID, c_al2fb_meta_facebook_id, true);
-	$info .= '<tr><td>Facebook ID:</td><td><a href="' . $al2fb->Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td></tr>';
+	$info .= '<tr><td>Facebook ID:</td><td><a href="' . WPAL2Int::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td></tr>';
 
 	$info .= '<tr><td>OGP:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_open_graph, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
@@ -303,7 +304,7 @@ function al2fb_debug_info($al2fb) {
 		if (!empty($avatar_picture))
 			$info .= ' <a href="' . $avatar_picture . '" target="_blank">avatar</a>';
 		if (!empty($link_id))
-			$info .= ' <a href="' . $al2fb->Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
+			$info .= ' <a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
 		$info .= '</td></tr>';
 	}
 

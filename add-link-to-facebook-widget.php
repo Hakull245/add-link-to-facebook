@@ -83,13 +83,13 @@ class AL2FB_Widget extends WP_Widget {
 		// Get comments
 		$fb_comments = false;
 		if ($comments)
-			$fb_comments = $wp_al2fb->Get_comments_or_likes($post, false);
+			$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
 
 		// Get messages
 		$fb_messages = false;
 		if ($messages)
 			try {
-				$fb_messages = $wp_al2fb->Get_fb_feed_cached($user_ID);
+				$fb_messages = WPAL2Int::Get_fb_feed_cached($user_ID);
 			}
 			catch (Exception $e) {
 				if ($wp_al2fb->debug)
@@ -126,39 +126,39 @@ class AL2FB_Widget extends WP_Widget {
 
 			// Facebook like button
 			if ($like_button)
-				echo $wp_al2fb->Get_like_button($post, false);
+				echo WPAL2Int::Get_like_button($post, false);
 
 			// Facebook like box
 			if ($like_box)
-				echo $wp_al2fb->Get_like_button($post, true);
+				echo WPAL2Int::Get_like_button($post, true);
 
 			// Facebook send button
 			if ($send_button)
-				echo $wp_al2fb->Get_send_button($post);
+				echo WPAL2Int::Get_send_button($post);
 
 			// Facebook comments plugins
 			if ($comments_plugin)
-				echo $wp_al2fb->Get_comments_plugin($post);
+				echo WPAL2Int::Get_comments_plugin($post);
 
 			// Facebook Face pile
 			if ($face_pile)
-				echo $wp_al2fb->Get_face_pile($post);
+				echo WPAL2Int::Get_face_pile($post);
 
 			// Facebook profile
 			if ($profile)
-				echo $wp_al2fb->Get_profile_link($post);
+				echo WPAL2Int::Get_profile_link($post);
 
 			// Facebook registration
 			if ($registration)
-				echo $wp_al2fb->Get_registration($post);
+				echo WPAL2Int::Get_registration($post);
 
 			// Facebook login
 			if ($login)
-				echo $wp_al2fb->Get_login($post);
+				echo WPAL2Int::Get_login($post);
 
 			// Facebook activity feed
 			if ($activity)
-				echo $wp_al2fb->Get_activity_feed($post);
+				echo WPAL2Int::Get_activity_feed($post);
 
 			echo $after_widget;
 		}
@@ -166,7 +166,6 @@ class AL2FB_Widget extends WP_Widget {
 
 	// Helper render Facebook comments
 	function Render_fb_comments($fb_comments, $comments_nolink, $link_id, $max_count) {
-		global $wp_al2fb;
 		$charset = get_bloginfo('charset');
 
 		// Get time zone offset
@@ -187,14 +186,14 @@ class AL2FB_Widget extends WP_Widget {
 
 			// Picture
 			if ($comments_nolink == 'author')
-				echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
+				echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '" src="' . WPAL2Int::Get_fb_picture_url_cached($fb_comment->from->id, 'small') . '" />';
 
 			// Author
 			echo ' ';
 			if ($comments_nolink == 'link')
-				echo '<a href="' . $wp_al2fb->Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
+				echo '<a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 			else if ($comments_nolink == 'author')
-				echo '<a href="' . $wp_al2fb->Get_fb_profilelink($fb_comment->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
+				echo '<a href="' . WPAL2Int::Get_fb_profilelink($fb_comment->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</a>';
 			else
 				echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_comment->from->name, ENT_QUOTES, $charset) . '</span>';
 
@@ -214,7 +213,6 @@ class AL2FB_Widget extends WP_Widget {
 
 	// Helper render Facebook status messages
 	function Render_fb_messages($fb_messages, $comments_nolink, $link_id, $max_count, $messages_comments) {
-		global $wp_al2fb;
 		$charset = get_bloginfo('charset');
 
 		// Get time zone offset
@@ -234,13 +232,13 @@ class AL2FB_Widget extends WP_Widget {
 
 				// Picture
 				if ($comments_nolink == 'author')
-					echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '" src="' . $wp_al2fb->Get_fb_picture_url_cached($fb_message->from->id, 'small') . '" />';
+					echo '<img class="al2fb_widget_picture" alt="' . htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '" src="' . WPAL2Int::Get_fb_picture_url_cached($fb_message->from->id, 'small') . '" />';
 
 				// Author
 				if ($comments_nolink == 'link')
-					echo '<a href="' . $wp_al2fb->Get_fb_permalink($fb_message->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
+					echo '<a href="' . WPAL2Int::Get_fb_permalink($fb_message->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
 				else if ($comments_nolink == 'author')
-					echo '<a href="' . $wp_al2fb->Get_fb_profilelink($fb_message->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
+					echo '<a href="' . WPAL2Int::Get_fb_profilelink($fb_message->from->id) . '" class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</a>';
 				else
 					echo '<span class="al2fb_widget_name">' .  htmlspecialchars($fb_message->from->name, ENT_QUOTES, $charset) . '</span>';
 
@@ -256,7 +254,7 @@ class AL2FB_Widget extends WP_Widget {
 				// Comments on message
 				if ($messages_comments)
 					try {
-						$fb_message_comments = $wp_al2fb->Get_fb_comments_cached($user_ID, $fb_message->id);
+						$fb_message_comments = WPAL2Int::Get_fb_comments_cached($user_ID, $fb_message->id);
 						if ($fb_message_comments)
 							self::Render_fb_comments($fb_message_comments, $comments_nolink, $fb_message->id, $messages_comments);
 					}

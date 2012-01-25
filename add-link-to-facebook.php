@@ -28,16 +28,13 @@ Author URI: http://blog.bokhorst.biz/about/
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Enabled all notices
-if (get_option(c_al2fb_option_debug))
-	error_reporting(E_ALL);
-
 // Check PHP version
 if (version_compare(PHP_VERSION, '5.0.0', '<'))
 	die('Add Link to Facebook requires at least PHP 5, installed version is ' . PHP_VERSION);
 
-// Debug console
+// Debug
 if (get_option('al2fb_debug')) {
+	error_reporting(E_ALL);
 	//require_once('PhpConsole.php');
 	//PhpConsole::start();
 }
@@ -45,6 +42,8 @@ if (get_option('al2fb_debug')) {
 // Auto load widget class
 if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
 	function __autoload_al2fb($class_name) {
+		if ($class_name == 'WPAL2Int')
+			require_once('add-link-to-facebook-int.php');
 		if ($class_name == 'AL2FB_Widget')
 			require_once('add-link-to-facebook-widget.php');
 	}
@@ -53,10 +52,13 @@ if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
 else {
 	if (function_exists('__autoload')) {
 		// Another plugin is using __autoload too
+		require_once('add-link-to-facebook-int.php');
 		require_once('add-link-to-facebook-widget.php');
 	}
 	else {
 		function __autoload($class_name) {
+			if ($class_name == 'WPAL2Int')
+				require_once('add-link-to-facebook-int.php');
 			if ($class_name == 'AL2FB_Widget')
 				require_once('add-link-to-facebook-widget.php');
 		}
@@ -123,117 +125,108 @@ if (!function_exists('al2fb_like_count')) {
 // Template tag for Facebook like button
 if (!function_exists('al2fb_like_button')) {
 	function al2fb_like_button($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_like_button($post, false);
+			echo WPAL2Int::Get_like_button($post, false);
 	}
 }
 
 // Template tag for Facebook like box
 if (!function_exists('al2fb_like_box')) {
 	function al2fb_like_box($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_like_button($post, true);
+			echo WPAL2Int::Get_like_button($post, true);
 	}
 }
 
 // Template tag for Facebook send button
 if (!function_exists('al2fb_send_button')) {
 	function al2fb_send_button($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_send_button($post);
+			echo WPAL2Int::Get_send_button($post);
 	}
 }
 
 // Template tag for Facebook comments plugins
 if (!function_exists('al2fb_comments_plugin')) {
 	function al2fb_comments_plugin($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_comments_plugin($post);
+			echo WPAL2Int::Get_comments_plugin($post);
 	}
 }
 
 // Template tag for Facebook face pile
 if (!function_exists('al2fb_face_pile')) {
 	function al2fb_face_pile($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_face_pile($post);
+			echo WPAL2Int::Get_face_pile($post);
 	}
 }
 
 // Template tag for profile link
 if (!function_exists('al2fb_profile_link')) {
 	function al2fb_profile_link($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_profile_link($post);
+			echo WPAL2Int::Get_profile_link($post);
 	}
 }
 
 // Template tag for Facebook registration
 if (!function_exists('al2fb_registration')) {
 	function al2fb_registration($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_registration($post);
+			echo WPAL2Int::Get_registration($post);
 	}
 }
 
 // Template tag for Facebook login
 if (!function_exists('al2fb_login')) {
 	function al2fb_login($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_login($post);
+			echo WPAL2Int::Get_login($post);
 	}
 }
 
 // Template tag for Facebook activity feed
 if (!function_exists('al2fb_activity_feed')) {
 	function al2fb_activity_feed($post_ID = null) {
-		global $wp_al2fb;
 		if (empty($post_ID))
 			global $post;
 		else
 			$post = get_post($post_ID);
 		if (isset($post))
-			echo $wp_al2fb->Get_activity_feed($post);
+			echo WPAL2Int::Get_activity_feed($post);
 	}
 }
 

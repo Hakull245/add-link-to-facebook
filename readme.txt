@@ -661,7 +661,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Further memory usage reduction (work in progress)
+* Improvement: Further memory usage reduction
+* Work in progress: **do not install development version!**
 
 Follow these steps to install the development version:
 
