@@ -1075,8 +1075,10 @@ if (!class_exists('WPAL2Facebook')) {
 				self::Is_authorized($user_ID)) {
 				// Add, update or delete link
 				if ($update || $delete || $new_status == 'trash') {
-					if (!empty($link_id))
+					if (!empty($link_id)) {
 						WPAL2Int::Delete_fb_link($post);
+						$link_id = null;
+					}
 				}
 				if (!$delete) {
 					// Check post status

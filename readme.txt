@@ -661,6 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* Bugfix: Update existing Facebook link
 * Improvement: Further memory usage reduction
 * Work in progress: **do not install development version!**
 
