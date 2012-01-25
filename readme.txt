@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.131
+Stable tag: 1.132
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -661,12 +661,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: support for multi site installs (settings per user/blog)
-* Improvement: exluding custom post type of [Mute Screamer](http://wordpress.org/extend/plugins/mute-screamer/ "Mute Screamer")
-* Improvement: cache widget messages
-* Improvement: new (default) filters: *al2fb_fb_comments*, *al2fb_fb_likes*, *al2fb_fb_feed*, *al2fb_fb_picture*
-* Improvement: enable all error reporting when in debug mode
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Further memory usage reduction (work in progress)
 
 Follow these steps to install the development version:
 
@@ -678,6 +673,14 @@ Follow these steps to install the development version:
 * Click *Upload* (a link at the top)
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
+
+= 1.132 =
+* New feature: support for multi site installs (settings per user/blog)
+* Improvement: exluding custom post type of [Mute Screamer](http://wordpress.org/extend/plugins/mute-screamer/ "Mute Screamer")
+* Improvement: cache widget messages
+* Improvement: new (default) filters: *al2fb_fb_comments*, *al2fb_fb_likes*, *al2fb_fb_feed*, *al2fb_fb_picture*
+* Improvement: enable all error reporting when in debug mode
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.131 =
 * Improvement: clarified option *See all pages*
@@ -732,6 +735,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.132 =
+One new feature, four improvements, translation update
 
 = 1.131 =
 Eight improvements, translation updates
