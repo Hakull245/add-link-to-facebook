@@ -668,6 +668,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
 * Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
