@@ -112,6 +112,30 @@ if (!class_exists('WPAL2Int')) {
 			), '', '&');
 			update_option(c_al2fb_log_get_token, $url . '?' . $query);
 			$response = WPAL2Int::Request($url, $query, 'GET');
+			$access_token = WPAL2Int::Process_fb_token($response);
+			update_user_meta($user_ID, c_al2fb_meta_access_token, $access_token);
+			update_user_meta($user_ID, c_al2fb_meta_token_time, date('c'));
+			return $access_token;
+		}
+
+		static function Refresh_fb_token($user_ID) {
+			// https://developers.facebook.com/docs/offline-access-deprecation/
+			$url = 'https://graph.facebook.com/oauth/access_token';
+			$url = apply_filters('al2fb_url', $url);
+			$query = http_build_query(array(
+				'client_id' => get_user_meta($user_ID, c_al2fb_meta_client_id, true),
+				'client_secret' => get_user_meta($user_ID, c_al2fb_meta_app_secret, true),
+				'grant_type' => 'fb_exchange_token',
+				'fb_exchange_token' => get_user_meta($user_ID, c_al2fb_meta_access_token, true)
+			), '', '&');
+			$response = WPAL2Int::Request($url, $query, 'GET');
+			$access_token = WPAL2Int::Process_fb_token($response);
+			update_user_meta($user_ID, c_al2fb_meta_access_token, $access_token);
+			update_user_meta($user_ID, c_al2fb_meta_token_time, date('c'));
+			return $access_token;
+		}
+
+		static function Process_fb_token($response) {
 			$key = 'access_token=';
 			$access_token = substr($response, strpos($response, $key) + strlen($key));
 			$access_token = explode('&', $access_token);
@@ -464,6 +488,15 @@ if (!class_exists('WPAL2Int')) {
 				update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 				delete_post_meta($post->ID, c_al2fb_meta_error);
 				delete_post_meta($post->ID, c_al2fb_meta_error_time);
+
+				// Auto refresh access token
+				try {
+					WPAL2Int::Refresh_fb_token($user_ID);
+				}
+				catch (Exception $e) {
+					update_post_meta($post->ID, c_al2fb_meta_error, 'Refresh token: ' . $e->getMessage());
+					update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
+				}
 			}
 			catch (Exception $e) {
 				update_post_meta($post->ID, c_al2fb_meta_error, 'Add link: ' . $e->getMessage());

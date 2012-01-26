@@ -95,7 +95,8 @@ function al2fb_render_admin($al2fb)
 	<strong><?php _e('Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!', c_al2fb_text_domain); ?></strong>
 	</div>
 
-<?php		if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) &&
+<?php
+	if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) &&
 		get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
 ?>
 		<hr />
@@ -131,8 +132,9 @@ function al2fb_render_admin($al2fb)
 			</p>
 			</form>
 		</td>
-
-<?php			if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
+<?php
+		if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) {
+?>
 			<td>
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 				<input type="hidden" name="cmd" value="_s-xclick">
@@ -147,7 +149,9 @@ function al2fb_render_admin($al2fb)
 				<a href="http://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin" target="_blank">
 				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
 			</td>
-<?php			} ?>
+<?php
+		}
+?>
 
 		</tr></table>
 
@@ -167,7 +171,9 @@ function al2fb_render_admin($al2fb)
 				});
 			});
 		</script>
-<?php		} ?>
+<?php
+	}
+?>
 
 	<hr />
 	<a name="configure"></a>
@@ -209,11 +215,16 @@ function al2fb_render_admin($al2fb)
 		<input id="al2fb_app_secret" class="al2fb_text" name="<?php echo c_al2fb_meta_app_secret; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_app_secret, true); ?>" />
 	</td></tr>
 
-<?php		if (isset($_REQUEST['debug'])) { ?>
+<?php
+	if (isset($_REQUEST['debug'])) {
+?>
 		<tr valign="top"><th scope="row">
 			<label for="al2fb_access_token"><strong><?php _e('Access token:', c_al2fb_text_domain); ?></strong></label>
 		</th><td>
 			<input id="al2fb_access_token" class="al2fb_text" name="<?php echo c_al2fb_meta_access_token; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_access_token, true); ?>" />
+<?php
+			echo '<br /><span>' . get_user_meta($user_ID, c_al2fb_meta_token_time, true) . '</span>';
+?>
 		</td></tr>
 <?php
 	}
@@ -298,9 +309,13 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="facebook"<?php echo $pic_facebook; ?>><?php _e('Let Facebook select', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="post"<?php echo $pic_post; ?>><?php _e('First image in the post', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="avatar"<?php echo $pic_avatar; ?>><?php _e('Avatar of author', c_al2fb_text_domain); ?><br />
-<?php 			if ($pic_type == 'userphoto' || $al2fb->debug) { ?>
+<?php
+		if ($pic_type == 'userphoto' || $al2fb->debug) {
+?>
 			<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="userphoto"<?php echo $pic_userphoto; ?>><?php _e('Image from User Photo plugin', c_al2fb_text_domain); ?><br />
-<?php			} ?>
+<?php
+		}
+?>
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_type; ?>" value="custom"<?php echo $pic_custom; ?>><?php _e('Custom picture below', c_al2fb_text_domain); ?><br />
 	</td></tr>
 
@@ -395,7 +410,8 @@ function al2fb_render_admin($al2fb)
 				<br /><span class="al2fb_explanation"><?php _e('Requires user groups permission', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
-<?php		if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+<?php
+			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
 				$groups = WPAL2Int::Get_fb_groups($user_ID);
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
 ?>
@@ -428,9 +444,12 @@ function al2fb_render_admin($al2fb)
 			echo '<div id="message" class="error fade al2fb_error"><p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</p></div>';
 		}
 	}
-	else { ?>
+	else {
+?>
 		<h4><?php _e('First authorize the plugin', c_al2fb_text_domain); ?></h4>
-<?php		} ?>
+<?php
+	}
+?>
 	</div>
 
 	<div id="al2fb_tab_appearance" class="al2fb_tab_content">
@@ -921,7 +940,9 @@ function al2fb_render_admin($al2fb)
 	</div>
 
 	<div id="al2fb_tab_admin" class="al2fb_tab_content">
-<?php		if (current_user_can('manage_options')) { ?>
+<?php
+	if (current_user_can('manage_options')) {
+?>
 		<h4><?php _e('Administrator options', c_al2fb_text_domain); ?></h4>
 		<table class="form-table al2fb_border">
 		<tr valign="top"><th scope="row">
@@ -1135,7 +1156,9 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 		</table>
 
-<?php			if (isset($_REQUEST['debug'])) { ?>
+<?php
+		if (isset($_REQUEST['debug'])) {
+?>
 			<h4><?php _e('Debug options', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -1162,15 +1185,20 @@ function al2fb_render_admin($al2fb)
 				<input id="al2fb_debug" name="<?php echo c_al2fb_option_debug; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_debug)) echo ' checked="checked"'; ?> />
 			</td></tr>
 			</table>
-<?php			} ?>
+<?php
+		}
+?>
 		<p class="submit">
 		<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 		</p>
 <?php
 	}
-	else { ?>
+	else {
+?>
 		<h4><?php _e('Only for administrators', c_al2fb_text_domain); ?></h4>
-<?php		} ?>
+<?php
+	}
+?>
 	</div>
 
 	</div>
@@ -1226,7 +1254,9 @@ function al2fb_render_resources($al2fb) {
 	<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
 	</ul>
-<?php		if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) { ?>
+<?php
+	if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) {
+?>
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
@@ -1237,7 +1267,9 @@ function al2fb_render_resources($al2fb) {
 		<br />
 		<a href="http://flattr.com/thing/315162/Add-Link-to-Facebook-WordPress-plugin" target="_blank">
 		<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
-<?php		} ?>
+<?php
+	}
+?>
 	</div>
 <?php
 }
@@ -1282,13 +1314,11 @@ function al2fb_render_debug_info($al2fb) {
 			<br><strong><?php _e('Please describe your problem, even if you did before', c_al2fb_text_domain); ?></strong>
 		</td></tr>
 		</table>
-
 <?php
 		$msg = __('Did you check if your problem is described in <a href="[FAQ]" target="_blank">the FAQ</a> ?', c_al2fb_text_domain);
 		$msg = str_replace('[FAQ]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/', $msg);
 		echo '<br /><strong><span style="color: red;">' . $msg . '</span></strong>';
 ?>
-
 		<p class="submit">
 		<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
 		</p>

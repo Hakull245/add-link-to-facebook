@@ -51,6 +51,7 @@ define('c_al2fb_transient_cache', 'al2fb_cache_');
 define('c_al2fb_meta_client_id', 'al2fb_client_id');
 define('c_al2fb_meta_app_secret', 'al2fb_app_secret');
 define('c_al2fb_meta_access_token', 'al2fb_access_token');
+define('c_al2fb_meta_token_time', 'al2fb_token_time');
 define('c_al2fb_meta_picture_type', 'al2fb_picture_type');
 define('c_al2fb_meta_picture', 'al2fb_picture');
 define('c_al2fb_meta_picture_default', 'al2fb_picture_default');

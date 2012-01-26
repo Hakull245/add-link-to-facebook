@@ -664,6 +664,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: update existing Facebook link
 * Workaround: *trailingslashit* for redirect URI
 * New feature: show link on WordPress to Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
+* New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
 * Improvement: further memory usage reduction by splitting source code in more files
 * Improvement: fixed notices when saving settings
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)

@@ -478,6 +478,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$_POST[c_al2fb_meta_access_token] = null;
 				$_POST[c_al2fb_meta_access_token] = trim($_POST[c_al2fb_meta_access_token]);
 				update_user_meta($user_ID, c_al2fb_meta_access_token, $_POST[c_al2fb_meta_access_token]);
+				update_user_meta($user_ID, c_al2fb_meta_token_time, date('c'));
 			}
 
 			// Update admin options
@@ -539,9 +540,8 @@ if (!class_exists('WPAL2Facebook')) {
 			if (isset($_REQUEST['code'])) {
 				try {
 					// Get & store token
-					$access_token = WPAL2Int::Get_fb_token($user_ID);
+					WPAL2Int::Get_fb_token($user_ID);
 					update_option(c_al2fb_log_auth_time, date('c'));
-					update_user_meta($user_ID, c_al2fb_meta_access_token, $access_token);
 					if (get_option(c_al2fb_option_version) <= 6)
 						update_option(c_al2fb_option_version, 7);
 					delete_option(c_al2fb_last_error);
