@@ -662,6 +662,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: update existing Facebook link
+* Workaround: *trailingslashit* for redirect URI
 * New feature: show link on WordPress to Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
 * Improvement: further memory usage reduction by splitting source code in more files
 * Improvement: fixed notices when saving settings
