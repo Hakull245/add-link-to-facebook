@@ -68,9 +68,9 @@ if (!class_exists('WPAL2Int')) {
 			// WordPress Address -> get_site_url() -> WordPress folder
 			// Blog Address -> get_home_url() -> Home page
 			if (get_option(c_al2fb_option_siteurl))
-				return get_site_url(null, '/');
+				return trailingslashit(get_site_url());
 			else
-				return get_home_url(null, '/');
+				return trailingslashit(get_home_url());
 		}
 
 		// Generate authorization secret
