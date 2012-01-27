@@ -352,6 +352,9 @@ function al2fb_render_admin($al2fb)
 				}
 				$pages = WPAL2Int::Get_fb_pages($user_ID);
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				$extra_page = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
+				if (empty($extra_page))
+					$extra_page = array();
 ?>
 				<div id="al2fb_pages">
 				<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
@@ -382,6 +385,28 @@ function al2fb_render_admin($al2fb)
 						}
 ?>
 					</select>
+				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_page"><?php _e('Add also to page:', c_al2fb_text_domain); ?></label>
+				</th><td>
+					<table>
+					<strong>WORK IN PROGRESS!</strong>
+					<br />
+<?php
+					if ($me != null) {
+						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
+						echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</td></tr>';
+					}
+					if ($pages->data)
+						foreach ($pages->data as $page) {
+							if (empty($page->name))
+								$page->name = '?';
+							echo '<tr><td><input type="checkbox"' . (in_array($page->id, $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="' . $page->id . '"></td>';
+							echo '<td>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</td></tr>';
+						}
+?>
+					</table>
 				</td></tr>
 				</table>
 				<p class="submit">
