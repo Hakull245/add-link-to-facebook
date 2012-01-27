@@ -295,12 +295,14 @@ One WordPress user can only add links to one wall OR one page OR one group, even
 Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
 It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 
-= U26 Why are liker names not displayed? =
+= U26 Why doesn't the like button show all likes? Why are liker names not displayed? =
 
 The option *Show likers below the post text* shows the names of the people that liked the *link* the plugin added on Facebook.
-The like button is a standard Facebook like button which is not connect to links added by the plugin.
-The like button is connected to the *page* on which it is displayed.
-So, people that click on the like button are displayed within the like button, but not as people that liked an added link.
+The like button on your website is a standard Facebook like button which is not connected to the link added by the plugin
+(in fact there may not even have been added a link).
+The like button is connected to the *post* (page) on which it is displayed.
+Unfortunately there is no way to connect the likes of the *link* to the post and the likes of the *post*,
+since Facebook consider these as different objects.
 
 = U28 Can I display the widget on every page? =
 
@@ -657,6 +659,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Screenshots ==
 
 1. Added Link on Facebook
+2. Website URL
 
 == Changelog ==
 
@@ -669,6 +672,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: fixed notices when saving settings
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
 * Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
+* Added new screenshot
+* Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
