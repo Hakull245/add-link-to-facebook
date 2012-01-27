@@ -381,18 +381,17 @@ function al2fb_render_admin($al2fb)
 								echo ' selected';
 							if (empty($page->name))
 								$page->name = '?';
-							echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' - ' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . '</option>';
+							echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</option>';
 						}
 ?>
 					</select>
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
-					<label for="al2fb_page"><?php _e('Add also to page:', c_al2fb_text_domain); ?></label>
+					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
 				</th><td>
+					<span class="al2fb_explanation"><strong><a href="https://developers.facebook.com/policy/" target="_blank"><?php _e('Be sure you to conform to the Facebook Platform Policies', c_al2fb_text_domain); ?></a></strong></span>
 					<table>
-					<strong>WORK IN PROGRESS!</strong>
-					<br />
 <?php
 					if ($me != null) {
 						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
@@ -407,6 +406,7 @@ function al2fb_render_admin($al2fb)
 						}
 ?>
 					</table>
+					<br /><span class="al2fb_explanation"><?php _e('Comment integration, etc. for extra pages is not supported', c_al2fb_text_domain); ?></span>
 				</td></tr>
 				</table>
 				<p class="submit">

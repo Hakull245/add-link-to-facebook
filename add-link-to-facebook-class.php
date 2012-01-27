@@ -760,12 +760,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check if errors
 			$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
-
-			global $wp_version;
-			if (version_compare($wp_version, '3.2') < 0) {
 ?>
-				<div class="misc-pub-section"></div>
-<?php		} ?>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
 <?php
@@ -780,7 +775,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<input id="al2fb_nointegrate" type="checkbox" name="<?php echo c_al2fb_meta_nointegrate; ?>"<?php echo $chk_nointegrate; ?> />
 			<label for="al2fb_nointegrate"><?php _e('Do not integrate comments', c_al2fb_text_domain); ?></label>
 
-<?php		if (!empty($link_id)) { ?>
+<?php
+			if (!empty($link_id)) {
+?>
 				<br />
 				<input id="al2fb_update" type="checkbox" name="<?php echo c_al2fb_action_update; ?>"/>
 				<label for="al2fb_update"><?php _e('Update existing Facebook link', c_al2fb_text_domain); ?></label>
@@ -791,12 +788,17 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
 				<br />
 				<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
-<?php		} ?>
-<?php		if (!empty($error)) { ?>
+<?php
+			}
+
+			if (!empty($error)) {
+?>
 				<br />
 				<input id="al2fb_clear" type="checkbox" name="<?php echo c_al2fb_action_clear; ?>"/>
 				<label for="al2fb_clear"><?php _e('Clear error messages', c_al2fb_text_domain); ?></label>
-<?php		} ?>
+<?php
+			}
+?>
 			</div>
 			</div>
 <?php
