@@ -658,8 +658,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Screenshots ==
 
-1. Added Link on Facebook
-2. Website URL
+1. What is a caption, message, etc?
+2. Where is the Website URL?
 
 == Changelog ==
 
@@ -776,8 +776,8 @@ Basically there are five steps to follow:
 2. Create the Facebook application:
 	* Give it any display name you like (will appear as *via* below the added links)
 	* Fill in the red URL which the plugin indicates into the field *Website* (click the word) > *Site URL*
-	* **Don't confuse this with the field *App Domain*, this field should be empty**
 	* See the [screenshot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
+	* **Don't confuse this with the field *App Domain*, this field should be empty**
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
