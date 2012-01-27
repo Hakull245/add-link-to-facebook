@@ -256,6 +256,7 @@ Example to show liker names:
 All shortcodes:
 
 * [al2fb_likers]
+* [al2fb_anchor]
 * [al2fb_like_count]
 * [al2fb_like_button]
 * [al2fb_like_box]
@@ -279,6 +280,8 @@ Example:
 All template tags:
 
 * al2fb_likers
+* al2fb_anchor
+* al2fb_like_count
 * al2fb_like_button
 * al2fb_like_box
 * al2fb_send_button
@@ -291,9 +294,13 @@ All template tags:
 
 = U25 Can I add links to multiple walls? =
 
-One WordPress user can only add links to one wall OR one page OR one group, even if that user happens to have multiple sites (which is possible within a network site).
-Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
-It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+You can add links to multiple page walls, including your personal wall, if you donate $20/€20 or more.
+It is entirely your responsibility to prevent violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+
+Note that:
+
+* It is NOT possible to add links to multiple groups (or multiple pages AND groups)
+* Comment integration and social plugins that require an added link is ONLY available for the first added link
 
 = U26 Why doesn't the like button show all likes? Why are liker names not displayed? =
 
@@ -420,7 +427,6 @@ This is an option, when enabled shortcodes will be processed.
 
 Yes, each user can configure his/her own wall or page or group.
 You should enable the plugin from the network admin panel thru "Plugins".
-See also question U25.
 
 = C05 Is remote publishing supported? =
 
@@ -668,7 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Workaround: *trailingslashit* for redirect URI
 * New feature: show link on WordPress to Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
 * New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
-* New feature: add to multiple pages (finally!)
+* New feature: add to multiple walls
 * Improvement: further memory usage reduction by splitting source code in more files
 * Improvement: fixed notices when saving settings
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
@@ -851,7 +857,6 @@ No picture at all is not officially supported by Facebook, but you can try to us
 *Pages and groups*
 
 The plugin can add a link to a page or group wall of your choice.
-The plugin will always add only one link, see question U25 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 Just check what you want, page or group, press *Save* and select the page or group you want to add links to.
 For pages it is possible to add links as page owner, instead of with your personal account.
 For groups this is not possible, since Facebook doesn't support it.
@@ -1006,19 +1011,17 @@ In no particular order:
 Feature which will not be realized, sorry:
 
 * Add link as group owner: not possible unfortunately
-* Adding links to multiple walls: see FAQ, question U25
-* Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
 * Other social buttons: too far from the core function of the plugin
-* Like button at the bottom and top: there are already enough like buttons in the world
+* Like button at the bottom and top: use a template tag
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
 * Comment with Facebook login: requires permissions
 * Integrate posts from Facebook: WordPress centric plugin
-* <Title> by <Author>: each author should authorize
+* <Title> by <Author>: each author should authorize, but you can use avatars
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
 
