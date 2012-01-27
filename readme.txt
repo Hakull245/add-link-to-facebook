@@ -673,7 +673,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
 * Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
 * Added new screenshot
-* Updated FAQ
+* Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -777,6 +777,7 @@ Basically there are five steps to follow:
 	* Give it any display name you like (will appear as *via* below the added links)
 	* Fill in the red URL which the plugin indicates into the field *Website* (click the word) > *Site URL*
 	* **Don't confuse this with the field *App Domain*, this field should be empty**
+	* See the [screenshot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
 	* Press the *Save Changes* button
 3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
 4. Press the *Save* button to save the configuration
