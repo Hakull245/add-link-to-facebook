@@ -1896,6 +1896,8 @@ if (!class_exists('WPAL2Facebook')) {
 										'user_id' => 0
 									);
 
+									$commentdata = apply_filters('al2fb_preprocess_comment', $commentdata);
+
 									// Copy Facebook comment to WordPress database
 									if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) {
 										// Apply filters
