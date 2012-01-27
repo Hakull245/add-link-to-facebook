@@ -542,7 +542,7 @@ if (!class_exists('WPAL2Int')) {
 					), '', '&');
 
 					if (get_option(c_al2fb_option_debug))
-						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' request=' . print_r($query_array, true));
+						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' request=' . print_r($query, true));
 
 					// Execute request
 					$response = WPAL2Int::Request($url, $query, 'POST');
