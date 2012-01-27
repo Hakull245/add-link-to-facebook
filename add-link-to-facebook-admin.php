@@ -417,7 +417,7 @@ function al2fb_render_admin($al2fb)
 						echo '</table>';
 					}
 					else {
-						echo '<p><strong>' . __('Donate $20 or more to get this feature', c_al2fb_text_domain) . '</strong></p>';
+						echo '<p><strong>' . __('Donate $25 or more to get this feature', c_al2fb_text_domain) . '</strong></p>';
 ?>
 						<p>
 							<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
