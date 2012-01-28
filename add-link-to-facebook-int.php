@@ -331,6 +331,8 @@ if (!class_exists('WPAL2Int')) {
 				curl_setopt($c, CURLOPT_NOBODY, 1);
 				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
+				if (get_option(c_al2fb_option_noverifypeer))
+					curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
 				$headers = curl_exec($c);
 				curl_close ($c);
 				if (preg_match('/Location: (.*)/', $headers, $location)) {
