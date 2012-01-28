@@ -672,13 +672,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: update existing Facebook link
 * Workaround: *trailingslashit* for redirect URI
-* New feature: show link on WordPress to Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
+* New feature: show link on WordPress to added link on Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
 * New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
-* New feature: add to multiple walls
+* New feature: add to multiple walls, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ"), question U25, for details
+* New feature: filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
 * Improvement: further memory usage reduction by splitting source code in more files
 * Improvement: fixed notices when saving settings
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
-* Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
+* Improvement: *Do not verify the peer's certificate* for fetching Avatars too
 * Added new screenshot
 * Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
