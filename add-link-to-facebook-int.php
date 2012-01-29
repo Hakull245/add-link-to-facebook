@@ -707,13 +707,21 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_fb_script($user_ID) {
 			if (get_option(c_al2fb_option_noscript))
 				return '<!-- AL2FB no script -->';
+
 			$lang = WPAL2Int::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
+
+			$result = '<script>(function(d, s, id) {' . PHP_EOL;
+			$result .= '  var js, fjs = d.getElementsByTagName(s)[0];' . PHP_EOL;
+			$result .= '  if (d.getElementById(id)) return;' . PHP_EOL;
+			$result .= '  js = d.createElement(s); js.id = id;' . PHP_EOL;
 			if ($appid)
-				$url = 'http://connect.facebook.net/' . $lang . '/all.js#appId=' . $appid . '&amp;xfbml=1';
+				$result .= '  js.src = "//connect.facebook.net/' . $lang . '/all.js#xfbml=1&appId=' . $appid . '";' . PHP_EOL;
 			else
-				$url = 'http://connect.facebook.net/' . $lang . '/all.js#xfbml=1';
-			return '<script src="' . $url . '" type="text/javascript"></script>' . PHP_EOL;
+				$result .= '  js.src = "//connect.facebook.net/' . $lang . '/all.js#xfbml=1";' . PHP_EOL;
+			$result .= '  fjs.parentNode.insertBefore(js, fjs);' . PHP_EOL;
+			$result .= '}(document, \'script\', \'facebook-jssdk\'));</script>' . PHP_EOL;
+			return $result;
 		}
 
 		// Get HTML for like button
