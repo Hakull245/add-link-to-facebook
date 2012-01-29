@@ -295,10 +295,10 @@ All template tags:
 = U25 Can I add links to multiple walls? =
 
 You can add links to multiple page walls, including your personal wall, if you donate $25/€20 or more.
-It is entirely your responsibility to prevent violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
 
-Note that:
+Please note that:
 
+* It is entirely your responsibility to prevent violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies")
 * It is NOT possible to add links to multiple groups (or multiple pages AND groups)
 * Comment integration and social plugins that require an added link are ONLY available for the one page selected by the option *Add to page*
 

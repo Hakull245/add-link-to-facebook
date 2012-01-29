@@ -399,7 +399,7 @@ function al2fb_render_admin($al2fb)
 					// To get an idea, look here for how many versions have been released so far:
 					// http://wordpress.org/extend/plugins/add-link-to-facebook/download/
 					//
-					// Please do not hack this and make a donation to use this function
+					// So, please, please make a donation to use this function
 					//
 					if (get_option(c_al2fb_option_multiple)) {
 						echo '<table>';
