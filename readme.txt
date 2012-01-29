@@ -696,6 +696,8 @@ Follow these steps to install the development version:
 * Click *Upload* (a link at the top)
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
+* Please report any problem you encounter
+* Reports that everything works are also appreciated :-)
 
 = 1.132 =
 * New feature: support for multi site installs (settings per user/blog)
