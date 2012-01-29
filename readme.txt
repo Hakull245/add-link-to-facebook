@@ -680,6 +680,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: fixed notices when saving settings
 * Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
 * Improvement: *Do not verify the peer's certificate* for fetching Avatars too
+* Improvement: asynchronous loading of [Facebook SDK](https://developers.facebook.com/docs/reference/javascript/ "Facebook SDK")
 * Added new screenshot
 * Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
