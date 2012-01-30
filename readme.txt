@@ -311,6 +311,12 @@ The like button is connected to the *post* (page) on which it is displayed.
 Unfortunately there is no way to connect the likes of the *link* to the post and the likes of the *post*,
 since Facebook consider these as different objects.
 
+= U27 I want pink links! :-) =
+
+How, when and where links appear on your wall is entirely determined by Facebook.
+Only a few links properties can be set by the plugin.
+See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
+
 = U28 Can I display the widget on every page? =
 
 This is not directly possible. The plugin is a multi-user plugin.
