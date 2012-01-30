@@ -311,7 +311,7 @@ The like button is connected to the *post* (page) on which it is displayed.
 Unfortunately there is no way to connect the likes of the *link* to the post and the likes of the *post*,
 since Facebook consider these as different objects.
 
-= U27 I want pink links! :-) =
+= U27 I want pink links! ;-) =
 
 How, when and where links appear on your wall is entirely determined by Facebook.
 Only a few links properties can be set by the plugin.
@@ -671,7 +671,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Screenshots ==
 
 1. What is a caption, message, etc?
-2. Where is the Website URL?
+1. Where is Apps?
+1. Where is Create New App?
+1. Where is the Website URL?
 
 == Changelog ==
 
@@ -788,8 +790,10 @@ The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
+	* Or click [here](https://developers.facebook.com/) ;-)
 	* Navigate to *Apps* (top)
 	* Select *Create New App* (button at top)
+	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
 2. Create the Facebook application:
 	* Give it any display name you like (will appear as *via* below the added links)
 	* Fill in the red URL which the plugin indicates into the field *Website* (click the word) > *Site URL*
