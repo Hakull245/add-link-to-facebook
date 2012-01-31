@@ -36,8 +36,11 @@ function al2fb_render_admin($al2fb)
 		$config_url .= '&debug=1';
 	if (isset($_REQUEST['tabs']))
 		$config_url .= '&tabs=0';
-	if (isset($_REQUEST['multiple']))
+	if (isset($_REQUEST['multiple'])) {
 		update_option(c_al2fb_option_multiple, $_REQUEST['multiple']);
+		if ($_REQUEST['multiple'] == md5(WPAL2Int::Redirect_uri()))
+			echo '<div id="message" class="updated fade al2fb_notice"><p>Code accepted</p></div>';
+	}
 
 	// Decode picture type
 	$pic_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
@@ -392,7 +395,7 @@ function al2fb_render_admin($al2fb)
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<span class="al2fb_explanation"><strong><a href="https://developers.facebook.com/policy/" target="_blank"><?php _e('Be sure you to conform to the Facebook Platform Policies', c_al2fb_text_domain); ?></a></strong></span>
+					<p class="al2fb_explanation"><strong><a href="https://developers.facebook.com/policy/" target="_blank"><?php _e('Be sure you to conform to the Facebook Platform Policies', c_al2fb_text_domain); ?></a></strong></p>
 <?php
 					//
 					// I have spend many, many hours developing this plugin
@@ -401,7 +404,7 @@ function al2fb_render_admin($al2fb)
 					//
 					// So, please, please make a donation to use this function
 					//
-					if (get_option(c_al2fb_option_multiple)) {
+					if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
 						echo '<table>';
 						if ($me != null) {
 							echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
@@ -418,6 +421,7 @@ function al2fb_render_admin($al2fb)
 					}
 					else {
 						echo '<p><strong>' . __('Donate $25 or more to get this feature', c_al2fb_text_domain) . '</strong></p>';
+						echo '<p><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank">' . __('See the FAQ, question U25 for detailed information', c_al2fb_text_domain) . '</a></p>';
 ?>
 						<p>
 							<form action="https://www.paypal.com/cgi-bin/webscr" method="post">

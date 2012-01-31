@@ -431,7 +431,8 @@ if (!class_exists('WPAL2Int')) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
 			if (empty($page_ids)) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
-				if (!empty($page_ids)) {
+				if (!empty($page_ids) &&
+					get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
 					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
 					if (!empty($extra))
 						$page_ids = array_merge($page_ids, $extra);
