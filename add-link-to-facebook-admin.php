@@ -391,52 +391,33 @@ function al2fb_render_admin($al2fb)
 ?>
 					</select>
 				</td></tr>
-
-				<tr valign="top"><th scope="row">
-					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
-				</th><td>
+<?php
+				if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
+?>
+					<tr valign="top"><th scope="row">
+						<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
+					</th><td>
 					<p class="al2fb_explanation"><strong><a href="https://developers.facebook.com/policy/" target="_blank"><?php _e('Be sure you to conform to the Facebook Platform Policies', c_al2fb_text_domain); ?></a></strong></p>
 <?php
-					//
-					// I have spend many, many hours developing this plugin
-					// To get an idea, look here for how many versions have been released so far:
-					// http://wordpress.org/extend/plugins/add-link-to-facebook/download/
-					//
-					// So, please, please make a donation to use this function
-					//
-					if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
-						echo '<table>';
-						if ($me != null) {
-							echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
-							echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</td></tr>';
+					echo '<table>';
+					if ($me != null) {
+						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
+						echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</td></tr>';
+					}
+					if ($pages->data)
+						foreach ($pages->data as $page) {
+							if (empty($page->name))
+								$page->name = '?';
+							echo '<tr><td><input type="checkbox"' . (in_array($page->id, $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="' . $page->id . '"></td>';
+							echo '<td>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</td></tr>';
 						}
-						if ($pages->data)
-							foreach ($pages->data as $page) {
-								if (empty($page->name))
-									$page->name = '?';
-								echo '<tr><td><input type="checkbox"' . (in_array($page->id, $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="' . $page->id . '"></td>';
-								echo '<td>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</td></tr>';
-							}
-						echo '</table>';
-					}
-					else {
-						echo '<p><strong>' . __('Donate $25 or more to get this feature', c_al2fb_text_domain) . '</strong></p>';
-						echo '<p><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank">' . __('See the FAQ, question U25 for detailed information', c_al2fb_text_domain) . '</a></p>';
-?>
-						<p>
-							<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-							<input type="hidden" name="cmd" value="_s-xclick">
-							<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
-							<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-							</form>
-							<br>
-							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=marcel%40bokhorst%2ebiz&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20plugin&item_number=Marcel%20Bokhorst&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><?php _e('Donate in EUR', c_al2fb_text_domain) ?></a>
-						</p>
-<?php
-					}
+					echo '</table>';
 ?>
 					<span class="al2fb_explanation"><?php _e('Comment integration, etc. for extra pages is not supported', c_al2fb_text_domain); ?></span>
-				</td></tr>
+					</td></tr>
+<?php
+				}
+?>
 				</table>
 				<p class="submit">
 				<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
