@@ -301,6 +301,8 @@ Please note that:
 * It is entirely your responsibility to prevent violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies")
 * It is NOT possible to add links to multiple groups (or multiple pages AND groups)
 * Comment integration and social plugins that require an added link are ONLY available for the one page selected by the option *Add to page*
+* If you have more than one website: a donation for each website is required
+* Contact me using [this contact form](http://blog.bokhorst.biz/contact/) if you have a good reason not to donate for this option (for example if want to use this funtion for a charity website)
 
 = U26 Why doesn't the like button show all likes? Why are liker names not displayed? =
 
