@@ -143,6 +143,17 @@ if (!class_exists('WPAL2Int')) {
 			return $access_token;
 		}
 
+		static function Get_fb_application_cached($user_ID) {
+			$app_key = c_al2fb_transient_cache . md5('app' . $user_ID);
+			$app = get_transient($app_key);
+			if ($app === false) {
+				$app = WPAL2Int::Get_fb_application($user_ID);
+				$duration = WPAL2Int::Get_duration(false);
+				set_transient($app_key, $app, $duration);
+			}
+			return $app;
+		}
+
 		// Get application properties
 		static function Get_fb_application($user_ID) {
 			$app_id = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
@@ -191,6 +202,17 @@ if (!class_exists('WPAL2Int')) {
 				throw new Exception('Page "' . $page_id . '" not found');
 		}
 
+		static function Get_fb_pages_cached($user_ID) {
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			$pages = get_transient($pages_key);
+			if ($pages === false) {
+				$pages = WPAL2Int::Get_fb_pages($user_ID);
+				$duration = WPAL2Int::Get_duration(false);
+				set_transient($pages_key, $pages, $duration);
+			}
+			return $pages;
+		}
+
 		// Get page list
 		static function Get_fb_pages($user_ID) {
 			$url = 'https://graph.facebook.com/me/accounts';
@@ -201,6 +223,17 @@ if (!class_exists('WPAL2Int')) {
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$accounts = json_decode($response);
 			return $accounts;
+		}
+
+		static function Get_fb_groups_cached($user_ID) {
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			$groups = get_transient($groups_key);
+			if ($groups === false) {
+				$groups = WPAL2Int::Get_fb_groups($user_ID);
+				$duration = WPAL2Int::Get_duration(false);
+				set_transient($groups_key, $groups, $duration);
+			}
+			return $groups;
 		}
 
 		// Get group list
@@ -712,7 +745,7 @@ if (!class_exists('WPAL2Int')) {
 			$lang = WPAL2Int::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 
-			$result = '<script>(function(d, s, id) {' . PHP_EOL;
+			$result = '<script type="text/javascript">(function(d, s, id) {' . PHP_EOL;
 			$result .= '  var js, fjs = d.getElementsByTagName(s)[0];' . PHP_EOL;
 			$result .= '  if (d.getElementById(id)) return;' . PHP_EOL;
 			$result .= '  js = d.createElement(s); js.id = id;' . PHP_EOL;

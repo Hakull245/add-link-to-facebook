@@ -114,7 +114,7 @@ function al2fb_render_admin($al2fb)
 			echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
 			// Get page name
 			try {
-				$me = WPAL2Int::Get_fb_me($user_ID, false);
+				$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
 				if ($me != null) {
 					_e('Links will be added to', c_al2fb_text_domain);
 					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
@@ -236,7 +236,7 @@ function al2fb_render_admin($al2fb)
 
 	if ($al2fb->Is_authorized($user_ID))
 		try {
-			$app = WPAL2Int::Get_fb_application($user_ID);
+			$app = WPAL2Int::Get_fb_application_cached($user_ID);
 ?>
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_app_name"><?php _e('App Name:', c_al2fb_text_domain); ?></label>
@@ -350,12 +350,12 @@ function al2fb_render_admin($al2fb)
 			if (!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ||
 				!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
 				try {
-					$me = WPAL2Int::Get_fb_me($user_ID, true);
+					$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
 				}
 				catch (Exception $e) {
 					$me = null;
 				}
-				$pages = WPAL2Int::Get_fb_pages($user_ID);
+				$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 				$extra_page = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
 				if (empty($extra_page))
@@ -447,7 +447,7 @@ function al2fb_render_admin($al2fb)
 
 <?php
 			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
-				$groups = WPAL2Int::Get_fb_groups($user_ID);
+				$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
 ?>
 				<tr valign="top"><th scope="row">
