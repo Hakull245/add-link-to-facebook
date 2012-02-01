@@ -674,7 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Planned: data URI support
+* New feature: support for data URI images
 
 Follow these steps to install the development version:
 
