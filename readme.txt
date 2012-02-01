@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.133
+Stable tag: 1.134
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -294,9 +294,8 @@ All template tags:
 
 = U25 Can I add links to multiple walls? =
 
-One WordPress user can only add links to one wall OR one page OR one group, even if that user happens to have multiple sites (which is possible within a network site).
-Adding the same link to more than one wall may lead to difficulties with Facebook as this can be seen as spam.
-It may also be a violation of the [Facebook Platform Policies](http://developers.facebook.com/policy/ "Facebook Platform Policies").
+This feature is available in the 'Pro' version of the plugin.
+Visit the plugin settings tab 'Page/group' for more details.
 
 = U26 Why doesn't the like button show all likes? Why are liker names not displayed? =
 
@@ -674,9 +673,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: support for data URI images
-* Improvement: fixed Facebook/WordPress login (protocol changed)
-* Reference to the 'pro' version (add links to multiple page walls)
+* ...
 
 Follow these steps to install the development version:
 
@@ -690,6 +687,11 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.134 =
+* New feature: support for data URI images
+* Improvement: fixed Facebook/WordPress login (protocol has been changed)
+* 'Pro' version to add links to multiple page walls. Visit the plugin settings tab 'Page/group' for more details.
 
 = 1.133 =
 * Bugfix: update existing Facebook link
@@ -734,30 +736,14 @@ Follow these steps to install the development version:
 * New feature: delete added link when move to trash
 * Improvement: no Facebook comment import when comments closed.
 
-= 1.128 =
-* Bugfix: __autoload clash other plugin(s)
-* Improvement: extra check to prevent comment integration loop
-* Improvement: added comments to debug info
-* Improvement: checking for empty Facebook comment ID's
-* Improvement: no authorization pre-check when in debug mode
-
-= 1.127 =
-* Happy New Year!
-* Bugfix: e-mail headers debug info
-* Bugfix: html entity decode OGP post title
-* Bugfix: html entity decode OGP blog description
-* Improvement: allow ' in OGP meta tags (workaround Facebook bug)
-* Improvement: allow -_.~ in share links (workaround Facebook bug)
-* Improvement: generalized option checking
-* Improvement: splitted main file to reduce memory usage
-* Improvement: auto load widget class to reduce memory usage
-* Improvement: post status transition debug info
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.134 =
+One new feature, one improvement, 'Pro' version: add to multiple page walls
 
 = 1.133 =
 One bugfix, one workaround, three new features, five improvements, updated FAQ & setup guide, translation updates
@@ -770,18 +756,6 @@ Eight improvements, translation updates
 
 = 1.129 =
 One new feature, one improvement
-
-= 1.128 =
-One bugfix, four improvements
-
-= 1.127 =
-Three bugfixes, six improvements
-
-= 1.126 =
-One bugfix, three improvements
-
-= 1.125 =
-One bugfix
 
 == Setup guide ==
 
