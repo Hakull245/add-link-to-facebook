@@ -675,6 +675,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: support for data URI images
+* Improvement: fixed Facebook/WordPress login (protocol changed)
 
 Follow these steps to install the development version:
 
