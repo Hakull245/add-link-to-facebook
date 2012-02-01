@@ -34,6 +34,7 @@ define('c_al2fb_option_siteurl', 'al2fb_siteurl');
 define('c_al2fb_option_nocurl', 'al2fb_nocurl');
 define('c_al2fb_option_use_pp', 'al2fb_use_pp');
 define('c_al2fb_option_debug', 'al2fb_debug');
+define('c_al2fb_option_multiple', 'al2fb_multiple');
 
 define('c_al2fb_option_cron_enabled', 'al2fb_cron_enabled');
 define('c_al2fb_option_cron_time', 'al2fb_cron_time');
@@ -57,6 +58,7 @@ define('c_al2fb_meta_picture', 'al2fb_picture');
 define('c_al2fb_meta_picture_default', 'al2fb_picture_default');
 define('c_al2fb_meta_page', 'al2fb_page');
 define('c_al2fb_meta_page_owner', 'al2fb_page_owner');
+define('c_al2fb_meta_page_extra', 'al2fb_page_extra');
 define('c_al2fb_meta_use_groups', 'al2fb_use_groups');
 define('c_al2fb_meta_group', 'al2fb_group');
 define('c_al2fb_meta_caption', 'al2fb_caption');

@@ -36,6 +36,11 @@ function al2fb_render_admin($al2fb)
 		$config_url .= '&debug=1';
 	if (isset($_REQUEST['tabs']))
 		$config_url .= '&tabs=0';
+	if (isset($_REQUEST['multiple'])) {
+		update_option(c_al2fb_option_multiple, $_REQUEST['multiple']);
+		if ($_REQUEST['multiple'] == md5(WPAL2Int::Redirect_uri()))
+			echo '<div id="message" class="updated fade al2fb_notice"><p>Code accepted</p></div>';
+	}
 
 	// Decode picture type
 	$pic_type = get_user_meta($user_ID, c_al2fb_meta_picture_type, true);
@@ -352,6 +357,9 @@ function al2fb_render_admin($al2fb)
 				}
 				$pages = WPAL2Int::Get_fb_pages($user_ID);
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				$extra_page = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
+				if (empty($extra_page))
+					$extra_page = array();
 ?>
 				<div id="al2fb_pages">
 				<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
@@ -378,10 +386,37 @@ function al2fb_render_admin($al2fb)
 								echo ' selected';
 							if (empty($page->name))
 								$page->name = '?';
-							echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' - ' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . '</option>';
+							echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</option>';
 						}
 ?>
 					</select>
+				</td></tr>
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
+				</th><td>
+<?php
+				if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
+					echo '<table>';
+					if ($me != null) {
+						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
+						echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</td></tr>';
+					}
+					if ($pages->data)
+						foreach ($pages->data as $page) {
+							if (empty($page->name))
+								$page->name = '?';
+							echo '<tr><td><input type="checkbox"' . (in_array($page->id, $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="' . $page->id . '"></td>';
+							echo '<td>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</td></tr>';
+						}
+					echo '</table>';
+				}
+				else {
+					echo '<strong>';
+					_e('This option is only available in', c_al2fb_text_domain);
+					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo '</strong>';
+				}
+?>
 				</td></tr>
 				</table>
 				<p class="submit">
