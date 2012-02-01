@@ -760,7 +760,7 @@ Follow these steps to install the development version:
 == Upgrade Notice ==
 
 = 1.133 =
-One bugfix, one workaround, four new features, five improvements, updated FAQ & setup guide, translation updates
+One bugfix, one workaround, three new features, five improvements, updated FAQ & setup guide, translation updates
 
 = 1.132 =
 One new feature, four improvements, translation update
