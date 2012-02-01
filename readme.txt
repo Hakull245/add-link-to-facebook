@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.132
+Stable tag: 1.133
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -256,6 +256,7 @@ Example to show liker names:
 All shortcodes:
 
 * [al2fb_likers]
+* [al2fb_anchor]
 * [al2fb_like_count]
 * [al2fb_like_button]
 * [al2fb_like_box]
@@ -279,6 +280,8 @@ Example:
 All template tags:
 
 * al2fb_likers
+* al2fb_anchor
+* al2fb_like_count
 * al2fb_like_button
 * al2fb_like_box
 * al2fb_send_button
@@ -303,6 +306,12 @@ The like button on your website is a standard Facebook like button which is not 
 The like button is connected to the *post* (page) on which it is displayed.
 Unfortunately there is no way to connect the likes of the *link* to the post and the likes of the *post*,
 since Facebook consider these as different objects.
+
+= U27 I want pink links! ;-) =
+
+How, when and where links appear on your wall is entirely determined by Facebook.
+Only a few links properties can be set by the plugin.
+See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
 = U28 Can I display the widget on every page? =
 
@@ -420,7 +429,6 @@ This is an option, when enabled shortcodes will be processed.
 
 Yes, each user can configure his/her own wall or page or group.
 You should enable the plugin from the network admin panel thru "Plugins".
-See also question U25.
 
 = C05 Is remote publishing supported? =
 
@@ -659,23 +667,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Screenshots ==
 
 1. What is a caption, message, etc?
-2. Where is the Website URL?
+1. Where is Apps?
+1. Where is Create New App?
+1. Where is the Website URL?
 
 == Changelog ==
 
 = Development version =
-* Bugfix: update existing Facebook link
-* Workaround: *trailingslashit* for redirect URI
-* New feature: show link on WordPress to Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
-* New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
-* Improvement: further memory usage reduction by splitting source code in more files
-* Improvement: fixed notices when saving settings
-* Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
-* Improvement: new filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
-* Added new screenshot
-* Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Planned: data URI support
 
 Follow these steps to install the development version:
 
@@ -687,6 +686,26 @@ Follow these steps to install the development version:
 * Click *Upload* (a link at the top)
 * Click *Choose file* and select the file you downloaded before
 * Click *Install*, then *Activate Plugin*
+* Please report any problem you encounter
+* Reports that everything works are also appreciated :-)
+
+= 1.133 =
+* Bugfix: update existing Facebook link
+* Workaround: *trailingslashit* for redirect URI
+* New feature: show link on WordPress to added link on Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
+* New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
+* New feature: add to multiple walls, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ"), question U25, for details
+* New feature: filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
+* Improvement: further memory usage reduction by splitting source code in more files
+* Improvement: fixed notices when saving settings
+* Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
+* Improvement: *Do not verify the peer's certificate* for fetching Avatars too
+* Improvement: asynchronous loading of [Facebook SDK](https://developers.facebook.com/docs/reference/javascript/ "Facebook SDK")
+* Added new screenshots
+* Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.132 =
 * New feature: support for multi site installs (settings per user/blog)
@@ -739,8 +758,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.133
-One bugfix, one new feature, four improvements, translation update
+= 1.133 =
+One bugfix, one workaround, four new features, five improvements, updated FAQ & setup guide, translation updates
 
 = 1.132 =
 One new feature, four improvements, translation update
@@ -771,8 +790,10 @@ The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
+	* Or click [here](https://developers.facebook.com/) ;-)
 	* Navigate to *Apps* (top)
 	* Select *Create New App* (button at top)
+	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
 2. Create the Facebook application:
 	* Give it any display name you like (will appear as *via* below the added links)
 	* Fill in the red URL which the plugin indicates into the field *Website* (click the word) > *Site URL*
@@ -850,7 +871,6 @@ No picture at all is not officially supported by Facebook, but you can try to us
 *Pages and groups*
 
 The plugin can add a link to a page or group wall of your choice.
-The plugin will always add only one link, see question U25 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 Just check what you want, page or group, press *Save* and select the page or group you want to add links to.
 For pages it is possible to add links as page owner, instead of with your personal account.
 For groups this is not possible, since Facebook doesn't support it.
@@ -1005,19 +1025,17 @@ In no particular order:
 Feature which will not be realized, sorry:
 
 * Add link as group owner: not possible unfortunately
-* Adding links to multiple walls: see FAQ, question U25
-* Common wall per site/blog: see FAQ, question U25
 * Link audio: too far from the core function of the plugin
 * Link videos, posted via JW Player plugin: too far from the core function of the plugin
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
 * Other social buttons: too far from the core function of the plugin
-* Like button at the bottom and top: there are already enough like buttons in the world
+* Like button at the bottom and top: use a template tag
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
 * Comment with Facebook login: requires permissions
 * Integrate posts from Facebook: WordPress centric plugin
-* <Title> by <Author>: each author should authorize
+* <Title> by <Author>: each author should authorize, but you can use avatars
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
 
