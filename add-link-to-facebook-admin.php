@@ -391,14 +391,11 @@ function al2fb_render_admin($al2fb)
 ?>
 					</select>
 				</td></tr>
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
+				</th><td>
 <?php
 				if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
-?>
-					<tr valign="top"><th scope="row">
-						<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
-					</th><td>
-					<p class="al2fb_explanation"><strong><a href="https://developers.facebook.com/policy/" target="_blank"><?php _e('Be sure you to conform to the Facebook Platform Policies', c_al2fb_text_domain); ?></a></strong></p>
-<?php
 					echo '<table>';
 					if ($me != null) {
 						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
@@ -412,12 +409,15 @@ function al2fb_render_admin($al2fb)
 							echo '<td>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</td></tr>';
 						}
 					echo '</table>';
-?>
-					<span class="al2fb_explanation"><?php _e('Comment integration, etc. for extra pages is not supported', c_al2fb_text_domain); ?></span>
-					</td></tr>
-<?php
+				}
+				else {
+					echo '<strong>';
+					_e('This option is only available in', c_al2fb_text_domain);
+					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo '</strong>';
 				}
 ?>
+				</td></tr>
 				</table>
 				<p class="submit">
 				<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />

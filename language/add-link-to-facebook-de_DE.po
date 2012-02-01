@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-31 18:22+0100\n"
-"PO-Revision-Date: 2012-02-01 07:35+0100\n"
+"PO-Revision-Date: 2012-02-01 13:25+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Wolfgang Tischer <literaturcafe.de>\n"
 "MIME-Version: 1.0\n"
@@ -327,16 +327,6 @@ msgstr "Zur Seite hinzufügen:"
 #: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:396
 msgid "Add also to pages:"
 msgstr "Ebenso hinzufügen zu:"
-
-#: /Users/wolfgang/Documents/poedit
-#: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:398
-msgid "Be sure you to conform to the Facebook Platform Policies"
-msgstr "Stellen Sie sicher, dass Sie die Facebook-Richtlinien einhalten"
-
-#: /Users/wolfgang/Documents/poedit
-#: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:438
-msgid "Comment integration, etc. for extra pages is not supported"
-msgstr "Kommentarintegration etc. für zusätzliche Seiten wird nicht unterstützt"
 
 #: /Users/wolfgang/Documents/poedit
 #: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:458

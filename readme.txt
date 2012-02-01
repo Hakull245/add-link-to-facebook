@@ -676,7 +676,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: support for data URI images
 * Improvement: fixed Facebook/WordPress login (protocol changed)
-* Planned: add to multiple walls
+* Reference to the 'pro' version (add links to multiple page walls)
 
 Follow these steps to install the development version:
 
