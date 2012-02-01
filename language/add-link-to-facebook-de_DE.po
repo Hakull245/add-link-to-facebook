@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-31 18:22+0100\n"
-"PO-Revision-Date: 2012-01-31 18:31+0100\n"
+"PO-Revision-Date: 2012-02-01 07:35+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Wolfgang Tischer <literaturcafe.de>\n"
 "MIME-Version: 1.0\n"
@@ -332,16 +332,6 @@ msgstr "Ebenso hinzufügen zu:"
 #: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:398
 msgid "Be sure you to conform to the Facebook Platform Policies"
 msgstr "Stellen Sie sicher, dass Sie die Facebook-Richtlinien einhalten"
-
-#: /Users/wolfgang/Documents/poedit
-#: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:423
-msgid "Donate $25 or more to get this feature"
-msgstr "Spenden Sie 25 Dollar oder mehr, um diese Funktion zu erhalten"
-
-#: /Users/wolfgang/Documents/poedit
-#: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:424
-msgid "See the FAQ, question U25 for detailed information"
-msgstr "Siehe FAQ Frage U25 für weitere Infos"
 
 #: /Users/wolfgang/Documents/poedit
 #: UÌbersetzungen/AL2FB/add-link-to-facebook/add-link-to-facebook-admin.php:438

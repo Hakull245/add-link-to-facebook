@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.132
+Stable tag: 1.133
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -674,22 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: update existing Facebook link
-* Workaround: *trailingslashit* for redirect URI
-* New feature: show link on WordPress to added link on Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
-* New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
-* New feature: add to multiple walls, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ"), question U25, for details
-* New feature: filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
-* Improvement: further memory usage reduction by splitting source code in more files
-* Improvement: fixed notices when saving settings
-* Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
-* Improvement: *Do not verify the peer's certificate* for fetching Avatars too
-* Improvement: asynchronous loading of [Facebook SDK](https://developers.facebook.com/docs/reference/javascript/ "Facebook SDK")
-* Added new screenshot
-* Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Planned: data URI support
 
 Follow these steps to install the development version:
 
@@ -703,6 +688,24 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.133 =
+* Bugfix: update existing Facebook link
+* Workaround: *trailingslashit* for redirect URI
+* New feature: show link on WordPress to added link on Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
+* New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
+* New feature: add to multiple walls, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ"), question U25, for details
+* New feature: filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
+* Improvement: further memory usage reduction by splitting source code in more files
+* Improvement: fixed notices when saving settings
+* Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
+* Improvement: *Do not verify the peer's certificate* for fetching Avatars too
+* Improvement: asynchronous loading of [Facebook SDK](https://developers.facebook.com/docs/reference/javascript/ "Facebook SDK")
+* Added new screenshots
+* Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.132 =
 * New feature: support for multi site installs (settings per user/blog)
@@ -755,8 +758,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.133
-One bugfix, one new feature, four improvements, translation update
+= 1.133 =
+One bugfix, one workaround, four new features, five improvements, updated FAQ & setup guide, translation updates
 
 = 1.132 =
 One new feature, four improvements, translation update
