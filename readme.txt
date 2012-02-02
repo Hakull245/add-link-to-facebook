@@ -674,6 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Improvement: caching for settings page
+* Improvement: added type to Facebook JavaScript
 
 Follow these steps to install the development version:
 
