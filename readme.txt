@@ -675,6 +675,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Improvement: caching for settings page
 * Improvement: added type to Facebook JavaScript
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
