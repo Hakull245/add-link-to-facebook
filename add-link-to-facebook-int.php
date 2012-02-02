@@ -745,7 +745,8 @@ if (!class_exists('WPAL2Int')) {
 			$lang = WPAL2Int::Get_locale($user_ID);
 			$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
 
-			$result = '<script type="text/javascript">(function(d, s, id) {' . PHP_EOL;
+			$result = '<script type="text/javascript">' . PHP_EOL;
+			$result .= '(function(d, s, id) {' . PHP_EOL;
 			$result .= '  var js, fjs = d.getElementsByTagName(s)[0];' . PHP_EOL;
 			$result .= '  if (d.getElementById(id)) return;' . PHP_EOL;
 			$result .= '  js = d.createElement(s); js.id = id;' . PHP_EOL;
@@ -754,7 +755,8 @@ if (!class_exists('WPAL2Int')) {
 			else
 				$result .= '  js.src = "//connect.facebook.net/' . $lang . '/all.js#xfbml=1";' . PHP_EOL;
 			$result .= '  fjs.parentNode.insertBefore(js, fjs);' . PHP_EOL;
-			$result .= '}(document, \'script\', \'facebook-jssdk\'));</script>' . PHP_EOL;
+			$result .= '}(document, "script", "facebook-jssdk"));' . PHP_EOL;
+			$result .= '</script>' . PHP_EOL;
 			return $result;
 		}
 
