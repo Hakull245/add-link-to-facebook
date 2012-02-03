@@ -476,6 +476,8 @@ if (!class_exists('WPAL2Int')) {
 
 			// Add links to walls
 			foreach ($page_ids as $page_id) {
+				// https://developers.facebook.com/docs/reference/api/user/#posts
+				// https://developers.facebook.com/docs/reference/api/post/
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 				$url = apply_filters('al2fb_url', $url);
 
