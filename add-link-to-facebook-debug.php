@@ -28,7 +28,7 @@ function al2fb_debug_info($al2fb) {
 	// Get application
 	try {
 		if ($al2fb->Is_authorized($user_ID)) {
-			$a = WPAL2Int::Get_fb_application($user_ID);
+			$a = WPAL2Int::Get_fb_application_cached($user_ID);
 			$app = '<a href="' . $a->link . '" target="_blank">' . $a->name . '</a>';
 		}
 		else
@@ -47,7 +47,7 @@ function al2fb_debug_info($al2fb) {
 	// Get page
 	try {
 		if ($al2fb->Is_authorized($user_ID)) {
-			$me = WPAL2Int::Get_fb_me($user_ID, false);
+			$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
 			if ($me == null)
 				$page = 'n/a';
 			else {

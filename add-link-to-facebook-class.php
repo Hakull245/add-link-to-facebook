@@ -229,6 +229,21 @@ if (!class_exists('WPAL2Facebook')) {
   				exit();
 			}
 
+			// Data URI request
+			if (isset($_GET['al2fb_data_uri'])) {
+				$post = get_post($_GET['al2fb_data_uri']);
+				$data_uri = self::Get_first_image($post);
+				// data:image/png;base64,
+				// data:[<MIME-type>][;charset=<encoding>][;base64],<data>
+				$semi = strpos($data_uri, ';');
+				$comma = strpos($data_uri, ',');
+				$content_type = substr($data_uri, 5, $semi - 5);
+				$data = substr($data_uri, $comma + 1);
+				header('Content-type: ' . $content_type);
+				echo base64_decode($data);
+  				exit();
+			}
+
 			// Facebook registration
 			if (isset($_REQUEST['al2fb_reg'])) {
 				WPAL2Int::Facebook_registration();
@@ -410,6 +425,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_picture_default, $_POST[c_al2fb_meta_picture_default]);
 			update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
 			update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
+			update_user_meta($user_ID, c_al2fb_meta_page_extra, $_POST[c_al2fb_meta_page_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_use_groups, $_POST[c_al2fb_meta_use_groups]);
 			update_user_meta($user_ID, c_al2fb_meta_group, $_POST[c_al2fb_meta_group]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
@@ -514,6 +530,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_use_ssp, $_POST[c_al2fb_option_use_ssp]);
 				update_option(c_al2fb_option_ssp_info, $_POST[c_al2fb_option_ssp_info]);
 				update_option(c_al2fb_option_filter_prio, $_POST[c_al2fb_option_filter_prio]);
+				update_option(c_al2fb_option_noasync, $_POST[c_al2fb_option_noasync]);
 				update_option(c_al2fb_option_noscript, $_POST[c_al2fb_option_noscript]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
@@ -759,12 +776,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check if errors
 			$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
-
-			global $wp_version;
-			if (version_compare($wp_version, '3.2') < 0) {
 ?>
-				<div class="misc-pub-section"></div>
-<?php		} ?>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
 <?php
@@ -779,7 +791,9 @@ if (!class_exists('WPAL2Facebook')) {
 			<input id="al2fb_nointegrate" type="checkbox" name="<?php echo c_al2fb_meta_nointegrate; ?>"<?php echo $chk_nointegrate; ?> />
 			<label for="al2fb_nointegrate"><?php _e('Do not integrate comments', c_al2fb_text_domain); ?></label>
 
-<?php		if (!empty($link_id)) { ?>
+<?php
+			if (!empty($link_id)) {
+?>
 				<br />
 				<input id="al2fb_update" type="checkbox" name="<?php echo c_al2fb_action_update; ?>"/>
 				<label for="al2fb_update"><?php _e('Update existing Facebook link', c_al2fb_text_domain); ?></label>
@@ -790,12 +804,17 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
 				<br />
 				<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
-<?php		} ?>
-<?php		if (!empty($error)) { ?>
+<?php
+			}
+
+			if (!empty($error)) {
+?>
 				<br />
 				<input id="al2fb_clear" type="checkbox" name="<?php echo c_al2fb_action_clear; ?>"/>
 				<label for="al2fb_clear"><?php _e('Clear error messages', c_al2fb_text_domain); ?></label>
-<?php		} ?>
+<?php
+			}
+?>
 			</div>
 			</div>
 <?php
@@ -1298,11 +1317,9 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($picture_type == 'facebook')
 					$picture = '';
 				else if ($picture_type == 'post' || empty($picture_type)) {
-					$content = $post->post_content;
-					if (!get_option(c_al2fb_option_nofilter))
-						$content = apply_filters('the_content', $content);
-					if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
-						$picture = $matches[1];
+					$picture = self::Get_first_image($post);
+					if (strpos($picture, 'data:') === 0 && strpos($picture, 'base64') > 0)
+						$picture = WPAL2Int::Redirect_uri() . '?al2fb_data_uri=' . $post->ID;
 				}
 				else if ($picture_type == 'avatar') {
 					$userdata = get_userdata($post->post_author);
@@ -1332,6 +1349,15 @@ if (!class_exists('WPAL2Facebook')) {
 				'picture' => $picture,
 				'picture_type' => $picture_type
 			);
+		}
+
+		function Get_first_image($post) {
+			$content = $post->post_content;
+			if (!get_option(c_al2fb_option_nofilter))
+				$content = apply_filters('the_content', $content);
+			if (preg_match('/< *img[^>]*src *= *["\']([^"\']*)["\']/i', $content, $matches))
+				return $matches[1];
+			return false;
 		}
 
 		function Filter_excerpt($excerpt, $post) {
