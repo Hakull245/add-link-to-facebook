@@ -751,7 +751,7 @@ Follow these steps to install the development version:
 == Upgrade Notice ==
 
 = 1.135 =
-One new feature, two improvements, translation updates
+One new feature, three improvements, translation updates
 
 = 1.134 =
 One new feature, one improvement, 'Pro' version: add to multiple page walls
