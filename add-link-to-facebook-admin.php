@@ -1168,6 +1168,12 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_noasync"><?php _e('No asynchronous Facebook script:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_noasync" name="<?php echo c_al2fb_option_noasync; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noasync)) echo ' checked="checked"'; ?> />
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_noscript"><?php _e('Do not include Facebook script:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<input id="al2fb_noscript" name="<?php echo c_al2fb_option_noscript; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noscript)) echo ' checked="checked"'; ?> />

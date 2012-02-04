@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-02-01 13:25+0100\n"
+"PO-Revision-Date: 2012-02-04 10:17+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -886,4 +886,7 @@ msgstr "Deze optie is alleen beschikbaar in"
 
 msgid "Code accepted"
 msgstr "Code geaccepteerd"
+
+msgid "No asynchronous Facebook script:"
+msgstr "Geen asynchroon Facebook script:"
 

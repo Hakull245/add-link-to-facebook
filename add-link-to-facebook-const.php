@@ -27,6 +27,7 @@ define('c_al2fb_option_nofilter_comments', 'al2fb_nofilter_comments');
 define('c_al2fb_option_use_ssp', 'al2fb_use_ssp');
 define('c_al2fb_option_ssp_info', 'al2fb_ssp_info');
 define('c_al2fb_option_filter_prio', 'al2fb_filter_prio');
+define('c_al2fb_option_noasync', 'al2fb_noasync');
 define('c_al2fb_option_noscript', 'al2fb_noscript');
 define('c_al2fb_option_clean', 'al2fb_clean');
 define('c_al2fb_option_css', 'al2fb_css');
