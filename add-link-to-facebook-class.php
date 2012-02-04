@@ -1596,6 +1596,10 @@ if (!class_exists('WPAL2Facebook')) {
 		function The_content($content = '') {
 			global $post;
 
+			// Do not process excerpt
+			if (in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
+				return $content;
+
 			$user_ID = self::Get_user_ID($post);
 			if (!self::Is_excluded($post) &&
 				!(get_user_meta($user_ID, c_al2fb_meta_like_nohome, true) && is_home()) &&

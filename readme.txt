@@ -692,6 +692,7 @@ Follow these steps to install the development version:
 * New feature: option to disable asynchronous Facebook script
 * Improvement: caching for settings page
 * Improvement: added script type to Facebook JavaScript
+* Improvement: no likers, like button and comments plugin in excerpts
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
