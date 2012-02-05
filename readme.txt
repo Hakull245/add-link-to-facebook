@@ -68,7 +68,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive") and [Yossi Jana](http://www.webist.co.il "Yossi Jana"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 * Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
-* Slovak (sk\_SK) by *Viliam Brozman*, thanks!
+* Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -674,7 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Added Slovak (sk\_SK) translation by *Viliam Brozman*
+* Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
 
 Follow these steps to install the development version:
 
