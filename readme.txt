@@ -674,6 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* Bugfix: default picture URL
 * Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
 
 Follow these steps to install the development version:
