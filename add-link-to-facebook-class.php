@@ -1317,9 +1317,11 @@ if (!class_exists('WPAL2Facebook')) {
 				else if ($picture_type == 'facebook')
 					$picture = '';
 				else if ($picture_type == 'post' || empty($picture_type)) {
-					$picture = self::Get_first_image($post);
-					if (strpos($picture, 'data:') === 0 && strpos($picture, 'base64') > 0)
+					$picture_post = self::Get_first_image($post);
+					if (strpos($picture_post, 'data:') === 0 && strpos($picture_post, 'base64') > 0)
 						$picture = WPAL2Int::Redirect_uri() . '?al2fb_data_uri=' . $post->ID;
+					else if ($picture_post)
+						$picture = $picture_post;
 				}
 				else if ($picture_type == 'avatar') {
 					$userdata = get_userdata($post->post_author);
