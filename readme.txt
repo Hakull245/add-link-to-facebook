@@ -1004,11 +1004,16 @@ The link to the author follow the comment integration settings (*None*, *Profile
 The styling (layout, colors, etc) of the widget depends on the styling of your theme.
 You can add additional styling rules using a plugin option.
 
+== Known bugs ==
+
+* Profile link to Facebook page redirects to website now
+
 == Requested features ==
 
 In no particular order:
 
-* ...
+* Truncate imported Facebook comments
+* Set link privacy settings
 
 Feature which will not be realized, sorry:
 
