@@ -1007,6 +1007,7 @@ You can add additional styling rules using a plugin option.
 == Known bugs ==
 
 * Profile link to Facebook page redirects to website now
+* Likes as pings are counted, even when not displayed
 
 == Requested features ==
 
