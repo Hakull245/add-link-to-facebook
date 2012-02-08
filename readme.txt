@@ -546,7 +546,7 @@ cURL errors are almost always caused by internet connection problems.
 For most cURL errors you need support from your hosting provider.
 
 Recent versions of the plugin report cURL errors encountered while importing Facebook comments and likes too:
-*Import comment: cURL error ...*
+*Import comment: cURL error ...* and *Add comment: cURL error ...*
 These error messages will be removed automatically after a next successful import for the same post/page.
 If these errors appear now and then, don't worry about them.
 This just means the internet connection from your hosting server isn't perfect.
@@ -674,7 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Improvement: remove add comment errors after successful adding comment for same post
 
 Follow these steps to install the development version:
 

@@ -679,6 +679,13 @@ if (!class_exists('WPAL2Int')) {
 				// Process response
 				$fb_comment = json_decode($response);
 				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+
+				// Remove previous errors
+				$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
+				if (strpos($error, 'Add comment: ') !== false) {
+					delete_post_meta($post->ID, c_al2fb_meta_error, $error);
+					delete_post_meta($post->ID, c_al2fb_meta_error_time);
+				}
 			}
 			catch (Exception $e) {
 				update_post_meta($post->ID, c_al2fb_meta_error, 'Add comment: ' . $e->getMessage());
