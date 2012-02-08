@@ -694,6 +694,7 @@ Follow these steps to install the development version:
 * Bugfix: link Facebook comments to added links disabled for groups (doesn't work)
 * Bugfix: take into account the post ping status for likes (import/count)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
 
 = 1.135 =
@@ -734,24 +735,6 @@ Follow these steps to install the development version:
 * Improvement: enable all error reporting when in debug mode
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.131 =
-* Improvement: clarified option *See all pages*
-* Improvement: hiding page selection when groups enabled
-* Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
-* Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
-* Improvement: new filter: *al2fb_excluded_post_types*
-* Improvement: new filter: *al2fb_url*
-* Improvement: NextGEN featured image compatibility
-* Improvement: forum topic link debug info
-* Updated required WordPress version to version 3.2
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.129 =
-* Updated FAQ
-* New feature: delete added link when move to trash
-* Improvement: no Facebook comment import when comments closed.
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -772,12 +755,6 @@ One bugfix, one workaround, three new features, five improvements, updated FAQ &
 
 = 1.132 =
 One new feature, four improvements, translation update
-
-= 1.131 =
-Eight improvements, translation updates
-
-= 1.129 =
-One new feature, one improvement
 
 == Setup guide ==
 
@@ -1021,8 +998,8 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Truncate imported Facebook comments
 * Set link privacy settings
+* Truncate imported Facebook comments
 
 Feature which will not be realized, sorry:
 
