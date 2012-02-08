@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.135
+Stable tag: 1.136
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -674,8 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: default picture URL
-* Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
+* ...
 
 Follow these steps to install the development version:
 
@@ -689,6 +688,13 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.136 =
+* Bugfix: default picture URL
+* Bugfix: link Facebook comments to added links disabled for groups (doesn't work)
+* Bugfix: take into account the post ping status for likes (import/count)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
 
 = 1.135 =
 * New feature: option to disable asynchronous Facebook script
@@ -751,6 +757,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.136 =
+Threee bugfixes, new translation, translation updates
 
 = 1.135 =
 One new feature, three improvements, translation updates
@@ -1006,8 +1015,7 @@ You can add additional styling rules using a plugin option.
 
 == Known bugs ==
 
-* Profile link to Facebook page redirects to website now
-* Likes as pings are counted, even when not displayed
+* None at this moment
 
 == Requested features ==
 
