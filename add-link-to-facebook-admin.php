@@ -80,9 +80,19 @@ function al2fb_render_admin($al2fb)
 		$comments_nolink = 'author';
 	else if ($comments_nolink == 'on')
 		$comments_nolink = 'none';
+
+	// Linking to posts on group pages doesn't work
+	if ($comments_nolink == 'link' &&
+		get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
+		get_user_meta($user_ID, c_al2fb_meta_group, true))
+		$comments_nolink = 'author';
+
 	$comments_nolink_none = ($comments_nolink == 'none' ? ' checked' : '');
 	$comments_nolink_author = ($comments_nolink == 'author' ? ' checked' : '');
 	$comments_nolink_link = ($comments_nolink == 'link' ? ' checked' : '');
+	if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
+		get_user_meta($user_ID, c_al2fb_meta_group, true))
+		$comments_nolink_link = ' disabled';
 
 	// Face pile
 	$pile_size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
@@ -564,7 +574,7 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="none"<?php echo $comments_nolink_none; ?>><?php _e('None', c_al2fb_text_domain); ?><br />
 		<span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="author"<?php echo $comments_nolink_author; ?>><?php _e('Profile author', c_al2fb_text_domain); ?><br />
-		<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="link"<?php echo $comments_nolink_link; ?>><?php _e('Added link', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_fb_comments_nolink; ?>" value="link"<?php echo $comments_nolink_link; ?>><?php _e('Added link', c_al2fb_text_domain); ?> (<?php _e('Does not work for groups', c_al2fb_text_domain); ?>)<br />
 		<span class="al2fb_explanation"><?php _e('Disables displaying of Facebook avatars too', c_al2fb_text_domain); ?></span><br />
 	</td></tr>
 
