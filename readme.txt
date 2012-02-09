@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.136
+Stable tag: 1.137
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -674,7 +674,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Improvement: remove add comment errors after successful adding comment for same post
+* ...
 
 Follow these steps to install the development version:
 
@@ -688,6 +688,10 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.137 =
+* Improvement: remove add comment errors after successful adding comment for same post
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.136 =
 * Bugfix: default picture URL
@@ -741,8 +745,11 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
+= 1.137 =
+One improvement, translation update
+
 = 1.136 =
-Threee bugfixes, new translation, translation updates
+Three bugfixes, new translation, translation updates
 
 = 1.135 =
 One new feature, three improvements, translation updates
