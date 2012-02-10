@@ -478,6 +478,8 @@ if (!class_exists('WPAL2Int')) {
 			foreach ($page_ids as $page_id) {
 				// https://developers.facebook.com/docs/reference/api/user/#posts
 				// https://developers.facebook.com/docs/reference/api/post/
+				if (empty($page_id))
+					$page_id = 'me';
 				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
 				$url = apply_filters('al2fb_url', $url);
 
@@ -507,6 +509,13 @@ if (!class_exists('WPAL2Int')) {
 						$query_array['actions'] = json_encode($actions);
 					}
 
+					// Privacy
+					if ($page_id == 'me') {
+						$privacy = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
+						if ($privacy)
+							$query_array['privacy'] = json_encode(array('value' => $privacy));
+					}
+
 					// Build request
 					$query = http_build_query($query_array, '', '&');
 
@@ -515,7 +524,7 @@ if (!class_exists('WPAL2Int')) {
 					update_option(c_al2fb_last_request_time, date('c'));
 					update_option(c_al2fb_last_texts, print_r($texts, true) . $query);
 					if (get_option(c_al2fb_option_debug)) {
-						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' request=' . print_r($query_array, true));
+						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' ' . $url . ' request=' . print_r($query_array, true));
 						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' texts=' . print_r($texts, true));
 					}
 
@@ -526,7 +535,7 @@ if (!class_exists('WPAL2Int')) {
 					update_option(c_al2fb_last_response, $response);
 					update_option(c_al2fb_last_response_time, date('c'));
 					if (get_option(c_al2fb_option_debug))
-						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' response=' . $response);
+						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' ' . $url . ' response=' . $response);
 
 					// Decode response
 					$fb_link = json_decode($response);
@@ -580,13 +589,13 @@ if (!class_exists('WPAL2Int')) {
 					), '', '&');
 
 					if (get_option(c_al2fb_option_debug))
-						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' request=' . print_r($query, true));
+						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' ' . $url . ' request=' . print_r($query, true));
 
 					// Execute request
 					$response = WPAL2Int::Request($url, $query, 'POST');
 
 					if (get_option(c_al2fb_option_debug))
-						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' response=' . $response);
+						add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' ' . $url . ' response=' . $response);
 
 					// Delete meta data
 					delete_post_meta($post->ID, c_al2fb_meta_link_id, $link_id);

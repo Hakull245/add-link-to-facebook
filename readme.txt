@@ -674,7 +674,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: adding links as me
+* New feature: option to set link privacy (tab appearance)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
@@ -1005,7 +1007,6 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Set link privacy settings
 * Truncate imported Facebook comments
 
 Feature which will not be realized, sorry:

@@ -53,6 +53,14 @@ function al2fb_render_admin($al2fb)
 	$pic_userphoto = ($pic_type == 'userphoto' ? ' checked' : '');
 	$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 
+	// Decode privacy
+	$priv_type = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
+	$priv_none = ($priv_type == '' ? ' checked' : '');
+	$priv_everyone = ($priv_type == 'EVERYONE' ? ' checked' : '');
+	$priv_friends = ($priv_type == 'ALL_FRIENDS' ? ' checked' : '');
+	$priv_network = ($priv_type == 'NETWORKS_FRIENDS' ? ' checked' : '');
+	$priv_fof = ($priv_type == 'FRIENDS_OF_FRIENDS' ? ' checked' : '');
+
 	if (!current_theme_supports('post-thumbnails') ||
 		!function_exists('get_post_thumbnail_id') ||
 		!function_exists('wp_get_attachment_image_src'))
@@ -539,6 +547,17 @@ function al2fb_render_admin($al2fb)
 	</th><td>
 		<input id="al2fb_shortlink" name="<?php echo c_al2fb_meta_shortlink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true)) echo ' checked="checked"'; ?> />
 		<br /><span class="al2fb_explanation"><?php _e('If available', c_al2fb_text_domain); ?></span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_privacy"><?php _e('Privacy:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value=""<?php echo $priv_none; ?>><?php _e('Default', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="EVERYONE"<?php echo $priv_everyone; ?>><?php _e('Everyone', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="ALL_FRIENDS"<?php echo $priv_friends; ?>><?php _e('All friends', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="NETWORKS_FRIENDS"<?php echo $priv_network; ?>><?php _e('Network friends', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="FRIENDS_OF_FRIENDS"<?php echo $priv_fof; ?>><?php _e('Friends of friends', c_al2fb_text_domain); ?><br />
+		<br /><span class="al2fb_explanation"><?php _e('Only works for your personal wall', c_al2fb_text_domain); ?></span>
 	</td></tr>
 	</table>
 	<p class="submit">
