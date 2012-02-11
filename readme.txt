@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.135
+Stable tag: 1.138
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -39,6 +39,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * And much more!
+
+**Pro version:**
+
+* Add links to more than one Facebook page wall for one post
+* See [here](http://al2fb.bokhorst.biz/ "Add link to Facebook Pro") for details
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
@@ -546,7 +551,7 @@ cURL errors are almost always caused by internet connection problems.
 For most cURL errors you need support from your hosting provider.
 
 Recent versions of the plugin report cURL errors encountered while importing Facebook comments and likes too:
-*Import comment: cURL error ...*
+*Import comment: cURL error ...* and *Add comment: cURL error ...*
 These error messages will be removed automatically after a next successful import for the same post/page.
 If these errors appear now and then, don't worry about them.
 This just means the internet connection from your hosting server isn't perfect.
@@ -674,8 +679,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: default picture URL
-* Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
+* ...
 
 Follow these steps to install the development version:
 
@@ -689,6 +693,26 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.138 =
+* Bugfix: adding links as me: use correct URL
+* Bugfix: handle errors when fetching pages/groups
+* New feature: option to set link privacy (tab appearance)
+* Improvement: no caching in debug mode
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
+= 1.137 =
+* Improvement: remove add comment errors after successful adding comment for same post
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+
+= 1.136 =
+* Bugfix: default picture URL
+* Bugfix: link Facebook comments to added links disabled for groups (doesn't work)
+* Bugfix: take into account the post ping status for likes (import/count)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
 
 = 1.135 =
 * New feature: option to disable asynchronous Facebook script
@@ -728,29 +752,20 @@ Follow these steps to install the development version:
 * Improvement: enable all error reporting when in debug mode
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.131 =
-* Improvement: clarified option *See all pages*
-* Improvement: hiding page selection when groups enabled
-* Improvement: consistent use of post type exclusions (all shortcodes, widgets, plugins)
-* Improvement: excluding custom post types of [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress")
-* Improvement: new filter: *al2fb_excluded_post_types*
-* Improvement: new filter: *al2fb_url*
-* Improvement: NextGEN featured image compatibility
-* Improvement: forum topic link debug info
-* Updated required WordPress version to version 3.2
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.129 =
-* Updated FAQ
-* New feature: delete added link when move to trash
-* Improvement: no Facebook comment import when comments closed.
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.138 =
+Two bugfixes, one new feature, one improvement, translation updates
+
+= 1.137 =
+One improvement, translation update
+
+= 1.136 =
+Three bugfixes, new translation, translation updates
 
 = 1.135 =
 One new feature, three improvements, translation updates
@@ -763,12 +778,6 @@ One bugfix, one workaround, three new features, five improvements, updated FAQ &
 
 = 1.132 =
 One new feature, four improvements, translation update
-
-= 1.131 =
-Eight improvements, translation updates
-
-= 1.129 =
-One new feature, one improvement
 
 == Setup guide ==
 
@@ -1006,15 +1015,13 @@ You can add additional styling rules using a plugin option.
 
 == Known bugs ==
 
-* Profile link to Facebook page redirects to website now
-* Likes as pings are counted, even when not displayed
+* None at this moment
 
 == Requested features ==
 
 In no particular order:
 
 * Truncate imported Facebook comments
-* Set link privacy settings
 
 Feature which will not be realized, sorry:
 

@@ -431,6 +431,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
+			update_user_meta($user_ID, c_al2fb_meta_privacy, $_POST[c_al2fb_meta_privacy]);
 			update_user_meta($user_ID, c_al2fb_meta_add_new_page, $_POST[c_al2fb_meta_add_new_page]);
 			update_user_meta($user_ID, c_al2fb_meta_show_permalink, $_POST[c_al2fb_meta_show_permalink]);
 			update_user_meta($user_ID, c_al2fb_meta_trailer, $_POST[c_al2fb_meta_trailer]);
@@ -870,7 +871,8 @@ if (!class_exists('WPAL2Facebook')) {
 						}
 
 						// Show number of likes
-						if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+						if ($post->ping_status == 'open' &&
+							get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 							$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 							if (!empty($fb_likes))
 								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
@@ -1984,7 +1986,9 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Get likes
-				if (self::Is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+				if (self::Is_recent($post) &&
+					$post->ping_status == 'open' &&
+					get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 					$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 					if ($fb_likes)
 						foreach ($fb_likes->data as $fb_like) {
@@ -2111,7 +2115,8 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Like count
-				if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true))
+				if ($post->ping_status == 'open' &&
+					get_user_meta($user_ID, c_al2fb_meta_fb_likes, true))
 					$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if (!empty($fb_likes))
 					$count += count($fb_likes->data);
@@ -2224,7 +2229,8 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 
 					// Get likes
-					if (get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+					if ($post->ping_status == 'open' &&
+						get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 						$fb_likes = WPAL2Int::Get_comments_or_likes($post, true, false);
 						$likes += count($fb_likes->data);
 					}
