@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.137
+Stable tag: 1.138
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -39,6 +39,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
 * And much more!
+
+**Pro version:**
+
+* Add links to more than one Facebook page wall for one post
+* See [here](http://al2fb.bokhorst.biz/ "Add link to Facebook Pro") for details
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
@@ -674,10 +679,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: adding links as me
-* New feature: option to set link privacy (tab appearance)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* ...
 
 Follow these steps to install the development version:
 
@@ -691,6 +693,14 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.138 =
+* Bugfix: adding links as me: use correct URL
+* Bugfix: handle errors when fetching pages/groups
+* New feature: option to set link privacy (tab appearance)
+* Improvement: no caching in debug mode
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.137 =
 * Improvement: remove add comment errors after successful adding comment for same post
@@ -747,6 +757,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.138 =
+Two bugfixes, one new feature, one improvement, translation updates
 
 = 1.137 =
 One improvement, translation update

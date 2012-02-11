@@ -367,13 +367,22 @@ function al2fb_render_admin($al2fb)
 		try {
 			if (!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ||
 				!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
+				// Get personal page
 				try {
 					$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
 				}
 				catch (Exception $e) {
 					$me = null;
 				}
-				$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
+
+				// Get other pages
+				try {
+					$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
+				}
+				catch (Exception $e) {
+					$pages = null;
+				}
+
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 				$extra_page = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
 				if (empty($extra_page))
@@ -395,9 +404,9 @@ function al2fb_render_admin($al2fb)
 				</th><td>
 					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
-					if ($me != null)
+					if ($me)
 						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</option>';
-					if ($pages->data)
+					if ($pages && $pages->data)
 						foreach ($pages->data as $page) {
 							echo '<option value="' . $page->id . '"';
 							if ($page->id == $selected_page)
@@ -415,11 +424,11 @@ function al2fb_render_admin($al2fb)
 <?php
 				if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
 					echo '<table>';
-					if ($me != null) {
+					if ($me) {
 						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
 						echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</td></tr>';
 					}
-					if ($pages->data)
+					if ($pages && $pages->data)
 						foreach ($pages->data as $page) {
 							if (empty($page->name))
 								$page->name = '?';
@@ -465,7 +474,13 @@ function al2fb_render_admin($al2fb)
 
 <?php
 			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
-				$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+				// Get groups
+				try {
+					$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+				}
+				catch (Exception $e) {
+					$groups = null;
+				}
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
 ?>
 				<tr valign="top"><th scope="row">
@@ -474,7 +489,7 @@ function al2fb_render_admin($al2fb)
 					<select class="al2db_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
 <?php
 					echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
-					if ($groups->data)
+					if ($groups && $groups->data)
 						foreach ($groups->data as $group) {
 							echo '<option value="' . $group->id . '"';
 							if ($group->id == $selected_group)

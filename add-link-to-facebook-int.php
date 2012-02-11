@@ -146,6 +146,8 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_fb_application_cached($user_ID) {
 			$app_key = c_al2fb_transient_cache . md5('app' . $user_ID);
 			$app = get_transient($app_key);
+			if (get_option(c_al2fb_option_debug))
+				$app = false;
 			if ($app === false) {
 				$app = WPAL2Int::Get_fb_application($user_ID);
 				$duration = WPAL2Int::Get_duration(false);
@@ -172,6 +174,8 @@ if (!class_exists('WPAL2Int')) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
 			$me_key = c_al2fb_transient_cache . md5('me' . $user_ID . $page_id);
 			$me = get_transient($me_key);
+			if (get_option(c_al2fb_option_debug))
+				$me = false;
 			if ($me === false) {
 				$me = WPAL2Int::Get_fb_me($user_ID, $self);
 				if ($me != null) {
@@ -205,6 +209,8 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_fb_pages_cached($user_ID) {
 			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
 			$pages = get_transient($pages_key);
+			if (get_option(c_al2fb_option_debug))
+				$pages = false;
 			if ($pages === false) {
 				$pages = WPAL2Int::Get_fb_pages($user_ID);
 				$duration = WPAL2Int::Get_duration(false);
@@ -228,6 +234,8 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_fb_groups_cached($user_ID) {
 			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
 			$groups = get_transient($groups_key);
+			if (get_option(c_al2fb_option_debug))
+				$groups = false;
 			if ($groups === false) {
 				$groups = WPAL2Int::Get_fb_groups($user_ID);
 				$duration = WPAL2Int::Get_duration(false);
