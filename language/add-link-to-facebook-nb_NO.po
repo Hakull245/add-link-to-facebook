@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-02-08 15:11+0100\n"
+"PO-Revision-Date: 2012-02-11 10:43+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -892,4 +892,25 @@ msgstr "Ingen asynkron Facebook skript:"
 
 msgid "Does not work for groups"
 msgstr "Fungerer ikke for grupper"
+
+msgid "Privacy"
+msgstr "Personvern"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Everyone"
+msgstr "Alle"
+
+msgid "All friends"
+msgstr "Alle venner"
+
+msgid "Network friends"
+msgstr "Nettverk venner"
+
+msgid "Friends of friends"
+msgstr "Venner av venner"
+
+msgid "Only works for your personal wall"
+msgstr "Fungerer bare for din personlige vegg"
 
