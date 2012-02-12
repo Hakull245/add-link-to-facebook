@@ -202,7 +202,7 @@ if (!class_exists('WPAL2Int')) {
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$me = json_decode($response);
 			if ($me) {
-				if (empty($me->link))	// Group
+				if (empty($me->category))	// Group
 					$me->link = 'http://www.facebook.com/home.php?sk=group_' . $page_id;
 				return $me;
 			}

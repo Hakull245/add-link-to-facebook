@@ -376,14 +376,17 @@ function al2fb_debug_info($al2fb) {
 	}
 	$info .= '<pre>comments=' . print_r($comments, true) . '</pre>';
 
+	$extra = ($_REQUEST['debug'] == 2);
+
 	// Info self
-	try {
-		$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
-		$info .= '<pre>me=' . print_r($me, true) . '</pre>';
-	}
-	catch (Exception $e) {
-		$info .= '<pre>me=' . $e->getMessage() . '</pre>';
-	}
+	if ($extra)
+		try {
+			$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
+			$info .= '<pre>me=' . print_r($me, true) . '</pre>';
+		}
+		catch (Exception $e) {
+			$info .= '<pre>me=' . $e->getMessage() . '</pre>';
+		}
 
 	// Info App
 	try {
@@ -392,8 +395,6 @@ function al2fb_debug_info($al2fb) {
 	catch (Exception $e) {
 		$info .= '<pre>app=' . $e->getMessage() . '</pre>';
 	}
-
-	$extra = ($_REQUEST['debug'] == 2);
 
 	// Info pages
 	try {
