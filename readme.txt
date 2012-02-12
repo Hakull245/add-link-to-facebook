@@ -685,7 +685,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Improvement: option to set privacy to *Only me*
-* Improvement: clear cache when chaning page/group settings
+* Improvement: clear cache when changing page/group settings
+* Improvement: more debug information
 * Updated FAQ: added question U36 about the privacy option
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 

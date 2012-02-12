@@ -367,14 +367,67 @@ function al2fb_debug_info($al2fb) {
 
 	$info .= '</table></div>';
 
-	$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
+	$info .= '<pre>$_SERVER=' . print_r($_SERVER, true) . '</pre>';
 
 	$comments = get_comments('number=10');
 	foreach ($comments as $comment) {
 		$fb_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
 		$comment->fb_comment_id = $fb_id;
 	}
-	$info .= '<pre>' . print_r($comments, true) . '</pre>';
+	$info .= '<pre>comments=' . print_r($comments, true) . '</pre>';
+
+	// Info self
+	try {
+		$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
+		$info .= '<pre>me=' . print_r($me, true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>me=' . $e->getMessage() . '</pre>';
+	}
+
+	// Info App
+	try {
+		$info .= '<pre>app=' . print_r(WPAL2Int::Get_fb_application_cached($user_ID), true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>app=' . $e->getMessage() . '</pre>';
+	}
+
+	$extra = ($_REQUEST['debug'] == 2);
+
+	// Info pages
+	try {
+		$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
+		if ($extra)
+			foreach ($pages->data as $page)
+				try {
+					$page->info = WPAL2Int::Get_fb_info($user_ID, $page->id);
+				}
+				catch (Exception $e) {
+					$page->info = $e->getMessage();
+				}
+		$info .= '<pre>pages=' . print_r($pages, true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>pages=' . $e->getMessage() . '</pre>';
+	}
+
+	// Info groups
+	try {
+		$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+		if ($extra)
+			foreach ($groups->data as $group)
+				try {
+					$group->info = WPAL2Int::Get_fb_info($user_ID, $group->id);
+				}
+				catch (Exception $e) {
+					$group->info = $e->getMessage();
+				}
+		$info .= '<pre>groups=' . print_r($groups, true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>groups=' . $e->getMessage() . '</pre>';
+	}
 
 	return $info;
 }

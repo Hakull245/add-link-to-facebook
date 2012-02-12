@@ -189,6 +189,10 @@ if (!class_exists('WPAL2Int')) {
 		// Get wall, page or group name
 		static function Get_fb_me($user_ID, $self) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
+			return WPAL2Int::Get_fb_info($user_ID, $page_id);
+		}
+
+		static function Get_fb_info($user_ID, $page_id) {
 			$url = 'https://graph.facebook.com/' . $page_id;
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token_by_page($user_ID, $page_id);
