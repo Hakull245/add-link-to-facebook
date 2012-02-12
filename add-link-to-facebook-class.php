@@ -404,13 +404,17 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_access_token);
 
 			// Page owner changed
-			if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
+			if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
 				delete_user_meta($user_ID, c_al2fb_meta_access_token);
+				WPAL2Int::Clear_fb_pages_cache($user_ID);
+			}
 
 			// Use groups changed
 			if ($_POST[c_al2fb_meta_use_groups] && !get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				if (!get_user_meta($user_ID, c_al2fb_meta_group, true))
+				if (!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
 					delete_user_meta($user_ID, c_al2fb_meta_access_token);
+					WPAL2Int::Clear_fb_groups_cache($user_ID);
+				}
 
 			// Like or send button enabled
 			if ((!get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) && !empty($_POST[c_al2fb_meta_post_like_button])) ||

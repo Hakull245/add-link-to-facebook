@@ -219,6 +219,11 @@ if (!class_exists('WPAL2Int')) {
 			return $pages;
 		}
 
+		static function Clear_fb_pages_cache($user_ID) {
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			delete_transient($pages_key);
+		}
+
 		// Get page list
 		static function Get_fb_pages($user_ID) {
 			$url = 'https://graph.facebook.com/me/accounts';
@@ -242,6 +247,11 @@ if (!class_exists('WPAL2Int')) {
 				set_transient($groups_key, $groups, $duration);
 			}
 			return $groups;
+		}
+
+		function Clear_fb_groups_cache($user_ID) {
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			delete_transient($groups_key);
 		}
 
 		// Get group list
