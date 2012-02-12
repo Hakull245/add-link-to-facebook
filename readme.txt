@@ -403,6 +403,11 @@ The author of the plugin will probably know the name(s), else you will have to l
 The likes on Facebook are for the added link and the likes on WordPress are for the post/page.
 Facebook considers these as different objects.
 
+= U36 The privacy option is not working =
+
+You cannot add links with less privacy as specified in the Facebook application settings.
+To change this: Privacy Settings (right top triangle) > Apps and Websites > Edit Settings > Edit Settings (button) > Edit (link) > App activity privacy
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -679,7 +684,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Improvement: option to set privacy to *Only me*
+* Updated FAQ: added question U36 about the privacy option
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
@@ -1022,6 +1029,7 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Truncate imported Facebook comments
+* Style resources box for small screens
 
 Feature which will not be realized, sorry:
 

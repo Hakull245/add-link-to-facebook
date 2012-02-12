@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-02-11 10:57+0100\n"
+"PO-Revision-Date: 2012-02-12 08:17+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -911,6 +911,12 @@ msgstr "Vrienden in het netwerk"
 msgid "Friends of friends"
 msgstr "Vrienden van vrienden"
 
+msgid "Only me"
+msgstr "Alleen ik"
+
 msgid "Only works for your personal wall"
 msgstr "Werk alleen voor je persoonlijke pagina"
+
+msgid "Personal"
+msgstr "Persoonlijk"
 
