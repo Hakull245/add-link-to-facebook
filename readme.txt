@@ -1035,7 +1035,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Style resources box for small screens
+* ...
 
 Feature which will not be realized, sorry:
 
