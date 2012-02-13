@@ -129,6 +129,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 2);
 			add_filter('al2fb_comment', array(&$this, 'Filter_comment'), 10, 3);
 			add_filter('al2fb_fb_feed', array(&$this, 'Filter_feed'), 10, 1);
+			add_filter('al2fb_preprocess_comment', array(&$this, 'Preprocess_comment'), 10, 2);
 
 			// Widget
 			add_action('widgets_init', create_function('', 'return register_widget("AL2FB_Widget");'));
@@ -378,7 +379,9 @@ if (!class_exists('WPAL2Facebook')) {
 			// Default values
 			$consts = get_defined_constants(true);
 			foreach ($consts['user'] as $name => $value) {
-				if (strpos($value, 'al2fb_') === 0 && $value != c_al2fb_meta_trailer)
+				if (strpos($value, 'al2fb_') === 0 &&
+					$value != c_al2fb_meta_trailer &&
+					$value != c_al2fb_meta_fb_comments_trailer)
 					if (isset($_POST[$value]) && is_string($_POST[$value]))
 						$_POST[$value] = trim($_POST[$value]);
 					else if (empty($_POST[$value]))
@@ -442,6 +445,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_share_link, $_POST[c_al2fb_meta_share_link]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments, $_POST[c_al2fb_meta_fb_comments]);
+			update_user_meta($user_ID, c_al2fb_meta_fb_comments_trailer, $_POST[c_al2fb_meta_fb_comments_trailer]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, $_POST[c_al2fb_meta_fb_comments_postback]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, $_POST[c_al2fb_meta_fb_comments_copy]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, $_POST[c_al2fb_meta_fb_comments_nolink]);
@@ -522,6 +526,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_cron_enabled, $_POST[c_al2fb_option_cron_enabled]);
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
+				update_option(c_al2fb_option_max_comment, $_POST[c_al2fb_option_max_comment]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_exclude_tag, $_POST[c_al2fb_option_exclude_tag]);
@@ -1235,34 +1240,15 @@ if (!class_exists('WPAL2Facebook')) {
 			else
 				$description = ($excerpt ? $excerpt : $content);
 
-			// Trailer: limit body size
+			// Trailer
 			$trailer = get_user_meta($user_ID, c_al2fb_meta_trailer, true);
 			if ($trailer) {
-				$trailer = preg_replace('/<[^>]*>/', '', $trailer);
-
-				// Get maximum FB description size
+				// Get maximum FB text size
 				$maxlen = get_option(c_al2fb_option_max_descr);
 				if (!$maxlen)
 					$maxlen = 256;
-
-				// Add maximum number of sentences
-				$lines = explode('.', $description);
-				if ($lines) {
-					$count = 0;
-					$description = '';
-					foreach ($lines as $sentence) {
-						$line = $sentence;
-						if ($count + 1 < count($lines))
-							$line .= '.';
-						if (strlen($description) + strlen($line) + strlen($trailer) < $maxlen)
-							$description .= $line;
-						else
-							break;
-					}
-					if (empty($description) && count($lines) > 0)
-						$description = substr($lines[0], 0, $maxlen - strlen($trailer));
-					$description .= $trailer;
-				}
+				// Limit body size
+				$description = self::Limit_text_size($description, $trailer, $maxlen);
 			}
 
 			// Build result
@@ -1272,6 +1258,39 @@ if (!class_exists('WPAL2Facebook')) {
 				'description' => $description
 			);
 			return $texts;
+		}
+
+		// Limit text size
+		function Limit_text_size($text, $trailer, $maxlen) {
+			if (strlen($text) > $maxlen) {
+				// Filter HTML
+				$trailer = preg_replace('/<[^>]*>/', '', $trailer);
+
+				// Add maximum number of sentences
+				$text = trim($text);
+				$lines = explode('.', $text);
+				if ($lines) {
+					$count = 0;
+					$text = '';
+					foreach ($lines as $sentence) {
+						$count++;
+						$line = $sentence;
+						if ($count < count($lines) || substr($text, -1) == '.')
+							$line .= '.';
+						if (strlen($text) + strlen($line) + strlen($trailer) < $maxlen)
+							$text .= $line;
+						else
+							break;
+					}
+					if (empty($text) && count($lines) > 0)
+						$text = substr($lines[0], 0, $maxlen - strlen($trailer));
+
+					// Append trailer
+					$text .= $trailer;
+				}
+			}
+
+			return $text;
 		}
 
 		// Get link picture
@@ -1934,7 +1953,7 @@ if (!class_exists('WPAL2Facebook')) {
 										'user_id' => 0
 									);
 
-									$commentdata = apply_filters('al2fb_preprocess_comment', $commentdata);
+									$commentdata = apply_filters('al2fb_preprocess_comment', $commentdata, $post);
 
 									// Copy Facebook comment to WordPress database
 									if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) {
@@ -2054,6 +2073,21 @@ if (!class_exists('WPAL2Facebook')) {
 							unset($comments[$i]);
 
 			return $comments;
+		}
+
+		// Pre process comment: limit text size
+		function Preprocess_comment($commentdata, $post) {
+			$user_ID = self::Get_user_ID($post);
+			$trailer = get_user_meta($user_ID, c_al2fb_meta_fb_comments_trailer, true);
+			if ($trailer) {
+				// Get maximum comment text size
+				$maxlen = get_option(c_al2fb_option_max_comment);
+				if (!$maxlen)
+					$maxlen = 256;
+				// Limit comment size
+				$commentdata['comment_content'] = self::Limit_text_size($commentdata['comment_content'], $trailer, $maxlen);
+			}
+			return $commentdata;
 		}
 
 		// Sort helper

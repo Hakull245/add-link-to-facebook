@@ -592,6 +592,13 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_fb_comments_trailer"><?php _e('Comment trailer:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_fb_comments_trailer" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_comments_trailer; ?>" type="text" value="<?php  echo htmlentities(get_user_meta($user_ID, c_al2fb_meta_fb_comments_trailer, true), ENT_QUOTES, get_bloginfo('charset')); ?>" />
+		<br /><span class="al2fb_explanation"><?php _e('For example "Read more ..."', c_al2fb_text_domain); ?></span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_fb_comments_postback"><?php _e('Post WordPress comments back to Facebook:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_comments_postback" name="<?php echo c_al2fb_meta_fb_comments_postback; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true)) echo ' checked="checked"'; ?> />
@@ -1125,6 +1132,14 @@ function al2fb_render_admin($al2fb)
 			<input class="al2fb_numeric" id="al2fb_max_text" name="<?php echo c_al2fb_option_max_text; ?>" type="text" value="<?php echo get_option(c_al2fb_option_max_text); ?>" />
 			<span><?php _e('Characters', c_al2fb_text_domain); ?></span>
 			<br /><span class="al2fb_explanation"><?php _e('Default 10,000 characters', c_al2fb_text_domain); ?></span>
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
+			<label for="al2fb_max_comment"><?php _e('Maximum comment length with trailer:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input class="al2fb_numeric" id="al2fb_max_comment" name="<?php echo c_al2fb_option_max_comment; ?>" type="text" value="<?php echo get_option(c_al2fb_option_max_comment); ?>" />
+			<span><?php _e('Characters', c_al2fb_text_domain); ?></span>
+			<br /><span class="al2fb_explanation"><?php _e('Default 256 characters', c_al2fb_text_domain); ?></span>
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
