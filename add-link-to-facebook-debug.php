@@ -22,6 +22,12 @@ function al2fb_debug_info($al2fb) {
 	$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 	$plugin_version = $plugin_folder[basename($al2fb->main_file)]['Version'];
 
+	$curl_version = 'No';
+	if (function_exists('curl_init')) {
+		$v = curl_version();
+		$curl_version = $v['version'];
+	}
+
 	// Get charset, token
 	$charset = get_bloginfo('charset');
 
@@ -110,7 +116,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Authorized time:</td><td>' . get_option(c_al2fb_log_auth_time) . '</td></tr>';
 	$info .= '<tr><td>Token time:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_token_time, true)  . '</td></tr>';
 	$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
-	$info .= '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
+	$info .= '<tr><td>cURL:</td><td>' . $curl_version . '</td></tr>';
 	$info .= '<tr><td>openssl loaded:</td><td>' . (extension_loaded('openssl') ? 'Yes' : 'No') . '</td></tr>';
 
 	$info .= '<tr><td>Encoding:</td><td>' . htmlspecialchars(get_option('blog_charset'), ENT_QUOTES, $charset) . '</td></tr>';

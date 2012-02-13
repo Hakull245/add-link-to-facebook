@@ -690,7 +690,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: clear cache when changing page/group settings
 * Improvement: more debug information
 * Improvement: display cURL error text
-* Improvement: allow cURL timeout fractions (PHP >= 5.2.3)
 * Improvement: floating resources box
 * Workaround: fix links to groups
 * Updated FAQ: added question U36 about the privacy option

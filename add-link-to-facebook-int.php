@@ -1473,10 +1473,7 @@ if (!class_exists('WPAL2Int')) {
 				curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 				curl_setopt($c, CURLOPT_MAXREDIRS, 10);
 			}
-			if (version_compare(PHP_VERSION, '5.2.3') < 0)
-				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
-			else
-				curl_setopt($c, CURLOPT_TIMEOUT_MS, $timeout * 1000);
+			curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
 
 			if ($type == 'GET')
 				curl_setopt($c, CURLOPT_URL, $url . ($query ? '?' . $query : ''));
