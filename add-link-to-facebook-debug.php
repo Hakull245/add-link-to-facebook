@@ -196,7 +196,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 	$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
 
-	$info .= '<tr><td>Timeout:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_timeout), ENT_QUOTES, $charset) . '</td></tr>';
+	$info .= '<tr><td>Timeout ms:</td><td>' . (get_option(c_al2fb_option_timeout) * 1000) . '</td></tr>';
 	$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Min. capability:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Min. capability comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap_comment), ENT_QUOTES, $charset) . '</td></tr>';
