@@ -1488,6 +1488,7 @@ if (!class_exists('WPAL2Int')) {
 
 			$content = curl_exec($c);
 			$errno = curl_errno($c);
+			$errtext = curl_error($c);
 			$info = curl_getinfo($c);
 			curl_close($c);
 
@@ -1497,7 +1498,7 @@ if (!class_exists('WPAL2Int')) {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
 				if ($errno || !$error)
-					$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
+					$msg = 'cURL communication error ' . $errno . ' ' . $errtext . ': ' . $error . ' ' . print_r($info, true);
 				else
 					$msg = $error;
 				update_option(c_al2fb_last_error, $msg);

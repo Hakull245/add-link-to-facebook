@@ -19,14 +19,14 @@
 	float: right;
 	padding: 10px;
 	width: 180px;
-	margin-top: 30px;
+	/* margin-top: 30px; */
 	border: 1px solid #CCCCCC;
 	background-color: #FFFEEB;
 }
 
 /* Options panel left */
 .al2fb_options {
-	float: left;
+	/* float: left; */
 }
 
 /* Application setup instructions */
