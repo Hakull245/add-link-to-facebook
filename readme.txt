@@ -684,6 +684,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: option to limit imported comment length (comment trailer)
+* Improvement: no text trailer when not needed
 * Improvement: option to set privacy to *Only me*
 * Improvement: clear cache when changing page/group settings
 * Improvement: more debug information
@@ -1031,7 +1033,6 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Truncate imported Facebook comments
 * Style resources box for small screens
 
 Feature which will not be realized, sorry:
