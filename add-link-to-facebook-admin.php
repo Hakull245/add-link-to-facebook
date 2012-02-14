@@ -60,6 +60,7 @@ function al2fb_render_admin($al2fb)
 	$priv_friends = ($priv_type == 'ALL_FRIENDS' ? ' checked' : '');
 	$priv_network = ($priv_type == 'NETWORKS_FRIENDS' ? ' checked' : '');
 	$priv_fof = ($priv_type == 'FRIENDS_OF_FRIENDS' ? ' checked' : '');
+	$priv_me = ($priv_type == 'SELF' ? ' checked' : '');
 
 	if (!current_theme_supports('post-thumbnails') ||
 		!function_exists('get_post_thumbnail_id') ||
@@ -405,7 +406,7 @@ function al2fb_render_admin($al2fb)
 					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
 					if ($me)
-						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</option>';
+						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</option>';
 					if ($pages && $pages->data)
 						foreach ($pages->data as $page) {
 							echo '<option value="' . $page->id . '"';
@@ -426,7 +427,7 @@ function al2fb_render_admin($al2fb)
 					echo '<table>';
 					if ($me) {
 						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
-						echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . '</td></tr>';
+						echo '<td>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</td></tr>';
 					}
 					if ($pages && $pages->data)
 						foreach ($pages->data as $page) {
@@ -572,6 +573,7 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="ALL_FRIENDS"<?php echo $priv_friends; ?>><?php _e('All friends', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="NETWORKS_FRIENDS"<?php echo $priv_network; ?>><?php _e('Network friends', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="FRIENDS_OF_FRIENDS"<?php echo $priv_fof; ?>><?php _e('Friends of friends', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="SELF"<?php echo $priv_me; ?>><?php _e('Only me', c_al2fb_text_domain); ?><br />
 		<br /><span class="al2fb_explanation"><?php _e('Only works for your personal wall', c_al2fb_text_domain); ?></span>
 	</td></tr>
 	</table>
@@ -587,6 +589,13 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_fb_comments"><?php _e('Integrate comments from Facebook:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_comments" name="<?php echo c_al2fb_meta_fb_comments; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_fb_comments_trailer"><?php _e('Comment trailer:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_fb_comments_trailer" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_comments_trailer; ?>" type="text" value="<?php  echo htmlentities(get_user_meta($user_ID, c_al2fb_meta_fb_comments_trailer, true), ENT_QUOTES, get_bloginfo('charset')); ?>" />
+		<br /><span class="al2fb_explanation"><?php _e('For example "Read more ..."', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -1123,6 +1132,14 @@ function al2fb_render_admin($al2fb)
 			<input class="al2fb_numeric" id="al2fb_max_text" name="<?php echo c_al2fb_option_max_text; ?>" type="text" value="<?php echo get_option(c_al2fb_option_max_text); ?>" />
 			<span><?php _e('Characters', c_al2fb_text_domain); ?></span>
 			<br /><span class="al2fb_explanation"><?php _e('Default 10,000 characters', c_al2fb_text_domain); ?></span>
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
+			<label for="al2fb_max_comment"><?php _e('Maximum comment length with trailer:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input class="al2fb_numeric" id="al2fb_max_comment" name="<?php echo c_al2fb_option_max_comment; ?>" type="text" value="<?php echo get_option(c_al2fb_option_max_comment); ?>" />
+			<span><?php _e('Characters', c_al2fb_text_domain); ?></span>
+			<br /><span class="al2fb_explanation"><?php _e('Default 256 characters', c_al2fb_text_domain); ?></span>
 		</td></tr>
 
 		<tr valign="top"><th scope="row">

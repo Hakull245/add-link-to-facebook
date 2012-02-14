@@ -22,6 +22,12 @@ function al2fb_debug_info($al2fb) {
 	$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
 	$plugin_version = $plugin_folder[basename($al2fb->main_file)]['Version'];
 
+	$curl_version = 'No';
+	if (function_exists('curl_init')) {
+		$v = curl_version();
+		$curl_version = $v['version'];
+	}
+
 	// Get charset, token
 	$charset = get_bloginfo('charset');
 
@@ -110,7 +116,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Authorized time:</td><td>' . get_option(c_al2fb_log_auth_time) . '</td></tr>';
 	$info .= '<tr><td>Token time:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_token_time, true)  . '</td></tr>';
 	$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
-	$info .= '<tr><td>cURL:</td><td>' . (function_exists('curl_init') ? 'Yes' : 'No') . '</td></tr>';
+	$info .= '<tr><td>cURL:</td><td>' . $curl_version . '</td></tr>';
 	$info .= '<tr><td>openssl loaded:</td><td>' . (extension_loaded('openssl') ? 'Yes' : 'No') . '</td></tr>';
 
 	$info .= '<tr><td>Encoding:</td><td>' . htmlspecialchars(get_option('blog_charset'), ENT_QUOTES, $charset) . '</td></tr>';
@@ -196,7 +202,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>OGP type:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true) . '</td></tr>';
 	$info .= '<tr><td>OGP admins:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_open_graph_admins, true) . '</td></tr>';
 
-	$info .= '<tr><td>Timeout:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_timeout), ENT_QUOTES, $charset) . '</td></tr>';
+	$info .= '<tr><td>Timeout ms:</td><td>' . (get_option(c_al2fb_option_timeout) * 1000) . '</td></tr>';
 	$info .= '<tr><td>No notices:</td><td>' . (get_option(c_al2fb_option_nonotice) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Min. capability:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Min. capability comments:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_min_cap_comment), ENT_QUOTES, $charset) . '</td></tr>';
@@ -367,14 +373,68 @@ function al2fb_debug_info($al2fb) {
 
 	$info .= '</table></div>';
 
-	$info .= '<pre>' . print_r($_SERVER, true) . '</pre>';
+	$info .= '<pre>$_SERVER=' . print_r($_SERVER, true) . '</pre>';
 
 	$comments = get_comments('number=10');
 	foreach ($comments as $comment) {
 		$fb_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
 		$comment->fb_comment_id = $fb_id;
 	}
-	$info .= '<pre>' . print_r($comments, true) . '</pre>';
+	$info .= '<pre>comments=' . print_r($comments, true) . '</pre>';
+
+	$extra = ($_REQUEST['debug'] == 2);
+
+	// Info self
+	if ($extra)
+		try {
+			$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
+			$info .= '<pre>me=' . print_r($me, true) . '</pre>';
+		}
+		catch (Exception $e) {
+			$info .= '<pre>me=' . $e->getMessage() . '</pre>';
+		}
+
+	// Info App
+	try {
+		$info .= '<pre>app=' . print_r(WPAL2Int::Get_fb_application_cached($user_ID), true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>app=' . $e->getMessage() . '</pre>';
+	}
+
+	// Info pages
+	try {
+		$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
+		if ($extra)
+			foreach ($pages->data as $page)
+				try {
+					$page->info = WPAL2Int::Get_fb_info($user_ID, $page->id);
+				}
+				catch (Exception $e) {
+					$page->info = $e->getMessage();
+				}
+		$info .= '<pre>pages=' . print_r($pages, true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>pages=' . $e->getMessage() . '</pre>';
+	}
+
+	// Info groups
+	try {
+		$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+		if ($extra)
+			foreach ($groups->data as $group)
+				try {
+					$group->info = WPAL2Int::Get_fb_info($user_ID, $group->id);
+				}
+				catch (Exception $e) {
+					$group->info = $e->getMessage();
+				}
+		$info .= '<pre>groups=' . print_r($groups, true) . '</pre>';
+	}
+	catch (Exception $e) {
+		$info .= '<pre>groups=' . $e->getMessage() . '</pre>';
+	}
 
 	return $info;
 }

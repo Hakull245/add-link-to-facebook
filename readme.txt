@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.138
+Stable tag: 1.139
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -403,6 +403,11 @@ The author of the plugin will probably know the name(s), else you will have to l
 The likes on Facebook are for the added link and the likes on WordPress are for the post/page.
 Facebook considers these as different objects.
 
+= U36 The privacy option is not working =
+
+You cannot add links with less privacy as specified in the Facebook application settings.
+To change this: Privacy Settings (right top triangle) > Apps and Websites > Edit Settings > Edit Settings (button) > Edit (link) > App activity privacy
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -694,6 +699,19 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.139 =
+* New feature: option to limit imported comment length (comment trailer)
+* Improvement: no text trailer when not needed
+* Improvement: option to set privacy to *Only me*
+* Improvement: clear cache when changing page/group settings
+* Improvement: more debug information
+* Improvement: display cURL error text
+* Improvement: floating resources box
+* Workaround: fix links to groups
+* Updated FAQ: added question U36 about the privacy option
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.138 =
 * Bugfix: adding links as me: use correct URL
 * Bugfix: handle errors when fetching pages/groups
@@ -722,41 +740,14 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.134 =
-* New feature: support for data URI images
-* Improvement: fixed Facebook/WordPress login (protocol has been changed)
-* 'Pro' version to add links to multiple page walls. Visit the plugin settings tab 'Page/group' for more details.
-
-= 1.133 =
-* Bugfix: update existing Facebook link
-* Workaround: *trailingslashit* for redirect URI
-* New feature: show link on WordPress to added link on Facebook (option); shortcode/template tag/filter: *al2fb_anchor*
-* New feature: [auto refresh](https://developers.facebook.com/docs/offline-access-deprecation/) Facebook token
-* New feature: filters: *al2fb_excluded_tags*, *al2fb_excluded_categories*, *al2fb_excluded_authors*, *al2fb_preprocess_comment*
-* Improvement: further memory usage reduction by splitting source code in more files
-* Improvement: fixed notices when saving settings
-* Improvement: excluded post types, tags, categories and authors apply to all plugins (link button, comments plugin, etc)
-* Improvement: *Do not verify the peer's certificate* for fetching Avatars too
-* Improvement: asynchronous loading of [Facebook SDK](https://developers.facebook.com/docs/reference/javascript/ "Facebook SDK")
-* Added new screenshots
-* Updated FAQ and [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.132 =
-* New feature: support for multi site installs (settings per user/blog)
-* Improvement: exluding custom post type of [Mute Screamer](http://wordpress.org/extend/plugins/mute-screamer/ "Mute Screamer")
-* Improvement: cache widget messages
-* Improvement: new (default) filters: *al2fb_fb_comments*, *al2fb_fb_likes*, *al2fb_fb_feed*, *al2fb_fb_picture*
-* Improvement: enable all error reporting when in debug mode
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.139 =
+One new feature, six improvements, one workaround, translation updates
 
 = 1.138 =
 Two bugfixes, one new feature, one improvement, translation updates
@@ -769,15 +760,6 @@ Three bugfixes, new translation, translation updates
 
 = 1.135 =
 One new feature, three improvements, translation updates
-
-= 1.134 =
-One new feature, one improvement, 'Pro' version: add to multiple page walls
-
-= 1.133 =
-One bugfix, one workaround, three new features, five improvements, updated FAQ & setup guide, translation updates
-
-= 1.132 =
-One new feature, four improvements, translation update
 
 == Setup guide ==
 
@@ -1021,7 +1003,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Truncate imported Facebook comments
+* ...
 
 Feature which will not be realized, sorry:
 

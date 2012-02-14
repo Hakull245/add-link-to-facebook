@@ -189,6 +189,10 @@ if (!class_exists('WPAL2Int')) {
 		// Get wall, page or group name
 		static function Get_fb_me($user_ID, $self) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
+			return WPAL2Int::Get_fb_info($user_ID, $page_id);
+		}
+
+		static function Get_fb_info($user_ID, $page_id) {
 			$url = 'https://graph.facebook.com/' . $page_id;
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token_by_page($user_ID, $page_id);
@@ -198,7 +202,7 @@ if (!class_exists('WPAL2Int')) {
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$me = json_decode($response);
 			if ($me) {
-				if (empty($me->link))	// Group
+				if (empty($me->category))	// Group
 					$me->link = 'http://www.facebook.com/home.php?sk=group_' . $page_id;
 				return $me;
 			}
@@ -217,6 +221,11 @@ if (!class_exists('WPAL2Int')) {
 				set_transient($pages_key, $pages, $duration);
 			}
 			return $pages;
+		}
+
+		static function Clear_fb_pages_cache($user_ID) {
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			delete_transient($pages_key);
 		}
 
 		// Get page list
@@ -242,6 +251,11 @@ if (!class_exists('WPAL2Int')) {
 				set_transient($groups_key, $groups, $duration);
 			}
 			return $groups;
+		}
+
+		function Clear_fb_groups_cache($user_ID) {
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			delete_transient($groups_key);
 		}
 
 		// Get group list
@@ -1474,6 +1488,7 @@ if (!class_exists('WPAL2Int')) {
 
 			$content = curl_exec($c);
 			$errno = curl_errno($c);
+			$errtext = curl_error($c);
 			$info = curl_getinfo($c);
 			curl_close($c);
 
@@ -1483,7 +1498,7 @@ if (!class_exists('WPAL2Int')) {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
 				if ($errno || !$error)
-					$msg = 'cURL error ' . $errno . ': ' . $error . ' ' . print_r($info, true);
+					$msg = 'cURL communication error ' . $errno . ' ' . $errtext . ': ' . $error . ' ' . print_r($info, true);
 				else
 					$msg = $error;
 				update_option(c_al2fb_last_error, $msg);
