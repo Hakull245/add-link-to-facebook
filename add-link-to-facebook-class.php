@@ -875,7 +875,7 @@ if (!class_exists('WPAL2Facebook')) {
 						// Show number of comments
 						if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 							$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
-							if (!empty($fb_comments))
+							if (!empty($fb_comments) && !empty($fb_comments->data))
 								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('comments', c_al2fb_text_domain) . '</span>';
 						}
 
@@ -883,8 +883,8 @@ if (!class_exists('WPAL2Facebook')) {
 						if ($post->ping_status == 'open' &&
 							get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 							$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-							if (!empty($fb_likes))
-								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
+							if (!empty($fb_likes) && !empty($fb_likes->data))
+								echo '<br /><span>' . count($fb_likes->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
 						}
 					}
 				}

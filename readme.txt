@@ -684,7 +684,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: number of likes / notice
 
 Follow these steps to install the development version:
 
