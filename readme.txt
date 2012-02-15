@@ -686,9 +686,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
-* Improvement: removed PhpConsole
 * Improvement: more debug info
-* Improvement: basic bbPress support
+* Improvement: removed PhpConsole
+* Improvement: bbPress support (topics only)
 * Temporary: disabled plugins actions links
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
 
@@ -1000,10 +1000,6 @@ Facebook comments, status updates and the profile link are only shown if the pos
 The link to the author follow the comment integration settings (*None*, *Profile author* or *Added link*).
 The styling (layout, colors, etc) of the widget depends on the styling of your theme.
 You can add additional styling rules using a plugin option.
-
-== Known bugs ==
-
-* None at this moment
 
 == Requested features ==
 
