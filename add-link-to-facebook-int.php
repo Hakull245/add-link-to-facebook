@@ -762,6 +762,7 @@ if (!class_exists('WPAL2Int')) {
 
 				// Process response
 				$fb_comment = json_decode($response);
+				add_post_meta($topic->ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
 
 				// Remove previous errors
 				$error = get_post_meta($topic->ID, c_al2fb_meta_error, true);

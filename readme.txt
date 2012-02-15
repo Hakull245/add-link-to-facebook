@@ -686,7 +686,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
-* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (topics and replies)
+* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (both topics and replies)
 * Improvement: more debug info
 * Improvement: removed PhpConsole
 * Temporary: disabled plugins actions links

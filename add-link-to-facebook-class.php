@@ -993,7 +993,13 @@ if (!class_exists('WPAL2Facebook')) {
 				// Error messages
 				if ($this->debug) {
 					$logs = get_post_meta($post->ID, c_al2fb_meta_log, false);
-					echo '<pre>' . print_r($logs, true) . '</pre>';
+					echo '<pre>log=' . print_r($logs, true) . '</pre>';
+
+					$logs = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+					echo '<pre>fbid=' . print_r($logs, true) . '</pre>';
+
+					$logs = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
+					echo '<pre>fbcid=' . print_r($logs, true) . '</pre>';
 				}
 			}
 		}
