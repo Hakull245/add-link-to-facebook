@@ -1,7 +1,7 @@
 ﻿=== Add Link to Facebook ===
 Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
-Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget
+Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
 Stable tag: 1.139
@@ -686,9 +686,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
+* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (topics and replies)
 * Improvement: more debug info
 * Improvement: removed PhpConsole
-* Improvement: bbPress support (topics only)
 * Temporary: disabled plugins actions links
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
 
