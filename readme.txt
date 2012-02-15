@@ -74,6 +74,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 * Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
+* Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -685,7 +686,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
+* Improvement: removed PhpConsole
+* Improvement: more debug info
 * Temporary: disabled plugins actions links
+* Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
 
 Follow these steps to install the development version:
 

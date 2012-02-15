@@ -32,19 +32,12 @@ Author URI: http://blog.bokhorst.biz/about/
 if (version_compare(PHP_VERSION, '5.0.0', '<'))
 	die('Add Link to Facebook requires at least PHP 5, installed version is ' . PHP_VERSION);
 
-// Debug
-if (get_option('al2fb_debug')) {
-	error_reporting(E_ALL);
-	//require_once('PhpConsole.php');
-	//PhpConsole::start();
-}
-
-// Auto load widget class
+// Auto load classs
 if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
 	function __autoload_al2fb($class_name) {
 		if ($class_name == 'WPAL2Int')
 			require_once('add-link-to-facebook-int.php');
-		if ($class_name == 'AL2FB_Widget')
+		else if ($class_name == 'AL2FB_Widget')
 			require_once('add-link-to-facebook-widget.php');
 	}
 	spl_autoload_register('__autoload_al2fb');
@@ -59,7 +52,7 @@ else {
 		function __autoload($class_name) {
 			if ($class_name == 'WPAL2Int')
 				require_once('add-link-to-facebook-int.php');
-			if ($class_name == 'AL2FB_Widget')
+			else if ($class_name == 'AL2FB_Widget')
 				require_once('add-link-to-facebook-widget.php');
 		}
 	}

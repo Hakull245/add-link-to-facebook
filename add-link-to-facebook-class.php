@@ -966,8 +966,9 @@ if (!class_exists('WPAL2Facebook')) {
 				else
 					echo 'wp_get_attachment_image_src does not exist';
 
+				// Debug texts
 				if ($this->debug)
-					echo '<p>' . print_r($texts, true) . '</p>';
+					echo '<pre>' . print_r($texts, true) . '</pre>';
 
 				// Custom excerpt
 				$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
@@ -988,6 +989,12 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<img src="' . $picture_info['picture'] . '" alt="Link picture">';
 				if ($this->debug)
 					echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
+
+				// Error messages
+				if ($this->debug) {
+					$logs = get_post_meta($post->ID, c_al2fb_meta_log, false);
+					echo '<pre>' . print_r($logs, true) . '</pre>';
+				}
 			}
 		}
 
@@ -1169,7 +1176,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$ex_custom_types[] = 'mscr_ban';
 			// bbPress
 			$ex_custom_types[] = 'forum';
-			$ex_custom_types[] = 'topic';
+			//$ex_custom_types[] = 'topic';
 			$ex_custom_types[] = 'reply';
 
 			$ex_custom_types = apply_filters('al2fb_excluded_post_types', $ex_custom_types);
