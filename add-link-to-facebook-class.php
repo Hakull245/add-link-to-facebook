@@ -1136,10 +1136,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Checks
-			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
-				// Check if not added
-				if (self::Is_authorized($user_ID) &&
-					!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
+			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
+				self::Is_authorized($user_ID)) {
+				// Check if not added/excluded
+				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
 
 					$add_new_page = get_user_meta($user_ID, c_al2fb_meta_add_new_page, true);
@@ -1210,6 +1210,8 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Is_excluded_author($post) {
+			if (empty($post->post_author))
+				return false;
 			$excluding_authors = explode(',', get_option(c_al2fb_option_exclude_author));
 			$excluding_authors = apply_filters('al2fb_excluded_authors', $excluding_authors);
 			$author = get_the_author_meta('user_login', $post->post_author);

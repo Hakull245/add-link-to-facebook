@@ -688,6 +688,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: number of likes / notice
 * Improvement: removed PhpConsole
 * Improvement: more debug info
+* Improvement: basic bbPress support
 * Temporary: disabled plugins actions links
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
 
