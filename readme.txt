@@ -685,6 +685,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
+* Temporary: disabled plugins actions links
 
 Follow these steps to install the development version:
 

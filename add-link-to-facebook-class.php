@@ -59,15 +59,14 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			$this->blog_id = $blog_id;
 
-			// register activation actions
-			//register_activation_hook($this->main_file, array(&$this, 'Activate'));
+			// register for de-activation
 			register_deactivation_hook($this->main_file, array(&$this, 'Deactivate'));
 
 			// Register actions
 			add_action('init', array(&$this, 'Init'), 0);
 			if (is_admin()) {
 				add_action('admin_menu', array(&$this, 'Admin_menu'));
-				add_filter('plugin_action_links', array(&$this, 'Plugin_action_links'), 10, 2);
+				//add_filter('plugin_action_links', array(&$this, 'Plugin_action_links'), 10, 2);
 				add_action('admin_notices', array(&$this, 'Admin_notices'));
 				add_action('post_submitbox_misc_actions', array(&$this, 'Post_submitbox_misc_actions'));
 				add_filter('manage_posts_columns', array(&$this, 'Manage_posts_columns'));
@@ -75,7 +74,6 @@ if (!class_exists('WPAL2Facebook')) {
 				add_filter('manage_pages_columns', array(&$this, 'Manage_posts_columns'));
 				add_action('manage_pages_custom_column', array(&$this, 'Manage_posts_custom_column'), 10, 2);
 				add_action('add_meta_boxes', array(&$this, 'Add_meta_boxes'));
-				//add_action('save_post', array(&$this, 'Save_post'));
 				add_action('personal_options', array(&$this, 'Personal_options'));
 				add_action('personal_options_update', array(&$this, 'Personal_options_update'));
 				add_action('edit_user_profile_update', array(&$this, 'Personal_options_update'));
@@ -227,7 +225,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$img = dirname(__FILE__) . '/wp-blue-s.png';
 				header('Content-type: image/png');
 				readfile($img);
-  				exit();
+				exit();
 			}
 
 			// Data URI request
@@ -242,7 +240,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$data = substr($data_uri, $comma + 1);
 				header('Content-type: ' . $content_type);
 				echo base64_decode($data);
-  				exit();
+				exit();
 			}
 
 			// Facebook registration
