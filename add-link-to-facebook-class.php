@@ -1148,7 +1148,10 @@ if (!class_exists('WPAL2Facebook')) {
 					if (empty($post->post_password) &&
 						($post->post_type != 'page' || $add_new_page) &&
 						!self::Is_excluded($post))
-						WPAL2Int::Add_fb_link($post);
+						if ($post->post_type == 'reply')
+							WPAL2Int::Add_fb_link_reply($post);
+						else
+							WPAL2Int::Add_fb_link($post);
 				}
 			}
 		}
@@ -1177,7 +1180,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// bbPress
 			$ex_custom_types[] = 'forum';
 			//$ex_custom_types[] = 'topic';
-			$ex_custom_types[] = 'reply';
+			//$ex_custom_types[] = 'reply';
 
 			$ex_custom_types = apply_filters('al2fb_excluded_post_types', $ex_custom_types);
 
@@ -1902,6 +1905,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Integration?
 			if ($user_ID && !self::Is_excluded($post) &&
+				!$post->post_type == 'reply' &&
 				!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
 				$post->comment_status == 'open') {
 

@@ -724,6 +724,58 @@ if (!class_exists('WPAL2Int')) {
 			}
 		}
 
+		// Add comment to link
+		static function Add_fb_link_reply($reply) {
+			// Get data
+			$topic_id = bbp_get_reply_topic_id($reply->ID);
+			$topic = bbp_get_topic($topic_id);
+			$link_id = get_post_meta($topic->ID, c_al2fb_meta_link_id, true);
+			if (empty($link_id))
+				return;
+			if (get_post_meta($topic->ID, c_al2fb_meta_nointegrate, true))
+				return;
+			$user_ID = WPAL2Facebook::Get_user_ID($topic);
+			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
+				return;
+
+			// Build message
+			$message = bbp_get_reply_author($reply->ID) . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
+			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
+			$message .= $reply->post_content;
+			$message = apply_filters('al2fb_reply', $message, $reply_id);
+
+			// Do not disturb WordPress
+			try {
+				$url = 'https://graph.facebook.com/' . $link_id . '/comments';
+				$url = apply_filters('al2fb_url', $url);
+
+				$query_array = array(
+					'access_token' => WPAL2Int::Get_access_token_by_post($topic),
+					'message' => $message
+				);
+
+				// http://developers.facebook.com/docs/reference/api/Comment/
+				$query = http_build_query($query_array, '', '&');
+
+				// Execute request
+				$response = WPAL2Int::Request($url, $query, 'POST');
+
+				// Process response
+				$fb_comment = json_decode($response);
+
+				// Remove previous errors
+				$error = get_post_meta($topic->ID, c_al2fb_meta_error, true);
+				if (strpos($error, 'Add reply: ') !== false) {
+					delete_post_meta($topic->ID, c_al2fb_meta_error, $error);
+					delete_post_meta($topic->ID, c_al2fb_meta_error_time);
+				}
+			}
+			catch (Exception $e) {
+				update_post_meta($topic->ID, c_al2fb_meta_error, 'Add reply: ' . $e->getMessage());
+				update_post_meta($topic->ID, c_al2fb_meta_error_time, date('c'));
+			}
+		}
+
 		// Get selected page id
 		static function Get_page_id($user_ID, $self) {
 			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
