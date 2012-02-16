@@ -1006,7 +1006,8 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* ...
+* Further bbPress integration (in any case like button)
+* Template tag *al2fb_is_liked*
 
 Feature which will not be realized, sorry:
 
