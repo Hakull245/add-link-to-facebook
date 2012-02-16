@@ -1008,6 +1008,7 @@ In no particular order:
 
 * Further bbPress integration (in any case like button)
 * Template tag *al2fb_is_liked*
+* Disable post submit box additions (based on capabilities)
 
 Feature which will not be realized, sorry:
 
