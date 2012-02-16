@@ -691,6 +691,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: removed PhpConsole
 * Temporary: disabled plugins actions links
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:
 
