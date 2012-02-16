@@ -1021,9 +1021,9 @@ Feature which will not be realized, sorry:
 * Other social buttons: too far from the core function of the plugin
 * Like button at the bottom and top: use a template tag
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
-* Comment with Facebook login: requires permissions
+* Comment with Facebook login: requires too much permissions
 * Integrate posts from Facebook: WordPress centric plugin
-* <Title> by <Author>: each author should authorize, but you can use avatars
+* \<Title\> by \<Author\>: each author should authorize, but you can use avatars
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
 
