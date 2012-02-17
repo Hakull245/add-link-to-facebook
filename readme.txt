@@ -1006,7 +1006,6 @@ You can add additional styling rules using a plugin option.
 In no particular order:
 
 * Further bbPress integration (in any case like button)
-* Template tag *al2fb_is_liked*
 * Disable post submit box additions (based on capabilities)
 
 Feature which will not be realized, sorry:
@@ -1022,7 +1021,7 @@ Feature which will not be realized, sorry:
 * Restrict adding links to no more than x per hour: plugin is designed for real-time
 * Comment with Facebook login: requires too much permissions
 * Integrate posts from Facebook: WordPress centric plugin
-* \<Title\> by \<Author\>: each author should authorize, but you can use avatars
+* "Title" by "Author": each author should authorize, but you can use avatars
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
 
