@@ -689,7 +689,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (both topics and replies)
 * Improvement: more debug info
 * Improvement: removed PhpConsole
-* Temporary: disabled plugins actions links
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 

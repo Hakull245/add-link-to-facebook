@@ -37,9 +37,9 @@ function al2fb_render_admin($al2fb)
 	if (isset($_REQUEST['tabs']))
 		$config_url .= '&tabs=0';
 	if (isset($_REQUEST['multiple'])) {
-		update_option(c_al2fb_option_multiple, $_REQUEST['multiple']);
-		if ($_REQUEST['multiple'] == md5(WPAL2Int::Redirect_uri()))
-			echo '<div id="message" class="updated fade al2fb_notice"><p>Code accepted</p></div>';
+		$count = (isset($_REQUEST['sites']) ? $_REQUEST['sites'] : 1);
+		if (al2fb_set_multiple($_REQUEST['multiple'], $count))
+			echo '<div id="message" class="updated fade al2fb_notice"><p>Code accepted (' . $count . ')</p></div>';
 	}
 
 	// Decode picture type
@@ -423,7 +423,7 @@ function al2fb_render_admin($al2fb)
 					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
 				</th><td>
 <?php
-				if (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
+				if (al2fb_check_multiple()) {
 					echo '<table>';
 					if ($me) {
 						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
@@ -1430,6 +1430,17 @@ function al2fb_render_debug_info($al2fb) {
 		require_once('add-link-to-facebook-debug.php');
 		echo al2fb_debug_info($al2fb);
 	}
+}
+
+function al2fb_set_multiple($code, $count) {
+	update_option(c_al2fb_option_multiple, $code);
+	update_option(c_al2fb_option_multiple_count, $count);
+	return al2fb_check_multiple();
+}
+
+function al2fb_check_multiple() {
+	// is_multisite()
+	return (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri()));
 }
 
 ?>
