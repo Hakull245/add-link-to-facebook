@@ -101,6 +101,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
 			add_filter('the_content', array(&$this, 'The_content'), $fprio);
+			add_filter('bbp_get_topic_content', array(&$this, 'The_content'), $fprio);
 			add_filter('bbp_get_reply_content', array(&$this, 'The_content'), $fprio);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
@@ -1918,7 +1919,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Integration?
 			if ($user_ID && !self::Is_excluded($post) &&
-				!$post->post_type == 'reply' &&
+				$post->post_type != 'reply' &&
 				!get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) &&
 				$post->comment_status == 'open') {
 
@@ -1959,70 +1960,98 @@ if (!class_exists('WPAL2Facebook')) {
 
 								// Create new comment
 								if (!$stored) {
-									$comment_ID = $fb_comment->id;
-									$commentdata = array(
-										'comment_post_ID' => $post_ID,
-										'comment_author' => $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain),
-										'comment_author_email' => $fb_comment->from->id . '@facebook.com',
-										'comment_author_url' => WPAL2Int::Get_fb_profilelink($fb_comment->from->id),
-										'comment_author_IP' => '',
-										'comment_date' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off),
-										'comment_date_gmt' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time)),
-										'comment_content' => $fb_comment->message,
-										'comment_karma' => 0,
-										'comment_approved' => 1,
-										'comment_agent' => 'AL2FB',
-										'comment_type' => '', // pingback|trackback
-										'comment_parent' => 0,
-										'user_id' => 0
-									);
+									$name = $fb_comment->from->name . ' ' . __('on Facebook', c_al2fb_text_domain);
+									if ($post->post_type == 'topic') {
+										// bbPress
+										$reply_id = bbp_insert_reply(array(
+											'post_parent' => $post_ID,
+											'post_content' => $fb_comment->message,
+											'post_status' => 'draft'
+										),
+										array(
+											'forum_id' => bbp_get_topic_forum_id($post_ID),
+											'topic_id' => $post_ID,
+											'anonymous_name' => $name
+										));
 
-									$commentdata = apply_filters('al2fb_preprocess_comment', $commentdata, $post);
+										// Add data
+										add_post_meta($reply_id, c_al2fb_meta_link_id, $fb_comment->id);
+										add_post_meta($post_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
 
-									// Copy Facebook comment to WordPress database
-									if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) {
-										// Apply filters
-										if (get_option(c_al2fb_option_nofilter_comments))
+										// Publish
+										$reply = array();
+										$reply['ID'] = $reply_id;
+										$reply['post_status'] = 'publish';
+										wp_update_post($reply);
+  									}
+									else {
+										$comment_ID = $fb_comment->id;
+										$commentdata = array(
+											'comment_post_ID' => $post_ID,
+											'comment_author' => $name,
+											'comment_author_email' => $fb_comment->from->id . '@facebook.com',
+											'comment_author_url' => WPAL2Int::Get_fb_profilelink($fb_comment->from->id),
+											'comment_author_IP' => '',
+											'comment_date' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time) + $tz_off),
+											'comment_date_gmt' => date('Y-m-d H:i:s', strtotime($fb_comment->created_time)),
+											'comment_content' => $fb_comment->message,
+											'comment_karma' => 0,
+											'comment_approved' => 1,
+											'comment_agent' => 'AL2FB',
+											'comment_type' => '', // pingback|trackback
+											'comment_parent' => 0,
+											'user_id' => 0
+										);
+
+										$commentdata = apply_filters('al2fb_preprocess_comment', $commentdata, $post);
+
+										// Copy Facebook comment to WordPress database
+										if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) {
+											// Apply filters
+											if (get_option(c_al2fb_option_nofilter_comments))
+												$commentdata['comment_approved'] = '1';
+											else {
+												$commentdata = apply_filters('preprocess_comment', $commentdata);
+												$commentdata = wp_filter_comment($commentdata);
+												$commentdata['comment_approved'] = wp_allow_comment($commentdata);
+											}
+
+											// Insert comment in database
+											$comment_ID = wp_insert_comment($commentdata);
+											add_comment_meta($comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+											do_action('comment_post', $comment_ID, $commentdata['comment_approved']);
+
+											// Notify
+											if ('spam' !== $commentdata['comment_approved']) {
+												if ('0' == $commentdata['comment_approved'])
+													wp_notify_moderator($comment_ID);
+												if (get_option('comments_notify') && $commentdata['comment_approved'])
+													wp_notify_postauthor($comment_ID, $commentdata['comment_type']);
+											}
+										}
+										else
 											$commentdata['comment_approved'] = '1';
-										else {
-											$commentdata = apply_filters('preprocess_comment', $commentdata);
-											$commentdata = wp_filter_comment($commentdata);
-											$commentdata['comment_approved'] = wp_allow_comment($commentdata);
+
+										// Add comment to array
+										if ($commentdata['comment_approved'] == 1) {
+											$new = null;
+											$new->comment_ID = $comment_ID;
+											$new->comment_post_ID = $commentdata['comment_post_ID'];
+											$new->comment_author = $commentdata['comment_author'];
+											$new->comment_author_email = $commentdata['comment_author_email'];
+											$new->comment_author_url = $commentdata['comment_author_url'];
+											$new->comment_author_ip = $commentdata['comment_author_IP'];
+											$new->comment_date = $commentdata['comment_date'];
+											$new->comment_date_gmt = $commentdata['comment_date_gmt'];
+											$new->comment_content = stripslashes($commentdata['comment_content']);
+											$new->comment_karma = $commentdata['comment_karma'];
+											$new->comment_approved = $commentdata['comment_approved'];
+											$new->comment_agent = $commentdata['comment_agent'];
+											$new->comment_type = $commentdata['comment_type'];
+											$new->comment_parent = $commentdata['comment_parent'];
+											$new->user_id = $commentdata['user_id'];
+											$comments[] = $new;
 										}
-
-										// Insert comment in database
-										$comment_ID = wp_insert_comment($commentdata);
-										add_comment_meta($comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
-										do_action('comment_post', $comment_ID, $commentdata['comment_approved']);
-
-										// Notify
-										if ('spam' !== $commentdata['comment_approved']) {
-											if ('0' == $commentdata['comment_approved'])
-												wp_notify_moderator($comment_ID);
-											if (get_option('comments_notify') && $commentdata['comment_approved'])
-												wp_notify_postauthor($comment_ID, $commentdata['comment_type']);
-										}
-									}
-
-									// Add comment to array
-									if ($commentdata['comment_approved'] == 1) {
-										$new = null;
-										$new->comment_ID = $comment_ID;
-										$new->comment_post_ID = $commentdata['comment_post_ID'];
-										$new->comment_author = $commentdata['comment_author'];
-										$new->comment_author_email = $commentdata['comment_author_email'];
-										$new->comment_author_url = $commentdata['comment_author_url'];
-										$new->comment_author_ip = $commentdata['comment_author_IP'];
-										$new->comment_date = $commentdata['comment_date'];
-										$new->comment_date_gmt = $commentdata['comment_date_gmt'];
-										$new->comment_content = stripslashes($commentdata['comment_content']);
-										$new->comment_karma = $commentdata['comment_karma'];
-										$new->comment_approved = $commentdata['comment_approved'];
-										$new->comment_agent = $commentdata['comment_agent'];
-										$new->comment_type = $commentdata['comment_type'];
-										$new->comment_parent = $commentdata['comment_parent'];
-										$new->user_id = $commentdata['user_id'];
-										$comments[] = $new;
 									}
 								}
 							}
