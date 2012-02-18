@@ -38,6 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile/ "Facepile"),
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
+* [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support
 * And much more!
 
 **Pro version:**
