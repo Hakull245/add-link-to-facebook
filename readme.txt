@@ -686,10 +686,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
-* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (topics, replies, like button)
+* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (topics, replies, like button, etc)
+* New feature: option to hide post submit actions based on capabilities
 * Improvement: more debug info
 * Improvement: removed PhpConsole
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:
@@ -1005,8 +1007,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Further bbPress integration (in any case like button)
-* Disable post submit box additions (based on capabilities)
+* ...
 
 Feature which will not be realized, sorry:
 
