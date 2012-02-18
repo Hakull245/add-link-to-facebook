@@ -101,6 +101,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Content
 			add_action('wp_head', array(&$this, 'WP_head'));
 			add_filter('the_content', array(&$this, 'The_content'), $fprio);
+			add_filter('bbp_get_reply_content', array(&$this, 'The_content'), $fprio);
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
 			add_filter('comment_class', array(&$this, 'Comment_class'));
