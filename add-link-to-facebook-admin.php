@@ -1434,13 +1434,29 @@ function al2fb_render_debug_info($al2fb) {
 
 function al2fb_set_multiple($code, $count) {
 	update_option(c_al2fb_option_multiple, $code);
-	update_option(c_al2fb_option_multiple_count, $count);
+	if ($count > 1)
+		update_option(c_al2fb_option_multiple_count, $count);
+	else
+		delete_option(c_al2fb_option_multiple_count);
 	return al2fb_check_multiple();
 }
 
 function al2fb_check_multiple() {
-	// is_multisite()
-	return (get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri()));
+	$code = get_option(c_al2fb_option_multiple);
+	$count = get_option(c_al2fb_option_multiple_count);
+	if (is_multisite()) {
+		$current_site = get_current_site();
+		$blog_details = get_blog_details($current_site->blog_id, true);
+		$main_site_url = trailingslashit($blog_details->siteurl);
+		$blog_count = get_blog_count();
+		if (!$blog_count) {
+			wp_update_network_counts();
+			$blog_count = get_blog_count();
+		}
+		return ($code == md5($main_site_url . $count) && $blog_count <= $count);
+	}
+	else
+		return ($code == md5(WPAL2Int::Redirect_uri()));
 }
 
 ?>
