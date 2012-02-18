@@ -686,7 +686,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
-* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support (topics, replies, like button, etc)
+* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support
 * New feature: option to hide post submit actions based on capabilities
 * Improvement: more debug info
 * Improvement: removed PhpConsole
