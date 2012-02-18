@@ -1075,6 +1075,12 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_no_post_submit"><?php _e('Hide post submit additions too:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_no_post_submit" name="<?php echo c_al2fb_option_no_post_submit; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_no_post_submit)) echo ' checked="checked"'; ?> />
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_min_cap_comment"><?php _e('Required capability to view Facebook comments:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<select class="al2db_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">

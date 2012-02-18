@@ -519,6 +519,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_timeout, $_POST[c_al2fb_option_timeout]);
 				update_option(c_al2fb_option_nonotice, $_POST[c_al2fb_option_nonotice]);
 				update_option(c_al2fb_option_min_cap, $_POST[c_al2fb_option_min_cap]);
+				update_option(c_al2fb_option_no_post_submit, $_POST[c_al2fb_option_no_post_submit]);
 				update_option(c_al2fb_option_min_cap_comment, $_POST[c_al2fb_option_min_cap_comment]);
 				update_option(c_al2fb_option_msg_refresh, $_POST[c_al2fb_option_msg_refresh]);
 				update_option(c_al2fb_option_msg_maxage, $_POST[c_al2fb_option_msg_maxage]);
@@ -767,6 +768,11 @@ if (!class_exists('WPAL2Facebook')) {
 			// Check exclusion
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
+				return;
+
+			// Security
+			if (get_option(c_al2fb_option_no_post_submit) &&
+				!current_user_can(get_option(c_al2fb_option_min_cap)))
 				return;
 
 			// Get user
