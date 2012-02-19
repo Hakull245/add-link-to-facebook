@@ -38,7 +38,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 [Facepile](http://developers.facebook.com/docs/reference/plugins/facepile/ "Facepile"),
 [Registration](http://developers.facebook.com/docs/plugins/registration/ "Registration")/login,
 [Activity feed](http://developers.facebook.com/docs/reference/plugins/activity/ "Activity feed") and/or a link/icon to your Facebook profile
-* [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support
+* [bbPress support](http://wordpress.org/support/topic/add-link-to-facebook-support-bbpress-now)
 * And much more!
 
 **Pro version:**
@@ -687,7 +687,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: number of likes / notice
-* New feature: [bbPress](http://wordpress.org/extend/plugins/bbpress/ "bbPress") support
+* New feature: [bbPress support](http://wordpress.org/support/topic/add-link-to-facebook-support-bbpress-now)
 * New feature: option to hide post submit actions based on capabilities
 * Improvement: more debug info
 * Improvement: removed PhpConsole
