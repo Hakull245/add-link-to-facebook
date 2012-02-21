@@ -1008,7 +1008,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* ...
+* Replace br by line breaks
 
 Feature which will not be realized, sorry:
 
