@@ -509,9 +509,20 @@ if (!class_exists('WPAL2Int')) {
 				'caption' => $caption,
 				'description' => $description,
 				'message' => $message,
+				'ref' => 'AL2FB',
 				'scrape' => 'true'
-				// source (video)
 			);
+
+			// Add home link
+			$actions = array(
+				name => __('Website', c_al2fb_text_domain),
+				link => get_home_url());
+			$query_array['actions'] = json_encode($actions);
+
+			if (get_option(c_al2fb_option_debug)) {
+				// http://facebook.stackoverflow.com/questions/5227607/posting-an-embedded-video-link-using-the-facebook-graph-api
+				// $query_array['source'] = 'http://www.youtube.com/v/fN-xq7t6pKw';
+			}
 
 			// Add picture
 			if ($picture)

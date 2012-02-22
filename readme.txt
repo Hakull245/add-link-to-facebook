@@ -690,6 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: link back to website from Facebook
 * Improvement: always request Facebook scrape
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
