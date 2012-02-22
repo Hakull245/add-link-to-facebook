@@ -435,6 +435,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_page_extra, $_POST[c_al2fb_meta_page_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_use_groups, $_POST[c_al2fb_meta_use_groups]);
 			update_user_meta($user_ID, c_al2fb_meta_group, $_POST[c_al2fb_meta_group]);
+			update_user_meta($user_ID, c_al2fb_meta_group_extra, $_POST[c_al2fb_meta_group_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);

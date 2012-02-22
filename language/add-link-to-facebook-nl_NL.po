@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-02-20 21:12+0100\n"
+"PO-Revision-Date: 2012-02-22 09:46+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Dutch\n"
@@ -931,4 +931,7 @@ msgstr "Verberg ook bericht bijwerk toevoegingen:"
 
 msgid "Pro version"
 msgstr "Pro versie"
+
+msgid "Add also to groups:"
+msgstr "Voeg ook toe aan groepen:"
 

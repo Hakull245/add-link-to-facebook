@@ -38,7 +38,7 @@ function al2fb_render_admin($al2fb)
 		$config_url .= '&tabs=0';
 	if (isset($_REQUEST['multiple'])) {
 		$count = (isset($_REQUEST['sites']) ? $_REQUEST['sites'] : 1);
-		if (al2fb_set_multiple($_REQUEST['multiple'], $count))
+		if (WPAL2Int::Set_multiple($_REQUEST['multiple'], $count))
 			echo '<div id="message" class="updated fade al2fb_notice"><p>Code accepted (' . $count . ')</p></div>';
 	}
 
@@ -367,7 +367,8 @@ function al2fb_render_admin($al2fb)
 	if ($al2fb->Is_authorized($user_ID)) {
 		try {
 			if (!get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ||
-				!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
+				!get_user_meta($user_ID, c_al2fb_meta_group, true) ||
+				WPAL2Int::Check_multiple()) {
 				// Get personal page
 				try {
 					$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
@@ -423,7 +424,7 @@ function al2fb_render_admin($al2fb)
 					<label for="al2fb_page"><?php _e('Add also to pages:', c_al2fb_text_domain); ?></label>
 				</th><td>
 <?php
-				if (al2fb_check_multiple()) {
+				if (WPAL2Int::Check_multiple()) {
 					echo '<table>';
 					if ($me) {
 						echo '<tr><td><input type="checkbox"' . (in_array('me', $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="me"></td>';
@@ -433,7 +434,7 @@ function al2fb_render_admin($al2fb)
 						foreach ($pages->data as $page) {
 							if (empty($page->name))
 								$page->name = '?';
-							echo '<tr><td><input type="checkbox"' . (in_array($page->id, $extra_page) ? ' checked="checked"' : '') . ' name="al2fb_page_extra[]" value="' . $page->id . '"></td>';
+							echo '<tr><td><input type="checkbox"' . (in_array($page->id, $extra_page) ? ' checked="checked"' : '') . ' name="' . c_al2fb_meta_page_extra . '[]" value="' . $page->id . '"></td>';
 							echo '<td>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</td></tr>';
 						}
 					echo '</table>';
@@ -447,12 +448,9 @@ function al2fb_render_admin($al2fb)
 ?>
 				</td></tr>
 				</table>
-				<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
-				</p>
 				</div>
 <?php
-				if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+				if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true) && !WPAL2Int::Check_multiple()) {
 ?>
 					<script type="text/javascript">
 						jQuery(document).ready(function($) {
@@ -463,7 +461,6 @@ function al2fb_render_admin($al2fb)
 				}
 			}
 ?>
-
 			<h4><?php _e('Facebook group', c_al2fb_text_domain); ?></h4>
 			<table class="form-table al2fb_border">
 			<tr valign="top"><th scope="row">
@@ -483,6 +480,9 @@ function al2fb_render_admin($al2fb)
 					$groups = null;
 				}
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
+				$extra_group = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
+				if (empty($extra_group))
+					$extra_group = array();
 ?>
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_group"><?php _e('Add to group:', c_al2fb_text_domain); ?></label>
@@ -500,7 +500,28 @@ function al2fb_render_admin($al2fb)
 ?>
 					</select>
 				</td></tr>
+
+				<tr valign="top"><th scope="row">
+					<label for="al2fb_page"><?php _e('Add also to groups:', c_al2fb_text_domain); ?></label>
+				</th><td>
 <?php
+				if (WPAL2Int::Check_multiple()) {
+					echo '<table>';
+					if ($groups && $groups->data)
+						foreach ($groups->data as $group) {
+							if (empty($group->name))
+								$group->name = '?';
+							echo '<tr><td><input type="checkbox"' . (in_array($group->id, $extra_group) ? ' checked="checked"' : '') . ' name="' . c_al2fb_meta_group_extra . '[]" value="' . $group->id . '"></td>';
+							echo '<td>' . htmlspecialchars($group->name, ENT_QUOTES, $charset) . '</td></tr>';
+						}
+					echo '</table>';
+				}
+				else {
+					echo '<strong>';
+					_e('This option is only available in', c_al2fb_text_domain);
+					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo '</strong>';
+				}
 			}
 ?>
 			</table>
@@ -1437,33 +1458,6 @@ function al2fb_render_debug_info($al2fb) {
 		require_once('add-link-to-facebook-debug.php');
 		echo al2fb_debug_info($al2fb);
 	}
-}
-
-function al2fb_set_multiple($code, $count) {
-	update_option(c_al2fb_option_multiple, $code);
-	if ($count > 1)
-		update_option(c_al2fb_option_multiple_count, $count);
-	else
-		delete_option(c_al2fb_option_multiple_count);
-	return al2fb_check_multiple();
-}
-
-function al2fb_check_multiple() {
-	$code = get_option(c_al2fb_option_multiple);
-	$count = get_option(c_al2fb_option_multiple_count);
-	if (is_multisite()) {
-		$current_site = get_current_site();
-		$blog_details = get_blog_details($current_site->blog_id, true);
-		$main_site_url = trailingslashit($blog_details->siteurl);
-		$blog_count = get_blog_count();
-		if (!$blog_count) {
-			wp_update_network_counts();
-			$blog_count = get_blog_count();
-		}
-		return ($code == md5($main_site_url . $count) && $blog_count <= $count);
-	}
-	else
-		return ($code == md5(WPAL2Int::Redirect_uri()));
 }
 
 ?>

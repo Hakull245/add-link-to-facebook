@@ -442,7 +442,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Add_fb_link($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
 
-			// Get url
+			// Get link URL
 			if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true))
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
@@ -480,14 +480,20 @@ if (!class_exists('WPAL2Int')) {
 			if (get_user_meta($user_ID, c_al2fb_meta_msg, true))
 				$message = $excerpt;
 
-			// Get walls
+			// Get wall
 			$page_ids = array();
-			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
+			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
-			if (empty($page_ids)) {
+				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
+					$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
+					if (!empty($extra))
+						$page_ids = array_merge($page_ids, $extra);
+				}
+			}
+
+			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
-				if (!empty($page_ids) &&
-					get_option(c_al2fb_option_multiple) == md5(WPAL2Int::Redirect_uri())) {
+				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
 					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
 					if (!empty($extra))
 						$page_ids = array_merge($page_ids, $extra);
@@ -496,52 +502,57 @@ if (!class_exists('WPAL2Int')) {
 			if (empty($page_ids))
 				$page_ids[] = 'me';
 
-			// Add links to walls
-			foreach ($page_ids as $page_id) {
-				// https://developers.facebook.com/docs/reference/api/user/#posts
-				// https://developers.facebook.com/docs/reference/api/post/
-				if (empty($page_id))
-					$page_id = 'me';
-				$url = 'https://graph.facebook.com/' . $page_id . '/feed';
-				$url = apply_filters('al2fb_url', $url);
+			// Build request
+			$query_array = array(
+				'link' => $link,
+				'name' => $name,
+				'caption' => $caption,
+				'description' => $description,
+				'message' => $message,
+				'scrape' => 'true'
+				// source (video)
+			);
 
+			// Add picture
+			if ($picture)
+				$query_array['picture'] = $picture;
+
+			// Add share link
+			if (get_user_meta($user_ID, c_al2fb_meta_share_link, true)) {
+				// http://forum.developers.facebook.net/viewtopic.php?id=50049
+				// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
+				$actions = array(
+					'name' => __('Share', c_al2fb_text_domain),
+					'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . rawurlencode($name)
+				);
+				$query_array['actions'] = json_encode($actions);
+			}
+
+			// Add privacy option
+			if ($page_id == 'me') {
+				$privacy = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
+				if ($privacy)
+					$query_array['privacy'] = json_encode(array('value' => $privacy));
+			}
+
+			// Add link
+			foreach ($page_ids as $page_id) {
 				// Do not disturb WordPress
 				try {
-					// Build request
-					$query_array = array(
-						'access_token' => WPAL2Int::Get_access_token_by_page($user_ID, $page_id),
-						'link' => $link,
-						'name' => $name,
-						'caption' => $caption,
-						'description' => $description,
-						'message' => $message
-						// scrape (true)
-						// source (video)
-						// https://developers.facebook.com/docs/reference/dialogs/feed/
-					);
+					// https://developers.facebook.com/docs/reference/api/user/#posts
+					// https://developers.facebook.com/docs/reference/api/post/
+					// https://developers.facebook.com/docs/reference/dialogs/feed/
 
-					if ($picture)
-						$query_array['picture'] = $picture;
+					// Get URL
+					if (empty($page_id))
+						$page_id = 'me';
+					$url = 'https://graph.facebook.com/' . $page_id . '/feed';
+					$url = apply_filters('al2fb_url', $url);
 
-					// Add share link
-					if (get_user_meta($user_ID, c_al2fb_meta_share_link, true)) {
-						// http://forum.developers.facebook.net/viewtopic.php?id=50049
-						// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
-						$actions = array(
-							'name' => __('Share', c_al2fb_text_domain),
-							'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . rawurlencode($name)
-						);
-						$query_array['actions'] = json_encode($actions);
-					}
+					// Get access token
+					$query_array['access_token'] = WPAL2Int::Get_access_token_by_page($user_ID, $page_id);
 
-					// Privacy
-					if ($page_id == 'me') {
-						$privacy = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
-						if ($privacy)
-							$query_array['privacy'] = json_encode(array('value' => $privacy));
-					}
-
-					// Build request
+					// Build query
 					$query = http_build_query($query_array, '', '&');
 
 					// Log request
@@ -572,20 +583,21 @@ if (!class_exists('WPAL2Int')) {
 					delete_post_meta($post->ID, c_al2fb_meta_error);
 					delete_post_meta($post->ID, c_al2fb_meta_error_time);
 
-					// Auto refresh access token
-					try {
-						WPAL2Int::Refresh_fb_token($user_ID);
-					}
-					catch (Exception $e) {
-						update_post_meta($post->ID, c_al2fb_meta_error, 'Refresh token: ' . $e->getMessage());
-						update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
-					}
 				}
 				catch (Exception $e) {
 					update_post_meta($post->ID, c_al2fb_meta_error, 'Add link: ' . $e->getMessage());
 					update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 					update_post_meta($post->ID, c_al2fb_meta_link_picture, $picture_type . '=' . $picture);
 				}
+			}
+
+			// Auto refresh access token
+			try {
+				WPAL2Int::Refresh_fb_token($user_ID);
+			}
+			catch (Exception $e) {
+				update_post_meta($post->ID, c_al2fb_meta_error, 'Refresh token: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
 			}
 		}
 
@@ -1561,6 +1573,33 @@ if (!class_exists('WPAL2Int')) {
 				update_option(c_al2fb_last_error_time, date('c'));
 				throw new Exception($msg);
 			}
+		}
+
+		static function Set_multiple($code, $count) {
+			update_option(c_al2fb_option_multiple, $code);
+			if ($count > 1)
+				update_option(c_al2fb_option_multiple_count, $count);
+			else
+				delete_option(c_al2fb_option_multiple_count);
+			return WPAL2Int::Check_multiple();
+		}
+
+		static function Check_multiple() {
+			$code = get_option(c_al2fb_option_multiple);
+			$count = get_option(c_al2fb_option_multiple_count);
+			if (is_multisite()) {
+				$current_site = get_current_site();
+				$blog_details = get_blog_details($current_site->blog_id, true);
+				$main_site_url = trailingslashit($blog_details->siteurl);
+				$blog_count = get_blog_count();
+				if (!$blog_count) {
+					wp_update_network_counts();
+					$blog_count = get_blog_count();
+				}
+				return ($code == md5($main_site_url . $count) && $blog_count <= $count);
+			}
+			else
+				return ($code == md5(WPAL2Int::Redirect_uri()));
 		}
 	}
 }
