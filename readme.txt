@@ -76,6 +76,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
+* Greek (el\_EL), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
@@ -694,6 +695,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: always request Facebook scrape
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Added Greek (el\_EL) translation
 
 Follow these steps to install the development version:
 
