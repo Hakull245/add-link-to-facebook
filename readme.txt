@@ -711,6 +711,7 @@ Follow these steps to install the development version:
 * Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.139 =
 * New feature: option to limit imported comment length (comment trailer)
@@ -745,14 +746,6 @@ Follow these steps to install the development version:
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
 
-= 1.135 =
-* New feature: option to disable asynchronous Facebook script
-* Improvement: caching for settings page
-* Improvement: added script type to Facebook JavaScript
-* Improvement: no likers, like button and comments plugin in excerpts
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -773,9 +766,6 @@ One improvement, translation update
 
 = 1.136 =
 Three bugfixes, new translation, translation updates
-
-= 1.135 =
-One new feature, three improvements, translation updates
 
 == Setup guide ==
 
