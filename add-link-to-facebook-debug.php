@@ -93,7 +93,7 @@ function al2fb_debug_info($al2fb) {
 	$active  = get_option('active_plugins', array());
 	foreach (get_plugins() as $plugin_tag => $plugin_data)
 		if (in_array($plugin_tag, $active))
-			$info .= '<tr><td>Active plugin:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . '</a></td></tr>';
+			$info .= '<tr><td>Active plugin:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . ' ' . $plugin_data['Version'] . '</a></td></tr>';
 
 	$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 	$info .= '<tr><td>Settings version:</td><td>' . get_option(c_al2fb_option_version) . '</td></tr>';

@@ -519,9 +519,14 @@ if (!class_exists('WPAL2Int')) {
 				link => get_home_url());
 			$query_array['actions'] = json_encode($actions);
 
-			if (get_option(c_al2fb_option_debug)) {
-				// http://facebook.stackoverflow.com/questions/5227607/posting-an-embedded-video-link-using-the-facebook-graph-api
-				// $query_array['source'] = 'http://www.youtube.com/v/fN-xq7t6pKw';
+			// Add video
+			// http://wordpress.org/extend/plugins/vipers-video-quicktags/
+			global $VipersVideoQuicktags;
+			if (isset($VipersVideoQuicktags)) {
+				do_shortcode($post->post_content);
+				$video = reset($VipersVideoQuicktags->swfobjects);
+				if (!empty($video))
+					$query_array['source'] = $video['url'];
 			}
 
 			// Add picture
