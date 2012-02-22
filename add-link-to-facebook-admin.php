@@ -111,7 +111,10 @@ function al2fb_render_admin($al2fb)
 		echo '<div id="message" class="error fade al2fb_error"><p>' . __('Your server may not allow external connections', c_al2fb_text_domain) . '</p></div>';
 
 	al2fb_render_debug_info($al2fb);
+	echo '<div class="al2fb_sidebar">';
 	al2fb_render_resources($al2fb);
+	al2fb_render_ads($al2fb);
+	echo '</div>';
 ?>
 	<div class="al2fb_options">
 
@@ -1402,6 +1405,16 @@ function al2fb_render_resources($al2fb) {
 ?>
 	</div>
 <?php
+}
+
+function al2fb_render_ads($al2fb) {
+	if (!get_user_meta($user_ID, c_al2fb_meta_donated, true)) {
+		echo '<div class="al2fb_ads">';
+		echo '<a href="http://managewp.com/?utm_source=Plugins&utm_medium=Banner&utm_content=mwp250_2&utm_campaign=addtofacebook" target="_blank">';
+		echo '<img src="' . plugins_url('mwp250_2.png', __FILE__) . '" alt="ManageWP">';
+		echo '</a>';
+		echo '</div>';
+	}
 }
 
 function al2fb_render_debug_info($al2fb) {

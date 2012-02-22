@@ -32,7 +32,6 @@ if (!class_exists('WPAL2Facebook')) {
 	class WPAL2Facebook {
 		// Class variables
 		var $main_file = null;
-		var $plugin_url = null;
 		var $debug = null;
 		var $site_id = '';
 		var $blog_id = '';
@@ -43,11 +42,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get main file name
 			$this->main_file = str_replace('-class', '', __FILE__);
-
-			// Get plugin url
-			$this->plugin_url = WP_PLUGIN_URL . '/' . basename(dirname($this->main_file));
-			if (strpos($this->plugin_url, 'http') === 0 && is_ssl())
-				$this->plugin_url = str_replace('http://', 'https://', $this->plugin_url);
 
 			// Log
 			$this->debug = get_option(c_al2fb_option_debug);
@@ -270,7 +264,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Enqueue style sheet
 			if (is_admin()) {
 				$css_name = $this->Change_extension(basename($this->main_file), '-admin.css');
-				$css_url = $this->plugin_url . '/' . $css_name;
+				$css_url = plugins_url($css_name, __FILE__);
 				wp_register_style('al2fb_style_admin', $css_url);
 				wp_enqueue_style('al2fb_style_admin');
 			}
@@ -282,7 +276,7 @@ if (!class_exists('WPAL2Facebook')) {
 				else if (file_exists(TEMPLATEPATH . '/' . $css_name))
 					$css_url = get_bloginfo('template_directory') . '/' . $css_name;
 				else
-					$css_url = $this->plugin_url . '/' . $css_name;
+					$css_url = plugins_url($css_name, __FILE__);
 				wp_register_style('al2fb_style', $css_url);
 				wp_enqueue_style('al2fb_style');
 			}
@@ -292,7 +286,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Social share privacy
 			if (get_option(c_al2fb_option_use_ssp))
-				wp_enqueue_script('socialshareprivacy', $this->plugin_url . '/js/jquery.socialshareprivacy.js', array('jquery'));
+				wp_enqueue_script('socialshareprivacy', plugins_url('/js/jquery.socialshareprivacy.js', __FILE__), array('jquery'));
 
 			// Check user capability
 			if (current_user_can(get_option(c_al2fb_option_min_cap))) {
