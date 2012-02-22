@@ -147,7 +147,6 @@ Mostly the first picture in the post, but it depends on the theme and layout of 
 
 Maybe because it is smaller than 50 x 50 pixels.
 Facebook might also have had trouble accessing the image.
-Another common cause is an incompatible plugin or theme.
 
 = U07 I don't want a link picture =
 
@@ -433,6 +432,11 @@ Because of this I don't give support on compatibility with other plugins and the
 You should contact the author of the other plugin or theme.
 The author of the other plugin or theme is free to contact me if needed.
 
+Known incompatible plugins:
+
+* [WordPress Importer](http://wordpress.org/extend/plugins/wordpress-importer/)
+* [Pricing Table](http://wordpress.org/extend/plugins/pricing-table/)
+
 = C03 Are shortcodes being processed? =
 
 This is an option, when enabled shortcodes will be processed.
@@ -686,7 +690,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Improvement: always request Facebook scrape
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
@@ -1005,7 +1011,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* Replace br by line breaks
+* ...
 
 Feature which will not be realized, sorry:
 
@@ -1023,6 +1029,7 @@ Feature which will not be realized, sorry:
 * "Title" by "Author": each author should authorize, but you can use avatars
 * Facebook avatar after Facebook login: see question U29 of the FAQ for how to
 * Single sign-off (Facebook and WordPress): not possible
+* Replace html br by newline: not possible
 
 == Acknowledgements ==
 
