@@ -1195,6 +1195,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$ex_custom_types[] = 'forum';
 			//$ex_custom_types[] = 'topic';
 			//$ex_custom_types[] = 'reply';
+			$ex_custom_types[] = 'tweet';
 
 			$ex_custom_types = apply_filters('al2fb_excluded_post_types', $ex_custom_types);
 

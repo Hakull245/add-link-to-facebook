@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.139
+Stable tag: 1.141
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -686,14 +686,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: number of likes / notice
-* New feature: [bbPress support](http://wordpress.org/support/topic/add-link-to-facebook-support-bbpress-now)
-* New feature: option to hide post submit actions based on capabilities
-* Improvement: more debug info
-* Improvement: removed PhpConsole
-* Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* ...
 
 Follow these steps to install the development version:
 
@@ -707,6 +700,17 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.141 =
+* Bugfix: number of likes / notice
+* New feature: [bbPress support](http://wordpress.org/support/topic/add-link-to-facebook-support-bbpress-now)
+* New feature: option to hide post submit actions based on capabilities
+* Improvement: more debug info
+* Improvement: removed PhpConsole
+* Improvement: excluding custom post type *tweet*
+* Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.139 =
 * New feature: option to limit imported comment length (comment trailer)
@@ -754,6 +758,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.141 =
+One bugfix, two new features, three improvements, translation updates
 
 = 1.139 =
 One new feature, six improvements, one workaround, translation updates
@@ -1008,7 +1015,7 @@ You can add additional styling rules using a plugin option.
 
 In no particular order:
 
-* ...
+* Replace br by line breaks
 
 Feature which will not be realized, sorry:
 

@@ -515,6 +515,9 @@ if (!class_exists('WPAL2Int')) {
 						'caption' => $caption,
 						'description' => $description,
 						'message' => $message
+						// scrape (true)
+						// source (video)
+						// https://developers.facebook.com/docs/reference/dialogs/feed/
 					);
 
 					if ($picture)
