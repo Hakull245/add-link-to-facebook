@@ -378,8 +378,7 @@ The only thing that can be changed is the Facebook application name after 'via'.
 
 = U32 Is video or audio supported? =
 
-No, but depending on how videos are embedded, it is sometimes possible to have the preview image of a video as link picture.
-Set the link picture option to first image in the post for this.
+From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
 
 = U33 The like/send button doesn't look/behave as I want =
 
@@ -691,7 +690,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: link back to website from Facebook
+* New feature: support for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
+* New feature: link back to home page from Facebook
 * Improvement: always request Facebook scrape
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
@@ -1019,8 +1019,6 @@ In no particular order:
 Feature which will not be realized, sorry:
 
 * Add link as group owner: not possible unfortunately
-* Link audio: too far from the core function of the plugin
-* Link videos, posted via JW Player plugin: too far from the core function of the plugin
 * Display only first name for Facebook comments and likers: not possible unfortunately
 * Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
 * Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
