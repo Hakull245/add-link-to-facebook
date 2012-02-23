@@ -509,8 +509,8 @@ if (!class_exists('WPAL2Int')) {
 				'caption' => $caption,
 				'description' => $description,
 				'message' => $message,
-				'ref' => 'AL2FB',
-				'scrape' => 'true'
+				'ref' => 'AL2FB'
+				//'scrape' => 'true'
 			);
 
 			// Add home link
@@ -525,8 +525,11 @@ if (!class_exists('WPAL2Int')) {
 			if (isset($VipersVideoQuicktags)) {
 				do_shortcode($post->post_content);
 				$video = reset($VipersVideoQuicktags->swfobjects);
-				if (!empty($video))
+				if (!empty($video)) {
 					$query_array['source'] = $video['url'];
+					if (!$picture)
+						$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
+				}
 			}
 
 			// Add picture
