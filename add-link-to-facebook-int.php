@@ -1584,6 +1584,11 @@ if (!class_exists('WPAL2Int')) {
 			else {
 				$error = json_decode($content);
 				$error = empty($error->error->message) ? $content : $error->error->message;
+				if (isset($info['url'])) {
+					// Strip privacy sensitive info
+					$url = explode('?', $info['url']);
+					$info['url'] = $url[0] . '...';
+				}
 				if ($errno || !$error)
 					$msg = 'cURL communication error ' . $errno . ' ' . $errtext . ': ' . $error . ' ' . print_r($info, true);
 				else

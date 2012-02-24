@@ -692,6 +692,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: support for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
 * New feature: link to home page from Facebook
+* Improvement: strip privacy sensitive information from error messages
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Added Greek (el\_EL) translation
