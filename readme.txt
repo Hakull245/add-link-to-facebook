@@ -696,6 +696,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Added Greek (el\_EL) translation
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:
 
