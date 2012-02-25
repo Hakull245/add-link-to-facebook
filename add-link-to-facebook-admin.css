@@ -180,12 +180,15 @@ html ul.al2fb_tabs li.active, html ul.al2fb_tabs li.active a:hover {
 	border-bottom: 1px solid #fff;
 }
 
+.al2fb_auth, .al2fb_config, .al2fb_tab_container {
+	display: inline-block;
+}
+
 /* Tab content */
 .al2fb_tab_container {
 	border: 1px solid #999;
 	border-top: none;
 	overflow: hidden;
-	/* clear: both; */
 	float: left; width: 100%;
 	background: #fff;
 }
