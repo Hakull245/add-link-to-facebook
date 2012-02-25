@@ -1614,7 +1614,7 @@ if (!class_exists('WPAL2Int')) {
 			if (is_multisite()) {
 				$current_site = get_current_site();
 				$blog_details = get_blog_details($current_site->blog_id, true);
-				$main_site_url = trailingslashit($blog_details->siteurl);
+				$main_site_url = strtolower(trailingslashit($blog_details->siteurl));
 				$blog_count = get_blog_count();
 				if (!$blog_count) {
 					wp_update_network_counts();
@@ -1623,7 +1623,9 @@ if (!class_exists('WPAL2Int')) {
 				return ($code == md5($main_site_url . $count) && $blog_count <= $count);
 			}
 			else
-				return ($code == md5(WPAL2Int::Redirect_uri()));
+				return
+					($code == md5(WPAL2Int::Redirect_uri()) ||
+					$code == md5(strtolower(WPAL2Int::Redirect_uri())));
 		}
 	}
 }
