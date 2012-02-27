@@ -39,6 +39,8 @@ if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
 			require_once('add-link-to-facebook-int.php');
 		else if ($class_name == 'AL2FB_Widget')
 			require_once('add-link-to-facebook-widget.php');
+		else if ($class_name == 'PluginUpdateChecker')
+			require_once('plugin-update-checker.php');
 	}
 	spl_autoload_register('__autoload_al2fb');
 }
@@ -47,6 +49,7 @@ else {
 		// Another plugin is using __autoload too
 		require_once('add-link-to-facebook-int.php');
 		require_once('add-link-to-facebook-widget.php');
+		require_once('plugin-update-checker.php');
 	}
 	else {
 		function __autoload($class_name) {
@@ -54,11 +57,13 @@ else {
 				require_once('add-link-to-facebook-int.php');
 			else if ($class_name == 'AL2FB_Widget')
 				require_once('add-link-to-facebook-widget.php');
+			else if ($class_name == 'PluginUpdateChecker')
+				require_once('plugin-update-checker.php');
 		}
 	}
 }
 
-// Include support class
+// Include main class
 require_once('add-link-to-facebook-class.php');
 
 // Check pre-requisites
@@ -69,6 +74,16 @@ global $wp_al2fb;
 if (empty($wp_al2fb)) {
 	$wp_al2fb = new WPAL2Facebook();
 	register_activation_hook(__FILE__, array(&$wp_al2fb, 'Activate'));
+}
+
+// Pro version is not hosted on wordpress.org
+if (WPAL2Int::Check_multiple()) {
+	global $updates_al2fb;
+	if (empty($updates_al2fb)) {
+		$updates_url = 'http://updates.bokhorst.biz/al2fbpro?action=update&plugin=al2fbpro&uri=';
+		$updates_url .= urlencode(WPAL2Int::Redirect_uri());
+		$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook-pro');
+	}
 }
 
 // Schedule cron if needed
