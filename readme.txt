@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.141
+Stable tag: 1.142
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -690,13 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* New feature: support for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
-* New feature: link to home page from Facebook
-* Improvement: strip privacy sensitive information from error messages
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Added Greek (el\_EL) translation
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* ...
 
 Follow these steps to install the development version:
 
@@ -710,6 +704,15 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.142 =
+* New feature: support for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
+* New feature: link to home page from Facebook
+* Improvement: strip privacy sensitive information from error messages
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Added Greek (el\_EL) translation
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.141 =
 * Bugfix: number of likes / notice
@@ -748,19 +751,14 @@ Follow these steps to install the development version:
 * Improvement: remove add comment errors after successful adding comment for same post
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
-= 1.136 =
-* Bugfix: default picture URL
-* Bugfix: link Facebook comments to added links disabled for groups (doesn't work)
-* Bugfix: take into account the post ping status for likes (import/count)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* Added Slovak (sk\_SK) translation by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.142 =
+Two new features, one improvement, updated documentation & translations
 
 = 1.141 =
 One bugfix, two new features, three improvements, translation updates
@@ -773,9 +771,6 @@ Two bugfixes, one new feature, one improvement, translation updates
 
 = 1.137 =
 One improvement, translation update
-
-= 1.136 =
-Three bugfixes, new translation, translation updates
 
 == Setup guide ==
 
@@ -1039,3 +1034,4 @@ This plugin uses:
 
 * [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
 * [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT License
+* [Plugin Update Checker Library](http://w-shadow.com/ "Plugin Update Checker Library") licensed under GNU General Public License (GPL)
