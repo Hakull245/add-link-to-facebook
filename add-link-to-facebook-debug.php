@@ -95,11 +95,31 @@ function al2fb_debug_info($al2fb) {
 		if (in_array($plugin_tag, $active))
 			$info .= '<tr><td>Active plugin:</td><td><a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . htmlspecialchars($plugin_data['Name'], ENT_QUOTES, $charset) . ' ' . $plugin_data['Version'] . '</a></td></tr>';
 
+	if (is_multisite()) {
+		$current_site = get_current_site();
+		$blog_details = get_blog_details($current_site->blog_id, true);
+		$main_site_url = strtolower(trailingslashit($blog_details->siteurl));
+		$blog_count = get_blog_count();
+		if (!$blog_count) {
+			wp_update_network_counts();
+			$blog_count = get_blog_count();
+		}
+	}
+	else {
+		$current_site = null;
+		$blog_details = null;
+		$main_site_url = null;
+		$blog_count = -1;
+	}
+
 	$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
 	$info .= '<tr><td>Settings version:</td><td>' . get_option(c_al2fb_option_version) . '</td></tr>';
 	$info .= '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Site id:</td><td>' . $al2fb->site_id . '</td></tr>';
 	$info .= '<tr><td>Blog id:</td><td>' . $al2fb->blog_id . '</td></tr>';
+	$info .= '<tr><td>Current site:</td><td><pre>' . print_r($current_site, true) . '</pre></td></tr>';
+	$info .= '<tr><td>Blog details:</td><td><pre>' . print_r($blog_details, true) . '</pre></td></tr>';
+	$info .= '<tr><td>Blog count:</td><td>' . $blog_count . '</td></tr>';
 	$info .= '<tr><td>Number of users:</td><td>' . $users . '</td></tr>';
 	$info .= '<tr><td>Blog address (home):</td><td><a href="' . get_home_url() . '" target="_blank">' . htmlspecialchars(get_home_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
 	$info .= '<tr><td>WordPress address (site):</td><td><a href="' . get_site_url() . '" target="_blank">' . htmlspecialchars(get_site_url(), ENT_QUOTES, $charset) . '</a></td></tr>';
