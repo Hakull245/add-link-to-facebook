@@ -191,7 +191,7 @@ class PluginUpdateChecker {
 	 * @return void
 	 */
 	function checkForUpdates(){
-		$state = get_option($this->optionName);
+		$state = get_site_option($this->optionName);
 		if ( empty($state) ){
 			$state = new StdClass;
 			$state->lastCheck = 0;
@@ -201,10 +201,10 @@ class PluginUpdateChecker {
 		
 		$state->lastCheck = time();
 		$state->checkedVersion = $this->getInstalledVersion();
-		update_option($this->optionName, $state); //Save before checking in case something goes wrong 
+		update_site_option($this->optionName, $state); //Save before checking in case something goes wrong 
 		
 		$state->update = $this->requestUpdate();
-		update_option($this->optionName, $state);
+		update_site_option($this->optionName, $state);
 	}
 	
 	/**
@@ -217,7 +217,7 @@ class PluginUpdateChecker {
 			return;
 		}
 		
-		$state = get_option($this->optionName);
+		$state = get_site_option($this->optionName);
 		
 		$shouldCheck =
 			empty($state) ||
@@ -261,7 +261,7 @@ class PluginUpdateChecker {
 	 * @return array Modified update list.
 	 */
 	function injectUpdate($updates){
-		$state = get_option($this->optionName);
+		$state = get_site_option($this->optionName);
 		
 		//Is there an update to insert?
 		if ( !empty($state) && isset($state->update) && !empty($state->update) ){
