@@ -715,6 +715,15 @@ if (!class_exists('WPAL2Facebook')) {
 				$msg = str_replace('[settings]', $url . '&rate', $msg);
 				echo $msg . '</p></div>';
 			}
+
+			// Check for multiple count
+			$x = WPAL2Int::Get_multiple_count();
+			if ($x && $x['blog_count'] > $x['count']) {
+				echo '<div id="message" class="error fade al2fb_error"><p>';
+				echo __('Maximum number of sites exceeded', c_al2fb_text_domain);
+				echo ' (' . $x['blog_count'] . '/' . $x['count'] . ')';
+				echo '</p></div>';
+			}
 		}
 
 		// Register options page
@@ -1986,7 +1995,7 @@ if (!class_exists('WPAL2Facebook')) {
 										$reply['ID'] = $reply_id;
 										$reply['post_status'] = 'publish';
 										wp_update_post($reply);
-  									}
+									}
 									else {
 										$comment_ID = $fb_comment->id;
 										$commentdata = array(

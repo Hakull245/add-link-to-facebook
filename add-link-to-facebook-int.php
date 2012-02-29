@@ -1637,6 +1637,16 @@ if (!class_exists('WPAL2Int')) {
 			}
 			return false;
 		}
+
+		static function Get_multiple_count() {
+			if (is_multisite() && get_option(c_al2fb_option_multiple)) {
+				$result = array();
+				$result['count'] = get_option(c_al2fb_option_multiple_count);
+				$result['blog_count'] = get_blog_count();
+				return $result;
+			}
+			return false;
+		}
 	}
 }
 
