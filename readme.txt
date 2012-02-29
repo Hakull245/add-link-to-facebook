@@ -690,10 +690,14 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: plugin update checker for multi-site installs
-* Improvement: plugin update frequency one hour
-* Improvement: debug info multi-site
+* Bugfix: plugin update checker for multisite installs
+* Bugfix: clear cache when authorizing
+* Bugfix: admin styles
+* Improvement: set plugin update frequency to one hour
+* Improvement: display main URL for multisites
+* Improvement: debug info for multisites
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 

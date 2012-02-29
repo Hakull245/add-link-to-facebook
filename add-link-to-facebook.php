@@ -83,6 +83,8 @@ if (WPAL2Int::Check_multiple()) {
 		$updates_url = 'http://updates.bokhorst.biz/al2fbpro?action=update&plugin=al2fbpro&uri=';
 		$updates_url .= urlencode(WPAL2Int::Redirect_uri());
 		$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook', 1);
+		if (get_option(c_al2fb_option_debug))
+			$updates_al2fb->checkForUpdates();
 	}
 }
 

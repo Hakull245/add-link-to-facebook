@@ -229,6 +229,7 @@ function al2fb_render_admin($al2fb)
 	<span><?php _e('and navigate to \'<em>Apps</em>\' and then to \'<em>Create New App</em>\'', c_al2fb_text_domain); ?></span>
 	</div>
 
+	<div class="al2fb_form">
 	<table class="form-table al2fb_border">
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_client_id"><strong><?php _e('App ID:', c_al2fb_text_domain); ?></strong></label>
@@ -282,6 +283,7 @@ function al2fb_render_admin($al2fb)
 	}
 ?>
 	</table>
+	</div>
 
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -447,6 +449,9 @@ function al2fb_render_admin($al2fb)
 					_e('This option is only available in', c_al2fb_text_domain);
 					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
+					$mu = WPAL2Int::Get_multiple_url();
+					if ($mu)
+						echo '<p><span style="color: red;"><strong>' . htmlspecialchars($mu, ENT_QUOTES, $charset) . '</strong></span></p>';
 				}
 ?>
 				</td></tr>
@@ -524,6 +529,9 @@ function al2fb_render_admin($al2fb)
 					_e('This option is only available in', c_al2fb_text_domain);
 					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
+					$mu = WPAL2Int::Get_multiple_url();
+					if ($mu)
+						echo '<p><span style="color: red;"><strong>' . htmlspecialchars($mu, ENT_QUOTES, $charset) . '</strong></span></p>';
 				}
 			}
 ?>

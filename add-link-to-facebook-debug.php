@@ -100,7 +100,7 @@ function al2fb_debug_info($al2fb) {
 		$blog_details = get_blog_details($current_site->blog_id, true);
 		$main_site_url = strtolower(trailingslashit($blog_details->siteurl));
 		$blog_count = get_blog_count();
-		if (!$blog_count) {
+		if (!$blog_count || $al2fb->debug) {
 			wp_update_network_counts();
 			$blog_count = get_blog_count();
 		}

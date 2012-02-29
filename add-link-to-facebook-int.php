@@ -1627,6 +1627,16 @@ if (!class_exists('WPAL2Int')) {
 					($code == md5(WPAL2Int::Redirect_uri()) ||
 					$code == md5(strtolower(WPAL2Int::Redirect_uri())));
 		}
+
+		static function Get_multiple_url() {
+			if (is_multisite()) {
+				$current_site = get_current_site();
+				$blog_details = get_blog_details($current_site->blog_id, true);
+				$main_site_url = strtolower(trailingslashit($blog_details->siteurl));
+				return $main_site_url;
+			}
+			return false;
+		}
 	}
 }
 

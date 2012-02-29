@@ -300,6 +300,10 @@ if (!class_exists('WPAL2Facebook')) {
 						global $user_ID;
 						get_currentuserinfo();
 
+						// Clear cache
+						WPAL2Int::Clear_fb_pages_cache($user_ID);
+						WPAL2Int::Clear_fb_groups_cache($user_ID);
+
 						// Redirect
 						$auth_url = WPAL2Int::Authorize_url($user_ID);
 						try {
@@ -397,8 +401,11 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// App ID or secret changed
 			if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) != $_POST[c_al2fb_meta_client_id] ||
-				get_user_meta($user_ID, c_al2fb_meta_app_secret, true) != $_POST[c_al2fb_meta_app_secret])
+				get_user_meta($user_ID, c_al2fb_meta_app_secret, true) != $_POST[c_al2fb_meta_app_secret]) {
 				delete_user_meta($user_ID, c_al2fb_meta_access_token);
+				WPAL2Int::Clear_fb_pages_cache($user_ID);
+				WPAL2Int::Clear_fb_groups_cache($user_ID);
+			}
 
 			// Page owner changed
 			if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
