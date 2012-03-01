@@ -691,7 +691,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: plugin update checker for multisites
-* Bugfix: clear cache when authorizing
+* Bugfix: clear cache when authorizing / changing configuration
 * Bugfix: admin styles
 * Improvement: set plugin update frequency to one hour
 * Improvement: display main URL for multisites
