@@ -365,14 +365,27 @@ Question E22 describes possible errors for the Facebook registration form / logi
 
 = U30 Which filters can I use? =
 
-* al2fb_excerpt: $excerpt, $post
-* al2fb_content: $content, $post
-* al2fb_link: $link, $post
-* al2fb_name: $name, $post
-* al2fb_caption: $caption, $post
-* al2fb_picture: $picture, $post
-* al2fb_comment: $message, $comment, $post
-* al2fb_heise: $content
+* al2fb_excerpt($excerpt, $post)
+* al2fb_content($content, $post)
+* al2fb_link($link, $post)
+* al2fb_name($name, $post)
+* al2fb_caption($caption, $post)
+* al2fb_picture($picture, $post)
+* al2fb_comment($message, $comment, $post)
+* al2fb_heise($content)
+* al2fb_excluded_post_types($ex_custom_types)
+* al2fb_excluded_tags($excluding_tags)
+* al2fb_excluded_categories($excluding_categories)
+* al2fb_excluded_authors($excluding_authors)
+* al2fb_preprocess_comment($commentdata, $post)
+* al2fb_url($url)
+* al2fb_fb_comments($comments)
+* al2fb_fb_likes($likes)
+* al2fb_fb_feed($posts)
+* al2fb_fb_picture($location)
+* al2fb_anchor($title, $post)
+* al2fb_message($message, $post)
+* al2fb_reply($message, $reply_id)
 
 = U31 Can I change/remove 'xxx seconds ago via ...'? =
 
