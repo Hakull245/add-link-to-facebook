@@ -189,6 +189,7 @@ Just go to the plugin settings through the WordPress *Tools* menu and check *Use
 You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
 After you have done that, you can select the group to add links to.
 Note that pages and groups exclude each other.
+Also note that it is only possible to add links using your personal account (a Facebook limitation).
 
 = U14 How can I use hyperlinks on Facebook? =
 
@@ -239,6 +240,8 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Was there already a link added? See also question U09.
 * Are you logged into the correct Facebook account?
 * Are you looking at the correct personal/page/group wall/profile?
+
+Note that each WordPress user should authorize the plugin, unless you check the option *Share with all users on this site* in the Easy setup section.
 
 = U22 Where are the settings of the plugin? =
 
@@ -408,6 +411,11 @@ Facebook considers these as different objects.
 
 You cannot add links with less privacy as specified in the Facebook application settings.
 To change this: Privacy Settings (right top triangle) > Apps and Websites > Edit Settings > Edit Settings (button) > Edit (link) > App activity privacy
+
+= U37 I don't want my links grouped on the timeline =
+
+Enabling the option *Use excerpt as message* will prevent grouping of links.
+If you don't write an excerpt the site title will be used as message (from version 1.143).
 
 **--- Security ---**
 
@@ -690,6 +698,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* New feature: filter *al2fb_message*
 * Bugfix: plugin update checker for multisites
 * Bugfix: clear cache when authorizing / changing configuration
 * Bugfix: admin styles
@@ -697,6 +706,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: set plugin update frequency to one hour
 * Improvement: display main URL for multisites
 * Improvement: debug info for multisites
+* Improvement: use site title as message when no excerpt
+* Updated FAQ
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 

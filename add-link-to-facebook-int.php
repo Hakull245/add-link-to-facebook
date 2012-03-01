@@ -477,8 +477,13 @@ if (!class_exists('WPAL2Int')) {
 
 			// Get user note
 			$message = '';
-			if (get_user_meta($user_ID, c_al2fb_meta_msg, true))
+			if (get_user_meta($user_ID, c_al2fb_meta_msg, true)) {
 				$message = $excerpt;
+				if (empty($message))
+					$message = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+				$message = WPAL2Facebook::Convert_encoding($user_ID, $message);
+			}
+			$message = apply_filters('al2fb_message', $message, $post);
 
 			// Get wall
 			$page_ids = array();
