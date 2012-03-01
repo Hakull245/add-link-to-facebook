@@ -467,8 +467,8 @@ if (!class_exists('WPAL2Int')) {
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
 				$caption = WPAL2Facebook::Convert_encoding($user_ID, $caption);
-				$caption = apply_filters('al2fb_caption', $caption, $post);
 			}
+			$caption = apply_filters('al2fb_caption', $caption, $post);
 
 			// Get link picture
 			$picture_info = WPAL2Facebook::Get_link_picture($post, $user_ID);
