@@ -690,7 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: plugin update checker for multisite installs
+* Bugfix: plugin update checker for multisites
 * Bugfix: clear cache when authorizing
 * Bugfix: admin styles
 * Improvement: set plugin update frequency to one hour

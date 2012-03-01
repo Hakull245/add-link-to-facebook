@@ -1600,17 +1600,27 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Set_multiple($code, $count) {
-			update_option(c_al2fb_option_multiple, $code);
+			update_site_option(c_al2fb_option_multiple, $code);
 			if ($count > 1)
-				update_option(c_al2fb_option_multiple_count, $count);
+				update_site_option(c_al2fb_option_multiple_count, $count);
 			else
-				delete_option(c_al2fb_option_multiple_count);
+				delete_site_option(c_al2fb_option_multiple_count);
 			return WPAL2Int::Check_multiple();
 		}
 
 		static function Check_multiple() {
-			$code = get_option(c_al2fb_option_multiple);
-			$count = get_option(c_al2fb_option_multiple_count);
+			// Backward compatibility
+			if (is_multisite()) {
+				$code = get_option(c_al2fb_option_multiple);
+				$count = get_option(c_al2fb_option_multiple_count);
+				if (!empty($code)) {
+					update_site_option(c_al2fb_option_multiple, $code);
+					update_site_option(c_al2fb_option_multiple_count, $count);
+				}
+			}
+
+			$code = get_site_option(c_al2fb_option_multiple);
+			$count = get_site_option(c_al2fb_option_multiple_count);
 			if (is_multisite()) {
 				$current_site = get_current_site();
 				$blog_details = get_blog_details($current_site->blog_id, true);
@@ -1639,9 +1649,9 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_multiple_count() {
-			if (is_multisite() && get_option(c_al2fb_option_multiple)) {
+			if (is_multisite() && get_site_option(c_al2fb_option_multiple)) {
 				$result = array();
-				$result['count'] = get_option(c_al2fb_option_multiple_count);
+				$result['count'] = get_site_option(c_al2fb_option_multiple_count);
 				$result['blog_count'] = get_blog_count();
 				return $result;
 			}
