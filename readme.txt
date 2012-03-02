@@ -190,7 +190,7 @@ This option is only available *after* you have authorized, since information fro
 Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups*.
 You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
 After you have done that, you can select the group to add links to.
-Note that pages and groups exclude each other.
+Note that pages and groups exclude each other (except in the Pro version).
 Also note that it is only possible to add links using your personal account (a Facebook limitation).
 
 = U14 How can I use hyperlinks on Facebook? =
