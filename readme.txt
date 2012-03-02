@@ -179,7 +179,9 @@ Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page*.
 Be sure to check the option *'<em>See all pages</em>'*.
 If you do that, you have to re-authorize one time more, because an extra Facebook permission is required.
-Note that pages and groups exclude each other.
+Note that pages and groups exclude each other (except in the Pro version).
+
+If you want to add links to a page or group, the Facebook account you authorized with should have permission to that page or group.
 
 = U13 I want to add links to a group =
 
