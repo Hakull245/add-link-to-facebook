@@ -112,7 +112,7 @@ function al2fb_debug_info($al2fb) {
 		$blog_count = -1;
 	}
 
-	$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . '</td></tr>';
+	$info .= '<tr><td>Plugin version:</td><td>' . $plugin_version . (WPAL2Int::Check_multiple() ? 'p' : '') . '</td></tr>';
 	$info .= '<tr><td>Settings version:</td><td>' . get_option(c_al2fb_option_version) . '</td></tr>';
 	$info .= '<tr><td>Multi site:</td><td>' . (is_multisite() ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Site id:</td><td>' . $al2fb->site_id . '</td></tr>';

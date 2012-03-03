@@ -1280,6 +1280,13 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_uselinks"><?php _e('Use links API instead of feed API:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_uselinks" name="<?php echo c_al2fb_option_uselinks; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_uselinks)) echo ' checked="checked"'; ?> />
+			<strong>Experimental!</strong>
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
 			<br />
 			<span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?></strong></span>

@@ -714,6 +714,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: filter *al2fb_message*
+* New feature: option to use links API instead of feed API (experimental)
 * Bugfix: plugin update checker for multisites
 * Bugfix: clear cache when authorizing / changing configuration
 * Bugfix: admin styles

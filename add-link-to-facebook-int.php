@@ -570,7 +570,7 @@ if (!class_exists('WPAL2Int')) {
 					// Get URL
 					if (empty($page_id))
 						$page_id = 'me';
-					$url = 'https://graph.facebook.com/' . $page_id . '/feed';
+					$url = 'https://graph.facebook.com/' . $page_id . (get_option(c_al2fb_option_uselinks) ? '/links' : '/feed');
 					$url = apply_filters('al2fb_url', $url);
 
 					// Get access token
@@ -1635,6 +1635,8 @@ if (!class_exists('WPAL2Int')) {
 					wp_update_network_counts();
 					$blog_count = get_blog_count();
 				}
+				if (empty($count) && $blog_count == 1)
+					$blog_count = '';
 				return ($code == md5($main_site_url . $count) && $blog_count <= $count);
 			}
 			else

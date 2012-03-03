@@ -545,6 +545,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_filter_prio, $_POST[c_al2fb_option_filter_prio]);
 				update_option(c_al2fb_option_noasync, $_POST[c_al2fb_option_noasync]);
 				update_option(c_al2fb_option_noscript, $_POST[c_al2fb_option_noscript]);
+				update_option(c_al2fb_option_uselinks, $_POST[c_al2fb_option_uselinks]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
