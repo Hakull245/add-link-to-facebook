@@ -600,6 +600,10 @@ if (!class_exists('WPAL2Int')) {
 					// Decode response
 					$fb_link = json_decode($response);
 
+					// Fix for links
+					if (get_option(c_al2fb_option_uselinks))
+						$fb_link->id = $page_id . '_' . $fb_link->id;
+
 					// Register link/date
 					add_post_meta($post->ID, c_al2fb_meta_link_id, $fb_link->id);
 					update_post_meta($post->ID, c_al2fb_meta_link_time, date('c'));
