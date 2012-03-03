@@ -431,6 +431,7 @@ To change this: Privacy Settings (right top triangle) > Apps and Websites > Edit
 
 Enabling the option *Use excerpt as message* will prevent grouping of links.
 If you don't write an excerpt the site title will be used as message (from version 1.143).
+You can also enable the option *Use links API instead of feed API* (from version 1.143).
 
 **--- Security ---**
 
@@ -724,6 +725,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: debug info for multisites
 * Improvement: use site title as message when no excerpt
 * Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
