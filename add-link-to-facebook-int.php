@@ -202,7 +202,7 @@ if (!class_exists('WPAL2Int')) {
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$me = json_decode($response);
 			if ($me) {
-				if (empty($me->category))	// Group
+				if ($page_id != 'me' && empty($me->category))	// Group
 					$me->link = 'http://www.facebook.com/home.php?sk=group_' . $page_id;
 				return $me;
 			}
@@ -600,9 +600,14 @@ if (!class_exists('WPAL2Int')) {
 					// Decode response
 					$fb_link = json_decode($response);
 
-					// Fix for links
-					if (get_option(c_al2fb_option_uselinks))
-						$fb_link->id = $page_id . '_' . $fb_link->id;
+					// Fix for some links
+					if (strpos($fb_link->id, '_') === false)
+						if ($page_id == 'me') {
+							$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
+							$fb_link->id = $me->id . '_' . $fb_link->id;
+						}
+						else
+							$fb_link->id = $page_id . '_' . $fb_link->id;
 
 					// Register link/date
 					add_post_meta($post->ID, c_al2fb_meta_link_id, $fb_link->id);
