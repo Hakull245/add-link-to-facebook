@@ -826,7 +826,7 @@ if (!class_exists('WPAL2Facebook')) {
 				<input id="al2fb_update" type="checkbox" name="<?php echo c_al2fb_action_update; ?>"/>
 				<label for="al2fb_update"><?php _e('Update existing Facebook link', c_al2fb_text_domain); ?></label>
 				<br />
-				<span class="al2fb_explanation"><?php _e('Comments and likes will be lost!', c_al2fb_text_domain); ?></span>
+				<span class="al2fb_explanation"><strong><?php _e('Comments and likes will be lost!', c_al2fb_text_domain); ?></strong></span>
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
