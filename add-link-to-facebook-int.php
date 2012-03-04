@@ -495,7 +495,6 @@ if (!class_exists('WPAL2Int')) {
 						$page_ids = array_merge($page_ids, $extra);
 				}
 			}
-
 			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
 				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
@@ -541,7 +540,7 @@ if (!class_exists('WPAL2Int')) {
 			if ($picture)
 				$query_array['picture'] = $picture;
 
-			// Add share link
+			// Add share link (overwrites how link)
 			if (get_user_meta($user_ID, c_al2fb_meta_share_link, true)) {
 				// http://forum.developers.facebook.net/viewtopic.php?id=50049
 				// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
@@ -552,11 +551,14 @@ if (!class_exists('WPAL2Int')) {
 				$query_array['actions'] = json_encode($actions);
 			}
 
-			// Add privacy option
-			if ($page_id == 'me') {
-				$privacy = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
-				if ($privacy)
-					$query_array['privacy'] = json_encode(array('value' => $privacy));
+			// Get me info (needed for malformed link id's)
+			try {
+				$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
+			}
+			catch (Exception $e) {
+				update_post_meta($post->ID, c_al2fb_meta_error, 'Get me: ' . $e->getMessage());
+				update_post_meta($post->ID, c_al2fb_meta_error_time, date('c'));
+				return;
 			}
 
 			// Add link
@@ -567,11 +569,21 @@ if (!class_exists('WPAL2Int')) {
 					// https://developers.facebook.com/docs/reference/api/post/
 					// https://developers.facebook.com/docs/reference/dialogs/feed/
 
-					// Get URL
 					if (empty($page_id))
 						$page_id = 'me';
+
+					// Get URL
 					$url = 'https://graph.facebook.com/' . $page_id . (get_option(c_al2fb_option_uselinks) ? '/links' : '/feed');
 					$url = apply_filters('al2fb_url', $url);
+
+					// Add privacy option
+					if ($page_id == 'me') {
+						$privacy = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
+						if ($privacy)
+							$query_array['privacy'] = json_encode(array('value' => $privacy));
+					}
+					else if (isset($query_array['privacy']))
+						unset($query_array['privacy']);
 
 					// Get access token
 					$query_array['access_token'] = WPAL2Int::Get_access_token_by_page($user_ID, $page_id);
@@ -600,14 +612,9 @@ if (!class_exists('WPAL2Int')) {
 					// Decode response
 					$fb_link = json_decode($response);
 
-					// Fix for some links
+					// Workaround for some links
 					if (strpos($fb_link->id, '_') === false)
-						if ($page_id == 'me') {
-							$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
-							$fb_link->id = $me->id . '_' . $fb_link->id;
-						}
-						else
-							$fb_link->id = $page_id . '_' . $fb_link->id;
+						$fb_link->id = ($page_id == 'me' ? $me->id : $page_id) . '_' . $fb_link->id;
 
 					// Register link/date
 					add_post_meta($post->ID, c_al2fb_meta_link_id, $fb_link->id);
