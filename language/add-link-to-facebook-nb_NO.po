@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-02-29 10:32+0100\n"
+"PO-Revision-Date: 2012-03-04 10:56+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
 "Language-Team: Marcel Bokhorst\n"
 "X-Poedit-Language: Norwegian\n"
@@ -937,4 +937,7 @@ msgstr "Legg også til grupper:"
 
 msgid "Website"
 msgstr "Nettside"
+
+msgid "Use links API instead of feed API:"
+msgstr "Bruk lenker API i stedet for feed API:"
 
