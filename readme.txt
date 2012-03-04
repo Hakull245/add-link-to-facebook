@@ -720,6 +720,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: clear cache when authorizing / changing configuration
 * Bugfix: admin styles
 * Bugfix: always filter caption
+* Bugfix: link to personal profile
 * Improvement: set plugin update frequency to one hour
 * Improvement: display main URL for multisites
 * Improvement: debug info for multisites
