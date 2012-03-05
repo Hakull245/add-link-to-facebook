@@ -435,8 +435,8 @@ The privacy option doesn't work if you use the option *Use links API instead of 
 = U37 I don't want my links grouped on the timeline =
 
 Enabling the option *Use excerpt as message* will prevent grouping of links.
-If you don't write an excerpt the site title will be used as message (from version 1.143).
-You can also enable the option *Use links API instead of feed API* (from version 1.143).
+If you don't write an excerpt the site title will be used as message.
+You can also enable the option *Use links API instead of feed API*.
 This option has not yet been tested thoroughly, so if you have problems, please report them.
 There is one known limitation, see the previous question.
 
@@ -723,6 +723,22 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
+* ...
+
+Follow these steps to install the development version:
+
+* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+* Go to *Plugins* on your WordPress dashboard
+* *Deactivate* Add Link to Facebook
+* *Delete* Add Link to Facebook (*Yes, delete these files*)
+* Click *Add New*
+* Click *Upload* (a link at the top)
+* Click *Choose file* and select the file you downloaded before
+* Click *Install*, then *Activate Plugin*
+* Please report any problem you encounter
+* Reports that everything works are also appreciated :-)
+
+= 1.143 =
 * New feature: filter *al2fb_message*
 * New feature: option to use links API instead of feed API (experimental!)
 * Bugfix: plugin update checker for multisites
@@ -739,19 +755,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-Follow these steps to install the development version:
-
-* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
-* Go to *Plugins* on your WordPress dashboard
-* *Deactivate* Add Link to Facebook
-* *Delete* Add Link to Facebook (*Yes, delete these files*)
-* Click *Add New*
-* Click *Upload* (a link at the top)
-* Click *Choose file* and select the file you downloaded before
-* Click *Install*, then *Activate Plugin*
-* Please report any problem you encounter
-* Reports that everything works are also appreciated :-)
 
 = 1.142 =
 * New feature: support for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
@@ -795,15 +798,14 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.137 =
-* Improvement: remove add comment errors after successful adding comment for same post
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.143 =
+Two new features, six bugfixes, four improvements, FAQ & translation updates
 
 = 1.142 =
 Two new features, one improvement, updated documentation & translations
@@ -816,9 +818,6 @@ One new feature, six improvements, one workaround, translation updates
 
 = 1.138 =
 Two bugfixes, one new feature, one improvement, translation updates
-
-= 1.137 =
-One improvement, translation update
 
 == Setup guide ==
 
