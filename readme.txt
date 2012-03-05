@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.142
+Stable tag: 1.143
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
