@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.142
+Stable tag: 1.143
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -143,6 +143,7 @@ You can add links to pages and groups too, see question U12 and U13.
 = U05 Which link picture will Facebook select? =
 
 Mostly the first picture in the post, but it depends on the theme and layout of your website.
+You are adviced to let the plugin select an image (the default setting is to select the first image in the post).
 
 = U06 Why doesn't Facebook display my link picture? =
 
@@ -176,22 +177,24 @@ Don't worry, no links to private posts will be added.
 This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
 
 Just go to the plugin settings through the WordPress *Tools* menu and
-select the page you want the links to be added to using the option *Add to page*.
-Be sure to check the option *'<em>See all pages</em>'*.
-If you do that, you have to re-authorize one time more, because an extra Facebook permission is required.
+select the page you want the links to be added to using the option *Add to page* on the tab *Page/group*.
+Be sure to check the option *See all pages*.
+You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
 Note that pages and groups exclude each other (except in the Pro version).
 
-If you want to add links to a page or group, the Facebook account you authorized with should have permission to that page or group.
+If you want to add links to a page, the Facebook account you authorized with should have permission to that page.
 
 = U13 I want to add links to a group =
 
 This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
 
-Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups*.
-You have to re-authorize one time more now, because an extra Facebook permission is required to access groups.
-After you have done that, you can select the group to add links to.
+Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups* on the tab *Page/group*.
+You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
 Note that pages and groups exclude each other (except in the Pro version).
 Also note that it is only possible to add links using your personal account (a Facebook limitation).
+However, you can add links to pages as page owner, so consider switching to pages.
+
+If you want to add links to a group, the Facebook account you authorized with should have permission to that group.
 
 = U14 How can I use hyperlinks on Facebook? =
 
@@ -227,7 +230,7 @@ Please use the [contact form](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst
 = U20 How can I setup one wall for all users? =
 
 An administrator can setup his wall (personal/page/group) for all users of one site by checking the option *Share with all users on this site*.
-The other users cannot configure their own wall amymore, if this option is used.
+Other users cannot configure their own wall anymore, if this option is used.
 Only the **same** administrator can undo this.
 
 = U21 I don't see a link to my post on Facebook =
@@ -242,6 +245,7 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Was there already a link added? See also question U09.
 * Are you logged into the correct Facebook account?
 * Are you looking at the correct personal/page/group wall/profile?
+* Do the privacy options allow viewing the link?
 
 Note that each WordPress user should authorize the plugin, unless you check the option *Share with all users on this site* in the Easy setup section.
 
@@ -307,8 +311,7 @@ All template tags:
 
 = U25 Can I add links to multiple walls? =
 
-This feature is available in the 'Pro' version of the plugin.
-Visit the plugin settings tab 'Page/group' for more details.
+This feature is only available in the [Pro version](http://al2fb.bokhorst.biz/) of the plugin.
 
 = U26 Why doesn't the like button show all likes? Why are liker names not displayed? =
 
@@ -322,7 +325,7 @@ since Facebook consider these as different objects.
 = U27 I want pink links! ;-) =
 
 How, when and where links appear on your wall is entirely determined by Facebook.
-Only a few links properties can be set by the plugin.
+Only a few link properties can be set by the plugin.
 See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
 = U28 Can I display the widget on every page? =
@@ -331,7 +334,7 @@ This is not directly possible. The plugin is a multi-user plugin.
 Only on single posts/pages an author can be determined, which is needed to get the correct settings (layout, link, etc).
 
 However, there is a workaround: choose a post/page you want to tie the widget to and
-use one or more of the shortcodes to display what you want, see question U23 for more details.
+use one or more of the shortcodes to display what you want using the *post_id* parameter, see question U23 for more details.
 
 You probably want to enable the option *Execute shortcodes in widgets*.
 
@@ -391,12 +394,12 @@ Question E22 describes possible errors for the Facebook registration form / logi
 
 = U31 Can I change/remove 'xxx seconds ago via ...'? =
 
-No, this can't be removed or changed for automatically added links.
+No, this can't be removed or changed for automatically added links, see also question U27.
 The only thing that can be changed is the Facebook application name after 'via'.
 
 = U32 Is video or audio supported? =
 
-From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
+From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/).
 
 = U33 The like/send button doesn't look/behave as I want =
 
@@ -405,7 +408,6 @@ Facebook doesn't allow any change to the like/send button, except for a very few
 The most important thing that can be controlled is the link the like button is associated with.
 The default is the current post and page, which is almost always what you want.
 Likes for this post or page are counted.
-If the like/send button doesn't work correctly (anymore), only Facebook can solve that.
 
 = U34 How do I prevent adding links for special post types? =
 
@@ -417,21 +419,26 @@ If this is not wanted, you will have to find out the name(s) of the custom post 
 and to put them into the plugin option *Exclude these custom post types* (admin only).
 The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
 
-= U35 Why are the number likes on Facebook and WordPress not added? =
+= U35 The link picture is wrong =
 
-The likes on Facebook are for the added link and the likes on WordPress are for the post/page.
-Facebook considers these as different objects.
+First check if the Open Graph Protocol is enabled (plugin settings tab *Common*).
+Next check if the option *Link picture* (tab *Picture*) is set correctly.
+The default *First image in the post* is mostly what you want.
+If you want to use a featured image as link picture, see question U02 and U03.
 
 = U36 The privacy option is not working =
 
 You cannot add links with less privacy as specified in the Facebook application settings.
 To change this: Privacy Settings (right top triangle) > Apps and Websites > Edit Settings > Edit Settings (button) > Edit (link) > App activity privacy
+The privacy option doesn't work if you use the option *Use links API instead of feed API*.
 
 = U37 I don't want my links grouped on the timeline =
 
 Enabling the option *Use excerpt as message* will prevent grouping of links.
 If you don't write an excerpt the site title will be used as message (from version 1.143).
 You can also enable the option *Use links API instead of feed API* (from version 1.143).
+This option has not yet been tested thoroughly, so if you have problems, please report them.
+There is one known limitation, see the previous question.
 
 **--- Security ---**
 
@@ -464,11 +471,12 @@ Known incompatible plugins:
 = C03 Are shortcodes being processed? =
 
 This is an option, when enabled shortcodes will be processed.
+This option is disabled by default, because not all plugins are compatible with it, especially forum software.
 
 = C04 Are multi-user and network sites supported? =
 
-Yes, each user can configure his/her own wall or page or group.
-You should enable the plugin from the network admin panel thru "Plugins".
+Yes, each user can configure his/her own wall, page or group.
+The same user can setup the plugin multiple times for multiple sites.
 
 = C05 Is remote publishing supported? =
 
@@ -488,6 +496,7 @@ Yes, but the custom post type should support custom values for it to work.
 Assuming that you embed a NextGEN Gallery into a post, set the option *Link Picture* to *First image in the post*.
 Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
 Enable the option *Do not execute shortcodes for texts*.
+It is also possible to use featured images of NextGEN Gallery.
 
 **--- Custom values ---**
 
@@ -721,6 +730,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: admin styles
 * Bugfix: always filter caption
 * Bugfix: link to personal profile
+* Bugfix: privacy option
 * Improvement: set plugin update frequency to one hour
 * Improvement: display main URL for multisites
 * Improvement: debug info for multisites
