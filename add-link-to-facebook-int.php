@@ -457,16 +457,21 @@ if (!class_exists('WPAL2Int')) {
 			if (!$description)
 				$description = ' ';
 
+			// Convert character sets if needed
+			$excerpt = WPAL2Int::Convert_encoding($user_ID, $excerpt);
+			$content = WPAL2Int::Convert_encoding($user_ID, $content);
+			$description = WPAL2Int::Convert_encoding($user_ID, $description);
+
 			// Get name
 			$name = html_entity_decode(get_the_title($post->ID), ENT_QUOTES, get_bloginfo('charset'));
-			$name = WPAL2Facebook::Convert_encoding($user_ID, $name);
+			$name = WPAL2Int::Convert_encoding($user_ID, $name);
 			$name = apply_filters('al2fb_name', $name, $post);
 
 			// Get caption
 			$caption = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
 				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
-				$caption = WPAL2Facebook::Convert_encoding($user_ID, $caption);
+				$caption = WPAL2Int::Convert_encoding($user_ID, $caption);
 			}
 			$caption = apply_filters('al2fb_caption', $caption, $post);
 
@@ -481,7 +486,7 @@ if (!class_exists('WPAL2Int')) {
 				$message = $excerpt;
 				if (empty($message))
 					$message = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
-				$message = WPAL2Facebook::Convert_encoding($user_ID, $message);
+				$message = WPAL2Int::Convert_encoding($user_ID, $message);
 			}
 			$message = apply_filters('al2fb_message', $message, $post);
 
@@ -641,6 +646,19 @@ if (!class_exists('WPAL2Int')) {
 			}
 		}
 
+		// Convert charset
+		static function Convert_encoding($user_ID, $text) {
+			$blog_encoding = get_option('blog_charset');
+			$fb_encoding = get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true);
+			if (empty($fb_encoding))
+				$fb_encoding = 'UTF-8';
+
+			if ($blog_encoding != $fb_encoding && function_exists('mb_convert_encoding'))
+				return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
+			else
+				return $text;
+		}
+
 		// Delete Link from Facebook
 		static function Delete_fb_link($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
@@ -745,6 +763,7 @@ if (!class_exists('WPAL2Int')) {
 			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
 			$message .= $comment->comment_content;
 			$message = apply_filters('al2fb_comment', $message, $comment, $post);
+			$message = WPAL2Int::Convert_encoding($user_ID, $message);
 
 			// Do not disturb WordPress
 			try {

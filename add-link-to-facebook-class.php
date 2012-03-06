@@ -119,8 +119,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_filter('widget_text', 'do_shortcode');
 
 			// Custom filters
-			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 3);
-			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 3);
+			add_filter('al2fb_excerpt', array(&$this, 'Filter_excerpt'), 10, 2);
+			add_filter('al2fb_content', array(&$this, 'Filter_content'), 10, 2);
 			add_filter('al2fb_comment', array(&$this, 'Filter_comment'), 10, 3);
 			add_filter('al2fb_fb_feed', array(&$this, 'Filter_feed'), 10, 1);
 			add_filter('al2fb_preprocess_comment', array(&$this, 'Preprocess_comment'), 10, 2);
@@ -927,13 +927,14 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 			if (!empty($post)) {
 				$user_ID = self::Get_user_ID($post);
-				$texts = self::Get_texts($post, false);
+				$texts = self::Get_texts($post);
 
 				// Security
 				wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
 				if ($this->debug) {
-					echo '<strong>Type:</strong> ' . $post->post_type . '<br />';
+					echo '<strong>Type:</strong> ' . $post->post_type . '<br />';;
+					$texts = self::Get_texts($post);
 					echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content, ENT_QUOTES, get_bloginfo('charset')) . '<br />';
 					echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content'], ENT_QUOTES, get_bloginfo('charset')) . '<br />';
 				}
@@ -1248,7 +1249,7 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		// Build texts for link/ogp
-		function Get_texts($post, $convert = true) {
+		function Get_texts($post) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Filter excerpt
@@ -1258,7 +1259,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!get_option(c_al2fb_option_nofilter))
 					$excerpt = apply_filters('the_excerpt', $excerpt);
 			}
-			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post, $convert);
+			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
 
 			// Filter post text
 			$content = get_post_meta($post->ID, c_al2fb_meta_text, true);
@@ -1267,7 +1268,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!get_option(c_al2fb_option_nofilter))
 					$content = apply_filters('the_content', $content);
 			}
-			$content = apply_filters('al2fb_content', $content, $post, $convert);
+			$content = apply_filters('al2fb_content', $content, $post);
 
 			// Get body
 			$description = '';
@@ -1423,12 +1424,12 @@ if (!class_exists('WPAL2Facebook')) {
 			return false;
 		}
 
-		function Filter_excerpt($excerpt, $post, $convert) {
-			return self::Filter_standard($excerpt, $post, $convert);
+		function Filter_excerpt($excerpt, $post) {
+			return self::Filter_standard($excerpt, $post);
 		}
 
-		function Filter_content($content, $post, $convert) {
-			return self::Filter_standard($content, $post, $convert);
+		function Filter_content($content, $post) {
+			return self::Filter_standard($content, $post);
 		}
 
 		function Filter_comment($message, $comment, $post) {
@@ -1444,12 +1445,8 @@ if (!class_exists('WPAL2Facebook')) {
 			return $fb_messages;
 		}
 
-		function Filter_standard($text, $post, $convert = true) {
+		function Filter_standard($text, $post) {
 			$user_ID = self::Get_user_ID($post);
-
-			// Convert to UTF-8 if needed
-			if ($convert)
-				$text = self::Convert_encoding($user_ID, $text);
 
 			// Execute shortcodes
 			if (!get_option(c_al2fb_option_noshortcode))
@@ -1488,19 +1485,6 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			return $text;
-		}
-
-		// Convert charset
-		function Convert_encoding($user_ID, $text) {
-			$blog_encoding = get_option('blog_charset');
-			$fb_encoding = get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true);
-			if (empty($fb_encoding))
-				$fb_encoding = 'UTF-8';
-
-			if ($blog_encoding != $fb_encoding && function_exists('mb_convert_encoding'))
-				return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
-			else
-				return $text;
 		}
 
 		// New comment
@@ -1570,7 +1554,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
-					$texts = self::Get_texts($post, false);
+					$texts = self::Get_texts($post);
 					$maxlen = get_option(c_al2fb_option_max_descr);
 					$description = substr($texts['description'], 0, $maxlen ? $maxlen : 256);
 					echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
