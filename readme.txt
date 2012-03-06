@@ -723,7 +723,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: do not convert character sets for Open Graph Protocol
+* Bugfix: convert character sets after filtering
 
 Follow these steps to install the development version:
 
