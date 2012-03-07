@@ -645,10 +645,9 @@ if (!class_exists('WPAL2Facebook')) {
 			global $user_ID;
 			get_currentuserinfo();
 
-			// Check config/authorization
+			// Check if reporting errors
 			$uri = $_SERVER['REQUEST_URI'];
 			$url = 'tools.php?page=' . plugin_basename($this->main_file);
-
 			$nonotice = get_option(c_al2fb_option_nonotice);
 			if (is_multisite())
 				$nonotice = $nonotice || get_site_option(c_al2fb_option_app_share);
@@ -657,6 +656,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$donotice = ($nonotice ? strpos($uri, $url) !== false : true);
 
 			if ($donotice) {
+				// Check configuration
 				if (!get_user_meta($user_ID, c_al2fb_meta_client_id, true) ||
 					!get_user_meta($user_ID, c_al2fb_meta_app_secret, true)) {
 					$notice = __('needs configuration', c_al2fb_text_domain);
@@ -673,10 +673,37 @@ if (!class_exists('WPAL2Facebook')) {
 						$anchor = 'authorize';
 					}
 				}
+
+				// Report configuration problems
 				if (!empty($notice)) {
 					echo '<div class="error fade al2fb_error"><p>';
 					_e('Add Link to Facebook', c_al2fb_text_domain);
 					echo ' <a href="' . $url . '#' . $anchor . '">' . $notice . '</a></p></div>';
+				}
+			}
+
+			// Check for post related errors
+			global $post;
+			$ispost = ($post && strpos($uri, 'post.php') !== false);
+			if (!get_option(c_al2fb_option_nonotice) || $donotice || $ispost) {
+				$query = array(
+					'author' => $user_ID,
+					'meta_key' => c_al2fb_meta_error,
+					'posts_per_page' => 5);
+				if ($ispost)
+					$query['p'] = $post->ID;
+				$posts = new WP_Query($query);
+				while ($posts->have_posts()) {
+					$posts->next_post();
+					$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
+					if (!empty($error)) {
+						echo '<div id="message" class="error fade al2fb_error"><p>';
+						echo __('Add Link to Facebook', c_al2fb_text_domain) . ' - ';
+						edit_post_link(get_the_title($posts->post->ID), null, null, $posts->post->ID);
+						echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset'));
+						echo ' @ ' . get_post_meta($posts->post->ID, c_al2fb_meta_error_time, true);
+						echo '</p></div>';
+					}
 				}
 			}
 
@@ -686,24 +713,6 @@ if (!class_exists('WPAL2Facebook')) {
 				$msg = htmlspecialchars(stripslashes($_REQUEST['error']), ENT_QUOTES, get_bloginfo('charset'));
 				$msg .= '<br /><br />Most errors are described in <a href="' . $faq . '" target="_blank">the FAQ</a>';
 				echo '<div id="message" class="error fade al2fb_error"><p>' . $msg . '</p></div>';
-			}
-
-			// Check for post errors
-			$posts = new WP_Query(array(
-				'author' => $user_ID,
-				'meta_key' => c_al2fb_meta_error,
-				'posts_per_page' => 5));
-			while ($posts->have_posts()) {
-				$posts->next_post();
-				$error = get_post_meta($posts->post->ID, c_al2fb_meta_error, true);
-				if (!empty($error)) {
-					echo '<div id="message" class="error fade al2fb_error"><p>';
-					echo __('Add Link to Facebook', c_al2fb_text_domain) . ' - ';
-					edit_post_link(get_the_title($posts->post->ID), null, null, $posts->post->ID);
-					echo ': ' . htmlspecialchars($error, ENT_QUOTES, get_bloginfo('charset'));
-					echo '@ ' . get_post_meta($posts->post->ID, c_al2fb_meta_error_time, true);
-					echo '</p></div>';
-				}
 			}
 
 			// Check for rating notice

@@ -724,6 +724,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: convert character sets after filtering
+* Improvement: disable post related errors too, when *Do not display notices* is checked (except for the edit page of a post with errors)
 
 Follow these steps to install the development version:
 
