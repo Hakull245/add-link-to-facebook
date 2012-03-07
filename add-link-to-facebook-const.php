@@ -40,6 +40,7 @@ define('c_al2fb_option_use_pp', 'al2fb_use_pp');
 define('c_al2fb_option_debug', 'al2fb_debug');
 define('c_al2fb_option_multiple', 'al2fb_multiple');
 define('c_al2fb_option_multiple_count', 'al2fb_multiple_count');
+define('c_al2fb_option_multiple_disable', 'al2fb_multiple_disable');
 
 define('c_al2fb_option_cron_enabled', 'al2fb_cron_enabled');
 define('c_al2fb_option_cron_time', 'al2fb_cron_time');

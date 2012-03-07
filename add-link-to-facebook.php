@@ -77,7 +77,7 @@ if (empty($wp_al2fb)) {
 }
 
 // Pro version is not hosted on wordpress.org
-if (WPAL2Int::Check_multiple()) {
+if (WPAL2Int::Check_updates()) {
 	global $updates_al2fb;
 	if (empty($updates_al2fb)) {
 		$uri = WPAL2Int::Get_multiple_url();

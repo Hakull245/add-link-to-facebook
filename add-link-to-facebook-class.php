@@ -132,6 +132,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Cron
 			add_filter('cron_schedules', array(&$this, 'Cron_schedules'));
+
+			// Misc.
+			add_filter('puc_request_info_result-add-link-to-facebook', array(&$this, 'Update'), 10, 2);
 		}
 
 		// Handle plugin activation
@@ -2330,6 +2333,14 @@ if (!class_exists('WPAL2Facebook')) {
 			update_option(c_al2fb_option_cron_posts, $posts);
 			update_option(c_al2fb_option_cron_comments, $comments);
 			update_option(c_al2fb_option_cron_likes, $likes);
+		}
+
+		function Update($pluginInfo, $result) {
+			if (isset($pluginInfo->disable))
+				update_option(c_al2fb_option_multiple_disable, $pluginInfo->disable);
+			else
+				delete_option(c_al2fb_option_multiple_disable);
+			return $pluginInfo;
 		}
 
 		// Check environment

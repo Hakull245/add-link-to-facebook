@@ -1649,6 +1649,9 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Check_multiple() {
+			if (get_option(c_al2fb_option_multiple_disable))
+				return false;
+
 			// Backward compatibility
 			if (is_multisite()) {
 				$code = get_option(c_al2fb_option_multiple);
@@ -1678,6 +1681,10 @@ if (!class_exists('WPAL2Int')) {
 				return
 					($code == md5(WPAL2Int::Redirect_uri()) ||
 					$code == md5(strtolower(WPAL2Int::Redirect_uri())));
+		}
+
+		static function Check_updates() {
+			return get_site_option(c_al2fb_option_multiple);
 		}
 
 		static function Get_multiple_url() {
