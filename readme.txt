@@ -440,6 +440,25 @@ You can also enable the option *Use links API instead of feed API*.
 This option has not yet been tested thoroughly, so if you have problems, please report them.
 There is one known limitation, see the previous question.
 
+= U38 I see HTML / shortcodes on Facebook =
+
+Try enabling one of these options on the plugin settings tab *Admin*:
+
+* *Do not execute shortcodes for texts*
+* *Do not execute filters for texts*
+
+but be sure to check if everything still looks and works as should,
+because these options are known to be incompatible with some plugins.
+
+= U39 Why are comments are not imported? =
+
+First check if the setting *Integrate comments from Facebook* on the plugin settings tab *Comments* is enabled.
+It could be that your theme is incompatible with this feature. Switch back to the default theme (Twenty Ten/Eleven),
+wait at least 10 minutes (because of caching) and then refresh the post page where you expect comments.
+Please note that only comments on links added by the plugin are imported (the link is the anchor).
+Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
+Try writing a comment with another Facebook account.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -725,6 +744,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: convert character sets after filtering
 * Improvement: disable post related errors too, when *Do not display notices* is checked (except for the edit page of a post with errors)
+* Updated FAQ: two new questions
 
 Follow these steps to install the development version:
 
