@@ -1311,7 +1311,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Limit text size
 		function Limit_text_size($text, $trailer, $maxlen) {
-			if (strlen($text) > $maxlen) {
+			if (mb_strlen($text) > $maxlen) {
 				// Filter HTML
 				$trailer = preg_replace('/<[^>]*>/', '', $trailer);
 
@@ -1324,15 +1324,15 @@ if (!class_exists('WPAL2Facebook')) {
 					foreach ($lines as $sentence) {
 						$count++;
 						$line = $sentence;
-						if ($count < count($lines) || substr($text, -1) == '.')
+						if ($count < count($lines) || mb_substr($text, -1) == '.')
 							$line .= '.';
-						if (strlen($text) + strlen($line) + strlen($trailer) < $maxlen)
+						if (mb_strlen($text) + mb_strlen($line) + mb_strlen($trailer) < $maxlen)
 							$text .= $line;
 						else
 							break;
 					}
 					if (empty($text) && count($lines) > 0)
-						$text = substr($lines[0], 0, $maxlen - strlen($trailer));
+						$text = mb_substr($lines[0], 0, $maxlen - mb_strlen($trailer));
 
 					// Append trailer
 					$text .= $trailer;
@@ -1493,7 +1493,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$maxtext = get_option(c_al2fb_option_max_text);
 				if (!$maxtext)
 					$maxtext = 10000;
-				$text = substr($text, 0, $maxtext);
+				$text = mb_substr($text, 0, $maxtext);
 			}
 
 			return $text;
@@ -1568,7 +1568,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$texts = self::Get_texts($post);
 					$maxlen = get_option(c_al2fb_option_max_descr);
-					$description = substr($texts['description'], 0, $maxlen ? $maxlen : 256);
+					$description = mb_substr($texts['description'], 0, $maxlen ? $maxlen : 256);
 					echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
