@@ -743,6 +743,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: convert character sets after filtering
+* Bugfix: using multi-byte string functions
 * Improvement: disable post related errors too, when *Do not display notices* is checked (except for the edit page of a post with errors)
 * Updated FAQ: two new questions
 
