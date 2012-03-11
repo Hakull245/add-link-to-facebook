@@ -78,7 +78,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
 * Greek (el\_EL), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -368,30 +368,6 @@ echo '<a href="' . wp_logout_url(home_url()) . '">Logout</a></p>';`
 
 Question E22 describes possible errors for the Facebook registration form / login button.
 
-= U30 Which filters can I use? =
-
-* al2fb_excerpt($excerpt, $post)
-* al2fb_content($content, $post)
-* al2fb_link($link, $post)
-* al2fb_name($name, $post)
-* al2fb_caption($caption, $post)
-* al2fb_picture($picture, $post)
-* al2fb_comment($message, $comment, $post)
-* al2fb_heise($content)
-* al2fb_excluded_post_types($ex_custom_types)
-* al2fb_excluded_tags($excluding_tags)
-* al2fb_excluded_categories($excluding_categories)
-* al2fb_excluded_authors($excluding_authors)
-* al2fb_preprocess_comment($commentdata, $post)
-* al2fb_url($url)
-* al2fb_fb_comments($comments)
-* al2fb_fb_likes($likes)
-* al2fb_fb_feed($posts)
-* al2fb_fb_picture($location)
-* al2fb_anchor($title, $post)
-* al2fb_message($message, $post)
-* al2fb_reply($message, $reply_id)
-
 = U31 Can I change/remove 'xxx seconds ago via ...'? =
 
 No, this can't be removed or changed for automatically added links, see also question U27.
@@ -516,46 +492,6 @@ Assuming that you embed a NextGEN Gallery into a post, set the option *Link Pict
 Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
 Enable the option *Do not execute shortcodes for texts*.
 It is also possible to use featured images of NextGEN Gallery.
-
-**--- Custom values ---**
-
-= V01 What is the custom field 'al2fb_facebook_link_id' for? =
-
-This is the Facebook identification of the added link.
-
-= V02 What is the custom field 'al2fb_facebook_link_time' for? =
-
-This is the time (UTC) the link was added to Facebook or the time of the last error.
-
-= V03 What is the custom field 'al2fb_facebook_link_picture' for? =
-
-This is the picture type and URL of the link as added to Facebook.
-
-= V04 What is the custom field 'al2fb_facebook_exclude' for? =
-
-This is to remember you ticked the check box *Do not add link to Facebook*.
-
-= V05 What is the custom field 'al2fb_facebook_image_id' for? =
-
-This is to remember the image you have selected as link picture.
-
-= V06 What is the custom field 'al2fb_facebook_error' for? =
-
-If something goes wrong when adding a link to your wall or page, the error message is stored in this field.
-You can try to add the link again by updating the post.
-Please send me the message and follow the instruction in the last question.
-
-= V07 What is the custom field 'al2fb_facebook_nolike' for? =
-
-This field indicates that the like button shouldn't be show for the post or page.
-
-= V08 What is the custom field 'c_al2fb_meta_excerpt' for? =
-
-This fields holds the custom excerpt that will be used in stead of the WordPress excerpt.
-
-= V09 What is the custom field 'al2fb_facebook_comment_id' for? =
-
-This field records deleted imported Facebook comments.
 
 **--- Error messages ---**
 
@@ -813,14 +749,6 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.138 =
-* Bugfix: adding links as me: use correct URL
-* Bugfix: handle errors when fetching pages/groups
-* New feature: option to set link privacy (tab appearance)
-* Improvement: no caching in debug mode
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -838,9 +766,6 @@ One bugfix, two new features, three improvements, translation updates
 
 = 1.139 =
 One new feature, six improvements, one workaround, translation updates
-
-= 1.138 =
-Two bugfixes, one new feature, one improvement, translation updates
 
 == Setup guide ==
 
@@ -1075,28 +1000,6 @@ Facebook comments, status updates and the profile link are only shown if the pos
 The link to the author follow the comment integration settings (*None*, *Profile author* or *Added link*).
 The styling (layout, colors, etc) of the widget depends on the styling of your theme.
 You can add additional styling rules using a plugin option.
-
-== Requested features ==
-
-In no particular order:
-
-* ...
-
-Feature which will not be realized, sorry:
-
-* Add link as group owner: not possible unfortunately
-* Display only first name for Facebook comments and likers: not possible unfortunately
-* Add Link with author name for multi-user sites: this can be realized by letting each user authorize with his own account
-* Postback comments with 'In reply to NAME: ...': comment threading is not supported by Facebook
-* Other social buttons: too far from the core function of the plugin
-* Like button at the bottom and top: use a template tag
-* Restrict adding links to no more than x per hour: plugin is designed for real-time
-* Comment with Facebook login: requires too much permissions
-* Integrate posts from Facebook: WordPress centric plugin
-* "Title" by "Author": each author should authorize, but you can use avatars
-* Facebook avatar after Facebook login: see question U29 of the FAQ for how to
-* Single sign-off (Facebook and WordPress): not possible
-* Replace html br by newline: not possible
 
 == Acknowledgements ==
 
