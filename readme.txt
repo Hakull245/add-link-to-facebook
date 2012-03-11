@@ -623,6 +623,7 @@ it is time to contact your hosting provider.
 
 cURL errors commonly reported:
 
+* Error 0: cURL may not be installed or functioning correctly or there may be no internet connection
 * Error 1: *The URL you passed to libcurl used a protocol that this libcurl does not support*: the hosting server may not support secure connections (https)
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
