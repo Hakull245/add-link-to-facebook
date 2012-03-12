@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.143
+Stable tag: 1.145
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -679,10 +679,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: convert character sets after filtering
-* Bugfix: using multi-byte string functions
-* Improvement: disable post related errors too, when *Do not display notices* is checked (except for the edit page of a post with errors)
-* Updated FAQ: two new questions
+* ...
 
 Follow these steps to install the development version:
 
@@ -696,6 +693,15 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.145 =
+* Bugfix: using multi-byte string functions if present
+
+= 1.144 =
+* Bugfix: convert character sets after filtering
+* Bugfix: using multi-byte string functions
+* Improvement: disable post related errors too, when *Do not display notices* is checked (except for the edit page of a post with errors)
+* Updated FAQ: two new questions
 
 = 1.143 =
 * New feature: filter *al2fb_message*
@@ -754,6 +760,12 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.145 =
+One bugfix
+
+= 1.144 =
+Two bugfixes, one improvement
 
 = 1.143 =
 Two new features, six bugfixes, four improvements, FAQ & translation updates
