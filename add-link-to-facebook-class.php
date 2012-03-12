@@ -1311,7 +1311,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Limit text size
 		function Limit_text_size($text, $trailer, $maxlen) {
-			if (mb_strlen($text) > $maxlen) {
+			if (self::_strlen($text) > $maxlen) {
 				// Filter HTML
 				$trailer = preg_replace('/<[^>]*>/', '', $trailer);
 
@@ -1324,15 +1324,15 @@ if (!class_exists('WPAL2Facebook')) {
 					foreach ($lines as $sentence) {
 						$count++;
 						$line = $sentence;
-						if ($count < count($lines) || mb_substr($text, -1) == '.')
+						if ($count < count($lines) || self::_substr($text, -1, 1) == '.')
 							$line .= '.';
-						if (mb_strlen($text) + mb_strlen($line) + mb_strlen($trailer) < $maxlen)
+						if (self::_strlen($text) + self::_strlen($line) + self::_strlen($trailer) < $maxlen)
 							$text .= $line;
 						else
 							break;
 					}
 					if (empty($text) && count($lines) > 0)
-						$text = mb_substr($lines[0], 0, $maxlen - mb_strlen($trailer));
+						$text = self::_substr($lines[0], 0, $maxlen - self::_strlen($trailer));
 
 					// Append trailer
 					$text .= $trailer;
@@ -1493,7 +1493,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$maxtext = get_option(c_al2fb_option_max_text);
 				if (!$maxtext)
 					$maxtext = 10000;
-				$text = mb_substr($text, 0, $maxtext);
+				$text = self::_substr($text, 0, $maxtext);
 			}
 
 			return $text;
@@ -1568,7 +1568,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					$texts = self::Get_texts($post);
 					$maxlen = get_option(c_al2fb_option_max_descr);
-					$description = mb_substr($texts['description'], 0, $maxlen ? $maxlen : 256);
+					$description = self::_substr($texts['description'], 0, $maxlen ? $maxlen : 256);
 					echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					$appid = get_user_meta($user_ID, c_al2fb_meta_client_id, true);
@@ -2350,6 +2350,21 @@ if (!class_exists('WPAL2Facebook')) {
 			else
 				delete_option(c_al2fb_option_multiple_disable);
 			return $pluginInfo;
+		}
+
+		// String helpers
+		function _strlen($str) {
+			if (function_exists('mb_strlen'))
+				return mb_strlen($str);
+			else
+				return strlen($str);
+		}
+
+		function _substr($str, $start, $length) {
+			if (function_exists('mb_substr'))
+				return mb_substr($str, $start, $length);
+			else
+				return substr($str, $start, $length);
 		}
 
 		// Check environment
