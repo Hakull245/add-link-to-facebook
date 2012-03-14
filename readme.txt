@@ -212,6 +212,10 @@ So you have to choose if you want the hyperlink text (the default) or the hyperl
 * Enable the option *Use short URL*
 * You probably want to enable the option *Use site title as caption* too
 
+= U16 Can I add links to pages? =
+
+Yes, just check the option *Add links for new pages* (settings tab *Misc.*).
+
 = U17 Why is the option "add 'Share' link" experimental? =
 
 For two reasons:
