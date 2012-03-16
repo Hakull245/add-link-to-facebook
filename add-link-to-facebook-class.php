@@ -1014,6 +1014,12 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<textarea id="al2fb_text" name="al2fb_text" cols="40" rows="1" class="attachmentlinks">';
 				echo $text . '</textarea>';
 
+				// URL parameters
+				$url_param = get_post_meta($post->ID, c_al2fb_meta_url_param, true);
+				echo '<h4>' . __('URL parameters', c_al2fb_text_domain) . '</h4>';
+				echo get_permalink($post->ID) . '<input type="text" id="al2fb_url_param" name="al2fb_url_param" value="' . $url_param . '" />';
+
+				// Current link picture
 				echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
 
 				$picture_info = self::Get_link_picture($post, $user_ID);
@@ -1097,6 +1103,11 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post_id, c_al2fb_meta_text, trim($_POST['al2fb_text']));
 			else
 				delete_post_meta($post_id, c_al2fb_meta_text);
+
+			if (isset($_POST['al2fb_url_param']) && !empty($_POST['al2fb_url_param']))
+				update_post_meta($post_id, c_al2fb_meta_url_param, trim($_POST['al2fb_url_param']));
+			else
+				delete_post_meta($post_id, c_al2fb_meta_url_param);
 		}
 
 		// Remote publish & custom action

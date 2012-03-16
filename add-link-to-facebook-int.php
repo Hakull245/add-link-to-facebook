@@ -446,7 +446,7 @@ if (!class_exists('WPAL2Int')) {
 			if (get_user_meta($user_ID, c_al2fb_meta_shortlink, true))
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
-				$link = get_permalink($post->ID);
+				$link = get_permalink($post->ID) . get_post_meta($post->ID, c_al2fb_meta_url_param, true);
 			$link = apply_filters('al2fb_link', $link, $post);
 
 			// Get processed texts
