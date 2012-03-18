@@ -392,7 +392,7 @@ function al2fb_render_admin($al2fb)
 
 				$selected_page = get_user_meta($user_ID, c_al2fb_meta_page, true);
 				$extra_page = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
-				if (empty($extra_page))
+				if (empty($extra_page) || !is_array($extra_page))
 					$extra_page = array();
 ?>
 				<div id="al2fb_pages">
@@ -489,7 +489,7 @@ function al2fb_render_admin($al2fb)
 				}
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
 				$extra_group = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
-				if (empty($extra_group))
+				if (empty($extra_group) || !is_array($extra_group))
 					$extra_group = array();
 ?>
 				<tr valign="top"><th scope="row">
