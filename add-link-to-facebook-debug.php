@@ -434,6 +434,8 @@ function al2fb_debug_info($al2fb) {
 					$page->info = $e->getMessage();
 				}
 		$info .= '<pre>pages=' . print_r($pages, true) . '</pre>';
+		$ep = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
+		$info .= '<pre>extra=' . print_r($ep, true) . '</pre>';
 	}
 	catch (Exception $e) {
 		$info .= '<pre>pages=' . $e->getMessage() . '</pre>';
