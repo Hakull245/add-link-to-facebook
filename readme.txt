@@ -685,6 +685,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: option to set additional URL parameters
 * Improvement: more debug info
+* Improvement: more error checking
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
