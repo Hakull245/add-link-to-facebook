@@ -1015,9 +1015,13 @@ if (!class_exists('WPAL2Facebook')) {
 				echo $text . '</textarea>';
 
 				// URL parameters
-				$url_param = get_post_meta($post->ID, c_al2fb_meta_url_param, true);
-				echo '<h4>' . __('URL parameters', c_al2fb_text_domain) . '</h4>';
-				echo get_permalink($post->ID) . '<input type="text" id="al2fb_url_param" name="al2fb_url_param" value="' . $url_param . '" />';
+				$url_param_name = get_post_meta($post->ID, c_al2fb_meta_url_param_name, true);
+				$url_param_value = get_post_meta($post->ID, c_al2fb_meta_url_param_value, true);
+				echo '<h4>' . __('Extra URL parameter', c_al2fb_text_domain) . '</h4>';
+				echo __('For example for Google Anaylytics', c_al2fb_text_domain) . '<br>';
+				echo '<input type="text" id="al2fb_url_param_name" name="al2fb_url_param_name" value="' . $url_param_name . '" />';
+				echo '&nbsp;=&nbsp;';
+				echo '<input type="text" id="al2fb_url_param_value" name="al2fb_url_param_value" value="' . $url_param_value . '" />';
 
 				// Current link picture
 				echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
@@ -1104,10 +1108,15 @@ if (!class_exists('WPAL2Facebook')) {
 			else
 				delete_post_meta($post_id, c_al2fb_meta_text);
 
-			if (isset($_POST['al2fb_url_param']) && !empty($_POST['al2fb_url_param']))
-				update_post_meta($post_id, c_al2fb_meta_url_param, trim($_POST['al2fb_url_param']));
+			if (isset($_POST['al2fb_url_param_name']) && !empty($_POST['al2fb_url_param_name']))
+				update_post_meta($post_id, c_al2fb_meta_url_param_name, trim($_POST['al2fb_url_param_name']));
 			else
-				delete_post_meta($post_id, c_al2fb_meta_url_param);
+				delete_post_meta($post_id, c_al2fb_meta_url_param_name);
+
+			if (isset($_POST['al2fb_url_param_value']) && !empty($_POST['al2fb_url_param_value']))
+				update_post_meta($post_id, c_al2fb_meta_url_param_value, trim($_POST['al2fb_url_param_value']));
+			else
+				delete_post_meta($post_id, c_al2fb_meta_url_param_value);
 		}
 
 		// Remote publish & custom action
