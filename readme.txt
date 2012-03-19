@@ -332,7 +332,7 @@ How, when and where links appear on your wall is entirely determined by Facebook
 Only a few link properties can be set by the plugin.
 See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
-= U28 Can I display the widget on every page? =
+= U28 Can I display the widget / social plugins on every page? =
 
 This is not directly possible. The plugin is a multi-user plugin.
 Only on single posts/pages an author can be determined, which is needed to get the correct settings (layout, link, etc).
@@ -341,6 +341,8 @@ However, there is a workaround: choose a post/page you want to tie the widget to
 use one or more of the shortcodes to display what you want using the *post_id* parameter, see question U23 for more details.
 
 You probably want to enable the option *Execute shortcodes in widgets*.
+
+This applies to some Open Graph Meta tags as well.
 
 = U29 How can I use the Facebook registration form/login button? =
 
