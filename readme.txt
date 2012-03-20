@@ -687,7 +687,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: option to set additional URL parameters (for example for Google Analytics)
 * Improvement: more debug info, more error checking
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen").
 
 Follow these steps to install the development version:
 
