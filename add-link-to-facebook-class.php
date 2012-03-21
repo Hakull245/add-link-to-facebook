@@ -1030,7 +1030,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!empty($picture_info['picture']))
 					echo '<img src="' . $picture_info['picture'] . '" alt="Link picture">';
 				if ($this->debug)
-					echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . '</span>';
+					echo '<br /><span style="font-size: smaller;">' . $picture_info['picture_type'] . ': ' . $picture_info['picture'] . '</span>';
 
 				// Error messages
 				if ($this->debug) {
