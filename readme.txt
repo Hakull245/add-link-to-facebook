@@ -592,6 +592,8 @@ You might need to manually remove the link information of the plugin.
 On the post edit page click *Screen Options* (upper right) and tick *Custom fields*.
 Scroll down to the meta box *Custom fields* and delete the value *al2fb_facebook_link_id*.
 
+You can prevent this problem by deleting the link using the plugin.
+
 = E15 I get 'Error validating access token' =
 
 Most often this happen when you changed your Facebook password.
@@ -687,7 +689,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: option to set additional URL parameters (for example for Google Analytics)
 * Improvement: more debug info, more error checking
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen").
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
