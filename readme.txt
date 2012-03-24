@@ -440,6 +440,11 @@ Please note that only comments on links added by the plugin are imported (the li
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
 
+= U40 I don't see pictures in the messages widget =
+
+The messages widget only imports status updates, not links with pictures.
+Consider using the activity feed instead.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -688,6 +693,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: option to set additional URL parameters (for example for Google Analytics)
 * Improvement: more debug info, more error checking
+* Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
@@ -731,40 +737,6 @@ Follow these steps to install the development version:
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.142 =
-* New feature: support for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
-* New feature: link to home page from Facebook
-* Improvement: strip privacy sensitive information from error messages
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Added Greek (el\_EL) translation
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.141 =
-* Bugfix: number of likes / notice
-* New feature: [bbPress support](http://wordpress.org/support/topic/add-link-to-facebook-support-bbpress-now)
-* New feature: option to hide post submit actions based on capabilities
-* Improvement: more debug info
-* Improvement: removed PhpConsole
-* Improvement: excluding custom post type *tweet*
-* Added Serbian (sr\_RS) translation by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.139 =
-* New feature: option to limit imported comment length (comment trailer)
-* Improvement: no text trailer when not needed
-* Improvement: option to set privacy to *Only me*
-* Improvement: clear cache when changing page/group settings
-* Improvement: more debug information
-* Improvement: display cURL error text
-* Improvement: floating resources box
-* Workaround: fix links to groups
-* Updated FAQ: added question U36 about the privacy option
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -779,15 +751,6 @@ Two bugfixes, one improvement
 
 = 1.143 =
 Two new features, six bugfixes, four improvements, FAQ & translation updates
-
-= 1.142 =
-Two new features, one improvement, updated documentation & translations
-
-= 1.141 =
-One bugfix, two new features, three improvements, translation updates
-
-= 1.139 =
-One new feature, six improvements, one workaround, translation updates
 
 == Setup guide ==
 
