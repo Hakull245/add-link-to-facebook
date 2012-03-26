@@ -418,7 +418,7 @@ The privacy option doesn't work if you use the option *Use links API instead of 
 
 Enabling the option *Use excerpt as message* will prevent grouping of links.
 If you don't write an excerpt the site title will be used as message.
-You can also enable the option *Use links API instead of feed API*.
+You can also enable the option *Use links API instead of feed API* (tab *Admin*).
 There is one known limitation, see the previous question.
 
 = U38 I see HTML / shortcodes on Facebook =
