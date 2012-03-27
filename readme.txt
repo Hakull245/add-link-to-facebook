@@ -113,7 +113,7 @@ Take a look at [the screen shot](http://wordpress.org/extend/plugins/add-link-to
 The plugin will use the excerpt as description and when not available it will use part of the post text.
 If you specify a *Text trailer* the text will be truncated and the text trailer (for example *Read more ...*)
 will be used as last words (no link, Facebook does not allow this).
-If you leave the text trailer blank, Facebook will show *See more* and if you click on it, see can see the whole post text on Facebook.
+If you leave the text trailer blank, Facebook will show *See more* and if you click on it, you will see the whole post text on Facebook.
 The options *Use site title as caption* and *Use excerpt as message* (tab *Appearance*) do what they say.
 If you leave the excerpt blank, the site title will be used as message. This is to prevent grouping of links.
 See question U37 for an alternative method.
