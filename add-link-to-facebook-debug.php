@@ -315,7 +315,7 @@ function al2fb_debug_info($al2fb) {
 		// Actual picture
 		$picture = $al2fb->Get_link_picture($posts->post, $al2fb->Get_user_ID($posts->post));
 
-		$info .= '<tr><td>Post #' . $posts->post->ID . ':</td>';
+		$info .= '<tr><td>' . $posts->post->post_type . ' #' . $posts->post->ID . ':</td>';
 		$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a>';
 		$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
 		$info .= ' @ ' . $posts->post->post_date;
