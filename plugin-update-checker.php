@@ -76,8 +76,9 @@ class PluginUpdateChecker {
 			//Trigger the check via Cron
 			add_filter('cron_schedules', array(&$this, '_addCustomSchedule'));
 			if ( !wp_next_scheduled($cronHook) && !defined('WP_INSTALLING') ) {
-				$scheduleName = 'every' . $this->checkPeriod . 'hours';
-				wp_schedule_event(time(), $scheduleName, $cronHook);
+				//$scheduleName = 'every' . $this->checkPeriod . 'hours';
+				//wp_schedule_event(time(), $scheduleName, $cronHook);
+				wp_schedule_event(time(), 'hourly', $cronHook);				
 			}
 			add_action($cronHook, array(&$this, 'checkForUpdates'));
 			
