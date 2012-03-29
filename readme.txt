@@ -184,6 +184,7 @@ select the page you want the links to be added to using the option *Add to page*
 Be sure to check the option *See all pages*.
 You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
 Note that pages and groups exclude each other (except in the Pro version).
+You can only add links to pages you are owner of.
 
 If you want to add links to a page, the Facebook account you authorized with should have permission to that page.
 
