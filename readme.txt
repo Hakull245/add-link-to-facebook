@@ -78,7 +78,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
 * Greek (el\_EL), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -337,15 +337,7 @@ See [here](https://developers.facebook.com/docs/reference/api/link/) for the off
 
 = U28 Can I display the widget / social plugins on every page? =
 
-This is not directly possible. The plugin is a multi-user plugin.
-Only on single posts/pages an author can be determined, which is needed to get the correct settings (layout, link, etc).
-
-However, there is a workaround: choose a post/page you want to tie the widget to and
-use one or more of the shortcodes to display what you want using the *post_id* parameter, see question U23 for more details.
-
-You probably want to enable the option *Execute shortcodes in widgets*.
-
-This applies to some Open Graph Meta tags as well.
+Yes, enable the widget option *Show everywhere using my settings* (since version 1.146).
 
 = U29 How can I use the Facebook registration form/login button? =
 
@@ -403,6 +395,7 @@ Sometimes this is desirable and sometimes not.
 If this is not wanted, you will have to find out the name(s) of the custom post types
 and to put them into the plugin option *Exclude these custom post types* (admin only).
 The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
+Since version 1.146 the custom post types for the last 10 posts is visible in the debug information (see last question).
 
 = U35 The link picture is wrong =
 
@@ -695,6 +688,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: option to set additional URL parameters (for example for Google Analytics)
+* New feature: display widget everywhere (option)
 * Improvement: more debug info, more error checking
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
