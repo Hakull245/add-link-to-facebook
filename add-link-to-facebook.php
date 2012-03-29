@@ -87,8 +87,6 @@ if (WPAL2Int::Check_updates()) {
 		if (is_multisite())
 			$updates_url .= '&blogs=' . get_blog_count();
 		$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook', 1);
-		if (get_option(c_al2fb_option_debug))
-			$updates_al2fb->checkForUpdates();
 	}
 }
 

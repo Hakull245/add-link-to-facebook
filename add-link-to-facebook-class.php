@@ -784,6 +784,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			require_once('add-link-to-facebook-admin.php');
 			al2fb_render_admin($this);
+
+			global $updates_al2fb;
+			$updates_al2fb->checkForUpdates();
 		}
 
 		// Add checkboxes
@@ -1573,6 +1576,14 @@ if (!class_exists('WPAL2Facebook')) {
 					if (empty($picture))
 						$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
 
+					// Video
+					$video = false;
+					global $VipersVideoQuicktags;
+					if (isset($VipersVideoQuicktags)) {
+						do_shortcode($post->post_content);
+						$video = reset($VipersVideoQuicktags->swfobjects);
+					}
+
 					// Get type
 					$ogp_type = get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true);
 					if (empty($ogp_type))
@@ -1585,6 +1596,8 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
+					if ($video)
+						echo '<meta property="og:video" content="' . $video['url'] . '" />' . PHP_EOL;
 
 					$texts = self::Get_texts($post);
 					$maxlen = get_option(c_al2fb_option_max_descr);

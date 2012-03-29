@@ -83,7 +83,7 @@ class PluginUpdateChecker {
 			
 			//In case Cron is disabled or unreliable, we also manually trigger 
 			//the periodic checks while the user is browsing the Dashboard. 
-			add_action( 'admin_init', array(&$this, 'maybeCheckForUpdates') );
+			//add_action( 'admin_init', array(&$this, 'maybeCheckForUpdates') );
 			
 		} else {
 			//Periodic checks are disabled.
