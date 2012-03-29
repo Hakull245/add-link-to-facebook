@@ -690,6 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * New feature: option to set additional URL parameters (for example for Google Analytics)
 * New feature: display widget everywhere (option)
+* New feature: OGP video meta tag
 * Improvement: more debug info, more error checking
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
