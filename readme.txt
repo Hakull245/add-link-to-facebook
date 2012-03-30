@@ -332,7 +332,7 @@ since Facebook consider these as different objects.
 
 = U27 I want pink links! ;-) =
 
-How, when and where links appear on your wall is entirely determined by Facebook.
+How, when and where links, comments, etc appear on your wall/page/group is entirely determined by Facebook.
 Only a few link properties can be set by the plugin.
 See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
