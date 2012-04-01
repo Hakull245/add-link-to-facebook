@@ -786,7 +786,8 @@ if (!class_exists('WPAL2Facebook')) {
 			al2fb_render_admin($this);
 
 			global $updates_al2fb;
-			$updates_al2fb->checkForUpdates();
+			if (isset($updates_al2fb))
+				$updates_al2fb->checkForUpdates();
 		}
 
 		// Add checkboxes
