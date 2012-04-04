@@ -420,7 +420,7 @@ There is one known limitation, see the previous question.
 
 = U38 I see HTML / shortcodes on Facebook =
 
-Try enabling one of these options on the plugin settings tab *Admin*:
+Try disabling one of these options on the plugin settings tab *Admin*:
 
 * *Do not execute shortcodes for texts*
 * *Do not execute filters for texts*
