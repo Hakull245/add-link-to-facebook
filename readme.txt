@@ -78,7 +78,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
 * Greek (el\_EL), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -420,7 +420,7 @@ There is one known limitation, see the previous question.
 
 = U38 I see HTML / shortcodes on Facebook =
 
-Try enabling one of these options on the plugin settings tab *Admin*:
+Try disabling one of these options on the plugin settings tab *Admin*:
 
 * *Do not execute shortcodes for texts*
 * *Do not execute filters for texts*
