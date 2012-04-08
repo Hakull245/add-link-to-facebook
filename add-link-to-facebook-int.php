@@ -294,6 +294,11 @@ if (!class_exists('WPAL2Int')) {
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$comments = json_decode($response);
 			$comments = apply_filters('al2fb_fb_comments', $comments);
+			if ($comments)
+				foreach ($comments->data as $comment) {
+					$comment->message = WPAL2Int::Convert_encoding($user_ID, $comment->message);
+					$comment->from->name = WPAL2Int::Convert_encoding($user_ID, $comment->from->name);
+				}
 			return $comments;
 		}
 

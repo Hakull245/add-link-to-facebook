@@ -688,7 +688,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: convert character encoding of imported comments
 
 Follow these steps to install the development version:
 
