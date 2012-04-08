@@ -689,6 +689,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: convert character encoding of imported comments
+* Bugfix: comment/like count
 
 Follow these steps to install the development version:
 

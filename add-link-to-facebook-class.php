@@ -2249,7 +2249,8 @@ if (!class_exists('WPAL2Facebook')) {
 				}
 
 				// Like count
-				if ($post->ping_status == 'open' &&
+				if (self::Is_recent($post) &&
+					$post->ping_status == 'open' &&
 					get_user_meta($user_ID, c_al2fb_meta_fb_likes, true))
 					$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if (!empty($fb_likes))
