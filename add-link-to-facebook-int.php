@@ -296,8 +296,8 @@ if (!class_exists('WPAL2Int')) {
 			$comments = apply_filters('al2fb_fb_comments', $comments);
 			if ($comments)
 				foreach ($comments->data as $comment) {
-					$comment->message = WPAL2Int::Convert_encoding($user_ID, $comment->message);
-					$comment->from->name = WPAL2Int::Convert_encoding($user_ID, $comment->from->name);
+					$comment->message = WPAL2Int::Convert_encoding($user_ID, $comment->message, true);
+					$comment->from->name = WPAL2Int::Convert_encoding($user_ID, $comment->from->name, true);
 				}
 			return $comments;
 		}
@@ -656,14 +656,17 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		// Convert charset
-		static function Convert_encoding($user_ID, $text) {
+		static function Convert_encoding($user_ID, $text, $import = false) {
 			$blog_encoding = get_option('blog_charset');
 			$fb_encoding = get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true);
 			if (empty($fb_encoding))
 				$fb_encoding = 'UTF-8';
 
 			if ($blog_encoding != $fb_encoding && function_exists('mb_convert_encoding'))
-				return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
+				if ($import)
+					return @mb_convert_encoding($text, $blog_encoding, $fb_encoding);
+				else
+					return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
 			else
 				return $text;
 		}
