@@ -78,7 +78,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
 * Greek (el\_EL), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -690,6 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: character encoding of imported comments
 * Bugfix: comment/like count
+* Improvement: increased link picture size from thumbnail to medium
 
 Follow these steps to install the development version:
 
