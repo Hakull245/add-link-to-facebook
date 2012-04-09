@@ -690,6 +690,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: character encoding of imported comments
 * Bugfix: comment/like count
+* Improvement: increased link picture size from thumbnail to medium
 
 Follow these steps to install the development version:
 

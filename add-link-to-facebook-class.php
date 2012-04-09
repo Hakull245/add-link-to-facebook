@@ -1370,12 +1370,12 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_link_picture($post, $user_ID) {
 			// Get selected image
 			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-			if (!empty($image_id) && function_exists('wp_get_attachment_thumb_url')) {
+			$image_size = 'medium';
+			if (!empty($image_id) && function_exists('wp_get_attachment_image_src')) {
 				$picture_type = 'meta';
-				$picture = wp_get_attachment_thumb_url($image_id);
-				// Workaround
-				if (strpos($picture, 'http') === false)
-					$picture = content_url($picture);
+				$picture = wp_get_attachment_image_src($image_id, $image_size);
+				if ($picture)
+					$picture = $picture[0]; // url
 			}
 
 			if (empty($picture)) {
@@ -1389,7 +1389,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if ($picture_type == 'media') {
 					$images = array_values(get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID));
 					if (!empty($images) && function_exists('wp_get_attachment_image_src')) {
-						$picture = wp_get_attachment_image_src($images[0]->ID, 'thumbnail');
+						$picture = wp_get_attachment_image_src($images[0]->ID, $image_size);
 						if ($picture && $picture[0])
 							$picture = $picture[0];
 					}
@@ -1405,7 +1405,7 @@ if (!class_exists('WPAL2Facebook')) {
 								$picture = $nggMeta->image->imageURL;
 							}
 							else {
-								$picture = wp_get_attachment_image_src($picture_id, 'thumbnail');
+								$picture = wp_get_attachment_image_src($picture_id, $image_size);
 								if ($picture && $picture[0])
 									$picture = $picture[0];
 							}
