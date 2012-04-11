@@ -1430,11 +1430,11 @@ function al2fb_render_resources($al2fb) {
 
 function al2fb_render_ads($al2fb) {
 	// Host1Plus
-	//echo '<div class="al2fb_ads">';
-	//echo '<a href="http://www.host1plus.com/" target="_blank">';
-	//echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
-	//echo '</a>';
-	//echo '</div>';
+	echo '<div class="al2fb_ads">';
+	echo '<a href="http://www.host1plus.com/vps-hosting/" target="_blank">';
+	echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
+	echo '</a>';
+	echo '</div>';
 
 	// ManageWP
 	echo '<div class="al2fb_ads">';
