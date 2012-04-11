@@ -394,7 +394,7 @@ Sometimes this is desirable and sometimes not.
 If this is not wanted, you will have to find out the name(s) of the custom post types
 and to put them into the plugin option *Exclude these custom post types* (admin only).
 The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
-The custom post types for the last 10 posts is visible in the debug information (see last question).
+The custom post types for the last 10 posts are visible in the debug information (see last question).
 
 = U35 The link picture is wrong =
 
