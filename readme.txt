@@ -186,8 +186,6 @@ You'll have to re-authorize one more time, because an extra Facebook permission 
 Note that pages and groups exclude each other (except in the Pro version).
 You can only add links to pages you are owner of.
 
-If you want to add links to a page, the Facebook account you authorized with should have permission to that page.
-
 = U13 I want to add links to a group =
 
 This option is only available *after* you have authorized, since information from Facebook needs to be fetched.
@@ -691,6 +689,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: character encoding of imported comments
 * Bugfix: comment/like count
 * Improvement: increased link picture size from thumbnail to medium
+* New feature: disabled sending pingbacks/trackbacks to Facebook (option)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
