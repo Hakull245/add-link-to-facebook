@@ -691,6 +691,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: increased link picture size from thumbnail to medium
 * New feature: disabled sending pingbacks/trackbacks to Facebook (option)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de/ "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
