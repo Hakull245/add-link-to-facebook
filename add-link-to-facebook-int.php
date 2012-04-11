@@ -767,6 +767,9 @@ if (!class_exists('WPAL2Int')) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
 			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
 				return;
+			if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_only, true))
+				if ($comment->comment_type == 'pingback' || $comment->comment_type == 'trackback')
+					return;
 			if (WPAL2Facebook::Is_excluded_post_type($post))
 				return;
 

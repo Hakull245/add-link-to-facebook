@@ -80,6 +80,7 @@ define('c_al2fb_meta_share_link', 'al2fb_share_link');
 define('c_al2fb_meta_fb_comments', 'al2fb_fb_comments');
 define('c_al2fb_meta_fb_comments_trailer', 'al2fb_fb_comments_trailer');
 define('c_al2fb_meta_fb_comments_postback', 'al2fb_fb_comments_postback');
+define('c_al2fb_meta_fb_comments_only', 'al2fb_fb_comments_only');
 define('c_al2fb_meta_fb_comments_copy', 'al2fb_fb_comments_copy');
 define('c_al2fb_meta_fb_comments_nolink', 'al2fb_fb_comments_nolink');
 define('c_al2fb_meta_fb_likes', 'al2fb_fb_likes');
