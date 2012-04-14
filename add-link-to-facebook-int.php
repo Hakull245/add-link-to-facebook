@@ -1655,11 +1655,21 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Set_multiple($code, $count) {
-			update_site_option(c_al2fb_option_multiple, $code);
-			if ($count > 1)
-				update_site_option(c_al2fb_option_multiple_count, $count);
-			else
-				delete_site_option(c_al2fb_option_multiple_count);
+			if (empty($code)) {
+				delete_option(c_al2fb_option_multiple);
+				delete_option(c_al2fb_option_multiple_count);
+				if (is_multisite()) {
+					delete_site_option(c_al2fb_option_multiple);
+					delete_site_option(c_al2fb_option_multiple_count);
+				}
+			}
+			else {
+				update_site_option(c_al2fb_option_multiple, $code);
+				if ($count > 1)
+					update_site_option(c_al2fb_option_multiple_count, $count);
+				else
+					delete_site_option(c_al2fb_option_multiple_count);
+			}
 			return WPAL2Int::Check_multiple();
 		}
 
