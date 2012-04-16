@@ -334,7 +334,7 @@ How, when and where links, comments, etc appear on your wall/page/group is entir
 Only a few link properties can be set by the plugin.
 See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
-The social plugins, such as the like box, comments plugin and activity feed, seem to be part of you website,
+The social plugins, such as the like box, comments plugin and activity feed, seem to be part of your website,
 but in reality these plugins run on Facebook. This means the appearance and behavior of these plugins can only be changed by Facebook.
 
 = U28 Can I display the widget / social plugins on every page? =
