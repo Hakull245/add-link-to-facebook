@@ -334,6 +334,9 @@ How, when and where links, comments, etc appear on your wall/page/group is entir
 Only a few link properties can be set by the plugin.
 See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
+The social plugins, such as the like box, comments plugin and activity feed, seem to be part of you website,
+but in reality these plugins run on Facebook. This means the appearance and behavior of these plugins can only be changed by Facebook.
+
 = U28 Can I display the widget / social plugins on every page? =
 
 Yes, enable the widget option *Show everywhere using my settings*
@@ -690,6 +693,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: comment/like count
 * Improvement: increased link picture size from thumbnail to medium
 * New feature: disabled sending pingbacks/trackbacks to Facebook (option)
+* Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de/ "Wolfgang Tischer")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
