@@ -190,8 +190,10 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 			if ($version <= 8)
 				update_option(c_al2fb_option_nofilter_comments, true);
+			if ($version <= 9)
+				update_option(c_al2fb_option_nopreauth, true);
 
-			update_option(c_al2fb_option_version, 9);
+			update_option(c_al2fb_option_version, 10);
 		}
 
 		// Handle plugin deactivation
