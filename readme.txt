@@ -76,8 +76,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
-* Lithuanian (lt\_LT) by *Censored on request of wordpress.org*, thanks!
 * Greek (el\_EL), thanks!
+* Lithuanian (lt\_LT) by *Censored on request of wordpress.org*, thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
