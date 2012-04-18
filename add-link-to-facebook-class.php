@@ -311,7 +311,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$auth_url = WPAL2Int::Authorize_url($user_ID);
 						try {
 							// Check
-							if (ini_get('safe_mode') || ini_get('open_basedir') || $this->debug)
+							if (ini_get('safe_mode') || ini_get('open_basedir') || $this->debug || get_option(c_al2fb_option_nopreauth))
 								update_option(c_al2fb_log_redir_check, 'No');
 							else {
 								$response = WPAL2Int::Request($auth_url, '', 'GET');
@@ -550,6 +550,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_noasync, $_POST[c_al2fb_option_noasync]);
 				update_option(c_al2fb_option_noscript, $_POST[c_al2fb_option_noscript]);
 				update_option(c_al2fb_option_uselinks, $_POST[c_al2fb_option_uselinks]);
+				update_option(c_al2fb_option_nopreauth, $_POST[c_al2fb_option_nopreauth]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 
