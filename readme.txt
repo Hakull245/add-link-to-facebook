@@ -693,6 +693,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: character encoding of imported comments
 * Bugfix: comment/like count
 * Improvement: increased link picture size from thumbnail to medium
+* Improvement: set User Agent for pre-authorization check
 * New feature: disabled sending pingbacks/trackbacks to Facebook (option)
 * Updated FAQ
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
