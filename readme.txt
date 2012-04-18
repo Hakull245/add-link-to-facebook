@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 1.146
+Stable tag: 1.148
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -77,6 +77,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 * Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
 * Greek (el\_EL), thanks!
+* Lithuanian (lt\_LT), thanks!
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
@@ -185,8 +186,6 @@ Be sure to check the option *See all pages*.
 You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
 Note that pages and groups exclude each other (except in the Pro version).
 You can only add links to pages you are owner of.
-
-If you want to add links to a page, the Facebook account you authorized with should have permission to that page.
 
 = U13 I want to add links to a group =
 
@@ -336,6 +335,9 @@ How, when and where links, comments, etc appear on your wall/page/group is entir
 Only a few link properties can be set by the plugin.
 See [here](https://developers.facebook.com/docs/reference/api/link/) for the official documentation.
 
+The social plugins, such as the like box, comments plugin and activity feed, seem to be part of your website,
+but in reality these plugins run on Facebook. This means the appearance and behavior of these plugins can only be changed by Facebook.
+
 = U28 Can I display the widget / social plugins on every page? =
 
 Yes, enable the widget option *Show everywhere using my settings*
@@ -396,7 +398,7 @@ Sometimes this is desirable and sometimes not.
 If this is not wanted, you will have to find out the name(s) of the custom post types
 and to put them into the plugin option *Exclude these custom post types* (admin only).
 The author of the plugin will probably know the name(s), else you will have to look into the source code or database.
-The custom post types for the last 10 posts is visible in the debug information (see last question).
+The custom post types for the last 10 posts are visible in the debug information (see last question).
 
 = U35 The link picture is wrong =
 
@@ -571,8 +573,9 @@ cURL errors commonly reported:
 * Error 6: *Couldn’t resolve host*: the DNS of the hosting server may not work correct
 * Error 7: *Failed to connect() to host or proxy*: the hosting server is probably not allowing connections to the internet
 * Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server, you can try to increase the setting *Facebook communication timeout*
+* Error 47: *Maximum redirects followed*: try enabling the option *Skip authorization check* (settings tab *Admin*)
 * Error 56: *Failure with receiving network data*: this error may be caused by using a CDN or caching solutions like CloudFare
-* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate*, but be aware this is less secure
+* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate* (settings tab *Admin*), but be aware this is less secure
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
 You can find all cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
@@ -688,7 +691,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: convert character encoding of imported comments
+* ...
 
 Follow these steps to install the development version:
 
@@ -703,6 +706,21 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.148 =
+* Disabled pre-authorization check
+
+= 1.147 =
+* Bugfix: character encoding of imported comments
+* Bugfix: comment/like count
+* Improvement: increased link picture size from thumbnail to medium
+* New feature: disable sending pingbacks/trackbacks to Facebook (option)
+* New feature: disable pre-authorization check (option)
+* Updated FAQ
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de/ "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Added Lithuanian (lt\_LT) translation
+
 = 1.146 =
 * New feature: option to set additional URL parameters (for example for Google Analytics)
 * New feature: display widget everywhere (widget option)
@@ -712,29 +730,20 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.145 =
-* Bugfix: using multi-byte string functions if present
-
-= 1.144 =
-* Bugfix: convert character sets after filtering
-* Bugfix: using multi-byte string functions
-* Improvement: disable post related errors too, when *Do not display notices* is checked (except for the edit page of a post with errors)
-* Updated FAQ: two new questions
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.148 =
+Disabled pre-authorization check
+
+= 1.147 =
+Two bug fixes, two new features, one improvement, updated FAQ & translations
+
 = 1.146 =
 Three new features, one improvement, updated FAQ & translations
-
-= 1.145 =
-One bugfix
-
-= 1.144 =
-Two bugfixes, one improvement
 
 == Setup guide ==
 
