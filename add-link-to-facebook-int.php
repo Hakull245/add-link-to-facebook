@@ -1628,9 +1628,14 @@ if (!class_exists('WPAL2Int')) {
 			if (get_option(c_al2fb_option_noverifypeer))
 				curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
 
-			//$ua = $_SERVER['HTTP_USER_AGENT'];
-			//if (!empty($ua))
-			//	curl_setopt($c,CURLOPT_USERAGENT, $ua);
+			delete_option(c_al2fb_log_ua);
+			if (get_option(c_al2fb_option_nopreauth)) {
+				$ua = $_SERVER['HTTP_USER_AGENT'];
+				if (!empty($ua)) {
+					curl_setopt($c,CURLOPT_USERAGENT, $ua);
+					update_option(c_al2fb_log_ua, $ua);
+				}
+			}
 
 			$content = curl_exec($c);
 			$errno = curl_errno($c);

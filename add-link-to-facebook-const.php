@@ -167,6 +167,7 @@ define('c_al2fb_log_redir_from', 'al2fb_redir_from');
 define('c_al2fb_log_redir_to', 'al2fb_redir_to');
 define('c_al2fb_log_get_token', 'al2fb_get_token');
 define('c_al2fb_log_auth_time', 'al2fb_auth_time');
+define('c_al2fb_log_ua', 'al2fb_ua');
 define('c_al2fb_last_error', 'al2fb_last_error');
 define('c_al2fb_last_error_time', 'al2fb_last_error_time');
 define('c_al2fb_last_request', 'al2fb_last_request');

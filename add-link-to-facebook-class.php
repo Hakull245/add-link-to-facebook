@@ -313,7 +313,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$auth_url = WPAL2Int::Authorize_url($user_ID);
 						try {
 							// Check
-							if (ini_get('safe_mode') || ini_get('open_basedir') || $this->debug || get_option(c_al2fb_option_nopreauth) || true)
+							if (ini_get('safe_mode') || ini_get('open_basedir') || $this->debug) // || get_option(c_al2fb_option_nopreauth) || true)
 								update_option(c_al2fb_log_redir_check, 'No');
 							else {
 								$response = WPAL2Int::Request($auth_url, '', 'GET');
