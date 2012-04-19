@@ -692,6 +692,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
+* Temporary: *Skip authorization check* selects if the user agent is sent to Facebook
 
 Follow these steps to install the development version:
 
