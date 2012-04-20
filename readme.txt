@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.3.1
-Stable tag: 1.148
+Tested up to: 3.3.2
+Stable tag: 1.149
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -691,10 +691,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Bugfix: send user agent to Facebook
-* Improvement: no *... commented on ...* when post authors comments (except when sharing is enabled by someone else)
-* Removed option *Skip authorization check*
-* Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
+* ...
 
 Follow these steps to install the development version:
 
@@ -708,6 +705,12 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.149 =
+* Bugfix: send user agent to Facebook
+* Improvement: removed option *Skip authorization check*
+* Improvement: no *... commented on ...* when post authors comments (except when sharing is enabled by someone else)
+* Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
 
 = 1.148 =
 * Disabled pre-authorization check
@@ -724,29 +727,20 @@ Follow these steps to install the development version:
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Added Lithuanian (lt\_LT) translation
 
-= 1.146 =
-* New feature: option to set additional URL parameters (for example for Google Analytics)
-* New feature: display widget everywhere (widget option)
-* New feature: OGP video meta tag
-* Improvement: more debug info, more error checking
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.149 =
+One bugfix, two improvements, updated library
+
 = 1.148 =
 Disabled pre-authorization check
 
 = 1.147 =
 Two bug fixes, two new features, one improvement, updated FAQ & translations
-
-= 1.146 =
-Three new features, one improvement, updated FAQ & translations
 
 == Setup guide ==
 
