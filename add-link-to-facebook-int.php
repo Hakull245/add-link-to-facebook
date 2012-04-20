@@ -774,8 +774,11 @@ if (!class_exists('WPAL2Int')) {
 				return;
 
 			// Build message
-			$message = $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
-			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
+			$message = '';
+			if ($post->post_author != $comment->user_id) {
+				$message .= $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
+				$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
+			}
 			$message .= $comment->comment_content;
 			$message = apply_filters('al2fb_comment', $message, $comment, $post);
 			$message = WPAL2Int::Convert_encoding($user_ID, $message);
