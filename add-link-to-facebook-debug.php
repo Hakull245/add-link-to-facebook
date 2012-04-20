@@ -135,6 +135,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Authorized:</td><td>' . ($al2fb->Is_authorized($user_ID) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Authorized time:</td><td>' . get_option(c_al2fb_log_auth_time) . '</td></tr>';
 	$info .= '<tr><td>Token time:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_token_time, true)  . '</td></tr>';
+	$info .= '<tr><td>User agent:</td><td>' . get_option(c_al2fb_log_ua) . '</td></tr>';
 	$info .= '<tr><td>allow_url_fopen:</td><td>' . (ini_get('allow_url_fopen') ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>cURL:</td><td>' . $curl_version . '</td></tr>';
 	$info .= '<tr><td>openssl loaded:</td><td>' . (extension_loaded('openssl') ? 'Yes' : 'No') . '</td></tr>';

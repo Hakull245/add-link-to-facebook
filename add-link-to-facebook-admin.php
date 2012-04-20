@@ -637,6 +637,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_fb_comments_only"><?php _e('Do not send pingbacks and trackbacks:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_fb_comments_only" name="<?php echo c_al2fb_meta_fb_comments_only; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_only, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_fb_comments_copy"><?php _e('Copy comments from Facebook to WordPress:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_comments_copy" name="<?php echo c_al2fb_meta_fb_comments_copy; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_copy, true)) echo ' checked="checked"'; ?> />
@@ -1283,7 +1289,6 @@ function al2fb_render_admin($al2fb)
 			<label for="al2fb_uselinks"><?php _e('Use links API instead of feed API:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<input id="al2fb_uselinks" name="<?php echo c_al2fb_option_uselinks; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_uselinks)) echo ' checked="checked"'; ?> />
-			<strong>Experimental!</strong>
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
@@ -1424,11 +1429,11 @@ function al2fb_render_resources($al2fb) {
 
 function al2fb_render_ads($al2fb) {
 	// Host1Plus
-	//echo '<div class="al2fb_ads">';
-	//echo '<a href="http://www.host1plus.com/" target="_blank">';
-	//echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
-	//echo '</a>';
-	//echo '</div>';
+	echo '<div class="al2fb_ads">';
+	echo '<a href="http://www.host1plus.com/vps-hosting/" target="_blank">';
+	echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
+	echo '</a>';
+	echo '</div>';
 
 	// ManageWP
 	echo '<div class="al2fb_ads">';

@@ -296,8 +296,8 @@ if (!class_exists('WPAL2Int')) {
 			$comments = apply_filters('al2fb_fb_comments', $comments);
 			if ($comments)
 				foreach ($comments->data as $comment) {
-					$comment->message = WPAL2Int::Convert_encoding($user_ID, $comment->message);
-					$comment->from->name = WPAL2Int::Convert_encoding($user_ID, $comment->from->name);
+					$comment->message = WPAL2Int::Convert_encoding($user_ID, $comment->message, true);
+					$comment->from->name = WPAL2Int::Convert_encoding($user_ID, $comment->from->name, true);
 				}
 			return $comments;
 		}
@@ -656,14 +656,17 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		// Convert charset
-		static function Convert_encoding($user_ID, $text) {
+		static function Convert_encoding($user_ID, $text, $import = false) {
 			$blog_encoding = get_option('blog_charset');
 			$fb_encoding = get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true);
 			if (empty($fb_encoding))
 				$fb_encoding = 'UTF-8';
 
 			if ($blog_encoding != $fb_encoding && function_exists('mb_convert_encoding'))
-				return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
+				if ($import)
+					return @mb_convert_encoding($text, $blog_encoding, $fb_encoding);
+				else
+					return @mb_convert_encoding($text, $fb_encoding, $blog_encoding);
 			else
 				return $text;
 		}
@@ -764,12 +767,18 @@ if (!class_exists('WPAL2Int')) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
 			if (!get_user_meta($user_ID, c_al2fb_meta_fb_comments_postback, true))
 				return;
+			if (get_user_meta($user_ID, c_al2fb_meta_fb_comments_only, true))
+				if ($comment->comment_type == 'pingback' || $comment->comment_type == 'trackback')
+					return;
 			if (WPAL2Facebook::Is_excluded_post_type($post))
 				return;
 
 			// Build message
-			$message = $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
-			$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
+			$message = '';
+			if ($post->post_author != $comment->user_id || $post->post_author != $user_ID) {
+				$message .= $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
+				$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
+			}
 			$message .= $comment->comment_content;
 			$message = apply_filters('al2fb_comment', $message, $comment, $post);
 			$message = WPAL2Int::Convert_encoding($user_ID, $message);
@@ -1622,6 +1631,13 @@ if (!class_exists('WPAL2Int')) {
 			if (get_option(c_al2fb_option_noverifypeer))
 				curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
 
+			delete_option(c_al2fb_log_ua);
+			$ua = $_SERVER['HTTP_USER_AGENT'];
+			if (!empty($ua)) {
+				curl_setopt($c,CURLOPT_USERAGENT, $ua);
+				update_option(c_al2fb_log_ua, $ua);
+			}
+
 			$content = curl_exec($c);
 			$errno = curl_errno($c);
 			$errtext = curl_error($c);
@@ -1649,11 +1665,21 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Set_multiple($code, $count) {
-			update_site_option(c_al2fb_option_multiple, $code);
-			if ($count > 1)
-				update_site_option(c_al2fb_option_multiple_count, $count);
-			else
-				delete_site_option(c_al2fb_option_multiple_count);
+			if (empty($code)) {
+				delete_option(c_al2fb_option_multiple);
+				delete_option(c_al2fb_option_multiple_count);
+				if (is_multisite()) {
+					delete_site_option(c_al2fb_option_multiple);
+					delete_site_option(c_al2fb_option_multiple_count);
+				}
+			}
+			else {
+				update_site_option(c_al2fb_option_multiple, $code);
+				if ($count > 1)
+					update_site_option(c_al2fb_option_multiple_count, $count);
+				else
+					delete_site_option(c_al2fb_option_multiple_count);
+			}
 			return WPAL2Int::Check_multiple();
 		}
 
