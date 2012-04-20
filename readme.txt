@@ -709,7 +709,7 @@ Follow these steps to install the development version:
 = 1.149 =
 * Bugfix: send user agent to Facebook
 * Improvement: removed option *Skip authorization check*
-* Improvement: no *... commented on ...* when post authors comments (except when sharing is enabled by someone else)
+* Improvement: no *... commented on ...* when post author comments (except when sharing is enabled by someone else)
 * Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
 
 = 1.148 =
