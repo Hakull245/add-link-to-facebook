@@ -692,6 +692,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: send user agent to Facebook
+* Improvement: no *... commented on ...* when post authors comments
 * Removed option *Skip authorization check*
 * Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
 
