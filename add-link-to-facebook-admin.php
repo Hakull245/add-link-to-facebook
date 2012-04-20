@@ -1292,12 +1292,6 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
-			<label for="al2fb_nopreauth"><?php _e('Skip authorization check:', c_al2fb_text_domain); ?></label>
-		</th><td>
-			<input id="al2fb_nopreauth" name="<?php echo c_al2fb_option_nopreauth; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_nopreauth)) echo ' checked="checked"'; ?> />
-		</td></tr>
-
-		<tr valign="top"><th scope="row">
 			<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
 			<br />
 			<span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?></strong></span>
