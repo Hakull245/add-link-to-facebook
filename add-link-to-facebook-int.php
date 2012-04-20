@@ -775,7 +775,7 @@ if (!class_exists('WPAL2Int')) {
 
 			// Build message
 			$message = '';
-			if ($post->post_author != $comment->user_id) {
+			if ($post->post_author != $comment->user_id || $post->post_author != $user_ID) {
 				$message .= $comment->comment_author . ' ' .  __('commented on', c_al2fb_text_domain) . ' ';
 				$message .= html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset')) . ":\n\n";
 			}
