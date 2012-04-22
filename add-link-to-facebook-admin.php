@@ -362,6 +362,13 @@ function al2fb_render_admin($al2fb)
 		<input id="al2fb_picture_default" class="al2fb_text" name="<?php echo c_al2fb_meta_picture_default; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_picture_default, true); ?>" />
 		<br /><span class="al2fb_explanation"><?php _e('Default WordPress logo', c_al2fb_text_domain); ?></span>
 	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_icon"><?php _e('URL news feed icon:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_icon" class="al2fb_text" name="<?php echo c_al2fb_meta_icon; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_icon, true); ?>" />
+		<br /><span class="al2fb_explanation"><?php _e('Does anybody know where this appears on Facebook?', c_al2fb_text_domain); ?></span>
+	</td></tr>
 	</table>
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />

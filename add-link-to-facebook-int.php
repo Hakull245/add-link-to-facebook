@@ -560,6 +560,12 @@ if (!class_exists('WPAL2Int')) {
 			if ($picture)
 				$query_array['picture'] = $picture;
 
+			// Add icon
+			$icon = get_user_meta($user_ID, c_al2fb_meta_icon, true);
+			$icon = apply_filters('al2fb_icon', $icon, $post);
+			if ($icon)
+				$query_array['icon'] = $icon;
+
 			// Add share link (overwrites how link)
 			if (get_user_meta($user_ID, c_al2fb_meta_share_link, true)) {
 				// http://forum.developers.facebook.net/viewtopic.php?id=50049
