@@ -79,7 +79,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Greek (el\_EL), thanks!
 * Lithuanian (lt\_LT), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
