@@ -381,6 +381,8 @@ The only thing that can be changed is the Facebook application name after 'via'.
 
 From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/).
 
+From version 1.151 you can set a video URL in the post editor.
+
 = U33 The like/send button doesn't look/behave as I want =
 
 The plugin just adds the standard Facebook like/send button.
@@ -691,7 +693,9 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: specify video URL in post editor
+* New feature: filter *al2fb_video*
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
