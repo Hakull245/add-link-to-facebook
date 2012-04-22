@@ -538,16 +538,22 @@ if (!class_exists('WPAL2Int')) {
 			$query_array['actions'] = json_encode($actions);
 
 			// Add video
-			// http://wordpress.org/extend/plugins/vipers-video-quicktags/
-			global $VipersVideoQuicktags;
-			if (isset($VipersVideoQuicktags)) {
-				do_shortcode($post->post_content);
-				$video = reset($VipersVideoQuicktags->swfobjects);
-				if (!empty($video)) {
-					$query_array['source'] = $video['url'];
-					if (!$picture)
-						$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
+			$video = get_post_meta($post->ID, c_al2fb_meta_video, true);
+			if (empty($video)) {
+				// http://wordpress.org/extend/plugins/vipers-video-quicktags/
+				global $VipersVideoQuicktags;
+				if (isset($VipersVideoQuicktags)) {
+					do_shortcode($post->post_content);
+					$video = reset($VipersVideoQuicktags->swfobjects);
+					if (!empty($video))
+						$video = $video['url'];
 				}
+			}
+			$video = apply_filters('al2fb_video', $video, $post);
+			if (!empty($video)) {
+				$query_array['source'] = $video;
+				if (!$picture)
+					$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
 			}
 
 			// Add picture

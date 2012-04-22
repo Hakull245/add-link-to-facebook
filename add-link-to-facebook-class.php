@@ -124,6 +124,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_filter('al2fb_comment', array(&$this, 'Filter_comment'), 10, 3);
 			add_filter('al2fb_fb_feed', array(&$this, 'Filter_feed'), 10, 1);
 			add_filter('al2fb_preprocess_comment', array(&$this, 'Preprocess_comment'), 10, 2);
+			add_filter('al2fb_video', array(&$this, 'Filter_video'), 10, 2);
 
 			// Widget
 			add_action('widgets_init', create_function('', 'return register_widget("AL2FB_Widget");'));
@@ -954,6 +955,15 @@ if (!class_exists('WPAL2Facebook')) {
 					$texts = self::Get_texts($post);
 					echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content, ENT_QUOTES, get_bloginfo('charset')) . '<br />';
 					echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content'], ENT_QUOTES, get_bloginfo('charset')) . '<br />';
+
+					global $VipersVideoQuicktags;
+					if (isset($VipersVideoQuicktags)) {
+						do_shortcode($post->post_content);
+						$video = reset($VipersVideoQuicktags->swfobjects);
+						if (!empty($video))
+							$video = $video['url'];
+						echo '<strong>Viper:</strong> ' . htmlspecialchars($video, ENT_QUOTES, get_bloginfo('charset')) . '<br />';
+					}
 				}
 
 				if (function_exists('wp_get_attachment_image_src')) {
@@ -1027,6 +1037,11 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<input type="text" id="al2fb_url_param_name" name="al2fb_url_param_name" value="' . $url_param_name . '" />';
 				echo '&nbsp;=&nbsp;';
 				echo '<input type="text" id="al2fb_url_param_value" name="al2fb_url_param_value" value="' . $url_param_value . '" />';
+
+				// Video link
+				$video = get_post_meta($post->ID, c_al2fb_meta_video, true);
+				echo '<h4>' . __('Video URL', c_al2fb_text_domain) . '</h4>';
+				echo '<input type="text" id="al2fb_video" name="al2fb_video" value="' . $video . '" />';
 
 				// Current link picture
 				echo '<h4>' . __('Link picture', c_al2fb_text_domain) . '</h4>';
@@ -1122,6 +1137,11 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post_id, c_al2fb_meta_url_param_value, trim($_POST['al2fb_url_param_value']));
 			else
 				delete_post_meta($post_id, c_al2fb_meta_url_param_value);
+
+			if (isset($_POST['al2fb_video']) && !empty($_POST['al2fb_video']))
+				update_post_meta($post_id, c_al2fb_meta_video, trim($_POST['al2fb_video']));
+			else
+				delete_post_meta($post_id, c_al2fb_meta_video);
 		}
 
 		// Remote publish & custom action
@@ -1522,6 +1542,19 @@ if (!class_exists('WPAL2Facebook')) {
 			}
 
 			return $text;
+		}
+
+		function Filter_video($video, $post) {
+			$components = parse_url($video);
+
+			// Normalize YouTube URL
+			if ($components['host'] == 'www.youtube.com') {
+				parse_str($components['query']);
+				if (isset($v))
+					return $components['scheme'] . '://' . $components['host'] . '/v/' . $v;
+			}
+
+			return $video;
 		}
 
 		// New comment
