@@ -694,7 +694,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * New feature: specify video URL in post editor
-* New feature: filter *al2fb_video*
+* New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
 * New feature: privacy: some friends (or friend list)
 * New feature: URL news feed icon (does anybody know where this appears?)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
