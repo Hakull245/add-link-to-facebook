@@ -599,8 +599,16 @@ if (!class_exists('WPAL2Int')) {
 					// Add privacy option
 					if ($page_id == 'me') {
 						$privacy = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
-						if ($privacy)
-							$query_array['privacy'] = json_encode(array('value' => $privacy));
+						if ($privacy) {
+							$p = array('value' => $privacy);
+							if ($privacy == 'SOME_FRIENDS') {
+								$p['value'] = 'CUSTOM';
+								$p['friends'] = 'SOME_FRIENDS';
+								$p['allow'] = get_user_meta($user_ID, c_al2fb_meta_some_friends, true);
+								$p['deny'] = '';
+							}
+							$query_array['privacy'] = json_encode($p);
+						}
 					}
 					else if (isset($query_array['privacy']))
 						unset($query_array['privacy']);

@@ -72,6 +72,7 @@ define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
 define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_privacy', 'al2fb_privacy');
+define('c_al2fb_meta_some_friends', 'al2fb_some_friends');
 define('c_al2fb_meta_add_new_page', 'al2fb_add_to_page');
 define('c_al2fb_meta_show_permalink', 'al2fb_show_permalink');
 define('c_al2fb_meta_trailer', 'al2fb_trailer');
