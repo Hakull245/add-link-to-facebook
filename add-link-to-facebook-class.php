@@ -957,15 +957,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$texts = self::Get_texts($post);
 					echo '<strong>Original:</strong> ' . htmlspecialchars($post->post_content, ENT_QUOTES, get_bloginfo('charset')) . '<br />';
 					echo '<strong>Processed:</strong> ' . htmlspecialchars($texts['content'], ENT_QUOTES, get_bloginfo('charset')) . '<br />';
-
-					global $VipersVideoQuicktags;
-					if (isset($VipersVideoQuicktags)) {
-						do_shortcode($post->post_content);
-						$video = reset($VipersVideoQuicktags->swfobjects);
-						if (!empty($video))
-							$video = $video['url'];
-						echo '<strong>Viper:</strong> ' . htmlspecialchars($video, ENT_QUOTES, get_bloginfo('charset')) . '<br />';
-					}
+					echo '<strong>Video:</strong> ' . htmlspecialchars(self::Get_link_video($post, $user_ID), ENT_QUOTES, get_bloginfo('charset')) . '<br />';
 				}
 
 				if (function_exists('wp_get_attachment_image_src')) {
@@ -1483,6 +1475,23 @@ if (!class_exists('WPAL2Facebook')) {
 			return false;
 		}
 
+		// Get link video
+		function Get_link_video($post, $user_ID) {
+			$video = get_post_meta($post->ID, c_al2fb_meta_video, true);
+			if (empty($video)) {
+				// http://wordpress.org/extend/plugins/vipers-video-quicktags/
+				global $VipersVideoQuicktags;
+				if (isset($VipersVideoQuicktags)) {
+					do_shortcode($post->post_content);
+					$video = reset($VipersVideoQuicktags->swfobjects);
+					if (!empty($video))
+						$video = $video['url'];
+				}
+			}
+			$video = apply_filters('al2fb_video', $video, $post);
+			return $video;
+		}
+
 		function Filter_excerpt($excerpt, $post) {
 			return self::Filter_standard($excerpt, $post);
 		}
@@ -1551,9 +1560,16 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Normalize YouTube URL
 			if ($components['host'] == 'www.youtube.com') {
+				// http://www.youtube.com/watch?v=RVUxgqH-y4s -> http://www.youtube.com/v/RVUxgqH-y4s
 				parse_str($components['query']);
 				if (isset($v))
 					return $components['scheme'] . '://' . $components['host'] . '/v/' . $v;
+			}
+
+			// Normalize Vimeo URL
+			if ($components['host'] == 'vimeo.com') {
+				// http://vimeo.com/240975 -> http://www.vimeo.com/moogaloop.swf?server=www.vimeo.com&clip_id=240975
+				return $components['scheme'] . '://www.' . $components['host'] . '/moogaloop.swf?server=www.vimeo.com&clip_id=' . substr($components['path'], 1);
 			}
 
 			return $video;
@@ -1614,12 +1630,7 @@ if (!class_exists('WPAL2Facebook')) {
 						$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
 
 					// Video
-					$video = false;
-					global $VipersVideoQuicktags;
-					if (isset($VipersVideoQuicktags)) {
-						do_shortcode($post->post_content);
-						$video = reset($VipersVideoQuicktags->swfobjects);
-					}
+					$video = self::Get_link_video($post, $user_ID);
 
 					// Get type
 					$ogp_type = get_user_meta($user_ID, c_al2fb_meta_open_graph_type, true);
@@ -1634,7 +1645,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:url" content="' . get_permalink($post->ID) . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 					if ($video)
-						echo '<meta property="og:video" content="' . $video['url'] . '" />' . PHP_EOL;
+						echo '<meta property="og:video" content="' . $video . '" />' . PHP_EOL;
 
 					$texts = self::Get_texts($post);
 					$maxlen = get_option(c_al2fb_option_max_descr);

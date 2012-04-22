@@ -538,20 +538,10 @@ if (!class_exists('WPAL2Int')) {
 			$query_array['actions'] = json_encode($actions);
 
 			// Add video
-			$video = get_post_meta($post->ID, c_al2fb_meta_video, true);
-			if (empty($video)) {
-				// http://wordpress.org/extend/plugins/vipers-video-quicktags/
-				global $VipersVideoQuicktags;
-				if (isset($VipersVideoQuicktags)) {
-					do_shortcode($post->post_content);
-					$video = reset($VipersVideoQuicktags->swfobjects);
-					if (!empty($video))
-						$video = $video['url'];
-				}
-			}
-			$video = apply_filters('al2fb_video', $video, $post);
+			$video = WPAL2Facebook::Get_link_video($post, $user_ID);
 			if (!empty($video)) {
 				$query_array['source'] = $video;
+				// Picture is mandatory
 				if (!$picture)
 					$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
 			}
