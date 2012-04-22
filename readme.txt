@@ -79,7 +79,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Greek (el\_EL), thanks!
 * Lithuanian (lt\_LT), thanks!
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -698,6 +698,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: privacy: some friends (or friend list)
 * New feature: URL news feed icon (does anybody know where this appears?)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
