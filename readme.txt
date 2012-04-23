@@ -672,6 +672,11 @@ You should ask your hosting provider to install and configure cURL.
 
 Try to authorize the plugin again.
 
+= E26 I get 'Session has expired at unix time ...' =
+
+The access token has expired for some reason.
+This problem can probably be solved by authorizing the plugin again.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
