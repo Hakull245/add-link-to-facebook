@@ -1168,7 +1168,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_ID);
 			$user_ID = self::Get_user_ID($post);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-			if (!empty($link_id) && self::Is_authorized($user_ID))
+			if (!empty($link_id) && (self::Is_authorized($user_ID) || self::Is_fb_loggedin($user_ID)))
 				WPAL2Int::Delete_fb_link($post);
 		}
 
@@ -1186,7 +1186,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Security check
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
-				self::Is_authorized($user_ID)) {
+				(self::Is_authorized($user_ID) || self::Is_fb_loggedin($user_ID))) {
 				// Add, update or delete link
 				if ($update || $delete || $new_status == 'trash') {
 					if (!empty($link_id)) {
@@ -1214,7 +1214,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
-				self::Is_authorized($user_ID)) {
+				(self::Is_authorized($user_ID) || self::Is_fb_loggedin($user_ID))) {
 				// Check if not added/excluded
 				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
@@ -1608,6 +1608,10 @@ if (!class_exists('WPAL2Facebook')) {
 			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 		}
 
+		function Is_fb_loggedin($user_ID) {
+			return get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+		}
+
 		// HTML header
 		function WP_head() {
 			if (is_single() || is_page()) {
@@ -1988,13 +1992,14 @@ if (!class_exists('WPAL2Facebook')) {
 		// Profile personal options
 		function Personal_options($user) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
+			$ftoken = get_user_meta($user->ID, c_al2fb_meta_facebook_token, true);
 			echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
 			echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
 			if ($fid)
-				echo '<a href="' . WPAL2Int::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a></td>';
-			else
-				echo '<a href="http://apps.facebook.com/whatismyid/" target="_blank">' . __('What is my Facebook ID?', c_al2fb_text_domain) . '</a></td>';
-			echo '</tr>';
+				echo '<br><a href="' . WPAL2Int::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a>';
+			if ($ftoken && $this->debug)
+				echo '<br><span>token=' . $ftoken . '</span>';
+			echo '</td></tr>';
 		}
 
 		// Handle personal options change

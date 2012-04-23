@@ -180,6 +180,7 @@ define('c_al2fb_last_texts', 'al2fb_last_texts');
 
 // User meta
 define('c_al2fb_meta_facebook_id', 'al2fb_facebook_id');
+define('c_al2fb_meta_facebook_token', 'al2fb_facebook_token');
 
 // Mail
 define('c_al2fb_mail_name', 'al2fb_debug_name');

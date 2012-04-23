@@ -697,11 +697,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version (1.149.1) =
+= Development version (1.149.1+) =
 * New feature: specify video URL in post editor
 * New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
 * New feature: privacy: some friends (or friend list)
 * New feature: URL news feed icon (does anybody know where this appears?)
+* Improvement: Facebook registration allowed for existing WordPress users
+* New feature: logged in Facebook users can add links to their personal wall without setting up the plugin (experimental!)
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
