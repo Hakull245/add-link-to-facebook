@@ -76,13 +76,6 @@ class AL2FB_Widget extends WP_Widget {
 		else if ($comments_nolink == 'on')
 			$comments_nolink = 'none';
 
-		// Get time zone offset
-		$tz_off = get_option('gmt_offset');
-		if (empty($tz_off))
-			$tz_off = 0;
-		else
-			$tz_off = $tz_off * 3600;
-
 		// Get comments
 		$fb_comments = false;
 		if ($comments)
@@ -175,8 +168,8 @@ class AL2FB_Widget extends WP_Widget {
 		$tz_off = get_option('gmt_offset');
 		if (empty($tz_off))
 			$tz_off = 0;
-		else
-			$tz_off = $tz_off * 3600;
+		$tz_off = apply_filters('al2fb_gmt_offset', $tz_off);
+		$tz_off = $tz_off * 3600;
 
 		$fb_comments->data = array_reverse($fb_comments->data);
 
@@ -222,8 +215,8 @@ class AL2FB_Widget extends WP_Widget {
 		$tz_off = get_option('gmt_offset');
 		if (empty($tz_off))
 			$tz_off = 0;
-		else
-			$tz_off = $tz_off * 3600;
+		$tz_off = apply_filters('al2fb_gmt_offset', $tz_off);
+		$tz_off = $tz_off * 3600;
 
 		$count = 0;
 		echo '<ul>';

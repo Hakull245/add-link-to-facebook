@@ -2022,8 +2022,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$tz_off = get_option('gmt_offset');
 				if (empty($tz_off))
 					$tz_off = 0;
-				else
-					$tz_off = $tz_off * 3600;
+				$tz_off = apply_filters('al2fb_gmt_offset', $tz_off);
+				$tz_off = $tz_off * 3600;
 
 				// Get Facebook comments
 				if (self::Is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
