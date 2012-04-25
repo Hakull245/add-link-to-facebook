@@ -227,7 +227,9 @@ function al2fb_render_admin($al2fb)
 		</tr>
 	</table>
 	<a href="http://developers.facebook.com/" target="_blank"><?php _e('Click here to create', c_al2fb_text_domain); ?></a>
-	<span><?php _e('and navigate to \'<em>Apps</em>\' and then to \'<em>Create New App</em>\'', c_al2fb_text_domain); ?></span>
+	<span><?php _e('and navigate to \'<em>Apps</em>\' and then to \'<em>Create New App</em>\'', c_al2fb_text_domain); ?></span><br />
+	<br />
+	<strong><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/" target="_blank"><?php _e('Setup guide & user manual', c_al2fb_text_domain); ?></a></strong>
 	</div>
 
 	<div class="al2fb_form">
@@ -863,6 +865,12 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_login_redir"><?php _e('Login redirect URL:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input class="al2fb_text" id="al2fb_login_redir" name="<?php echo c_al2fb_meta_login_redir; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_redir, true); ?>" />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_login_add_links"><?php _e('Allow adding links with login:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_login_add_links" name="<?php echo c_al2fb_meta_login_add_links; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true)) echo ' checked="checked"'; ?> />
 	</td></tr>
 
 	<tr valign="top"><th scope="row" colspan="2">

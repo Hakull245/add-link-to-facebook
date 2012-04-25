@@ -491,6 +491,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_login_regurl, $_POST[c_al2fb_meta_login_regurl]);
 			update_user_meta($user_ID, c_al2fb_meta_login_redir, $_POST[c_al2fb_meta_login_redir]);
 			update_user_meta($user_ID, c_al2fb_meta_login_html, $_POST[c_al2fb_meta_login_html]);
+			update_user_meta($user_ID, c_al2fb_meta_login_add_links, $_POST[c_al2fb_meta_login_add_links]);
 			update_user_meta($user_ID, c_al2fb_meta_act_width, $_POST[c_al2fb_meta_act_width]);
 			update_user_meta($user_ID, c_al2fb_meta_act_height, $_POST[c_al2fb_meta_act_height]);
 			update_user_meta($user_ID, c_al2fb_meta_act_header, $_POST[c_al2fb_meta_act_header]);
@@ -829,6 +830,72 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="misc-pub-section">
 <?php
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+
+
+			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true))
+				if (self::Is_fb_authorized($user_ID, false)) {
+					// Get personal page
+					try {
+						$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
+					}
+					catch (Exception $e) {
+						$me = null;
+					}
+
+					// Get other pages
+					try {
+						$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
+					}
+					catch (Exception $e) {
+						$pages = null;
+					}
+
+					// Get groups
+					try {
+						$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+					}
+					catch (Exception $e) {
+						$groups = null;
+					}
+
+					// Get previous selected page
+					$selected_page = get_user_meta($user_ID, c_al2fb_meta_facebook_page, true);
+
+					// Debug info
+					if ($this->debug) {
+						echo 'sel=' . $selected_page . '<br />';
+						echo 'me=' . print_r($me, true) . '<br />';
+					}
+?>
+					<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
+					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_facebook_page; ?>">
+<?php
+					echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
+					if ($me)
+						echo '<option value="' . $me->id . '"' . ($selected_page == $me->id ? ' selected' : '') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</option>';
+					if ($pages && $pages->data)
+						foreach ($pages->data as $page) {
+							echo '<option value="' . $page->id . '"';
+							if ($page->id == $selected_page)
+								echo ' selected';
+							if (empty($page->name))
+								$page->name = '?';
+							echo '>' . htmlspecialchars($page->name, ENT_QUOTES, $charset) . ' (' . htmlspecialchars($page->category, ENT_QUOTES, $charset) . ')</option>';
+						}
+					if ($groups && $groups->data)
+						foreach ($groups->data as $group) {
+							echo '<option value="' . $group->id . '"';
+							if ($group->id == $selected_page)
+								echo ' selected';
+							echo '>' . htmlspecialchars($group->name, ENT_QUOTES, $charset) . ' (' . __('Group', c_al2fb_text_domain) . ')</option>';
+						}
+?>
+					</select>
+					<br />
+<?php
+				}
+				else
+					echo '<strong>' . __('Not logged in with Facebook (anymore)', c_al2fb_text_domain) . '</strong><br />';
 ?>
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>"<?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
@@ -1082,6 +1149,12 @@ if (!class_exists('WPAL2Facebook')) {
 			if (in_array($post->post_type, $ex_custom_types))
 				return $post_id;
 
+			// Persist slected page
+			$user_ID = self::Get_user_ID($post);
+			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true) &&
+				self::Is_fb_authorized($user_ID, false))
+				update_user_meta($user_ID, c_al2fb_meta_facebook_page, $_POST[c_al2fb_meta_facebook_page]);
+
 			// Process exclude indication
 			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
 				update_post_meta($post_id, c_al2fb_meta_exclude, true);
@@ -1168,7 +1241,8 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_ID);
 			$user_ID = self::Get_user_ID($post);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-			if (!empty($link_id) && (self::Is_authorized($user_ID) || self::Is_fb_loggedin($user_ID)))
+			if (!empty($link_id) &&
+				(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, false)))
 				WPAL2Int::Delete_fb_link($post);
 		}
 
@@ -1185,11 +1259,11 @@ if (!class_exists('WPAL2Facebook')) {
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 
 			// Security check
-			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
-				(self::Is_authorized($user_ID) || self::Is_fb_loggedin($user_ID))) {
+			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap))) {
 				// Add, update or delete link
 				if ($update || $delete || $new_status == 'trash') {
-					if (!empty($link_id)) {
+					if (!empty($link_id) &&
+						(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, false))) {
 						WPAL2Int::Delete_fb_link($post);
 						$link_id = null;
 					}
@@ -1197,6 +1271,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!$delete) {
 					// Check post status
 					if (empty($link_id) &&
+						(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, true)) &&
 						$new_status == 'publish' &&
 						($new_status != $old_status || $update ||
 						get_post_meta($post->ID, c_al2fb_meta_error, true)))
@@ -1214,7 +1289,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
-				(self::Is_authorized($user_ID) || self::Is_fb_loggedin($user_ID))) {
+				(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, true))) {
 				// Check if not added/excluded
 				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
@@ -1608,8 +1683,21 @@ if (!class_exists('WPAL2Facebook')) {
 			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 		}
 
-		function Is_fb_loggedin($user_ID) {
-			return get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+		function Is_fb_authorized($user_ID, $page_selected) {
+			if ($page_selected &&
+				!get_user_meta($user_ID, c_al2fb_meta_facebook_page, true))
+				return false;
+			$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+			if ($token)
+				try {
+					// Check if token valid (not expired)
+					WPAL2Int::Get_fb_me($user_ID, true);
+					return $token;
+				}
+				catch (Exception $e) {
+					delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
+				}
+			return false;
 		}
 
 		// HTML header

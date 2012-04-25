@@ -703,7 +703,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: privacy: some friends (or friend list)
 * New feature: URL news feed icon (does anybody know where this appears?)
 * Improvement: Facebook registration allowed for existing WordPress users
-* New feature: logged in Facebook users can add links to their personal wall without setting up the plugin (experimental!)
+* New feature: Users logged into WordPress with their Facebook account can add links without setting up the plugin (experimental!)
 * New feature: new filter *al2fb_gmt_offset*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
