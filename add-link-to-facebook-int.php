@@ -1403,9 +1403,6 @@ if (!class_exists('WPAL2Int')) {
 								echo PHP_EOL;
 								echo $email;
 							}
-
-							// Redirect
-							wp_redirect(get_home_url());
 						}
 						else {
 							// Create new WP user
@@ -1425,12 +1422,10 @@ if (!class_exists('WPAL2Int')) {
 								if (get_option(c_al2fb_option_debug))
 									print_r($reg);
 							}
-
-							// Redirect
-							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
-							$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
-							wp_redirect($redir ? $redir : $self);
 						}
+
+						// Redirect
+						wp_redirect(get_home_url());
 					}
 				}
 				catch (Exception $e) {
