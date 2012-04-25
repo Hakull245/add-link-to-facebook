@@ -1213,7 +1213,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_registration($post) {
 			// Check if registration enabled
 			if (!get_option('users_can_register'))
-				return '';
+				return '<strong>' . __('User registration disabled', c_al2fb_text_domain) . '</strong>';
 
 			// Get data
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
@@ -1361,67 +1361,87 @@ if (!class_exists('WPAL2Int')) {
 				header('Content-type: text/plain');
 				_e('Facebook registration failed', c_al2fb_text_domain);
 				echo PHP_EOL;
+				if (get_option(c_al2fb_option_debug))
+					print_r($_REQUEST);
 			}
-			else {
-				if (!get_option('users_can_register')) {
-					// Registration not enabled
-					header('Content-type: text/plain');
-					_e('User registration disabled', c_al2fb_text_domain);
-					echo PHP_EOL;
-				}
-				else if (empty($reg['registration']['email'])) {
-					// E-mail missing
-					header('Content-type: text/plain');
-					_e('Facebook e-mail address missing', c_al2fb_text_domain);
-					echo PHP_EOL;
-					if (get_option(c_al2fb_option_debug))
-						print_r($reg);
-				}
-				else if (empty($reg['user_id'])) {
-					// User ID missing
-					header('Content-type: text/plain');
-					_e('Facebook user ID missing', c_al2fb_text_domain);
-					echo PHP_EOL;
-					if (get_option(c_al2fb_option_debug))
-						print_r($reg);
-				}
-				else {
-					if (email_exists($reg['registration']['email'])) {
-						$user = get_user_by('email', $reg['registration']['email']);
-						if ($user)
-							$user_ID = $user->ID;
-						else {
-							header('Content-type: text/plain');
-							_e('User not found', c_al2fb_text_domain);
-							echo PHP_EOL;
-							echo $reg['registration']['email'];
+			else
+				try {
+					// Validate
+					$url = 'https://graph.facebook.com/' . $reg['user_id'];
+					$url = apply_filters('al2fb_url', $url);
+					$query = http_build_query(array('access_token' => $reg['oauth_token']), '', '&');
+					$response = WPAL2Int::Request($url, $query, 'GET');
+					$me = json_decode($response);
+					$email = (empty($me) ? null : $me->email);
+
+					if (!get_option('users_can_register')) {
+						// Registration not enabled
+						header('Content-type: text/plain');
+						_e('User registration disabled', c_al2fb_text_domain);
+						echo PHP_EOL;
+					}
+					else if (empty($email)) {
+						// E-mail missing
+						header('Content-type: text/plain');
+						_e('Facebook e-mail address missing', c_al2fb_text_domain);
+						echo PHP_EOL;
+						if (get_option(c_al2fb_option_debug)) {
+							print_r($reg);
+							print_r($me);
 						}
 					}
 					else {
-						// Create new WP user
-						$user_ID = wp_insert_user(array(
-							'first_name' => $reg['registration']['first_name'],
-							'last_name' => $reg['registration']['last_name'],
-							'user_email' => $reg['registration']['email'],
-							'user_login' => $reg['registration']['user_name'],
-							'user_pass' => $reg['registration']['password']
-						)) ;
+						if (email_exists($email)) {
+							$user = get_user_by('email', $email);
+							if ($user)
+								$user_ID = $user->ID;
+							else {
+								header('Content-type: text/plain');
+								_e('User not found', c_al2fb_text_domain);
+								echo PHP_EOL;
+								echo $email;
+							}
 
-						// Check result
-						if (is_wp_error($user_ID)) {
-							header('Content-type: text/plain');
-							_e($user_ID->get_error_message());
-							echo PHP_EOL;
-							if (get_option(c_al2fb_option_debug))
-								print_r($reg);
+							// Redirect
+							wp_redirect(get_home_url());
+						}
+						else {
+							// Create new WP user
+							$user_ID = wp_insert_user(array(
+								'first_name' => $reg['registration']['first_name'],
+								'last_name' => $reg['registration']['last_name'],
+								'user_email' => $email,
+								'user_login' => $reg['registration']['user_name'],
+								'user_pass' => $reg['registration']['password']
+							)) ;
+
+							// Check result
+							if (is_wp_error($user_ID)) {
+								header('Content-type: text/plain');
+								_e($user_ID->get_error_message());
+								echo PHP_EOL;
+								if (get_option(c_al2fb_option_debug))
+									print_r($reg);
+							}
+
+							// Redirect
+							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
+							$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
+							wp_redirect($redir ? $redir : $self);
 						}
 					}
-					// Redirect
-					$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
-					$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
-					wp_redirect($redir ? $redir : $self);
 				}
-			}
+				catch (Exception $e) {
+					// Communication error?
+					header('Content-type: text/plain');
+					_e('Could not verify Facebook registration', c_al2fb_text_domain);
+					echo PHP_EOL;
+					echo $e->getMessage();
+					if (get_option(c_al2fb_option_debug)) {
+						print_r($_REQUEST);
+						print_r($response);
+					}
+				}
 		}
 
 		// Handle Facebook login
@@ -1493,8 +1513,10 @@ if (!class_exists('WPAL2Int')) {
 					header('Content-type: text/plain');
 					_e('Could not verify Facebook login', c_al2fb_text_domain);
 					echo PHP_EOL;
-					if (get_option(c_al2fb_option_debug))
+					if (get_option(c_al2fb_option_debug)) {
 						print_r($_REQUEST);
+						print_r($response);
+					}
 				}
 			}
 			catch (Exception $e) {
