@@ -1382,7 +1382,18 @@ if (!class_exists('WPAL2Int')) {
 						print_r($reg);
 				}
 				else {
-					if (!email_exists($reg['registration']['email'])) {
+					if (email_exists($reg['registration']['email'])) {
+						$user = get_user_by('email', $reg['registration']['email']);
+						if ($user)
+							$user_ID = $user->ID;
+						else {
+							header('Content-type: text/plain');
+							_e('User not found', c_al2fb_text_domain);
+							echo PHP_EOL;
+							echo $reg['registration']['email'];
+						}
+					}
+					else {
 						// Create new WP user
 						$user_ID = wp_insert_user(array(
 							'first_name' => $reg['registration']['first_name'],
@@ -1401,27 +1412,10 @@ if (!class_exists('WPAL2Int')) {
 								print_r($reg);
 						}
 					}
-
-					// Log user in
-					$user = WPAL2Int::Login_by_email($reg['registration']['email'], true);
-					if ($user) {
-						// Persist Facebook ID
-						update_user_meta($user->ID, c_al2fb_meta_facebook_id, $reg['user_id']);
-						update_user_meta($user->ID, c_al2fb_meta_facebook_token, $reg['oauth_token']);
-
-						// Redirect
-						$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
-						$redir = get_user_meta($user->ID, c_al2fb_meta_login_redir, true);
-						wp_redirect($redir ? $redir : $self);
-					}
-					else {
-						// User not found (anymore)
-						header('Content-type: text/plain');
-						_e('User not found', c_al2fb_text_domain);
-						echo PHP_EOL;
-						if (get_option(c_al2fb_option_debug))
-							print_r($me);
-					}
+					// Redirect
+					$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
+					$redir = get_user_meta($user_ID, c_al2fb_meta_login_redir, true);
+					wp_redirect($redir ? $redir : $self);
 				}
 			}
 		}
