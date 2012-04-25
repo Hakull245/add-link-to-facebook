@@ -702,9 +702,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
 * New feature: privacy: some friends (or friend list)
 * New feature: URL news feed icon (does anybody know where this appears?)
-* New feature: Allow users logged into WordPress with their Facebook account ton add links (experimental!)
+* New feature: Allow users logged into WordPress with their Facebook account to add links (option, experimental!)
 * New feature: new filter *al2fb_gmt_offset*
 * Improvement: Facebook registration allowed for existing WordPress users (username/password will be ignored)
+* Improvement: Facebook registration redirect URL configurable
 * Improvement: validate Facebook registration
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
