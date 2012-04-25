@@ -915,10 +915,12 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_access_token($user_ID) {
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true))
-				return get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
-			else
-				return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
+			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true)) {
+				$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+				if ($token)
+					return $token;
+			}
+			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 		}
 
 		// Get correct access for post
