@@ -1428,6 +1428,7 @@ if (!class_exists('WPAL2Int')) {
 
 						// Redirect
 						if ($user_ID) {
+							update_user_meta($user_ID, c_al2fb_meta_facebook_id, $me->id);
 							$url = get_user_meta($user_ID, c_al2fb_meta_reg_success, true);
 							if (empty($url))
 								$url = get_home_url();
