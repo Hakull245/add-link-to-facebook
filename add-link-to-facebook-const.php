@@ -116,6 +116,7 @@ define('c_al2fb_meta_pile_width', 'al2fb_pile_width');
 define('c_al2fb_meta_pile_rows', 'al2fb_pile_rows');
 define('c_al2fb_meta_reg_width', 'al2fb_reg_width');
 define('c_al2fb_meta_login_width', 'al2fb_login_width');
+define('c_al2fb_meta_reg_success', 'al2fb_reg_success');
 define('c_al2fb_meta_login_regurl', 'al2fb_login_regurl');
 define('c_al2fb_meta_login_redir', 'al2fb_login_redir');
 define('c_al2fb_meta_login_html', 'al2fb_login_html');

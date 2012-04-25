@@ -1393,6 +1393,7 @@ if (!class_exists('WPAL2Int')) {
 						}
 					}
 					else {
+						$user_ID = false;
 						if (email_exists($email)) {
 							$user = get_user_by('email', $email);
 							if ($user)
@@ -1421,11 +1422,17 @@ if (!class_exists('WPAL2Int')) {
 								echo PHP_EOL;
 								if (get_option(c_al2fb_option_debug))
 									print_r($reg);
+								$user_ID = false;
 							}
 						}
 
 						// Redirect
-						wp_redirect(get_home_url());
+						if ($user_ID) {
+							$url = get_user_meta($user_ID, c_al2fb_meta_reg_success, true);
+							if (empty($url))
+								$url = get_home_url();
+							wp_redirect($url);
+						}
 					}
 				}
 				catch (Exception $e) {

@@ -862,6 +862,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_reg_success"><?php _e('Registration success URL:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input class="al2fb_text" id="al2fb_reg_success" name="<?php echo c_al2fb_meta_reg_success; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_reg_success, true); ?>" />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_login_redir"><?php _e('Login redirect URL:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input class="al2fb_text" id="al2fb_login_redir" name="<?php echo c_al2fb_meta_login_redir; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_redir, true); ?>" />
