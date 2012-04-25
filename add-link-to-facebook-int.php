@@ -1247,6 +1247,8 @@ if (!class_exists('WPAL2Int')) {
 					$content .= '</div>';
 					return $content;
 				}
+				else
+					return '<strong>' . __('Facebook App ID required', c_al2fb_text_domain) . '</strong>';
 			}
 			return '';
 		}
@@ -1307,6 +1309,8 @@ if (!class_exists('WPAL2Int')) {
 					$content .= '</div>';
 					return $content;
 				}
+				else
+					return '<strong>' . __('Facebook App ID required', c_al2fb_text_domain) . '</strong>';
 			}
 			return '';
 		}
