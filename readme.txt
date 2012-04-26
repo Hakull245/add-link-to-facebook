@@ -707,6 +707,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: Facebook registration allowed for existing WordPress users (username/password will be ignored)
 * Improvement: Facebook registration redirect URL configurable
 * Improvement: validate Facebook registration
+* Improvement: bundeling CA certificate file
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
