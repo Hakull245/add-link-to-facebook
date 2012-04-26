@@ -41,6 +41,7 @@ define('c_al2fb_option_debug', 'al2fb_debug');
 define('c_al2fb_option_multiple', 'al2fb_multiple');
 define('c_al2fb_option_multiple_count', 'al2fb_multiple_count');
 define('c_al2fb_option_multiple_disable', 'al2fb_multiple_disable');
+define('c_al2fb_option_login_add_links', 'al2fb_login_add_links');
 
 define('c_al2fb_option_cron_enabled', 'al2fb_cron_enabled');
 define('c_al2fb_option_cron_time', 'al2fb_cron_time');
@@ -120,7 +121,6 @@ define('c_al2fb_meta_reg_success', 'al2fb_reg_success');
 define('c_al2fb_meta_login_regurl', 'al2fb_login_regurl');
 define('c_al2fb_meta_login_redir', 'al2fb_login_redir');
 define('c_al2fb_meta_login_html', 'al2fb_login_html');
-define('c_al2fb_meta_login_add_links', 'al2fb_login_add_links');
 define('c_al2fb_meta_act_width', 'al2fb_act_width');
 define('c_al2fb_meta_act_height', 'al2fb_act_height');
 define('c_al2fb_meta_act_header', 'al2fb_act_header');

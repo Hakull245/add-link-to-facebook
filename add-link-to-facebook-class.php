@@ -492,7 +492,6 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_login_regurl, $_POST[c_al2fb_meta_login_regurl]);
 			update_user_meta($user_ID, c_al2fb_meta_login_redir, $_POST[c_al2fb_meta_login_redir]);
 			update_user_meta($user_ID, c_al2fb_meta_login_html, $_POST[c_al2fb_meta_login_html]);
-			update_user_meta($user_ID, c_al2fb_meta_login_add_links, $_POST[c_al2fb_meta_login_add_links]);
 			update_user_meta($user_ID, c_al2fb_meta_act_width, $_POST[c_al2fb_meta_act_width]);
 			update_user_meta($user_ID, c_al2fb_meta_act_height, $_POST[c_al2fb_meta_act_height]);
 			update_user_meta($user_ID, c_al2fb_meta_act_header, $_POST[c_al2fb_meta_act_header]);
@@ -557,6 +556,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_uselinks, $_POST[c_al2fb_option_uselinks]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
+				update_option(c_al2fb_option_login_add_links, $_POST[c_al2fb_option_login_add_links]);
 
 				if (isset($_REQUEST['debug'])) {
 					update_option(c_al2fb_option_siteurl, $_POST[c_al2fb_option_siteurl]);
@@ -833,7 +833,7 @@ if (!class_exists('WPAL2Facebook')) {
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
 
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true))
+			if (get_option(c_al2fb_option_login_add_links))
 				if (self::Is_fb_authorized($user_ID, false)) {
 					// Get personal page
 					try {
@@ -1150,9 +1150,9 @@ if (!class_exists('WPAL2Facebook')) {
 			if (in_array($post->post_type, $ex_custom_types))
 				return $post_id;
 
-			// Persist slected page
+			// Persist selected page
 			$user_ID = self::Get_user_ID($post);
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true) &&
+			if (get_option(c_al2fb_option_login_add_links) &&
 				self::Is_fb_authorized($user_ID, false))
 				update_user_meta($user_ID, c_al2fb_meta_facebook_page, $_POST[c_al2fb_meta_facebook_page]);
 

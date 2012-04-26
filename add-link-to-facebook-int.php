@@ -500,7 +500,7 @@ if (!class_exists('WPAL2Int')) {
 
 			// Get wall
 			$login = false;
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true) &&
+			if (get_option(c_al2fb_option_login_add_links) &&
 				get_user_meta($user_ID, c_al2fb_meta_facebook_token, true) &&
 				get_user_meta($user_ID, c_al2fb_meta_facebook_page, true)) {
 				$login = true;
@@ -915,7 +915,7 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_access_token($user_ID) {
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true)) {
+			if (get_option(c_al2fb_option_login_add_links)) {
 				$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
 				if ($token)
 					return $token;
@@ -1271,7 +1271,7 @@ if (!class_exists('WPAL2Int')) {
 				$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
 				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 				$permissions = '';
-				if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true))
+				if (get_option(c_al2fb_option_login_add_links))
 					$permissions .= 'read_stream,publish_stream,manage_pages,user_groups';
 
 				// Build content

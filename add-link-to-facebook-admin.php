@@ -876,7 +876,7 @@ function al2fb_render_admin($al2fb)
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_login_add_links"><?php _e('Allow adding links with login:', c_al2fb_text_domain); ?></label>
 	</th><td>
-		<input id="al2fb_login_add_links" name="<?php echo c_al2fb_meta_login_add_links; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true)) echo ' checked="checked"'; ?> />
+		<input id="al2fb_login_add_links" name="<?php echo c_al2fb_option_login_add_links; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_login_add_links)) echo ' checked="checked"'; if (!current_user_can('manage_options')) echo ' disabled'; ?> />
 	</td></tr>
 
 	<tr valign="top"><th scope="row" colspan="2">
