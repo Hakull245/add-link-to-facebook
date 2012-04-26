@@ -1696,7 +1696,7 @@ if (!class_exists('WPAL2Facebook')) {
 					return $token;
 				}
 				catch (Exception $e) {
-					delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
+					//delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
 				}
 			return false;
 		}
