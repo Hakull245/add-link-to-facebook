@@ -501,7 +501,7 @@ if (!class_exists('WPAL2Int')) {
 			// Get wall
 			$login = false;
 			if (get_option(c_al2fb_option_login_add_links) &&
-				get_user_meta($user_ID, c_al2fb_meta_facebook_token, true) &&
+				WPAL2Int::Get_login_access_token($user_ID) &&
 				get_user_meta($user_ID, c_al2fb_meta_facebook_page, true)) {
 				$login = true;
 				$page_ids = array();
@@ -916,11 +916,23 @@ if (!class_exists('WPAL2Int')) {
 
 		static function Get_access_token($user_ID) {
 			if (get_option(c_al2fb_option_login_add_links)) {
-				$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+				$token = WPAL2Int::Get_login_access_token($user_ID);
 				if ($token)
 					return $token;
 			}
 			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
+		}
+
+		static function Get_login_access_token($user_ID) {
+			$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+			$token_time = get_user_meta($user_ID, c_al2fb_meta_facebook_token_time, true);
+			if ($token && $token_time + 10 * 60 > time())
+				return $token;
+			else {
+				delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
+				delete_user_meta($user_ID, c_al2fb_meta_facebook_token_time);
+			}
+			return false;
 		}
 
 		// Get correct access for post
@@ -1492,6 +1504,7 @@ if (!class_exists('WPAL2Int')) {
 						if ($user) {
 							// Persist token
 							update_user_meta($user->ID, c_al2fb_meta_facebook_token, $_REQUEST['token']);
+							update_user_meta($user->ID, c_al2fb_meta_facebook_token_time, time());
 
 							// Redirect
 							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];

@@ -834,7 +834,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 
 			if (get_option(c_al2fb_option_login_add_links))
-				if (self::Is_fb_authorized($user_ID, false)) {
+				if (self::Is_login_authorized($user_ID, false)) {
 					// Get personal page
 					try {
 						$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
@@ -869,7 +869,7 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 ?>
 					<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
-					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_facebook_page; ?>">
+					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_facebook_page; ?>">
 <?php
 					echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 					if ($me)
@@ -1153,7 +1153,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Persist selected page
 			$user_ID = self::Get_user_ID($post);
 			if (get_option(c_al2fb_option_login_add_links) &&
-				self::Is_fb_authorized($user_ID, false))
+				self::Is_login_authorized($user_ID, false))
 				update_user_meta($user_ID, c_al2fb_meta_facebook_page, $_POST[c_al2fb_meta_facebook_page]);
 
 			// Process exclude indication
@@ -1243,7 +1243,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 			if (!empty($link_id) &&
-				(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, false)))
+				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, false)))
 				WPAL2Int::Delete_fb_link($post);
 		}
 
@@ -1264,7 +1264,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Add, update or delete link
 				if ($update || $delete || $new_status == 'trash') {
 					if (!empty($link_id) &&
-						(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, false))) {
+						(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, false))) {
 						WPAL2Int::Delete_fb_link($post);
 						$link_id = null;
 					}
@@ -1272,7 +1272,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!$delete) {
 					// Check post status
 					if (empty($link_id) &&
-						(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, true)) &&
+						(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true)) &&
 						$new_status == 'publish' &&
 						($new_status != $old_status || $update ||
 						get_post_meta($post->ID, c_al2fb_meta_error, true)))
@@ -1290,7 +1290,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
-				(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, true))) {
+				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true))) {
 				// Check if not added/excluded
 				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
@@ -1684,21 +1684,12 @@ if (!class_exists('WPAL2Facebook')) {
 			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 		}
 
-		function Is_fb_authorized($user_ID, $page_selected) {
+		function Is_login_authorized($user_ID, $page_selected) {
 			if ($page_selected &&
 				!get_user_meta($user_ID, c_al2fb_meta_facebook_page, true))
 				return false;
-			$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
-			if ($token)
-				try {
-					// Check if token valid (not expired)
-					WPAL2Int::Get_fb_me($user_ID, true);
-					return $token;
-				}
-				catch (Exception $e) {
-					//delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
-				}
-			return false;
+
+			return WPAL2Int::Get_login_access_token($user_ID);
 		}
 
 		// HTML header
@@ -2081,13 +2072,12 @@ if (!class_exists('WPAL2Facebook')) {
 		// Profile personal options
 		function Personal_options($user) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
-			$ftoken = get_user_meta($user->ID, c_al2fb_meta_facebook_token, true);
 			echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
 			echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
 			if ($fid)
 				echo '<br><a href="' . WPAL2Int::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a>';
-			if ($ftoken && $this->debug)
-				echo '<br><span>token=' . $ftoken . '</span>';
+			if ($this->debug)
+				echo '<br><span>token=' . get_user_meta($user->ID, c_al2fb_meta_facebook_token, true) . '</span>';
 			echo '</td></tr>';
 		}
 

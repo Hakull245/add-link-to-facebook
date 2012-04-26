@@ -419,7 +419,7 @@ function al2fb_render_admin($al2fb)
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
+					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
 					if ($me)
 						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</option>';
@@ -505,7 +505,7 @@ function al2fb_render_admin($al2fb)
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_group"><?php _e('Add to group:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<select class="al2db_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
+					<select class="al2fb_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
 <?php
 					echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 					if ($groups && $groups->data)
@@ -816,7 +816,7 @@ function al2fb_render_admin($al2fb)
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_pile_size"><?php _e('Size:', c_al2fb_text_domain); ?></label>
 	</th><td>
-		<select class="al2db_select" id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
+		<select class="al2fb_select" id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
 		<option value="small" <?php echo $pile_size == 'small' ? 'selected' : ''; ?>><?php _e('Small', c_al2fb_text_domain); ?></option>
 		<option value="large" <?php echo $pile_size == 'large' ? 'selected' : ''; ?>><?php _e('Large', c_al2fb_text_domain); ?></option>
 		</select>
@@ -977,7 +977,7 @@ function al2fb_render_admin($al2fb)
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_like_font"><?php _e('Font:', c_al2fb_text_domain); ?></label>
 	</th><td>
-		<select class="al2db_select" id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
+		<select class="al2fb_select" id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
 		<option value="" <?php echo empty($like_font) ? 'selected' : ''; ?>></option>
 		<option value="arial" <?php echo $like_font == 'arial' ? 'selected' : ''; ?>>arial</option>
 		<option value="lucida grande" <?php echo $like_font == 'lucida grande' ? 'selected' : ''; ?>>lucida grande</option>
@@ -1119,7 +1119,7 @@ function al2fb_render_admin($al2fb)
 		<tr valign="top"><th scope="row">
 			<label for="al2fb_min_cap"><?php _e('Required capability to use plugin:', c_al2fb_text_domain); ?></label>
 		</th><td>
-			<select class="al2db_select" id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
+			<select class="al2fb_select" id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
 <?php
 			// Get list of capabilities
 			global $wp_roles;
@@ -1151,7 +1151,7 @@ function al2fb_render_admin($al2fb)
 		<tr valign="top"><th scope="row">
 			<label for="al2fb_min_cap_comment"><?php _e('Required capability to view Facebook comments:', c_al2fb_text_domain); ?></label>
 		</th><td>
-			<select class="al2db_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">
+			<select class="al2fb_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">
 <?php
 			// List capabilities and select current
 			$min_cap = get_option(c_al2fb_option_min_cap_comment);
