@@ -75,7 +75,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
 * Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria"), thanks!
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
-* Serbian (sr\_RS) by [Plush Toys King team](http://plushtoysking.com "Plush Toys King team"), thanks!
+* Serbian (sr\_RS), thanks!
 * Greek (el\_EL), thanks!
 * Lithuanian (lt\_LT), thanks!
 
