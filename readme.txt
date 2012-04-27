@@ -708,6 +708,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: Facebook registration redirect URL configurable
 * Improvement: validate Facebook registration
 * Improvement: use bundled CA certificates (option)
+* Improvement: use *get_bloginfo* instead of *WPLANG*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
