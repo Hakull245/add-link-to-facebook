@@ -959,7 +959,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_locale($user_ID) {
 			$locale = get_user_meta($user_ID, c_al2fb_meta_fb_locale, true);
 			if (empty($locale)) {
-				$locale = defined('WPLANG') ? WPLANG : '';
+				$locale = get_bloginfo('language');
 				$locale = str_replace('-', '_', $locale);
 				if (empty($locale) || strlen($locale) != 5)
 					$locale = 'en_US';
