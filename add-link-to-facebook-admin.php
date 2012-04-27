@@ -1261,6 +1261,13 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_use_cacerts"><?php _e('Use bundled CA certificates:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_use_cacerts" name="<?php echo c_al2fb_option_use_cacerts; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_use_cacerts)) echo ' checked="checked"'; ?> />
+			<br /><span class="al2fb_explanation"><?php _e('Try this in case of cURL error 60', c_al2fb_text_domain); ?></span>
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_shortcode"><?php _e('Execute shortcodes in widgets:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<input id="al2fb_shortcode" name="<?php echo c_al2fb_option_shortcode_widget; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_shortcode_widget)) echo ' checked="checked"'; ?> />

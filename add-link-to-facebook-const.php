@@ -22,6 +22,7 @@ define('c_al2fb_option_exclude_tag', 'al2fb_exclude_tag');
 define('c_al2fb_option_exclude_author', 'al2fb_exclude_author');
 define('c_al2fb_option_metabox_type', 'al2fb_metabox_type');
 define('c_al2fb_option_noverifypeer', 'al2fb_noverifypeer');
+define('c_al2fb_option_use_cacerts', 'al2fb_use_cacerts');
 define('c_al2fb_option_shortcode_widget', 'al2fb_shortcode_widget');
 define('c_al2fb_option_noshortcode', 'al2fb_noshortcode');
 define('c_al2fb_option_nofilter', 'al2fb_nofilter');

@@ -1706,7 +1706,7 @@ if (!class_exists('WPAL2Int')) {
 
 			if (get_option(c_al2fb_option_noverifypeer))
 				curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-			else
+			else if (get_option(c_al2fb_option_use_cacerts))
 				curl_setopt($c, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
 
 			delete_option(c_al2fb_log_ua);

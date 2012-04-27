@@ -544,6 +544,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_author, $_POST[c_al2fb_option_exclude_author]);
 				update_option(c_al2fb_option_metabox_type, $_POST[c_al2fb_option_metabox_type]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
+				update_option(c_al2fb_option_use_cacerts, $_POST[c_al2fb_option_use_cacerts]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
 				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
 				update_option(c_al2fb_option_nofilter, $_POST[c_al2fb_option_nofilter]);
