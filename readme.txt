@@ -44,7 +44,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Pro version:**
 
 * Add links to more than one Facebook page wall for one post
-* See [here](http://www.faircode.eu/al2fbpro/ "Add link to Facebook Pro") for details
+* See [here](http://www.faircode.eu/al2fbpro/) for details
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
@@ -184,7 +184,7 @@ Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page* on the tab *Page/group*.
 Be sure to check the option *See all pages*.
 You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
-Note that pages and groups exclude each other (except in the Pro version).
+Note that pages and groups exclude each other (except in the [Pro version](http://www.faircode.eu/al2fbpro/)).
 You can only add links to pages you are owner of.
 
 = U13 I want to add links to a group =
@@ -193,7 +193,7 @@ This option is only available *after* you have authorized, since information fro
 
 Just go to the plugin settings through the WordPress *Tools* menu and check *Use groups* on the tab *Page/group*.
 You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
-Note that pages and groups exclude each other (except in the Pro version).
+Note that pages and groups exclude each other (except in the [Pro version](http://www.faircode.eu/al2fbpro/)).
 Also note that it is only possible to add links using your personal account (a Facebook limitation).
 However, you can add links to pages as page owner, so consider switching to pages.
 
@@ -842,7 +842,6 @@ The plugin offers several options to automatically select a picture:
 * Let Facebook select: this often doesn't work as you want to, because Facebook can select for example a header image
 * First image in the post: similar to first attached image, but the image doesn't have to be associated with the post
 * Avatar of author
-* Image from the [User Photo](http://wordpress.org/extend/plugins/user-photo/ "User Photo") plugin
 * Custom picture below: complete URL to a static picture of your choice
 
 Most users probably want to use *First image in the post*.
