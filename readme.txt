@@ -948,7 +948,7 @@ Developing this plugin took many hours. A small donation as a token of your appr
 
 Please let me know if you think this plugin is good or bad by rating it.
 Checking *I have rated this plugin* will remove the rating reminder message.
-If you don't like the plugin, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
+If you don't like the plugin, please [let me know why](http://forum.faircode.eu/).
 If the plugin isn't working for you, [help is just one question away](http://forum.faircode.eu/).
 
 *Administrator options*
