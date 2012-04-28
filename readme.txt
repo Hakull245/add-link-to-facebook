@@ -232,7 +232,7 @@ You can use the [Dutch translation](http://plugins.svn.wordpress.org/add-link-to
 After saving the file, you can translate it by using a text editor or [Poedit](http://www.poedit.net/ "Poedit").
 [See here](http://drupal.org/node/17564 "Poedit plural forms") for details on plural forms.
 Another way is to install and use the [Codestyling Localization](http://wordpress.org/extend/plugins/codestyling-localization/ "Codestyling Localization") plugin.
-Please use the [contact form](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst") to send me the new .po file.
+Please use [this contact form](http://forum.faircode.eu/contact/) to send me the new .po file.
 
 = U20 How can I setup one wall for all users? =
 
