@@ -44,11 +44,11 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 **Pro version:**
 
 * Add links to more than one Facebook page wall for one post
-* See [here](http://al2fb.bokhorst.biz/ "Add link to Facebook Pro") for details
+* See [here](http://www.faircode.eu/al2fbpro/ "Add link to Facebook Pro") for details
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
-Please report any issue you have with this plugin in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum"), so I can at least try to fix it.
+Please report any issue you have with this plugin in the [support forum](http://forum.faircode.eu/), so I can at least try to fix it.
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
@@ -318,7 +318,7 @@ All template tags:
 
 = U25 Can I add links to multiple walls? =
 
-This feature is only available in the [Pro version](http://al2fb.bokhorst.biz/) of the plugin.
+This feature is only available in the [Pro version](http://www.faircode.eu/al2fbpro/) of the plugin.
 
 = U26 Why doesn't the like button show all likes? Why are liker names not displayed? =
 
@@ -685,7 +685,7 @@ This problem can probably be solved by authorizing the plugin again.
 
 = S01 Where can I ask questions, report bugs and request features? =
 
-You can open a topic in the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+You can open a topic in the [support forum](http://forum.faircode.eu/).
 
 = S02 How can I send the debug information? =
 
@@ -799,7 +799,7 @@ If the standard procedure doesn't work, you can try [this page](https://register
 Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, don't hesitate to leave a message on the [support forum](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+If you need help, don't hesitate to leave a message on the [support forum](http://forum.faircode.eu/).
 
 == User Guide ==
 
@@ -950,7 +950,7 @@ Developing this plugin took many hours. A small donation as a token of your appr
 Please let me know if you think this plugin is good or bad by rating it.
 Checking *I have rated this plugin* will remove the rating reminder message.
 If you don't like the plugin, please [let me know why](http://blog.bokhorst.biz/contact/ "Marcel Bokhorst").
-If the plugin isn't working for you, [help is just one question away](http://forum.bokhorst.biz/add-link-to-facebook/ "Marcel's weblog - forum").
+If the plugin isn't working for you, [help is just one question away](http://forum.faircode.eu/).
 
 *Administrator options*
 
