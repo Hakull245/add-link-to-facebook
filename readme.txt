@@ -434,9 +434,11 @@ because these options are known to be incompatible with some plugins.
 
 = U39 Why are comments are not imported? =
 
-First check if the setting *Integrate comments from Facebook* on the plugin settings tab *Comments* is enabled (each author should enable this individually).
-It could be that your theme is incompatible with this feature. Switch back to the default theme (Twenty Ten/Eleven),
-wait at least 10 minutes (because of caching) and then refresh the post page where you expect comments.
+First check if the setting *Integrate comments from Facebook* on the plugin settings tab *Comments* is enabled
+(each author should enable this individually).
+It could be that your theme is incompatible with this feature.
+Switch back to the default theme (Twenty Ten/Eleven),
+wait at least 10 minutes (because of caching) and then refresh the post page where you expect Facebook comments.
 Please note that only comments on links added by the plugin are imported (the link is the anchor).
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
