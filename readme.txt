@@ -434,12 +434,14 @@ because these options are known to be incompatible with some plugins.
 
 = U39 Why are comments are not imported? =
 
-First check if the setting *Integrate comments from Facebook* on the plugin settings tab *Comments* is enabled.
+First check if the setting *Integrate comments from Facebook* on the plugin settings tab *Comments* is enabled (each author should enable this individually).
 It could be that your theme is incompatible with this feature. Switch back to the default theme (Twenty Ten/Eleven),
 wait at least 10 minutes (because of caching) and then refresh the post page where you expect comments.
 Please note that only comments on links added by the plugin are imported (the link is the anchor).
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
+
+For posts with comments disabled or which are excluded based on the settings tab admin or in the post editor, no comments will be imported.
 
 = U40 I don't see pictures in the messages widget =
 
@@ -709,6 +711,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: validate Facebook registration
 * Improvement: use bundled CA certificates (option)
 * Improvement: use *get_bloginfo* instead of *WPLANG*
+* Improvement: debug info for comment import
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
