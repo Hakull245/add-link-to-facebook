@@ -2091,6 +2091,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Comments_array($comments, $post_ID) {
 			$post = get_post($post_ID);
 			$user_ID = self::Get_user_ID($post);
+			update_option(c_al2fb_log_importing, true);
 
 			// Integration?
 			if ($user_ID && !self::Is_excluded($post) &&
