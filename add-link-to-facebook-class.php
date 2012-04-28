@@ -623,10 +623,10 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
 			else {
 				// Build headers
-				$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-				$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-				//$headers .= 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
+				$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\n";
+				$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\n";
+				$headers .= 'MIME-Version: 1.0' . "\n";
+				$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\n";
 
 				// Build message
 				$message = '<html><head><title>Add Link to Facebook</title></head><body>';

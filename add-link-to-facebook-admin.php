@@ -457,7 +457,7 @@ function al2fb_render_admin($al2fb)
 				else {
 					echo '<strong>';
 					_e('This option is only available in', c_al2fb_text_domain);
-					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
 					$mu = WPAL2Int::Get_multiple_url();
 					if ($mu)
@@ -537,7 +537,7 @@ function al2fb_render_admin($al2fb)
 				else {
 					echo '<strong>';
 					_e('This option is only available in', c_al2fb_text_domain);
-					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
 					$mu = WPAL2Int::Get_multiple_url();
 					if ($mu)
@@ -1438,8 +1438,8 @@ function al2fb_render_resources($al2fb) {
 	<ul>
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/" target="_blank"><?php _e('Setup guide & user manual', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
-	<li><a href="http://al2fb.bokhorst.biz/" target="_blank"><?php _e('Pro version', c_al2fb_text_domain); ?></a></li>
-	<li><a href="http://forum.bokhorst.biz/add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
+	<li><a href="http://www.faircode.eu/al2fbpro/" target="_blank"><?php _e('Pro version', c_al2fb_text_domain); ?></a></li>
+	<li><a href="http://forum.faircode.eu/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
 	<li><a href="<?php echo 'tools.php?page=' . plugin_basename($al2fb->main_file) . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
@@ -1507,7 +1507,7 @@ function al2fb_render_debug_info($al2fb) {
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
-			<label for="al2fb_debug_topic"><strong><a href="http://forum.bokhorst.biz/"><?php _e('Forum topic link:', c_al2fb_text_domain); ?></a></strong></label>
+			<label for="al2fb_debug_topic"><strong><a href="http://forum.faircode.eu/"><?php _e('Forum topic link:', c_al2fb_text_domain); ?></a></strong></label>
 		</th><td>
 			<input id="al2fb_debug_topic" class="" name="<?php echo c_al2fb_mail_topic; ?>" type="text" />
 			<br><strong><?php _e('Mandatory', c_al2fb_text_domain); ?></strong>
