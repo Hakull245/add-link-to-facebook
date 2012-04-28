@@ -316,9 +316,27 @@ function al2fb_debug_info($al2fb) {
 		// Actual picture
 		$picture = $al2fb->Get_link_picture($posts->post, $al2fb->Get_user_ID($posts->post));
 
+		// Comments
+		$xuser_ID = WPAL2Facebook::Get_user_ID($posts->post);
+		$excluded = WPAL2Facebook::Is_excluded($posts->post);
+		$post_type = $posts->post->post_type;
+		$nointegrate = get_post_meta($posts->post->ID, c_al2fb_meta_nointegrate, true);
+		$comment_status = $posts->post->comment_status;
+		$recent = WPAL2Facebook::Is_recent($posts->post);
+		$comments_enabled = get_user_meta($xuser_ID, c_al2fb_meta_fb_comments, true);
+		$comment_count = '?';
+		if ($xuser_ID && !$excluded && $post_type != 'reply' && !$nointegrate && $comment_status == 'open' && $recent && $comments_enabled) {
+			$fb_comments = WPAL2Int::Get_comments_or_likes($posts->post, false);
+			if ($fb_comments) {
+				$comment_count = 0;
+				foreach ($fb_comments->data as $fb_comment)
+					$comment_count++;
+			}
+		}
+
 		$info .= '<tr><td>' . $posts->post->post_type . ' #' . $posts->post->ID . ':</td>';
 		$info .= '<td><a href="' . get_permalink($posts->post->ID) . '" target="_blank">' . htmlspecialchars(get_the_title($posts->post->ID), ENT_QUOTES, $charset) . '</a>';
-		$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset);
+		$info .= ' by ' . htmlspecialchars($userdata->user_login, ENT_QUOTES, $charset) . ' (' . $posts->post->post_author . ')';
 		$info .= ' @ ' . $posts->post->post_date;
 		$info .= ' <a href="' . $picture['picture'] . '" target="_blank">result:' . $picture['picture_type'] . '</a>';
 		if (!empty($selected_picture))
@@ -333,6 +351,11 @@ function al2fb_debug_info($al2fb) {
 			$info .= ' <a href="' . $avatar_picture . '" target="_blank">avatar</a>';
 		if (!empty($link_id))
 			$info .= ' <a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
+
+		$info .= ' user=' . $xuser_ID . ' exluded=' . ($excluded ? 'Y' : 'N') . ' integrate=' . (!$nointegrate ? 'Y' : 'N');
+		$info .= ' status=' . $comment_status . ' recent=' . ($recent ? 'Y' : 'N') . ' enabled=' . ($comments_enabled ? 'Y' : 'N');
+		$info .= ' count=' . $comment_count;
+
 		$info .= '</td></tr>';
 	}
 
