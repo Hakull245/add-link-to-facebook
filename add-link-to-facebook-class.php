@@ -193,6 +193,8 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_nofilter_comments, true);
 
 			update_option(c_al2fb_option_version, 10);
+
+			// 11 when authorizing with 10
 		}
 
 		// Handle plugin deactivation
@@ -422,6 +424,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_picture_type, $_POST[c_al2fb_meta_picture_type]);
 			update_user_meta($user_ID, c_al2fb_meta_picture, $_POST[c_al2fb_meta_picture]);
 			update_user_meta($user_ID, c_al2fb_meta_picture_default, $_POST[c_al2fb_meta_picture_default]);
+			update_user_meta($user_ID, c_al2fb_meta_picture_size, $_POST[c_al2fb_meta_picture_size]);
 			update_user_meta($user_ID, c_al2fb_meta_icon, $_POST[c_al2fb_meta_icon]);
 			update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
 			update_user_meta($user_ID, c_al2fb_meta_page_extra, $_POST[c_al2fb_meta_page_extra]);
@@ -571,6 +574,8 @@ if (!class_exists('WPAL2Facebook')) {
 					update_option(c_al2fb_log_auth_time, date('c'));
 					if (get_option(c_al2fb_option_version) <= 6)
 						update_option(c_al2fb_option_version, 7);
+					if (get_option(c_al2fb_option_version) == 10)
+						update_option(c_al2fb_option_version, 11);
 					delete_option(c_al2fb_last_error);
 					delete_option(c_al2fb_last_error_time);
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Authorized, go posting!', c_al2fb_text_domain) . '</p></div>';
@@ -655,7 +660,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$notice = __('needs configuration', c_al2fb_text_domain);
 					$anchor = 'configure';
 				}
-				else if (!self::Is_authorized($user_ID)) {
+				else if (!self::Is_authorized($user_ID) || get_option(c_al2fb_option_version) == 10) {
 					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
 				}
@@ -1454,9 +1459,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get link picture
 		function Get_link_picture($post, $user_ID) {
+			// Get image size
+			$image_size = get_user_meta($user_ID, c_al2fb_meta_picture_size, true);
+			if (empty($image_size))
+				$image_size = 'medium';
+
 			// Get selected image
 			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-			$image_size = 'medium';
 			if (!empty($image_id) && function_exists('wp_get_attachment_image_src')) {
 				$picture_type = 'meta';
 				$picture = wp_get_attachment_image_src($image_id, $image_size);

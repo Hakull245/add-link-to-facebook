@@ -385,6 +385,8 @@ if (!class_exists('WPAL2Int')) {
 				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
 				if (get_option(c_al2fb_option_noverifypeer))
 					curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+				else if (get_option(c_al2fb_option_use_cacerts))
+					curl_setopt($c, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
 				$headers = curl_exec($c);
 				curl_close ($c);
 				if (preg_match('/Location: (.*)/', $headers, $location)) {

@@ -708,6 +708,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: URL news feed icon (does anybody know where this appears?)
 * New feature: Allow users logged into WordPress with their Facebook account to add links (option, experimental!)
 * New feature: new filter *al2fb_gmt_offset*
+* New feature: select image size (only for selected, attached or featured image)
 * Improvement: Facebook registration allowed for existing WordPress users (username/password will be ignored)
 * Improvement: Facebook registration redirect URL configurable
 * Improvement: validate Facebook registration

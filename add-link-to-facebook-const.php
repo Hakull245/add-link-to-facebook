@@ -64,6 +64,7 @@ define('c_al2fb_meta_token_time', 'al2fb_token_time');
 define('c_al2fb_meta_picture_type', 'al2fb_picture_type');
 define('c_al2fb_meta_picture', 'al2fb_picture');
 define('c_al2fb_meta_picture_default', 'al2fb_picture_default');
+define('c_al2fb_meta_picture_size', 'al2fb_picture_size');
 define('c_al2fb_meta_icon', 'al2fb_icon');
 define('c_al2fb_meta_page', 'al2fb_page');
 define('c_al2fb_meta_page_extra', 'al2fb_page_extra');

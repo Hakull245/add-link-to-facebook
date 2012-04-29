@@ -53,6 +53,11 @@ function al2fb_render_admin($al2fb)
 	$pic_userphoto = ($pic_type == 'userphoto' ? ' checked' : '');
 	$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 
+	$pic_size = get_user_meta($user_ID, c_al2fb_meta_picture_size, true);
+	$pic_thumbnail = ($pic_size == 'thumbnail' ? ' checked' : '');
+	$pic_medium = ($pic_size == 'medium' || empty($pic_size) ? ' checked' : '');
+	$pic_large = ($pic_size == 'large' ? ' checked' : '');
+
 	// Decode privacy
 	$priv_type = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
 	$priv_none = ($priv_type == '' ? ' checked' : '');
@@ -134,7 +139,9 @@ function al2fb_render_admin($al2fb)
 		<div id="al2fb_auth">
 <?php
 		if ($al2fb->Is_authorized($user_ID)) {
-			echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
+			if (get_option(c_al2fb_option_version) != 10)
+				echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
+
 			// Get page name
 			try {
 				$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
@@ -355,7 +362,7 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_picture"><?php _e('Custom picture URL:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_picture" class="al2fb_text" name="<?php echo c_al2fb_meta_picture; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_picture, true); ?>" />
-		<br /><span class="al2fb_explanation"><?php _e('At least 50 x 50 pixels', c_al2fb_text_domain); ?></span>
+		<br /><span class="al2fb_explanation"><?php echo str_replace('50', '200', __('At least 50 x 50 pixels', c_al2fb_text_domain)); ?></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -363,6 +370,14 @@ function al2fb_render_admin($al2fb)
 	</th><td>
 		<input id="al2fb_picture_default" class="al2fb_text" name="<?php echo c_al2fb_meta_picture_default; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_picture_default, true); ?>" />
 		<br /><span class="al2fb_explanation"><?php _e('Default WordPress logo', c_al2fb_text_domain); ?></span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_picture_size"><?php _e('Picture size:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="thumbnail"<?php echo $pic_thumbnail; ?>><?php _e('thumbnail', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="medium"<?php echo $pic_medium; ?>><?php _e('medium', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="large"<?php echo $pic_large; ?>><?php _e('large', c_al2fb_text_domain); ?><br />
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
