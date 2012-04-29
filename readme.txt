@@ -701,7 +701,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version (1.149.3) =
+= Development version (1.149.3+) =
 * New feature: specify video URL in post editor
 * New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
 * New feature: privacy: some friends (or friend list)
