@@ -51,14 +51,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = apply_filters('al2fb_url', $url);
 			$url .= '?client_id=' . urlencode(get_user_meta($user_ID, c_al2fb_meta_client_id, true));
 			$url .= '&redirect_uri=' . urlencode(WPAL2Int::Redirect_uri());
-			$url .= '&scope=read_stream,publish_stream,offline_access';
-
-			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
-				$url .= ',manage_pages';
-
-			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				$url .= ',user_groups';
-
+			$url .= '&scope=read_stream,publish_stream,offline_access,manage_pages,user_groups';
 			$url .= '&state=' . WPAL2Int::Authorize_secret();
 			return $url;
 		}
@@ -392,6 +385,8 @@ if (!class_exists('WPAL2Int')) {
 				curl_setopt($c, CURLOPT_TIMEOUT, $timeout);
 				if (get_option(c_al2fb_option_noverifypeer))
 					curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+				else if (get_option(c_al2fb_option_use_cacerts))
+					curl_setopt($c, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
 				$headers = curl_exec($c);
 				curl_close ($c);
 				if (preg_match('/Location: (.*)/', $headers, $location)) {
@@ -500,8 +495,8 @@ if (!class_exists('WPAL2Int')) {
 
 			// Get wall
 			$login = false;
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true) &&
-				get_user_meta($user_ID, c_al2fb_meta_facebook_token, true) &&
+			if (get_option(c_al2fb_option_login_add_links) &&
+				WPAL2Int::Get_login_access_token($user_ID) &&
 				get_user_meta($user_ID, c_al2fb_meta_facebook_page, true)) {
 				$login = true;
 				$page_ids = array();
@@ -699,10 +694,8 @@ if (!class_exists('WPAL2Int')) {
 		static function Delete_fb_link($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
 
-			// Get link id's
-			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
-
 			// Delete added links
+			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
 			foreach ($link_ids as $link_id) {
 				// Do not disturb WordPress
 				try {
@@ -915,12 +908,24 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_access_token($user_ID) {
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true)) {
-				$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+			if (get_option(c_al2fb_option_login_add_links)) {
+				$token = WPAL2Int::Get_login_access_token($user_ID);
 				if ($token)
 					return $token;
 			}
 			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
+		}
+
+		static function Get_login_access_token($user_ID) {
+			$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
+			$token_time = get_user_meta($user_ID, c_al2fb_meta_facebook_token_time, true);
+			if ($token && $token_time + 10 * 60 > time())
+				return $token;
+			else {
+				delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
+				delete_user_meta($user_ID, c_al2fb_meta_facebook_token_time);
+			}
+			return false;
 		}
 
 		// Get correct access for post
@@ -932,8 +937,7 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get access token for page
 		static function Get_access_token_by_page($user_ID, $page_id) {
-			if ($page_id && $page_id != 'me' &&
-				get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
+			if ($page_id && $page_id != 'me') {
 				$pages = WPAL2Int::Get_fb_pages($user_ID);
 				if ($pages->data)
 					foreach ($pages->data as $page)
@@ -947,7 +951,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_locale($user_ID) {
 			$locale = get_user_meta($user_ID, c_al2fb_meta_fb_locale, true);
 			if (empty($locale)) {
-				$locale = defined('WPLANG') ? WPLANG : '';
+				$locale = get_bloginfo('language');
 				$locale = str_replace('-', '_', $locale);
 				if (empty($locale) || strlen($locale) != 5)
 					$locale = 'en_US';
@@ -1271,7 +1275,7 @@ if (!class_exists('WPAL2Int')) {
 				$width = get_user_meta($user_ID, c_al2fb_meta_login_width, true);
 				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 				$permissions = '';
-				if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true))
+				if (get_option(c_al2fb_option_login_add_links))
 					$permissions .= 'read_stream,publish_stream,manage_pages,user_groups';
 
 				// Build content
@@ -1393,6 +1397,7 @@ if (!class_exists('WPAL2Int')) {
 						}
 					}
 					else {
+						$user_ID = false;
 						if (email_exists($email)) {
 							$user = get_user_by('email', $email);
 							if ($user)
@@ -1421,11 +1426,18 @@ if (!class_exists('WPAL2Int')) {
 								echo PHP_EOL;
 								if (get_option(c_al2fb_option_debug))
 									print_r($reg);
+								$user_ID = false;
 							}
 						}
 
 						// Redirect
-						wp_redirect(get_home_url());
+						if ($user_ID) {
+							update_user_meta($user_ID, c_al2fb_meta_facebook_id, $me->id);
+							$url = get_user_meta($user_ID, c_al2fb_meta_reg_success, true);
+							if (empty($url))
+								$url = get_home_url();
+							wp_redirect($url);
+						}
 					}
 				}
 				catch (Exception $e) {
@@ -1484,6 +1496,7 @@ if (!class_exists('WPAL2Int')) {
 						if ($user) {
 							// Persist token
 							update_user_meta($user->ID, c_al2fb_meta_facebook_token, $_REQUEST['token']);
+							update_user_meta($user->ID, c_al2fb_meta_facebook_token_time, time());
 
 							// Redirect
 							$self = (is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_REQUEST['uri'];
@@ -1685,6 +1698,8 @@ if (!class_exists('WPAL2Int')) {
 
 			if (get_option(c_al2fb_option_noverifypeer))
 				curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+			else if (get_option(c_al2fb_option_use_cacerts))
+				curl_setopt($c, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
 
 			delete_option(c_al2fb_log_ua);
 			$ua = $_SERVER['HTTP_USER_AGENT'];

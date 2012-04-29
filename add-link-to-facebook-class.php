@@ -193,6 +193,8 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_nofilter_comments, true);
 
 			update_option(c_al2fb_option_version, 10);
+
+			// 11 when authorizing with 10
 		}
 
 		// Handle plugin deactivation
@@ -411,19 +413,6 @@ if (!class_exists('WPAL2Facebook')) {
 				WPAL2Int::Clear_fb_groups_cache($user_ID);
 			}
 
-			// Page owner changed
-			if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
-				delete_user_meta($user_ID, c_al2fb_meta_access_token);
-				WPAL2Int::Clear_fb_pages_cache($user_ID);
-			}
-
-			// Use groups changed
-			if ($_POST[c_al2fb_meta_use_groups] && !get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				if (!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
-					delete_user_meta($user_ID, c_al2fb_meta_access_token);
-					WPAL2Int::Clear_fb_groups_cache($user_ID);
-				}
-
 			// Like or send button enabled
 			if ((!get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) && !empty($_POST[c_al2fb_meta_post_like_button])) ||
 				(!get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) && !empty($_POST[c_al2fb_meta_post_send_button])))
@@ -435,9 +424,9 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_picture_type, $_POST[c_al2fb_meta_picture_type]);
 			update_user_meta($user_ID, c_al2fb_meta_picture, $_POST[c_al2fb_meta_picture]);
 			update_user_meta($user_ID, c_al2fb_meta_picture_default, $_POST[c_al2fb_meta_picture_default]);
+			update_user_meta($user_ID, c_al2fb_meta_picture_size, $_POST[c_al2fb_meta_picture_size]);
 			update_user_meta($user_ID, c_al2fb_meta_icon, $_POST[c_al2fb_meta_icon]);
 			update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
-			update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
 			update_user_meta($user_ID, c_al2fb_meta_page_extra, $_POST[c_al2fb_meta_page_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_use_groups, $_POST[c_al2fb_meta_use_groups]);
 			update_user_meta($user_ID, c_al2fb_meta_group, $_POST[c_al2fb_meta_group]);
@@ -488,10 +477,10 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_pile_rows, $_POST[c_al2fb_meta_pile_rows]);
 			update_user_meta($user_ID, c_al2fb_meta_reg_width, $_POST[c_al2fb_meta_reg_width]);
 			update_user_meta($user_ID, c_al2fb_meta_login_width, $_POST[c_al2fb_meta_login_width]);
+			update_user_meta($user_ID, c_al2fb_meta_reg_success, $_POST[c_al2fb_meta_reg_success]);
 			update_user_meta($user_ID, c_al2fb_meta_login_regurl, $_POST[c_al2fb_meta_login_regurl]);
 			update_user_meta($user_ID, c_al2fb_meta_login_redir, $_POST[c_al2fb_meta_login_redir]);
 			update_user_meta($user_ID, c_al2fb_meta_login_html, $_POST[c_al2fb_meta_login_html]);
-			update_user_meta($user_ID, c_al2fb_meta_login_add_links, $_POST[c_al2fb_meta_login_add_links]);
 			update_user_meta($user_ID, c_al2fb_meta_act_width, $_POST[c_al2fb_meta_act_width]);
 			update_user_meta($user_ID, c_al2fb_meta_act_height, $_POST[c_al2fb_meta_act_height]);
 			update_user_meta($user_ID, c_al2fb_meta_act_header, $_POST[c_al2fb_meta_act_header]);
@@ -544,6 +533,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_exclude_author, $_POST[c_al2fb_option_exclude_author]);
 				update_option(c_al2fb_option_metabox_type, $_POST[c_al2fb_option_metabox_type]);
 				update_option(c_al2fb_option_noverifypeer, $_POST[c_al2fb_option_noverifypeer]);
+				update_option(c_al2fb_option_use_cacerts, $_POST[c_al2fb_option_use_cacerts]);
 				update_option(c_al2fb_option_shortcode_widget, $_POST[c_al2fb_option_shortcode_widget]);
 				update_option(c_al2fb_option_noshortcode, $_POST[c_al2fb_option_noshortcode]);
 				update_option(c_al2fb_option_nofilter, $_POST[c_al2fb_option_nofilter]);
@@ -556,6 +546,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_uselinks, $_POST[c_al2fb_option_uselinks]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
+				update_option(c_al2fb_option_login_add_links, $_POST[c_al2fb_option_login_add_links]);
 
 				if (isset($_REQUEST['debug'])) {
 					update_option(c_al2fb_option_siteurl, $_POST[c_al2fb_option_siteurl]);
@@ -583,6 +574,8 @@ if (!class_exists('WPAL2Facebook')) {
 					update_option(c_al2fb_log_auth_time, date('c'));
 					if (get_option(c_al2fb_option_version) <= 6)
 						update_option(c_al2fb_option_version, 7);
+					if (get_option(c_al2fb_option_version) == 10)
+						update_option(c_al2fb_option_version, 11);
 					delete_option(c_al2fb_last_error);
 					delete_option(c_al2fb_last_error_time);
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Authorized, go posting!', c_al2fb_text_domain) . '</p></div>';
@@ -621,10 +614,10 @@ if (!class_exists('WPAL2Facebook')) {
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
 			else {
 				// Build headers
-				$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-				$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\r\n";
-				//$headers .= 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\r\n";
+				$headers = 'From: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\n";
+				$headers .= 'Reply-To: ' . stripslashes($_POST[c_al2fb_mail_name]) . ' <' . stripslashes($_POST[c_al2fb_mail_email]) . '>' . "\n";
+				$headers .= 'MIME-Version: 1.0' . "\n";
+				$headers .= 'Content-type: text/html; charset=' . get_bloginfo('charset') . "\n";
 
 				// Build message
 				$message = '<html><head><title>Add Link to Facebook</title></head><body>';
@@ -634,7 +627,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$message .= al2fb_debug_info($this);
 				$message .= '<hr />';
 				$message .= '</body></html>';
-				if (wp_mail('al2fb@bokhorst.biz', '[Add Link to Facebook] Debug information', $message, $headers)) {
+				if (wp_mail('noreply@mail.faircode.eu', '[Add Link to Facebook] Debug information', $message, $headers)) {
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
 					if ($this->debug)
 						echo '<pre>' . nl2br(htmlspecialchars($headers, ENT_QUOTES, get_bloginfo('charset'))) . '</pre>';
@@ -667,7 +660,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$notice = __('needs configuration', c_al2fb_text_domain);
 					$anchor = 'configure';
 				}
-				else if (!self::Is_authorized($user_ID)) {
+				else if (!self::Is_authorized($user_ID) || get_option(c_al2fb_option_version) == 10) {
 					$notice = __('needs authorization', c_al2fb_text_domain);
 					$anchor = 'authorize';
 				}
@@ -814,8 +807,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
-			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-			if (!$link_id && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
+			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+			if (!$link_ids && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
 				$exclude = true;
 			$chk_exclude = ($exclude ? ' checked' : '');
 
@@ -832,8 +825,8 @@ if (!class_exists('WPAL2Facebook')) {
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
 
 
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true))
-				if (self::Is_fb_authorized($user_ID, false)) {
+			if (get_option(c_al2fb_option_login_add_links))
+				if (self::Is_login_authorized($user_ID, false)) {
 					// Get personal page
 					try {
 						$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
@@ -868,7 +861,7 @@ if (!class_exists('WPAL2Facebook')) {
 					}
 ?>
 					<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
-					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_facebook_page; ?>">
+					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_facebook_page; ?>">
 <?php
 					echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 					if ($me)
@@ -907,7 +900,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<label for="al2fb_nointegrate"><?php _e('Do not integrate comments', c_al2fb_text_domain); ?></label>
 
 <?php
-			if (!empty($link_id)) {
+			if (!empty($link_ids)) {
 ?>
 				<br />
 				<input id="al2fb_update" type="checkbox" name="<?php echo c_al2fb_action_update; ?>"/>
@@ -917,8 +910,16 @@ if (!class_exists('WPAL2Facebook')) {
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+<?php
+				foreach ($link_ids as $link_id) {
+?>
+					<br />
+					<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
+<?php
+				}
+?>
 				<br />
-				<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
+				<span class="al2fb_explanation"><em><?php _e('Due to limitations of Facebook not all links might work', c_al2fb_text_domain); ?></em></span>
 <?php
 			}
 
@@ -1149,10 +1150,10 @@ if (!class_exists('WPAL2Facebook')) {
 			if (in_array($post->post_type, $ex_custom_types))
 				return $post_id;
 
-			// Persist slected page
+			// Persist selected page
 			$user_ID = self::Get_user_ID($post);
-			if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true) &&
-				self::Is_fb_authorized($user_ID, false))
+			if (get_option(c_al2fb_option_login_add_links) &&
+				self::Is_login_authorized($user_ID, false))
 				update_user_meta($user_ID, c_al2fb_meta_facebook_page, $_POST[c_al2fb_meta_facebook_page]);
 
 			// Process exclude indication
@@ -1242,7 +1243,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 			if (!empty($link_id) &&
-				(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, false)))
+				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, false)))
 				WPAL2Int::Delete_fb_link($post);
 		}
 
@@ -1263,7 +1264,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Add, update or delete link
 				if ($update || $delete || $new_status == 'trash') {
 					if (!empty($link_id) &&
-						(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, false))) {
+						(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, false))) {
 						WPAL2Int::Delete_fb_link($post);
 						$link_id = null;
 					}
@@ -1271,7 +1272,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (!$delete) {
 					// Check post status
 					if (empty($link_id) &&
-						(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, true)) &&
+						(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true)) &&
 						$new_status == 'publish' &&
 						($new_status != $old_status || $update ||
 						get_post_meta($post->ID, c_al2fb_meta_error, true)))
@@ -1289,7 +1290,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
-				(self::Is_authorized($user_ID) || self::Is_fb_authorized($user_ID, true))) {
+				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true))) {
 				// Check if not added/excluded
 				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
@@ -1458,9 +1459,13 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get link picture
 		function Get_link_picture($post, $user_ID) {
+			// Get image size
+			$image_size = get_user_meta($user_ID, c_al2fb_meta_picture_size, true);
+			if (empty($image_size))
+				$image_size = 'medium';
+
 			// Get selected image
 			$image_id = get_post_meta($post->ID, c_al2fb_meta_image_id, true);
-			$image_size = 'medium';
 			if (!empty($image_id) && function_exists('wp_get_attachment_image_src')) {
 				$picture_type = 'meta';
 				$picture = wp_get_attachment_image_src($image_id, $image_size);
@@ -1683,21 +1688,12 @@ if (!class_exists('WPAL2Facebook')) {
 			return get_user_meta($user_ID, c_al2fb_meta_access_token, true);
 		}
 
-		function Is_fb_authorized($user_ID, $page_selected) {
+		function Is_login_authorized($user_ID, $page_selected) {
 			if ($page_selected &&
 				!get_user_meta($user_ID, c_al2fb_meta_facebook_page, true))
 				return false;
-			$token = get_user_meta($user_ID, c_al2fb_meta_facebook_token, true);
-			if ($token)
-				try {
-					// Check if token valid (not expired)
-					WPAL2Int::Get_fb_me($user_ID, true);
-					return $token;
-				}
-				catch (Exception $e) {
-					delete_user_meta($user_ID, c_al2fb_meta_facebook_token);
-				}
-			return false;
+
+			return WPAL2Int::Get_login_access_token($user_ID);
 		}
 
 		// HTML header
@@ -2080,13 +2076,12 @@ if (!class_exists('WPAL2Facebook')) {
 		// Profile personal options
 		function Personal_options($user) {
 			$fid = get_user_meta($user->ID, c_al2fb_meta_facebook_id, true);
-			$ftoken = get_user_meta($user->ID, c_al2fb_meta_facebook_token, true);
 			echo '<th scope="row">' . __('Facebook ID', c_al2fb_text_domain) . '</th><td>';
 			echo '<input type="text" name="' . c_al2fb_meta_facebook_id . '" id="' . c_al2fb_meta_facebook_id . '" value="' . $fid . '">';
 			if ($fid)
 				echo '<br><a href="' . WPAL2Int::Get_fb_profilelink($fid) . '" target="_blank">' . $fid . '</a>';
-			if ($ftoken && $this->debug)
-				echo '<br><span>token=' . $ftoken . '</span>';
+			if ($this->debug)
+				echo '<br><span>token=' . get_user_meta($user->ID, c_al2fb_meta_facebook_token, true) . '</span>';
 			echo '</td></tr>';
 		}
 
@@ -2099,6 +2094,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Comments_array($comments, $post_ID) {
 			$post = get_post($post_ID);
 			$user_ID = self::Get_user_ID($post);
+			update_option(c_al2fb_log_importing, true);
 
 			// Integration?
 			if ($user_ID && !self::Is_excluded($post) &&
