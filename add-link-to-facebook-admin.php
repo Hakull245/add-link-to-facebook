@@ -409,14 +409,6 @@ function al2fb_render_admin($al2fb)
 				<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
 				<table class="form-table al2fb_border">
 				<tr valign="top"><th scope="row">
-					<label for="al2fb_page_owner"><?php _e('See all pages:', c_al2fb_text_domain); ?></label>
-				</th><td>
-					<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
-					<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
-					<br /><span class="al2fb_explanation"><?php _e('Check this too if you want to add as page owner', c_al2fb_text_domain); ?></span>
-				</td></tr>
-
-				<tr valign="top"><th scope="row">
 					<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
 				</th><td>
 					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
@@ -485,7 +477,6 @@ function al2fb_render_admin($al2fb)
 				<label for="al2fb_use_groups"><?php _e('Use groups:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_use_groups" name="<?php echo c_al2fb_meta_use_groups; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) echo ' checked="checked"'; ?> />
-				<br /><span class="al2fb_explanation"><?php _e('Requires user groups permission', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 <?php

@@ -701,7 +701,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version (1.149.2+) =
+= Development version (1.149.3) =
 * New feature: specify video URL in post editor
 * New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
 * New feature: privacy: some friends (or friend list)
@@ -714,6 +714,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: use bundled CA certificates (option)
 * Improvement: use *get_bloginfo* instead of *WPLANG*
 * Improvement: debug info for comment import
+* Improvement: removed confusing option *See all pages*
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")

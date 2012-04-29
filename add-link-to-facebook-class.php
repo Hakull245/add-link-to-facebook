@@ -411,19 +411,6 @@ if (!class_exists('WPAL2Facebook')) {
 				WPAL2Int::Clear_fb_groups_cache($user_ID);
 			}
 
-			// Page owner changed
-			if ($_POST[c_al2fb_meta_page_owner] && !get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
-				delete_user_meta($user_ID, c_al2fb_meta_access_token);
-				WPAL2Int::Clear_fb_pages_cache($user_ID);
-			}
-
-			// Use groups changed
-			if ($_POST[c_al2fb_meta_use_groups] && !get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				if (!get_user_meta($user_ID, c_al2fb_meta_group, true)) {
-					delete_user_meta($user_ID, c_al2fb_meta_access_token);
-					WPAL2Int::Clear_fb_groups_cache($user_ID);
-				}
-
 			// Like or send button enabled
 			if ((!get_user_meta($user_ID, c_al2fb_meta_post_like_button, true) && !empty($_POST[c_al2fb_meta_post_like_button])) ||
 				(!get_user_meta($user_ID, c_al2fb_meta_post_send_button, true) && !empty($_POST[c_al2fb_meta_post_send_button])))
@@ -437,7 +424,6 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_picture_default, $_POST[c_al2fb_meta_picture_default]);
 			update_user_meta($user_ID, c_al2fb_meta_icon, $_POST[c_al2fb_meta_icon]);
 			update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
-			update_user_meta($user_ID, c_al2fb_meta_page_owner, $_POST[c_al2fb_meta_page_owner]);
 			update_user_meta($user_ID, c_al2fb_meta_page_extra, $_POST[c_al2fb_meta_page_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_use_groups, $_POST[c_al2fb_meta_use_groups]);
 			update_user_meta($user_ID, c_al2fb_meta_group, $_POST[c_al2fb_meta_group]);
@@ -816,8 +802,8 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
-			$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
-			if (!$link_id && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
+			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+			if (!$link_ids && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
 				$exclude = true;
 			$chk_exclude = ($exclude ? ' checked' : '');
 
@@ -909,7 +895,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<label for="al2fb_nointegrate"><?php _e('Do not integrate comments', c_al2fb_text_domain); ?></label>
 
 <?php
-			if (!empty($link_id)) {
+			if (!empty($link_ids)) {
 ?>
 				<br />
 				<input id="al2fb_update" type="checkbox" name="<?php echo c_al2fb_action_update; ?>"/>
@@ -919,8 +905,16 @@ if (!class_exists('WPAL2Facebook')) {
 				<br />
 				<input id="al2fb_delete" type="checkbox" name="<?php echo c_al2fb_action_delete; ?>"/>
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
+<?php
+				foreach ($link_ids as $link_id) {
+?>
+					<br />
+					<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
+<?php
+				}
+?>
 				<br />
-				<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
+				<span class="al2fb_explanation"><em><?php _e('Due to limitations of Facebook not all links might work', c_al2fb_text_domain); ?></em></span>
 <?php
 			}
 

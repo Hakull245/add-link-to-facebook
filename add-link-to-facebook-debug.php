@@ -155,7 +155,6 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Default picture URL:</td><td>' . $picture_default . '</td></tr>';
 
 	$info .= '<tr><td>Page:</td><td>' . $page . '</td></tr>';
-	$info .= '<tr><td>Page owner:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_page_owner, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Use groups:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ? 'Yes' : 'No')  . '</td></tr>';
 	$info .= '<tr><td>Group:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_group, true) . '</td></tr>';
 

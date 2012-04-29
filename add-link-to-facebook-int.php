@@ -51,14 +51,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = apply_filters('al2fb_url', $url);
 			$url .= '?client_id=' . urlencode(get_user_meta($user_ID, c_al2fb_meta_client_id, true));
 			$url .= '&redirect_uri=' . urlencode(WPAL2Int::Redirect_uri());
-			$url .= '&scope=read_stream,publish_stream,offline_access';
-
-			if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true))
-				$url .= ',manage_pages';
-
-			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
-				$url .= ',user_groups';
-
+			$url .= '&scope=read_stream,publish_stream,offline_access,manage_pages,user_groups';
 			$url .= '&state=' . WPAL2Int::Authorize_secret();
 			return $url;
 		}
@@ -699,10 +692,8 @@ if (!class_exists('WPAL2Int')) {
 		static function Delete_fb_link($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
 
-			// Get link id's
-			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
-
 			// Delete added links
+			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
 			foreach ($link_ids as $link_id) {
 				// Do not disturb WordPress
 				try {
@@ -944,8 +935,7 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get access token for page
 		static function Get_access_token_by_page($user_ID, $page_id) {
-			if ($page_id && $page_id != 'me' &&
-				get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) {
+			if ($page_id && $page_id != 'me') {
 				$pages = WPAL2Int::Get_fb_pages($user_ID);
 				if ($pages->data)
 					foreach ($pages->data as $page)

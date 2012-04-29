@@ -66,7 +66,6 @@ define('c_al2fb_meta_picture', 'al2fb_picture');
 define('c_al2fb_meta_picture_default', 'al2fb_picture_default');
 define('c_al2fb_meta_icon', 'al2fb_icon');
 define('c_al2fb_meta_page', 'al2fb_page');
-define('c_al2fb_meta_page_owner', 'al2fb_page_owner');
 define('c_al2fb_meta_page_extra', 'al2fb_page_extra');
 define('c_al2fb_meta_use_groups', 'al2fb_use_groups');
 define('c_al2fb_meta_group', 'al2fb_group');
