@@ -373,7 +373,7 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
-		<label for="al2fb_picture_size"><?php _e('Picture size:', c_al2fb_text_domain); ?></label>
+		<label for="al2fb_picture_size"><?php _e('Picture size sent to Facebook:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="thumbnail"<?php echo $pic_thumbnail; ?>><?php _e('thumbnail', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="medium"<?php echo $pic_medium; ?>><?php _e('medium', c_al2fb_text_domain); ?><br />
