@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.2
-Stable tag: 1.149
+Stable tag: 1.151
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -701,7 +701,23 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version (1.149.3+) =
+= Development version =
+* ...
+
+Follow these steps to install the development version:
+
+* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
+* Go to *Plugins* on your WordPress dashboard
+* *Deactivate* Add Link to Facebook
+* *Delete* Add Link to Facebook (*Yes, delete these files*)
+* Click *Add New*
+* Click *Upload* (a link at the top)
+* Click *Choose file* and select the file you downloaded before
+* Click *Install*, then *Activate Plugin*
+* Please report any problem you encounter
+* Reports that everything works are also appreciated :-)
+
+= 1.151 =
 * New feature: specify video URL in post editor
 * New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
 * New feature: privacy: some friends (or friend list)
@@ -720,19 +736,6 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-Follow these steps to install the development version:
-
-* Download the development version by clicking on [this link](http://downloads.wordpress.org/plugin/add-link-to-facebook.zip)
-* Go to *Plugins* on your WordPress dashboard
-* *Deactivate* Add Link to Facebook
-* *Delete* Add Link to Facebook (*Yes, delete these files*)
-* Click *Add New*
-* Click *Upload* (a link at the top)
-* Click *Choose file* and select the file you downloaded before
-* Click *Install*, then *Activate Plugin*
-* Please report any problem you encounter
-* Reports that everything works are also appreciated :-)
-
 = 1.149 =
 * Bugfix: send user agent to Facebook
 * Improvement: removed option *Skip authorization check*
@@ -742,23 +745,14 @@ Follow these steps to install the development version:
 = 1.148 =
 * Disabled pre-authorization check
 
-= 1.147 =
-* Bugfix: character encoding of imported comments
-* Bugfix: comment/like count
-* Improvement: increased link picture size from thumbnail to medium
-* New feature: disable sending pingbacks/trackbacks to Facebook (option)
-* New feature: disable pre-authorization check (option)
-* Updated FAQ
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de/ "Wolfgang Tischer")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* Added Lithuanian (lt\_LT) translation
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.151 =
+Seven new features, seven improvements, translation updates
 
 = 1.149 =
 One bugfix, two improvements, updated library
