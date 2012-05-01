@@ -1622,6 +1622,13 @@ if (!class_exists('WPAL2Int')) {
 			if (version_compare(PHP_VERSION, '5.2.1') < 0)
 				ini_set('default_socket_timeout', $timeout);
 
+			delete_option(c_al2fb_log_ua);
+			$ua = $_SERVER['HTTP_USER_AGENT'];
+			if (!empty($ua)) {
+				ini_set('user_agent', $ua);
+				update_option(c_al2fb_log_ua, $ua);
+			}
+
 			WPAL2Int::$php_error = '';
 			set_error_handler(array('WPAL2Int', 'PHP_error_handler'));
 			if ($type == 'GET') {
