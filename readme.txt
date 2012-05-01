@@ -702,7 +702,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: set user agent for *file_get_contents* too
 
 Follow these steps to install the development version:
 
