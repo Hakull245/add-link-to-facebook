@@ -200,3 +200,7 @@ html ul.al2fb_tabs li.active, html ul.al2fb_tabs li.active a:hover {
 #al2fb_video {
 	width: 98%;
 }
+
+select#al2fb_page.al2fb_select {
+	max-width: 250px;
+}

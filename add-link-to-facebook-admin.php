@@ -53,6 +53,11 @@ function al2fb_render_admin($al2fb)
 	$pic_userphoto = ($pic_type == 'userphoto' ? ' checked' : '');
 	$pic_custom = ($pic_type == 'custom' ? ' checked' : '');
 
+	$pic_size = get_user_meta($user_ID, c_al2fb_meta_picture_size, true);
+	$pic_thumbnail = ($pic_size == 'thumbnail' ? ' checked' : '');
+	$pic_medium = ($pic_size == 'medium' || empty($pic_size) ? ' checked' : '');
+	$pic_large = ($pic_size == 'large' ? ' checked' : '');
+
 	// Decode privacy
 	$priv_type = get_user_meta($user_ID, c_al2fb_meta_privacy, true);
 	$priv_none = ($priv_type == '' ? ' checked' : '');
@@ -134,7 +139,9 @@ function al2fb_render_admin($al2fb)
 		<div id="al2fb_auth">
 <?php
 		if ($al2fb->Is_authorized($user_ID)) {
-			echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
+			if (get_option(c_al2fb_option_version) != 10)
+				echo '<span>' . __('Plugin is authorized', c_al2fb_text_domain) . '</span><br />';
+
 			// Get page name
 			try {
 				$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
@@ -355,7 +362,7 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_picture"><?php _e('Custom picture URL:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_picture" class="al2fb_text" name="<?php echo c_al2fb_meta_picture; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_picture, true); ?>" />
-		<br /><span class="al2fb_explanation"><?php _e('At least 50 x 50 pixels', c_al2fb_text_domain); ?></span>
+		<br /><span class="al2fb_explanation"><?php echo str_replace('50', '200', __('At least 50 x 50 pixels', c_al2fb_text_domain)); ?></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -363,6 +370,14 @@ function al2fb_render_admin($al2fb)
 	</th><td>
 		<input id="al2fb_picture_default" class="al2fb_text" name="<?php echo c_al2fb_meta_picture_default; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_picture_default, true); ?>" />
 		<br /><span class="al2fb_explanation"><?php _e('Default WordPress logo', c_al2fb_text_domain); ?></span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_picture_size"><?php _e('Picture size sent to Facebook:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="thumbnail"<?php echo $pic_thumbnail; ?>><?php _e('thumbnail', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="medium"<?php echo $pic_medium; ?>><?php _e('medium', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="large"<?php echo $pic_large; ?>><?php _e('large', c_al2fb_text_domain); ?><br />
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -409,17 +424,9 @@ function al2fb_render_admin($al2fb)
 				<h4><?php _e('Facebook page', c_al2fb_text_domain); ?></h4>
 				<table class="form-table al2fb_border">
 				<tr valign="top"><th scope="row">
-					<label for="al2fb_page_owner"><?php _e('See all pages:', c_al2fb_text_domain); ?></label>
-				</th><td>
-					<input id="al2fb_page_owner" name="<?php echo c_al2fb_meta_page_owner; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_page_owner, true)) echo ' checked="checked"'; ?> />
-					<br /><span class="al2fb_explanation"><?php _e('Requires manage pages permission', c_al2fb_text_domain); ?></span>
-					<br /><span class="al2fb_explanation"><?php _e('Check this too if you want to add as page owner', c_al2fb_text_domain); ?></span>
-				</td></tr>
-
-				<tr valign="top"><th scope="row">
 					<label for="al2fb_page"><?php _e('Add to page:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<select class="al2db_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
+					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
 					if ($me)
 						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</option>';
@@ -457,7 +464,7 @@ function al2fb_render_admin($al2fb)
 				else {
 					echo '<strong>';
 					_e('This option is only available in', c_al2fb_text_domain);
-					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
 					$mu = WPAL2Int::Get_multiple_url();
 					if ($mu)
@@ -485,7 +492,6 @@ function al2fb_render_admin($al2fb)
 				<label for="al2fb_use_groups"><?php _e('Use groups:', c_al2fb_text_domain); ?></label>
 			</th><td>
 				<input id="al2fb_use_groups" name="<?php echo c_al2fb_meta_use_groups; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) echo ' checked="checked"'; ?> />
-				<br /><span class="al2fb_explanation"><?php _e('Requires user groups permission', c_al2fb_text_domain); ?></span>
 			</td></tr>
 
 <?php
@@ -505,7 +511,7 @@ function al2fb_render_admin($al2fb)
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_group"><?php _e('Add to group:', c_al2fb_text_domain); ?></label>
 				</th><td>
-					<select class="al2db_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
+					<select class="al2fb_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
 <?php
 					echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 					if ($groups && $groups->data)
@@ -537,7 +543,7 @@ function al2fb_render_admin($al2fb)
 				else {
 					echo '<strong>';
 					_e('This option is only available in', c_al2fb_text_domain);
-					echo ' <a href="http://al2fb.bokhorst.biz/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
 					$mu = WPAL2Int::Get_multiple_url();
 					if ($mu)
@@ -816,7 +822,7 @@ function al2fb_render_admin($al2fb)
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_pile_size"><?php _e('Size:', c_al2fb_text_domain); ?></label>
 	</th><td>
-		<select class="al2db_select" id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
+		<select class="al2fb_select" id="al2fb_pile_size" name="<?php echo c_al2fb_meta_pile_size; ?>">
 		<option value="small" <?php echo $pile_size == 'small' ? 'selected' : ''; ?>><?php _e('Small', c_al2fb_text_domain); ?></option>
 		<option value="large" <?php echo $pile_size == 'large' ? 'selected' : ''; ?>><?php _e('Large', c_al2fb_text_domain); ?></option>
 		</select>
@@ -862,6 +868,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_reg_success"><?php _e('Registration success URL:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input class="al2fb_text" id="al2fb_reg_success" name="<?php echo c_al2fb_meta_reg_success; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_reg_success, true); ?>" />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_login_redir"><?php _e('Login redirect URL:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input class="al2fb_text" id="al2fb_login_redir" name="<?php echo c_al2fb_meta_login_redir; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_login_redir, true); ?>" />
@@ -870,7 +882,7 @@ function al2fb_render_admin($al2fb)
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_login_add_links"><?php _e('Allow adding links with login:', c_al2fb_text_domain); ?></label>
 	</th><td>
-		<input id="al2fb_login_add_links" name="<?php echo c_al2fb_meta_login_add_links; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_login_add_links, true)) echo ' checked="checked"'; ?> />
+		<input id="al2fb_login_add_links" name="<?php echo c_al2fb_option_login_add_links; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_login_add_links)) echo ' checked="checked"'; if (!current_user_can('manage_options')) echo ' disabled'; ?> />
 	</td></tr>
 
 	<tr valign="top"><th scope="row" colspan="2">
@@ -971,7 +983,7 @@ function al2fb_render_admin($al2fb)
 	<tr valign="top"><th scope="row">
 		<label for="al2fb_like_font"><?php _e('Font:', c_al2fb_text_domain); ?></label>
 	</th><td>
-		<select class="al2db_select" id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
+		<select class="al2fb_select" id="al2fb_like_font" name="<?php echo c_al2fb_meta_like_font; ?>">
 		<option value="" <?php echo empty($like_font) ? 'selected' : ''; ?>></option>
 		<option value="arial" <?php echo $like_font == 'arial' ? 'selected' : ''; ?>>arial</option>
 		<option value="lucida grande" <?php echo $like_font == 'lucida grande' ? 'selected' : ''; ?>>lucida grande</option>
@@ -1069,7 +1081,7 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_fb_locale"><?php _e('Facebook locale:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_locale" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_locale; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_locale, true); ?>" />
-		<br /><span class="al2fb_explanation"><?php _e('Do not change if no need', c_al2fb_text_domain); ?><span>&nbsp;(<?php echo WPLANG; ?>)</span></span>
+		<br /><span class="al2fb_explanation"><?php _e('Do not change if no need', c_al2fb_text_domain); ?><span>&nbsp;(<?php echo get_bloginfo('language'); ?>)</span></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -1113,7 +1125,7 @@ function al2fb_render_admin($al2fb)
 		<tr valign="top"><th scope="row">
 			<label for="al2fb_min_cap"><?php _e('Required capability to use plugin:', c_al2fb_text_domain); ?></label>
 		</th><td>
-			<select class="al2db_select" id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
+			<select class="al2fb_select" id="al2fb_min_cap" name="<?php echo c_al2fb_option_min_cap; ?>">
 <?php
 			// Get list of capabilities
 			global $wp_roles;
@@ -1145,7 +1157,7 @@ function al2fb_render_admin($al2fb)
 		<tr valign="top"><th scope="row">
 			<label for="al2fb_min_cap_comment"><?php _e('Required capability to view Facebook comments:', c_al2fb_text_domain); ?></label>
 		</th><td>
-			<select class="al2db_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">
+			<select class="al2fb_select" id="al2fb_min_cap_comment" name="<?php echo c_al2fb_option_min_cap_comment; ?>">
 <?php
 			// List capabilities and select current
 			$min_cap = get_option(c_al2fb_option_min_cap_comment);
@@ -1251,6 +1263,13 @@ function al2fb_render_admin($al2fb)
 			<label for="al2fb_noverifypeer"><?php _e('Do not verify the peer\'s certificate:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<input id="al2fb_noverifypeer" name="<?php echo c_al2fb_option_noverifypeer; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_noverifypeer)) echo ' checked="checked"'; ?> />
+			<br /><span class="al2fb_explanation"><?php _e('Try this in case of cURL error 60', c_al2fb_text_domain); ?></span>
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
+			<label for="al2fb_use_cacerts"><?php _e('Use bundled CA certificates:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_use_cacerts" name="<?php echo c_al2fb_option_use_cacerts; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_use_cacerts)) echo ' checked="checked"'; ?> />
 			<br /><span class="al2fb_explanation"><?php _e('Try this in case of cURL error 60', c_al2fb_text_domain); ?></span>
 		</td></tr>
 
@@ -1425,8 +1444,8 @@ function al2fb_render_resources($al2fb) {
 	<ul>
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/" target="_blank"><?php _e('Setup guide & user manual', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
-	<li><a href="http://al2fb.bokhorst.biz/" target="_blank"><?php _e('Pro version', c_al2fb_text_domain); ?></a></li>
-	<li><a href="http://forum.bokhorst.biz/add-link-to-facebook/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
+	<li><a href="http://www.faircode.eu/al2fbpro/" target="_blank"><?php _e('Pro version', c_al2fb_text_domain); ?></a></li>
+	<li><a href="http://forum.faircode.eu/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
 	<li><a href="<?php echo 'tools.php?page=' . plugin_basename($al2fb->main_file) . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
@@ -1494,7 +1513,7 @@ function al2fb_render_debug_info($al2fb) {
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
-			<label for="al2fb_debug_topic"><strong><a href="http://forum.bokhorst.biz/"><?php _e('Forum topic link:', c_al2fb_text_domain); ?></a></strong></label>
+			<label for="al2fb_debug_topic"><strong><a href="http://forum.faircode.eu/"><?php _e('Forum topic link:', c_al2fb_text_domain); ?></a></strong></label>
 		</th><td>
 			<input id="al2fb_debug_topic" class="" name="<?php echo c_al2fb_mail_topic; ?>" type="text" />
 			<br><strong><?php _e('Mandatory', c_al2fb_text_domain); ?></strong>
