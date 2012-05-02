@@ -77,7 +77,8 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 * Serbian (sr\_RS), thanks!
 * Greek (el\_EL), thanks!
-* Lithuanian (lt\_LT), thanks!
+* Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
+* Danish (da\_DK), thanks
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
@@ -702,7 +703,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Added Danish (da\_DK) translation
 
 Follow these steps to install the development version:
 
