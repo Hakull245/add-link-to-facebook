@@ -703,7 +703,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Add Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon")
+* ...
 
 Follow these steps to install the development version:
 
@@ -721,6 +721,7 @@ Follow these steps to install the development version:
 = 1.153 =
 * Bugfix: upgrade procedure
 * Improvement: use links API by default (to have share links again)
+* Add Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon")
 
 = 1.152 =
 * Bugfix: set user agent for *file_get_contents* too
@@ -751,7 +752,7 @@ Follow these steps to install the development version:
 == Upgrade Notice ==
 
 = 1.153 =
-One bugfix, one improvement
+One bugfix, one improvement, new translation
 
 = 1.152 =
 One bugfix
