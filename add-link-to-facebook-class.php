@@ -202,7 +202,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// 11 when authorizing with 10
 
 			if ($version == 11) {
-				update_option(c_al2fb_option_uselinks, true);
+				//update_option(c_al2fb_option_uselinks, true);
 				update_option(c_al2fb_option_version, 12);
 			}
 		}
