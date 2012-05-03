@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.2
-Stable tag: 1.152
+Stable tag: 1.153
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -718,6 +718,10 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.153 =
+* Bugfix: upgrade procedure
+* Improvement: use links API by default (to have share links again)
+
 = 1.152 =
 * Bugfix: set user agent for *file_get_contents* too
 
@@ -740,26 +744,20 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.149 =
-* Bugfix: send user agent to Facebook
-* Improvement: removed option *Skip authorization check*
-* Improvement: no *... commented on ...* when post author comments (except when sharing is enabled by someone else)
-* Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.153 =
+One bugfix, one improvement
+
 = 1.152 =
 One bugfix
 
 = 1.151 =
 Seven new features, seven improvements, translation updates
-
-= 1.149 =
-One bugfix, two improvements, updated library
 
 == Setup guide ==
 

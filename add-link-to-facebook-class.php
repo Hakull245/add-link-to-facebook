@@ -140,6 +140,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin activation
 		function Activate() {
+			self::Upgrade();
+		}
+
+		function Upgrade() {
 			global $wpdb;
 			$version = get_option(c_al2fb_option_version);
 			if (empty($version))
@@ -192,9 +196,15 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($version <= 8)
 				update_option(c_al2fb_option_nofilter_comments, true);
 
-			update_option(c_al2fb_option_version, 10);
+			if ($version < 10)
+				update_option(c_al2fb_option_version, 10);
 
 			// 11 when authorizing with 10
+
+			if ($version == 11) {
+				update_option(c_al2fb_option_uselinks, true);
+				update_option(c_al2fb_option_version, 12);
+			}
 		}
 
 		// Handle plugin deactivation
@@ -342,6 +352,8 @@ if (!class_exists('WPAL2Facebook')) {
 				// Handle Facebook authorization
 				WPAL2Int::Authorize();
 			}
+
+			self::Upgrade();
 		}
 
 		// Display admin messages
