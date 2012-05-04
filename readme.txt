@@ -183,8 +183,6 @@ This option is only available *after* you have authorized, since information fro
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page* on the tab *Page/group*.
-Be sure to check the option *See all pages*.
-You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
 Note that pages and groups exclude each other (except in the [Pro version](http://www.faircode.eu/al2fbpro/)).
 You can only add links to pages you are owner of.
 
