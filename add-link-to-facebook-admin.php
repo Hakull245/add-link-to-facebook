@@ -144,13 +144,14 @@ function al2fb_render_admin($al2fb)
 
 			// Get page name
 			try {
-				$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
-				if ($me != null) {
+				$page_ids = WPAL2Int::Get_page_ids($user_ID);
+				foreach ($page_ids as $page_id) {
+					$info = WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
 					_e('Links will be added to', c_al2fb_text_domain);
-					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
-					if (!empty($me->category))
-						echo ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
-					echo '</a>';
+					echo ' <a href="' . $info->link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset);
+					if (!empty($info->category))
+						echo ' - ' . htmlspecialchars($info->category, ENT_QUOTES, $charset);
+					echo '</a><br />';
 				}
 			}
 			catch (Exception $e) {

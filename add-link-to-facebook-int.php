@@ -168,24 +168,26 @@ if (!class_exists('WPAL2Int')) {
 		// Get wall, page or group name and cache
 		static function Get_fb_me_cached($user_ID, $self) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
-			$me_key = c_al2fb_transient_cache . md5('me' . $user_ID . $page_id);
-			$me = get_transient($me_key);
-			if (get_option(c_al2fb_option_debug))
-				$me = false;
-			if ($me === false) {
-				$me = WPAL2Int::Get_fb_me($user_ID, $self);
-				if ($me != null) {
-					$duration = WPAL2Int::Get_duration(false);
-					set_transient($me_key, $me, $duration);
-				}
-			}
-			return $me;
+			return WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
 		}
 
 		// Get wall, page or group name
 		static function Get_fb_me($user_ID, $self) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
 			return WPAL2Int::Get_fb_info($user_ID, $page_id);
+		}
+
+		static function Get_fb_info_cached($user_ID, $page_id) {
+			$info_key = c_al2fb_transient_cache . md5('inf' . $user_ID);
+			$info = get_transient($info_key);
+			if (get_option(c_al2fb_option_debug))
+				$info = false;
+			if ($info === false) {
+				$info = WPAL2Int::Get_fb_info($user_ID, $page_id);
+				$duration = WPAL2Int::Get_duration(false);
+				set_transient($info_key, $info, $duration);
+			}
+			return $info;
 		}
 
 		static function Get_fb_info($user_ID, $page_id) {
@@ -418,6 +420,13 @@ if (!class_exists('WPAL2Int')) {
 			return 'http://www.facebook.com/profile.php?id=' . $id;
 		}
 
+		static function Get_page_from_link_id($link_id) {
+			if (empty($link_id))
+				return '';
+			$ids = explode('_', $link_id);
+			return $ids[0];
+		}
+
 		// Get permalink to added link
 		static function Get_fb_permalink($link_id) {
 			if (empty($link_id))
@@ -435,6 +444,30 @@ if (!class_exists('WPAL2Int')) {
 			$title = __('Facebook', c_al2fb_text_domain);
 			$title = apply_filters('al2fb_anchor', $title, $post);
 			return '<div class="al2fb_anchor"><a href="' . $link . '" target="_blank">' . $title . '</div></a>';
+		}
+
+		static function Get_page_ids($user_ID) {
+			$page_ids = array();
+			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
+				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
+					$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
+					if (!empty($extra))
+						$page_ids = array_merge($page_ids, $extra);
+				}
+			}
+			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
+				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
+					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
+					if (!empty($extra))
+						$page_ids = array_merge($page_ids, $extra);
+				}
+			}
+			if (empty($page_ids))
+				$page_ids[] = 'me';
+
+			return $page_ids;
 		}
 
 		// Add Link to Facebook
@@ -502,27 +535,8 @@ if (!class_exists('WPAL2Int')) {
 				$page_ids = array();
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_facebook_page, true);
 			}
-			else {
-				$page_ids = array();
-				if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
-					$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
-					if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
-						$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
-						if (!empty($extra))
-							$page_ids = array_merge($page_ids, $extra);
-					}
-				}
-				if (empty($page_ids) || WPAL2Int::Check_multiple()) {
-					$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
-					if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
-						$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
-						if (!empty($extra))
-							$page_ids = array_merge($page_ids, $extra);
-					}
-				}
-				if (empty($page_ids))
-					$page_ids[] = 'me';
-			}
+			else
+				$page_ids = WPAL2Int::Get_page_ids($user_ID);
 
 			// Build request
 			$query_array = array(
