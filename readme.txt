@@ -701,12 +701,10 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version (1.154.1) =
-* Improvement: show all walls in easy setup section (#)
-* Improvement: show all added links in post list (#)
+* Improvement: show all walls in easy setup section ([Pro version](http://www.faircode.eu/al2fbpro/) only)
+* Improvement: show all added links in post list ([Pro version](http://www.faircode.eu/al2fbpro/) only)
 * Improvement: show wall names in post list (instead of *Yes*)
 * Improvement: display zero number of comments/likes in post list
-
-# [Pro version](http://www.faircode.eu/al2fbpro/) only
 
 Follow these steps to install the development version:
 
