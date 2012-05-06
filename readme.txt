@@ -709,6 +709,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Improvement: show all added links in post list ([Pro version](http://www.faircode.eu/al2fbpro/) only)
 * Improvement: show wall names in post list (instead of *Yes*)
 * Improvement: display zero number of comments/likes in post list
+* Improvement: more debug info
 
 Follow these steps to install the development version:
 
