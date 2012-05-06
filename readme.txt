@@ -269,6 +269,10 @@ else
 
 This code resets the option *Share with all users on this site*.
 
+To reset the option *Required capability to use plugin*, you can add this:
+
+`update_option(c_al2fb_option_min_cap, 'edit_posts');`
+
 = U23 How can I use the shortcodes? =
 
 Example to show liker names:
