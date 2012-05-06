@@ -268,7 +268,7 @@ function al2fb_debug_info($al2fb) {
 	while ($posts->have_posts()) {
 		$posts->next_post();
 		$userdata = get_userdata($posts->post->post_author);
-		$link_id = get_post_meta($posts->post->ID, c_al2fb_meta_link_id, true);
+		$link_ids = get_post_meta($posts->post->ID, c_al2fb_meta_link_id, false);
 
 		// Selected picture
 		$selected_picture = null;
@@ -349,8 +349,9 @@ function al2fb_debug_info($al2fb) {
 			$info .= ' <a href="' . $post_picture . '" target="_blank">post</a>';
 		if (!empty($avatar_picture))
 			$info .= ' <a href="' . $avatar_picture . '" target="_blank">avatar</a>';
-		if (!empty($link_id))
-			$info .= ' <a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
+		if (!empty($link_ids))
+			foreach ($link_ids as $link_id)
+				$info .= ' <a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" target="_blank">Facebook</a>';
 
 		$info .= ' user=' . $xuser_ID . ' exluded=' . ($excluded ? 'Y' : 'N') . ' integrate=' . (!$nointegrate ? 'Y' : 'N');
 		$info .= ' status=' . $comment_status . ' recent=' . ($recent ? 'Y' : 'N') . ' enabled=' . ($comments_enabled ? 'Y' : 'N');
