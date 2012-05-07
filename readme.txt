@@ -425,6 +425,8 @@ If you don't write an excerpt the site title will be used as message.
 You can also enable the option *Use links API instead of feed API* (tab *Admin*).
 There is one known limitation, see the previous question.
 
+**Due to [a Facebook bug](https://developers.facebook.com/bugs/226481434092661?browse=search_4f0185df08d385a20237575) the links API will not work for groups**
+
 = U38 I see HTML / shortcodes on Facebook =
 
 Try disabling one of these options on the plugin settings tab *Admin*:
@@ -727,12 +729,12 @@ Follow these steps to install the development version:
 * Reports that everything works are also appreciated :-)
 
 = 1.154 =
-* Revert use links API by default because of [this bug](https://developers.facebook.com/bugs/226481434092661?browse=search_4f0185df08d385a20237575)
+* Reverted use links API by default because of a Facebook bug (see the FAQ, question U37)
 
 = 1.153 =
 * Bugfix: upgrade procedure
 * Improvement: use links API by default (to have share links again)
-* Add Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon")
+* Added Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon")
 
 = 1.152 =
 * Bugfix: set user agent for *file_get_contents* too
