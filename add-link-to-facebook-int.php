@@ -178,7 +178,7 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_info_cached($user_ID, $page_id) {
-			$info_key = c_al2fb_transient_cache . md5('inf' . $user_ID);
+			$info_key = c_al2fb_transient_cache . md5('inf' . $user_ID . $page_id);
 			$info = get_transient($info_key);
 			if (get_option(c_al2fb_option_debug))
 				$info = false;
@@ -268,7 +268,7 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get comments and cache
 		static function Get_fb_comments_cached($user_ID, $link_id, $cached = true) {
-			$fb_key = c_al2fb_transient_cache . md5( 'c' . $link_id);
+			$fb_key = c_al2fb_transient_cache . md5( 'c' . $user_ID . $link_id);
 			$fb_comments = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug) || !$cached)
 				$fb_comments = false;
@@ -299,7 +299,7 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get likes and cache
 		static function Get_fb_likes_cached($user_ID, $link_id, $cached = true) {
-			$fb_key = c_al2fb_transient_cache . md5('l' . $link_id);
+			$fb_key = c_al2fb_transient_cache . md5('l' . $user_ID . $link_id);
 			$fb_likes = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug) || !$cached)
 				$fb_likes = false;
@@ -399,7 +399,14 @@ if (!class_exists('WPAL2Int')) {
 				else
 					return false;
 			}
-			else if (function_exists('get_header') && ini_get('allow_url_fopen')) {
+			else if (function_exists('get_headers') && ini_get('allow_url_fopen')) {
+				delete_option(c_al2fb_log_ua);
+				$ua = $_SERVER['HTTP_USER_AGENT'];
+				if (!empty($ua)) {
+					ini_set('user_agent', $ua);
+					update_option(c_al2fb_log_ua, $ua);
+				}
+
 				$headers = get_headers($url, true);
 				if (isset($headers['Location'])) {
 					$location = $headers['Location'];

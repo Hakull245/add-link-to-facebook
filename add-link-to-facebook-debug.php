@@ -50,26 +50,6 @@ function al2fb_debug_info($al2fb) {
 	else
 		$shared_user_ID = get_option(c_al2fb_option_app_share);
 
-	// Get page
-	try {
-		if ($al2fb->Is_authorized($user_ID)) {
-			$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
-			if ($me == null)
-				$page = 'n/a';
-			else {
-				$page = '<a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
-				if (!empty($me->category))
-					$page .= ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
-				$page .= '</a>';
-			}
-		}
-		else
-			$page = 'n/a';
-	}
-	catch (Exception $e) {
-		$page = get_user_meta($user_ID, c_al2fb_meta_page, true) . ': ' . $e->getMessage();
-	}
-
 	// Get picture
 	$picture = '<a href="' . get_user_meta($user_ID, c_al2fb_meta_picture, true) . '" target="_blank">' . get_user_meta($user_ID, c_al2fb_meta_picture, true) . '</a>';
 	$picture_default = '<a href="' . get_user_meta($user_ID, c_al2fb_meta_picture_default, true) . '" target="_blank">' . get_user_meta($user_ID, c_al2fb_meta_picture_default, true) . '</a>';
@@ -154,9 +134,22 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Custom picture URL:</td><td>' . $picture . '</td></tr>';
 	$info .= '<tr><td>Default picture URL:</td><td>' . $picture_default . '</td></tr>';
 
-	$info .= '<tr><td>Page:</td><td>' . $page . '</td></tr>';
+	try {
+		$page_ids = WPAL2Int::Get_page_ids($user_ID);
+		foreach ($page_ids as $page_id) {
+			$pinfo = WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
+			$info .= '<tr><td>Wall:</td><td><a href="' . $pinfo->link . '">';
+			$info .= htmlspecialchars($pinfo->name, ENT_QUOTES, $charset);
+			if (!empty($pinfo->category))
+				$info .= ' - ' . htmlspecialchars($pinfo->category, ENT_QUOTES, $charset);
+			$info .= '</a></td></tr>';
+		}
+	}
+	catch (Exception $e) {
+		$info .= '<tr><td>Page:</td><td>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset) . '</a></td></tr>';
+	}
+
 	$info .= '<tr><td>Use groups:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_use_groups, true) ? 'Yes' : 'No')  . '</td></tr>';
-	$info .= '<tr><td>Group:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_group, true) . '</td></tr>';
 
 	$info .= '<tr><td>Caption:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_caption, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Excerpt:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_msg, true) ? 'Yes' : 'No') . '</td></tr>';
