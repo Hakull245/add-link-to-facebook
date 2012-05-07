@@ -309,7 +309,7 @@ function al2fb_debug_info($al2fb) {
 		// Actual picture
 		$picture = $al2fb->Get_link_picture($posts->post, $al2fb->Get_user_ID($posts->post));
 
-		// Comments
+		// Imported comments
 		$xuser_ID = WPAL2Facebook::Get_user_ID($posts->post);
 		$excluded = WPAL2Facebook::Is_excluded($posts->post);
 		$post_type = $posts->post->post_type;
@@ -325,6 +325,18 @@ function al2fb_debug_info($al2fb) {
 				foreach ($fb_comments->data as $fb_comment)
 					$comment_count++;
 			}
+		}
+
+		// Exported comments
+		$total_count = '-';
+		$stored_count = '-';
+		$stored_comments = get_comments('post_id=' . $posts->post->ID);
+		if ($stored_comments) {
+			$total_count = count($stored_comments);
+			$stored_count = 0;
+			foreach ($stored_comments as $comment)
+				if (get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true))
+					$stored_count++;
 		}
 
 		$info .= '<tr><td>' . $posts->post->post_type . ' #' . $posts->post->ID . ':</td>';
@@ -349,6 +361,7 @@ function al2fb_debug_info($al2fb) {
 		$info .= ' user=' . $xuser_ID . ' exluded=' . ($excluded ? 'Y' : 'N') . ' integrate=' . (!$nointegrate ? 'Y' : 'N');
 		$info .= ' status=' . $comment_status . ' recent=' . ($recent ? 'Y' : 'N') . ' enabled=' . ($comments_enabled ? 'Y' : 'N');
 		$info .= ' count=' . $comment_count;
+		$info .= ' export=' . $stored_count . '/' . $total_count;
 
 		$info .= '</td></tr>';
 	}

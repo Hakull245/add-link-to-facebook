@@ -434,6 +434,13 @@ if (!class_exists('WPAL2Int')) {
 			return $ids[0];
 		}
 
+		static function Get_story_from_link_id($link_id) {
+			if (empty($link_id))
+				return '';
+			$ids = explode('_', $link_id);
+			return (count($ids) > 1 ? $ids[1] : $ids[0]);
+		}
+
 		// Get permalink to added link
 		static function Get_fb_permalink($link_id) {
 			if (empty($link_id))
