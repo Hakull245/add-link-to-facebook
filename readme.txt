@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.2
-Stable tag: 1.152
+Stable tag: 1.155
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -78,7 +78,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Serbian (sr\_RS), thanks!
 * Greek (el\_EL), thanks!
 * Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
-* Danish (da\_DK), thanks
+* Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
@@ -183,8 +183,6 @@ This option is only available *after* you have authorized, since information fro
 
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page* on the tab *Page/group*.
-Be sure to check the option *See all pages*.
-You'll have to re-authorize one more time, because an extra Facebook permission is required for this.
 Note that pages and groups exclude each other (except in the [Pro version](http://www.faircode.eu/al2fbpro/)).
 You can only add links to pages you are owner of.
 
@@ -270,6 +268,10 @@ else
 	delete_option(c_al2fb_option_app_share);`
 
 This code resets the option *Share with all users on this site*.
+
+To reset the option *Required capability to use plugin*, you can add this:
+
+`update_option(c_al2fb_option_min_cap, 'edit_posts');`
 
 = U23 How can I use the shortcodes? =
 
@@ -422,6 +424,8 @@ Enabling the option *Use excerpt as message* will prevent grouping of links.
 If you don't write an excerpt the site title will be used as message.
 You can also enable the option *Use links API instead of feed API* (tab *Admin*).
 There is one known limitation, see the previous question.
+
+**Due to [a Facebook bug](https://developers.facebook.com/bugs/226481434092661?browse=search_4f0185df08d385a20237575) the links API will not work for groups**
 
 = U38 I see HTML / shortcodes on Facebook =
 
@@ -703,7 +707,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* Added Danish (da\_DK) translation
+* ...
 
 Follow these steps to install the development version:
 
@@ -717,6 +721,23 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.155 =
+* Bugfix: caching of Facebook page information
+* Improvement: show all walls in easy setup section ([Pro version](http://www.faircode.eu/al2fbpro/) only)
+* Improvement: show all added links in post list ([Pro version](http://www.faircode.eu/al2fbpro/) only)
+* Improvement: show wall names in post list (instead of *Yes*)
+* Improvement: display zero number of comments/likes in post list
+* Improvement: setting user agent for *get_headers*
+* Improvement: more debug info
+
+= 1.154 =
+* Reverted use links API by default because of a Facebook bug (see the FAQ, question U37)
+
+= 1.153 =
+* Bugfix: upgrade procedure
+* Improvement: use links API by default (to have share links again)
+* Added Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon")
 
 = 1.152 =
 * Bugfix: set user agent for *file_get_contents* too
@@ -740,17 +761,20 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.149 =
-* Bugfix: send user agent to Facebook
-* Improvement: removed option *Skip authorization check*
-* Improvement: no *... commented on ...* when post author comments (except when sharing is enabled by someone else)
-* Updated [Heise socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/) to version 1.4
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.155 =
+One bugfix, six improvements
+
+= 1.154 =
+Revert parts of 1.153
+
+= 1.153 =
+One bugfix, one improvement, new translation
 
 = 1.152 =
 One bugfix
@@ -758,12 +782,11 @@ One bugfix
 = 1.151 =
 Seven new features, seven improvements, translation updates
 
-= 1.149 =
-One bugfix, two improvements, updated library
-
 == Setup guide ==
 
 **If you have more than one Facebook account, either logout completely or login to the correct account before you start.**
+
+**If you want to add links to a fan/community/business page, authorize the plugin with a personal account that has access to the page.**
 
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:

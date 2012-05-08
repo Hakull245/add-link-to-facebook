@@ -144,13 +144,14 @@ function al2fb_render_admin($al2fb)
 
 			// Get page name
 			try {
-				$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
-				if ($me != null) {
+				$page_ids = WPAL2Int::Get_page_ids($user_ID);
+				foreach ($page_ids as $page_id) {
+					$info = WPAL2Int::Get_fb_info_cached($user_ID, empty($page_id) ? 'me' : $page_id);
 					_e('Links will be added to', c_al2fb_text_domain);
-					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
-					if (!empty($me->category))
-						echo ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
-					echo '</a>';
+					echo ' <a href="' . $info->link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset);
+					if (!empty($info->category))
+						echo ' - ' . htmlspecialchars($info->category, ENT_QUOTES, $charset);
+					echo '</a><br />';
 				}
 			}
 			catch (Exception $e) {
@@ -1475,6 +1476,14 @@ function al2fb_render_ads($al2fb) {
 	echo '<div class="al2fb_ads">';
 	echo '<a href="http://www.host1plus.com/vps-hosting/" target="_blank">';
 	echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
+	echo '</a>';
+	echo '</div>';
+
+	// ThemeFuse
+	$ab = (rand(0, 1) ? 'a' : 'b');
+	echo '<div class="al2fb_ads">';
+	echo '<a href="http://themefuse.com/wp-themes-shop/?plugin=add-link-to-facebook&v=' . $ab . '" target="_blank">';
+	echo '<img src="' . plugins_url('ThemeFuse-' . $ab . '.jpg', __FILE__) . '" alt="ThemeFuse">';
 	echo '</a>';
 	echo '</div>';
 

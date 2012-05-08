@@ -9,7 +9,7 @@ define('c_al2fb_option_version', 'al2fb_version');
 define('c_al2fb_option_timeout', 'al2fb_timeout');
 define('c_al2fb_option_nonotice', 'al2fb_nonotice');
 define('c_al2fb_option_min_cap', 'al2fb_min_cap');
-define('c_al2fb_option_no_post_submit', 'c_al2fb_no_post_submit');
+define('c_al2fb_option_no_post_submit', 'al2fb_no_post_submit');
 define('c_al2fb_option_min_cap_comment', 'al2fb_min_cap_comment');
 define('c_al2fb_option_msg_refresh', 'al2fb_comment_refresh');
 define('c_al2fb_option_msg_maxage', 'al2fb_msg_maxage');

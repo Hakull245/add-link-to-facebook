@@ -140,6 +140,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin activation
 		function Activate() {
+			self::Upgrade();
+		}
+
+		function Upgrade() {
 			global $wpdb;
 			$version = get_option(c_al2fb_option_version);
 			if (empty($version))
@@ -192,9 +196,15 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($version <= 8)
 				update_option(c_al2fb_option_nofilter_comments, true);
 
-			update_option(c_al2fb_option_version, 10);
+			if ($version < 10)
+				update_option(c_al2fb_option_version, 10);
 
 			// 11 when authorizing with 10
+
+			if ($version == 11) {
+				//update_option(c_al2fb_option_uselinks, true);
+				update_option(c_al2fb_option_version, 12);
+			}
 		}
 
 		// Handle plugin deactivation
@@ -342,6 +352,8 @@ if (!class_exists('WPAL2Facebook')) {
 				// Handle Facebook authorization
 				WPAL2Int::Authorize();
 			}
+
+			self::Upgrade();
 		}
 
 		// Display admin messages
@@ -967,31 +979,44 @@ if (!class_exists('WPAL2Facebook')) {
 		// Populate post facebook column
 		function Manage_posts_custom_column($column_name, $post_ID) {
 			if ($column_name == 'al2fb') {
-				$link_id = get_post_meta($post_ID, c_al2fb_meta_link_id, true);
-				if ($link_id)
-					echo '<a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" target="_blank">' . __('Yes', c_al2fb_text_domain) . '</a>';
+				$charset = get_bloginfo('charset');
+				$post = get_post($post_ID);
+				$user_ID = self::Get_user_ID($post);
+
+				$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+				if ($link_ids)
+					foreach ($link_ids as $link_id)
+						try {
+							$page_id = WPAL2Int::Get_page_from_link_id($link_id);
+							$link = WPAL2Int::Get_fb_permalink($link_id);
+							$info = WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
+							echo '<a href="' . $link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset) . '</a><br />';
+						}
+						catch (Exception $e) {
+							echo htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset);
+						}
 				else
 					echo '<span>' . __('No', c_al2fb_text_domain) . '</span>';
 
-				if ($link_id) {
-					$post = get_post($post_ID);
-					if (self::Is_recent($post)) {
-						$user_ID = self::Get_user_ID($post);
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				if ($link_id && self::Is_recent($post)) {
+					// Show number of comments
+					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+						$count = 0;
+						$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
+						if (!empty($fb_comments) && !empty($fb_comments->data))
+							$count = count($fb_comments->data);
+						echo '<span>' . $count . ' ' . __('comments', c_al2fb_text_domain) . '</span><br />';
+					}
 
-						// Show number of comments
-						if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-							$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
-							if (!empty($fb_comments) && !empty($fb_comments->data))
-								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('comments', c_al2fb_text_domain) . '</span>';
-						}
-
-						// Show number of likes
-						if ($post->ping_status == 'open' &&
-							get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
-							$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-							if (!empty($fb_likes) && !empty($fb_likes->data))
-								echo '<br /><span>' . count($fb_likes->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
-						}
+					// Show number of likes
+					if ($post->ping_status == 'open' &&
+						get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+						$count = 0;
+						$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
+						if (!empty($fb_likes) && !empty($fb_likes->data))
+							$count = count($fb_likes->data);
+						echo '<span>' . $count . ' ' . __('likes', c_al2fb_text_domain) . '</span><br />';
 					}
 				}
 			}
