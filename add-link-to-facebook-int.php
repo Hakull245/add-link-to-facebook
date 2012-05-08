@@ -141,7 +141,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_application_cached($user_ID) {
-			$app_key = c_al2fb_transient_cache . md5('app' . $user_ID);
+			global $blog_id;
+			$app_key = c_al2fb_transient_cache . md5('app' . $blog_id . $user_ID);
 			$app = get_transient($app_key);
 			if (get_option(c_al2fb_option_debug))
 				$app = false;
@@ -178,7 +179,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_info_cached($user_ID, $page_id) {
-			$info_key = c_al2fb_transient_cache . md5('inf' . $user_ID . $page_id);
+			global $blog_id;
+			$info_key = c_al2fb_transient_cache . md5('inf' . $blog_id . $user_ID . $page_id);
 			$info = get_transient($info_key);
 			if (get_option(c_al2fb_option_debug))
 				$info = false;
@@ -209,7 +211,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_pages_cached($user_ID) {
-			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			global $blog_id;
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $blog_id . $user_ID);
 			$pages = get_transient($pages_key);
 			if (get_option(c_al2fb_option_debug))
 				$pages = false;
@@ -222,7 +225,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Clear_fb_pages_cache($user_ID) {
-			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			global $blog_id;
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $blog_id . $user_ID);
 			delete_transient($pages_key);
 		}
 
@@ -238,7 +242,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_groups_cached($user_ID) {
-			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			global $blog_id;
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $blog_id . $user_ID);
 			$groups = get_transient($groups_key);
 			if (get_option(c_al2fb_option_debug))
 				$groups = false;
@@ -251,7 +256,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		function Clear_fb_groups_cache($user_ID) {
-			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			global $blog_id;
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $blog_id . $user_ID);
 			delete_transient($groups_key);
 		}
 
@@ -268,7 +274,8 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get comments and cache
 		static function Get_fb_comments_cached($user_ID, $link_id, $cached = true) {
-			$fb_key = c_al2fb_transient_cache . md5( 'c' . $user_ID . $link_id);
+			global $blog_id;
+			$fb_key = c_al2fb_transient_cache . md5( 'c' . $blog_id . $user_ID . $link_id);
 			$fb_comments = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug) || !$cached)
 				$fb_comments = false;
@@ -299,7 +306,8 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get likes and cache
 		static function Get_fb_likes_cached($user_ID, $link_id, $cached = true) {
-			$fb_key = c_al2fb_transient_cache . md5('l' . $user_ID . $link_id);
+			global $blog_id;
+			$fb_key = c_al2fb_transient_cache . md5('l' . $blog_id . $user_ID . $link_id);
 			$fb_likes = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug) || !$cached)
 				$fb_likes = false;
@@ -325,8 +333,9 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get messages and cache
 		static function Get_fb_feed_cached($user_ID) {
+			global $blog_id;
 			$page_id = WPAL2Int::Get_page_id($user_ID, false);
-			$fb_key = c_al2fb_transient_cache . md5( 'f' . $user_ID . $page_id);
+			$fb_key = c_al2fb_transient_cache . md5( 'f' . $blog_id . $user_ID . $page_id);
 			$fb_feed = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug))
 				$fb_feed = false;
@@ -466,16 +475,20 @@ if (!class_exists('WPAL2Int')) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
 				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
 					$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
-					if (!empty($extra))
+					if (is_array($extra))
 						$page_ids = array_merge($page_ids, $extra);
+					else if (!empty($extra))
+						$page_ids[] = $extra;
 				}
 			}
 			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
 				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
 					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
-					if (!empty($extra))
+					if (is_array($extra))
 						$page_ids = array_merge($page_ids, $extra);
+					else if (!empty($extra))
+						$page_ids[] = $extra;
 				}
 			}
 			if (empty($page_ids))

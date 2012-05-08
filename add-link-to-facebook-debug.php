@@ -137,7 +137,7 @@ function al2fb_debug_info($al2fb) {
 	try {
 		$page_ids = WPAL2Int::Get_page_ids($user_ID);
 		foreach ($page_ids as $page_id) {
-			$pinfo = WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
+			$pinfo = WPAL2Int::Get_fb_info_cached($user_ID, empty($page_id) ? 'me' : $page_id);
 			$info .= '<tr><td>Wall:</td><td><a href="' . $pinfo->link . '">';
 			$info .= htmlspecialchars($pinfo->name, ENT_QUOTES, $charset);
 			if (!empty($pinfo->category))
