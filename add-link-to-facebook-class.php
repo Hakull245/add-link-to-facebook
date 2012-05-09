@@ -1850,8 +1850,8 @@ if (!class_exists('WPAL2Facebook')) {
 		function The_content($content = '') {
 			global $post;
 
-			// Do not process excerpt
-			if (in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
+			// Do not process feed / excerpt
+			if (is_feed() || in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
 				return $content;
 
 			$user_ID = self::Get_user_ID($post);
