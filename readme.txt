@@ -708,6 +708,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 = Development version =
 * Bugfix: no like button etc, in feed
+* New feature: option to set like box height
 
 Follow these steps to install the development version:
 
