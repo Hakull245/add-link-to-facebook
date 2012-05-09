@@ -186,6 +186,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Combine buttons:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true) ? 'Yes' : 'No') . '</td></tr>';
 
 	$info .= '<tr><td>Like box width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_box_width, true) . '</td></tr>';
+	$info .= '<tr><td>Like box height:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_box_height, true) . '</td></tr>';
 	$info .= '<tr><td>Like box border:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_like_box_border, true) . '</td></tr>';
 	$info .= '<tr><td>Like box no header:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Like box no stream:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true) ? 'Yes' : 'No') . '</td></tr>';

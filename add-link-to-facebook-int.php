@@ -1038,10 +1038,14 @@ if (!class_exists('WPAL2Int')) {
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-				if ($box)
+				if ($box) {
 					$width = get_user_meta($user_ID, c_al2fb_meta_like_box_width, true);
-				else
+					$height = get_user_meta($user_ID, c_al2fb_meta_like_box_height, true);
+				}
+				else {
 					$width = get_user_meta($user_ID, c_al2fb_meta_like_width, true);
+					$height = false;
+				}
 				$action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
 				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
@@ -1129,6 +1133,8 @@ if (!class_exists('WPAL2Int')) {
 						$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
 					$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
 					$content .= ' width="' . (empty($width) ? ($box ? '292' : '450') : $width) . '"';
+					if ($height)
+						$content .= ' height="' . $height . '"';
 					if (!$box) {
 						$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
 						$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';

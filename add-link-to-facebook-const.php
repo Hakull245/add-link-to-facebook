@@ -107,6 +107,7 @@ define('c_al2fb_meta_like_iframe', 'al2fb_like_iframe');
 define('c_al2fb_meta_post_send_button', 'al2fb_post_send_button');
 define('c_al2fb_meta_post_combine_buttons', 'al2fb_post_combine_buttons');
 define('c_al2fb_meta_like_box_width', 'al2fb_box_width');
+define('c_al2fb_meta_like_box_height', 'al2fb_box_height');
 define('c_al2fb_meta_like_box_border', 'al2fb_box_border');
 define('c_al2fb_meta_like_box_noheader', 'al2fb_box_noheader');
 define('c_al2fb_meta_like_box_nostream', 'al2fb_box_nostream');

@@ -770,6 +770,13 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_like_box_height"><?php _e('Height:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input class="al2fb_numeric" id="al2fb_like_box_height" name="<?php echo c_al2fb_meta_like_box_height; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_like_box_height, true); ?>" />
+		<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_box_noheader"><?php _e('Disable like box header:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_box_noheader" name="<?php echo c_al2fb_meta_like_box_noheader; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_box_noheader, true)) echo ' checked="checked"'; ?> />
