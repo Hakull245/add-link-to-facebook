@@ -707,7 +707,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: no like button etc, in feed
 
 Follow these steps to install the development version:
 
