@@ -1,5 +1,6 @@
-# Copyright (C) 2010 Marcel Bokhorst
+# Copyright (C) 2012 Marcel Bokhorst
 # This file is distributed under the same license as the Add Link to Facebook package.
+# Este arquivo é distribuído sob a mesma licença do pacote Add Link to Facebook.
 msgid ""
 msgstr ""
 "Project-Id-Version: Add Link to Facebook\n"
@@ -8,27 +9,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-01-18 09:22+0100\n"
+"PO-Revision-Date: 2012-05-11 05:49+0100\n"
 "Last-Translator: Marcel Bokhorst\n"
-"Language-Team: Bruno Cantuaria\n"
+"Language-Team: Claudio Lessa\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Settings updated"
-msgstr "Configurações atualizadas"
+msgstr "Ajustes atualizados"
 
 msgid "Authorized, go posting!"
-msgstr "Autorizado, comece a publicar!"
+msgstr "Autorizado, comece a postar!"
 
 msgid "needs configuration"
-msgstr "precisa ser configurado"
+msgstr "necessita de configuração"
 
 msgid "needs authorization"
-msgstr "precisa ser autorizado"
+msgstr "necessita de autorização"
 
 msgid "Add Link to Facebook"
-msgstr "Adicionar Link ao Facebook"
+msgstr "Adicione Link ao Facebook"
 
 msgid "Administration"
 msgstr "Administração"
@@ -37,49 +38,49 @@ msgid "Your server may not allow external connections"
 msgstr "Seu servidor pode não permitir conexões externas"
 
 msgid "Easy setup"
-msgstr "Instalação Fácil"
+msgstr "Ajuste fácil"
 
 msgid "Use shared Facebook application:"
-msgstr "Usar aplicação compartilhada do Facebook:"
+msgstr "Use aplicativo compartilhado com Facebook:"
 
 msgid "Simple, but less secure"
 msgstr "Simples, mas menos seguro"
 
 msgid "To get an App ID and App Secret you have to create a Facebook application"
-msgstr "Para ter um App ID e um App Secret você precisa criar uma aplicação no Facebook"
+msgstr "Para obter um App ID e um App Secret você precisa criar um aplicativo no Facebook"
 
 msgid "You have to fill in the following:"
-msgstr "Você precisa preencher isso:"
+msgstr "Você precisa preencher o seguinte:"
 
 msgid "Click here to create"
 msgstr "Clique aqui para criar"
 
 msgid "Anything you like, will appear as \"via ...\" below the message"
-msgstr "O que você quiser, irá aparecer abaixo da mensagem como \"via...\""
+msgstr "Tudo o que você quiser vai aparecer como \"via ... \" abaixo da mensagem"
 
 msgid "Web > Site URL & Domain:"
-msgstr "Web > Site URL & Domínio:"
+msgstr "Web > URL do Site e Domínio:"
 
 msgid "App ID:"
-msgstr "App ID:"
+msgstr "App-ID:"
 
 msgid "App Secret:"
 msgstr "App Secret:"
 
 msgid "Access token:"
-msgstr "Chave de Acesso:"
+msgstr "Token de acesso:"
 
 msgid "App Name:"
 msgstr "Nome do App:"
 
 msgid "Share with all users on this site:"
-msgstr "Compartilhar com todos os usuários deste site:"
+msgstr "Compartilhe com todos os usuários neste site:"
 
 msgid "Additional settings"
-msgstr "Configurações Adicionais"
+msgstr "Ajustes adicionais"
 
 msgid "Link picture:"
-msgstr "Imagem do Link:"
+msgstr "Ilustração do link:"
 
 msgid "WordPress logo"
 msgstr "Logo do WordPress"
@@ -88,76 +89,76 @@ msgid "First attached image"
 msgstr "Primeira imagem anexada"
 
 msgid "Featured post image"
-msgstr "Imagem destacada"
+msgstr "Imagem apresentada no post"
 
 msgid "Let Facebook select"
-msgstr "Deixe o Facebook escolher"
+msgstr "Deixe o Facebook selecionar"
 
 msgid "First image in the post"
-msgstr "Primeira imagem do post"
+msgstr "Primeira imagem no post"
 
 msgid "Custom picture below"
-msgstr "A imagem abaixo"
+msgstr "Ilustração customizada abaixo"
 
 msgid "Custom picture URL:"
-msgstr "URL da imagem:"
+msgstr "URL da ilustração customizada:"
 
 msgid "At least 50 x 50 pixels"
 msgstr "Pelo menos 50 x 50 pixels"
 
 msgid "Add to page:"
-msgstr "Adicionar à página:"
+msgstr "Adicione à página:"
 
 msgid "Add as page owner:"
-msgstr "Adicionar como dono da página:"
+msgstr "Adicione como proprietário da página:"
 
 msgid "Requires manage pages permission"
-msgstr "Requer permissão de gerenciar a página"
+msgstr "Necessita de permissão de administração de páginas"
 
 msgid "Use groups:"
-msgstr "Usar grupos:"
+msgstr "Use grupos:"
 
 msgid "Requires user groups permission"
-msgstr "Requer permissão de grupos de usuário"
+msgstr "Necessita de permissão dos grupos de usuários"
 
 msgid "Add to group:"
-msgstr "Adicionar ao grupo:"
+msgstr "Adicione ao grupo:"
 
 msgid "Use site title as caption:"
-msgstr "Usar título do site como subtitulo:"
+msgstr "Use o título do site como legenda:"
 
 msgid "Use excerpt as message:"
-msgstr "Usar resumo como mensagem:"
+msgstr "Use trecho como mensagem:"
 
 msgid "Clean on deactivate:"
-msgstr "Limpar ao desativar:"
+msgstr "Limpar na desativação:"
 
 msgid "All data, except link id's"
-msgstr "Todos os dados, exceto id de links"
+msgstr "Todos os dados, excepto os id's do link"
 
 msgid "I have donated to this plugin:"
-msgstr "Eu doei para este plugin:"
+msgstr "Eu fiz doação para esse plugin:"
 
 msgid "Administrator options"
-msgstr "Opções do administrador"
+msgstr "Opções de administração"
 
 msgid "Do not display notices:"
-msgstr "Não mostrar avisos:"
+msgstr "Não exibir avisos:"
 
 msgid "Except on this page"
 msgstr "Exceto nesta página"
 
 msgid "Required capability to use plugin:"
-msgstr "Requer autorização para usar o plugin:"
+msgstr "Capacidade exigida para uso do plugin:"
 
 msgid "Debug options"
-msgstr "Opções de Debug"
+msgstr "Opções de debug"
 
 msgid "Use site URL as request URI:"
-msgstr "Usar URL do site como URI solicitante:"
+msgstr "Use o URL do site como URI de solicitação:"
 
 msgid "Do not use cURL:"
-msgstr "Não use cURL:"
+msgstr "Não usar o cURL:"
 
 msgid "Save"
 msgstr "Salvar"
@@ -166,13 +167,13 @@ msgid "Authorization"
 msgstr "Autorização"
 
 msgid "Links will be added to"
-msgstr "Links serão adicionados ao"
+msgstr "Links serão adicionados a"
 
 msgid "Authorize"
 msgstr "Autorizar"
 
 msgid "Privacy in the Sustainable Plugins Sponsorship Network"
-msgstr "Privacidade do Sustainable Plugins Sponsorship Network"
+msgstr "Privacidade na Rede Patrocinadora de Plugins Sustentáveis"
 
 msgid "Resources"
 msgstr "Recursos"
@@ -184,7 +185,7 @@ msgid "Facebook wall"
 msgstr "Mural do Facebook"
 
 msgid "Support page"
-msgstr "Página de ajuda"
+msgstr "Página de apoio"
 
 msgid "About the author"
 msgstr "Sobre o autor"
@@ -196,7 +197,7 @@ msgid "Do not add link to Facebook"
 msgstr "Não adicionar link ao Facebook"
 
 msgid "Debug information"
-msgstr "Informação de Debug"
+msgstr "Informação para debug"
 
 msgid "Yes"
 msgstr "Sim"
@@ -205,10 +206,10 @@ msgid "No"
 msgstr "Não"
 
 msgid "No images in the media library for this post"
-msgstr "Nenhuma imagem enviada para este post"
+msgstr "Não há imagens na coleção de mídia para este post"
 
 msgid "Select link image:"
-msgstr "Selecionar link da imagem:"
+msgstr "Selecione a imagem do link:"
 
 msgid "None"
 msgstr "Nenhum"
@@ -219,41 +220,50 @@ msgstr "Nome:"
 msgid "E-mail:"
 msgstr "E-mail:"
 
+msgid "Forum topic link:"
+msgstr "Link para o tópico do fórum:"
+
+msgid "Mandatory"
+msgstr "Obrigatório"
+
 msgid "Message:"
 msgstr "Mensagem:"
 
 msgid "Send"
 msgstr "Enviar"
 
+msgid "Forum topic link is mandatory"
+msgstr "O link para o tópico do fórum é obrigatório"
+
 msgid "Debug information sent"
-msgstr "Informação de Debug enviada"
+msgstr "Informação do debug enviada"
 
 msgid "Sending debug information failed"
-msgstr "Falha ao enviar a informação de debug"
+msgstr "O envio da informação do debug falhou"
 
 msgid "Use short URL:"
-msgstr "Usar URL curta:"
+msgstr "Use um URL curto:"
 
 msgid "If available"
 msgstr "Se disponível"
 
 msgid "Delete existing Facebook link"
-msgstr "Apagar link existente no Facebook"
+msgstr "Apagar o link existente para o Facebook"
 
 msgid "Number of sentences to use:"
-msgstr "Número de setenças a usar:"
+msgstr "Número de sentenças para usar:"
 
 msgid "Leave blank to let Facebook choose"
-msgstr "Deixe em branco para que o Facebook escolha"
+msgstr "Deixar em branco para permitir o fechamento do Facebook"
 
 msgid "Text trailer:"
-msgstr "Trailer do texto"
+msgstr "Texto de acompanhamento:"
 
 msgid "For example \"Read more ...\""
-msgstr "Exemplo \"Leia Mais...\""
+msgstr "Por exemplo \"Leia mais ...\""
 
 msgid "Keep hyperlinks:"
-msgstr "Manter hiperlinks:"
+msgstr "Mantenha os hiperlinks:"
 
 msgid "The hyperlink title will be removed"
 msgstr "O título do hiperlink será removido"
@@ -261,17 +271,20 @@ msgstr "O título do hiperlink será removido"
 msgid "Integrate comments from Facebook:"
 msgstr "Integrar comentários do Facebook:"
 
+msgid "Comment trailer:"
+msgstr "Comentário de acompanhamento:"
+
 msgid "Integrate likes from Facebook:"
-msgstr "Integrar Curtir do Facebook:"
+msgstr "Integrar o 'curtir' do Facebook:"
 
 msgid "Show likers below the post text:"
-msgstr "Mostrar quem curtiu abaixo do texto:"
+msgstr "Exibir quem 'curtiu' abaixo do texto do post:"
 
 msgid "Show Facebook like button:"
-msgstr "Mostrar botão de Curtir do Facebook:"
+msgstr "Exibir o botão de 'curtir' do Facebook:"
 
 msgid "Use Open Graph protocol:"
-msgstr "Usar protocolo do Open Graph:"
+msgstr "Usar o protocolo Open Graph:"
 
 msgid "Documentation"
 msgstr "Documentação"
@@ -283,34 +296,36 @@ msgid "Liked this post"
 msgstr "Curtiu este post"
 
 msgid "Refresh Facebook comments every:"
-msgstr "Atualizar comentários do Facebook a cada:"
+msgstr "Renovar os comentários do Facebook a cada:"
 
 msgid "Minutes"
 msgstr "Minutos"
 
 msgid "Default every 10 minutes"
-msgstr "Padrão é de 10 minutos"
+msgstr "Padrão a cada dez minutos"
 
 msgid "Maximum Facebook text length:"
-msgstr "Tamanho máximo do texto no Facebook:"
+msgstr "Extensão máxima do texto do Facebook:"
 
 msgid "Characters"
 msgstr "Caracteres"
 
 msgid "Default 256 characters"
-msgstr "Padrão de 256 caracteres"
+msgstr "Padrão 256 caracteres"
 
 msgid "liked this post"
-msgstr "curtiu este post"
+msgid_plural "liked this post"
+msgstr[0] "curti este post"
+msgstr[1] "curtimos este post"
 
 msgid "Add 'Share' link:"
-msgstr "Adicionar link 'Compartilhar':"
+msgstr "Adicionar o link 'Compartilhar':"
 
 msgid "Share"
-msgstr "Compartilhas"
+msgstr "Compartilhar"
 
 msgid "Default picture URL:"
-msgstr "URL da imagem padrão:"
+msgstr "URL da ilustração padrão:"
 
 msgid "Default WordPress logo"
 msgstr "Logo padrão do WordPress"
@@ -322,16 +337,16 @@ msgid "Standard"
 msgstr "Padrão"
 
 msgid "Button with count"
-msgstr "Botão com contador"
+msgstr "Botão com contagem"
 
 msgid "Box with count"
-msgstr "Box com contador"
+msgstr "Caixa com contagem"
 
 msgid "Faces:"
 msgstr "Rostos:"
 
 msgid "Width:"
-msgstr "Width:"
+msgstr "Largura:"
 
 msgid "Pixels"
 msgstr "Pixels"
@@ -346,10 +361,10 @@ msgid "Recommend"
 msgstr "Recomendar"
 
 msgid "Font:"
-msgstr "Fonte:"
+msgstr "Font:"
 
 msgid "Color scheme:"
-msgstr "Esquema de Cor:"
+msgstr "Esquema de cor:"
 
 msgid "Light"
 msgstr "Claro"
@@ -361,58 +376,58 @@ msgid "Use publish_post action:"
 msgstr "Usar ação publish_post:"
 
 msgid "Link to:"
-msgstr "Linkar para:"
+msgstr "Conectar com:"
 
 msgid "Default the post or page"
-msgstr "Padrão para o post ou página"
+msgstr "Padronizar o post ou a página"
 
 msgid "Do not show on the home page:"
-msgstr "Não mostrar na página inicial:"
+msgstr "Não exibir na home page:"
 
 msgid "Do not show on posts:"
-msgstr "Não mostrar em posts:"
+msgstr "Não exibir nos posts:"
 
 msgid "Do not show on pages:"
-msgstr "Não mostrar em páginas:"
+msgstr "Não exibir nas páginas:"
 
 msgid "Exclude these custom post types:"
-msgstr "Excluir esses tipos de posts:"
+msgstr "Excluir estes tipos customizados de post:"
 
 msgid "Separate by commas"
 msgstr "Separar por vírgulas"
 
 msgid "Do not verify the peer's certificate:"
-msgstr "Não verificar o certificado:"
+msgstr "Não verificar o certificado do peer:"
 
 msgid "Try this in case of cURL error 60"
-msgstr "Tente isso no caso de erro cURL 60"
+msgstr "Tente isso no caso de um erro 60 do cURL"
 
 msgid "Add links for new pages:"
 msgstr "Adicionar links para novas páginas:"
 
 msgid "Do not show in archives:"
-msgstr "Não mostrar em arquivos:"
+msgstr "Não exibir em arquivos:"
 
 msgid "Do not show in categories:"
-msgstr "Não mostrar em categorias:"
+msgstr "Não exibir em categorias:"
 
 msgid "Show at the top of the post:"
-msgstr "Mostrar no topo dos posts:"
+msgstr "Exibir no topo do post:"
 
 msgid "Open Graph protocol <em>og:type</em>:"
 msgstr "Protocolo Open Graph <em>og:type</em>:"
 
 msgid "Do not add link by default:"
-msgstr "Não adicionar link por padrão:"
+msgstr "Não adicionar link como padrão:"
 
 msgid "Don't show a summary in the post list:"
-msgstr "Não mostrar um sumário na lista de posts:"
+msgstr "Não exibir um sumário na lista de posts:"
 
 msgid "comments"
 msgstr "comentários"
 
 msgid "likes"
-msgstr "curtiram"
+msgstr "curtições"
 
 msgid "Exclude these categories:"
 msgstr "Excluir essas categorias:"
@@ -427,37 +442,40 @@ msgid "Image from User Photo plugin"
 msgstr "Imagem do plugin User Photo"
 
 msgid "Facebook character encoding:"
-msgstr "Codificação de caracteres do Facebook:"
+msgstr "Codificação do caractere do Facebook:"
 
 msgid "Default UTF-8; do not change if no need"
 msgstr "Padrão UTF-8; não altere se não for necessário"
 
 msgid "Do not add like button"
-msgstr "Não adicionar botão curtir"
+msgstr "Não adicionar o botão curtir"
 
 msgid "I have rated this plugin:"
-msgstr "Eu avaliei este plugin:"
+msgstr "Eu avaliei esse plugin:"
 
 msgid "If you like the Add Link to Facebook plugin, please rate it on <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option \"I have rated this plugin\" on the <a href=\"[settings]\">settings page</a>."
-msgstr "Se você gostou do plugin Add Link to Facebook, por favor, avalie ele em <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Se a avaliação média estiver baixa, não fará sentindo continuar o desenvolvimento deste plugin.<br />Você pode remover esse aviso marcando a opção \"Eu avaliei esse plugin\" nas <a href=\"[settings]\">páginas de configuração</a>."
+msgstr "Se você gostou do plugin Add Link to Facebook, por favor dê sua avaliação no <a href=\"[wordpress]\" target=\"_blank\">wordpress.org</a>.<br />Se a avaliação for baixa, não faz mais sentido dar suporte a esse plugin.<br />Você pode desativar esse aviso marcando a opção \"Eu avaliei esse plugin\" em <a href=\"[settings]\">ajustes página</a>."
 
 msgid "Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you've rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin again, I'd appreciate it. Thanks!"
-msgstr "Devido a um problema nos sistemas do WordPress.org, as avaliações anteriores do plugin foram perdidas.<br />Se você avaliou este plugin no passado, sua avaliação foi removida acidentalmente.<br />Então, se puder gentilmente avaliar novamente o plugin, eu agradeceria muito. Obrigado!"
+msgstr "Devido a um problema nos sistemas do WordPress.org, avaliações anteriores do plugin foram perdidas.<br />Se você avaliou o plugin anteriormente, sua avaliação foi acidentalmente removida.<br />Se você puder fazer a gentileza de avaliar o plugin novamente, eu agradeço. Muito obrigado!"
+
+msgid "Generated excerpt"
+msgstr "Trecho gerado"
 
 msgid "Custom excerpt"
-msgstr "Resumo customizado"
+msgstr "Trecho customizado"
 
 msgid "Use iframe in stead of XFBML:"
-msgstr "Usar iframe no lugar do XFBML:"
+msgstr "Usar iframe em vez de XFBML:"
 
 msgid "Post WordPress comments back to Facebook:"
-msgstr "Enviar comentários do WordPress para o Facebook:"
+msgstr "Postar os comentários do WordPress no Facebook:"
 
 msgid "commented on"
-msgstr "comentado em"
+msgstr "comentado no"
 
 msgid "Show Facebook send button:"
-msgstr "Mostrar botão enviar:"
+msgstr "Exibir o botão enviar do Facebook:"
 
 msgid "Do not integrate comments"
 msgstr "Não integrar comentários"
@@ -466,52 +484,52 @@ msgid "Copy comments from Facebook to WordPress:"
 msgstr "Copiar comentários do Facebook para o WordPress:"
 
 msgid "Enables for example editing of Facebook comments"
-msgstr "Habilitar por exemplo editar os comentários do Facebook"
+msgstr "Permite por exemplo a edição de comentários do Facebook"
 
 msgid "Show Facebook like button"
-msgstr "Mostrar botão curtir do Facebook"
+msgstr "Exibir o botão curtir do Facebook"
 
 msgid "Show Facebook send button"
-msgstr "Mostrar botão enviar do Facebook"
+msgstr "Exibir o botão enviar do Facebook"
 
 msgid "Combine Facebook like and send buttons:"
-msgstr "Combinar botões curtir e enviar do Facebook"
+msgstr "Combinar os botões curtir e enviar:"
 
 msgid "Clear error messages"
-msgstr "Limpar mensagens de erro"
+msgstr "Limpar as mensagens de erro"
 
 msgid "Show Facebook image/link"
-msgstr "Mostrar imagem/link do Facebook"
+msgstr "Exibir imagem/link do Facebook"
 
 msgid "Do not link to Facebook comment author:"
-msgstr "Não linkar para o autor do comentário no Facebook:"
+msgstr "Não conectar ao autor do comentário no Facebook:"
 
 msgid "Disables displaying of Facebook avatars too"
-msgstr "Desabilitar também os avatares do Facebook"
+msgstr "Desabilita a exibição dos avatares do Facebook também"
 
 msgid "and navigate to '<em>Apps</em>' and then to '<em>Create New App</em>'"
-msgstr "e vá no menu '<em>Aplicativos</em>' e então até '<em>Criar Novo Aplicativos</em>'"
+msgstr "e navegar para '<em>Apps</em>' e então para '<em>Create New App</em>'"
 
 msgid "Facebook locale:"
-msgstr "Língua do Facebook:"
+msgstr "Localização do Facebook:"
 
 msgid "Do not change if no need"
-msgstr "Não trocar se não precisar"
+msgstr "Não alterar se não for necessário"
 
 msgid "Link Facebook comment to:"
-msgstr "Linkar comentários do Facebook para:"
+msgstr "Conectar o comentário do Facebook a:"
 
 msgid "Profile author"
-msgstr "Perfil do autor"
+msgstr "Autor do perfil"
 
 msgid "Added link"
-msgstr "Link adicoinado"
+msgstr "Link adicionado"
 
 msgid "Link on Facebook"
 msgstr "Link no Facebook"
 
 msgid "Link picture"
-msgstr "Imagem do Link"
+msgstr "Ilustração do link"
 
 msgid "Facebook page"
 msgstr "Página do Facebook"
@@ -520,76 +538,79 @@ msgid "Facebook group"
 msgstr "Grupo do Facebook"
 
 msgid "Link appearance"
-msgstr "Aparência do Link"
+msgstr "Aparência do link"
 
 msgid "Facebook comments"
 msgstr "Comentários do Facebook"
 
 msgid "Facebook like button"
-msgstr "Botão curtir do Facebook"
+msgstr "Botão 'curtir' do Facebook"
 
 msgid "Miscelaneous settings"
-msgstr "Outras Configurações"
+msgstr "Ajustes diversos"
 
 msgid "Maximum text length with trailer:"
-msgstr "Tamanho máximo do texto com trailer:"
+msgstr "Extensão máxima do texto com acompanhamento:"
 
 msgid "Default 10,000 characters"
-msgstr "Padrão de 10.000 caracteres"
+msgstr "Padrão 10,000 caracteres"
+
+msgid "Maximum comment length with trailer:"
+msgstr "Extensão máxima do comentário com acompanhamento:"
 
 msgid "Facebook communication timeout:"
-msgstr "Limite de tempo de resposta do Facebook"
+msgstr "Timeout de comunicação do Facebook:"
 
 msgid "Seconds"
 msgstr "Segundos"
 
 msgid "Default 15 seconds"
-msgstr "Padrão de 15 segundos"
+msgstr "Padrão 15 segundos"
 
 msgid "Please check if this is a correct, reachable e-mail address"
-msgstr "Por favor confira se este email é válido e utilizado"
+msgstr "Por favor verifique se este é um endereço de e-mail correto e alcançável"
 
 msgid "Please describe your problem, even if you did before"
-msgstr "Por favor, descreva seu problema, mesmo se já tiver feito"
+msgstr "Por favor descreva seu problema, mesmo que já o tenha feito antes"
 
 msgid "Show Facebook comments"
-msgstr "Mostrar comentários do Facebook"
+msgstr "Exibir comentários do Facebook"
 
 msgid "Show Facebook messages"
-msgstr "Mostrar mensagens do Facebook"
+msgstr "Exibir mensagens do Facebook"
 
 msgid "Appearance depends on your theme!"
-msgstr "Aparência depende do seu tema!"
+msgstr "A aparência depende do seu tema!"
 
 msgid "Additional styling rules (CSS):"
-msgstr "Regras adicionais de CSS:"
+msgstr "Regras de estilo adicionais (CSS):"
 
 msgid "Please be aware that comment integration or showing Facebook messages in the widget could harm the privacy of other Facebook users!"
-msgstr "Esteja ciente de que a integração de comentários ou mostrar mensagens do Facebook no widget pode ferir a privacidade de outros usuários do Facebook!"
+msgstr "Por favor, esteja ciente de que a integração de comentários ou a exibição de mensagens do Facebook no widget podem prejudicar a privacidade de outros usuários do Facebook!"
 
 msgid "should be authorized again to show Facebook messages in the widget"
-msgstr "deve ser autorizado novamente para mostrar mensagens do Facebook no widget"
+msgstr "deve ser autorizado novamente para exibir mensagens do Facebook no widget"
 
 msgid "Plugin is authorized"
 msgstr "O plugin está autorizado"
 
 msgid "Show comments on messages"
-msgstr "Mostrar comentários nas mensagens"
+msgstr "Exibir comentários sobre as mensagens"
 
 msgid "Update existing Facebook link"
-msgstr "Atualizar o link existente do Facebook"
+msgstr "Atualizar o link do Facebook existente"
 
 msgid "Comments and likes will be lost!"
-msgstr "Comentários e Curtidas serão perdidos!"
+msgstr "Comentários e curtições serão perdidos!"
 
 msgid "Show Facebook like box"
-msgstr "Mostrar a Like Box do Facebook"
+msgstr "Exibir a caixa curtir do Facebook"
 
 msgid "Disable like box header:"
-msgstr "Remover o cabeçalho da Like Box:"
+msgstr "Desativar o cabeçalho da caixa curtir:"
 
 msgid "Disable like box stream:"
-msgstr "Remover o histórico da Like Box:"
+msgstr "Desativar o stream da caixa curtir:"
 
 msgid "Avatar of author"
 msgstr "Avatar do autor"
@@ -598,40 +619,40 @@ msgid "Facebook administrators:"
 msgstr "Administradores do Facebook:"
 
 msgid "Separate multiple administrators by a comma without spaces"
-msgstr "Separar vários administradores por uma vírgula sem espaços"
+msgstr "Separe os diversos administradores por uma vírgula sem espaços"
 
 msgid "Facebook like box"
-msgstr "Like Box do Facebook"
+msgstr "Caixa curtir do Facebook"
 
 msgid "Border color:"
-msgstr "Cores da Borda:"
+msgstr "Cor da borda:"
 
 msgid "Facebook common"
-msgstr "Comum do Facebook"
+msgstr "Facebook conjunto"
 
 msgid "Facebook comments plugin"
 msgstr "Plugin de comentários do Facebook"
 
 msgid "Number of posts:"
-msgstr "Número de posts;"
+msgstr "Número de posts:"
 
 msgid "Show Facebook comments plugin"
-msgstr "Mostrar plugin de comentários do Facebook"
+msgstr "Exibir o plugin de comentários do Facebook"
 
 msgid "Go to dashboard"
-msgstr "Ir ao Painel"
+msgstr "Ir para o dashboard"
 
 msgid "Do not collect statistics:"
-msgstr "Não coletar estatísticas"
+msgstr "Não coletar estatísticas:"
 
 msgid "Execute shortcodes in widgets:"
-msgstr "Executar shortcodes nos widgets:"
+msgstr "Executar os shortcodes nos widgets:"
 
 msgid "Show Facebook face pile"
-msgstr "Mostrar o Face Pile do Facebook"
+msgstr "Exibir o face pile do Facebook"
 
 msgid "Facebook face pile"
-msgstr "Face Pile do Facebook"
+msgstr "Face pile do Facebook"
 
 msgid "Size:"
 msgstr "Tamanho:"
@@ -643,19 +664,19 @@ msgid "Large"
 msgstr "Grande"
 
 msgid "Maximum count of rows:"
-msgstr "Quantidade máxima de linhas:"
+msgstr "Contagem máxima de fileiras:"
 
 msgid "Show Facebook registration"
-msgstr "Mostrar registrar no Facebook"
+msgstr "Exibir registro do Facebook"
 
 msgid "Show Facebook login"
-msgstr "Mostrar logar no Facebook"
+msgstr "Exibir o login do Facebook"
 
 msgid "WordPress user name"
 msgstr "Nome de usuário do WordPress"
 
 msgid "Facebook registration failed"
-msgstr "Failha no registro com o Facebook"
+msgstr "O registro no Facebook falhou"
 
 msgid "E-mail address in use"
 msgstr "Endereço de e-mail em uso"
@@ -664,49 +685,49 @@ msgid "User not found"
 msgstr "Usuário não encontrado"
 
 msgid "Could not verify Facebook login"
-msgstr "Não foi possível logar no Facebook"
+msgstr "Não pôde verificar o login no Facebook"
 
 msgid "Facebook login"
-msgstr "Logar no Facebook"
+msgstr "Login no Facebook"
 
 msgid "Registration width:"
-msgstr "Width do Registro:"
+msgstr "Largura do registro:"
 
 msgid "Login width:"
-msgstr "Width do Login:"
+msgstr "Largura do login:"
 
 msgid "Login registration URL:"
-msgstr "URL de Registro:"
+msgstr "URL do registro de login:"
 
 msgid "Login redirect URL:"
-msgstr "URL de Redirecionamento do Login:"
+msgstr "URL do redirecionamento de login:"
 
 msgid "User registration disabled"
-msgstr "Registro de usuários desabilitado"
+msgstr "Registro de usuário desativado"
 
 msgid "Facebook e-mail address missing"
-msgstr "Faltando e-mail do Facebook"
+msgstr "Endereço de e-mail do Facebook inexistente"
 
 msgid "Facebook ID"
 msgstr "ID do Facebook"
 
 msgid "Facebook user ID missing"
-msgstr "Faltando ID de Usuário do Facebook"
+msgstr "ID de usuário do Facebook inexistente"
 
 msgid "Text or HTML when logged in:"
 msgstr "Texto ou HTML quando logado:"
 
 msgid "Custom text"
-msgstr "Texto customizado:"
+msgstr "Texto customizado"
 
 msgid "Disable"
-msgstr "Desabilitado"
+msgstr "Desativar"
 
 msgid "I don't want to support this plugin with the Sustainable Plugins Sponsorship Network:"
-msgstr "Não quero colaborar com este plugin com a Sustainable Plugins Sponsorship Network:"
+msgstr "Não quero dar suporte a este plugin com a Rede de Patrocínio de Plugins Sustentáveis:"
 
 msgid "What is my Facebook ID?"
-msgstr "Qual é meu ID do Facebook?"
+msgstr "Qual é o meu ID no Facebook?"
 
 msgid "Do not execute shortcodes for texts:"
 msgstr "Não executar shortcodes para textos:"
@@ -718,46 +739,46 @@ msgid "Do not execute filters for comments:"
 msgstr "Não executar filtros para comentários:"
 
 msgid "Only this user can access the settings:"
-msgstr "Somente este usuário pode acessar essas configurações:"
+msgstr "Somente este usuário pode acessar os ajustes:"
 
 msgid "Facebook activity feed"
-msgstr "Feed de Atividades do Facebook:"
+msgstr "Feed de atividades do Facebook"
 
 msgid "Height:"
-msgstr "Height:"
+msgstr "Altura:"
 
 msgid "Show header:"
-msgstr "Mostrar cabeçalho:"
+msgstr "Exibir cabeçalho:"
 
 msgid "Show recommendations:"
-msgstr "Mostrar recomendações"
+msgstr "Exibir recomendações:"
 
 msgid "Show Facebook activity feed"
-msgstr "Mostrar feed de atividade do Facebook:"
+msgstr "Exibir feed de atividades do Facebook"
 
 msgid "Refresh Facebook comments for:"
-msgstr "Atualizar comentários do Facebook por:"
+msgstr "Renovar os comentários do Facebook para:"
 
 msgid "Days"
 msgstr "Dias"
 
 msgid "Default 7 days"
-msgstr "Padrão de 7 dias"
+msgstr "Padrão 7 dias"
 
 msgid "Required capability to view Facebook comments:"
-msgstr "Requer capacidade de ver comentários do Facebook:"
+msgstr "Capacidade exigida para ver os comentários do Facebook:"
 
 msgid "Add meta box for these custom post types:"
-msgstr "Adicionar meta box para esses tipos de posts:"
+msgstr "Adicionar meta box para esses tipos de post customizado:"
 
 msgid "Use Heise social share privacy:"
-msgstr "Usar privacidade de compartilhamento social Heise:"
+msgstr "Usar a privacidade de compartilhamento social Heise:"
 
 msgid "Information"
 msgstr "Informação"
 
 msgid "Refresh Facebook comments in the background:"
-msgstr "Atualizar comentários do Facebook em plano de fundo:"
+msgstr "Renovar os comentários do Facebook no background:"
 
 msgid "Using Wordress cron"
 msgstr "Usando cron do WordPress"
@@ -766,25 +787,28 @@ msgid "Heise privacy policy URL:"
 msgstr "URL da política de privacidade Heise:"
 
 msgid "Display automatically after post:"
-msgstr "Mostrar automaticamente após o post:"
+msgstr "Exibir automaticamente depois do post:"
 
 msgid "Priority filter 'the_content':"
-msgstr "Prioridade do filtro 'the_content':"
+msgstr "Filtro prioritário 'o_conteúdo':"
 
 msgid "Upgrade deactivates the plugin!"
-msgstr "Atualizar desativa o plugin!"
+msgstr "A atualização desativa o plugin!"
 
 msgid "See all pages:"
 msgstr "Ver todas as páginas:"
 
+msgid "Check this too if you want to add as page owner"
+msgstr "Marque esse também se você quiser adicionar como dono da página"
+
 msgid "Do not include Facebook script:"
-msgstr "Não inclua o script do Facebook:"
+msgstr "Não incluir o script do Facebook:"
 
 msgid "In case of conflicts with other Facebook plugins"
-msgstr "Em caso de conflitos com outros plugins do Facebook"
+msgstr "Em caso de conflito com outros plugins do Facebook"
 
 msgid "Picture"
-msgstr "Imagme"
+msgstr "Ilustração"
 
 msgid "Page/group"
 msgstr "Página/grupo"
@@ -796,59 +820,179 @@ msgid "Comments"
 msgstr "Comentários"
 
 msgid "Like button"
-msgstr "Botão Curtir"
+msgstr "Botão curtir"
 
 msgid "Like box"
-msgstr "Like Box"
+msgstr "Caixa curtir"
 
 msgid "Comments plugin"
-msgstr "Plugin de Comentários"
+msgstr "Plugin de comentários"
 
 msgid "Face pile"
-msgstr "Face Pile"
+msgstr "Face pile"
 
 msgid "Login"
 msgstr "Login"
 
 msgid "Activity feed"
-msgstr "Feed de Atividades"
+msgstr "Feed de atividades"
 
 msgid "Common"
-msgstr "Comum"
+msgstr "Conjunto"
 
 msgid "Misc."
-msgstr "Outros"
+msgstr "Diversos"
 
 msgid "Admin"
-msgstr "Administração"
+msgstr "Admin"
 
 msgid "First authorize the plugin"
 msgstr "Primeiro autorize o plugin"
 
 msgid "Only for administrators"
-msgstr "Somente para administradores"
+msgstr "Só para administradores"
 
 msgid "Setup guide & user manual"
-msgstr "Guia de Instalação & Manual de Usuário"
+msgstr "Guia de ajustes e manual do usuário"
 
 msgid "No tab pages"
-msgstr "Não usar abas"
+msgstr "Sem páginas de aba"
 
 msgid "Debug:"
 msgstr "Debug:"
 
 msgid "Use category ID's"
-msgstr "Usar ID's das categorias"
+msgstr "Use ID's de categoria"
 
 msgid "Use login names"
-msgstr "Usar nomes de login"
+msgstr "Use nomes de login"
 
 msgid "Donate in EUR"
-msgstr "Doar em Euro"
+msgstr "Doar em Euros"
 
 msgid "Show"
-msgstr "Mostrar"
+msgstr "Exibir"
 
 msgid "Did you check if your problem is described in <a href=\"[FAQ]\" target=\"_blank\">the FAQ</a> ?"
-msgstr "Já conferiu se seu problema não está descrito no <a href=\"[FAQ]\" target=\"_blank\">FAQ</a> ?"
+msgstr "Você já verificou se o seu problema está descrito em <a href=\"[FAQ]\" target=\"_blank\">de FAQ</a> ?"
+
+msgid "Default 'article'"
+msgstr "'artigo' padrão"
+
+msgid "Maximum number:"
+msgstr "Número máximo:"
+
+msgid "Show link to the added link on Facebook:"
+msgstr "Exibir o link para o link adicionado no Facebook:"
+
+msgid "Add also to pages:"
+msgstr "Adicionar também às páginas:"
+
+msgid "This option is only available in"
+msgstr "Esta opção está disponível somente em"
+
+msgid "Code accepted"
+msgstr "Código aceito"
+
+msgid "No asynchronous Facebook script:"
+msgstr "Não há script assíncrono do Facebook:"
+
+msgid "Does not work for groups"
+msgstr "Não funciona para grupos"
+
+msgid "Privacy:"
+msgstr "Privacidade:"
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "Everyone"
+msgstr "Todo mundo"
+
+msgid "All friends"
+msgstr "Todos os amigos"
+
+msgid "Network friends"
+msgstr "Amigos da rede"
+
+msgid "Friends of friends"
+msgstr "Amigos dos amigos"
+
+msgid "Only me"
+msgstr "Somente eu"
+
+msgid "Only works for your personal wall"
+msgstr "Funciona somente para seu mural pessoal"
+
+msgid "Personal"
+msgstr "Pessoal"
+
+msgid "Hide post submit additions too:"
+msgstr "Ocultar também acréscimos ao ALF acima do botão Atualizar/Publicar"
+
+msgid "Pro version"
+msgstr "Versão Pro"
+
+msgid "Add also to groups:"
+msgstr "Adicionar também aos grupos:"
+
+msgid "Website"
+msgstr "Site da Web"
+
+msgid "Use links API instead of feed API:"
+msgstr "Use API dos links em vez do API dos feeds:"
+
+msgid "Extra URL parameter"
+msgstr "Parâmetro do URL extra"
+
+msgid "For example for Google Analytics"
+msgstr "Por exemplo para o Google Analytics"
+
+msgid "Show everywhere using my settings"
+msgstr "Exibir em todo lugar usando meus ajustes"
+
+msgid "Do not send pingbacks and trackbacks:"
+msgstr "Não enviar pingbacks e trackbacks:"
+
+msgid "Video URL"
+msgstr "URL do vídeo"
+
+msgid "Some friends:"
+msgstr "Alguns amigos:"
+
+msgid "Comma-separated list of Facebook user IDs and friend list IDs"
+msgstr "Lista separada por vírgulas dos IDs dos usuários do Facebook e dos IDs da lista de amigos"
+
+msgid "URL news feed icon:"
+msgstr "Ícone do URL do feed de notícias:"
+
+msgid "Allow adding links with login:"
+msgstr "Permitir o acréscimo de links com login:"
+
+msgid "Group"
+msgstr "Grupo"
+
+msgid "Not logged in with Facebook (anymore)"
+msgstr "Não está (mais) logado no Facebook"
+
+msgid "Registration success URL:"
+msgstr "URL do registro bem sucedido:"
+
+msgid "Use bundled CA certificates:"
+msgstr "Usar os certificados agrupados de CA:"
+
+msgid "Due to limitations of Facebook not all links might work"
+msgstr "Devido a limitações do Facebook, nem todos os links podem funcionar"
+
+msgid "Picture size sent to Facebook:"
+msgstr "Tamanho da ilustração enviada ao Facebook:"
+
+msgid "thumbnail"
+msgstr "Thumbnail"
+
+msgid "medium"
+msgstr "Médio"
+
+msgid "large"
+msgstr "Grande"
 
