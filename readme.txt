@@ -73,7 +73,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive") and [Yossi Jana](http://www.webist.co.il "Yossi Jana"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
-* Brazilian Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria") and [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa"), thanks!
+* (Brazilian) Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria") and [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa"), thanks!
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 * Serbian (sr\_RS), thanks!
 * Greek (el\_EL), thanks!
@@ -152,8 +152,8 @@ You are adviced to let the plugin select an image (the default setting is to sel
 
 = U06 Why doesn't Facebook display my link picture? =
 
-Maybe because it is smaller than 50 x 50 pixels.
-Facebook might also have had trouble accessing the image.
+Maybe because the image is too small or Facebook had trouble accessing the image.
+Another cause could be that you disabled the Open Graph Protocol (a plugin option enabled be default).
 
 = U07 I don't want a link picture =
 
@@ -709,7 +709,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: no like button etc, in feed
 * New feature: option to set like box height
-* Updated Brazilian Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
+* Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
 
 Follow these steps to install the development version:
 
