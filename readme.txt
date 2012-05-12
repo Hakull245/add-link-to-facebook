@@ -695,6 +695,8 @@ This problem can probably be solved by authorizing the plugin again.
 
 You can open a topic in the [support forum](http://forum.faircode.eu/).
 
+**From May 15, 2012 only the [Pro version](http://www.faircode.eu/al2fbpro/) will be supported**
+
 = S02 How can I send the debug information? =
 
 Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
@@ -747,25 +749,6 @@ Follow these steps to install the development version:
 = 1.152 =
 * Bugfix: set user agent for *file_get_contents* too
 
-= 1.151 =
-* New feature: specify video URL in post editor
-* New feature: filter *al2fb_video* (default YouTube/Vimeo URL normalization)
-* New feature: privacy: some friends (or friend list)
-* New feature: URL news feed icon (does anybody know where this appears?)
-* New feature: Allow users logged into WordPress with their Facebook account to add links (option, experimental!)
-* New feature: new filter *al2fb_gmt_offset*
-* New feature: select image size (only for selected, attached or featured image)
-* Improvement: Facebook registration allowed for existing WordPress users (username/password will be ignored)
-* Improvement: Facebook registration redirect URL configurable
-* Improvement: validate Facebook registration
-* Improvement: use bundled CA certificates (option)
-* Improvement: use *get_bloginfo* instead of *WPLANG*
-* Improvement: debug info for comment import
-* Improvement: removed confusing option *See all pages*
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -783,9 +766,6 @@ One bugfix, one improvement, new translation
 
 = 1.152 =
 One bugfix
-
-= 1.151 =
-Seven new features, seven improvements, translation updates
 
 == Setup guide ==
 
