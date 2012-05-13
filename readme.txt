@@ -12,9 +12,6 @@ Automatically add links to published posts or pages to your Facebook wall, pages
 
 Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
-**Because support of this plugin takes too much of my free time,
-I will only answer support questions for the [Pro version](http://www.faircode.eu/al2fbpro/) from May 15, 2012**
-
 The link title will be the post title. The link description will be the excerpt, or part of the post text if there is none.
 It is possible to configure a link image (WordPress icon, first image in the media library or in the text, featured image, avatar of the author or custom image) or you can let Facebook select one automatically.
 It is possible to exclude individual post links from being added to your wall, pages or groups by ticking a check box just above the publish button.
@@ -682,7 +679,7 @@ You should ask your hosting provider to install and configure cURL.
 
 = E25 I get 'This API call requires a valid app_id' =
 
-Try to authorize the plugin again.
+Double check the App ID in the Easy setup section and try to authorize the plugin again.
 
 = E26 I get 'Session has expired at unix time ...' =
 
@@ -694,8 +691,6 @@ This problem can probably be solved by authorizing the plugin again.
 = S01 Where can I ask questions, report bugs and request features? =
 
 You can open a topic in the [support forum](http://forum.faircode.eu/).
-
-**From May 15, 2012 only the [Pro version](http://www.faircode.eu/al2fbpro/) will be supported**
 
 = S02 How can I send the debug information? =
 
@@ -714,6 +709,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 = Development version =
 * Bugfix: no like button etc, in feed
 * New feature: option to set like box height
+* New feature: option to disable refreshing access tokens
 * Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
 
 Follow these steps to install the development version:
