@@ -926,10 +926,19 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
 <?php
 				foreach ($link_ids as $link_id) {
+					$page_id = WPAL2Int::Get_page_from_link_id($link_id);
+					try {
+						$info = WPAL2Int::Get_fb_info_cached($user_ID, empty($page_id) ? 'me' : $page_id);
+					}
+					catch (Exception $e) {
+						$info = false;
+					}
 ?>
 					<br />
 					<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
 <?php
+					if ($info)
+						echo ' (<a href="' . $info->link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset) . '</a>)';
 				}
 ?>
 				<br />
