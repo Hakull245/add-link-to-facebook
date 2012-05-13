@@ -33,6 +33,7 @@ define('c_al2fb_option_filter_prio', 'al2fb_filter_prio');
 define('c_al2fb_option_noasync', 'al2fb_noasync');
 define('c_al2fb_option_noscript', 'al2fb_noscript');
 define('c_al2fb_option_uselinks', 'al2fb_uselinks');
+define('c_al2fb_option_notoken_refresh', 'al2fb_notoken_refresh');
 define('c_al2fb_option_clean', 'al2fb_clean');
 define('c_al2fb_option_css', 'al2fb_css');
 define('c_al2fb_option_siteurl', 'al2fb_siteurl');

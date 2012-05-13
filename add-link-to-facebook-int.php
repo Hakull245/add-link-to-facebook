@@ -705,7 +705,7 @@ if (!class_exists('WPAL2Int')) {
 			}
 
 			// Auto refresh access token
-			if (!$login)
+			if (!$login && !get_option(c_al2fb_option_notoken_refresh))
 				try {
 					WPAL2Int::Refresh_fb_token($user_ID);
 				}
@@ -1781,12 +1781,9 @@ if (!class_exists('WPAL2Int')) {
 				if ($errno || !$error)
 					$msg = 'cURL communication error ' . $errno . ' ' . $errtext . ': ' . $error . ' ' . print_r($info, true);
 				else
-					$msg = $error;
+					$msg = 'Facebook error: ' . $error;
 
-				if (get_option(c_al2fb_option_debug))
-					$msg .= print_r(debug_backtrace(), true);
-
-				update_option(c_al2fb_last_error, $msg);
+				update_option(c_al2fb_last_error, $msg . ' ' . print_r(debug_backtrace(), true));
 				update_option(c_al2fb_last_error_time, date('c'));
 				throw new Exception($msg);
 			}

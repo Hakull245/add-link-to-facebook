@@ -1343,6 +1343,12 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_norefresh"><?php _e('Do not refresh access token:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_norefresh" name="<?php echo c_al2fb_option_notoken_refresh; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_notoken_refresh)) echo ' checked="checked"'; ?> />
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
 			<br />
 			<span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?></strong></span>
@@ -1453,7 +1459,7 @@ function al2fb_render_resources($al2fb) {
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/" target="_blank"><?php _e('Setup guide & user manual', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://www.faircode.eu/al2fbpro/" target="_blank"><?php _e('Pro version', c_al2fb_text_domain); ?></a></li>
-	<li><a href="http://www.faircode.eu/al2fbpro/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
+	<li><a href="http://forum.faircode.eu/" target="_blank"><?php _e('Support page', c_al2fb_text_domain); ?></a></li>
 	<li><a href="<?php echo 'tools.php?page=' . plugin_basename($al2fb->main_file) . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
