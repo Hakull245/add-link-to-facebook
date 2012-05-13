@@ -53,6 +53,8 @@ Solutions to common problems are described in [the FAQ](http://wordpress.org/ext
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
+**Translators can get the [Pro version](http://www.faircode.eu/al2fbpro/) without donating**
+
 * English (en\_US), built-in, corrections are welcome
 * Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
 * Flemish (nl\_BE) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
@@ -713,6 +715,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: display wall name for added links in post editor
 * Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
