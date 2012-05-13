@@ -706,11 +706,13 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version =
+= Development version (1.155.2) =
 * Bugfix: no like button etc, in feed
 * New feature: option to set like box height
 * New feature: option to disable refreshing access tokens
+* New feature: display wall name for added links in post editor
 * Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 
