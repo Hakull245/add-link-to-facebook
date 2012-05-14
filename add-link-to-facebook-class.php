@@ -1091,7 +1091,12 @@ if (!class_exists('WPAL2Facebook')) {
 						// Images
 						if ($images)
 							foreach ($images as $attachment_id => $attachment) {
-								$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+								// Get image size
+								$image_size = get_user_meta($user_ID, c_al2fb_meta_picture_size, true);
+								if (empty($image_size))
+									$image_size = 'medium';
+
+								$picture = wp_get_attachment_image_src($attachment_id, $image_size);
 
 								echo '<div class="al2fb_image">';
 								echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
