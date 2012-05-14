@@ -446,7 +446,8 @@ First check if the setting *Integrate comments from Facebook* on the plugin sett
 It could be that your theme is incompatible with this feature.
 Switch back to the default theme (Twenty Ten/Eleven),
 wait at least 10 minutes (because of caching) and then refresh the post page where you expect Facebook comments.
-Please note that only comments on links added by the plugin are imported (the link is the anchor).
+Please note that only comments on links added by the plugin are imported (the link is the anchor)
+and only as native comments (the Facebook comments plugin only works on the WordPress side and this cannot be changed).
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
 
@@ -708,11 +709,12 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version (1.155.2) =
+= Development version (1.155.2+) =
 * Bugfix: no like button etc, in feed
 * New feature: option to set like box height
 * New feature: option to disable refreshing access tokens
 * New feature: display wall name for added links in post editor
+* Improvement: more debug information
 * Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")

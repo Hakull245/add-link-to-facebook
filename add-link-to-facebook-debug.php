@@ -203,6 +203,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Login width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_login_width, true) . '</td></tr>';
 	$info .= '<tr><td>Registration URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_regurl, true) . '" target="_blank">Link</a></td></tr>';
 	$info .= '<tr><td>Redir URL:</td><td><a href="' . get_user_meta($user_ID, c_al2fb_meta_login_redir, true) . '" target="_blank">Link</a></td></tr>';
+	$info .= '<tr><td>Add links:</td><td>' . (get_option(c_al2fb_option_login_add_links) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Login text/HTML:</td><td><a href="' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_login_html, true), ENT_QUOTES, $charset) . '" target="_blank">Link</a></td></tr>';
 
 	$info .= '<tr><td>Activity width:</td><td>' . get_user_meta($user_ID, c_al2fb_meta_act_width, true) . '</td></tr>';
