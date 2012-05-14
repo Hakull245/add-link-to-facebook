@@ -379,6 +379,7 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="thumbnail"<?php echo $pic_thumbnail; ?>><?php _e('thumbnail', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="medium"<?php echo $pic_medium; ?>><?php _e('medium', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="large"<?php echo $pic_large; ?>><?php _e('large', c_al2fb_text_domain); ?><br />
+		<span class="al2fb_explanation"><?php _e('Only works for pictures from the media library', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
