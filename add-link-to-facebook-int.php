@@ -78,7 +78,12 @@ if (!class_exists('WPAL2Int')) {
 				// Build new url
 				$query['state'] = '';
 				$query['al2fb_action'] = 'authorize';
-				$url = admin_url('tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()));
+				if (is_multisite()) {
+					global $blog_id;
+					$url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()), 'admin');
+				}
+				else
+					$url = admin_url('tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()));
 				$url .= '&' . http_build_query($query, '', '&');
 
 				// Debug info

@@ -726,6 +726,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * Bugfix: no like button etc, in feed
 * Bugfix: use selected image size for post meta box
 * Bugfix: user settings for multi-domain sites
+* Bugfix: authorize redirect for multi-domain sites
 * New feature: option to set like box height
 * New feature: option to disable refreshing access tokens
 * New feature: display wall name for added links in post editor

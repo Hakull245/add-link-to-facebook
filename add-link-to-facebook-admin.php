@@ -31,7 +31,12 @@ function al2fb_render_admin($al2fb)
 
 	// Get settings
 	$charset = get_bloginfo('charset');
-	$config_url = admin_url('tools.php?page=' . plugin_basename($al2fb->main_file));
+	if (is_multisite()) {
+		global $blog_id;
+		$config_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($al2fb->main_file), 'admin');
+	}
+	else
+		$config_url = admin_url('tools.php?page=' . plugin_basename($al2fb->main_file));
 	if (isset($_REQUEST['debug']))
 		$config_url .= '&debug=1';
 	if (isset($_REQUEST['tabs']))
@@ -161,7 +166,7 @@ function al2fb_render_admin($al2fb)
 ?>
 		<table><tr>
 		<td>
-			<form method="get" action="<?php echo admin_url('tools.php?page=' . plugin_basename($al2fb->main_file)); ?>">
+			<form method="get" action="<?php echo $config_url; ?>">
 			<input type="hidden" name="al2fb_action" value="init">
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
@@ -1412,7 +1417,7 @@ function al2fb_render_admin($al2fb)
 	</div>
 
 	</div>
-	<a href="<?php echo admin_url('tools.php?page=' . plugin_basename($al2fb->main_file)) . '&tabs=0'; ?>"><?php _e('No tab pages', c_al2fb_text_domain); ?></a>
+	<a href="<?php echo $config_url . '&tabs=0'; ?>"><?php _e('No tab pages', c_al2fb_text_domain); ?></a>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {

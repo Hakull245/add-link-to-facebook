@@ -340,7 +340,12 @@ if (!class_exists('WPAL2Facebook')) {
 							update_option(c_al2fb_last_error, $e->getMessage());
 							update_option(c_al2fb_last_error_time, date('c'));
 							// Redirect
-							$error_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+							if (is_multisite()) {
+								global $blog_id;
+								$error_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($this->main_file), 'admin');
+							}
+							else
+								$error_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 							$error_url .= '&al2fb_action=error';
 							$error_url .= '&error=' . urlencode($e->getMessage());
 							wp_redirect($error_url);
@@ -780,7 +785,12 @@ if (!class_exists('WPAL2Facebook')) {
 						$shared_user_ID = get_option(c_al2fb_option_app_share);
 					if (!$shared_user_ID || $shared_user_ID == $user_ID) {
 						// Add settings link
-						$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+						if (is_multisite()) {
+							global $blog_id;
+							$config_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($this->main_file), 'admin');
+						}
+						else
+							$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 						$links[] = '<a href="' . $config_url . '">' . __('Settings', c_al2fb_text_domain) . '</a>';
 					}
 				}
