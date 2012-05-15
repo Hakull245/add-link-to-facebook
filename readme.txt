@@ -458,6 +458,19 @@ For posts with comments disabled or which are excluded based on the settings tab
 The messages widget only imports status updates, not links with pictures.
 Consider using the activity feed instead.
 
+= U41 Added links do not show up in the news feed =
+
+Read [Your Average Facebook Post Only Reaches 12% Of Your Friends](http://techcrunch.com/2012/02/29/facebook-post-reach-16-friends/) to understand why.
+
+= U42 I want to edit/moderate imported Facebook comments =
+
+Enable these options:
+
+* *Integrate comments from Facebook* (plugin)
+* *Copy comments from Facebook to WordPress* (plugin)
+* *Do not execute filters for comments* (plugin)
+* *An administrator must always approve the comment* (WordPress)
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
