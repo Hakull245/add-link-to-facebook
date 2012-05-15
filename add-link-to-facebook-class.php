@@ -1830,8 +1830,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
-					if (!empty($description))
-						echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:description" content="' . htmlspecialchars(empty($description) ? $title : $description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					// Single user blog
 					if ($opg == 1) {
@@ -1846,6 +1845,8 @@ if (!class_exists('WPAL2Facebook')) {
 						// Facebook i18n
 						echo '<meta property="og:locale" content="' . WPAL2Int::Get_locale($user_ID) . '" />' . PHP_EOL;
 					}
+					else
+						echo '<meta property="og:locale" content="' . WPAL2Int::Get_locale(-1) . '" />' . PHP_EOL;
 					echo '<!-- End AL2FB OGP -->' . PHP_EOL;
 				}
 			}
