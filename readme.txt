@@ -417,7 +417,7 @@ If you want to use a featured image as link picture, see question U02 and U03.
 = U36 The privacy option is not working =
 
 You cannot add links with less privacy as specified in the Facebook application settings.
-To change this: Privacy Settings (right top triangle) > Ads, Apps and Websites > Apps you use > Edit Settings (button) > Edit (link) > Posts on your behalf
+To change this: Privacy Settings (right top triangle) > Ads, Apps and Websites > Apps you use > Edit Settings (button) > Edit (link) > Posts on your behalf.
 The privacy option doesn't work if you use the option *Use links API instead of feed API*.
 
 = U37 I don't want my links grouped on the timeline =
