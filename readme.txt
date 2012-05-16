@@ -641,7 +641,7 @@ Re-authorizing will probably solve this problem.
 
 = E15b I get 'Error invalidating access token' =
 
-This problem is probably caused by a Facebook and applies at least to multi-sites using the same application for each site.
+This problem is probably caused by Facebook and applies at least to multi-sites using the same application for each site.
 A workaround might be to use a different application for each site.
 
 See [here](http://forum.faircode.eu/forums/topic/multi-user-site-facebook-group-error/) for progress on this problem.
