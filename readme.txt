@@ -735,7 +735,7 @@ Optionally fill in your name and describe the problem as accurate as possible an
 
 == Changelog ==
 
-= Development version (1.155.2+) =
+= Development version (1.155.3) =
 * Bugfix: no like button etc, in feed
 * Bugfix: use selected image size for post meta box
 * Bugfix: user settings for multi-domain sites
@@ -744,7 +744,8 @@ Optionally fill in your name and describe the problem as accurate as possible an
 * New feature: option to disable refreshing access tokens
 * New feature: display wall name for added links in post editor
 * Improvement: og:locale for home page on multi-user sites
-* improvement: og:description site title if no site description
+* Improvement: og:description site title if no site description
+* Improvement: fixed a notice parsing video URL's
 * Improvement: more debug information
 * Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
