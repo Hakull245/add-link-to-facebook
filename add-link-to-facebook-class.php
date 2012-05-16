@@ -1689,18 +1689,20 @@ if (!class_exists('WPAL2Facebook')) {
 		function Filter_video($video, $post) {
 			$components = parse_url($video);
 
-			// Normalize YouTube URL
-			if ($components['host'] == 'www.youtube.com') {
-				// http://www.youtube.com/watch?v=RVUxgqH-y4s -> http://www.youtube.com/v/RVUxgqH-y4s
-				parse_str($components['query']);
-				if (isset($v))
-					return $components['scheme'] . '://' . $components['host'] . '/v/' . $v;
-			}
+			if (isset($components['host'])) {
+				// Normalize YouTube URL
+				if ($components['host'] == 'www.youtube.com') {
+					// http://www.youtube.com/watch?v=RVUxgqH-y4s -> http://www.youtube.com/v/RVUxgqH-y4s
+					parse_str($components['query']);
+					if (isset($v))
+						return $components['scheme'] . '://' . $components['host'] . '/v/' . $v;
+				}
 
-			// Normalize Vimeo URL
-			if ($components['host'] == 'vimeo.com') {
-				// http://vimeo.com/240975 -> http://www.vimeo.com/moogaloop.swf?server=www.vimeo.com&clip_id=240975
-				return $components['scheme'] . '://www.' . $components['host'] . '/moogaloop.swf?server=www.vimeo.com&clip_id=' . substr($components['path'], 1);
+				// Normalize Vimeo URL
+				if ($components['host'] == 'vimeo.com') {
+					// http://vimeo.com/240975 -> http://www.vimeo.com/moogaloop.swf?server=www.vimeo.com&clip_id=240975
+					return $components['scheme'] . '://www.' . $components['host'] . '/moogaloop.swf?server=www.vimeo.com&clip_id=' . substr($components['path'], 1);
+				}
 			}
 
 			return $video;
