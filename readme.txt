@@ -425,7 +425,8 @@ The privacy option doesn't work if you use the option *Use links API instead of 
 Enabling the option *Use excerpt as message* will prevent grouping of links.
 If you don't write an excerpt the site title will be used as message.
 You can also enable the option *Use links API instead of feed API* (tab *Admin*).
-There is one known limitation, see the previous question.
+The links API does not work for groups (a Facebook bug).
+See the previous question for another limitation.
 
 **Due to [a Facebook bug](https://developers.facebook.com/bugs/226481434092661?browse=search_4f0185df08d385a20237575) the links API will not work for groups**
 
@@ -470,6 +471,11 @@ Enable these options:
 * *Copy comments from Facebook to WordPress* (plugin)
 * *Do not execute filters for comments* (plugin)
 * *An administrator must always approve the comment* (WordPress)
+
+= U43 There is no share link (anymore) =
+
+Thank Facebook for this.
+You might be able to fix it by switching to the links API, but read about the limitations in question U37.
 
 **--- Security ---**
 
