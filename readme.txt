@@ -632,12 +632,19 @@ Scroll down to the meta box *Custom fields* and delete the value *al2fb_facebook
 
 You can prevent this problem by deleting the link using the plugin.
 
-= E15 I get 'Error validating access token' =
+= E15a I get 'Error validating access token' =
 
 Most often this happen when you changed your Facebook password.
 The access token the plugin acquired during the authorization process may be revoked by Facebook.
 Maybe because there was a security problem with your Facebook application or account.
 Re-authorizing will probably solve this problem.
+
+= E15b I get 'Error invalidating access token' =
+
+This problem is probably caused by a Facebook and applies at least to multi-sites using the same application for each site.
+A workaround might be to use a different application for each site.
+
+See [here](http://forum.faircode.eu/forums/topic/multi-user-site-facebook-group-error/) for progress on this problem.
 
 = E16 I get 'You failed to provide a valid list of administators' =
 
