@@ -82,7 +82,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -448,11 +448,12 @@ It could be that your theme is incompatible with this feature.
 Switch back to the default theme (Twenty Ten/Eleven),
 wait at least 10 minutes (because of caching) and then refresh the post page where you expect Facebook comments.
 Please note that only comments on links added by the plugin are imported (the link is the anchor)
-and only as native comments (the Facebook comments plugin only works on the WordPress side and this cannot be changed).
+and only as native comments (the Facebook comments plugin only works on the WordPress site and this cannot be changed).
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
 
 For posts with comments disabled or which are excluded based on the settings tab admin or in the post editor, no comments will be imported.
+To prevent problems with Facebook, only comments for young posts are imported (less than a week old).
 
 = U40 I don't see pictures in the messages widget =
 
@@ -571,11 +572,10 @@ See [here](http://codex.wordpress.org/Changing_The_Site_URL) for how to change y
 = E07 I get 'This API call requires a valid app_id' =
 
 You could try to re-authorize to fix this, but it should not happen.
-Please send me the debug information, see the last question for instructions.
 
 = E08 I get 'An active access token must be used to query information about the current user' =
 
-If you keep getting this error after upgrading to the latest version, please report it and send me the debug information (see the last question for instructions).
+Should not happen.
 
 = E09 I get 'Invalid access token signature' =
 
@@ -723,8 +723,12 @@ You can open a topic in the [support forum](http://forum.faircode.eu/).
 
 = S02 How can I send the debug information? =
 
-Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the *Resources* panel.
-Optionally fill in your name and describe the problem as accurate as possible and press the *Send* button.
+Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the right yellow *Resources* panel.
+Fill in your name, your e-mail address,
+a link to the [support forum](http://forum.faircode.eu/) where you reported the problem before
+and describe the problem as accurate as possible and press the *Send* button.
+
+**Debug information without a valid support forum topic link will not be answered!**
 
 == Screenshots ==
 
