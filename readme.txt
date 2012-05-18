@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.2
-Stable tag: 1.155
+Stable tag: 1.156
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -75,7 +75,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Czech (cs\_CZ) by [Artemian](http://www.artemian.cz/ "Artemian"), thanks!
 * Hebrew (he\_IL) by [Sagive](http://www.sagive.co.il/ "Sagive") and [Yossi Jana](http://www.webist.co.il "Yossi Jana"), thanks!
 * Belorussian (be\_BY) by [Igor Dubilei](http://www.itransition.com/ "Igor Dubilei"), thanks!
-* (Brazilian) Portuguese (pt\_BR) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria") and [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa"), thanks!
+* (Brazilian) Portuguese (pt\_BR/pt_PT) by [Bruno Cantuaria](http://cantuaria.net.br "Bruno Cantuaria") and [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa"), thanks!
 * Slovak (sk\_SK) by [Viliam Brozman](http://www.brozman.sk/blog/ "Viliam Brozman"), thanks!
 * Serbian (sr\_RS), thanks!
 * Greek (el\_EL), thanks!
@@ -739,21 +739,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 == Changelog ==
 
-= Development version (1.155.3) =
-* Bugfix: no like button etc, in feed
-* Bugfix: use selected image size for post meta box
-* Bugfix: user settings for multi-domain sites
-* Bugfix: authorize redirect for multi-domain sites
-* New feature: option to set like box height
-* New feature: option to disable refreshing access tokens
-* New feature: display wall name for added links in post editor
-* Improvement: og:locale for home page on multi-user sites
-* Improvement: og:description site title if no site description
-* Improvement: fixed a notice parsing video URL's
-* Improvement: more debug information
-* Updated (Brazilian) Portuguese (pt\_BR) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+= Development version =
+* ...
 
 Follow these steps to install the development version:
 
@@ -768,6 +755,22 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.156 =
+* Bugfix: no like button etc, in feed
+* Bugfix: use selected image size for post meta box
+* Bugfix: user settings for multi-domain sites
+* Bugfix: authorize redirect for multi-domain sites
+* New feature: option to set like box height
+* New feature: option to disable refreshing access tokens
+* New feature: display wall name for added links in post editor
+* Improvement: og:locale for home page on multi-user sites
+* Improvement: og:description site title if no site description
+* Improvement: fixed a notice parsing video URL's
+* Improvement: more debug information
+* Added (Brazilian) Portuguese (pt\_BR/pt_PT) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+
 = 1.155 =
 * Bugfix: caching of Facebook page information
 * Improvement: show all walls in easy setup section ([Pro version](http://www.faircode.eu/al2fbpro/) only)
@@ -777,40 +780,25 @@ Follow these steps to install the development version:
 * Improvement: setting user agent for *get_headers*
 * Improvement: more debug info
 
-= 1.154 =
-* Reverted use links API by default because of a Facebook bug (see the FAQ, question U37)
-
-= 1.153 =
-* Bugfix: upgrade procedure
-* Improvement: use links API by default (to have share links again)
-* Added Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon")
-
-= 1.152 =
-* Bugfix: set user agent for *file_get_contents* too
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.156 =
+Four bugfixes, three new features, four improvements, new/updated translations
+
 = 1.155 =
 One bugfix, six improvements
-
-= 1.154 =
-Revert parts of 1.153
-
-= 1.153 =
-One bugfix, one improvement, new translation
-
-= 1.152 =
-One bugfix
 
 == Setup guide ==
 
 **If you have more than one Facebook account, either logout completely or login to the correct account before you start.**
 
-**If you want to add links to a fan/community/business page, authorize the plugin with a personal account that has access to the page.**
+**If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.**
+
+**If you have a multi-site installation, create a separate Facebook application for each site.**
 
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
