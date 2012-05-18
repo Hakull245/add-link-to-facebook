@@ -31,7 +31,12 @@ function al2fb_render_admin($al2fb)
 
 	// Get settings
 	$charset = get_bloginfo('charset');
-	$config_url = admin_url('tools.php?page=' . plugin_basename($al2fb->main_file));
+	if (is_multisite()) {
+		global $blog_id;
+		$config_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($al2fb->main_file), 'admin');
+	}
+	else
+		$config_url = admin_url('tools.php?page=' . plugin_basename($al2fb->main_file));
 	if (isset($_REQUEST['debug']))
 		$config_url .= '&debug=1';
 	if (isset($_REQUEST['tabs']))
@@ -144,13 +149,14 @@ function al2fb_render_admin($al2fb)
 
 			// Get page name
 			try {
-				$me = WPAL2Int::Get_fb_me_cached($user_ID, false);
-				if ($me != null) {
+				$page_ids = WPAL2Int::Get_page_ids($user_ID);
+				foreach ($page_ids as $page_id) {
+					$info = WPAL2Int::Get_fb_info_cached($user_ID, empty($page_id) ? 'me' : $page_id);
 					_e('Links will be added to', c_al2fb_text_domain);
-					echo ' <a href="' . $me->link . '" target="_blank">' . htmlspecialchars($me->name, ENT_QUOTES, $charset);
-					if (!empty($me->category))
-						echo ' - ' . htmlspecialchars($me->category, ENT_QUOTES, $charset);
-					echo '</a>';
+					echo ' <a href="' . $info->link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset);
+					if (!empty($info->category))
+						echo ' - ' . htmlspecialchars($info->category, ENT_QUOTES, $charset);
+					echo '</a><br />';
 				}
 			}
 			catch (Exception $e) {
@@ -160,7 +166,7 @@ function al2fb_render_admin($al2fb)
 ?>
 		<table><tr>
 		<td>
-			<form method="get" action="<?php echo admin_url('tools.php?page=' . plugin_basename($al2fb->main_file)); ?>">
+			<form method="get" action="<?php echo $config_url; ?>">
 			<input type="hidden" name="al2fb_action" value="init">
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Authorize', c_al2fb_text_domain) ?>" />
@@ -378,6 +384,7 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="thumbnail"<?php echo $pic_thumbnail; ?>><?php _e('thumbnail', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="medium"<?php echo $pic_medium; ?>><?php _e('medium', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_picture_size; ?>" value="large"<?php echo $pic_large; ?>><?php _e('large', c_al2fb_text_domain); ?><br />
+		<span class="al2fb_explanation"><?php _e('Only works for pictures from the media library', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -765,6 +772,13 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_like_box_width"><?php _e('Width:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input class="al2fb_numeric" id="al2fb_like_box_width" name="<?php echo c_al2fb_meta_like_box_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_like_box_width, true); ?>" />
+		<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_like_box_height"><?php _e('Height:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input class="al2fb_numeric" id="al2fb_like_box_height" name="<?php echo c_al2fb_meta_like_box_height; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_like_box_height, true); ?>" />
 		<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
@@ -1335,6 +1349,12 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_norefresh"><?php _e('Do not refresh access token:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_norefresh" name="<?php echo c_al2fb_option_notoken_refresh; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_notoken_refresh)) echo ' checked="checked"'; ?> />
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_clean"><?php _e('Clean on deactivate:', c_al2fb_text_domain); ?></label>
 			<br />
 			<span class="al2fb_explanation"><strong><?php _e('Upgrade deactivates the plugin!', c_al2fb_text_domain); ?></strong></span>
@@ -1397,7 +1417,7 @@ function al2fb_render_admin($al2fb)
 	</div>
 
 	</div>
-	<a href="<?php echo admin_url('tools.php?page=' . plugin_basename($al2fb->main_file)) . '&tabs=0'; ?>"><?php _e('No tab pages', c_al2fb_text_domain); ?></a>
+	<a href="<?php echo $config_url . '&tabs=0'; ?>"><?php _e('No tab pages', c_al2fb_text_domain); ?></a>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
@@ -1475,6 +1495,14 @@ function al2fb_render_ads($al2fb) {
 	echo '<div class="al2fb_ads">';
 	echo '<a href="http://www.host1plus.com/vps-hosting/" target="_blank">';
 	echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
+	echo '</a>';
+	echo '</div>';
+
+	// ThemeFuse
+	$ab = (rand(0, 1) ? 'a' : 'b');
+	echo '<div class="al2fb_ads">';
+	echo '<a href="http://themefuse.com/wp-themes-shop/?plugin=add-link-to-facebook&v=' . $ab . '" target="_blank">';
+	echo '<img src="' . plugins_url('ThemeFuse-' . $ab . '.jpg', __FILE__) . '" alt="ThemeFuse">';
 	echo '</a>';
 	echo '</div>';
 

@@ -140,6 +140,10 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Handle plugin activation
 		function Activate() {
+			self::Upgrade();
+		}
+
+		function Upgrade() {
 			global $wpdb;
 			$version = get_option(c_al2fb_option_version);
 			if (empty($version))
@@ -192,9 +196,15 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($version <= 8)
 				update_option(c_al2fb_option_nofilter_comments, true);
 
-			update_option(c_al2fb_option_version, 10);
+			if ($version < 10)
+				update_option(c_al2fb_option_version, 10);
 
 			// 11 when authorizing with 10
+
+			if ($version == 11) {
+				//update_option(c_al2fb_option_uselinks, true);
+				update_option(c_al2fb_option_version, 12);
+			}
 		}
 
 		// Handle plugin deactivation
@@ -330,7 +340,12 @@ if (!class_exists('WPAL2Facebook')) {
 							update_option(c_al2fb_last_error, $e->getMessage());
 							update_option(c_al2fb_last_error_time, date('c'));
 							// Redirect
-							$error_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+							if (is_multisite()) {
+								global $blog_id;
+								$error_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($this->main_file), 'admin');
+							}
+							else
+								$error_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 							$error_url .= '&al2fb_action=error';
 							$error_url .= '&error=' . urlencode($e->getMessage());
 							wp_redirect($error_url);
@@ -342,6 +357,8 @@ if (!class_exists('WPAL2Facebook')) {
 				// Handle Facebook authorization
 				WPAL2Int::Authorize();
 			}
+
+			self::Upgrade();
 		}
 
 		// Display admin messages
@@ -466,6 +483,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_post_send_button, $_POST[c_al2fb_meta_post_send_button]);
 			update_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, $_POST[c_al2fb_meta_post_combine_buttons]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_width, $_POST[c_al2fb_meta_like_box_width]);
+			update_user_meta($user_ID, c_al2fb_meta_like_box_height, $_POST[c_al2fb_meta_like_box_height]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_border, $_POST[c_al2fb_meta_like_box_border]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_noheader, $_POST[c_al2fb_meta_like_box_noheader]);
 			update_user_meta($user_ID, c_al2fb_meta_like_box_nostream, $_POST[c_al2fb_meta_like_box_nostream]);
@@ -544,6 +562,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_noasync, $_POST[c_al2fb_option_noasync]);
 				update_option(c_al2fb_option_noscript, $_POST[c_al2fb_option_noscript]);
 				update_option(c_al2fb_option_uselinks, $_POST[c_al2fb_option_uselinks]);
+				update_option(c_al2fb_option_notoken_refresh, $_POST[c_al2fb_option_notoken_refresh]);
 				update_option(c_al2fb_option_clean, $_POST[c_al2fb_option_clean]);
 				update_option(c_al2fb_option_css, $_POST[c_al2fb_option_css]);
 				update_option(c_al2fb_option_login_add_links, $_POST[c_al2fb_option_login_add_links]);
@@ -766,7 +785,12 @@ if (!class_exists('WPAL2Facebook')) {
 						$shared_user_ID = get_option(c_al2fb_option_app_share);
 					if (!$shared_user_ID || $shared_user_ID == $user_ID) {
 						// Add settings link
-						$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+						if (is_multisite()) {
+							global $blog_id;
+							$config_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($this->main_file), 'admin');
+						}
+						else
+							$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
 						$links[] = '<a href="' . $config_url . '">' . __('Settings', c_al2fb_text_domain) . '</a>';
 					}
 				}
@@ -912,10 +936,19 @@ if (!class_exists('WPAL2Facebook')) {
 				<label for="al2fb_delete"><?php _e('Delete existing Facebook link', c_al2fb_text_domain); ?></label>
 <?php
 				foreach ($link_ids as $link_id) {
+					$page_id = WPAL2Int::Get_page_from_link_id($link_id);
+					try {
+						$info = WPAL2Int::Get_fb_info_cached($user_ID, empty($page_id) ? 'me' : $page_id);
+					}
+					catch (Exception $e) {
+						$info = false;
+					}
 ?>
 					<br />
 					<a href="<?php echo WPAL2Int::Get_fb_permalink($link_id); ?>" target="_blank"><?php _e('Link on Facebook', c_al2fb_text_domain); ?></a>
 <?php
+					if ($info)
+						echo ' (<a href="' . $info->link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset) . '</a>)';
 				}
 ?>
 				<br />
@@ -967,31 +1000,44 @@ if (!class_exists('WPAL2Facebook')) {
 		// Populate post facebook column
 		function Manage_posts_custom_column($column_name, $post_ID) {
 			if ($column_name == 'al2fb') {
-				$link_id = get_post_meta($post_ID, c_al2fb_meta_link_id, true);
-				if ($link_id)
-					echo '<a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" target="_blank">' . __('Yes', c_al2fb_text_domain) . '</a>';
+				$charset = get_bloginfo('charset');
+				$post = get_post($post_ID);
+				$user_ID = self::Get_user_ID($post);
+
+				$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+				if ($link_ids)
+					foreach ($link_ids as $link_id)
+						try {
+							$page_id = WPAL2Int::Get_page_from_link_id($link_id);
+							$link = WPAL2Int::Get_fb_permalink($link_id);
+							$info = WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
+							echo '<a href="' . $link . '" target="_blank">' . htmlspecialchars($info->name, ENT_QUOTES, $charset) . '</a><br />';
+						}
+						catch (Exception $e) {
+							echo htmlspecialchars($e->getMessage(), ENT_QUOTES, $charset);
+						}
 				else
 					echo '<span>' . __('No', c_al2fb_text_domain) . '</span>';
 
-				if ($link_id) {
-					$post = get_post($post_ID);
-					if (self::Is_recent($post)) {
-						$user_ID = self::Get_user_ID($post);
+				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
+				if ($link_id && self::Is_recent($post)) {
+					// Show number of comments
+					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
+						$count = 0;
+						$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
+						if (!empty($fb_comments) && !empty($fb_comments->data))
+							$count = count($fb_comments->data);
+						echo '<span>' . $count . ' ' . __('comments', c_al2fb_text_domain) . '</span><br />';
+					}
 
-						// Show number of comments
-						if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
-							$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
-							if (!empty($fb_comments) && !empty($fb_comments->data))
-								echo '<br /><span>' . count($fb_comments->data) . ' ' . __('comments', c_al2fb_text_domain) . '</span>';
-						}
-
-						// Show number of likes
-						if ($post->ping_status == 'open' &&
-							get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
-							$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-							if (!empty($fb_likes) && !empty($fb_likes->data))
-								echo '<br /><span>' . count($fb_likes->data) . ' ' . __('likes', c_al2fb_text_domain) . '</span>';
-						}
+					// Show number of likes
+					if ($post->ping_status == 'open' &&
+						get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
+						$count = 0;
+						$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
+						if (!empty($fb_likes) && !empty($fb_likes->data))
+							$count = count($fb_likes->data);
+						echo '<span>' . $count . ' ' . __('likes', c_al2fb_text_domain) . '</span><br />';
 					}
 				}
 			}
@@ -1055,7 +1101,12 @@ if (!class_exists('WPAL2Facebook')) {
 						// Images
 						if ($images)
 							foreach ($images as $attachment_id => $attachment) {
-								$picture = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+								// Get image size
+								$image_size = get_user_meta($user_ID, c_al2fb_meta_picture_size, true);
+								if (empty($image_size))
+									$image_size = 'medium';
+
+								$picture = wp_get_attachment_image_src($attachment_id, $image_size);
 
 								echo '<div class="al2fb_image">';
 								echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
@@ -1638,18 +1689,20 @@ if (!class_exists('WPAL2Facebook')) {
 		function Filter_video($video, $post) {
 			$components = parse_url($video);
 
-			// Normalize YouTube URL
-			if ($components['host'] == 'www.youtube.com') {
-				// http://www.youtube.com/watch?v=RVUxgqH-y4s -> http://www.youtube.com/v/RVUxgqH-y4s
-				parse_str($components['query']);
-				if (isset($v))
-					return $components['scheme'] . '://' . $components['host'] . '/v/' . $v;
-			}
+			if (isset($components['host'])) {
+				// Normalize YouTube URL
+				if ($components['host'] == 'www.youtube.com') {
+					// http://www.youtube.com/watch?v=RVUxgqH-y4s -> http://www.youtube.com/v/RVUxgqH-y4s
+					parse_str($components['query']);
+					if (isset($v))
+						return $components['scheme'] . '://' . $components['host'] . '/v/' . $v;
+				}
 
-			// Normalize Vimeo URL
-			if ($components['host'] == 'vimeo.com') {
-				// http://vimeo.com/240975 -> http://www.vimeo.com/moogaloop.swf?server=www.vimeo.com&clip_id=240975
-				return $components['scheme'] . '://www.' . $components['host'] . '/moogaloop.swf?server=www.vimeo.com&clip_id=' . substr($components['path'], 1);
+				// Normalize Vimeo URL
+				if ($components['host'] == 'vimeo.com') {
+					// http://vimeo.com/240975 -> http://www.vimeo.com/moogaloop.swf?server=www.vimeo.com&clip_id=240975
+					return $components['scheme'] . '://www.' . $components['host'] . '/moogaloop.swf?server=www.vimeo.com&clip_id=' . substr($components['path'], 1);
+				}
 			}
 
 			return $video;
@@ -1789,8 +1842,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
 					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
-					if (!empty($description))
-						echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
+					echo '<meta property="og:description" content="' . htmlspecialchars(empty($description) ? $title : $description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
 					// Single user blog
 					if ($opg == 1) {
@@ -1805,6 +1857,8 @@ if (!class_exists('WPAL2Facebook')) {
 						// Facebook i18n
 						echo '<meta property="og:locale" content="' . WPAL2Int::Get_locale($user_ID) . '" />' . PHP_EOL;
 					}
+					else
+						echo '<meta property="og:locale" content="' . WPAL2Int::Get_locale(-1) . '" />' . PHP_EOL;
 					echo '<!-- End AL2FB OGP -->' . PHP_EOL;
 				}
 			}
@@ -1825,8 +1879,8 @@ if (!class_exists('WPAL2Facebook')) {
 		function The_content($content = '') {
 			global $post;
 
-			// Do not process excerpt
-			if (in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
+			// Do not process feed / excerpt
+			if (is_feed() || in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
 				return $content;
 
 			$user_ID = self::Get_user_ID($post);

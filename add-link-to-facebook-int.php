@@ -78,7 +78,12 @@ if (!class_exists('WPAL2Int')) {
 				// Build new url
 				$query['state'] = '';
 				$query['al2fb_action'] = 'authorize';
-				$url = admin_url('tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()));
+				if (is_multisite()) {
+					global $blog_id;
+					$url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()), 'admin');
+				}
+				else
+					$url = admin_url('tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()));
 				$url .= '&' . http_build_query($query, '', '&');
 
 				// Debug info
@@ -141,7 +146,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_application_cached($user_ID) {
-			$app_key = c_al2fb_transient_cache . md5('app' . $user_ID);
+			global $blog_id;
+			$app_key = c_al2fb_transient_cache . md5('app' . $blog_id . $user_ID);
 			$app = get_transient($app_key);
 			if (get_option(c_al2fb_option_debug))
 				$app = false;
@@ -168,24 +174,27 @@ if (!class_exists('WPAL2Int')) {
 		// Get wall, page or group name and cache
 		static function Get_fb_me_cached($user_ID, $self) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
-			$me_key = c_al2fb_transient_cache . md5('me' . $user_ID . $page_id);
-			$me = get_transient($me_key);
-			if (get_option(c_al2fb_option_debug))
-				$me = false;
-			if ($me === false) {
-				$me = WPAL2Int::Get_fb_me($user_ID, $self);
-				if ($me != null) {
-					$duration = WPAL2Int::Get_duration(false);
-					set_transient($me_key, $me, $duration);
-				}
-			}
-			return $me;
+			return WPAL2Int::Get_fb_info_cached($user_ID, $page_id);
 		}
 
 		// Get wall, page or group name
 		static function Get_fb_me($user_ID, $self) {
 			$page_id = WPAL2Int::Get_page_id($user_ID, $self);
 			return WPAL2Int::Get_fb_info($user_ID, $page_id);
+		}
+
+		static function Get_fb_info_cached($user_ID, $page_id) {
+			global $blog_id;
+			$info_key = c_al2fb_transient_cache . md5('inf' . $blog_id . $user_ID . $page_id);
+			$info = get_transient($info_key);
+			if (get_option(c_al2fb_option_debug))
+				$info = false;
+			if ($info === false) {
+				$info = WPAL2Int::Get_fb_info($user_ID, $page_id);
+				$duration = WPAL2Int::Get_duration(false);
+				set_transient($info_key, $info, $duration);
+			}
+			return $info;
 		}
 
 		static function Get_fb_info($user_ID, $page_id) {
@@ -207,7 +216,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_pages_cached($user_ID) {
-			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			global $blog_id;
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $blog_id . $user_ID);
 			$pages = get_transient($pages_key);
 			if (get_option(c_al2fb_option_debug))
 				$pages = false;
@@ -220,7 +230,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Clear_fb_pages_cache($user_ID) {
-			$pages_key = c_al2fb_transient_cache . md5('pgs' . $user_ID);
+			global $blog_id;
+			$pages_key = c_al2fb_transient_cache . md5('pgs' . $blog_id . $user_ID);
 			delete_transient($pages_key);
 		}
 
@@ -236,7 +247,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		static function Get_fb_groups_cached($user_ID) {
-			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			global $blog_id;
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $blog_id . $user_ID);
 			$groups = get_transient($groups_key);
 			if (get_option(c_al2fb_option_debug))
 				$groups = false;
@@ -249,7 +261,8 @@ if (!class_exists('WPAL2Int')) {
 		}
 
 		function Clear_fb_groups_cache($user_ID) {
-			$groups_key = c_al2fb_transient_cache . md5('grp' . $user_ID);
+			global $blog_id;
+			$groups_key = c_al2fb_transient_cache . md5('grp' . $blog_id . $user_ID);
 			delete_transient($groups_key);
 		}
 
@@ -266,7 +279,8 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get comments and cache
 		static function Get_fb_comments_cached($user_ID, $link_id, $cached = true) {
-			$fb_key = c_al2fb_transient_cache . md5( 'c' . $link_id);
+			global $blog_id;
+			$fb_key = c_al2fb_transient_cache . md5( 'c' . $blog_id . $user_ID . $link_id);
 			$fb_comments = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug) || !$cached)
 				$fb_comments = false;
@@ -297,7 +311,8 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get likes and cache
 		static function Get_fb_likes_cached($user_ID, $link_id, $cached = true) {
-			$fb_key = c_al2fb_transient_cache . md5('l' . $link_id);
+			global $blog_id;
+			$fb_key = c_al2fb_transient_cache . md5('l' . $blog_id . $user_ID . $link_id);
 			$fb_likes = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug) || !$cached)
 				$fb_likes = false;
@@ -323,8 +338,9 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get messages and cache
 		static function Get_fb_feed_cached($user_ID) {
+			global $blog_id;
 			$page_id = WPAL2Int::Get_page_id($user_ID, false);
-			$fb_key = c_al2fb_transient_cache . md5( 'f' . $user_ID . $page_id);
+			$fb_key = c_al2fb_transient_cache . md5( 'f' . $blog_id . $user_ID . $page_id);
 			$fb_feed = get_transient($fb_key);
 			if (get_option(c_al2fb_option_debug))
 				$fb_feed = false;
@@ -397,7 +413,14 @@ if (!class_exists('WPAL2Int')) {
 				else
 					return false;
 			}
-			else if (function_exists('get_header') && ini_get('allow_url_fopen')) {
+			else if (function_exists('get_headers') && ini_get('allow_url_fopen')) {
+				delete_option(c_al2fb_log_ua);
+				$ua = $_SERVER['HTTP_USER_AGENT'];
+				if (!empty($ua)) {
+					ini_set('user_agent', $ua);
+					update_option(c_al2fb_log_ua, $ua);
+				}
+
 				$headers = get_headers($url, true);
 				if (isset($headers['Location'])) {
 					$location = $headers['Location'];
@@ -418,6 +441,20 @@ if (!class_exists('WPAL2Int')) {
 			return 'http://www.facebook.com/profile.php?id=' . $id;
 		}
 
+		static function Get_page_from_link_id($link_id) {
+			if (empty($link_id))
+				return '';
+			$ids = explode('_', $link_id);
+			return $ids[0];
+		}
+
+		static function Get_story_from_link_id($link_id) {
+			if (empty($link_id))
+				return '';
+			$ids = explode('_', $link_id);
+			return (count($ids) > 1 ? $ids[1] : $ids[0]);
+		}
+
 		// Get permalink to added link
 		static function Get_fb_permalink($link_id) {
 			if (empty($link_id))
@@ -435,6 +472,34 @@ if (!class_exists('WPAL2Int')) {
 			$title = __('Facebook', c_al2fb_text_domain);
 			$title = apply_filters('al2fb_anchor', $title, $post);
 			return '<div class="al2fb_anchor"><a href="' . $link . '" target="_blank">' . $title . '</div></a>';
+		}
+
+		static function Get_page_ids($user_ID) {
+			$page_ids = array();
+			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
+				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
+					$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
+					if (is_array($extra))
+						$page_ids = array_merge($page_ids, $extra);
+					else if (!empty($extra))
+						$page_ids[] = $extra;
+				}
+			}
+			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
+				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
+					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
+					if (is_array($extra))
+						$page_ids = array_merge($page_ids, $extra);
+					else if (!empty($extra))
+						$page_ids[] = $extra;
+				}
+			}
+			if (empty($page_ids))
+				$page_ids[] = 'me';
+
+			return $page_ids;
 		}
 
 		// Add Link to Facebook
@@ -502,27 +567,8 @@ if (!class_exists('WPAL2Int')) {
 				$page_ids = array();
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_facebook_page, true);
 			}
-			else {
-				$page_ids = array();
-				if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
-					$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
-					if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
-						$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
-						if (!empty($extra))
-							$page_ids = array_merge($page_ids, $extra);
-					}
-				}
-				if (empty($page_ids) || WPAL2Int::Check_multiple()) {
-					$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
-					if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
-						$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
-						if (!empty($extra))
-							$page_ids = array_merge($page_ids, $extra);
-					}
-				}
-				if (empty($page_ids))
-					$page_ids[] = 'me';
-			}
+			else
+				$page_ids = WPAL2Int::Get_page_ids($user_ID);
 
 			// Build request
 			$query_array = array(
@@ -664,7 +710,7 @@ if (!class_exists('WPAL2Int')) {
 			}
 
 			// Auto refresh access token
-			if (!$login)
+			if (!$login && !get_option(c_al2fb_option_notoken_refresh))
 				try {
 					WPAL2Int::Refresh_fb_token($user_ID);
 				}
@@ -997,10 +1043,14 @@ if (!class_exists('WPAL2Int')) {
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-				if ($box)
+				if ($box) {
 					$width = get_user_meta($user_ID, c_al2fb_meta_like_box_width, true);
-				else
+					$height = get_user_meta($user_ID, c_al2fb_meta_like_box_height, true);
+				}
+				else {
 					$width = get_user_meta($user_ID, c_al2fb_meta_like_width, true);
+					$height = false;
+				}
 				$action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
 				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
@@ -1088,6 +1138,8 @@ if (!class_exists('WPAL2Int')) {
 						$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
 					$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
 					$content .= ' width="' . (empty($width) ? ($box ? '292' : '450') : $width) . '"';
+					if ($height)
+						$content .= ' height="' . $height . '"';
 					if (!$box) {
 						$content .= ' action="' . (empty($action) ? 'like' : $action) . '"';
 						$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
@@ -1734,12 +1786,9 @@ if (!class_exists('WPAL2Int')) {
 				if ($errno || !$error)
 					$msg = 'cURL communication error ' . $errno . ' ' . $errtext . ': ' . $error . ' ' . print_r($info, true);
 				else
-					$msg = $error;
+					$msg = 'Facebook error: ' . $error;
 
-				if (get_option(c_al2fb_option_debug))
-					$msg .= print_r(debug_backtrace(), true);
-
-				update_option(c_al2fb_last_error, $msg);
+				update_option(c_al2fb_last_error, $msg . ' ' . print_r(debug_backtrace(), true));
 				update_option(c_al2fb_last_error_time, date('c'));
 				throw new Exception($msg);
 			}
