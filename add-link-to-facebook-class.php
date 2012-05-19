@@ -836,6 +836,9 @@ if (!class_exists('WPAL2Facebook')) {
 				$exclude = true;
 			$chk_exclude = ($exclude ? ' checked' : '');
 
+			$exclude_video = get_post_meta($post->ID, c_al2fb_meta_exclude_video, true);
+			$chk_exclude_video = ($exclude_video ? ' checked' : '');
+
 			// Get no like button indication
 			$chk_nolike = (get_post_meta($post->ID, c_al2fb_meta_nolike, true) ? ' checked' : '');
 			$chk_nointegrate = (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true) ? ' checked' : '');
@@ -916,6 +919,9 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 			<input id="al2fb_exclude" type="checkbox" name="<?php echo c_al2fb_meta_exclude; ?>"<?php echo $chk_exclude; ?> />
 			<label for="al2fb_exclude"><?php _e('Do not add link to Facebook', c_al2fb_text_domain); ?></label>
+			<br />
+			<input id="al2fb_exclude_video" type="checkbox" name="<?php echo c_al2fb_meta_exclude_video; ?>"<?php echo $chk_exclude_video; ?> />
+			<label for="al2fb_exclude_video"><?php _e('Do not add video to Facebook', c_al2fb_text_domain); ?></label>
 			<br />
 			<input id="al2fb_nolike" type="checkbox" name="<?php echo c_al2fb_meta_nolike; ?>"<?php echo $chk_nolike; ?> />
 			<label for="al2fb_nolike"><?php _e('Do not add like button', c_al2fb_text_domain); ?></label>
@@ -1212,6 +1218,10 @@ if (!class_exists('WPAL2Facebook')) {
 				update_post_meta($post_id, c_al2fb_meta_exclude, true);
 			else
 				delete_post_meta($post_id, c_al2fb_meta_exclude);
+			if (isset($_POST[c_al2fb_meta_exclude_video]) && $_POST[c_al2fb_meta_exclude_video])
+				update_post_meta($post_id, c_al2fb_meta_exclude_video, true);
+			else
+				delete_post_meta($post_id, c_al2fb_meta_exclude_video);
 
 			// Process no like indication
 			if (isset($_POST[c_al2fb_meta_nolike]) && $_POST[c_al2fb_meta_nolike])
@@ -1608,6 +1618,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get link video
 		function Get_link_video($post, $user_ID) {
+			if (get_post_meta($post->ID, c_al2fb_meta_exclude_video, true))
+				return;
+
 			$video = get_post_meta($post->ID, c_al2fb_meta_video, true);
 			if (empty($video)) {
 				// http://wordpress.org/extend/plugins/vipers-video-quicktags/

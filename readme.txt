@@ -740,7 +740,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: option to not add video to Facebook
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 Follow these steps to install the development version:
 

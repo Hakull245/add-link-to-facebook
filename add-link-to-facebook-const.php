@@ -146,6 +146,7 @@ define('c_al2fb_meta_link_id', 'al2fb_facebook_link_id');
 define('c_al2fb_meta_link_time', 'al2fb_facebook_link_time');
 define('c_al2fb_meta_link_picture', 'al2fb_facebook_link_picture');
 define('c_al2fb_meta_exclude', 'al2fb_facebook_exclude');
+define('c_al2fb_meta_exclude_video', 'al2fb_facebook_exclude_video');
 define('c_al2fb_meta_error', 'al2fb_facebook_error');
 define('c_al2fb_meta_error_time', 'al2fb_facebook_error_time');
 define('c_al2fb_meta_image_id', 'al2fb_facebook_image_id');
