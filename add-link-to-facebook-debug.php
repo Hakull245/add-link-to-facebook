@@ -236,7 +236,7 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>No shortcode:</td><td>' . (get_option(c_al2fb_option_noshortcode) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>No filter:</td><td>' . (get_option(c_al2fb_option_nofilter) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>No filter comments:</td><td>' . (get_option(c_al2fb_option_nofilter_comments) ? 'Yes' : 'No') . '</td></tr>';
-	$info .= '<tr><td>Site URL:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_siteurl), ENT_QUOTES, $charset) . '</td></tr>';
+	$info .= '<tr><td>Site URL:</td><td>' . (get_option(c_al2fb_option_siteurl) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Do not use cURL:</td><td>' . (get_option(c_al2fb_option_nocurl) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Use publish_post:</td><td>' . (get_option(c_al2fb_option_use_pp) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Debug:</td><td>' . (get_option(c_al2fb_option_debug) ? 'Yes' : 'No') . '</td></tr>';
@@ -244,6 +244,8 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>SSP info:</td><td><a href="' . get_option(c_al2fb_option_ssp_info) . '">link</a></td></tr>';
 	$info .= '<tr><td>Filter prio:</td><td>' . intval(get_option(c_al2fb_option_filter_prio)) . '</td></tr>';
 	$info .= '<tr><td>No script:</td><td>' . (get_option(c_al2fb_option_noscript) ? 'Yes' : 'No') . '</td></tr>';
+	$info .= '<tr><td>Links API:</td><td>' . (get_option(c_al2fb_option_uselinks) ? 'Yes' : 'No') . '</td></tr>';
+	$info .= '<tr><td>No token refresh:</td><td>' . (get_option(c_al2fb_option_notoken_refresh) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Clean:</td><td>' . (get_option(c_al2fb_option_clean) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>CSS:</td><td>' . htmlspecialchars(get_option(c_al2fb_option_css), ENT_QUOTES, $charset) . '</td></tr>';
 

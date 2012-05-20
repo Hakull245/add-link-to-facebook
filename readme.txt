@@ -741,6 +741,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * New feature: option to not add video to Facebook
+* Improvement: more debug info
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
