@@ -723,12 +723,14 @@ You can open a topic in the [support forum](http://forum.faircode.eu/).
 
 = S02 How can I send the debug information? =
 
+**Only send debug information when asked for and always include a valid support forum topic link**
+
+Debug information not asked for and without valid support forum topic link will be ignored.
+
 Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the right yellow *Resources* panel.
 Fill in your name, your e-mail address,
 a link to the [support forum](http://forum.faircode.eu/) where you reported the problem before
 and describe the problem as accurate as possible and press the *Send* button.
-
-**Debug information without a valid support forum topic link will not be answered!**
 
 == Screenshots ==
 
