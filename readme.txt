@@ -715,6 +715,13 @@ Double check the App ID in the Easy setup section and try to authorize the plugi
 The access token has expired for some reason.
 This problem can probably be solved by authorizing the plugin again.
 
+= E27 I get a blank settings page / authorizing the plugin =
+
+It could be that your hosting server is blocking things (firewall, max. execution time, etc)
+or that your local firewall is blocking things.
+
+If you have access to your hosting server logs, check if there are error messages.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
