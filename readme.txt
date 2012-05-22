@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.3.2
-Stable tag: 1.156
+Stable tag: 1.157
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -52,8 +52,6 @@ Please report any issue you have with this plugin in the [support forum](http://
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
-
-**Translators can get the [Pro version](http://www.faircode.eu/al2fbpro/) without donating**
 
 * English (en\_US), built-in, corrections are welcome
 * Dutch (nl\_NL) by [Marcel](http://blog.bokhorst.biz/about/ "Marcel Bokhorst") and [Satyamo](http://www.satyamo.nl/ "Satyamo"), thanks!
@@ -447,10 +445,11 @@ First check if the setting *Integrate comments from Facebook* on the plugin sett
 It could be that your theme is incompatible with this feature.
 Switch back to the default theme (Twenty Ten/Eleven),
 wait at least 10 minutes (because of caching) and then refresh the post page where you expect Facebook comments.
-Please note that only comments on links added by the plugin are imported (the link is the anchor)
-and only as native comments (the Facebook comments plugin only works on the WordPress site and this cannot be changed).
+Please note that only comments on links added by the plugin are imported (the link is the anchor) and only as native comments.
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
+
+**Comments are not imported for the [Facebook comments plugin](https://developers.facebook.com/docs/reference/plugins/comments/)**
 
 For posts with comments disabled or which are excluded based on the settings tab admin or in the post editor, no comments will be imported.
 To prevent problems with Facebook, only comments for young posts are imported (less than a week old).
@@ -718,7 +717,7 @@ This problem can probably be solved by authorizing the plugin again.
 = E27 I get a blank settings page / authorizing the plugin =
 
 It could be that your hosting server is blocking things (firewall, max. execution time, etc)
-or that your local firewall is blocking things.
+or that your local firewall is blocking things or that your browser is incompatible.
 
 If you have access to your hosting server logs, check if there are error messages.
 
@@ -749,10 +748,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* New feature: option to not add video to Facebook
-* Improvement: more debug info
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* ...
 
 Follow these steps to install the development version:
 
@@ -766,6 +762,14 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.157 =
+* New feature: option to not add video to Facebook
+* Improvement: more debug info
+* Updated FAQ
+* Updated CA certificates
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.156 =
 * Bugfix: no like button etc, in feed
@@ -797,6 +801,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.157 =
+One new feature, one improvement, updated FAQ, translation updates
 
 = 1.156 =
 Four bugfixes, three new features, four improvements, new/updated translations

@@ -821,6 +821,7 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_comments_auto"><?php _e('Display automatically after post:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_comments_auto" name="<?php echo c_al2fb_meta_comments_auto; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_comments_auto, true)) echo ' checked="checked"'; ?> />
+		<br /><span><?php _e('There is no comment integration for the Facebook comments plugin!', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
 	</table>
