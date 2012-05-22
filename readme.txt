@@ -449,10 +449,12 @@ Please note that only comments on links added by the plugin are imported (the li
 Another potential problem are the privacy settings of the Facebook account that was used to comment on Facebook.
 Try writing a comment with another Facebook account.
 
-**Comments are not imported for the [Facebook comments plugin](https://developers.facebook.com/docs/reference/plugins/comments/)**
-
 For posts with comments disabled or which are excluded based on the settings tab admin or in the post editor, no comments will be imported.
 To prevent problems with Facebook, only comments for young posts are imported (less than a week old).
+
+**Comments are not imported for the [Facebook comments plugin](https://developers.facebook.com/docs/reference/plugins/comments/)**
+
+See also question U27.
 
 = U40 I don't see pictures in the messages widget =
 
@@ -476,6 +478,11 @@ Enable these options:
 
 Thank Facebook for this.
 You might be able to fix it by switching to the links API, but read about the limitations in question U37.
+
+= U44 The option 'Picture size sent to Facebook' does not work =
+
+Facebook only shows thumbnails for link pictures (see also question U27).
+This option exists only to solve aspect ratio problems in some case.
 
 **--- Security ---**
 
