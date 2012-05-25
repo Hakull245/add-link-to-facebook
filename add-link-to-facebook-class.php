@@ -86,6 +86,10 @@ if (!class_exists('WPAL2Facebook')) {
 			add_action('comment_post', array(&$this, 'Comment_post'), 999);
 			add_action('comment_unapproved_to_approved', array(&$this, 'Comment_approved'));
 			add_action('comment_approved_to_unapproved', array(&$this, 'Comment_unapproved'));
+			add_action('trash_comment', array(&$this, 'Comment_trash'));
+			add_action('untrash_comment', array(&$this, 'Comment_untrash'));
+			add_action('spam_comment',  array(&$this, 'Comment_spam'));
+			add_action('unspam_comment',  array(&$this, 'Comment_unspam'));
 			add_action('delete_comment', array(&$this, 'Delete_comment'));
 
 			$fprio = intval(get_option(c_al2fb_option_filter_prio));
@@ -1724,7 +1728,8 @@ if (!class_exists('WPAL2Facebook')) {
 		// New comment
 		function Comment_post($comment_ID) {
 			$comment = get_comment($comment_ID);
-			if ($comment->comment_approved == '1' && $comment->comment_agent != 'AL2FB')
+			if ($comment->comment_approved == '1' &&
+				$comment->comment_agent != 'AL2FB')
 				WPAL2Int::Add_fb_link_comment($comment);
 		}
 
@@ -1736,7 +1741,26 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Disapproved comment
 		function Comment_unapproved($comment) {
-			WPAL2Int::Delete_fb_link_comment($comment);
+			if ($comment->comment_agent != 'AL2FB')
+				WPAL2Int::Delete_fb_link_comment($comment);
+		}
+
+		function Comment_trash($comment_ID) {
+			$comment = get_comment($comment_ID);
+			self::Comment_unapproved($comment);
+		}
+
+		function Comment_untrash($comment_ID) {
+			$comment = get_comment($comment_ID);
+			self::Comment_approved($comment);
+		}
+
+		function Comment_spam($comment_ID) {
+			self::Comment_trash($comment_ID);
+		}
+
+		function Comment_unspam($comment_ID) {
+			self::Comment_untrash($comment_ID);
 		}
 
 		// Permanently delete comment
@@ -1745,9 +1769,10 @@ if (!class_exists('WPAL2Facebook')) {
 			$comment = get_comment($comment_ID);
 			$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
 
-			// Save Facebook ID
+			// Save Facebook ID to prevent import again
 			if (!empty($fb_comment_id))
-				add_post_meta($comment->comment_post_ID, c_al2fb_meta_fb_comment_id, $fb_comment_id, false);
+				if ($comment->comment_agent == 'AL2FB')
+					add_post_meta($comment->comment_post_ID, c_al2fb_meta_fb_comment_id, $fb_comment_id, false);
 		}
 
 		function Is_authorized($user_ID) {
