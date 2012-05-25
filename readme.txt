@@ -255,6 +255,8 @@ Assuming that you have configured and authorize the plugin, you can check this:
 
 Note that each WordPress user should authorize the plugin, unless you check the option *Share with all users on this site* in the Easy setup section.
 
+See also question U41.
+
 = U22 Where are the settings of the plugin? =
 
 In the WordPress menu *Tools*.
@@ -464,6 +466,8 @@ Consider using the activity feed instead.
 = U41 Added links do not show up in the news feed =
 
 Read [Your Average Facebook Post Only Reaches 12% Of Your Friends](http://techcrunch.com/2012/02/29/facebook-post-reach-16-friends/) to understand why.
+
+Added links are often not visible on your own timeline too.
 
 = U42 I want to edit/moderate imported Facebook comments =
 
