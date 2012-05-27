@@ -32,6 +32,11 @@ Author URI: http://blog.bokhorst.biz/about/
 if (version_compare(PHP_VERSION, '5.0.0', '<'))
 	die('Add Link to Facebook requires at least PHP 5, installed version is ' . PHP_VERSION);
 
+if (get_option(c_al2fb_option_debug)) {
+	error_reporting(E_ALL);
+	define('WP_DEBUG', true);
+}
+
 // Auto load classs
 if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
 	function __autoload_al2fb($class_name) {
