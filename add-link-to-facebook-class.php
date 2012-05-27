@@ -2305,7 +2305,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 										// Add comment to array
 										if ($commentdata['comment_approved'] == 1) {
-											$new = null;
+											$new = new stdClass();
 											$new->comment_ID = $comment_ID;
 											$new->comment_post_ID = $commentdata['comment_post_ID'];
 											$new->comment_author = $commentdata['comment_author'];
@@ -2341,7 +2341,7 @@ if (!class_exists('WPAL2Facebook')) {
 						foreach ($fb_likes->data as $fb_like) {
 							// Create new virtual comment
 							$link = WPAL2Int::Get_fb_profilelink($fb_like->id);
-							$new = null;
+							$new = new stdClass();
 							$new->comment_ID = $fb_like->id;
 							$new->comment_post_ID = $post_ID;
 							$new->comment_author = $fb_like->name . ' ' . __('on Facebook', c_al2fb_text_domain);
