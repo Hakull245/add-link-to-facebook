@@ -759,6 +759,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
+* Bugfix: fixed a notice while importing comments/likes
 * New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
