@@ -80,7 +80,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
 
@@ -760,6 +760,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * Bugfix: fixed a notice while importing comments/likes
+* Bugfix: fixed a notice redeclaring a function
 * New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
 * New feature: unapprove Facebook comments (it is not possible to approve again!)
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
