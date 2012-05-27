@@ -1741,7 +1741,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Disapproved comment
 		function Comment_unapproved($comment) {
-			if ($comment->comment_agent != 'AL2FB')
+			//if ($comment->comment_agent != 'AL2FB')
 				WPAL2Int::Delete_fb_link_comment($comment);
 		}
 
