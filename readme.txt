@@ -760,6 +760,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * Bugfix: fixed a notice while importing comments/likes
+* Bugfix: fixed a notice redeclaring a function
 * New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
 * New feature: unapprove Facebook comments (it is not possible to approve again!)
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
