@@ -3,7 +3,7 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.3.2
+Tested up to: 3.4
 Stable tag: 1.157
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
@@ -742,7 +742,7 @@ You can open a topic in the [support forum](http://forum.faircode.eu/).
 
 **Only send debug information when asked for and always include a valid support forum topic link**
 
-Debug information not asked for and without valid support forum topic link will be ignored.
+Debug information not asked for or without valid support forum topic link will be ignored.
 
 Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the right yellow *Resources* panel.
 Fill in your name, your e-mail address,
@@ -763,6 +763,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 * Bugfix: fixed a notice redeclaring a function
 * New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
 * Improvement: more debug info
+* Tested with WordPress 3.4 RC
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 Follow these steps to install the development version:
