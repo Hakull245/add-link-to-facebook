@@ -732,6 +732,10 @@ or that your local firewall is blocking things or that your browser is incompati
 
 If you have access to your hosting server logs, check if there are error messages.
 
+= E28 I get 'Requires extended permission: share_item' =
+
+Authorizing the plugin again is reported to solve this problem.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -859,12 +863,15 @@ Note that you don't have to submit the Facebook application to the *App Director
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
-If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php "Confirm phone").
+If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php).
 
 Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, don't hesitate to leave a message on the [support forum](http://forum.faircode.eu/).
+If you need help, you can leave a message on the [support forum](http://forum.faircode.eu/).
+
+If you need to setup the plugin again for some reason,
+just remove the Facebook App ID & Secret from the Easy setup section of the plugin settings page.
 
 == User Guide ==
 
