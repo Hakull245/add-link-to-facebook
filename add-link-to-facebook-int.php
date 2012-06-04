@@ -806,6 +806,9 @@ if (!class_exists('WPAL2Int')) {
 
 				// Delete meta data
 				delete_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id);
+
+				if (get_option(c_al2fb_option_debug))
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' deleted comment=' . $comment->comment_ID . ' fib=' . $fb_comment_id);
 			}
 			catch (Exception $e) {
 				update_post_meta($post->ID, c_al2fb_meta_error, 'Delete comment: ' . $e->getMessage());
@@ -865,6 +868,9 @@ if (!class_exists('WPAL2Int')) {
 				// Process response
 				$fb_comment = json_decode($response);
 				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+
+				if (get_option(c_al2fb_option_debug))
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' added comment=' . $comment->comment_ID . ' fib=' . $fb_comment->id);
 
 				// Remove previous errors
 				$error = get_post_meta($post->ID, c_al2fb_meta_error, true);

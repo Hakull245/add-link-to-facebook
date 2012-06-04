@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.3.2
-Stable tag: 1.157
+Tested up to: 3.4
+Stable tag: 1.158
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -732,6 +732,10 @@ or that your local firewall is blocking things or that your browser is incompati
 
 If you have access to your hosting server logs, check if there are error messages.
 
+= E28 I get 'Requires extended permission: share_item' =
+
+Authorizing the plugin again is reported to solve this problem.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -742,7 +746,7 @@ You can open a topic in the [support forum](http://forum.faircode.eu/).
 
 **Only send debug information when asked for and always include a valid support forum topic link**
 
-Debug information not asked for and without valid support forum topic link will be ignored.
+Debug information not asked for or without valid support forum topic link will be ignored.
 
 Go to the plugin page (via the *Tools* menu) and click on the link *Debug information* in the right yellow *Resources* panel.
 Fill in your name, your e-mail address,
@@ -759,8 +763,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* ...
 
 Follow these steps to install the development version:
 
@@ -774,6 +777,15 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.158 =
+* Bugfix: fixed a notice while importing comments/likes
+* Bugfix: fixed a notice redeclaring a function
+* New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
+* Improvement: more debug info
+* Tested with WordPress 3.4 RC
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = 1.157 =
 * New feature: option to not add video to Facebook
@@ -799,29 +811,20 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.155 =
-* Bugfix: caching of Facebook page information
-* Improvement: show all walls in easy setup section ([Pro version](http://www.faircode.eu/al2fbpro/) only)
-* Improvement: show all added links in post list ([Pro version](http://www.faircode.eu/al2fbpro/) only)
-* Improvement: show wall names in post list (instead of *Yes*)
-* Improvement: display zero number of comments/likes in post list
-* Improvement: setting user agent for *get_headers*
-* Improvement: more debug info
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.158 =
+Two bugfixes, one new feature, one improvement, updated translations
+
 = 1.157 =
 One new feature, one improvement, updated FAQ, translation updates
 
 = 1.156 =
 Four bugfixes, three new features, four improvements, new/updated translations
-
-= 1.155 =
-One bugfix, six improvements
 
 == Setup guide ==
 
@@ -854,12 +857,15 @@ Note that you don't have to submit the Facebook application to the *App Director
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
-If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php "Confirm phone").
+If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php).
 
 Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, don't hesitate to leave a message on the [support forum](http://forum.faircode.eu/).
+If you need help, you can leave a message on the [support forum](http://forum.faircode.eu/).
+
+If you need to setup the plugin again for some reason,
+just remove the Facebook App ID & Secret from the Easy setup section of the plugin settings page.
 
 == User Guide ==
 

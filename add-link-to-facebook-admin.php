@@ -1561,6 +1561,8 @@ function al2fb_render_debug_info($al2fb) {
 		$msg = str_replace('[FAQ]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/', $msg);
 		echo '<br /><strong><span style="color: red;">' . $msg . '</span></strong>';
 ?>
+		<br />
+		<br /><strong><span style="color: red;"><?php _e('Debug information not asked for or without valid support forum topic link will be ignored', c_al2fb_text_domain); ?></span></strong>
 		<p class="submit">
 		<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
 		</p>
