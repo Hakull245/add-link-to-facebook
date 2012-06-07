@@ -995,6 +995,7 @@ if (!class_exists('WPAL2Int')) {
 					foreach ($pages->data as $page)
 						if ($page->id == $page_id)
 							return $page->access_token;
+				throw new Exception('Page access token for page "' . $page_id . '" not found');
 			}
 			return WPAL2Int::Get_access_token($user_ID);
 		}
