@@ -767,7 +767,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* Improvement: error if page access token not found
 
 Follow these steps to install the development version:
 
