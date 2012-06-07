@@ -736,6 +736,10 @@ If you have access to your hosting server logs, check if there are error message
 
 Authorizing the plugin again is reported to solve this problem.
 
+= E29 I get 'Subject must be a page' =
+
+This seems to be a [Facebook bug](https://developers.connect.facebook.com/bugs/149252845187252).
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
