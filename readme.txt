@@ -738,7 +738,8 @@ Authorizing the plugin again is reported to solve this problem.
 
 = E29 I get 'Subject must be a page' =
 
-This seems to be a [Facebook bug](https://developers.connect.facebook.com/bugs/149252845187252).
+This is probably because you are trying to add links to an application page.
+Check the pages you are adding links to on the plugin settings tab Page/group.
 
 **--- Support ---**
 
