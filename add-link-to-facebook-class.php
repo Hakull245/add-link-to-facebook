@@ -634,7 +634,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			if (empty($_POST[c_al2fb_mail_topic]) ||
 				$_POST[c_al2fb_mail_topic] == 'http://forum.faircode.eu/' ||
-				!(strpos($_POST[c_al2fb_mail_topic], 'http://forum.faircode.eu/') === 0)
+				!(strpos($_POST[c_al2fb_mail_topic], 'http://forum.faircode.eu/') === 0))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
 			else {
 				// Build headers
