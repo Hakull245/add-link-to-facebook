@@ -459,6 +459,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_some_friends, $_POST[c_al2fb_meta_some_friends]);
 			update_user_meta($user_ID, c_al2fb_meta_add_new_page, $_POST[c_al2fb_meta_add_new_page]);
 			update_user_meta($user_ID, c_al2fb_meta_show_permalink, $_POST[c_al2fb_meta_show_permalink]);
+			update_user_meta($user_ID, c_al2fb_meta_social_noexcerpt, $_POST[c_al2fb_meta_social_noexcerpt]);
 			update_user_meta($user_ID, c_al2fb_meta_trailer, $_POST[c_al2fb_meta_trailer]);
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_share_link, $_POST[c_al2fb_meta_share_link]);
@@ -632,8 +633,8 @@ if (!class_exists('WPAL2Facebook')) {
 			require_once('add-link-to-facebook-debug.php');
 
 			if (empty($_POST[c_al2fb_mail_topic]) ||
-				!(strpos($_POST[c_al2fb_mail_topic], 'http://') === 0 ||
-				strpos($_POST[c_al2fb_mail_topic], 'https://') === 0))
+				$_POST[c_al2fb_mail_topic] == 'http://forum.faircode.eu/' ||
+				!(strpos($_POST[c_al2fb_mail_topic], 'http://forum.faircode.eu/') === 0)
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
 			else {
 				// Build headers
@@ -1918,7 +1919,7 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 
 			// Do not process feed / excerpt
-			if (is_feed() || in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
+			if (is_feed() || WPAL2Int::in_excerpt())
 				return $content;
 
 			$user_ID = self::Get_user_ID($post);
@@ -2130,7 +2131,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_likers($post) {
 			$likers = '';
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID && !self::Is_excluded($post)) {
+			if ($user_ID && !self::Is_excluded($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				$charset = get_bloginfo('charset');
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if ($fb_likes)
@@ -2156,7 +2157,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like count
 		function Get_like_count($post) {
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID && !self::Is_excluded($post)) {
+			if ($user_ID && !self::Is_excluded($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if ($fb_likes && count($fb_likes->data) > 0)
