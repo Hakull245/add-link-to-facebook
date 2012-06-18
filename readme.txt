@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.4
-Stable tag: 1.158
+Stable tag: 1.159
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -768,7 +768,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* New feature: option to disable social plugins (for example like button) in excerpts
+* ...
 
 Follow these steps to install the development version:
 
@@ -782,6 +782,10 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.159 =
+* New feature: option to disable social plugins (for example like button) in excerpts
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.158 =
 * Bugfix: fixed a notice while importing comments/likes
@@ -800,36 +804,20 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.156 =
-* Bugfix: no like button etc, in feed
-* Bugfix: use selected image size for post meta box
-* Bugfix: user settings for multi-domain sites
-* Bugfix: authorize redirect for multi-domain sites
-* New feature: option to set like box height
-* New feature: option to disable refreshing access tokens
-* New feature: display wall name for added links in post editor
-* Improvement: og:locale for home page on multi-user sites
-* Improvement: og:description site title if no site description
-* Improvement: fixed a notice parsing video URL's
-* Improvement: more debug information
-* Added (Brazilian) Portuguese (pt\_BR/pt_PT) translation by [Claudio Lessa](http://www.claudiolessa.com/ "Claudio Lessa")
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.159 =
+One new feature, translation update
+
 = 1.158 =
 Two bugfixes, one new feature, one improvement, updated translations
 
 = 1.157 =
 One new feature, one improvement, updated FAQ, translation updates
-
-= 1.156 =
-Four bugfixes, three new features, four improvements, new/updated translations
 
 == Setup guide ==
 
