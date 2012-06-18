@@ -1086,6 +1086,13 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_social_noexcerpt"><?php _e('Do not show social plugins in excerpts:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_social_noexcerpt" name="<?php echo c_al2fb_meta_social_noexcerpt; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_social_noexcerpt, true)) echo ' checked="checked"'; ?> />
+		<br /><span class="al2fb_explanation"><?php _e('For example like button', c_al2fb_text_domain); ?><span>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_fb_encoding"><?php _e('Facebook character encoding:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_encoding" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_encoding; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_encoding, true); ?>" />
@@ -1561,6 +1568,8 @@ function al2fb_render_debug_info($al2fb) {
 		$msg = str_replace('[FAQ]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/', $msg);
 		echo '<br /><strong><span style="color: red;">' . $msg . '</span></strong>';
 ?>
+		<br />
+		<br /><strong><span style="color: red;"><?php _e('Debug information not asked for or without valid support forum topic link will be ignored', c_al2fb_text_domain); ?></span></strong>
 		<p class="submit">
 		<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
 		</p>

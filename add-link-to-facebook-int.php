@@ -806,6 +806,9 @@ if (!class_exists('WPAL2Int')) {
 
 				// Delete meta data
 				delete_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id);
+
+				if (get_option(c_al2fb_option_debug))
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' deleted comment=' . $comment->comment_ID . ' fib=' . $fb_comment_id);
 			}
 			catch (Exception $e) {
 				update_post_meta($post->ID, c_al2fb_meta_error, 'Delete comment: ' . $e->getMessage());
@@ -865,6 +868,9 @@ if (!class_exists('WPAL2Int')) {
 				// Process response
 				$fb_comment = json_decode($response);
 				add_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, $fb_comment->id);
+
+				if (get_option(c_al2fb_option_debug))
+					add_post_meta($post->ID, c_al2fb_meta_log, date('c') . ' added comment=' . $comment->comment_ID . ' fib=' . $fb_comment->id);
 
 				// Remove previous errors
 				$error = get_post_meta($post->ID, c_al2fb_meta_error, true);
@@ -1039,7 +1045,7 @@ if (!class_exists('WPAL2Int')) {
 		// Get HTML for like button
 		static function Get_like_button($post, $box) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
@@ -1165,7 +1171,7 @@ if (!class_exists('WPAL2Int')) {
 		// Get HTML for like button
 		static function Get_send_button($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				// Get options
 				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
@@ -1195,7 +1201,7 @@ if (!class_exists('WPAL2Int')) {
 				return '';
 
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				// Get options
 				$posts = get_user_meta($user_ID, c_al2fb_meta_comments_posts, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_comments_width, true);
@@ -1224,7 +1230,7 @@ if (!class_exists('WPAL2Int')) {
 		// Get HTML face pile
 		static function Get_face_pile($post) {
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				// Get options
 				$size = get_user_meta($user_ID, c_al2fb_meta_pile_size, true);
 				$width = get_user_meta($user_ID, c_al2fb_meta_pile_width, true);
@@ -1275,7 +1281,7 @@ if (!class_exists('WPAL2Int')) {
 
 			// Get data
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				// Check if user logged in
 				if (is_user_logged_in())
 					return do_shortcode(get_user_meta($user_ID, c_al2fb_meta_login_html, true));
@@ -1315,7 +1321,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_login($post) {
 			// Get data
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				// Check if user logged in
 				if (is_user_logged_in())
 					return do_shortcode(get_user_meta($user_ID, c_al2fb_meta_login_html, true));
@@ -1377,7 +1383,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_activity_feed($post) {
 			// Get data
 			$user_ID = WPAL2Facebook::Get_user_ID($post);
-			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post)) {
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 
 				// Get options
 				$domain = $_SERVER['HTTP_HOST'];
@@ -1658,6 +1664,19 @@ if (!class_exists('WPAL2Int')) {
 					return null;
 				}
 			return null;
+		}
+
+		static function in_excerpt() {
+			return
+				in_array('the_excerpt', $GLOBALS['wp_current_filter']) ||
+				in_array('get_the_excerpt', $GLOBALS['wp_current_filter']);
+		}
+
+		static function social_in_excerpt($user_ID) {
+			if (get_user_meta($user_ID, c_al2fb_meta_social_noexcerpt, true))
+				return WPAL2Int::in_excerpt();
+			else
+				return false;
 		}
 
 		// Generic http request
