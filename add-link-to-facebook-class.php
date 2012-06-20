@@ -454,6 +454,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_group_extra, $_POST[c_al2fb_meta_group_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
+			update_user_meta($user_ID, c_al2fb_meta_auto_excerpt, $_POST[c_al2fb_meta_auto_excerpt]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_privacy, $_POST[c_al2fb_meta_privacy]);
 			update_user_meta($user_ID, c_al2fb_meta_some_friends, $_POST[c_al2fb_meta_some_friends]);
@@ -1451,6 +1452,15 @@ if (!class_exists('WPAL2Facebook')) {
 				$excerpt = $post->post_excerpt;
 				if (!get_option(c_al2fb_option_nofilter))
 					$excerpt = apply_filters('the_excerpt', $excerpt);
+				if (empty($excerpt) && get_user_meta($user_ID, c_al2fb_meta_auto_excerpt, true)) {
+					$excerpt = strip_tags(strip_shortcodes($post->post_content));
+					$words = explode(' ', $excerpt, 55 + 1);
+					if (count($words) > 55) {
+						array_pop($words);
+						array_push($words, '…');
+						$excerpt = implode(' ', $words);
+					}
+				}
 			}
 			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
 

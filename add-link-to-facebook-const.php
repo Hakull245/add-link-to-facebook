@@ -74,6 +74,7 @@ define('c_al2fb_meta_group', 'al2fb_group');
 define('c_al2fb_meta_group_extra', 'al2fb_group_extra');
 define('c_al2fb_meta_caption', 'al2fb_caption');
 define('c_al2fb_meta_msg', 'al2fb_msg');
+define('c_al2fb_meta_auto_excerpt', 'al2fb_auto_excerpt');
 define('c_al2fb_meta_shortlink', 'al2fb_shortlink');
 define('c_al2fb_meta_privacy', 'al2fb_privacy');
 define('c_al2fb_meta_some_friends', 'al2fb_some_friends');

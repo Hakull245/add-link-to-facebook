@@ -768,7 +768,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: option to automatically generate excerpts (like WordPress does)
 
 Follow these steps to install the development version:
 

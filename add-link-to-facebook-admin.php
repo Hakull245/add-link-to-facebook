@@ -593,6 +593,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_auto_excerpt"><?php _e('Automatically generate excerpt:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_auto_excerpt" name="<?php echo c_al2fb_meta_auto_excerpt; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_auto_excerpt, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_trailer"><?php _e('Text trailer:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_trailer" class="al2fb_text" name="<?php echo c_al2fb_meta_trailer; ?>" type="text" value="<?php  echo htmlentities(get_user_meta($user_ID, c_al2fb_meta_trailer, true), ENT_QUOTES, get_bloginfo('charset')); ?>" />
