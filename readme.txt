@@ -784,6 +784,7 @@ Follow these steps to install the development version:
 * Reports that everything works are also appreciated :-)
 
 = 1.159 =
+* Bugfix: fixed a notice for an undefined constant
 * New feature: option to disable social plugins (for example like button) in excerpts
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
