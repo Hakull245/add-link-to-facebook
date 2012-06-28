@@ -488,6 +488,11 @@ You might be able to fix it by switching to the links API, but read about the li
 Facebook only shows thumbnails for link pictures (see also question U27).
 This option exists only to solve aspect ratio problems in some case.
 
+= U45 I don't see the 'Create New App' button =
+
+You are probably using a non-personal Facebook account type.
+Try to login with a personal Facebook account that has access to the page you want to add links to.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
