@@ -513,6 +513,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
+			update_user_meta($user_ID, c_al2fb_meta_exclude_default_video, $_POST[c_al2fb_meta_exclude_default_video]);
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
@@ -832,17 +833,19 @@ if (!class_exists('WPAL2Facebook')) {
 				!current_user_can(get_option(c_al2fb_option_min_cap)))
 				return;
 
-			// Get user
+			// Get user/link
 			$user_ID = self::Get_user_ID($post);
+			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
-			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
 			if (!$link_ids && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
 				$exclude = true;
 			$chk_exclude = ($exclude ? ' checked' : '');
 
 			$exclude_video = get_post_meta($post->ID, c_al2fb_meta_exclude_video, true);
+			if (!$link_ids && get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true))
+				$exclude_video = true;
 			$chk_exclude_video = ($exclude_video ? ' checked' : '');
 
 			// Get no like button indication

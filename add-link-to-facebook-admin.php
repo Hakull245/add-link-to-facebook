@@ -1074,6 +1074,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_exclude_default_video"><?php _e('Do not add video by default:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_exclude_default_video" name="<?php echo c_al2fb_meta_exclude_default_video; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_not_post_list"><?php _e('Don\'t show a summary in the post list:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_not_post_list" name="<?php echo c_al2fb_meta_not_post_list; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_not_post_list, true)) echo ' checked="checked"'; ?> />

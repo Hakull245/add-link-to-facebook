@@ -134,6 +134,7 @@ define('c_al2fb_meta_open_graph', 'al2fb_open_graph');
 define('c_al2fb_meta_open_graph_type', 'al2fb_open_graph_type');
 define('c_al2fb_meta_open_graph_admins', 'al2fb_open_graph_admins');
 define('c_al2fb_meta_exclude_default', 'al2fb_exclude_default');
+define('c_al2fb_meta_exclude_default_video', 'al2fb_exclude_default_video');
 define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
 define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
