@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.4.1
-Stable tag: 1.159
+Stable tag: 1.161
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -773,9 +773,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* New feature: option to automatically generate excerpts (like WordPress does)
-* New feature: do not add video can be set by default (option)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* ...
 
 Follow these steps to install the development version:
 
@@ -789,6 +787,11 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.161 =
+* New feature: option to automatically generate excerpts (like WordPress does)
+* New feature: do not add video can be set by default (option)
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.159 =
 * Bugfix: fixed a notice for an undefined constant
@@ -804,28 +807,20 @@ Follow these steps to install the development version:
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
-= 1.157 =
-* New feature: option to not add video to Facebook
-* Improvement: more debug info
-* Updated FAQ
-* Updated CA certificates
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.161 =
+Two new features, translation update
+
 = 1.159 =
 One new feature, translation update
 
 = 1.158 =
 Two bugfixes, one new feature, one improvement, updated translations
-
-= 1.157 =
-One new feature, one improvement, updated FAQ, translation updates
 
 == Setup guide ==
 
