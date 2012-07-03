@@ -454,11 +454,13 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_group_extra, $_POST[c_al2fb_meta_group_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
+			update_user_meta($user_ID, c_al2fb_meta_auto_excerpt, $_POST[c_al2fb_meta_auto_excerpt]);
 			update_user_meta($user_ID, c_al2fb_meta_shortlink, $_POST[c_al2fb_meta_shortlink]);
 			update_user_meta($user_ID, c_al2fb_meta_privacy, $_POST[c_al2fb_meta_privacy]);
 			update_user_meta($user_ID, c_al2fb_meta_some_friends, $_POST[c_al2fb_meta_some_friends]);
 			update_user_meta($user_ID, c_al2fb_meta_add_new_page, $_POST[c_al2fb_meta_add_new_page]);
 			update_user_meta($user_ID, c_al2fb_meta_show_permalink, $_POST[c_al2fb_meta_show_permalink]);
+			update_user_meta($user_ID, c_al2fb_meta_social_noexcerpt, $_POST[c_al2fb_meta_social_noexcerpt]);
 			update_user_meta($user_ID, c_al2fb_meta_trailer, $_POST[c_al2fb_meta_trailer]);
 			update_user_meta($user_ID, c_al2fb_meta_hyperlink, $_POST[c_al2fb_meta_hyperlink]);
 			update_user_meta($user_ID, c_al2fb_meta_share_link, $_POST[c_al2fb_meta_share_link]);
@@ -511,6 +513,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_type, $_POST[c_al2fb_meta_open_graph_type]);
 			update_user_meta($user_ID, c_al2fb_meta_open_graph_admins, $_POST[c_al2fb_meta_open_graph_admins]);
 			update_user_meta($user_ID, c_al2fb_meta_exclude_default, $_POST[c_al2fb_meta_exclude_default]);
+			update_user_meta($user_ID, c_al2fb_meta_exclude_default_video, $_POST[c_al2fb_meta_exclude_default_video]);
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
@@ -632,8 +635,8 @@ if (!class_exists('WPAL2Facebook')) {
 			require_once('add-link-to-facebook-debug.php');
 
 			if (empty($_POST[c_al2fb_mail_topic]) ||
-				!(strpos($_POST[c_al2fb_mail_topic], 'http://') === 0 ||
-				strpos($_POST[c_al2fb_mail_topic], 'https://') === 0))
+				$_POST[c_al2fb_mail_topic] == 'http://forum.faircode.eu/' ||
+				!(strpos($_POST[c_al2fb_mail_topic], 'http://forum.faircode.eu/') === 0))
 				echo '<div id="message" class="error fade al2fb_error"><p>' . __('Forum topic link is mandatory', c_al2fb_text_domain) . '</p></div>';
 			else {
 				// Build headers
@@ -830,17 +833,19 @@ if (!class_exists('WPAL2Facebook')) {
 				!current_user_can(get_option(c_al2fb_option_min_cap)))
 				return;
 
-			// Get user
+			// Get user/link
 			$user_ID = self::Get_user_ID($post);
+			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
-			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
 			if (!$link_ids && get_user_meta($user_ID, c_al2fb_meta_exclude_default, true))
 				$exclude = true;
 			$chk_exclude = ($exclude ? ' checked' : '');
 
 			$exclude_video = get_post_meta($post->ID, c_al2fb_meta_exclude_video, true);
+			if (!$link_ids && get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true))
+				$exclude_video = true;
 			$chk_exclude_video = ($exclude_video ? ' checked' : '');
 
 			// Get no like button indication
@@ -1450,6 +1455,15 @@ if (!class_exists('WPAL2Facebook')) {
 				$excerpt = $post->post_excerpt;
 				if (!get_option(c_al2fb_option_nofilter))
 					$excerpt = apply_filters('the_excerpt', $excerpt);
+				if (empty($excerpt) && get_user_meta($user_ID, c_al2fb_meta_auto_excerpt, true)) {
+					$excerpt = strip_tags(strip_shortcodes($post->post_content));
+					$words = explode(' ', $excerpt, 55 + 1);
+					if (count($words) > 55) {
+						array_pop($words);
+						array_push($words, '…');
+						$excerpt = implode(' ', $words);
+					}
+				}
 			}
 			$excerpt = apply_filters('al2fb_excerpt', $excerpt, $post);
 
@@ -1918,7 +1932,7 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 
 			// Do not process feed / excerpt
-			if (is_feed() || in_array('get_the_excerpt', $GLOBALS['wp_current_filter']))
+			if (is_feed() || WPAL2Int::in_excerpt())
 				return $content;
 
 			$user_ID = self::Get_user_ID($post);
@@ -2130,7 +2144,7 @@ if (!class_exists('WPAL2Facebook')) {
 		function Get_likers($post) {
 			$likers = '';
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID && !self::Is_excluded($post)) {
+			if ($user_ID && !self::Is_excluded($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				$charset = get_bloginfo('charset');
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if ($fb_likes)
@@ -2156,7 +2170,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Get HTML for like count
 		function Get_like_count($post) {
 			$user_ID = self::Get_user_ID($post);
-			if ($user_ID && !self::Is_excluded($post)) {
+			if ($user_ID && !self::Is_excluded($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
 				if ($fb_likes && count($fb_likes->data) > 0)
@@ -2305,7 +2319,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 										// Add comment to array
 										if ($commentdata['comment_approved'] == 1) {
-											$new = null;
+											$new = new stdClass();
 											$new->comment_ID = $comment_ID;
 											$new->comment_post_ID = $commentdata['comment_post_ID'];
 											$new->comment_author = $commentdata['comment_author'];
@@ -2341,7 +2355,7 @@ if (!class_exists('WPAL2Facebook')) {
 						foreach ($fb_likes->data as $fb_like) {
 							// Create new virtual comment
 							$link = WPAL2Int::Get_fb_profilelink($fb_like->id);
-							$new = null;
+							$new = new stdClass();
 							$new->comment_ID = $fb_like->id;
 							$new->comment_post_ID = $post_ID;
 							$new->comment_author = $fb_like->name . ' ' . __('on Facebook', c_al2fb_text_domain);

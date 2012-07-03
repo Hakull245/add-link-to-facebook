@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://wordpress.org/extend/plugins/add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 1.157
+Version: 1.161
 Author: Marcel Bokhorst
 Author URI: http://blog.bokhorst.biz/about/
 */
@@ -31,6 +31,11 @@ Author URI: http://blog.bokhorst.biz/about/
 // Check PHP version
 if (version_compare(PHP_VERSION, '5.0.0', '<'))
 	die('Add Link to Facebook requires at least PHP 5, installed version is ' . PHP_VERSION);
+
+if (get_option('al2fb_debug')) {
+	error_reporting(E_ALL);
+	define('WP_DEBUG', true);
+}
 
 // Auto load classs
 if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
@@ -261,52 +266,60 @@ add_filter('update_user_metadata', 'al2fb_update_user_metadata', 10, 5);
 add_filter('delete_user_metadata', 'al2fb_delete_user_metadata', 10, 4);
 add_filter('get_user_metadata', 'al2fb_get_user_metadata', 10, 4);
 
-function al2fb_user_meta_prefix() {
-	global $blog_id;
-	if (!empty($blog_id) && $blog_id > 1)
-	{
-		$site_id = false;
-		if (is_multisite()) {
-			$current_site = get_current_site();
-			$site_id = $current_site->id;
+if (!function_exists('al2fb_user_meta_prefix')) {
+	function al2fb_user_meta_prefix() {
+		global $blog_id;
+		if (!empty($blog_id) && $blog_id > 1)
+		{
+			$site_id = false;
+			if (is_multisite()) {
+				$current_site = get_current_site();
+				$site_id = $current_site->id;
+			}
+			if ($site_id && $site_id > 1)
+				return 'blog_' . $blog_id . '_' . $site_id . '_';
+			else
+				return 'blog_' . $blog_id . '_';
 		}
-		if ($site_id && $site_id > 1)
-			return 'blog_' . $blog_id . '_' . $site_id . '_';
 		else
-			return 'blog_' . $blog_id . '_';
+			return false;
 	}
-	else
-		return false;
 }
 
-function al2fb_add_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value, $unique = false) {
-	$prefix = al2fb_user_meta_prefix();
-	if ($prefix && strpos($meta_key, 'al2fb_') === 0)
-		return add_user_meta($user_id, $prefix . $meta_key, $meta_value, $unique);
-	return null;
+if (!function_exists('al2fb_add_user_metadata')) {
+	function al2fb_add_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value, $unique = false) {
+		$prefix = al2fb_user_meta_prefix();
+		if ($prefix && strpos($meta_key, 'al2fb_') === 0)
+			return add_user_meta($user_id, $prefix . $meta_key, $meta_value, $unique);
+		return null;
+	}
 }
 
-function al2fb_update_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value, $prev_value = '') {
-	$prefix = al2fb_user_meta_prefix();
-	if ($prefix && strpos($meta_key, 'al2fb_') === 0)
-		return update_user_meta($user_id, $prefix . $meta_key, $meta_value, $prev_value);
-	return null;
+if (!function_exists('al2fb_update_user_metadata')) {
+	function al2fb_update_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value, $prev_value = '') {
+		$prefix = al2fb_user_meta_prefix();
+		if ($prefix && strpos($meta_key, 'al2fb_') === 0)
+			return update_user_meta($user_id, $prefix . $meta_key, $meta_value, $prev_value);
+		return null;
+	}
 }
 
-function al2fb_delete_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value = '') {
-	$prefix = al2fb_user_meta_prefix();
-	if ($prefix && strpos($meta_key, 'al2fb_') === 0)
-		return delete_user_meta($user_id, $prefix . $meta_key, $meta_value);
-	return null;
+if (!function_exists('al2fb_delete_user_metadata')) {
+	function al2fb_delete_user_metadata($meta_type = null, $user_id, $meta_key, $meta_value = '') {
+		$prefix = al2fb_user_meta_prefix();
+		if ($prefix && strpos($meta_key, 'al2fb_') === 0)
+			return delete_user_meta($user_id, $prefix . $meta_key, $meta_value);
+		return null;
+	}
 }
 
-function al2fb_get_user_metadata($meta_type = null, $user_id, $meta_key, $single = false) {
-	$prefix = al2fb_user_meta_prefix();
-	if ($prefix && strpos($meta_key, 'al2fb_') === 0)
-		return get_user_meta($user_id, $prefix . $meta_key, $single);
-	return null;
+if (!function_exists('al2fb_get_user_metadata')) {
+	function al2fb_get_user_metadata($meta_type = null, $user_id, $meta_key, $single = false) {
+		$prefix = al2fb_user_meta_prefix();
+		if ($prefix && strpos($meta_key, 'al2fb_') === 0)
+			return get_user_meta($user_id, $prefix . $meta_key, $single);
+		return null;
+	}
 }
-
-// That's it!
 
 ?>

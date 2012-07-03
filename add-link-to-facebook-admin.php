@@ -593,6 +593,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_auto_excerpt"><?php _e('Automatically generate excerpt:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_auto_excerpt" name="<?php echo c_al2fb_meta_auto_excerpt; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_auto_excerpt, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_trailer"><?php _e('Text trailer:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_trailer" class="al2fb_text" name="<?php echo c_al2fb_meta_trailer; ?>" type="text" value="<?php  echo htmlentities(get_user_meta($user_ID, c_al2fb_meta_trailer, true), ENT_QUOTES, get_bloginfo('charset')); ?>" />
@@ -1068,6 +1074,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_exclude_default_video"><?php _e('Do not add video by default:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_exclude_default_video" name="<?php echo c_al2fb_meta_exclude_default_video; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_not_post_list"><?php _e('Don\'t show a summary in the post list:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_not_post_list" name="<?php echo c_al2fb_meta_not_post_list; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_not_post_list, true)) echo ' checked="checked"'; ?> />
@@ -1083,6 +1095,13 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_show_permalink"><?php _e('Show link to the added link on Facebook:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_show_permalink" name="<?php echo c_al2fb_meta_show_permalink; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_show_permalink, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_social_noexcerpt"><?php _e('Do not show social plugins in excerpts:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_social_noexcerpt" name="<?php echo c_al2fb_meta_social_noexcerpt; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_social_noexcerpt, true)) echo ' checked="checked"'; ?> />
+		<br /><span class="al2fb_explanation"><?php _e('For example like button', c_al2fb_text_domain); ?><span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -1561,6 +1580,8 @@ function al2fb_render_debug_info($al2fb) {
 		$msg = str_replace('[FAQ]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/faq/', $msg);
 		echo '<br /><strong><span style="color: red;">' . $msg . '</span></strong>';
 ?>
+		<br />
+		<br /><strong><span style="color: red;"><?php _e('Debug information not asked for or without valid support forum topic link will be ignored', c_al2fb_text_domain); ?></span></strong>
 		<p class="submit">
 		<input type="submit" class="button-primary" value="<?php _e('Send', c_al2fb_text_domain) ?>" />
 		</p>
