@@ -1519,14 +1519,6 @@ function al2fb_render_ads($al2fb) {
 	echo '</a>';
 	echo '</div>';
 
-	// ThemeFuse
-	$ab = (rand(0, 1) ? 'a' : 'b');
-	echo '<div class="al2fb_ads">';
-	echo '<a href="http://themefuse.com/wp-themes-shop/?plugin=add-link-to-facebook&v=' . $ab . '" target="_blank">';
-	echo '<img src="' . plugins_url('ThemeFuse-' . $ab . '.jpg', __FILE__) . '" alt="ThemeFuse">';
-	echo '</a>';
-	echo '</div>';
-
 	// ManageWP
 	echo '<div class="al2fb_ads">';
 	echo '<a href="http://managewp.com/?utm_source=Plugins&utm_medium=Banner&utm_content=mwp250_2&utm_campaign=addtofacebook" target="_blank">';
