@@ -34,7 +34,8 @@ if (version_compare(PHP_VERSION, '5.0.0', '<'))
 
 if (get_option('al2fb_debug')) {
 	error_reporting(E_ALL);
-	define('WP_DEBUG', true);
+	if (!defined('WP_DEBUG'))
+		define('WP_DEBUG', true);
 }
 
 // Auto load classs
