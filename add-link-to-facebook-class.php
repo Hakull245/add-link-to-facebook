@@ -1679,7 +1679,9 @@ if (!class_exists('WPAL2Facebook')) {
 			$user_ID = self::Get_user_ID($post);
 
 			// Execute shortcodes
-			if (!get_option(c_al2fb_option_noshortcode))
+			if (get_option(c_al2fb_option_noshortcode))
+				$text = strip_shortcodes($text);
+			else
 				$text = do_shortcode($text);
 
 			// http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
