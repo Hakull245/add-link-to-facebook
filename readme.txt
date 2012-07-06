@@ -773,6 +773,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
+* Improvement: strip_shortcodes when not processing shortcodes
 * Improvement: define WP_DEBUG only if not already defined (debug mode only)
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
