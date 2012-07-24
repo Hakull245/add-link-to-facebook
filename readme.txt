@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.4.1
-Stable tag: 1.161
+Stable tag: 1.162
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -773,9 +773,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Improvement: strip_shortcodes when not processing shortcodes
-* Improvement: define WP_DEBUG only if not already defined (debug mode only)
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* ...
 
 Follow these steps to install the development version:
 
@@ -789,6 +787,11 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.162 =
+* Improvement: strip_shortcodes when not processing shortcodes
+* Bugfix: define WP_DEBUG only if not already defined (debug mode only)
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.161 =
 * New feature: option to automatically generate excerpts (like WordPress does)
@@ -814,6 +817,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.162 =
+One improvement, one bugfix, translation update
 
 = 1.161 =
 Two new features, translation update
