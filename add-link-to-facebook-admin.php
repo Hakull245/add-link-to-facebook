@@ -157,6 +157,8 @@ function al2fb_render_admin($al2fb)
 					if (!empty($info->category))
 						echo ' - ' . htmlspecialchars($info->category, ENT_QUOTES, $charset);
 					echo '</a><br />';
+					if ($al2fb->debug)
+						echo print_r($info, true) . '<br />';
 				}
 			}
 			catch (Exception $e) {
