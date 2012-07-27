@@ -95,6 +95,14 @@
 	border-color: gray;
 	border-style: outset;
 	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+}
+
+.al2fb_border td {
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 /* Debug information */
