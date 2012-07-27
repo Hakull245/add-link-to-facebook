@@ -411,6 +411,8 @@ function al2fb_render_admin($al2fb)
 					$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
 				}
 				catch (Exception $e) {
+					if ($al2fb->debug)
+						print_r($e);
 					$me = null;
 				}
 
@@ -419,6 +421,8 @@ function al2fb_render_admin($al2fb)
 					$pages = WPAL2Int::Get_fb_pages_cached($user_ID);
 				}
 				catch (Exception $e) {
+					if ($al2fb->debug)
+						print_r($e);
 					$pages = null;
 				}
 
@@ -500,14 +504,19 @@ function al2fb_render_admin($al2fb)
 			</th><td>
 				<input id="al2fb_use_groups" name="<?php echo c_al2fb_meta_use_groups; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) echo ' checked="checked"'; ?> />
 			</td></tr>
-
 <?php
 			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
+				// Check links API
+				if (get_option(c_al2fb_option_uselinks))
+					echo '<tr><td>&nbsp;</td><td style="color: Red"><strong>' . __('Disable the links API to use this feature', c_al2fb_text_domain) . '</strong></td></tr>';
+
 				// Get groups
 				try {
 					$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
 				}
 				catch (Exception $e) {
+					if ($al2fb->debug)
+						print_r($e);
 					$groups = null;
 				}
 				$selected_group = get_user_meta($user_ID, c_al2fb_meta_group, true);
@@ -556,9 +565,60 @@ function al2fb_render_admin($al2fb)
 					if ($mu)
 						echo '<p><span style="color: red;"><strong>' . htmlspecialchars($mu, ENT_QUOTES, $charset) . '</strong></span></p>';
 				}
+?>
+				</td></tr>
+<?php
 			}
 ?>
 			</table>
+
+			<h4><?php _e('Facebook friends', c_al2fb_text_domain); ?></h4>
+			<table class="form-table al2fb_border">
+			<tr valign="top"><th scope="row">
+				<label for="al2fb_friend"><?php _e('Add to wall of friends:', c_al2fb_text_domain); ?></label>
+			</th><td>
+				<p><strong>Beta!</strong></p>
+<?php
+				if (WPAL2Int::Check_multiple()) {
+					// Check links API
+					if (get_option(c_al2fb_option_uselinks))
+						echo '<p style="color: Red"><strong>' . __('Disable the links API to use this feature', c_al2fb_text_domain) . '</strong></p>';
+
+					// Get friends
+					try {
+						$friends = WPAL2Int::Get_fb_friends_cached($user_ID);
+					}
+					catch (Exception $e) {
+						if ($al2fb->debug)
+							print_r($e);
+						$friends = null;
+					}
+					$extra_friend = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
+					if (empty($extra_friend) || !is_array($extra_friend))
+						$extra_friend = array();
+
+					echo '<table>';
+					if ($friends && $friends->data) {
+						usort($friends->data, 'al2fb_compare_friends');
+						foreach ($friends->data as $friend) {
+							if (empty($friend->name))
+								$friend->name = '?';
+							echo '<tr><td><input type="checkbox"' . (in_array($friend->id, $extra_friend) ? ' checked="checked"' : '') . ' name="' . c_al2fb_meta_friend_extra . '[]" value="' . $friend->id . '"></td>';
+							echo '<td>' . htmlspecialchars($friend->name, ENT_QUOTES, $charset) . '</td></tr>';
+						}
+					}
+					echo '</table>';
+				}
+				else {
+					echo '<strong>';
+					_e('This option is only available in', c_al2fb_text_domain);
+					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+					echo '</strong>';
+				}
+?>
+			</td></tr>
+			</table>
+
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
 			</p>
@@ -1583,6 +1643,11 @@ function al2fb_render_debug_info($al2fb) {
 		require_once('add-link-to-facebook-debug.php');
 		echo al2fb_debug_info($al2fb);
 	}
+}
+
+function al2fb_compare_friends($a, $b) {
+	if ($a->name == $b->name) { return 0; }
+	return ($a->name < $b->name ? -1 : 1);
 }
 
 ?>

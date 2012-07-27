@@ -43,7 +43,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 **Pro version:**
 
-* Add links to more than one Facebook page wall for one post
+* Add links to more than one Facebook page/group/friend wall for one post simultaneously
 * See [here](http://www.faircode.eu/al2fbpro/) for details
 
 If you find this plugin useful, please rate it accordingly.
@@ -773,7 +773,11 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
+* Bugfix: add extra link to personal wall when using groups
+* Bugfix: losing selected pages/groups in some cases
+* New feature: add to wall of friends ([Pro version](http://www.faircode.eu/al2fbpro/) only; beta)
 * Improvement: updated Mozilla CA certificates
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Update Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:

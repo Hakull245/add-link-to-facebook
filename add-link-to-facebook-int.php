@@ -260,7 +260,7 @@ if (!class_exists('WPAL2Int')) {
 			return $groups;
 		}
 
-		function Clear_fb_groups_cache($user_ID) {
+		static function Clear_fb_groups_cache($user_ID) {
 			global $blog_id;
 			$groups_key = c_al2fb_transient_cache . md5('grp' . $blog_id . $user_ID);
 			delete_transient($groups_key);
@@ -275,6 +275,47 @@ if (!class_exists('WPAL2Int')) {
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$groups = json_decode($response);
 			return $groups;
+		}
+
+		static function Get_fb_friends_cached($user_ID) {
+			global $blog_id;
+			$friends_key = c_al2fb_transient_cache . md5('frnd' . $blog_id . $user_ID);
+			$friends = get_transient($friends_key);
+			if (get_option(c_al2fb_option_debug))
+				$friends = false;
+			if ($friends === false) {
+				$friends = WPAL2Int::Get_fb_friends($user_ID);
+				$duration = WPAL2Int::Get_duration(false);
+				set_transient($friends_key, $friends, $duration);
+			}
+			return $friends;
+		}
+
+		static function Clear_fb_friends_cache($user_ID) {
+			global $blog_id;
+			$friends_key = c_al2fb_transient_cache . md5('frnd' . $blog_id . $user_ID);
+			delete_transient($friends_key);
+		}
+
+		// Get friend list
+		static function Get_fb_friends($user_ID) {
+			$url = 'https://graph.facebook.com/me/friends';
+			$url = apply_filters('al2fb_url', $url);
+			$token = WPAL2Int::Get_access_token($user_ID);
+			$query = http_build_query(array('access_token' => $token), '', '&');
+			$response = WPAL2Int::Request($url, $query, 'GET');
+			$friends = json_decode($response);
+			return $friends;
+		}
+
+		static function Get_fb_permissions($user_ID, $id) {
+			$url = 'https://graph.facebook.com/' . $id . '/permissions';
+			$url = apply_filters('al2fb_url', $url);
+			$token = WPAL2Int::Get_access_token($user_ID);
+			$query = http_build_query(array('access_token' => $token), '', '&');
+			$response = WPAL2Int::Request($url, $query, 'GET');
+			$permissions = json_decode($response);
+			return $permissions;
 		}
 
 		// Get comments and cache
@@ -476,19 +517,26 @@ if (!class_exists('WPAL2Int')) {
 
 		static function Get_page_ids($user_ID) {
 			$page_ids = array();
-			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
-				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_group, true);
-				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
-					$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
-					if (is_array($extra))
-						$page_ids = array_merge($page_ids, $extra);
-					else if (!empty($extra))
-						$page_ids[] = $extra;
+
+			// Groups
+			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true) && !get_option(c_al2fb_option_uselinks)) {
+				$group = get_user_meta($user_ID, c_al2fb_meta_group, true);
+				if (!empty($group)) {
+					$page_ids[] = $group;
+					if (WPAL2Int::Check_multiple()) {
+						$extra = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
+						if (is_array($extra))
+							$page_ids = array_merge($page_ids, $extra);
+						else if (!empty($extra))
+							$page_ids[] = $extra;
+					}
 				}
 			}
+
+			// Pages
 			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
 				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
-				if (!empty($page_ids) && WPAL2Int::Check_multiple()) {
+				if (WPAL2Int::Check_multiple()) {
 					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
 					if (is_array($extra))
 						$page_ids = array_merge($page_ids, $extra);
@@ -496,8 +544,21 @@ if (!class_exists('WPAL2Int')) {
 						$page_ids[] = $extra;
 				}
 			}
+
+			// Friends
+			if (WPAL2Int::Check_multiple() && !get_option(c_al2fb_option_uselinks)) {
+				$extra = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
+				if (is_array($extra))
+					$page_ids = array_merge($page_ids, $extra);
+				else if (!empty($extra))
+					$page_ids[] = $extra;
+			}
+
+			// Default personal wall
 			if (empty($page_ids))
 				$page_ids[] = 'me';
+
+			$page_ids = apply_filters('al2fb_page_ids', $page_ids, $user_ID);
 
 			return $page_ids;
 		}

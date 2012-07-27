@@ -323,6 +323,7 @@ if (!class_exists('WPAL2Facebook')) {
 						// Clear cache
 						WPAL2Int::Clear_fb_pages_cache($user_ID);
 						WPAL2Int::Clear_fb_groups_cache($user_ID);
+						WPAL2Int::Clear_fb_friends_cache($user_ID);
 
 						// Redirect
 						$auth_url = WPAL2Int::Authorize_url($user_ID);
@@ -418,13 +419,22 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Prevent losing selected page
 			if (!self::Is_authorized($user_ID) ||
-				(get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
-				get_user_meta($user_ID, c_al2fb_meta_group, true)))
+				(!WPAL2Int::Check_multiple() &&
+				get_user_meta($user_ID, c_al2fb_meta_use_groups, true) &&
+				get_user_meta($user_ID, c_al2fb_meta_group, true))) {
 				$_POST[c_al2fb_meta_page] = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				$_POST[c_al2fb_meta_page_extra] = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
+			}
 
 			// Prevent losing selected group
-			if (!self::Is_authorized($user_ID) || !get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
+			if (!self::Is_authorized($user_ID) || !get_user_meta($user_ID, c_al2fb_meta_use_groups, true)) {
 				$_POST[c_al2fb_meta_group] = get_user_meta($user_ID, c_al2fb_meta_group, true);
+				$_POST[c_al2fb_meta_group_extra] = get_user_meta($user_ID, c_al2fb_meta_group_extra, true);
+			}
+
+			// Prevent losing selected friends
+			if (!self::Is_authorized($user_ID))
+				$_POST[c_al2fb_meta_friend_extra] = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
 
 			// App ID or secret changed
 			if (get_user_meta($user_ID, c_al2fb_meta_client_id, true) != $_POST[c_al2fb_meta_client_id] ||
@@ -432,6 +442,7 @@ if (!class_exists('WPAL2Facebook')) {
 				delete_user_meta($user_ID, c_al2fb_meta_access_token);
 				WPAL2Int::Clear_fb_pages_cache($user_ID);
 				WPAL2Int::Clear_fb_groups_cache($user_ID);
+				WPAL2Int::Clear_fb_friends_cache($user_ID);
 			}
 
 			// Like or send button enabled
@@ -452,6 +463,7 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_use_groups, $_POST[c_al2fb_meta_use_groups]);
 			update_user_meta($user_ID, c_al2fb_meta_group, $_POST[c_al2fb_meta_group]);
 			update_user_meta($user_ID, c_al2fb_meta_group_extra, $_POST[c_al2fb_meta_group_extra]);
+			update_user_meta($user_ID, c_al2fb_meta_friend_extra, $_POST[c_al2fb_meta_friend_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_caption, $_POST[c_al2fb_meta_caption]);
 			update_user_meta($user_ID, c_al2fb_meta_msg, $_POST[c_al2fb_meta_msg]);
 			update_user_meta($user_ID, c_al2fb_meta_auto_excerpt, $_POST[c_al2fb_meta_auto_excerpt]);
