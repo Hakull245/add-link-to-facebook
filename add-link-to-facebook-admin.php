@@ -441,6 +441,7 @@ function al2fb_render_admin($al2fb)
 				</th><td>
 					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
+					echo '<option value="-"' . ($selected_page == '-' ? ' selected' : '') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 					if ($me)
 						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</option>';
 					if ($pages && $pages->data)
