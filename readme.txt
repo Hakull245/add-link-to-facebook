@@ -779,6 +779,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 * Improvement: updated Mozilla CA certificates
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Update Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
