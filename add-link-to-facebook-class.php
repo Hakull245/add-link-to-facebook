@@ -596,6 +596,19 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Show result
 			echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
+
+			// Clear all errors
+			if ($_POST[c_al2fb_meta_clear_errors]) {
+				$query = array(
+					'author' => $user_ID,
+					'meta_key' => c_al2fb_meta_error,
+					'posts_per_page' => -1);
+				$posts = new WP_Query($query);
+				while ($posts->have_posts()) {
+					$posts->next_post();
+					delete_post_meta($posts->post->ID, c_al2fb_meta_error);
+				}
+			}
 		}
 
 		// Get token

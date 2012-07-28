@@ -689,6 +689,7 @@ The plugin will add a link to the post if it didn't already do that and remove t
 You can also tick the checkbox *Clear error messages* in the post submit box, near the update button.
 In this way you can clear the error message without adding a link to Facebook
 (you'll probably want to check *Do not add link to Facebook* too in this case).
+Since version 1.163 you can clear all errors for the current user using an option in the settings tab 'Misc'.
 
 = E20 I get 'Error validating access token: The session has been invalidated because the user has changed the password' =
 
@@ -776,6 +777,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 * Bugfix: add extra link to personal wall when using groups
 * Bugfix: losing selected pages/groups in some cases
 * New feature: add to wall of friends ([Pro version](http://www.faircode.eu/al2fbpro/) only; beta)
+* New feature: option to clear all errors (settings tab Misc)
 * Improvement: updated Mozilla CA certificates
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Update Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")

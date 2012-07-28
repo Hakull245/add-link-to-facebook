@@ -1181,6 +1181,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_clear_errors"><?php _e('Clear all error messages:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_clear_errors" name="<?php echo c_al2fb_meta_clear_errors; ?>" type="checkbox" />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
