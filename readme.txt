@@ -777,7 +777,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 * Bugfix: add extra link to personal wall when using groups
 * Bugfix: losing selected pages/groups in some cases
 * New feature: add to wall of friends ([Pro version](http://www.faircode.eu/al2fbpro/) only; beta)
-* New feature: option to clear all errors (settings tab Misc)
+* New feature: option to clear all errors (plugin settings tab Misc)
 * Improvement: add to page: none
 * Improvement: updated Mozilla CA certificates
 * Improvement: apply (video) exclude default when not using the post editor
