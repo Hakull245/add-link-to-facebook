@@ -882,9 +882,9 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
+			<input type="hidden" id="al2fb_form" name="al2fb_form" value="true">
 <?php
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
-
 
 			if (get_option(c_al2fb_option_login_add_links))
 				if (self::Is_login_authorized($user_ID, false)) {
@@ -1246,6 +1246,12 @@ if (!class_exists('WPAL2Facebook')) {
 			if (get_option(c_al2fb_option_login_add_links) &&
 				self::Is_login_authorized($user_ID, false))
 				update_user_meta($user_ID, c_al2fb_meta_facebook_page, $_POST[c_al2fb_meta_facebook_page]);
+
+			// Apply defaults if no form
+			if (!isset($_POST['al2fb_form'])) {
+				update_post_meta($post_id, c_al2fb_meta_exclude, get_user_meta($user_ID, c_al2fb_meta_exclude_default, true));
+				update_post_meta($post_id, c_al2fb_meta_exclude_video, get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true));
+			}
 
 			// Process exclude indication
 			if (isset($_POST[c_al2fb_meta_exclude]) && $_POST[c_al2fb_meta_exclude])
