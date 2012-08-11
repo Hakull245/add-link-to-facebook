@@ -781,6 +781,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 * Improvement: add to page: none
 * Improvement: updated Mozilla CA certificates
 * Improvement: apply (video) exclude default when not using the post editor
+* Improvement: list custom post type for exclusion
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 * Update Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
