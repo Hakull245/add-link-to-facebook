@@ -1330,6 +1330,19 @@ function al2fb_render_admin($al2fb)
 		</th><td>
 			<input class="al2fb_text" id="al2fb_exclude_type" name="<?php echo c_al2fb_option_exclude_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_type); ?>" />
 			<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+<?php
+			echo '<br /><span class="al2fb_explanation">';
+			$first = true;
+			$post_types = get_post_types('', 'names');
+			foreach ($post_types as $post_type) {
+				if ($first)
+					$first = false;
+				else
+					echo ',';
+				echo htmlspecialchars($post_type, ENT_QUOTES, $charset);
+			}
+			echo '</span>';
+?>
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
