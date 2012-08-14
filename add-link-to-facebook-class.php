@@ -1224,12 +1224,6 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($this->debug)
 				add_post_meta($post_id, c_al2fb_meta_log, date('c') . ' Save post');
 
-			// Apply defaults if no form
-			if (!isset($_POST['al2fb_form'])) {
-				update_post_meta($post_id, c_al2fb_meta_exclude, get_user_meta($user_ID, c_al2fb_meta_exclude_default, true));
-				update_post_meta($post_id, c_al2fb_meta_exclude_video, get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true));
-			}
-
 			// Security checks
 			$nonce = (isset($_POST[c_al2fb_nonce_form]) ? $_POST[c_al2fb_nonce_form] : null);
 			if (!wp_verify_nonce($nonce, plugin_basename(__FILE__)))
@@ -1392,6 +1386,12 @@ if (!class_exists('WPAL2Facebook')) {
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
 				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true))) {
+				// Apply defaults if no form
+				if (!isset($_POST['al2fb_form'])) {
+					update_post_meta($post->ID, c_al2fb_meta_exclude, get_user_meta($user_ID, c_al2fb_meta_exclude_default, true));
+					update_post_meta($post->ID, c_al2fb_meta_exclude_video, get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true));
+				}
+
 				// Check if not added/excluded
 				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
