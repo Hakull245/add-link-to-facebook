@@ -535,7 +535,9 @@ if (!class_exists('WPAL2Int')) {
 
 			// Pages
 			if (empty($page_ids) || WPAL2Int::Check_multiple()) {
-				$page_ids[] = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				$page = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				if ($page != '-')
+					$page_ids[] = $page;
 				if (WPAL2Int::Check_multiple()) {
 					$extra = get_user_meta($user_ID, c_al2fb_meta_page_extra, true);
 					if (is_array($extra))
@@ -1003,8 +1005,11 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_page_id($user_ID, $self) {
 			if (get_user_meta($user_ID, c_al2fb_meta_use_groups, true))
 				$page_id = get_user_meta($user_ID, c_al2fb_meta_group, true);
-			if (empty($page_id))
+			if (empty($page_id)) {
 				$page_id = get_user_meta($user_ID, c_al2fb_meta_page, true);
+				if ($page_id == '-')
+					unset($page_id);
+			}
 			if ($self || empty($page_id))
 				$page_id = 'me';
 			return $page_id;

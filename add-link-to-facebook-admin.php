@@ -441,6 +441,7 @@ function al2fb_render_admin($al2fb)
 				</th><td>
 					<select class="al2fb_select" id="al2fb_page" name="<?php echo c_al2fb_meta_page; ?>">
 <?php
+					echo '<option value="-"' . ($selected_page == '-' ? ' selected' : '') . '>' . __('None', c_al2fb_text_domain) . '</option>';
 					if ($me)
 						echo '<option value=""' . ($selected_page ? '' : ' selected') . '>' . htmlspecialchars($me->name, ENT_QUOTES, $charset) . ' (' . __('Personal', c_al2fb_text_domain) . ')</option>';
 					if ($pages && $pages->data)
@@ -1181,6 +1182,12 @@ function al2fb_render_admin($al2fb)
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
+		<label for="al2fb_clear_errors"><?php _e('Clear all error messages:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_clear_errors" name="<?php echo c_al2fb_meta_clear_errors; ?>" type="checkbox" />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
 		<label for="al2fb_donated"><?php _e('I have donated to this plugin:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
@@ -1323,6 +1330,19 @@ function al2fb_render_admin($al2fb)
 		</th><td>
 			<input class="al2fb_text" id="al2fb_exclude_type" name="<?php echo c_al2fb_option_exclude_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_type); ?>" />
 			<br /><span class="al2fb_explanation"><?php _e('Separate by commas', c_al2fb_text_domain); ?></span>
+<?php
+			echo '<br /><span class="al2fb_explanation">';
+			$first = true;
+			$post_types = get_post_types('', 'names');
+			foreach ($post_types as $post_type) {
+				if ($first)
+					$first = false;
+				else
+					echo ',';
+				echo htmlspecialchars($post_type, ENT_QUOTES, $charset);
+			}
+			echo '</span>';
+?>
 		</td></tr>
 
 		<tr valign="top"><th scope="row">

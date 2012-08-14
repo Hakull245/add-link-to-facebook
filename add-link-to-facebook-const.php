@@ -139,6 +139,7 @@ define('c_al2fb_meta_exclude_default_video', 'al2fb_exclude_default_video');
 define('c_al2fb_meta_not_post_list', 'al2fb_like_not_list');
 define('c_al2fb_meta_fb_encoding', 'al2fb_fb_encoding');
 define('c_al2fb_meta_fb_locale', 'al2fb_fb_locale');
+define('c_al2fb_meta_clear_errors', 'al2fb_clear_errors');
 define('c_al2fb_meta_donated', 'al2fb_donated');
 define('c_al2fb_meta_rated0', 'al2fb_rated');
 define('c_al2fb_meta_rated', 'al2fb_rated1');

@@ -596,6 +596,19 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Show result
 			echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Settings updated', c_al2fb_text_domain) . '</p></div>';
+
+			// Clear all errors
+			if ($_POST[c_al2fb_meta_clear_errors]) {
+				$query = array(
+					'author' => $user_ID,
+					'meta_key' => c_al2fb_meta_error,
+					'posts_per_page' => -1);
+				$posts = new WP_Query($query);
+				while ($posts->have_posts()) {
+					$posts->next_post();
+					delete_post_meta($posts->post->ID, c_al2fb_meta_error);
+				}
+			}
 		}
 
 		// Get token
@@ -869,9 +882,9 @@ if (!class_exists('WPAL2Facebook')) {
 ?>
 			<div class="al2fb_post_submit">
 			<div class="misc-pub-section">
+			<input type="hidden" id="al2fb_form" name="al2fb_form" value="true">
 <?php
 			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
-
 
 			if (get_option(c_al2fb_option_login_add_links))
 				if (self::Is_login_authorized($user_ID, false)) {
@@ -1373,6 +1386,12 @@ if (!class_exists('WPAL2Facebook')) {
 			// Checks
 			if (self::user_can($user_ID, get_option(c_al2fb_option_min_cap)) &&
 				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true))) {
+				// Apply defaults if no form
+				if (!isset($_POST['al2fb_form'])) {
+					update_post_meta($post->ID, c_al2fb_meta_exclude, get_user_meta($user_ID, c_al2fb_meta_exclude_default, true));
+					update_post_meta($post->ID, c_al2fb_meta_exclude_video, get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true));
+				}
+
 				// Check if not added/excluded
 				if (!get_post_meta($post->ID, c_al2fb_meta_link_id, true) &&
 					!get_post_meta($post->ID, c_al2fb_meta_exclude, true)) {
