@@ -774,6 +774,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
+* Bugfix: PHP notice post submit box actions
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 Follow these steps to install the development version:
