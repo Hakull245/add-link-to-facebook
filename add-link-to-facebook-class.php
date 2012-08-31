@@ -861,6 +861,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get user/link
 			$user_ID = self::Get_user_ID($post);
 			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+			$charset = get_bloginfo('charset');
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
