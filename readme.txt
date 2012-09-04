@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.4.1
-Stable tag: 1.163
+Stable tag: 1.164
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -774,8 +774,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Bugfix: PHP notice post submit box actions
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* ...
 
 Follow these steps to install the development version:
 
@@ -789,6 +788,10 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.164 =
+* Bugfix: correct character set post submit box actions
+* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 
 = 1.163 =
 * Bugfix: add extra link to personal wall when using groups
@@ -819,20 +822,14 @@ Follow these steps to install the development version:
 * New feature: option to disable social plugins (for example like button) in excerpts
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.158 =
-* Bugfix: fixed a notice while importing comments/likes
-* Bugfix: fixed a notice redeclaring a function
-* New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
-* Improvement: more debug info
-* Tested with WordPress 3.4 RC
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.164 =
+One bugfix, translation update
 
 = 1.163 =
 Two bugfixes, two new features, four improvements, several translation updates
@@ -845,9 +842,6 @@ Two new features, translation update
 
 = 1.159 =
 One new feature, translation update
-
-= 1.158 =
-Two bugfixes, one new feature, one improvement, updated translations
 
 == Setup guide ==
 
