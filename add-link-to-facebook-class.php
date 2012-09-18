@@ -1487,6 +1487,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$excerpt = $post->post_excerpt;
 				if (!get_option(c_al2fb_option_nofilter))
 					$excerpt = apply_filters('the_excerpt', $excerpt);
+				else
+					$excerpt = strip_shortcodes($excerpt);
 				if (empty($excerpt) && get_user_meta($user_ID, c_al2fb_meta_auto_excerpt, true)) {
 					$excerpt = strip_tags(strip_shortcodes($post->post_content));
 					$words = explode(' ', $excerpt, 55 + 1);
@@ -1505,6 +1507,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$content = $post->post_content;
 				if (!get_option(c_al2fb_option_nofilter))
 					$content = apply_filters('the_content', $content);
+				else
+					$content = strip_shortcodes($content);
 			}
 			$content = apply_filters('al2fb_content', $content, $post);
 

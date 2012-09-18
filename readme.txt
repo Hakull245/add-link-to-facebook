@@ -775,6 +775,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * Improvement: auto fix invalid locales
+* Improvement: strip shortcodes if not filtering text/excerpt
 
 Follow these steps to install the development version:
 
