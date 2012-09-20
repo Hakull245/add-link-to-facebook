@@ -822,16 +822,6 @@ Follow these steps to install the development version:
 * Bugfix: define WP_DEBUG only if not already defined (debug mode only)
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.161 =
-* New feature: option to automatically generate excerpts (like WordPress does)
-* New feature: do not add video can be set by default (option)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.159 =
-* Bugfix: fixed a notice for an undefined constant
-* New feature: option to disable social plugins (for example like button) in excerpts
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -846,12 +836,6 @@ Two bugfixes, two new features, four improvements, several translation updates
 
 = 1.162 =
 One improvement, one bugfix, translation update
-
-= 1.161 =
-Two new features, translation update
-
-= 1.159 =
-One new feature, translation update
 
 == Setup guide ==
 
