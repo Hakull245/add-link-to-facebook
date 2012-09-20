@@ -493,6 +493,15 @@ This option exists only to solve aspect ratio problems in some case.
 You are probably using a non-personal Facebook account type.
 Try to login with a personal Facebook account that has access to the page you want to add links to.
 
+= U46 My website gets slow =
+
+If you enabled comment integration: try increasing the refresh/cache time (option *Refresh Facebook comments every*, settings tab *Admin*)
+or try decreasing the number of posts to import comments for (option *Refresh Facebook comments for*)
+or try enabling the option *Refresh Facebook comments in the background*.
+
+This plugin does require some memory and processor cycles, maybe more than your hosting provider provides,
+so consider contacting your hosting provider for an upgrade or switching to another hosting provider.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
