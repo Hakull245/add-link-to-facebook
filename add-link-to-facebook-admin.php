@@ -1178,7 +1178,7 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_fb_locale"><?php _e('Facebook locale:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_fb_locale" class="al2fb_text" name="<?php echo c_al2fb_meta_fb_locale; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_fb_locale, true); ?>" />
-		<br /><span class="al2fb_explanation"><?php _e('Do not change if no need', c_al2fb_text_domain); ?><span>&nbsp;(<?php echo get_bloginfo('language'); ?>)</span></span>
+		<br /><span class="al2fb_explanation"><?php _e('Do not change if no need', c_al2fb_text_domain); ?><span>&nbsp;(<?php echo str_replace('-', '_', get_bloginfo('language')); ?>)</span></span>
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
