@@ -786,6 +786,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 * Bugfix: exclude/video for scheduled posts
 * Improvement: auto fix invalid locales
 * Improvement: strip shortcodes if not filtering text/excerpt
+* Improvement: WordPress logo in Open Graph Protocol if no link added (performance)
 * New feature: global URL parameter
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 * Tested with WordPress 3.5 beta 2
