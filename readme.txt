@@ -3,7 +3,7 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.4.1
+Tested up to: 3.5
 Stable tag: 1.164
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
@@ -783,8 +783,12 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
+* Bugfix: exclude/video for scheduled posts
 * Improvement: auto fix invalid locales
 * Improvement: strip shortcodes if not filtering text/excerpt
+* New feature: global URL parameter
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Tested with WordPress 3.5 beta 2
 
 Follow these steps to install the development version:
 
@@ -817,11 +821,6 @@ Follow these steps to install the development version:
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
-= 1.162 =
-* Improvement: strip_shortcodes when not processing shortcodes
-* Bugfix: define WP_DEBUG only if not already defined (debug mode only)
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
@@ -833,9 +832,6 @@ One bugfix, translation update
 
 = 1.163 =
 Two bugfixes, two new features, four improvements, several translation updates
-
-= 1.162 =
-One improvement, one bugfix, translation update
 
 == Setup guide ==
 
