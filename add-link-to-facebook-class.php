@@ -529,6 +529,8 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
+			update_user_meta($user_ID, c_al2fb_meta_param_name, $_POST[c_al2fb_meta_param_name]);
+			update_user_meta($user_ID, c_al2fb_meta_param_value, $_POST[c_al2fb_meta_param_value]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
 			if ($_POST[c_al2fb_meta_rated])
@@ -1328,6 +1330,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_ID);
 
 			// Delegate
+			$_POST['al2fb_form'] = true;
 			self::Transition_post_status('publish', 'future', $post);
 		}
 

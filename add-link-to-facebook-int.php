@@ -574,10 +574,17 @@ if (!class_exists('WPAL2Int')) {
 				$link = wp_get_shortlink($post->ID);
 			if (empty($link))
 				$link = get_permalink($post->ID);
-			$url_param_name = get_post_meta($post->ID, c_al2fb_meta_url_param_name, true);
-			$url_param_value = get_post_meta($post->ID, c_al2fb_meta_url_param_value, true);
+
+			// Get URL param
+			$url_param_name = get_user_meta($user_ID, c_al2fb_meta_param_name, true);
+			$url_param_value = get_user_meta($user_ID, c_al2fb_meta_param_value, true);
+			if (empty($url_param_name))
+				$url_param_name = get_post_meta($post->ID, c_al2fb_meta_url_param_name, true);
+			if (empty($url_param_value))
+				$url_param_value = get_post_meta($post->ID, c_al2fb_meta_url_param_value, true);
 			if (!empty($url_param_name))
 				$link = add_query_arg($url_param_name, $url_param_value, $link);
+
 			$link = apply_filters('al2fb_link', $link, $post);
 
 			// Get processed texts
