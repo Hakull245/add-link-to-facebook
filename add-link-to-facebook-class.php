@@ -1854,11 +1854,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Get link picture
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
-					if (empty($link_picture)) {
-						$picture_info = self::Get_link_picture($post, $user_ID);
-						$picture = $picture_info['picture'];
-					}
-					else
+					if (!empty($link_picture))
 						$picture = substr($link_picture, strpos($link_picture, '=') + 1);
 					if (empty($picture))
 						$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';
