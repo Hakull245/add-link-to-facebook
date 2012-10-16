@@ -529,6 +529,8 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_not_post_list, $_POST[c_al2fb_meta_not_post_list]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_encoding, $_POST[c_al2fb_meta_fb_encoding]);
 			update_user_meta($user_ID, c_al2fb_meta_fb_locale, $_POST[c_al2fb_meta_fb_locale]);
+			update_user_meta($user_ID, c_al2fb_meta_param_name, $_POST[c_al2fb_meta_param_name]);
+			update_user_meta($user_ID, c_al2fb_meta_param_value, $_POST[c_al2fb_meta_param_value]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
 			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
 			if ($_POST[c_al2fb_meta_rated])
@@ -861,6 +863,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Get user/link
 			$user_ID = self::Get_user_ID($post);
 			$link_ids = get_post_meta($post->ID, c_al2fb_meta_link_id, false);
+			$charset = get_bloginfo('charset');
 
 			// Get exclude indication
 			$exclude = get_post_meta($post->ID, c_al2fb_meta_exclude, true);
@@ -1327,6 +1330,7 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_ID);
 
 			// Delegate
+			$_POST['al2fb_form'] = true;
 			self::Transition_post_status('publish', 'future', $post);
 		}
 
@@ -1486,6 +1490,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$excerpt = $post->post_excerpt;
 				if (!get_option(c_al2fb_option_nofilter))
 					$excerpt = apply_filters('the_excerpt', $excerpt);
+				else
+					$excerpt = strip_shortcodes($excerpt);
 				if (empty($excerpt) && get_user_meta($user_ID, c_al2fb_meta_auto_excerpt, true)) {
 					$excerpt = strip_tags(strip_shortcodes($post->post_content));
 					$words = explode(' ', $excerpt, 55 + 1);
@@ -1504,6 +1510,8 @@ if (!class_exists('WPAL2Facebook')) {
 				$content = $post->post_content;
 				if (!get_option(c_al2fb_option_nofilter))
 					$content = apply_filters('the_content', $content);
+				else
+					$content = strip_shortcodes($content);
 			}
 			$content = apply_filters('al2fb_content', $content, $post);
 
@@ -1846,11 +1854,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 					// Get link picture
 					$link_picture = get_post_meta($post->ID, c_al2fb_meta_link_picture, true);
-					if (empty($link_picture)) {
-						$picture_info = self::Get_link_picture($post, $user_ID);
-						$picture = $picture_info['picture'];
-					}
-					else
+					if (!empty($link_picture))
 						$picture = substr($link_picture, strpos($link_picture, '=') + 1);
 					if (empty($picture))
 						$picture = WPAL2Int::Redirect_uri() . '?al2fb_image=1';

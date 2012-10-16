@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.4.1
-Stable tag: 1.163
+Tested up to: 3.5
+Stable tag: 1.165
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -493,6 +493,15 @@ This option exists only to solve aspect ratio problems in some case.
 You are probably using a non-personal Facebook account type.
 Try to login with a personal Facebook account that has access to the page you want to add links to.
 
+= U46 My website gets slow =
+
+If you enabled comment integration: try increasing the refresh/cache time (option *Refresh Facebook comments every*, settings tab *Admin*)
+or try decreasing the number of posts to import comments for (option *Refresh Facebook comments for*)
+or try enabling the option *Refresh Facebook comments in the background*.
+
+This plugin does require some memory and processor cycles, maybe more than your hosting provider provides,
+so consider contacting your hosting provider for an upgrade or switching to another hosting provider.
+
 **--- Security ---**
 
 = X01 Which users can use this plugin? =
@@ -774,7 +783,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
+* ...
 
 Follow these steps to install the development version:
 
@@ -789,43 +798,19 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.163 =
-* Bugfix: add extra link to personal wall when using groups
-* Bugfix: losing selected pages/groups in some cases
-* New feature: add to wall of friends ([Pro version](http://www.faircode.eu/al2fbpro/) only; beta)
-* New feature: option to clear all errors (plugin settings tab Misc)
-* Improvement: add to page: none
-* Improvement: updated Mozilla CA certificates
-* Improvement: (video) exclude default when not using the post editor
-* Improvement: list custom post type for exclusion
+= 1.165 =
+* Bugfix: exclude/video for scheduled posts
+* Improvement: auto fix invalid locales
+* Improvement: strip shortcodes if not filtering text/excerpt
+* Improvement: WordPress logo in Open Graph Protocol if no link added (performance)
+* New feature: global URL parameter
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Tested with WordPress 3.5 beta 2
+
+= 1.164 =
+* Bugfix: correct character set post submit box actions
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.162 =
-* Improvement: strip_shortcodes when not processing shortcodes
-* Bugfix: define WP_DEBUG only if not already defined (debug mode only)
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.161 =
-* New feature: option to automatically generate excerpts (like WordPress does)
-* New feature: do not add video can be set by default (option)
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.159 =
-* Bugfix: fixed a notice for an undefined constant
-* New feature: option to disable social plugins (for example like button) in excerpts
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-
-= 1.158 =
-* Bugfix: fixed a notice while importing comments/likes
-* Bugfix: fixed a notice redeclaring a function
-* New feature: trash/untrash and spam/unspam deletes/restores exported Facebook comment too
-* Improvement: more debug info
-* Tested with WordPress 3.4 RC
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
 = Older versions =
 * Deleted, because of maximum readme.txt size
@@ -833,20 +818,11 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.163 =
-Two bugfixes, two new features, four improvements, several translation updates
+= 1.165 =
+One bugfix, three improvements, one new feature, translation updates
 
-= 1.162 =
-One improvement, one bugfix, translation update
-
-= 1.161 =
-Two new features, translation update
-
-= 1.159 =
-One new feature, translation update
-
-= 1.158 =
-Two bugfixes, one new feature, one improvement, updated translations
+= 1.164 =
+One bugfix, translation update
 
 == Setup guide ==
 
