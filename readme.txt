@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5
-Stable tag: 1.164
+Stable tag: 1.165
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -782,15 +782,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 == Changelog ==
 
-= Development version (1.165) =
-* Bugfix: exclude/video for scheduled posts
-* Improvement: auto fix invalid locales
-* Improvement: strip shortcodes if not filtering text/excerpt
-* Improvement: WordPress logo in Open Graph Protocol if no link added (performance)
-* New feature: global URL parameter
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* Tested with WordPress 3.5 beta 2
+= Development version =
+* ...
 
 Follow these steps to install the development version:
 
@@ -805,23 +798,19 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.165 =
+* Bugfix: exclude/video for scheduled posts
+* Improvement: auto fix invalid locales
+* Improvement: strip shortcodes if not filtering text/excerpt
+* Improvement: WordPress logo in Open Graph Protocol if no link added (performance)
+* New feature: global URL parameter
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* Tested with WordPress 3.5 beta 2
+
 = 1.164 =
 * Bugfix: correct character set post submit box actions
 * Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
-= 1.163 =
-* Bugfix: add extra link to personal wall when using groups
-* Bugfix: losing selected pages/groups in some cases
-* New feature: add to wall of friends ([Pro version](http://www.faircode.eu/al2fbpro/) only; beta)
-* New feature: option to clear all errors (plugin settings tab Misc)
-* Improvement: add to page: none
-* Improvement: updated Mozilla CA certificates
-* Improvement: (video) exclude default when not using the post editor
-* Improvement: list custom post type for exclusion
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = Older versions =
 * Deleted, because of maximum readme.txt size
@@ -829,11 +818,11 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
+= 1.165 =
+One bugfix, three improvements, one new feature, translation updates
+
 = 1.164 =
 One bugfix, translation update
-
-= 1.163 =
-Two bugfixes, two new features, four improvements, several translation updates
 
 == Setup guide ==
 
