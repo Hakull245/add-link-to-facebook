@@ -840,11 +840,11 @@ Basically there are five steps to follow:
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
 	* Or click [here](https://developers.facebook.com/) ;-)
-	* Navigate to *Apps* (top)
+	* Navigate to *Apps* (top menu)
 	* Select *Create New App* (button at top)
 	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
 2. Create the Facebook application:
-	* Give it any display name you like (will appear as *via* below the added links)
+	* Give it any name you like (will appear as *via* below the added links) and press *Continue*
 	* Fill in the red URL which the plugin indicates into the field *Website with Facebook Login* (click the sentence) > *Site URL*
 	* See the [screenshot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
 	* **Don't confuse this with the field *App Domain*, this field should be empty**
