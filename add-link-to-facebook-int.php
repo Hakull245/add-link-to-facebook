@@ -1275,8 +1275,8 @@ if (!class_exists('WPAL2Int')) {
 				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
 				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
-				$layout = '';
-				$width = '';
+				$layout = get_user_meta($user_ID, c_al2fb_meta_subscribe_layout, true);
+				$width = get_user_meta($user_ID, c_al2fb_meta_subscribe_width, true);
 
 				// Get link
 				$page_id = WPAL2Int::Get_page_id($user_ID, false);

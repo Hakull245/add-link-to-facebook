@@ -94,6 +94,9 @@ function al2fb_render_admin($al2fb)
 	$like_color_light = ($like_color == 'light' ? ' checked' : '');
 	$like_color_dark = ($like_color == 'dark' ? ' checked' : '');
 
+	// Subscribe button
+	$subscribe_layout = get_user_meta($user_ID, c_al2fb_meta_subscribe_layout, true);
+
 	// Comment link option
 	$comments_nolink = get_user_meta($user_ID, c_al2fb_meta_fb_comments_nolink, true);
 	if (empty($comments_nolink))
@@ -334,6 +337,7 @@ function al2fb_render_admin($al2fb)
 		<li><a href="#al2fb_tab_comments"><?php _e('Comments', c_al2fb_text_domain); ?></a></li>
 		<li><a href="#al2fb_tab_like_button"><?php _e('Like button', c_al2fb_text_domain); ?></a></li>
 		<li><a href="#al2fb_tab_like_box"><?php _e('Like box', c_al2fb_text_domain); ?></a></li>
+		<li><a href="#al2fb_tab_subscribe_button"><?php _e('Subscribe button', c_al2fb_text_domain); ?></a></li>
 		<li><a href="#al2fb_tab_comments_plugin"><?php _e('Comments plugin', c_al2fb_text_domain); ?></a></li>
 		<li><a href="#al2fb_tab_face_pile"><?php _e('Face pile', c_al2fb_text_domain); ?></a></li>
 		<li><a href="#al2fb_tab_login"><?php _e('Login', c_al2fb_text_domain); ?></a></li>
@@ -862,6 +866,33 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_box_nostream"><?php _e('Disable like box stream:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_box_nostream" name="<?php echo c_al2fb_meta_like_box_nostream; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_box_nostream, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	</table>
+	<p class="submit">
+	<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
+	</p>
+	</div>
+
+	<div id="al2fb_tab_subscribe_button" class="al2fb_tab_content">
+	<h4><?php _e('Subscribe button', c_al2fb_text_domain); ?></h4>
+	<table class="form-table al2fb_border">
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_subscribe_layout"><?php _e('Layout:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<select class="al2fb_select" id="al2fb_subscribe_layout" name="<?php echo c_al2fb_meta_subscribe_layout; ?>">
+		<option value="standard" <?php echo $subscribe_layout == 'standard' ? 'selected' : ''; ?>><?php _e('Standard', c_al2fb_text_domain); ?></option>
+		<option value="button_count" <?php echo $subscribe_layout == 'button_count' ? 'selected' : ''; ?>><?php _e('Button with count', c_al2fb_text_domain); ?></option>
+		<option value="box_count" <?php echo $subscribe_layout == 'box_count' ? 'selected' : ''; ?>><?php _e('Box with count', c_al2fb_text_domain); ?></option>
+		</select>
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_subscribe_width"><?php _e('Width:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input class="al2fb_numeric" id="al2fb_subscribe_width" name="<?php echo c_al2fb_meta_subscribe_width; ?>" type="text" value="<?php echo get_user_meta($user_ID, c_al2fb_meta_subscribe_width, true); ?>" />
+		<span><?php _e('Pixels', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
 	</table>
