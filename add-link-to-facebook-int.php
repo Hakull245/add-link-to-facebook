@@ -1268,6 +1268,39 @@ if (!class_exists('WPAL2Int')) {
 				return '';
 		}
 
+		static function Get_subscribe_button($post) {
+			$user_ID = WPAL2Facebook::Get_user_ID($post);
+			if ($user_ID && !WPAL2Facebook::Is_excluded_post_type($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
+				// Get options
+				$font = get_user_meta($user_ID, c_al2fb_meta_like_font, true);
+				$colorscheme = get_user_meta($user_ID, c_al2fb_meta_like_colorscheme, true);
+				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
+				$layout = '';
+				$width = '';
+
+				// Get link
+				$page_id = WPAL2Int::Get_page_id($user_ID, false);
+				$info = WPAL2Int::Get_fb_info_cached($user_ID, empty($page_id) ? 'me' : $page_id);
+
+				// Send button
+				$content = '<div class="al2fb_subscribe_button">';
+				$content .= '<div id="fb-root"></div>';
+				$content .= WPAL2Int::Get_fb_script($user_ID);
+				$content .= '<fb:subscribe';
+				$content .= ' font="' . (empty($font) ? 'arial' : $font) . '"';
+				$content .= ' colorscheme="' . (empty($colorscheme) ? 'light' : $colorscheme) . '"';
+				$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+				$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
+				$content .= ' width="' . (empty($width) ? '450' : $width) . '"';
+				$content .= ' href="' . $info->link . '"></fb:subscribe>';
+				$content .= '</div>';
+
+				return $content;
+			}
+			else
+				return '';
+		}
+
 		// Get HTML for comments plugin
 		static function Get_comments_plugin($post) {
 			if (get_post_meta($post->ID, c_al2fb_meta_nointegrate, true))

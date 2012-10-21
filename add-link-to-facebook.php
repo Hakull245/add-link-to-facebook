@@ -188,6 +188,18 @@ if (!function_exists('al2fb_send_button')) {
 	}
 }
 
+// Template tag for Facebook subscribe button
+if (!function_exists('al2fb_subscribe_button')) {
+	function al2fb_subscribe_button($post_ID = null) {
+		if (empty($post_ID))
+			global $post;
+		else
+			$post = get_post($post_ID);
+		if (isset($post))
+			echo WPAL2Int::Get_subscribe_button($post);
+	}
+}
+
 // Template tag for Facebook comments plugins
 if (!function_exists('al2fb_comments_plugin')) {
 	function al2fb_comments_plugin($post_ID = null) {

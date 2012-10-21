@@ -113,6 +113,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_shortcode('al2fb_like_button', array(&$this, 'Shortcode_like_button'));
 			add_shortcode('al2fb_like_box', array(&$this, 'Shortcode_like_box'));
 			add_shortcode('al2fb_send_button', array(&$this, 'Shortcode_send_button'));
+			add_shortcode('al2fb_subscribe_button', array(&$this, 'Shortcode_subscribe_button'));
 			add_shortcode('al2fb_comments_plugin', array(&$this, 'Shortcode_comments_plugin'));
 			add_shortcode('al2fb_face_pile', array(&$this, 'Shortcode_face_pile'));
 			add_shortcode('al2fb_profile_link', array(&$this, 'Shortcode_profile_link'));
@@ -2099,6 +2100,19 @@ if (!class_exists('WPAL2Facebook')) {
 				$post = get_post($post_id);
 			if (isset($post))
 				return WPAL2Int::Get_send_button($post);
+			else
+				return '';
+		}
+
+		// Shortcode send button
+		function Shortcode_subscribe_button($atts) {
+			extract(shortcode_atts(array('post_id' => null), $atts));
+			if (empty($post_id))
+				global $post;
+			else
+				$post = get_post($post_id);
+			if (isset($post))
+				return WPAL2Int::Get_subscribe_button($post);
 			else
 				return '';
 		}

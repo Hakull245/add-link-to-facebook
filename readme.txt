@@ -783,7 +783,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: shortcode/template tag/widget for Facebook subscribe button
 
 Follow these steps to install the development version:
 
