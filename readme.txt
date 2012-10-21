@@ -784,6 +784,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * New feature: widget/shortcode/template tag for Facebook subscribe button
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 Follow these steps to install the development version:
 
@@ -811,21 +813,17 @@ Follow these steps to install the development version:
 * Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 * Tested with WordPress 3.5 beta 2
 
-= 1.164 =
-* Bugfix: correct character set post submit box actions
-* Updated Italian (it\_IT) translation by [Gianni](http://gidibao.net/ "Gianni")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
+= 1.166 =
+Reverted one improvement
+
 = 1.165 =
 One bugfix, three improvements, one new feature, translation updates
-
-= 1.164 =
-One bugfix, translation update
 
 == Setup guide ==
 
