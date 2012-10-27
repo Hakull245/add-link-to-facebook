@@ -1333,7 +1333,6 @@ if (!class_exists('WPAL2Facebook')) {
 			$post = get_post($post_ID);
 
 			// Delegate
-			$_POST['al2fb_form'] = true;
 			self::Transition_post_status('publish', 'future', $post);
 		}
 
@@ -1395,8 +1394,10 @@ if (!class_exists('WPAL2Facebook')) {
 				(self::Is_authorized($user_ID) || self::Is_login_authorized($user_ID, true))) {
 				// Apply defaults if no form
 				if (!isset($_POST['al2fb_form'])) {
-					update_post_meta($post->ID, c_al2fb_meta_exclude, get_user_meta($user_ID, c_al2fb_meta_exclude_default, true));
-					update_post_meta($post->ID, c_al2fb_meta_exclude_video, get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true));
+					if (!get_post_meta($post->ID, c_al2fb_meta_exclude, true))
+						update_post_meta($post->ID, c_al2fb_meta_exclude, get_user_meta($user_ID, c_al2fb_meta_exclude_default, true));
+					if (!get_post_meta($post->ID, c_al2fb_meta_exclude_video, true))
+						update_post_meta($post->ID, c_al2fb_meta_exclude_video, get_user_meta($user_ID, c_al2fb_meta_exclude_default_video, true));
 				}
 
 				// Check if not added/excluded
