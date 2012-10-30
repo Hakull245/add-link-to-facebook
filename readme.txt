@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5
-Stable tag: 1.166
+Stable tag: 1.167
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -783,10 +783,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Bugfix: excludes when using scheduled posts
-* New feature: widget/shortcode/template tag for Facebook subscribe button
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
+* ...
 
 Follow these steps to install the development version:
 
@@ -800,6 +797,12 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.167 =
+* Bugfix: excludes when using scheduled posts
+* New feature: widget/shortcode/template tag for Facebook subscribe button
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = 1.166 =
 * Bugfix: revert WordPress logo in Open Graph Protocol if no link added
@@ -820,11 +823,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.166 =
-Reverted one improvement
-
-= 1.165 =
-One bugfix, three improvements, one new feature, translation updates
+= 1.167 =
+One bugfix, one new feature, translation updates
 
 == Setup guide ==
 
