@@ -605,9 +605,10 @@ if (!class_exists('WPAL2Facebook')) {
 			// Clear all errors
 			if ($_POST[c_al2fb_meta_clear_errors]) {
 				$query = array(
-					'author' => $user_ID,
 					'meta_key' => c_al2fb_meta_error,
 					'posts_per_page' => -1);
+				if (!get_site_option(c_al2fb_option_app_share))
+					$query['author'] = $user_ID;
 				$posts = new WP_Query($query);
 				while ($posts->have_posts()) {
 					$posts->next_post();

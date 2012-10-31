@@ -783,7 +783,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: clear errors for all users
 
 Follow these steps to install the development version:
 
