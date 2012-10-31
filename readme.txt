@@ -784,6 +784,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * Bugfix: clear errors for all users
+* Tested with WordPress 3.5 beta 2
 
 Follow these steps to install the development version:
 
