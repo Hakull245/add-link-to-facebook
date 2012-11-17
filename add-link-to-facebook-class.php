@@ -1154,6 +1154,7 @@ if (!class_exists('WPAL2Facebook')) {
 									$image_size = 'medium';
 
 								$picture = wp_get_attachment_image_src($attachment_id, $image_size);
+								$thumbnail = wp_get_attachment_image_src($attachment_id, 'thumbnail');
 
 								echo '<div class="al2fb_image">';
 								echo '<input type="radio" name="al2fb_image_id" id="al2fb_image_' . $attachment_id . '"';
@@ -1162,7 +1163,7 @@ if (!class_exists('WPAL2Facebook')) {
 								echo ' value="' . $attachment_id . '">';
 								echo '<br />';
 								echo '<label for="al2fb_image_' . $attachment_id . '">';
-								echo '<img src="' . $picture[0] . '" alt=""></label>';
+								echo '<img src="' . $thumbnail[0] . '" alt=""></label>';
 								echo '<br />';
 								echo '<span>' . $picture[1] . ' x ' . $picture[2] . '</span>';
 								echo '</div>';
