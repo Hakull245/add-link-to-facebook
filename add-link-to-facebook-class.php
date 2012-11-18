@@ -397,7 +397,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Save settings
 		function Action_config() {
 			// Security check
-			check_admin_referer(c_al2fb_nonce_form);
+			check_admin_referer(c_al2fb_nonce_action, c_al2fb_nonce_name);
 
 			// Get current user
 			global $user_ID;
@@ -661,8 +661,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Send debug info
 		function Action_mail() {
-			// Check security
-			check_admin_referer(c_al2fb_nonce_form);
+			// Security check
+			check_admin_referer(c_al2fb_nonce_action, c_al2fb_nonce_name);
+
 			require_once('add-link-to-facebook-debug.php');
 
 			if (empty($_POST[c_al2fb_mail_topic]) ||
@@ -891,7 +892,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="misc-pub-section">
 			<input type="hidden" id="al2fb_form" name="al2fb_form" value="true">
 <?php
-			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+			wp_nonce_field(c_al2fb_nonce_action, c_al2fb_nonce_name);
 
 			if (get_option(c_al2fb_option_login_add_links))
 				if (self::Is_login_authorized($user_ID, false)) {
@@ -1111,7 +1112,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$texts = self::Get_texts($post);
 
 				// Security
-				wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+				wp_nonce_field(c_al2fb_nonce_action, c_al2fb_nonce_name);
 
 				if ($this->debug) {
 					echo '<strong>Type:</strong> ' . $post->post_type . '<br />';;
@@ -1233,9 +1234,10 @@ if (!class_exists('WPAL2Facebook')) {
 				add_post_meta($post_id, c_al2fb_meta_log, date('c') . ' Save post');
 
 			// Security checks
-			$nonce = (isset($_POST[c_al2fb_nonce_form]) ? $_POST[c_al2fb_nonce_form] : null);
-			if (!wp_verify_nonce($nonce, plugin_basename(__FILE__)))
-				return $post_id;
+			check_admin_referer(c_al2fb_nonce_action, c_al2fb_nonce_name);
+			//$nonce = (isset($_POST[c_al2fb_nonce_name]) ? $_POST[c_al2fb_nonce_name] : null);
+			//if (!wp_verify_nonce($nonce, c_al2fb_nonce_action))
+			//	return $post_id;
 			if (!current_user_can('edit_post', $post_id))
 				return $post_id;
 
