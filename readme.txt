@@ -783,7 +783,7 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.169 ==
+= 1.169 =
 * Improvement: thumbnails in the post meta box
 * Improvement: hardened form security
 
