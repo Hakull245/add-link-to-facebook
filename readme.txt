@@ -768,7 +768,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* Updated French (fr\_FR) translation
 
 Follow these steps to install the development version:
 
