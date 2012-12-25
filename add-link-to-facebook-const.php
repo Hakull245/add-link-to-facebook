@@ -17,6 +17,7 @@ define('c_al2fb_option_msg_maxage', 'al2fb_msg_maxage');
 define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_max_comment', 'al2fb_max_comment');
+define('c_al2fb_option_exclude_custom', 'al2fb_exclude_custom');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_exclude_tag', 'al2fb_exclude_tag');

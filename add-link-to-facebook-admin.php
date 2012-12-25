@@ -1367,6 +1367,12 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_exclude_custom"><?php _e('Do not add links for custom post types:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_exclude_custom" name="<?php echo c_al2fb_option_exclude_custom; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_exclude_custom)) echo ' checked="checked"'; ?> />
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_exclude_type"><?php _e('Exclude these custom post types:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<input class="al2fb_text" id="al2fb_exclude_type" name="<?php echo c_al2fb_option_exclude_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_type); ?>" />

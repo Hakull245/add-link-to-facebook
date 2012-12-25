@@ -210,6 +210,12 @@ if (!class_exists('WPAL2Facebook')) {
 				//update_option(c_al2fb_option_uselinks, true);
 				update_option(c_al2fb_option_version, 12);
 			}
+
+			if ($version <= 12) {
+				if (empty($version))
+					add_option(c_al2fb_option_exclude_custom, true);
+				update_option(c_al2fb_option_version, 13);
+			}
 		}
 
 		// Handle plugin deactivation
@@ -569,6 +575,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_max_comment, $_POST[c_al2fb_option_max_comment]);
+				update_option(c_al2fb_option_exclude_custom, $_POST[c_al2fb_option_exclude_custom]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_exclude_tag, $_POST[c_al2fb_option_exclude_tag]);
@@ -856,6 +863,9 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 
 			// Check exclusion
+			if (get_option(c_al2fb_option_exclude_custom))
+				if ($post->post_type != 'post' && $post->post_type != 'page')
+					return;
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
 				return;
@@ -1246,6 +1256,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check exclusion
 			$post = get_post($post_id);
+			if (get_option(c_al2fb_option_exclude_custom))
+				if ($post->post_type != 'post' && $post->post_type != 'page')
+					return;
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
 				return $post_id;
@@ -1430,6 +1443,11 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Is_excluded_post_type($post) {
+			// All excluded?
+			if (get_option(c_al2fb_option_exclude_custom))
+				if ($post->post_type != 'post' && $post->post_type != 'page')
+					return true;
+
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 
 			// Compatibility
