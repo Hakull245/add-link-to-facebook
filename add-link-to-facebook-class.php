@@ -210,6 +210,12 @@ if (!class_exists('WPAL2Facebook')) {
 				//update_option(c_al2fb_option_uselinks, true);
 				update_option(c_al2fb_option_version, 12);
 			}
+
+			if ($version <= 12) {
+				if (empty($version))
+					add_option(c_al2fb_option_exclude_custom, true);
+				update_option(c_al2fb_option_version, 13);
+			}
 		}
 
 		// Handle plugin deactivation
@@ -397,7 +403,7 @@ if (!class_exists('WPAL2Facebook')) {
 		// Save settings
 		function Action_config() {
 			// Security check
-			check_admin_referer(c_al2fb_nonce_form);
+			check_admin_referer(c_al2fb_nonce_action, c_al2fb_nonce_name);
 
 			// Get current user
 			global $user_ID;
@@ -569,6 +575,7 @@ if (!class_exists('WPAL2Facebook')) {
 				update_option(c_al2fb_option_max_descr, $_POST[c_al2fb_option_max_descr]);
 				update_option(c_al2fb_option_max_text, $_POST[c_al2fb_option_max_text]);
 				update_option(c_al2fb_option_max_comment, $_POST[c_al2fb_option_max_comment]);
+				update_option(c_al2fb_option_exclude_custom, $_POST[c_al2fb_option_exclude_custom]);
 				update_option(c_al2fb_option_exclude_type, $_POST[c_al2fb_option_exclude_type]);
 				update_option(c_al2fb_option_exclude_cat, $_POST[c_al2fb_option_exclude_cat]);
 				update_option(c_al2fb_option_exclude_tag, $_POST[c_al2fb_option_exclude_tag]);
@@ -661,8 +668,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Send debug info
 		function Action_mail() {
-			// Check security
-			check_admin_referer(c_al2fb_nonce_form);
+			// Security check
+			check_admin_referer(c_al2fb_nonce_action, c_al2fb_nonce_name);
+
 			require_once('add-link-to-facebook-debug.php');
 
 			if (empty($_POST[c_al2fb_mail_topic]) ||
@@ -855,6 +863,9 @@ if (!class_exists('WPAL2Facebook')) {
 			global $post;
 
 			// Check exclusion
+			if (get_option(c_al2fb_option_exclude_custom))
+				if ($post->post_type != 'post' && $post->post_type != 'page')
+					return;
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
 				return;
@@ -891,7 +902,7 @@ if (!class_exists('WPAL2Facebook')) {
 			<div class="misc-pub-section">
 			<input type="hidden" id="al2fb_form" name="al2fb_form" value="true">
 <?php
-			wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+			wp_nonce_field(c_al2fb_nonce_action, c_al2fb_nonce_name);
 
 			if (get_option(c_al2fb_option_login_add_links))
 				if (self::Is_login_authorized($user_ID, false)) {
@@ -1111,7 +1122,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$texts = self::Get_texts($post);
 
 				// Security
-				wp_nonce_field(plugin_basename(__FILE__), c_al2fb_nonce_form);
+				wp_nonce_field(c_al2fb_nonce_action, c_al2fb_nonce_name);
 
 				if ($this->debug) {
 					echo '<strong>Type:</strong> ' . $post->post_type . '<br />';;
@@ -1233,8 +1244,8 @@ if (!class_exists('WPAL2Facebook')) {
 				add_post_meta($post_id, c_al2fb_meta_log, date('c') . ' Save post');
 
 			// Security checks
-			$nonce = (isset($_POST[c_al2fb_nonce_form]) ? $_POST[c_al2fb_nonce_form] : null);
-			if (!wp_verify_nonce($nonce, plugin_basename(__FILE__)))
+			$nonce = (isset($_POST[c_al2fb_nonce_name]) ? $_POST[c_al2fb_nonce_name] : null);
+			if (!wp_verify_nonce($nonce, c_al2fb_nonce_action))
 				return $post_id;
 			if (!current_user_can('edit_post', $post_id))
 				return $post_id;
@@ -1245,6 +1256,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check exclusion
 			$post = get_post($post_id);
+			if (get_option(c_al2fb_option_exclude_custom))
+				if ($post->post_type != 'post' && $post->post_type != 'page')
+					return;
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 			if (in_array($post->post_type, $ex_custom_types))
 				return $post_id;
@@ -1429,6 +1443,11 @@ if (!class_exists('WPAL2Facebook')) {
 		}
 
 		function Is_excluded_post_type($post) {
+			// All excluded?
+			if (get_option(c_al2fb_option_exclude_custom))
+				if ($post->post_type != 'post' && $post->post_type != 'page')
+					return true;
+
 			$ex_custom_types = explode(',', get_option(c_al2fb_option_exclude_type));
 
 			// Compatibility

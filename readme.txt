@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5
-Stable tag: 1.168
+Stable tag: 1.173
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -305,21 +305,6 @@ Example:
 
 * if (function_exists('al2fb_likers')) al2fb_likers();
 * if (function_exists('al2fb_likers')) al2fb_likers(123);
-
-All template tags:
-
-* al2fb_likers
-* al2fb_anchor
-* al2fb_like_count
-* al2fb_like_button
-* al2fb_like_box
-* al2fb_send_button
-* al2fb_comments_plugin
-* al2fb_face_pile
-* al2fb_profile_link
-* al2fb_registration
-* al2fb_login
-* al2fb_activity_feed
 
 = U25 Can I add links to multiple walls? =
 
@@ -783,7 +768,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Improvement: display thumbnails in the post meta box
+* ...
 
 Follow these steps to install the development version:
 
@@ -797,6 +782,21 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.173 =
+* New feature: option to disable adding links for all custom post types (enabled by default for new installations)
+* Improvement: updated CA certificates
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+
+= 1.172 =
+* Updated French (fr\_FR) translation
+
+= 1.171 =
+* Bugfix: add new post security warning
+
+= 1.169 =
+* Improvement: thumbnails in the post meta box
+* Improvement: hardened form security
 
 = 1.168 =
 * Bugfix: clear errors for all users
@@ -828,8 +828,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.168 =
-One bugfix, one improvement
+= 1.173 =
+One new feature, one improvement, updated translation
 
 == Setup guide ==
 
@@ -838,6 +838,8 @@ One bugfix, one improvement
 **If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.**
 
 **If you have a multi-site installation, create a separate Facebook application for each site.**
+
+**Never delete an existing Facebook application, because you could delete the links added through it too.***
 
 The setup of the plugin should be fairly self-explanatory.
 Basically there are five steps to follow:
