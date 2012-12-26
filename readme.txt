@@ -80,7 +80,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
