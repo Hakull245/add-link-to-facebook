@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5
-Stable tag: 1.172
+Stable tag: 1.173
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -768,9 +768,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* New feature: option to disable links for custom post types
-* Improvement: updated CA certificates
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
+* ...
 
 Follow these steps to install the development version:
 
@@ -784,6 +782,11 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.173 =
+* New feature: option to disable adding links for all custom post types (enabled by default for new installations)
+* Improvement: updated CA certificates
+* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
 = 1.172 =
 * Updated French (fr\_FR) translation
@@ -825,8 +828,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.172 =
-Update translation
+= 1.173 =
+One new feature, one improvement, updated translation
 
 == Setup guide ==
 
