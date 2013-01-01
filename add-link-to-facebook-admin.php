@@ -2,7 +2,7 @@
 
 /*
 	Support class Add Link to Facebook admin
-	Copyright (c) 2011, 2012 by Marcel Bokhorst
+	Copyright (c) 2011-2013 by Marcel Bokhorst
 */
 
 function al2fb_render_admin($al2fb)
@@ -227,7 +227,7 @@ function al2fb_render_admin($al2fb)
 
 	<form method="post" action="<?php echo $config_url; ?>">
 	<input type="hidden" name="al2fb_action" value="config">
-	<?php wp_nonce_field(c_al2fb_nonce_form); ?>
+	<?php wp_nonce_field(c_al2fb_nonce_action, c_al2fb_nonce_name); ?>
 
 	<div id="al2fb_config">
 
@@ -585,44 +585,45 @@ function al2fb_render_admin($al2fb)
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_friend"><?php _e('Add to wall of friends:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<p><strong>Beta!</strong></p>
+				<p><strong>Facebook will not allow adding to friends walls from February 6th, 2013 anymore</strong></p>
 <?php
-				if (WPAL2Int::Check_multiple()) {
-					// Check links API
-					if (get_option(c_al2fb_option_uselinks))
-						echo '<p style="color: Red"><strong>' . __('Disable the links API to use this feature', c_al2fb_text_domain) . '</strong></p>';
+				if (time() < strtotime('6 February 2013'))
+					if (WPAL2Int::Check_multiple()) {
+						// Check links API
+						if (get_option(c_al2fb_option_uselinks))
+							echo '<p style="color: Red"><strong>' . __('Disable the links API to use this feature', c_al2fb_text_domain) . '</strong></p>';
 
-					// Get friends
-					try {
-						$friends = WPAL2Int::Get_fb_friends_cached($user_ID);
-					}
-					catch (Exception $e) {
-						if ($al2fb->debug)
-							print_r($e);
-						$friends = null;
-					}
-					$extra_friend = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
-					if (empty($extra_friend) || !is_array($extra_friend))
-						$extra_friend = array();
-
-					echo '<table>';
-					if ($friends && $friends->data) {
-						usort($friends->data, 'al2fb_compare_friends');
-						foreach ($friends->data as $friend) {
-							if (empty($friend->name))
-								$friend->name = '?';
-							echo '<tr><td><input type="checkbox"' . (in_array($friend->id, $extra_friend) ? ' checked="checked"' : '') . ' name="' . c_al2fb_meta_friend_extra . '[]" value="' . $friend->id . '"></td>';
-							echo '<td>' . htmlspecialchars($friend->name, ENT_QUOTES, $charset) . '</td></tr>';
+						// Get friends
+						try {
+							$friends = WPAL2Int::Get_fb_friends_cached($user_ID);
 						}
+						catch (Exception $e) {
+							if ($al2fb->debug)
+								print_r($e);
+							$friends = null;
+						}
+						$extra_friend = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
+						if (empty($extra_friend) || !is_array($extra_friend))
+							$extra_friend = array();
+
+						echo '<table>';
+						if ($friends && $friends->data) {
+							usort($friends->data, 'al2fb_compare_friends');
+							foreach ($friends->data as $friend) {
+								if (empty($friend->name))
+									$friend->name = '?';
+								echo '<tr><td><input type="checkbox"' . (in_array($friend->id, $extra_friend) ? ' checked="checked"' : '') . ' name="' . c_al2fb_meta_friend_extra . '[]" value="' . $friend->id . '"></td>';
+								echo '<td>' . htmlspecialchars($friend->name, ENT_QUOTES, $charset) . '</td></tr>';
+							}
+						}
+						echo '</table>';
 					}
-					echo '</table>';
-				}
-				else {
-					echo '<strong>';
-					_e('This option is only available in', c_al2fb_text_domain);
-					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
-					echo '</strong>';
-				}
+					else {
+						echo '<strong>';
+						_e('This option is only available in', c_al2fb_text_domain);
+						echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
+						echo '</strong>';
+					}
 ?>
 			</td></tr>
 			</table>
@@ -1367,6 +1368,12 @@ function al2fb_render_admin($al2fb)
 		</td></tr>
 
 		<tr valign="top"><th scope="row">
+			<label for="al2fb_exclude_custom"><?php _e('Do not add links for custom post types:', c_al2fb_text_domain); ?></label>
+		</th><td>
+			<input id="al2fb_exclude_custom" name="<?php echo c_al2fb_option_exclude_custom; ?>" type="checkbox"<?php if (get_option(c_al2fb_option_exclude_custom)) echo ' checked="checked"'; ?> />
+		</td></tr>
+
+		<tr valign="top"><th scope="row">
 			<label for="al2fb_exclude_type"><?php _e('Exclude these custom post types:', c_al2fb_text_domain); ?></label>
 		</th><td>
 			<input class="al2fb_text" id="al2fb_exclude_type" name="<?php echo c_al2fb_option_exclude_type; ?>" type="text" value="<?php echo get_option(c_al2fb_option_exclude_type); ?>" />
@@ -1660,7 +1667,7 @@ function al2fb_render_debug_info($al2fb) {
 		<h3><?php _e('Debug information', c_al2fb_text_domain) ?></h3>
 		<form method="post" action="">
 		<input type="hidden" name="al2fb_action" value="mail">
-		<?php wp_nonce_field(c_al2fb_nonce_form); ?>
+		<?php wp_nonce_field(c_al2fb_nonce_action, c_al2fb_nonce_name); ?>
 
 		<table class="form-table">
 		<tr valign="top"><th scope="row">
