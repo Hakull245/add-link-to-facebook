@@ -2,13 +2,13 @@
 
 /*
 	Support class Add Link to Facebook plugin
-	Copyright (c) 2011, 2012 by Marcel Bokhorst
+	Copyright (c) 2011-2013 by Marcel Bokhorst
 */
 
 /*
 	GNU General Public License version 3
 
-	Copyright (c) 2011, 2012 Marcel Bokhorst
+	Copyright (c) 2011-2013 Marcel Bokhorst
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -548,13 +548,14 @@ if (!class_exists('WPAL2Int')) {
 			}
 
 			// Friends
-			if (WPAL2Int::Check_multiple() && !get_option(c_al2fb_option_uselinks)) {
-				$extra = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
-				if (is_array($extra))
-					$page_ids = array_merge($page_ids, $extra);
-				else if (!empty($extra))
-					$page_ids[] = $extra;
-			}
+			if (time() < strtotime('6 February 2013'))
+				if (WPAL2Int::Check_multiple() && !get_option(c_al2fb_option_uselinks)) {
+					$extra = get_user_meta($user_ID, c_al2fb_meta_friend_extra, true);
+					if (is_array($extra))
+						$page_ids = array_merge($page_ids, $extra);
+					else if (!empty($extra))
+						$page_ids[] = $extra;
+				}
 
 			// Default personal wall
 			if (empty($page_ids))

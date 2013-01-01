@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5
-Stable tag: 1.173
+Stable tag: 1.174
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -783,6 +783,9 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.174 =
+* Disable adding links to friends walls after February 6th, [read here](https://developers.facebook.com/blog/post/2012/10/10/growing-quality-apps-with-open-graph/) why
+
 = 1.173 =
 * New feature: option to disable adding links for all custom post types (enabled by default for new installations)
 * Improvement: updated CA certificates
@@ -827,6 +830,9 @@ Follow these steps to install the development version:
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
+
+= 1.174 =
+Disable adding links to friends
 
 = 1.173 =
 One new feature, one improvement, updated translation
