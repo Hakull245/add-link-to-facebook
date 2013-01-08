@@ -2,7 +2,8 @@
 
 // Define constants
 define('c_al2fb_text_domain', 'add-link-to-facebook');
-define('c_al2fb_nonce_form', 'al2fb-nonce-form');
+define('c_al2fb_nonce_action', 'wp-al2fb-action');
+define('c_al2fb_nonce_name', 'wp-al2fb-nonce');
 
 // Global options
 define('c_al2fb_option_version', 'al2fb_version');
@@ -16,6 +17,7 @@ define('c_al2fb_option_msg_maxage', 'al2fb_msg_maxage');
 define('c_al2fb_option_max_descr', 'al2fb_max_msg');
 define('c_al2fb_option_max_text', 'al2fb_max_text');
 define('c_al2fb_option_max_comment', 'al2fb_max_comment');
+define('c_al2fb_option_exclude_custom', 'al2fb_exclude_custom');
 define('c_al2fb_option_exclude_type', 'al2fb_exclude_type');
 define('c_al2fb_option_exclude_cat', 'al2fb_exclude_cat');
 define('c_al2fb_option_exclude_tag', 'al2fb_exclude_tag');
