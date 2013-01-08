@@ -796,40 +796,6 @@ Follow these steps to install the development version:
 * Improvement: updated CA certificates
 * Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
 
-= 1.172 =
-* Updated French (fr\_FR) translation
-
-= 1.171 =
-* Bugfix: add new post security warning
-
-= 1.169 =
-* Improvement: thumbnails in the post meta box
-* Improvement: hardened form security
-
-= 1.168 =
-* Bugfix: clear errors for all users
-* Improvement: more debug info
-* Tested with WordPress 3.5 beta 2
-
-= 1.167 =
-* Bugfix: excludes when using scheduled posts
-* New feature: widget/shortcode/template tag for Facebook subscribe button
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
-= 1.166 =
-* Bugfix: revert WordPress logo in Open Graph Protocol if no link added
-
-= 1.165 =
-* Bugfix: exclude/video for scheduled posts
-* Improvement: auto fix invalid locales
-* Improvement: strip shortcodes if not filtering text/excerpt
-* Improvement: WordPress logo in Open Graph Protocol if no link added (performance)
-* New feature: global URL parameter
-* Updated Dutch (nl\_NL) and Flemish (nl\_BE) translations
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-* Tested with WordPress 3.5 beta 2
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
