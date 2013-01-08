@@ -585,7 +585,7 @@ function al2fb_render_admin($al2fb)
 			<tr valign="top"><th scope="row">
 				<label for="al2fb_friend"><?php _e('Add to wall of friends:', c_al2fb_text_domain); ?></label>
 			</th><td>
-				<p><strong>Facebook will not allow adding to friends walls from February 6th, 2013 anymore</strong></p>
+				<p style="color: red;"><strong><a href="https://developers.facebook.com/blog/post/2012/10/10/growing-quality-apps-with-open-graph/">Facebook will not allow</a> adding to friends walls from February 6th, 2013 anymore</strong></p>
 <?php
 				if (time() < strtotime('6 February 2013'))
 					if (WPAL2Int::Check_multiple()) {
