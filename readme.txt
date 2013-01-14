@@ -709,6 +709,7 @@ Ask your provider to install and configure [cURL](http://www.php.net/manual/en/c
 
 You are probably using an existing Facebook application.
 You can solve this problem by going into application settings and setting the Stream post URL security to disabled under advanced.
+If you are adding links to a group, try disabling the option *Add 'Share' link*.
 
 = E24 I get 'file_get_contents ... No such file or directory' =
 
