@@ -617,7 +617,7 @@ cURL errors commonly reported:
 * Error 28: *Operation timeout*: hopefully temporarily no internet available on the hosting server, you can try to increase the setting *Facebook communication timeout*
 * Error 47: *Maximum redirects followed*: update to version 1.149+
 * Error 56: *Failure with receiving network data*: this error may be caused by using a CDN or caching solutions like CloudFare
-* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Do not verify the peer's certificate* (settings tab *Admin*), but be aware this is less secure
+* Error 60: *Peer certificate cannot be authenticated with known CA certificates*: the security certificates on the hosting server could be missing or outdated, try enabling the option *Use bundled CA certificates* or as a last resort *Do not verify the peer's certificate* (settings tab *Admin*), but be aware this is less secure
 * Error 77: *Problem with reading the SSL CA cert*: the certificate files on the hosting server are not accessible or missing
 
 You can find all cURL error codes on the [libcurl error page](http://curl.haxx.se/libcurl/c/libcurl-errors.html "libcurl-errors.3 -- man page").
