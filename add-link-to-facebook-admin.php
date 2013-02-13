@@ -127,7 +127,6 @@ function al2fb_render_admin($al2fb)
 	al2fb_render_debug_info($al2fb);
 	echo '<div class="al2fb_sidebar">';
 	al2fb_render_resources($al2fb);
-	al2fb_render_ads($al2fb);
 	echo '</div>';
 ?>
 	<div class="al2fb_options">
@@ -1234,12 +1233,6 @@ function al2fb_render_admin($al2fb)
 	</th><td>
 		<input id="al2fb_donated" name="<?php echo c_al2fb_meta_donated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_donated, true)) echo ' checked="checked"'; ?> />
 	</td></tr>
-
-	<tr valign="top"><th scope="row">
-		<label for="al2fb_rated"><?php _e('I have rated this plugin:', c_al2fb_text_domain); ?></label>
-	</th><td>
-		<input id="al2fb_rated" name="<?php echo c_al2fb_meta_rated; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_rated, true)) echo ' checked="checked"'; ?> />
-	</td></tr>
 	</table>
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -1639,22 +1632,6 @@ function al2fb_render_resources($al2fb) {
 ?>
 	</div>
 <?php
-}
-
-function al2fb_render_ads($al2fb) {
-	// Host1Plus
-	echo '<div class="al2fb_ads">';
-	echo '<a href="http://www.host1plus.com/vps-hosting/" target="_blank">';
-	echo '<img src="' . plugins_url('host1plus.jpg', __FILE__) . '" width="250" height="67" alt="Host1Plus">';
-	echo '</a>';
-	echo '</div>';
-
-	// ManageWP
-	echo '<div class="al2fb_ads">';
-	echo '<a href="http://managewp.com/?utm_source=Plugins&utm_medium=Banner&utm_content=mwp250_2&utm_campaign=addtofacebook" target="_blank">';
-	echo '<img src="' . plugins_url('mwp250_2.png', __FILE__) . '" alt="ManageWP">';
-	echo '</a>';
-	echo '</div>';
 }
 
 function al2fb_render_debug_info($al2fb) {
