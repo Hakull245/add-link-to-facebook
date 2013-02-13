@@ -147,8 +147,6 @@ define('c_al2fb_meta_param_name', 'al2fb_param_name');
 define('c_al2fb_meta_param_value', 'al2fb_param_value');
 define('c_al2fb_meta_clear_errors', 'al2fb_clear_errors');
 define('c_al2fb_meta_donated', 'al2fb_donated');
-define('c_al2fb_meta_rated0', 'al2fb_rated');
-define('c_al2fb_meta_rated', 'al2fb_rated1');
 define('c_al2fb_meta_stat', 'al2fb_stat');
 define('c_al2fb_meta_week', 'al2fb_week');
 

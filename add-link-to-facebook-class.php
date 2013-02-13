@@ -541,9 +541,6 @@ if (!class_exists('WPAL2Facebook')) {
 			update_user_meta($user_ID, c_al2fb_meta_param_name, $_POST[c_al2fb_meta_param_name]);
 			update_user_meta($user_ID, c_al2fb_meta_param_value, $_POST[c_al2fb_meta_param_value]);
 			update_user_meta($user_ID, c_al2fb_meta_donated, $_POST[c_al2fb_meta_donated]);
-			update_user_meta($user_ID, c_al2fb_meta_rated, $_POST[c_al2fb_meta_rated]);
-			if ($_POST[c_al2fb_meta_rated])
-				delete_user_meta($user_ID, c_al2fb_meta_rated0);
 
 			if (isset($_REQUEST['debug'])) {
 				if (empty($_POST[c_al2fb_meta_access_token]))
@@ -776,20 +773,6 @@ if (!class_exists('WPAL2Facebook')) {
 				$msg = htmlspecialchars(stripslashes($_REQUEST['error']), ENT_QUOTES, get_bloginfo('charset'));
 				$msg .= '<br /><br />Most errors are described in <a href="' . $faq . '" target="_blank">the FAQ</a>';
 				echo '<div id="message" class="error fade al2fb_error"><p>' . $msg . '</p></div>';
-			}
-
-			// Check for rating notice
-			if ($donotice && !get_user_meta($user_ID, c_al2fb_meta_rated, true)) {
-				echo '<div id="message" class="error fade al2fb_error"><p>';
-				$msg = __('If you like the Add Link to Facebook plugin, please rate it on <a href="[wordpress]" target="_blank">wordpress.org</a>.<br />If the average rating is low, it makes no sense to support this plugin any longer.<br />You can disable this notice by checking the option "I have rated this plugin" on the <a href="[settings]">settings page</a>.', c_al2fb_text_domain);
-				if (get_user_meta($user_ID, c_al2fb_meta_rated0, true)) {
-					$msg .= '<br /><br /><em>';
-					$msg .= __('Through a mishap on the WordPress.org systems, previous ratings for the plugin were lost.<br />If you\'ve rated the plugin in the past, your rating was accidentally removed.<br />So if you would be so kind as to rate the plugin again, I\'d appreciate it. Thanks!', c_al2fb_text_domain);
-					$msg .= '</em>';
-				}
-				$msg = str_replace('[wordpress]', 'http://wordpress.org/extend/plugins/add-link-to-facebook/', $msg);
-				$msg = str_replace('[settings]', $url . '&rate', $msg);
-				echo $msg . '</p></div>';
 			}
 
 			// Check for multiple count
