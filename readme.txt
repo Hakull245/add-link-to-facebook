@@ -373,6 +373,7 @@ The only thing that can be changed is the Facebook application name after 'via'.
 From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/).
 
 From version 1.149.1 you can set a video URL in the post editor.
+See [here](http://www.viwickam.com/how-to-make-your-video-blog-posts-facebook-friendly/) for how to get the correct video URL.
 
 = U33 The like/send button doesn't look/behave as I want =
 
@@ -785,7 +786,7 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.177 =
+= Next release =
 * Bugfix: Facebook login for multi-sites
 * Added Ukranian (ua\_UA) translation
 
