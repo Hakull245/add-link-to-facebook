@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5.1
-Stable tag: 1.176
+Stable tag: 1.177
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -79,6 +79,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Greek (el\_EL), thanks!
 * Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
+* Ukrainian (ua\_UA), thanks
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
@@ -252,6 +253,7 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Are you logged into the correct Facebook account?
 * Are you looking at the correct personal/page/group wall/profile?
 * Do the privacy options allow viewing the link?
+* Make sure sandbox mode is not enabled in the Facebook application
 
 Note that each WordPress user should authorize the plugin, unless you check the option *Share with all users on this site* in the Easy setup section.
 
@@ -372,6 +374,7 @@ The only thing that can be changed is the Facebook application name after 'via'.
 From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/).
 
 From version 1.149.1 you can set a video URL in the post editor.
+See [here](http://www.viwickam.com/how-to-make-your-video-blog-posts-facebook-friendly/) for how to get the correct video URL.
 
 = U33 The like/send button doesn't look/behave as I want =
 
@@ -784,6 +787,10 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.177 =
+* Bugfix: Facebook login for multi-sites
+* Added Ukranian (ua\_UA) translation
+
 = 1.176 =
 * Removed graphical ads
 * Removed request for rating
@@ -792,18 +799,14 @@ Follow these steps to install the development version:
 * Disable adding links to friends walls after February 6th, [read here](https://developers.facebook.com/blog/post/2012/10/10/growing-quality-apps-with-open-graph/) why
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
 
-= 1.174 =
-* Disable adding links to friends walls after February 6th, [read here](https://developers.facebook.com/blog/post/2012/10/10/growing-quality-apps-with-open-graph/) why
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
-= 1.176 =
-Removed ads
+= 1.177 =
+One bugfix, new translation
 
 == Setup guide ==
 
