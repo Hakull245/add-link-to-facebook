@@ -79,6 +79,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Greek (el\_EL), thanks!
 * Lithuanian (lt\_LT) by [Host1Free](http://www.host1free.com/ "Host1Free"), thanks!
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
+* Ukrainian (ua\_UA), thanks
 
 See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
@@ -784,6 +785,10 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.177 =
+* Bugfix: Facebook login for multi-sites
+* Added Ukranian (ua\_UA) translation
+
 = 1.176 =
 * Removed graphical ads
 * Removed request for rating
@@ -791,10 +796,6 @@ Follow these steps to install the development version:
 = 1.175 =
 * Disable adding links to friends walls after February 6th, [read here](https://developers.facebook.com/blog/post/2012/10/10/growing-quality-apps-with-open-graph/) why
 * Updated German (de\_DE) translation by [Wolfgang Tischer](http://www.literaturcafe.de "Wolfgang Tischer")
-
-= 1.174 =
-* Disable adding links to friends walls after February 6th, [read here](https://developers.facebook.com/blog/post/2012/10/10/growing-quality-apps-with-open-graph/) why
-* Updated Norwegian (nb\_NO) translation by [Stein Ivar Johnsen](http://www.idyrøy.no/ "Stein Ivar Johnsen")
 
 = Older versions =
 * Deleted, because of maximum readme.txt size
