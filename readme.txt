@@ -253,6 +253,7 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Are you logged into the correct Facebook account?
 * Are you looking at the correct personal/page/group wall/profile?
 * Do the privacy options allow viewing the link?
+* Make sure sandbox mode is not enabled in the Facebook application
 
 Note that each WordPress user should authorize the plugin, unless you check the option *Share with all users on this site* in the Easy setup section.
 
