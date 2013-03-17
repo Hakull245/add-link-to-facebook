@@ -772,7 +772,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* Bugfix: localized registration
 
 Follow these steps to install the development version:
 
