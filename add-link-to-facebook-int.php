@@ -1401,7 +1401,7 @@ if (!class_exists('WPAL2Int')) {
 				$fields .= ",{'name':'first_name'}";
 				$fields .= ",{'name':'last_name'}";
 				$fields .= ",{'name':'email'}";
-				$fields .= ",{'name':'user_name','description':'" . __('WordPress user name', c_al2fb_text_domain) . "','type':'text'}";
+				$fields .= ",{'name':'user_name','description':'" . addslashes(__('WordPress user name', c_al2fb_text_domain)) . "','type':'text'}";
 				$fields .= ",{'name':'password'}]";
 
 				// Build content
