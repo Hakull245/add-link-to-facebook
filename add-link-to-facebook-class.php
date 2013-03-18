@@ -1620,9 +1620,10 @@ if (!class_exists('WPAL2Facebook')) {
 						function_exists('wp_get_attachment_image_src')) {
 						$picture_id = get_post_thumbnail_id($post->ID);
 						if ($picture_id) {
-							if (stripos($picture_id, 'ngg-') !== false && class_exists('nggdb')) {
+							if (stripos($picture_id, 'ngg-') !== false && class_exists('nggdb') && class_exists('nggMeta')) {
 								$nggMeta = new nggMeta(str_replace('ngg-', '', $picture_id));
-								$picture = $nggMeta->image->imageURL;
+								if (!empty($nggMeta->image) && !empty($nggMeta->image->imageURL))
+									$picture = $nggMeta->image->imageURL;
 							}
 							else {
 								$picture = wp_get_attachment_image_src($picture_id, $image_size);
@@ -1691,9 +1692,11 @@ if (!class_exists('WPAL2Facebook')) {
 				global $VipersVideoQuicktags;
 				if (isset($VipersVideoQuicktags)) {
 					do_shortcode($post->post_content);
-					$video = reset($VipersVideoQuicktags->swfobjects);
-					if (!empty($video))
-						$video = $video['url'];
+					if (!empty($VipersVideoQuicktags->swfobjects)) {
+						$video = reset($VipersVideoQuicktags->swfobjects);
+						if (!empty($video) && !empty($video['url']))
+							$video = $video['url'];
+					}
 				}
 			}
 			$video = apply_filters('al2fb_video', $video, $post);

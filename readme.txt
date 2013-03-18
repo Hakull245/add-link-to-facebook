@@ -369,9 +369,7 @@ Question E22 describes possible errors for the Facebook registration form / logi
 No, this can't be removed or changed for automatically added links, see also question U27.
 The only thing that can be changed is the Facebook application name after 'via'.
 
-= U32 Is video or audio supported? =
-
-From version 1.142 video is supported for [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/).
+= U32 Is video supported? =
 
 From version 1.149.1 you can set a video URL in the post editor.
 Please note that the URL must link *directly* to the video and not to a page that displays the video.
@@ -545,8 +543,8 @@ Yes, but the custom post type should support custom values for it to work.
 
 Assuming that you embed a NextGEN Gallery into a post, set the option *Link Picture* to *First image in the post*.
 Disable the option *Do not execute filters for texts*, but take care to check if this doesn't result in compatibility problems with other plugins.
-Enable the option *Do not execute shortcodes for texts*.
-It is also possible to use featured images of NextGEN Gallery.
+Also enable the option *Do not execute shortcodes for texts*.
+Please note that changes in NextGEN may cause this not to work anymore, see also question C02.
 
 **--- Error messages ---**
 
