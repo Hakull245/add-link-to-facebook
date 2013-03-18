@@ -1618,16 +1618,10 @@ if (!class_exists('WPAL2Int')) {
 				$response = WPAL2Int::Request($url, $query, 'GET');
 				$me = json_decode($response);
 
-				$c_al2fb_meta_facebook_id = c_al2fb_meta_facebook_id;
-				if (is_multisite()) {
-					global $blog_id;
-					$c_al2fb_meta_facebook_id = 'blog_' . $blog_id . '_' . $c_al2fb_meta_facebook_id;
-				}
-
 				// Workaround if no e-mail present
 				if (!empty($me) && empty($me->email)) {
 					$users = get_users(array(
-						'meta_key' => $c_al2fb_meta_facebook_id,
+						'meta_key' => c_al2fb_meta_facebook_id,
 						'meta_value' => $me->id
 					));
 					if (count($users) == 0) {
@@ -1643,7 +1637,7 @@ if (!class_exists('WPAL2Int')) {
 				if (!empty($me) && !empty($me->id)) {
 					// Find user by Facebook ID
 					$users = get_users(array(
-						'meta_key' => $c_al2fb_meta_facebook_id,
+						'meta_key' => c_al2fb_meta_facebook_id,
 						'meta_value' => $me->id
 					));
 
