@@ -677,17 +677,6 @@ if (!class_exists('WPAL2Int')) {
 			if ($icon)
 				$query_array['icon'] = $icon;
 
-			// Add share link (overwrites how link)
-			if (get_user_meta($user_ID, c_al2fb_meta_share_link, true)) {
-				// http://forum.developers.facebook.net/viewtopic.php?id=50049
-				// http://bugs.developers.facebook.net/show_bug.cgi?id=9075
-				$actions = array(
-					'name' => __('Share', c_al2fb_text_domain),
-					'link' => 'http://www.facebook.com/share.php?u=' . urlencode($link) . '&t=' . rawurlencode($name)
-				);
-				$query_array['actions'] = json_encode($actions);
-			}
-
 			// Get me info (needed for malformed link id's)
 			try {
 				$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
