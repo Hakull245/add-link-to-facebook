@@ -773,6 +773,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 
 = Development version =
 * Bugfix: localized registration
+* Removed *Share link* feature, since there are too many problems with it
 
 Follow these steps to install the development version:
 
