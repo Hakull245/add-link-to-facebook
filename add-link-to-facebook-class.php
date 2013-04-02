@@ -1943,7 +1943,7 @@ if (!class_exists('WPAL2Facebook')) {
 					echo '<meta property="og:title" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:type" content="blog" />' . PHP_EOL;
 					echo '<meta property="og:image" content="' . $picture . '" />' . PHP_EOL;
-					echo '<meta property="og:url" content="' . get_home_url() . '" />' . PHP_EOL;
+					echo '<meta property="og:url" content="' . get_home_url(null, '/') . '" />' . PHP_EOL;
 					echo '<meta property="og:site_name" content="' . htmlspecialchars($title, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 					echo '<meta property="og:description" content="' . htmlspecialchars(empty($description) ? $title : $description, ENT_COMPAT, $charset) . '" />' . PHP_EOL;
 
