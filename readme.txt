@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5.1
-Stable tag: 1.178
+Stable tag: 1.179
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -770,7 +770,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Bugfix: OPG home URL
+* ...
 
 Follow these steps to install the development version:
 
@@ -785,6 +785,9 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.179 =
+* Bugfix: OPG home URL
+
 = 1.178 =
 * Bugfix: localized registration
 * Revert: bugfix Facebook login for multi-sites
@@ -794,18 +797,14 @@ Follow these steps to install the development version:
 * Bugfix: Facebook login for multi-sites
 * Added Ukranian (ua\_UA) translation
 
-= 1.176 =
-* Removed graphical ads
-* Removed request for rating
-
 = Older versions =
 * Deleted, because of maximum readme.txt size
 * Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
 
 == Upgrade Notice ==
 
-= 1.178 =
-Two bugfixes, removed one feature
+= 1.179 =
+One bugfix
 
 == Setup guide ==
 
