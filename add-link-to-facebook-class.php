@@ -2300,7 +2300,8 @@ if (!class_exists('WPAL2Facebook')) {
 								if ($stored_comments)
 									foreach ($stored_comments as $comment) {
 										$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-										if ($fb_comment_id == $fb_comment->id) {
+										if ($fb_comment_id == $fb_comment->id ||
+											strpos($fb_comment->id, $fb_comment_id) !== false) {
 											$stored = true;
 											break;
 										}
