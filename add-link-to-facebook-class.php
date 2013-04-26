@@ -2542,19 +2542,26 @@ if (!class_exists('WPAL2Facebook')) {
 						$deleted_fb_comment_ids = get_post_meta($post->ID, c_al2fb_meta_fb_comment_id, false);
 
 						foreach ($fb_comments->data as $fb_comment) {
-							// Check if comment in database
+							$search_comment_id = end(explode('_', $fb_comment->id));
+
+							// Check if stored comment
 							$stored = false;
 							if ($stored_comments)
 								foreach ($stored_comments as $comment) {
 									$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-									if ($fb_comment_id == $fb_comment->id) {
+									if ($search_comment_id == end(explode('_', $fb_comment_id))) {
 										$stored = true;
 										break;
 									}
 								}
 
-							// Check if comment deleted
-							$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
+							// Check if deleted comment
+							if (!$stored && $deleted_fb_comment_ids)
+								foreach ($deleted_fb_comment_ids as $deleted_fb_comment_id)
+									if ($search_comment_id == end(explode('_', $deleted_fb_comment_id))) {
+										$stored = true;
+										break;
+									}
 
 							// Only count if not in database or deleted
 							if (!$stored)
