@@ -156,7 +156,6 @@ function al2fb_debug_info($al2fb) {
 	$info .= '<tr><td>Excerpt:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_msg, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Trailer:</td><td>' . htmlspecialchars(get_user_meta($user_ID, c_al2fb_meta_trailer, true), ENT_QUOTES, $charset) . '</td></tr>';
 	$info .= '<tr><td>Hyperlink:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_hyperlink, true) ? 'Yes' : 'No') . '</td></tr>';
-	$info .= '<tr><td>Share link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_share_link, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Shortlink:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_shortlink, true) ? 'Yes' : 'No') . '</td></tr>';
 	$info .= '<tr><td>Page link:</td><td>' . (get_user_meta($user_ID, c_al2fb_meta_add_new_page, true) ? 'Yes' : 'No') . '</td></tr>';
 
@@ -431,16 +430,16 @@ function al2fb_debug_info($al2fb) {
 
 	$info .= '<pre>$_SERVER=' . print_r($_SERVER, true) . '</pre>';
 
-	$comments = get_comments('number=10');
+	// Comments
+	$comments = get_comments('number=20');
 	foreach ($comments as $comment) {
 		$fb_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
 		$comment->fb_comment_id = $fb_id;
 	}
 	$info .= '<pre>comments=' . print_r($comments, true) . '</pre>';
 
-	$extra = ($_REQUEST['debug'] == 2);
-
 	// Info self
+	$extra = ($_REQUEST['debug'] == 2);
 	if ($extra)
 		try {
 			$me = WPAL2Int::Get_fb_me_cached($user_ID, true);
