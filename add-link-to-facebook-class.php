@@ -2295,18 +2295,26 @@ if (!class_exists('WPAL2Facebook')) {
 
 						foreach ($fb_comments->data as $fb_comment)
 							if (!empty($fb_comment->id)) {
+								$search_comment_id = end(explode('_', $fb_comment->id));
+
 								// Check if stored comment
 								$stored = false;
 								if ($stored_comments)
 									foreach ($stored_comments as $comment) {
 										$fb_comment_id = get_comment_meta($comment->comment_ID, c_al2fb_meta_fb_comment_id, true);
-										if ($fb_comment_id == $fb_comment->id ||
-											strpos($fb_comment->id, $fb_comment_id) !== false) {
+										if ($search_comment_id == end(explode('_', $fb_comment_id))) {
 											$stored = true;
 											break;
 										}
 									}
-								$stored = $stored || in_array($fb_comment->id, $deleted_fb_comment_ids);
+
+								// Check if deleted comment
+								if (!$stored && $deleted_fb_comment_ids)
+									foreach ($deleted_fb_comment_ids as $deleted_fb_comment_id)
+										if ($search_comment_id == end(explode('_', $deleted_fb_comment_id))) {
+											$stored = true;
+											break;
+										}
 
 								// Create new comment
 								if (!$stored) {

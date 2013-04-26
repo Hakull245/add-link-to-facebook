@@ -770,7 +770,7 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* Workaround: import of exported Facebook comments (caused by Facebook bug)
+* Workaround: duplicate imported Facebook comments (caused by Facebook bug)
 
 Follow these steps to install the development version:
 
