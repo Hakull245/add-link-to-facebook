@@ -335,7 +335,7 @@ if (!class_exists('WPAL2Int')) {
 
 		// Get comments
 		static function Get_fb_comments($user_ID, $id) {
-			$url = 'https://graph.facebook.com/' . $id . '/comments?filter=stream';
+			$url = 'https://graph.facebook.com/' . $id . '/comments';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
 			$query = http_build_query(array('access_token' => $token), '', '&');

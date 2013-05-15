@@ -770,7 +770,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* Revert: use new Facebook comments API
+* Improvement: more debug information
 
 Follow these steps to install the development version:
 
