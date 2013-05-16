@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.5.1
-Stable tag: 1.181
+Stable tag: 1.184
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -511,11 +511,6 @@ Because of this I don't give support on compatibility with other plugins and the
 You should contact the author of the other plugin or theme.
 The author of the other plugin or theme is free to contact me if needed.
 
-Known incompatible plugins:
-
-* [WordPress Importer](http://wordpress.org/extend/plugins/wordpress-importer/)
-* [Pricing Table](http://wordpress.org/extend/plugins/pricing-table/)
-
 = C03 Are shortcodes being processed? =
 
 This is an option, when enabled shortcodes will be processed.
@@ -743,6 +738,15 @@ Authorizing the plugin again is reported to solve this problem.
 This is probably because you are trying to add links to an application page.
 Check the pages you are adding links to on the plugin settings tab Page/group.
 
+= E30 I get 'The url you supplied is invalid' =
+
+This is most probably caused by multiple plugins outputing the Open Graph Protocol meta tag *og:url*.
+Make sure that other plugins don't output conflicting OGP tags.
+
+= E31 I get 'Developer Alert: July 2013 Breaking Changes' =
+
+Just enable the Facebook app advanced option 'July 2013 Breaking Changes'.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
@@ -785,16 +789,16 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.181 =
-* Workaround: duplicate imported Facebook comments (caused by Facebook bug)
+= 1.184 =
+* Revert: use new Facebook comments API
+* Improvement: more debug information
+* Updated FAQ
 
-= 1.179 =
-* Bugfix: OPG home URL
+= 1.183 =
+* Improvement: use new Facebook comments API
 
-= 1.178 =
-* Bugfix: localized registration
-* Revert: bugfix Facebook login for multi-sites
-* Removed *Share link* feature, since there are too many problems with it
+= 1.182 =
+* Workaround: number of comments (caused by Facebook bug)
 
 = Older versions =
 * Deleted, because of maximum readme.txt size
@@ -802,8 +806,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.181 =
-One workaround
+= 1.184 =
+One revert, one improvement
 
 == Setup guide ==
 
