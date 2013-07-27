@@ -694,7 +694,6 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value=""<?php echo $priv_none; ?>><?php _e('Default', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="EVERYONE"<?php echo $priv_everyone; ?>><?php _e('Everyone', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="ALL_FRIENDS"<?php echo $priv_friends; ?>><?php _e('All friends', c_al2fb_text_domain); ?><br />
-		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="NETWORKS_FRIENDS"<?php echo $priv_network; ?>><?php _e('Network friends', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="FRIENDS_OF_FRIENDS"<?php echo $priv_fof; ?>><?php _e('Friends of friends', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="SELF"<?php echo $priv_me; ?>><?php _e('Only me', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="SOME_FRIENDS"<?php echo $priv_some; ?>><?php _e('Some friends:', c_al2fb_text_domain); ?><br />
