@@ -774,7 +774,8 @@ and describe the problem as accurate as possible and press the *Send* button.
 == Changelog ==
 
 = Development version =
-* ...
+* Updated Swedish translation
+* Removed privacy setting network of friends [see here why](https://developers.facebook.com/roadmap/)
 
 Follow these steps to install the development version:
 
