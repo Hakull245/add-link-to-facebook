@@ -789,7 +789,7 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.888 =
+= 1.188 =
 * Improvement: consistently check Facebook responses
 
 = 1.187 =
