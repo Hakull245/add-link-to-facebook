@@ -1065,7 +1065,7 @@ if (!class_exists('WPAL2Facebook')) {
 					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 						$count = 0;
 						$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
-						if (!empty($fb_comments) && !empty($fb_comments->data))
+						if ($fb_comments && $fb_comments->data)
 							$count = count($fb_comments->data);
 						echo '<span>' . $count . ' ' . __('comments', c_al2fb_text_domain) . '</span><br />';
 					}
@@ -1075,7 +1075,7 @@ if (!class_exists('WPAL2Facebook')) {
 						get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 						$count = 0;
 						$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-						if (!empty($fb_likes) && !empty($fb_likes->data))
+						if ($fb_likes && $fb_likes->data)
 							$count = count($fb_likes->data);
 						echo '<span>' . $count . ' ' . __('likes', c_al2fb_text_domain) . '</span><br />';
 					}
@@ -1717,7 +1717,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Filter messages
 		function Filter_feed($fb_messages) {
-			if (isset($fb_messages) && isset($fb_messages->data))
+			if ($fb_messages && $fb_messages->data)
 				for ($i = 0; $i < count($fb_messages->data); $i++)
 					if ($fb_messages->data[$i]->type != 'status')
 						unset($fb_messages->data[$i]);
@@ -2211,7 +2211,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($user_ID && !self::Is_excluded($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				$charset = get_bloginfo('charset');
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-				if ($fb_likes)
+				if ($fb_likes && $fb_likes->data) {
 					foreach ($fb_likes->data as $fb_like) {
 						if (!empty($likers))
 							$likers .= ', ';
@@ -2223,9 +2223,10 @@ if (!class_exists('WPAL2Facebook')) {
 							$likers .= htmlspecialchars($fb_like->name, ENT_QUOTES, $charset);
 					}
 
-				if (!empty($likers)) {
-					$likers .= ' <span class="al2fb_liked">' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</span>';
-					$likers = '<div class="al2fb_likers">' . $likers . '</div>';
+					if (!empty($likers)) {
+						$likers .= ' <span class="al2fb_liked">' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</span>';
+						$likers = '<div class="al2fb_likers">' . $likers . '</div>';
+					}
 				}
 			}
 			return $likers;
@@ -2237,7 +2238,7 @@ if (!class_exists('WPAL2Facebook')) {
 			if ($user_ID && !self::Is_excluded($post) && !WPAL2Int::social_in_excerpt($user_ID)) {
 				$link_id = get_post_meta($post->ID, c_al2fb_meta_link_id, true);
 				$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-				if ($fb_likes && count($fb_likes->data) > 0)
+				if ($fb_likes && $fb_likes->data && count($fb_likes->data) > 0)
 					return '<div class="al2fb_like_count"><a href="' . WPAL2Int::Get_fb_permalink($link_id) . '" rel="nofollow">' . count($fb_likes->data) . ' ' . _n('liked this post', 'liked this post', count($fb_likes->data), c_al2fb_text_domain) . '</a></div>';
 			}
 			return '';
@@ -2282,7 +2283,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Get Facebook comments
 				if (self::Is_recent($post) && get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
-					if ($fb_comments) {
+					if ($fb_comments && $fb_comments->data) {
 						// Get WordPress comments
 						$stored_comments = get_comments('post_id=' . $post->ID);
 						$stored_comments = array_merge($stored_comments,
@@ -2424,7 +2425,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$post->ping_status == 'open' &&
 					get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 					$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-					if ($fb_likes)
+					if ($fb_likes && $fb_likes->data)
 						foreach ($fb_likes->data as $fb_like) {
 							// Create new virtual comment
 							$link = WPAL2Int::Get_fb_profilelink($fb_like->id);
@@ -2531,7 +2532,7 @@ if (!class_exists('WPAL2Facebook')) {
 				// Comment count
 				if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 					$fb_comments = WPAL2Int::Get_comments_or_likes($post, false);
-					if ($fb_comments) {
+					if ($fb_comments && $fb_comments->data) {
 						$stored_comments = get_comments('post_id=' . $post->ID);
 						$stored_comments = array_merge($stored_comments,
 							get_comments('status=spam&post_id=' . $post->ID));
@@ -2575,7 +2576,7 @@ if (!class_exists('WPAL2Facebook')) {
 					$post->ping_status == 'open' &&
 					get_user_meta($user_ID, c_al2fb_meta_fb_likes, true))
 					$fb_likes = WPAL2Int::Get_comments_or_likes($post, true);
-				if (!empty($fb_likes))
+				if ($fb_likes && $fb_likes->data)
 					$count += count($fb_likes->data);
 			}
 
@@ -2682,14 +2683,16 @@ if (!class_exists('WPAL2Facebook')) {
 					// Get Facebook comments
 					if (get_user_meta($user_ID, c_al2fb_meta_fb_comments, true)) {
 						$fb_comments = WPAL2Int::Get_comments_or_likes($post, false, false);
-						$comments += count($fb_comments->data);
+						if ($fb_comments && $fb_comments->data)
+							$comments += count($fb_comments->data);
 					}
 
 					// Get likes
 					if ($post->ping_status == 'open' &&
 						get_user_meta($user_ID, c_al2fb_meta_fb_likes, true)) {
 						$fb_likes = WPAL2Int::Get_comments_or_likes($post, true, false);
-						$likes += count($fb_likes->data);
+						if ($fb_likes && $fb_likes->data)
+							$likes += count($fb_likes->data);
 					}
 				}
 			}
