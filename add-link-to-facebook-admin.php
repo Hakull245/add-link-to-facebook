@@ -568,10 +568,10 @@ function al2fb_render_admin($al2fb)
 					_e('This option is only available in', c_al2fb_text_domain);
 					echo ' <a href="http://www.faircode.eu/al2fbpro/?url=' . WPAL2Int::Redirect_uri() . '" target="_blank">Add Link to Facebook Pro</a>';
 					echo '</strong>';
-					$mu = WPAL2Int::Get_multiple_url();
-					if ($mu)
-						echo '<p><span style="color: red;"><strong>' . htmlspecialchars($mu, ENT_QUOTES, $charset) . '</strong></span></p>';
 				}
+				$mu = WPAL2Int::Get_multiple_url();
+				if ($mu)
+					echo '<p><span style="color: red;"><strong>' . htmlspecialchars($mu, ENT_QUOTES, $charset) . '</strong></span></p>';
 ?>
 				</td></tr>
 <?php
