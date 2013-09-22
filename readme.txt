@@ -767,6 +767,9 @@ Fill in your name, your e-mail address,
 a link to the [support forum](http://forum.faircode.eu/) where you reported the problem before
 and describe the problem as accurate as possible and press the *Send* button.
 
+The debug information sometimes doesn't arrive,
+therefore it isn't a bad idea to let me know on the forum you did send it.
+
 == Screenshots ==
 
 1. What is a caption, message, etc?
