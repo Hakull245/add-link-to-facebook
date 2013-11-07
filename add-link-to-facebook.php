@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://wordpress.org/extend/plugins/add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 1.192
+Version: 1.193
 Author: Marcel Bokhorst
 Author URI: http://blog.bokhorst.biz/about/
 */
@@ -63,8 +63,6 @@ else {
 				require_once('add-link-to-facebook-int.php');
 			else if ($class_name == 'AL2FB_Widget')
 				require_once('add-link-to-facebook-widget.php');
-			else if ($class_name == 'PluginUpdateChecker')
-				require_once('plugin-update-checker.php');
 		}
 	}
 }
@@ -80,20 +78,6 @@ global $wp_al2fb;
 if (empty($wp_al2fb)) {
 	$wp_al2fb = new WPAL2Facebook();
 	register_activation_hook(__FILE__, array(&$wp_al2fb, 'Activate'));
-}
-
-// Pro version is not hosted on wordpress.org
-if (WPAL2Int::Check_updates()) {
-	global $updates_al2fb;
-	if (empty($updates_al2fb)) {
-		$uri = WPAL2Int::Get_multiple_url();
-		if (!$uri)
-			$uri = WPAL2Int::Redirect_uri();
-		$updates_url = 'http://updates.faircode.eu/al2fbpro?action=update&plugin=al2fbpro&uri=' . urlencode($uri);
-		if (is_multisite())
-			$updates_url .= '&blogs=' . get_blog_count();
-		$updates_al2fb = new PluginUpdateChecker($updates_url, __FILE__, 'add-link-to-facebook', 1);
-	}
 }
 
 // Schedule cron if needed
