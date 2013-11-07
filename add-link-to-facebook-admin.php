@@ -696,13 +696,6 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="ALL_FRIENDS"<?php echo $priv_friends; ?>><?php _e('All friends', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="FRIENDS_OF_FRIENDS"<?php echo $priv_fof; ?>><?php _e('Friends of friends', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="SELF"<?php echo $priv_me; ?>><?php _e('Only me', c_al2fb_text_domain); ?><br />
-		<input type="radio" name="<?php echo c_al2fb_meta_privacy; ?>" value="SOME_FRIENDS"<?php echo $priv_some; ?>><?php _e('Some friends:', c_al2fb_text_domain); ?><br />
-	</td></tr>
-	<tr valign="top"><th scope="row">
-		<label for="al2fb_some_friends"><?php _e('Some friends:', c_al2fb_text_domain); ?></label>
-	</th><td>
-		<input id="al2fb_some_friends" class="al2fb_text" name="<?php echo al2fb_some_friends; ?>" type="text" value="<?php  echo htmlentities(get_user_meta($user_ID, c_al2fb_meta_some_friends, true), ENT_QUOTES, get_bloginfo('charset')); ?>" />
-		<br /><span class="al2fb_explanation"><?php _e('Comma-separated list of Facebook user IDs and friend list IDs', c_al2fb_text_domain); ?></span>
 	</td></tr>
 
 	</table>
