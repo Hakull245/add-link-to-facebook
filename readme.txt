@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.6
-Stable tag: 1.191
+Tested up to: 3.7.1
+Stable tag: 1.194
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -85,8 +85,6 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 
 == Installation ==
 
-*Using the WordPress dashboard*
-
 1. Login to your weblog
 1. Go to Plugins
 1. Select Add New
@@ -95,17 +93,11 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 1. Select Install Now
 1. Select Activate Plugin
 
-*Manual*
-
-1. Download and unzip the plugin
-1. Upload the entire add-link-to-facebook/ directory to the /wp-content/plugins/ directory
-1. Activate the plugin through the Plugins menu in WordPress
-
-Continue to the [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide").
+Continue with the [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide").
 
 == Frequently Asked Questions ==
 
-**Warning: if you delete your Facebook application, you will also delete the links it added!**
+**Warning: if you delete your Facebook application, you might also delete the links added through it!**
 
 **--- Usability ---**
 
@@ -185,7 +177,12 @@ This option is only available *after* you have authorized, since information fro
 Just go to the plugin settings through the WordPress *Tools* menu and
 select the page you want the links to be added to using the option *Add to page* on the tab *Page/group*.
 Note that pages and groups exclude each other (except in the [Pro version](http://www.faircode.eu/al2fbpro/)).
-You can only add links to pages you are owner of.
+
+If the page/group you want to add links to doesn't appear,
+make sure you have authorized the plugin with a personal Facebook account that has access to the page/group
+and that you have allowed all the permissions the plugin asked for.
+If you want to check the permissions, just press the authorize button on the plugin settings page again.
+If you want to change the Facebook account you have authorized the plugin with, see question U47.
 
 = U13 I want to add links to a group =
 
@@ -253,9 +250,10 @@ Assuming that you have configured and authorize the plugin, you can check this:
 * Are you logged into the correct Facebook account?
 * Are you looking at the correct personal/page/group wall/profile?
 * Do the privacy options allow viewing the link?
-* Make sure sandbox mode is not enabled in the Facebook application
+* Make sure sandbox mode is not enabled in the Facebook application (most common problem)
 
-Note that each WordPress user should authorize the plugin, unless you check the option *Share with all users on this site* in the Easy setup section.
+Note that each WordPress user (author) should authorize the plugin,
+unless you check the option *Share with all users on this site* in the Easy setup section.
 
 See also question U41.
 
@@ -487,6 +485,11 @@ or try enabling the option *Refresh Facebook comments in the background*.
 
 This plugin does require some memory and processor cycles, maybe more than your hosting provider provides,
 so consider contacting your hosting provider for an upgrade or switching to another hosting provider.
+
+= U47 How can I authorize the plugin with another Facebook account? =
+
+Just remove the Facebook App ID & Secret from the Easy setup section on the plugin settings page
+and follow [the setup guide](wordpress.org/plugins/add-link-to-facebook/other_notes/) again.
 
 **--- Security ---**
 
@@ -764,6 +767,12 @@ Fill in your name, your e-mail address,
 a link to the [support forum](http://forum.faircode.eu/) where you reported the problem before
 and describe the problem as accurate as possible and press the *Send* button.
 
+If your problem concerns a post, please include the title of the post in the message.
+Please note that the debug information only contains information about the last 10 posts.
+
+The debug information sometimes doesn't arrive,
+therefore it isn't a bad idea to let me know on the forum you did send it.
+
 == Screenshots ==
 
 1. What is a caption, message, etc?
@@ -789,18 +798,16 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.191 =
-* Improvement: fix PHP warning
 
-= 1.189 =
-* Improvement: allways show multi-site URL
+= 1.194 =
+* Removed plugin updater class
 
-= 1.188 =
-* Improvement: consistently check Facebook responses
+= 1.193 =
+* Removed plugin updater class
+* Removed some friends privacy option (deprecated by Facebook)
 
-= 1.187 =
-* Updated Swedish translation
-* Removed privacy setting network of friends [see here why](https://developers.facebook.com/roadmap/)
+= 1.192 =
+* Tested with WordPress 3.7.x
 
 = Older versions =
 * Deleted, because of maximum readme.txt size (thanks @wordpress.org)
@@ -808,8 +815,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.191 =
-One improvement
+= 1.194 =
+Removed plugin updater class
 
 == Setup guide ==
 
