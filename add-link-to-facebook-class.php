@@ -2,13 +2,13 @@
 
 /*
 	Support class Add Link to Facebook plugin
-	Copyright (c) 2011-2013 by Marcel Bokhorst
+	Copyright (c) 2011-2014 by Marcel Bokhorst
 */
 
 /*
 	GNU General Public License version 3
 
-	Copyright (c) 2011-2013 Marcel Bokhorst
+	Copyright (c) 2011-2014 Marcel Bokhorst
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
