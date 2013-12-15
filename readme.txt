@@ -783,7 +783,8 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 == Changelog ==
 
 = Development version =
-* ...
+* New feature: process comment replies
+* Improvement: better Gravatar processing
 
 Follow these steps to install the development version:
 
