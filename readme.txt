@@ -828,25 +828,24 @@ Tested with WordPress 3.8.x
 
 **Never delete an existing Facebook application, because you could delete the links added through it too.***
 
-The setup of the plugin should be fairly self-explanatory.
-Basically there are five steps to follow:
-
 1. Click on the link *Click here to create* in the yellow box on the settings page
-	* Or click [here](https://developers.facebook.com/) ;-)
-	* Navigate to *Apps* (top menu)
-	* Select *Create New App* (button at top)
+	* Or click [here](https://developers.facebook.com/)
+	* Click *Apps* (top menu)
+	* Click *Create a New App*
 	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
 2. Create the Facebook application:
-	* Give it any name you like (will appear as *via* below the added links) and press *Continue*
-	* Fill in the red URL which the plugin indicates into the field *Website with Facebook Login* (click the sentence) > *Site URL*
-	* See the [screenshot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
-	* **Don't confuse this with the field *App Domain*, this field should be empty**
+	* Give it any display name you like (will appear as *via* below the added links) and press *Create App*
+	* Go to the application settings (left menu)
+	* Click *Add Platform* (big button) and select *Website*
+	* Copy the red URL from the Easy setup section of the plugin settings page to the field *Site URL*
 	* Press the *Save Changes* button
-3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
+	* See also the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/)
+3. Copy the *App ID* and *App Secret* from Facebook to fields in the Easy setup section of the plugin settings page
 4. Press the *Save* button to save the configuration
 5. Press the *Authorize* button, login if needed and allow the plugin to add links to Facebook
 
-Note that you don't have to submit the Facebook application to the *App Directory* to use it.
+Note that you don't have to submit the Facebook application to the *App Directory* to use it
+(you can ignore the red warning triangles).
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
