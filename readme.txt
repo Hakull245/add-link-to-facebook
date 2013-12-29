@@ -472,7 +472,7 @@ You might be able to fix it by switching to the links API, but read about the li
 Facebook only shows thumbnails for link pictures (see also question U27).
 This option exists only to solve aspect ratio problems in some case.
 
-= U45 I don't see the 'Create New App' button =
+= U45 I don't see the 'Create a New App' button =
 
 You are probably using a non-personal Facebook account type.
 Try to login with a personal Facebook account that has access to the page you want to add links to.
@@ -776,8 +776,7 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 == Screenshots ==
 
 1. What is a caption, message, etc?
-1. Where is Apps?
-1. Where is Create New App?
+1. Where is Create a New App?
 1. Where is the Website URL?
 
 == Changelog ==
@@ -826,13 +825,13 @@ Tested with WordPress 3.8.x
 
 **If you have a multi-site installation, create a separate Facebook application for each site.**
 
-**Never delete an existing Facebook application, because you could delete the links added through it too.***
+**Never delete an existing Facebook application, because you could delete the links added through it too.**
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
 	* Or click [here](https://developers.facebook.com/)
 	* Click *Apps* (top menu)
 	* Click *Create a New App*
-	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
+	* See also the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/)
 2. Create the Facebook application:
 	* Give it any display name you like (will appear as *via* below the added links) and press *Create App*
 	* Go to the application settings (left menu)
