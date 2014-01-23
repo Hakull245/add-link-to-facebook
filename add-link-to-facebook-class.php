@@ -104,7 +104,7 @@ if (!class_exists('WPAL2Facebook')) {
 			add_filter('comments_array', array(&$this, 'Comments_array'), 10, 2);
 			add_filter('get_comments_number', array(&$this, 'Get_comments_number'), 10, 2);
 			add_filter('comment_class', array(&$this, 'Comment_class'));
-			add_filter('get_avatar', array(&$this, 'Get_avatar'), 11, 5);
+			add_filter('get_avatar', array(&$this, 'Get_avatar'), 10, 5);
 
 			// Shortcodes
 			add_shortcode('al2fb_likers', array(&$this, 'Shortcode_likers'));
@@ -2362,21 +2362,6 @@ if (!class_exists('WPAL2Facebook')) {
 											'user_id' => 0
 										);
 
-										// Assign parent comment id
-										if (!empty($fb_comment->parent->id)) {
-											$parent_args = array(
-												'post_id' => $post_ID,
-												'meta_query' => array(array(
-													'key' => c_al2fb_meta_fb_comment_id,
-													'value' => $fb_comment->parent->id
-												))
-											);
-											$parent_comments_query = new WP_Comment_Query;
-											$parent_comments = $parent_comments_query->query($parent_args);
-											if (isset($parent_comments[0]))
-												$commentdata['comment_parent'] = $parent_comments[0]->comment_ID;
-										}
-
 										$commentdata = apply_filters('al2fb_preprocess_comment', $commentdata, $post);
 
 										// Copy Facebook comment to WordPress database
@@ -2609,8 +2594,6 @@ if (!class_exists('WPAL2Facebook')) {
 
 		// Get FB picture as avatar
 		function Get_avatar($avatar, $id_or_email, $size, $default) {
-			$fb_picture_url = null;
-
 			if (is_object($id_or_email)) {
 				$comment = $id_or_email;
 				if ($comment->comment_agent == 'AL2FB' &&
@@ -2620,28 +2603,19 @@ if (!class_exists('WPAL2Facebook')) {
 					$id = explode('id=', $comment->comment_author_url);
 					if (count($id) == 2) {
 						$fb_picture_url = WPAL2Int::Get_fb_picture_url_cached($id[1], 'normal');
+
+						// Build avatar image
+						if ($fb_picture_url) {
+							$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
+							$avatar .= ' src="' . $fb_picture_url . '"';
+							$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
+							$avatar .= ' height="' . $size . '"';
+							$avatar .= ' width="' . $size . '"';
+							$avatar .= ' />';
+						}
 					}
 				}
 			}
-			else if (stripos($id_or_email,'@facebook.com') !== false) {
-				$id_or_email = strtolower($id_or_email);
-
-				// Get picture url
-				$id = explode('@facebook.com', $id_or_email);
-				if (count($id) == 2)
-					$fb_picture_url = WPAL2Int::Get_fb_picture_url_cached($id[0], 'normal');
-			}
-
-			// Build avatar image
-			if ($fb_picture_url) {
-				$avatar = '<img alt="' . esc_attr($comment->comment_author) . '"';
-				$avatar .= ' src="' . $fb_picture_url . '"';
-				$avatar .= ' class="avatar avatar-' . $size . ' photo al2fb"';
-				$avatar .= ' height="' . $size . '"';
-				$avatar .= ' width="' . $size . '"';
-				$avatar .= ' />';
-			}
-
 			return $avatar;
 		}
 
