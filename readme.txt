@@ -798,7 +798,7 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.198
+= 1.198 =
 * Restored fixed changes of 1.196
 
 = 1.197 =
