@@ -2,7 +2,7 @@
 
 /*
 	Support class Add Link to Facebook plugin
-	Copyright (c) 2011-2013 by Marcel Bokhorst
+	Copyright (c) 2011-2014 by Marcel Bokhorst
 */
 
 /*
@@ -338,7 +338,11 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/' . $id . '/comments';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			// Query comments & replies
+			$query = http_build_query(array(
+				'access_token' => $token,
+				'filter' => 'stream',
+				'fields' => 'id,from,message,can_remove,created_time,like_count,user_likes,parent.fields(id)'), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$comments = json_decode($response);
 			$comments = apply_filters('al2fb_fb_comments', $comments);
