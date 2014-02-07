@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.7.1
-Stable tag: 1.194
+Tested up to: 3.8.1
+Stable tag: 1.199
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -472,7 +472,7 @@ You might be able to fix it by switching to the links API, but read about the li
 Facebook only shows thumbnails for link pictures (see also question U27).
 This option exists only to solve aspect ratio problems in some case.
 
-= U45 I don't see the 'Create New App' button =
+= U45 I don't see the 'Create a New App' button =
 
 You are probably using a non-personal Facebook account type.
 Try to login with a personal Facebook account that has access to the page you want to add links to.
@@ -776,13 +776,13 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 == Screenshots ==
 
 1. What is a caption, message, etc?
-1. Where is Apps?
-1. Where is Create New App?
+1. Where is Create a New App?
 1. Where is the Website URL?
 
 == Changelog ==
 
 = Development version =
+
 * ...
 
 Follow these steps to install the development version:
@@ -798,16 +798,18 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.199 =
+* Attempt to fix Facebook error 'An unexpected error has occurred'
 
-= 1.194 =
-* Removed plugin updater class
+= 1.198 =
+* Restored fixed changes of 1.196
 
-= 1.193 =
-* Removed plugin updater class
-* Removed some friends privacy option (deprecated by Facebook)
+= 1.197 =
+* Reverted changes of 1.196
 
-= 1.192 =
-* Tested with WordPress 3.7.x
+= 1.196 =
+* New feature: process comment replies, thanks @Lukas
+* Improvement: better Facebook avatar processing, thanks @Lukas
 
 = Older versions =
 * Deleted, because of maximum readme.txt size (thanks @wordpress.org)
@@ -815,8 +817,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.194 =
-Removed plugin updater class
+= 1.199 =
+Attempt to fix Facebook error 'An unexpected error has occurred'
 
 == Setup guide ==
 
@@ -826,27 +828,26 @@ Removed plugin updater class
 
 **If you have a multi-site installation, create a separate Facebook application for each site.**
 
-**Never delete an existing Facebook application, because you could delete the links added through it too.***
-
-The setup of the plugin should be fairly self-explanatory.
-Basically there are five steps to follow:
+**Never delete an existing Facebook application, because you could delete the links added through it too.**
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
-	* Or click [here](https://developers.facebook.com/) ;-)
-	* Navigate to *Apps* (top menu)
-	* Select *Create New App* (button at top)
-	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
+	* Or click [here](https://developers.facebook.com/)
+	* Click *Apps* (top menu)
+	* Click *Create a New App*
+	* See also the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/)
 2. Create the Facebook application:
-	* Give it any name you like (will appear as *via* below the added links) and press *Continue*
-	* Fill in the red URL which the plugin indicates into the field *Website with Facebook Login* (click the sentence) > *Site URL*
-	* See the [screenshot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
-	* **Don't confuse this with the field *App Domain*, this field should be empty**
+	* Give it any display name you like (will appear as *via* below the added links) and press *Create App*
+	* Go to the application settings (left menu)
+	* Click *Add Platform* (big button) and select *Website*
+	* Copy the red URL from the Easy setup section of the plugin settings page to the field *Site URL*
 	* Press the *Save Changes* button
-3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
+	* See also the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/)
+3. Copy the *App ID* and *App Secret* from Facebook to fields in the Easy setup section of the plugin settings page
 4. Press the *Save* button to save the configuration
 5. Press the *Authorize* button, login if needed and allow the plugin to add links to Facebook
 
-Note that you don't have to submit the Facebook application to the *App Directory* to use it.
+Note that you don't have to submit the Facebook application to the *App Directory* to use it
+(you can ignore the red warning triangles).
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
