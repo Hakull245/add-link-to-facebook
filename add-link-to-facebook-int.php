@@ -657,10 +657,10 @@ if (!class_exists('WPAL2Int')) {
 			);
 
 			// Add home link
-			$actions = array(
-				name => __('Website', c_al2fb_text_domain),
-				link => get_home_url());
-			$query_array['actions'] = json_encode($actions);
+			// $actions = array(
+			//	name => __('Website', c_al2fb_text_domain),
+			//	link => get_home_url());
+			// $query_array['actions'] = json_encode($actions);
 
 			// Add video
 			$video = WPAL2Facebook::Get_link_video($post, $user_ID);
