@@ -606,14 +606,16 @@ if (!class_exists('WPAL2Int')) {
 			$description = WPAL2Int::Convert_encoding($user_ID, $description);
 
 			// Get name
-			$name = html_entity_decode(get_the_title($post->ID), ENT_QUOTES, get_bloginfo('charset'));
+			$name = strip_tags(get_the_title($post->ID));
+			$name = html_entity_decode($name, ENT_QUOTES, get_bloginfo('charset'));
 			$name = WPAL2Int::Convert_encoding($user_ID, $name);
 			$name = apply_filters('al2fb_name', $name, $post);
 
 			// Get caption
 			$caption = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
-				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+				$caption = strip_tags(get_bloginfo('title'));
+				$caption = html_entity_decode($caption, ENT_QUOTES, get_bloginfo('charset'));
 				$caption = WPAL2Int::Convert_encoding($user_ID, $caption);
 			}
 			$caption = apply_filters('al2fb_caption', $caption, $post);
@@ -627,8 +629,10 @@ if (!class_exists('WPAL2Int')) {
 			$message = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_msg, true)) {
 				$message = $excerpt;
-				if (empty($message))
-					$message = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+				if (empty($message)) {
+					$message = strip_tags(get_bloginfo('title'));
+					$message = html_entity_decode($message, ENT_QUOTES, get_bloginfo('charset'));
+				}
 				$message = WPAL2Int::Convert_encoding($user_ID, $message);
 			}
 			$message = apply_filters('al2fb_message', $message, $post);

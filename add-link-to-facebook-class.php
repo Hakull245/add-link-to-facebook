@@ -1494,7 +1494,7 @@ if (!class_exists('WPAL2Facebook')) {
 			// Filter excerpt
 			$excerpt = get_post_meta($post->ID, c_al2fb_meta_excerpt, true);
 			if (empty($excerpt)) {
-				$excerpt = $post->post_excerpt;
+				$excerpt = strip_tags($post->post_excerpt);
 				if (!get_option(c_al2fb_option_nofilter))
 					$excerpt = apply_filters('the_excerpt', $excerpt);
 				else
@@ -1513,8 +1513,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Filter post text
 			$content = get_post_meta($post->ID, c_al2fb_meta_text, true);
+			$content = strip_tags($content);
 			if (empty($content)) {
-				$content = $post->post_content;
+				$content = strip_tags($post->post_content);
 				if (!get_option(c_al2fb_option_nofilter))
 					$content = apply_filters('the_content', $content);
 				else
@@ -1531,6 +1532,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Trailer
 			$trailer = get_user_meta($user_ID, c_al2fb_meta_trailer, true);
+			$trailer = strip_tags($trailer);
 			if ($trailer) {
 				// Get maximum FB text size
 				$maxlen = get_option(c_al2fb_option_max_descr);
