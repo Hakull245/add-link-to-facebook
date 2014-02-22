@@ -750,6 +750,14 @@ Make sure that other plugins don't output conflicting OGP tags.
 
 Just enable the Facebook app advanced option 'July 2013 Breaking Changes'.
 
+= E32 I get 'This link could not be posted' =
+
+See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
+
+= E33 I get 'An unexpected error has occurred. Please retry your request later.' =
+
+See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
