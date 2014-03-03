@@ -791,7 +791,7 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 
 = Development version =
 
-* ...
+* Updated security certificates
 
 Follow these steps to install the development version:
 
