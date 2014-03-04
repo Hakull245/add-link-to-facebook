@@ -759,7 +759,7 @@ if (!class_exists('WPAL2Int')) {
 						$fb_link = json_decode($response);
 
 						// Workaround for some links
-						if (strpos($fb_link->id, '_') === false)
+						if (!empty($fb_link->id) && strpos($fb_link->id, '_') === false)
 							$fb_link->id = ($page_id == 'me' ? $me->id : $page_id) . '_' . $fb_link->id;
 
 						// Register link/date
