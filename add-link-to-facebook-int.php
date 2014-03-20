@@ -240,7 +240,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/me/accounts';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 100), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$accounts = json_decode($response);
 			return $accounts;
@@ -271,7 +271,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/me/groups';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 100), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$groups = json_decode($response);
 			return $groups;
@@ -341,6 +341,7 @@ if (!class_exists('WPAL2Int')) {
 			// Query comments & replies
 			$query = http_build_query(array(
 				'access_token' => $token,
+				'limit' => 250,
 				'filter' => 'stream',
 				'fields' => 'id,from,message,can_remove,created_time,like_count,user_likes,parent.fields(id)'), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
@@ -374,7 +375,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/' . $id . '/likes';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 250), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$likes = json_decode($response);
 			$likes = apply_filters('al2fb_fb_likes', $likes);

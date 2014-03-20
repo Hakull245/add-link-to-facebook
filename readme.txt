@@ -791,7 +791,8 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 
 = Development version =
 
-* ...
+* Increase pages/groups limit to 100
+* Increase comments/likes limit to 250
 
 Follow these steps to install the development version:
 
