@@ -2,7 +2,7 @@
 
 /*
 	Support class Add Link to Facebook plugin
-	Copyright (c) 2011-2013 by Marcel Bokhorst
+	Copyright (c) 2011-2014 by Marcel Bokhorst
 */
 
 /*
@@ -240,7 +240,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/me/accounts';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 100), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$accounts = json_decode($response);
 			return $accounts;
@@ -271,7 +271,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/me/groups';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 100), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$groups = json_decode($response);
 			return $groups;
@@ -338,7 +338,12 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/' . $id . '/comments';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			// Query comments & replies
+			$query = http_build_query(array(
+				'access_token' => $token,
+				'limit' => 250,
+				'filter' => 'stream',
+				'fields' => 'id,from,message,can_remove,created_time,like_count,user_likes,parent.fields(id)'), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$comments = json_decode($response);
 			$comments = apply_filters('al2fb_fb_comments', $comments);
@@ -370,7 +375,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/' . $id . '/likes';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 250), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$likes = json_decode($response);
 			$likes = apply_filters('al2fb_fb_likes', $likes);
@@ -602,14 +607,16 @@ if (!class_exists('WPAL2Int')) {
 			$description = WPAL2Int::Convert_encoding($user_ID, $description);
 
 			// Get name
-			$name = html_entity_decode(get_the_title($post->ID), ENT_QUOTES, get_bloginfo('charset'));
+			$name = strip_tags(get_the_title($post->ID));
+			$name = html_entity_decode($name, ENT_QUOTES, get_bloginfo('charset'));
 			$name = WPAL2Int::Convert_encoding($user_ID, $name);
 			$name = apply_filters('al2fb_name', $name, $post);
 
 			// Get caption
 			$caption = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_caption, true)) {
-				$caption = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+				$caption = strip_tags(get_bloginfo('title'));
+				$caption = html_entity_decode($caption, ENT_QUOTES, get_bloginfo('charset'));
 				$caption = WPAL2Int::Convert_encoding($user_ID, $caption);
 			}
 			$caption = apply_filters('al2fb_caption', $caption, $post);
@@ -623,8 +630,10 @@ if (!class_exists('WPAL2Int')) {
 			$message = '';
 			if (get_user_meta($user_ID, c_al2fb_meta_msg, true)) {
 				$message = $excerpt;
-				if (empty($message))
-					$message = html_entity_decode(get_bloginfo('title'), ENT_QUOTES, get_bloginfo('charset'));
+				if (empty($message)) {
+					$message = strip_tags(get_bloginfo('title'));
+					$message = html_entity_decode($message, ENT_QUOTES, get_bloginfo('charset'));
+				}
 				$message = WPAL2Int::Convert_encoding($user_ID, $message);
 			}
 			$message = apply_filters('al2fb_message', $message, $post);
@@ -653,10 +662,10 @@ if (!class_exists('WPAL2Int')) {
 			);
 
 			// Add home link
-			$actions = array(
-				name => __('Website', c_al2fb_text_domain),
-				link => get_home_url());
-			$query_array['actions'] = json_encode($actions);
+			// $actions = array(
+			//	name => __('Website', c_al2fb_text_domain),
+			//	link => get_home_url());
+			// $query_array['actions'] = json_encode($actions);
 
 			// Add video
 			$video = WPAL2Facebook::Get_link_video($post, $user_ID);
@@ -751,7 +760,7 @@ if (!class_exists('WPAL2Int')) {
 						$fb_link = json_decode($response);
 
 						// Workaround for some links
-						if (strpos($fb_link->id, '_') === false)
+						if (!empty($fb_link->id) && strpos($fb_link->id, '_') === false)
 							$fb_link->id = ($page_id == 'me' ? $me->id : $page_id) . '_' . $fb_link->id;
 
 						// Register link/date
