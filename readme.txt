@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.204
+Stable tag: 1.205
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -48,7 +48,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
-Please report any issue you have with this plugin in the [support forum](http://forum.faircode.eu/), so I can at least try to fix it.
+
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
@@ -762,7 +762,7 @@ See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
 
 = S01 Where can I ask questions, report bugs and request features? =
 
-You can open a topic in the [support forum](http://forum.faircode.eu/).
+There is only support for pro users. Please reply to the activation instructions to get support.
 
 = S02 How can I send the debug information? =
 
@@ -806,16 +806,15 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.205 =
+Only pro users will be supported
+
 = 1.204 =
 * Tested with WordPress 3.9
 
 = 1.203 =
 * Increase pages/groups limit to 100 (much higher than the Facebook default)
 * Increase comments/likes limit to 250 (much higher than the Facebook default)
-
-= 1.202 =
-* Updated security certificates
-* Check for empty Facebook response
 
 = Older versions =
 * Deleted, because of maximum readme.txt size (thanks @wordpress.org)
@@ -824,8 +823,8 @@ Follow these steps to install the development version:
 == Upgrade Notice ==
 Tested with WordPress 3.9
 
-= 1.204 =
-Tested with WordPress 3.9
+= 1.205 =
+Only pro users will be supported
 
 == Setup guide ==
 
@@ -864,7 +863,6 @@ If the standard procedure doesn't work, you can try [this page](https://register
 Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, you can leave a message on the [support forum](http://forum.faircode.eu/).
 
 If you need to setup the plugin again for some reason,
 just remove the Facebook App ID & Secret from the Easy setup section of the plugin settings page.
