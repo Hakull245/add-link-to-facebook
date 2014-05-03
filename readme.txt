@@ -562,10 +562,13 @@ You have most probably skipped the settings part of step 2 of the
 
 = E04 I get 'The user hasn't authorized the application to perform this action' =
 
-You have probably revoked one of the permissions of the Facebook application.
+Either you have probably revoked one of the permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you can also disable the plugin.
+
+Or you didn't submit the required Facebook permissions for review and/or your submission has not yet been approved by Facebook.
+Check the setup guide under *other notes*.
 
 = E05 I get 'Invalid access token signature' =
 
@@ -757,11 +760,6 @@ See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
 = E33 I get 'An unexpected error has occurred. Please retry your request later.' =
 
 See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
-
-= E34 I get 'The user hasn't authorized the application to perform this action' =
-
-You didn't submit the required Facebook permissions for review and/or your submission has not yet been approved by Facebook.
-Check the setup guide under *other notes*.
 
 **--- Support ---**
 
