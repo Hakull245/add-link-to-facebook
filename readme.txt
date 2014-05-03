@@ -783,6 +783,8 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 
 == Screenshots ==
 
+Please note that the screenshots might be out of date, since Facebook changes things quite often.
+
 1. What is a caption, message, etc?
 1. Where is Create a New App?
 1. Where is the Website URL?
@@ -828,39 +830,47 @@ Only pro users will be supported
 
 == Setup guide ==
 
-**If you have more than one Facebook account, either logout completely or login to the correct account before you start.**
+*On April 30, 2014 Facebook has made it harder to setup most third party software, including this and other WordPress related plugins.
+To add links to Facebook the required Facebook application has to go through a review process.*
 
-**If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.**
+*If you have more than one Facebook account, either logout completely or login to the correct account before you start.*
 
-**If you have a multi-site installation, create a separate Facebook application for each site.**
+*If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.*
 
-**Never delete an existing Facebook application, because you could delete the links added through it too.**
+*If you have a multi-site installation, create a separate Facebook application for each site.*
+
+*Never delete an existing Facebook application, because you could delete the links added through it too.*
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
 	* Or click [here](https://developers.facebook.com/)
 	* Click *Apps* (top menu)
 	* Click *Create a New App*
-	* See also the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/)
 2. Create the Facebook application:
-	* Give it any display name you like (will appear as *via* below the added links) and press *Create App*
-	* Go to the application settings (left menu)
-	* Click *Add Platform* (big button) and select *Website*
+	* Give it any display name you like (will appear as *via* below the added links), select a category and press *Create App*
+	* Go to the application *Settings* (left menu)
+	* Fill in a valid *Contact Email*
+	* Click *Add Platform* and select *Website*
 	* Copy the red URL from the Easy setup section of the plugin settings page to the field *Site URL*
-	* Press the *Save Changes* button
-	* See also the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/)
-3. Copy the *App ID* and *App Secret* from Facebook to fields in the Easy setup section of the plugin settings page
-4. Press the *Save* button to save the configuration
-5. Press the *Authorize* button, login if needed and allow the plugin to add links to Facebook
-
-Note that you don't have to submit the Facebook application to the *App Directory* to use it
-(you can ignore the red warning triangles).
+	* Press the *Save Changes*
+	* Go to *Status & Review* (left menu)
+	* Click *Start a Submission*
+	* Check the following items:
+		* App Details
+		* manage_pages
+		* read_stream
+		* user_groups
+	* Provide four screenshots of your website
+	* Press *Submit for Review*
+3. Setup the plugin:
+	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
+	* Press the *Save* button to save the plugin configuration
+	* Wait for Facebook to approve your review submission (do not proceed to the next step yet)
+	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed and allow the plugin all requested permissions
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
 If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php).
-
-Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
 
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
