@@ -758,6 +758,11 @@ See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
 
 See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
 
+= E34 I get 'The user hasn't authorized the application to perform this action' =
+
+You didn't submit the required Facebook permissions for review and/or your submission has not yet been approved by Facebook.
+Check the setup guide under *other notes*.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
