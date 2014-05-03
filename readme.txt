@@ -830,8 +830,8 @@ Only pro users will be supported
 
 == Setup guide ==
 
-*On April 30, 2014 Facebook has made it harder to setup most third party software, including this and other WordPress related plugins.
-To add links to Facebook the required Facebook application has to go through a review process.*
+**On April 30, 2014 Facebook has made it harder to setup most third party software, including this and other WordPress related plugins.
+To add links to Facebook the required Facebook application has to go through a review process.**
 
 *If you have more than one Facebook account, either logout completely or login to the correct account before you start.*
 
@@ -856,15 +856,15 @@ To add links to Facebook the required Facebook application has to go through a r
 	* Click *Start a Submission*
 	* Check the following items:
 		* App Details
-		* manage_pages
-		* read_stream
-		* user_groups
+		* *manage_pages*
+		* *read_stream*
+		* *user_groups*
 	* Provide four screenshots of your website
 	* Press *Submit for Review*
 3. Setup the plugin:
 	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
 	* Press the *Save* button to save the plugin configuration
-	* Wait for Facebook to approve your review submission (do not proceed to the next step yet)
+	* Wait for Facebook to approve your submission (do not proceed to the next step yet)
 	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed and allow the plugin all requested permissions
 
 Some people need to verify their account before they can create an application.
