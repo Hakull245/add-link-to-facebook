@@ -862,7 +862,7 @@ To add links to Facebook the required Facebook application has to go through a r
 		* *manage_pages*
 		* *read_stream*
 		* *user_groups*
-	* Provide four screenshots of your website
+	* Provide any other information Facebook requests
 	* Press *Submit for Review*
 3. Setup the plugin:
 	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
