@@ -863,7 +863,7 @@ To add links to Facebook the required Facebook application has to go through a r
 		* *read_stream*
 		* *user_groups*
 	* Provide any other information Facebook requests
-		* If you are unsure what to fill in, you could check [this guide](http://www.nextscripts.com/instructions/facebook-social-networks-auto-poster-setup-installation/)
+		* If you are unsure about what to fill in, you could check [this guide](http://www.nextscripts.com/instructions/facebook-social-networks-auto-poster-setup-installation/)
 	* Press *Submit for Review*
 3. Setup the plugin:
 	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
