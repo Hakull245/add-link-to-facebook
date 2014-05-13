@@ -567,8 +567,9 @@ If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you can also disable the plugin.
 
-Or you didn't submit the required Facebook permissions for review and/or your submission has not yet been approved by Facebook.
-Check the setup guide under *other notes*.
+IF you didn't submit the required Facebook permissions for review (needed from April 30, 2014):
+remove the Facebook App ID & Secret from the Easy setup section on the plugin settings page,
+follow *all* the steps of the setup guide again and create a *new* Facebook application.
 
 = E05 I get 'Invalid access token signature' =
 
@@ -860,7 +861,6 @@ To add links to Facebook the required Facebook application has to go through a r
 	* Check the following items:
 		* App Details
 		* *manage_pages*
-		* *read_stream*
 		* *user_groups*
 	* Provide any other information Facebook requests
 		* If you are unsure about what to fill in, you could check [this guide](http://www.nextscripts.com/instructions/facebook-social-networks-auto-poster-setup-installation/)
