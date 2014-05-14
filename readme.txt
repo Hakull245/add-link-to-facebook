@@ -860,8 +860,8 @@ To add links to Facebook the required Facebook application has to go through a r
 	* Click *Start a Submission*
 	* Check the following items:
 		* App Details
-		* *manage_pages*
-		* *user_groups*
+		* *manage_pages* (needed if you want to add links to Facebook pages)
+		* *user_groups* (needed if you want to add links to Facebook groups)
 	* Provide any other information Facebook requests
 		* If you are unsure about what to fill in, you could check [this guide](http://www.nextscripts.com/instructions/facebook-social-networks-auto-poster-setup-installation/)
 	* Press *Submit for Review*
