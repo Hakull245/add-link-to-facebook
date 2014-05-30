@@ -797,7 +797,8 @@ Please note that the screenshots might be out of date, since Facebook changes th
 
 = Development version =
 
-* ...
+* Increased pages/groups limit to 250 (much higher than the Facebook default)
+* Updated security certificates
 
 Follow these steps to install the development version:
 
@@ -819,8 +820,8 @@ Only pro users will be supported
 * Tested with WordPress 3.9
 
 = 1.203 =
-* Increase pages/groups limit to 100 (much higher than the Facebook default)
-* Increase comments/likes limit to 250 (much higher than the Facebook default)
+* Increased pages/groups limit to 100 (much higher than the Facebook default)
+* Increased comments/likes limit to 250 (much higher than the Facebook default)
 
 = Older versions =
 * Deleted, because of maximum readme.txt size (thanks @wordpress.org)

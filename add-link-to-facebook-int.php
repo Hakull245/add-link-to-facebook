@@ -8,7 +8,7 @@
 /*
 	GNU General Public License version 3
 
-	Copyright (c) 2011-2013 Marcel Bokhorst
+	Copyright (c) 2011-2014 Marcel Bokhorst
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -240,7 +240,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/me/accounts';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token, 'limit' => 100), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 250), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$accounts = json_decode($response);
 			return $accounts;
@@ -271,7 +271,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = 'https://graph.facebook.com/me/groups';
 			$url = apply_filters('al2fb_url', $url);
 			$token = WPAL2Int::Get_access_token($user_ID);
-			$query = http_build_query(array('access_token' => $token, 'limit' => 100), '', '&');
+			$query = http_build_query(array('access_token' => $token, 'limit' => 250), '', '&');
 			$response = WPAL2Int::Request($url, $query, 'GET');
 			$groups = json_decode($response);
 			return $groups;
