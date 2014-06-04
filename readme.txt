@@ -833,9 +833,6 @@ Increased pages/groups limit, updated security certificates
 
 == Setup guide ==
 
-**On April 30, 2014 Facebook has made it harder to setup most third party software, including this and other WordPress related plugins.
-To add links to Facebook the required Facebook application has to go through a review process.**
-
 *If you have more than one Facebook account, either logout completely or login to the correct account before you start.*
 
 *If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.*
@@ -846,6 +843,7 @@ To add links to Facebook the required Facebook application has to go through a r
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
 	* Or click [here](https://developers.facebook.com/)
+	* Click *Register as Developer* if needed
 	* Click *Apps* (top menu)
 	* Click *Create a New App*
 2. Create the Facebook application:
@@ -856,19 +854,21 @@ To add links to Facebook the required Facebook application has to go through a r
 	* Copy the red URL from the Easy setup section of the plugin settings page to the field *Site URL*
 	* Press the *Save Changes*
 	* Go to *Status & Review* (left menu)
-	* Click *Start a Submission*
-	* Check the following items:
-		* App Details
-		* *manage_pages* (needed if you want to add links to Facebook pages)
-		* *user_groups* (needed if you want to add links to Facebook groups)
-	* Provide any other information Facebook requests
-		* If you are unsure about what to fill in, you could check [this guide](http://www.nextscripts.com/instructions/facebook-social-networks-auto-poster-setup-installation/)
-	* Press *Submit for Review*
+	* Turn *Do you want to make this app ... public* on
+	* You don't need to submit your application for review if you will be posting to Facebook pages you administrate
 3. Setup the plugin:
 	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
 	* Press the *Save* button to save the plugin configuration
-	* Wait for Facebook to approve your submission (do not proceed to the next step yet)
 	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed and allow the plugin all requested permissions
+		* **When Facebook asks you for the access privileges to your profile/pages, do not uncheck anything and do not click "Skip"**
+
+Facebook is not very clear about this, but you might need to submit the Facebook application for review if your want to add links to groups:
+
+* Click *Start a Submission*
+* Check the following items:
+	* App Details
+	* *user_groups*
+	* Provide any other information Facebook requests
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
