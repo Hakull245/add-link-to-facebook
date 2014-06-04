@@ -822,10 +822,6 @@ Follow these steps to install the development version:
 = 1.204 =
 * Tested with WordPress 3.9
 
-= Older versions =
-* Deleted, because of maximum readme.txt size (thanks @wordpress.org)
-* Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
-
 == Upgrade Notice ==
 
 = 1.206 =
@@ -1085,4 +1081,3 @@ This plugin uses:
 
 * [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
 * [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT License
-* [Plugin Update Checker Library](http://w-shadow.com/ "Plugin Update Checker Library") licensed under GNU General Public License (GPL)
