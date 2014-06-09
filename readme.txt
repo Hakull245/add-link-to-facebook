@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.7.1
-Stable tag: 1.194
+Tested up to: 3.9.1
+Stable tag: 1.207
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -48,7 +48,7 @@ or from Linux using [BloGTK](http://blogtk.jayreding.com/ "BloGTK") or [Blogilo]
 
 If you find this plugin useful, please rate it accordingly.
 If you rate this plugin low, please let me know why.
-Please report any issue you have with this plugin in the [support forum](http://forum.faircode.eu/), so I can at least try to fix it.
+
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
@@ -472,7 +472,7 @@ You might be able to fix it by switching to the links API, but read about the li
 Facebook only shows thumbnails for link pictures (see also question U27).
 This option exists only to solve aspect ratio problems in some case.
 
-= U45 I don't see the 'Create New App' button =
+= U45 I don't see the 'Create a New App' button =
 
 You are probably using a non-personal Facebook account type.
 Try to login with a personal Facebook account that has access to the page you want to add links to.
@@ -562,10 +562,14 @@ You have most probably skipped the settings part of step 2 of the
 
 = E04 I get 'The user hasn't authorized the application to perform this action' =
 
-You have probably revoked one of the permissions of the Facebook application.
+Either you have probably revoked one of the permissions of the Facebook application.
 If you did this by accident, you can simply re-authorize the plugin.
 If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
 If you are the only user of the website, you can also disable the plugin.
+
+IF you didn't submit the required Facebook permissions for review (needed from April 30, 2014):
+remove the Facebook App ID & Secret from the Easy setup section on the plugin settings page,
+follow *all* the steps of the setup guide again and create a *new* Facebook application.
 
 = E05 I get 'Invalid access token signature' =
 
@@ -750,11 +754,19 @@ Make sure that other plugins don't output conflicting OGP tags.
 
 Just enable the Facebook app advanced option 'July 2013 Breaking Changes'.
 
+= E32 I get 'This link could not be posted' =
+
+See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
+
+= E33 I get 'An unexpected error has occurred. Please retry your request later.' =
+
+See [here](http://www.nextscripts.com/support-faq/#q418) for more information.
+
 **--- Support ---**
 
 = S01 Where can I ask questions, report bugs and request features? =
 
-You can open a topic in the [support forum](http://forum.faircode.eu/).
+There is only support for pro users. Please reply to the activation instructions to get support.
 
 = S02 How can I send the debug information? =
 
@@ -775,14 +787,16 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 
 == Screenshots ==
 
+Please note that the screenshots might be out of date, since Facebook changes things quite often.
+
 1. What is a caption, message, etc?
-1. Where is Apps?
-1. Where is Create New App?
+1. Where is Create a New App?
 1. Where is the Website URL?
 
 == Changelog ==
 
 = Development version =
+
 * ...
 
 Follow these steps to install the development version:
@@ -798,65 +812,66 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.207 =
+* Updated Facebook permissions (you should authorize the plugin again)
 
-= 1.194 =
-* Removed plugin updater class
+= 1.206 =
+* Increased pages/groups limit to 250
+* Updated security certificates
 
-= 1.193 =
-* Removed plugin updater class
-* Removed some friends privacy option (deprecated by Facebook)
-
-= 1.192 =
-* Tested with WordPress 3.7.x
-
-= Older versions =
-* Deleted, because of maximum readme.txt size (thanks @wordpress.org)
-* Newer versions should always be compatible with [older versions](http://wordpress.org/extend/plugins/add-link-to-facebook/download/ "Other Versions")
+= 1.205 =
+* Only pro users will be supported
 
 == Upgrade Notice ==
 
-= 1.194 =
-Removed plugin updater class
+= 1.207 =
+Updated Facebook permissions
 
 == Setup guide ==
 
-**If you have more than one Facebook account, either logout completely or login to the correct account before you start.**
+*If you have more than one Facebook account, either logout completely or login to the correct account before you start.*
 
-**If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.**
+*If you want to add links to a fan/community/business page, authorize the plugin with a personal account that owns to the page.*
 
-**If you have a multi-site installation, create a separate Facebook application for each site.**
+*If you have a multi-site installation, create a separate Facebook application for each site.*
 
-**Never delete an existing Facebook application, because you could delete the links added through it too.***
-
-The setup of the plugin should be fairly self-explanatory.
-Basically there are five steps to follow:
+*Never delete an existing Facebook application, because you could delete the links added through it too.*
 
 1. Click on the link *Click here to create* in the yellow box on the settings page
-	* Or click [here](https://developers.facebook.com/) ;-)
-	* Navigate to *Apps* (top menu)
-	* Select *Create New App* (button at top)
-	* See the [screenshots](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
+	* Or click [here](https://developers.facebook.com/)
+	* Click *Register as Developer* if needed
+	* Click *Apps* (top menu)
+	* Click *Create a New App*
 2. Create the Facebook application:
-	* Give it any name you like (will appear as *via* below the added links) and press *Continue*
-	* Fill in the red URL which the plugin indicates into the field *Website with Facebook Login* (click the sentence) > *Site URL*
-	* See the [screenshot](http://wordpress.org/extend/plugins/add-link-to-facebook/screenshots/) if you cannot find it
-	* **Don't confuse this with the field *App Domain*, this field should be empty**
-	* Press the *Save Changes* button
-3. Copy the *App ID* and *App Secret* from Facebook to the appropriate fields in the plugin
-4. Press the *Save* button to save the configuration
-5. Press the *Authorize* button, login if needed and allow the plugin to add links to Facebook
+	* Give it any display name you like (will appear as *via* below the added links), select a category and press *Create App*
+	* Go to the application *Settings* (left menu)
+	* Fill in a valid *Contact Email*
+	* Click *Add Platform* and select *Website*
+	* Copy the red URL from the Easy setup section of the plugin settings page to the field *Site URL*
+	* Press the *Save Changes*
+	* Go to *Status & Review* (left menu)
+	* Turn *Do you want to make this app ... public* on
+	* You don't need to submit your application for review if you will be posting to Facebook pages you administrate
+3. Setup the plugin:
+	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
+	* Press the *Save* button to save the plugin configuration
+	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed and allow the plugin all requested permissions
+		* **When Facebook asks you for the access privileges to your profile/pages, do not uncheck anything and do not click "Skip"**
 
-Note that you don't have to submit the Facebook application to the *App Directory* to use it.
+Facebook is not very clear about this, but you might need to submit the Facebook application for review if your want to add links to groups:
+
+* Click *Start a Submission*
+* Check the following items:
+	* App Details
+	* *user_groups*
+	* Provide any other information Facebook requests
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
 When it was wrong, you have to wait more than a week before you can try again.
 If the standard procedure doesn't work, you can try [this page](https://register.facebook.com/confirmphone.php).
 
-Setting up Facebook registration form / login button: see question U29 of [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ")
-
 If you are having a problem, you can probably find the solution in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
-If you need help, you can leave a message on the [support forum](http://forum.faircode.eu/).
 
 If you need to setup the plugin again for some reason,
 just remove the Facebook App ID & Secret from the Easy setup section of the plugin settings page.
@@ -1066,4 +1081,3 @@ This plugin uses:
 
 * [jQuery](http://jquery.com/ "jQuery") licensed under MIT License or GNU General Public License (GPL) Version 2
 * [jQuery Plug-In socialshareprivacy](http://www.heise.de/extras/socialshareprivacy/ "jQuery Plug-In socialshareprivacy") licensed under MIT License
-* [Plugin Update Checker Library](http://w-shadow.com/ "Plugin Update Checker Library") licensed under GNU General Public License (GPL)
