@@ -562,14 +562,8 @@ You have most probably skipped the settings part of step 2 of the
 
 = E04 I get 'The user hasn't authorized the application to perform this action' =
 
-Either you have probably revoked one of the permissions of the Facebook application.
-If you did this by accident, you can simply re-authorize the plugin.
-If you did this deliberately, you should remove the *App ID* and *App Secret* from the plugin settings.
-If you are the only user of the website, you can also disable the plugin.
-
-IF you didn't submit the required Facebook permissions for review (needed from April 30, 2014):
-remove the Facebook App ID & Secret from the Easy setup section on the plugin settings page,
-follow *all* the steps of the setup guide again and create a *new* Facebook application.
+The plugin has not been granted all Facebook permissions required, authorize the plugin again.
+If you are trying to add links to a page you do not administer, you need to acquire the permission *manage_pages*, see the setup guide.
 
 = E05 I get 'Invalid access token signature' =
 
@@ -857,6 +851,9 @@ Updated Facebook permissions
 	* Press the *Save* button to save the plugin configuration
 	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed and allow the plugin all requested permissions
 		* **When Facebook asks you for the access privileges to your profile/pages, do not uncheck anything and do not click "Skip"**
+
+Please note that you can add links to Facebook pages you administer (own) only.
+You can add links to other pages after submitting the permission *manage_pages* for review and getting approval from Facebook.
 
 Facebook is not very clear about this, but you might need to submit the Facebook application for review if your want to add links to groups:
 
