@@ -1116,7 +1116,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 				if (function_exists('wp_get_attachment_image_src')) {
 					// Get attached images
-					$images = &get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
+					$images = get_children('post_type=attachment&post_mime_type=image&order=ASC&post_parent=' . $post->ID);
 					if (empty($images))
 						echo '<span>' . __('No images in the media library for this post', c_al2fb_text_domain) . '</span><br />';
 					else {
@@ -2647,7 +2647,7 @@ if (!class_exists('WPAL2Facebook')) {
 			return $avatar;
 		}
 
-		function Get_user_ID($post) {
+		static function Get_user_ID($post) {
 			if (is_multisite())
 				$shared_user_ID = get_site_option(c_al2fb_option_app_share);
 			else
