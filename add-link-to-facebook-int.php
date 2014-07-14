@@ -736,6 +736,7 @@ if (!class_exists('WPAL2Int')) {
 						$query_array['access_token'] = $token;
 
 						// Build query
+						$query_array = apply_filters('al2fb_query', $query_array);
 						$query = http_build_query($query_array, '', '&');
 
 						// Log request
