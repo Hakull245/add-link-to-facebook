@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 3.9.1
-Stable tag: 1.208
+Stable tag: 1.209
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -791,7 +791,7 @@ Please note that the screenshots might be out of date, since Facebook changes th
 
 = Development version =
 
-* Added option to filter query
+* ...
 
 Follow these steps to install the development version:
 
@@ -805,6 +805,9 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
+
+= 1.209 =
+* Added option to filter query
 
 = 1.208 =
 * Fixed PHP warnings
@@ -821,8 +824,8 @@ Follow these steps to install the development version:
 
 == Upgrade Notice ==
 
-= 1.208 =
-Fixed PHP warnings
+= 1.209 =
+Added option to filter query
 
 == Setup guide ==
 
