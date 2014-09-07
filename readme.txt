@@ -3,8 +3,8 @@ Contributors: Marcel Bokhorst, M66B
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AJSBB7DGNA3MJ&lc=US&item_name=Add%20Link%20to%20Facebook%20WordPress%20Plugin&item_number=Marcel%20Bokhorst&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 3.9.1
-Stable tag: 1.209
+Tested up to: 4.0
+Stable tag: 1.211
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -806,26 +806,19 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.211=
+* Tested with WordPress 4.0
+
 = 1.209 =
 * Added option to filter query
 
 = 1.208 =
 * Fixed PHP warnings
 
-= 1.207 =
-* Updated Facebook permissions (you should authorize the plugin again)
-
-= 1.206 =
-* Increased pages/groups limit to 250
-* Updated security certificates
-
-= 1.205 =
-* Only pro users will be supported
-
 == Upgrade Notice ==
 
-= 1.209 =
-Added option to filter query
+= 1.211 =
+Tested with WordPress 4.0
 
 == Setup guide ==
 
