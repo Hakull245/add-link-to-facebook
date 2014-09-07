@@ -806,7 +806,7 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
-= 1.211=
+= 1.211 =
 * Tested with WordPress 4.0
 
 = 1.209 =
