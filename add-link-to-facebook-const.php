@@ -102,6 +102,7 @@ define('c_al2fb_meta_like_noarchives', 'al2fb_like_noarchives');
 define('c_al2fb_meta_like_nocategories', 'al2fb_like_nocategories');
 define('c_al2fb_meta_like_layout', 'al2fb_like_layout');
 define('c_al2fb_meta_like_faces', 'al2fb_like_faces');
+define('c_al2fb_meta_like_share', 'al2fb_like_share');
 define('c_al2fb_meta_like_width', 'al2fb_like_width');
 define('c_al2fb_meta_like_action', 'al2fb_like_action');
 define('c_al2fb_meta_like_font', 'al2fb_like_font');
