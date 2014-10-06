@@ -819,6 +819,12 @@ function al2fb_render_admin($al2fb)
 		<input id="al2fb_combine" name="<?php echo c_al2fb_meta_post_combine_buttons; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true)) echo ' checked="checked"'; ?> />
 	</td></tr>
 
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_like_share"><?php _e('Share button:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_like_share" name="<?php echo c_al2fb_meta_like_share; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_share, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
 	</table>
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save', c_al2fb_text_domain) ?>" />
@@ -1075,12 +1081,6 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_like_faces"><?php _e('Faces:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_like_faces" name="<?php echo c_al2fb_meta_like_faces; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_faces, true)) echo ' checked="checked"'; ?> />
-	</td></tr>
-
-	<tr valign="top"><th scope="row">
-		<label for="al2fb_like_share"><?php _e('Share button:', c_al2fb_text_domain); ?></label>
-	</th><td>
-		<input id="al2fb_like_share" name="<?php echo c_al2fb_meta_like_share; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_share, true)) echo ' checked="checked"'; ?> />
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
