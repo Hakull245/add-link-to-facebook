@@ -791,7 +791,7 @@ Please note that the screenshots might be out of date, since Facebook changes th
 
 = Development version =
 
-* ...
+* Added like/share button options
 
 Follow these steps to install the development version:
 
