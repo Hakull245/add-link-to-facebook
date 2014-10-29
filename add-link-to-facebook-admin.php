@@ -86,6 +86,7 @@ function al2fb_render_admin($al2fb)
 	$like_layout_standard = ($like_layout == 'standard' ? ' checked' : '');
 	$like_layout_button = ($like_layout == 'button_count' ? ' checked' : '');
 	$like_layout_box = ($like_layout == 'box_count' ? ' checked' : '');
+	$like_layout_simple = ($like_layout == 'button' ? ' checked' : '');
 	$like_action = get_user_meta($user_ID, c_al2fb_meta_like_action, true);
 	$like_action_like = ($like_action == 'like' ? ' checked' : '');
 	$like_action_recommend = ($like_action == 'recommend' ? ' checked' : '');
@@ -782,6 +783,7 @@ function al2fb_render_admin($al2fb)
 		<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="standard"<?php echo $like_layout_standard; ?>><?php _e('Standard', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="button_count"<?php echo $like_layout_button; ?>><?php _e('Button with count', c_al2fb_text_domain); ?><br />
 		<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="box_count"<?php echo $like_layout_box; ?>><?php _e('Box with count', c_al2fb_text_domain); ?><br />
+		<input type="radio" name="<?php echo c_al2fb_meta_like_layout; ?>" value="button"<?php echo $like_layout_simple; ?>><?php _e('Button', c_al2fb_text_domain); ?><br />
 	</td></tr>
 
 	<tr valign="top"><th scope="row">
@@ -815,6 +817,12 @@ function al2fb_render_admin($al2fb)
 		<label for="al2fb_combine"><?php _e('Combine Facebook like and send buttons:', c_al2fb_text_domain); ?></label>
 	</th><td>
 		<input id="al2fb_combine" name="<?php echo c_al2fb_meta_post_combine_buttons; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_post_combine_buttons, true)) echo ' checked="checked"'; ?> />
+	</td></tr>
+
+	<tr valign="top"><th scope="row">
+		<label for="al2fb_like_share"><?php _e('Share button:', c_al2fb_text_domain); ?></label>
+	</th><td>
+		<input id="al2fb_like_share" name="<?php echo c_al2fb_meta_like_share; ?>" type="checkbox"<?php if (get_user_meta($user_ID, c_al2fb_meta_like_share, true)) echo ' checked="checked"'; ?> />
 	</td></tr>
 
 	</table>

@@ -736,6 +736,7 @@ if (!class_exists('WPAL2Int')) {
 						$query_array['access_token'] = $token;
 
 						// Build query
+						$query_array = apply_filters('al2fb_query', $query_array);
 						$query = http_build_query($query_array, '', '&');
 
 						// Log request
@@ -1121,6 +1122,7 @@ if (!class_exists('WPAL2Int')) {
 				// Get options
 				$layout = get_user_meta($user_ID, c_al2fb_meta_like_layout, true);
 				$faces = get_user_meta($user_ID, c_al2fb_meta_like_faces, true);
+				$share = get_user_meta($user_ID, c_al2fb_meta_like_share, true);
 				if ($box) {
 					$width = get_user_meta($user_ID, c_al2fb_meta_like_box_width, true);
 					$height = get_user_meta($user_ID, c_al2fb_meta_like_box_height, true);
@@ -1215,6 +1217,7 @@ if (!class_exists('WPAL2Int')) {
 					if (!$box)
 						$content .= ' layout="' . (empty($layout) ? 'standard' : $layout) . '"';
 					$content .= ' show_faces="' . ($faces ? 'true' : 'false') . '"';
+					$content .= ' share="' . ($share ? 'true' : 'false') . '"';
 					$content .= ' width="' . (empty($width) ? ($box ? '292' : '450') : $width) . '"';
 					if ($height)
 						$content .= ' height="' . $height . '"';
