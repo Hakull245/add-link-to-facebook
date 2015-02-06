@@ -2,8 +2,8 @@
 Contributors: Marcel Bokhorst, M66B
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 4.0
-Stable tag: 1.213
+Tested up to: 4.1
+Stable tag: 1.214
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -807,19 +807,19 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.214 =
+* Removed donation links
+
 = 1.213 =
 * Added like/share button options
 
 = 1.212 =
 * Updated security certificates
 
-= 1.211 =
-* Tested with WordPress 4.0
-
 == Upgrade Notice ==
 
-= 1.213 =
-Added like/share button options
+= 1.214 =
+Removed donation links
 
 == Setup guide ==
 

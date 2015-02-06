@@ -2,7 +2,7 @@
 
 /*
 	Support class Add Link to Facebook plugin
-	Copyright (c) 2011-2014 by Marcel Bokhorst
+	Copyright (c) 2011-2015 by Marcel Bokhorst
 */
 
 /*
