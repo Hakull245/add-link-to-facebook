@@ -2,7 +2,7 @@
 
 /*
 	Support class Add Link to Facebook admin
-	Copyright (c) 2011-2014 by Marcel Bokhorst
+	Copyright (c) 2011-2015 by Marcel Bokhorst
 */
 
 function al2fb_render_admin($al2fb)
