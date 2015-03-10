@@ -2,8 +2,8 @@
 Contributors: Marcel Bokhorst, M66B
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 4.1
-Stable tag: 1.214
+Tested up to: 4.1.1
+Stable tag: 1.215
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -805,19 +805,19 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.215 =
+* Updated to Facebook API 2.2
+
 = 1.214 =
 * Removed donation links
 
 = 1.213 =
 * Added like/share button options
 
-= 1.212 =
-* Updated security certificates
-
 == Upgrade Notice ==
 
-= 1.214 =
-Removed donation links
+= 1.215 =
+Updated to Facebook API 2.2
 
 == Setup guide ==
 
@@ -832,34 +832,29 @@ Removed donation links
 1. Click on the link *Click here to create* in the yellow box on the settings page
 	* Or click [here](https://developers.facebook.com/)
 	* Click *Register as Developer* if needed
-	* Click *Apps* (top menu)
-	* Click *Create a New App*
+	* Click *My Apps* (top menu)
+	* Click *Add a New App*
+	* Click *Website*
 2. Create the Facebook application:
-	* Give it any display name you like (will appear as *via* below the added links), select a category and press *Create App*
+	* Type a name for the application and click *Create New Facebook App ID*
+	* Choose an appropriate category for your website and click *Create App ID*
+	* Click *Skip Quick Start* (top right)
 	* Go to the application *Settings* (left menu)
-	* Fill in a valid *Contact Email*
 	* Click *Add Platform* and select *Website*
-	* Copy the red URL from the Easy setup section of the plugin settings page to the field *Site URL*
-	* Press the *Save Changes*
+	* Copy the red URL from the *Easy setup section* of the plugin settings page to the field *Site URL*
+	* Press *Save Changes*
 	* Go to *Status & Review* (left menu)
-	* Turn *Do you want to make this app ... public* on
-	* You don't need to submit your application for review if you will be posting to Facebook pages you administrate
+	* Request the following permissions and supply any other information Facebook requests:
+		* *publish_actions* (required to add links)
+		* *user_groups* (required to add links to groups)
+		* *manage_pages* (required to add links to pages)
+		* *read_stream* (required to show a Facebook activity feed in a widget)
 3. Setup the plugin:
 	* Copy the *App ID* and *App Secret* from the Facebook application *Dashboard* to the fields in the Easy setup section of the plugin settings page
 	* Press the *Save* button to save the plugin configuration
-	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed and allow the plugin all requested permissions
-		* **When Facebook asks you for the access privileges to your profile/pages, do not uncheck anything and do not click "Skip"**
+	* Press the *Authorize* button on the plugin settings page, login to Facebook if needed
 
 Please note that you can add links to Facebook pages you administer (own) only.
-You can add links to other pages after submitting the permission *manage_pages* for review and getting approval from Facebook.
-
-Facebook is not very clear about this, but you might need to submit the Facebook application for review if your want to add links to groups:
-
-* Click *Start a Submission*
-* Check the following items:
-	* App Details
-	* *user_groups*
-	* Provide any other information Facebook requests
 
 Some people need to verify their account before they can create an application.
 If you want to use your mobile phone number, take care that the phone number is correct.
