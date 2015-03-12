@@ -80,7 +80,7 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
 * Ukrainian (ua\_UA), thanks
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
+See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst").
 
 == Installation ==
 
