@@ -1,5 +1,5 @@
 ﻿=== Add Link to Facebook ===
-Contributors: Marcel Bokhorst, M66B
+Contributors: Marcel Bokhorst, M66B, dabelon
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
 Tested up to: 4.1.1
