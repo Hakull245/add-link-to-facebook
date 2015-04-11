@@ -458,13 +458,13 @@ if (!class_exists('WPAL2Facebook')) {
 				$_POST[c_al2fb_meta_open_graph] = true;
 
 			// Update user options
-			update_user_meta($user_ID, c_al2fb_meta_client_id, $_POST[c_al2fb_meta_client_id]);
-			update_user_meta($user_ID, c_al2fb_meta_app_secret, $_POST[c_al2fb_meta_app_secret]);
+			update_user_meta($user_ID, c_al2fb_meta_client_id, sanitize_text_field($_POST[c_al2fb_meta_client_id]));
+			update_user_meta($user_ID, c_al2fb_meta_app_secret, sanitize_text_field($_POST[c_al2fb_meta_app_secret]));
 			update_user_meta($user_ID, c_al2fb_meta_picture_type, $_POST[c_al2fb_meta_picture_type]);
-			update_user_meta($user_ID, c_al2fb_meta_picture, $_POST[c_al2fb_meta_picture]);
-			update_user_meta($user_ID, c_al2fb_meta_picture_default, $_POST[c_al2fb_meta_picture_default]);
+			update_user_meta($user_ID, c_al2fb_meta_picture, sanitize_text_field($_POST[c_al2fb_meta_picture]));
+			update_user_meta($user_ID, c_al2fb_meta_picture_default, sanitize_text_field($_POST[c_al2fb_meta_picture_default]));
 			update_user_meta($user_ID, c_al2fb_meta_picture_size, $_POST[c_al2fb_meta_picture_size]);
-			update_user_meta($user_ID, c_al2fb_meta_icon, $_POST[c_al2fb_meta_icon]);
+			update_user_meta($user_ID, c_al2fb_meta_icon, sanitize_text_field($_POST[c_al2fb_meta_icon]));
 			update_user_meta($user_ID, c_al2fb_meta_page, $_POST[c_al2fb_meta_page]);
 			update_user_meta($user_ID, c_al2fb_meta_page_extra, $_POST[c_al2fb_meta_page_extra]);
 			update_user_meta($user_ID, c_al2fb_meta_use_groups, $_POST[c_al2fb_meta_use_groups]);
