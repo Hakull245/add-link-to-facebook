@@ -805,6 +805,9 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.216 =
+* XSS security fix
+
 = 1.215 =
 * Updated to Facebook API 2.2
 
