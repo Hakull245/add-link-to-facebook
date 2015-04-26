@@ -8,7 +8,7 @@
 /*
 	GNU General Public License version 3
 
-	Copyright (c) 2011-2014 Marcel Bokhorst
+	Copyright (c) 2011-2015 Marcel Bokhorst
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -484,7 +484,7 @@ if (!class_exists('WPAL2Int')) {
 		static function Get_fb_profilelink($id) {
 			if (empty($id))
 				return '';
-			return 'http://www.facebook.com/profile.php?id=' . $id;
+			return 'https://www.facebook.com/app_scoped_user_id/' . $id;
 		}
 
 		static function Get_page_from_link_id($link_id) {

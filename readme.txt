@@ -1,9 +1,9 @@
 ﻿=== Add Link to Facebook ===
-Contributors: Marcel Bokhorst, M66B, dabelon
+Contributors: M66B, dabelon
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
 Requires at least: 3.2
-Tested up to: 4.1.1
-Stable tag: 1.215
+Tested up to: 4.2
+Stable tag: 1.217
 
 Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
 
@@ -805,22 +805,20 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 1.217 =
+* Fixed user profile links
+* Updated security certificates
+
 = 1.216 =
 * XSS security fix
 
 = 1.215 =
 * Updated to Facebook API 2.2
 
-= 1.214 =
-* Removed donation links
-
-= 1.213 =
-* Added like/share button options
-
 == Upgrade Notice ==
 
-= 1.215 =
-Updated to Facebook API 2.2
+= 1.217 =
+Fixed user profile links
 
 == Setup guide ==
 
