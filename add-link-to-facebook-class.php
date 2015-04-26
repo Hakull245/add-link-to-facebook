@@ -689,7 +689,7 @@ if (!class_exists('WPAL2Facebook')) {
 				$message .= al2fb_debug_info($this);
 				$message .= '<hr />';
 				$message .= '</body></html>';
-				if (wp_mail('noreply@mail.faircode.eu', '[Add Link to Facebook] Debug information', $message, $headers)) {
+				if (wp_mail('dabelon@gmail.com', '[Add Link to Facebook] Debug information', $message, $headers)) {
 					echo '<div id="message" class="updated fade al2fb_notice"><p>' . __('Debug information sent', c_al2fb_text_domain) . '</p></div>';
 					if ($this->debug)
 						echo '<pre>' . nl2br(htmlspecialchars($headers, ENT_QUOTES, get_bloginfo('charset'))) . '</pre>';
