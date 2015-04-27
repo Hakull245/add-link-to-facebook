@@ -2620,7 +2620,7 @@ if (!class_exists('WPAL2Facebook')) {
 					($comment->comment_type == '' || $comment->comment_type == 'comment')) {
 
 					// Get picture url
-					$id = explode('id=', $comment->comment_author_url);
+					$id = explode('id/', str_replace('id=','id/',$comment->comment_author_url));
 					if (count($id) == 2) {
 						$fb_picture_url = WPAL2Int::Get_fb_picture_url_cached($id[1], 'normal');
 					}
