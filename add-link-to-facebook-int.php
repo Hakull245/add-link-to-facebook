@@ -8,7 +8,7 @@
 /*
 	GNU General Public License version 3
 
-	Copyright (c) 2011-2015 Marcel Bokhorst
+	Copyright (c) 2011-2014 Marcel Bokhorst
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -80,10 +80,10 @@ if (!class_exists('WPAL2Int')) {
 				$query['al2fb_action'] = 'authorize';
 				if (is_multisite()) {
 					global $blog_id;
-					$url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()), 'admin');
+					$url = get_admin_url($blog_id, 'admin.php?page=' . str_replace('/add-link-to-facebook.php', '', plugin_basename(WPAL2Int::Get_main_file())), 'admin');
 				}
 				else
-					$url = admin_url('tools.php?page=' . plugin_basename(WPAL2Int::Get_main_file()));
+					$url = admin_url('admin.php?page=' . str_replace('/add-link-to-facebook.php', '', plugin_basename(WPAL2Int::Get_main_file())));
 				$url .= '&' . http_build_query($query, '', '&');
 
 				// Debug info

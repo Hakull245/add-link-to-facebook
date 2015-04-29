@@ -42,6 +42,9 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Get main file name
 			$this->main_file = str_replace('-class', '', __FILE__);
+			$this->filename = plugin_basename($this->main_file); 
+			$this->filenames = explode("/", $this->filename); 
+			$this->main_plugin_name = $this->filenames[0]; 
 
 			// Log
 			$this->debug = get_option(c_al2fb_option_debug);
@@ -146,6 +149,8 @@ if (!class_exists('WPAL2Facebook')) {
 		// Handle plugin activation
 		function Activate() {
 			self::Upgrade();
+			add_option('readygraph_tutorial', 'true');
+			add_option('rg_al2fb_plugin_do_activation_redirect', true);
 		}
 
 		function Upgrade() {
@@ -354,10 +359,10 @@ if (!class_exists('WPAL2Facebook')) {
 							// Redirect
 							if (is_multisite()) {
 								global $blog_id;
-								$error_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($this->main_file), 'admin');
+								$error_url = get_admin_url($blog_id, 'admin.php?page=' . $this->main_plugin_name, 'admin');
 							}
 							else
-								$error_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+								$error_url = admin_url('admin.php?page=' . $this->main_plugin_name);
 							$error_url .= '&al2fb_action=error';
 							$error_url .= '&error=' . urlencode($e->getMessage());
 							wp_redirect($error_url);
@@ -707,7 +712,7 @@ if (!class_exists('WPAL2Facebook')) {
 
 			// Check if reporting errors
 			$uri = $_SERVER['REQUEST_URI'];
-			$url = 'tools.php?page=' . plugin_basename($this->main_file);
+			$url = 'admin.php?page=' . $this->main_plugin_name;
 			$nonotice = get_option(c_al2fb_option_nonotice);
 			if (is_multisite())
 				$nonotice = $nonotice || get_site_option(c_al2fb_option_app_share);
@@ -789,15 +794,27 @@ if (!class_exists('WPAL2Facebook')) {
 		function Admin_menu() {
 			// Get current user
 			global $user_ID;
+			
 			get_currentuserinfo();
-
 			if (function_exists('add_management_page'))
-				add_management_page(
-					__('Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
-					__('Add Link to Facebook', c_al2fb_text_domain),
-					get_option(c_al2fb_option_min_cap),
-					$this->main_file,
-					array(&$this, 'Administration'));
+				// add_management_page(
+					// __('Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
+					// __('Add Link to Facebook', c_al2fb_text_domain),
+					// get_option(c_al2fb_option_min_cap),
+					// $this->main_file,
+					// array(&$this, 'Administration'));
+			if( file_exists(plugin_dir_path( __FILE__ ).'/readygraph-extension.php')) {
+				global $menu_slug;
+				add_menu_page( __( 'Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
+				__('Add Link to Facebook', c_al2fb_text_domain), get_option(c_al2fb_option_min_cap), 'add-link-to-facebook-settings', array(&$this, 'readygraph_al2fb_menu_page'));
+				add_submenu_page('add-link-to-facebook-settings', 'Readygraph App', __( 'Readygraph App', c_al2fb_text_domain ), 'administrator', $menu_slug, array(&$this, 'readygraph_al2fb_menu_page'));
+				add_submenu_page('add-link-to-facebook-settings', __( 'Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain), __('Add Link to Facebook Configuration', c_al2fb_text_domain), get_option(c_al2fb_option_min_cap), $this->main_plugin_name, array(&$this, 'Administration'));
+				add_submenu_page('add-link-to-facebook-settings', 'Go Premium', __( 'Go Premium', c_al2fb_text_domain ), 'administrator', 'readygraph-go-premium', array(&$this, 'readygraph_al2fb_premium_page'));
+			}
+			else {
+				add_menu_page( __( 'Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
+				__('Add Link to Facebook', c_al2fb_text_domain), get_option(c_al2fb_option_min_cap), $this->main_plugin_name, array(&$this, 'Administration')) ;
+			}
 		}
 
 		function Plugin_action_links($links, $file) {
@@ -816,10 +833,10 @@ if (!class_exists('WPAL2Facebook')) {
 						// Add settings link
 						if (is_multisite()) {
 							global $blog_id;
-							$config_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($this->main_file), 'admin');
+							$config_url = get_admin_url($blog_id, 'admin.php?page=' . $this->main_plugin_name, 'admin');
 						}
 						else
-							$config_url = admin_url('tools.php?page=' . plugin_basename($this->main_file));
+							$config_url = admin_url('admin.php?page=' . $this->main_plugin_name);
 						$links[] = '<a href="' . $config_url . '">' . __('Settings', c_al2fb_text_domain) . '</a>';
 					}
 				}
@@ -839,6 +856,51 @@ if (!class_exists('WPAL2Facebook')) {
 			global $updates_al2fb;
 			if (isset($updates_al2fb))
 				$updates_al2fb->checkForUpdates();
+		}
+		function readygraph_al2fb_premium_page(){
+			require_once('extension/readygraph/go-premium.php');
+		}
+		function readygraph_al2fb_menu_page(){
+			$current_page = isset($_GET['ac']) ? $_GET['ac'] : '';
+			switch($current_page)
+			{
+				case 'signup-popup':
+					include('extension/readygraph/signup-popup.php');
+					break;
+				case 'invite-screen':
+					include('extension/readygraph/invite-screen.php');
+					break;
+				case 'social-feed':
+					include('extension/readygraph/social-feed.php');
+					break;
+				case 'site-profile':
+					include('extension/readygraph/site-profile.php');
+					break;
+				case 'customize-emails':
+					include('extension/readygraph/customize-emails.php');
+					break;
+				case 'deactivate-readygraph':
+					include('extension/readygraph/deactivate-readygraph.php');
+					break;
+				case 'welcome-email':
+					include('extension/readygraph/welcome-email.php');
+					break;
+				case 'retention-email':
+					include('extension/readygraph/retention-email.php');
+					break;
+				case 'invitation-email':
+					include('extension/readygraph/invitation-email.php');
+					break;	
+				case 'faq':
+					include('extension/readygraph/faq.php');
+					break;
+				case 'monetization-settings':
+					include('extension/readygraph/monetization.php');
+					break;
+				default:
+					include('extension/readygraph/admin.php');
+					break;
+			}
 		}
 
 		// Add checkboxes
@@ -2620,7 +2682,7 @@ if (!class_exists('WPAL2Facebook')) {
 					($comment->comment_type == '' || $comment->comment_type == 'comment')) {
 
 					// Get picture url
-					$id = explode('id/', str_replace('id=','id/',$comment->comment_author_url));
+					$id = explode('id=', $comment->comment_author_url);
 					if (count($id) == 2) {
 						$fb_picture_url = WPAL2Int::Get_fb_picture_url_cached($id[1], 'normal');
 					}

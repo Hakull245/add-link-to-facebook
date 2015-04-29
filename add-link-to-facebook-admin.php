@@ -33,10 +33,10 @@ function al2fb_render_admin($al2fb)
 	$charset = get_bloginfo('charset');
 	if (is_multisite()) {
 		global $blog_id;
-		$config_url = get_admin_url($blog_id, 'tools.php?page=' . plugin_basename($al2fb->main_file), 'admin');
+		$config_url = get_admin_url($blog_id, 'admin.php?page=' . $al2fb->main_plugin_name, 'admin');
 	}
 	else
-		$config_url = admin_url('tools.php?page=' . plugin_basename($al2fb->main_file));
+		$config_url = admin_url('admin.php?page=' . $al2fb->main_plugin_name);
 	if (isset($_REQUEST['debug']))
 		$config_url .= '&debug=1';
 	if (isset($_REQUEST['tabs']))
@@ -1602,7 +1602,7 @@ function al2fb_render_resources($al2fb) {
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/" target="_blank"><?php _e('Setup guide & user manual', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/add-link-to-facebook/faq/" target="_blank"><?php _e('Frequently asked questions', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://www.faircode.eu/al2fbpro/" target="_blank"><?php _e('Pro version', c_al2fb_text_domain); ?></a></li>
-	<li><a href="<?php echo 'tools.php?page=' . plugin_basename($al2fb->main_file) . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
+	<li><a href="<?php echo 'admin.php?page=' . $al2fb->main_plugin_name . '&debug=1'; ?>"><?php _e('Debug information', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://blog.bokhorst.biz/about/" target="_blank"><?php _e('About the author', c_al2fb_text_domain); ?></a></li>
 	<li><a href="http://wordpress.org/extend/plugins/profile/m66b" target="_blank"><?php _e('Other plugins', c_al2fb_text_domain); ?></a></li>
 	</ul>

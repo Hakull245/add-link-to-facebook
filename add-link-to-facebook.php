@@ -3,8 +3,8 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://wordpress.org/extend/plugins/add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 1.217
-Author: Marcel Bokhorst
+Version: 2.0
+Author: Marcel Bokhorst, Tanay Lakhani
 Author URI: http://blog.bokhorst.biz/about/
 */
 
@@ -314,6 +314,47 @@ if (!function_exists('al2fb_get_user_metadata')) {
 			return get_user_meta($user_id, $prefix . $meta_key, $single);
 		return null;
 	}
+}
+
+if( file_exists(plugin_dir_path( __FILE__ ).'/readygraph-extension.php' )) {
+include "readygraph-extension.php";
+}
+else {
+
+}
+function al2fb_rrmdir($dir) {
+  if (is_dir($dir)) {
+    $objects = scandir($dir);
+    foreach ($objects as $object) {
+      if ($object != "." && $object != "..") {
+        if (filetype($dir."/".$object) == "dir") 
+           al2fb_rrmdir($dir."/".$object); 
+        else unlink   ($dir."/".$object);
+      }
+    }
+    reset($objects);
+    rmdir($dir);
+  }
+  $del_url = plugin_dir_path( __FILE__ );
+  unlink($del_url.'/readygraph-extension.php');
+ $setting_url="admin.php?page=add-link-to-facebook";
+  echo'<script> window.location="'.admin_url($setting_url).'"; </script> ';
+}
+function al2fb_delete_rg_options() {
+delete_option('readygraph_access_token');
+delete_option('readygraph_application_id');
+delete_option('readygraph_refresh_token');
+delete_option('readygraph_email');
+delete_option('readygraph_settings');
+delete_option('readygraph_delay');
+delete_option('readygraph_enable_sidebar');
+delete_option('readygraph_auto_select_all');
+delete_option('readygraph_enable_notification');
+delete_option('readygraph_enable_branding');
+delete_option('readygraph_send_blog_updates');
+delete_option('readygraph_send_real_time_post_updates');
+delete_option('readygraph_popup_template');
+delete_option('readygraph_upgrade_notice');
 }
 
 ?>

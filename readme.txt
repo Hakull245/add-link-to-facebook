@@ -1,13 +1,22 @@
 ﻿=== Add Link to Facebook ===
-Contributors: M66B, dabelon
+Contributors: dabelon, tanaylakhani
 Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, comment, comments, shortcode, sidebar, widget, bbPress
+Donate link: http://blog.readygraph.com/donate/
 Requires at least: 3.2
 Tested up to: 4.2
-Stable tag: 1.217
+Stable tag: 2.0
 
-Automatically add links to published posts or pages to your Facebook wall, pages or groups and more
+Automatically add links to published posts or pages to your Facebook wall, pages, groups and more. Automate user growth through ReadyGraph integration
 
 == Description ==
+
+Check official website for live demo http://blog.readygraph.com/add-link-to-facebook/
+
+* [Live demo](http://blog.readygraph.com/add-link-to-facebook/)
+
+* [More Description](http://blog.readygraph.com/add-link-to-facebook/)
+
+* [Suggestion/comments](http://blog.readygraph.com/add-link-to-facebook/)
 
 Automatically add links to posts or pages that are being published to your Facebook wall, pages or groups. Simple one time setup and forget. The way links appear on Facebook can be customized.
 
@@ -50,6 +59,73 @@ If you rate this plugin low, please let me know why.
 
 Solutions to common problems are described in [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ").
 
+This plugin has integrated [ReadyGraph](http://readygraph.com/), an optional set of features to automate the growth of your userbase.  It helps you achieve the three goals of any web marketer: maximize conversion of site visitors to register for your email list, maximize viral referrals for your site, and maximize return visits to your site.  To accomplish this, we have integrated a key set of growth features with this plugin:
+	- Intelligent signup popup with email or one-click Facebook login
+	- Full viral referral flow
+	- Automated end user re-engagement emails including welcome emails, weekly digest, friend joined alert and more (all email campaigns are optional and configurable)
+	- Enhanced email deliverabilty
+	- Cloud-based analytics and data storage
+	- Settings that allow you to turn on and off all ReadyGraph features.
+
+
+Subscription form can gather more than just e-mail address, you can select additional fields like name, location, age and interests. All the subscribers can
+be exported into **.csv**, **.xls**, **.tsv** or **.xml** format and used anywhere else, in fact, you can even select to export by criteria **active**, or **inactive** or simply **all**.
+
+Your subscribers have the option to unsubscribe in each e-mail digest they receive, or you can put unsubscription form on your website. As of now, all use HTML template,
+and the new post digest uses short excerpt, with post title and post featured image (if there is any). In future I plan to add different e-mail template options (see below in road-map).
+Your digest email can contain your favourite social media links, just set them up simply in the admin, and they appear automatically in the e-mail. You can even try
+sending a post digest only to yourself, so you can see what it looks like, the option is Admin > Subscribers > Settings, on the right hand side.
+
+All Wordpress registered users have the option to subscribe simply in their Wordpress profile, by checking *E-mail subscriptions* in **Personal Options** section.
+
+Forms have both client / server side validation and they are literally bulletproof. There plenty of other features you will find "on the run".
+
+**New** you can change the look of the e-mail digest, colours, type etc. and contact all your subscribers directly with your own Subject and Message right from your Wordpress dashboard.
+
+If you are a **Developer**, what you're looking for is [here.](http://wordpress.org/plugins/simple-subscribe/other_notes/ "Developer's Guide")
+
+= ReadyGraph App =
+
+ReadyGraph is a system that automates the growth of your site’s userbase. It is optimized to deliver audience growth and motivate users to consistently revisit your site.
+
+= Optimized Signup Form =
+
+ReadyGraph’s signup form with intelligent pop-up functionality and one-click login is designed to maximize signups to your email list.  You can configure when the popup appears so as to maximize the likelihood that the user is engaged enough to register for your list.
+
+= Viral Friend Invites =
+
+ReadyGraph adds a friend invite process to your site’s signup flow.  We then power the entire viral loop by sending email and Facebook invitations that encourage your visitors’ friends to signup for your site.
+
+= Automated Re-engagement Emails =
+
+ReadyGraph’s automated email system encourages visitors to return to your site.   Users receive optimized emails such as a welcome email, re-engagement email, regular digest with new content from your blog, and social emails.  All emails are configurable including the ability to turn on and off individual campaigns.  We handle all sending to maximize deliverability.
+
+= Analytics =
+
+Track daily-new subscribers, daily invites, total traffic, and other key metrics that quantify growth and user engagement.  ReadyGraph safely stores user data in the cloud so you can access data from anywhere.
+
+= Newsfeed =
+
+ReadyGraph’s newsfeed is an optional overlay on your site where your users can engage with others in your community and recommend your content or products to each other.  It is like having a social network that engages users embedded on your site. Users can leave comments, ‘like’ comments left by other subscribers and ‘follow’ other subscribers.  Subscribers will receive automated email updates based on these actions.
+
+= Content Voting and Ranking =
+
+ReadyGraph allows your subscribers to vote on your latest content. The top content from our network of sites is then ranked on UserBase.com by the number of votes that it has received in the past 7 days.
+
+= Want To Grow Even Faster? =
+
+Try [ReadyGraph premium](https://readygraph.com/accounts/payment/) for free to get these advanced features:
+
+1.	Monthly Promotion to 10,000 New Users
+2.	Unlimited New Blog Post Emails
+3.	Unlimited Viral Email Invites
+4.	Unlimited Facebook Invites
+5.	Many more premium features added all the time
+
+[Get it here!](https://readygraph.com/accounts/payment/)
+
+If you have questions or concerns contact us anytime at [info@readygraph.com](mailto:info@readygraph.com)
+
 Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-link-to-facebook/faq/ "FAQ") for instructions.
 
 * English (en\_US), built-in, corrections are welcome
@@ -80,9 +156,10 @@ Translations are welcome, see [the FAQ](http://wordpress.org/extend/plugins/add-
 * Danish (da\_DK) by [Mads Phikamphon](http://www.genvejen.dk/ "Mads Phikamphon"), thanks
 * Ukrainian (ua\_UA), thanks
 
-See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel Bokhorst")
 
 == Installation ==
+
+Installation Instruction and Configuration can also be found at [Installation Instruction and Configuration](http://blog.readygraph.com/add-link-to-facebook/installation/)
 
 1. Login to your weblog
 1. Go to Plugins
@@ -95,6 +172,8 @@ See [my other plugins](http://wordpress.org/extend/plugins/profile/m66b "Marcel 
 Continue with the [Setup guide](http://wordpress.org/extend/plugins/add-link-to-facebook/other_notes/ "Setup guide").
 
 == Frequently Asked Questions ==
+
+For detailed FAQ and other support visit [http://blog.readygraph.com/add-link-to-facebook/faq/](http://blog.readygraph.com/add-link-to-facebook/faq/)
 
 **Warning: if you delete your Facebook application, you might also delete the links added through it!**
 
@@ -782,9 +861,9 @@ therefore it isn't a bad idea to let me know on the forum you did send it.
 
 Please note that the screenshots might be out of date, since Facebook changes things quite often.
 
-1. What is a caption, message, etc?
-1. Where is Create a New App?
-1. Where is the Website URL?
+1. What is a caption, message, etc? http://blog.readygraph.com/add-link-to-facebook/screenshots
+1. Where is Create a New App? http://blog.readygraph.com/add-link-to-facebook/screenshots
+1. Where is the Website URL? http://blog.readygraph.com/add-link-to-facebook/screenshots
 
 == Changelog ==
 
@@ -804,21 +883,33 @@ Follow these steps to install the development version:
 * Click *Install*, then *Activate Plugin*
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
-
+= 2.0 =
+* Added Readygraph as an extension
 = 1.217 =
 * Fixed user profile links
 * Updated security certificates
 
 = 1.216 =
 * XSS security fix
-
 = 1.215 =
 * Updated to Facebook API 2.2
 
+= 1.214 =
+* Removed donation links
+
+= 1.213 =
+* Added like/share button options
+
 == Upgrade Notice ==
+
+= 2.0 =
+* Added Readygraph as an extension
 
 = 1.217 =
 Fixed user profile links
+
+= 1.215 =
+Updated to Facebook API 2.2
 
 == Setup guide ==
 
