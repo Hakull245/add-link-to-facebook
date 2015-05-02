@@ -4,7 +4,7 @@ Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, commen
 Donate link: http://blog.readygraph.com/donate/
 Requires at least: 3.2
 Tested up to: 4.2
-Stable tag: 2.0
+Stable tag: 2.0.1
 
 Automatically add links to published posts or pages to your Facebook wall, pages, groups and more. Automate user growth through ReadyGraph integration
 
@@ -901,6 +901,9 @@ Follow these steps to install the development version:
 * Added like/share button options
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+* Bug fix
 
 = 2.0 =
 * Added Readygraph as an extension
