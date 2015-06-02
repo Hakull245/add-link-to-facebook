@@ -3,7 +3,7 @@
 Plugin Name: Add Link to Facebook
 Plugin URI: http://wordpress.org/extend/plugins/add-link-to-facebook/
 Description: Automatically add links to published posts to your Facebook wall or pages
-Version: 2.1
+Version: 2.2
 Author: Marcel Bokhorst, Tanay Lakhani
 Author URI: http://blog.bokhorst.biz/about/
 */
@@ -317,7 +317,19 @@ if (!function_exists('al2fb_get_user_metadata')) {
 }
 
 if( file_exists(plugin_dir_path( __FILE__ ).'/readygraph-extension.php' )) {
+if (get_option('readygraph_deleted') && get_option('readygraph_deleted') == 'true'){}
+else{
 include "readygraph-extension.php";
+}
+if(get_option('readygraph_application_id') && strlen(get_option('readygraph_application_id')) > 0){
+register_deactivation_hook( __FILE__, 'al2fb_readygraph_plugin_deactivate' );
+}
+function al2fb_readygraph_plugin_deactivate(){
+	$app_id = get_option('readygraph_application_id');
+	update_option('readygraph_deleted', 'false');
+	wp_remote_get( "http://readygraph.com/api/v1/tracking?event=add_link_to_facebook_plugin_uninstall&app_id=$app_id" );
+	al2fb_delete_rg_options();
+}
 }
 else {
 
@@ -350,11 +362,21 @@ delete_option('readygraph_delay');
 delete_option('readygraph_enable_sidebar');
 delete_option('readygraph_auto_select_all');
 delete_option('readygraph_enable_notification');
+delete_option('readygraph_enable_popup');
 delete_option('readygraph_enable_branding');
 delete_option('readygraph_send_blog_updates');
 delete_option('readygraph_send_real_time_post_updates');
 delete_option('readygraph_popup_template');
 delete_option('readygraph_upgrade_notice');
+delete_option('readygraph_adsoptimal_secret');
+delete_option('readygraph_adsoptimal_id');
+delete_option('readygraph_connect_anonymous');
+delete_option('readygraph_connect_anonymous_app_secret');
+delete_option('readygraph_tutorial');
+delete_option('readygraph_site_url');
+delete_option('readygraph_enable_monetize');
+delete_option('readygraph_monetize_email');
+delete_option('readygraph_plan');
 }
 
 ?>

@@ -803,11 +803,11 @@ if (!class_exists('WPAL2Facebook')) {
 					// get_option(c_al2fb_option_min_cap),
 					// $this->main_file,
 					// array(&$this, 'Administration'));
-			if( file_exists(plugin_dir_path( __FILE__ ).'/readygraph-extension.php')) {
-				global $menu_slug;
+			if( file_exists(plugin_dir_path( __FILE__ ).'/readygraph-extension.php') && (get_option('readygraph_deleted') != "true")) {
+				global $al2fb_menu_slug;
 				add_menu_page( __( 'Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain),
 				__('Add Link to Facebook', c_al2fb_text_domain), get_option(c_al2fb_option_min_cap), 'add-link-to-facebook-settings', array(&$this, 'readygraph_al2fb_menu_page'));
-				add_submenu_page('add-link-to-facebook-settings', 'Readygraph App', __( 'Readygraph App', c_al2fb_text_domain ), 'administrator', $menu_slug, array(&$this, 'readygraph_al2fb_menu_page'));
+				add_submenu_page('add-link-to-facebook-settings', 'Readygraph App', __( 'Readygraph App', c_al2fb_text_domain ), 'administrator', $al2fb_menu_slug, array(&$this, 'readygraph_al2fb_menu_page'));
 				add_submenu_page('add-link-to-facebook-settings', __( 'Add Link to Facebook', c_al2fb_text_domain) . ' ' . __('Administration', c_al2fb_text_domain), __('Add Link to Facebook Configuration', c_al2fb_text_domain), get_option(c_al2fb_option_min_cap), $this->main_plugin_name, array(&$this, 'Administration'));
 				add_submenu_page('add-link-to-facebook-settings', 'Go Premium', __( 'Go Premium', c_al2fb_text_domain ), 'administrator', 'readygraph-go-premium', array(&$this, 'readygraph_al2fb_premium_page'));
 			}
