@@ -43,7 +43,7 @@ include("functions.php");
 <script type="text/javascript" src="<?php echo plugins_url( 'assets/js/admin.js', __FILE__ ) ?>"></script>
 	<?php if (!get_option('readygraph_access_token') || strlen(get_option('readygraph_access_token')) <= 0) { ?>
 	<div class="readygraph-nav-menu">
-	<ul><li style="width: 250px;"><a style="color:#D5DEE4" href="<?php $current_url = explode("?", $_SERVER['REQUEST_URI']); echo $current_url[0];?>?page=settings">Simple Contact Form Settings</a>
+	<ul><li style="width: 250px;"><a style="color:#D5DEE4" href="<?php $current_url = explode("?", $_SERVER['REQUEST_URI']); echo $current_url[0];?>?page=add-link-to-facebook">Add link to Facebook Settings</a>
 	</li>
 	 <li style="width: 200px;color:#D5DEE4"><a style="color:#D5DEE4" href="<?php $current_url = explode("&", $_SERVER['REQUEST_URI']); echo $current_url[0];?>&ac=monetization-settings">Monetization Settings</a></li>
 	</ul>
