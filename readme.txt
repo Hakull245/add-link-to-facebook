@@ -4,7 +4,7 @@ Tags: post, posts, Facebook, social, link, links, permalink, wpmu, admin, commen
 Donate link: http://blog.readygraph.com/donate/
 Requires at least: 3.2
 Tested up to: 4.2
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 
 Automatically add links to published posts to your Facebook pages, groups, etc. Automate user growth and revenue with ReadyGraph integration.
 
@@ -891,6 +891,9 @@ Follow these steps to install the development version:
 * Please report any problem you encounter
 * Reports that everything works are also appreciated :-)
 
+= 2.2.3 =
+* Bug Fix for readygraph
+
 = 2.2.2 =
 * Facebook permission fix for publish as pages
 
@@ -924,6 +927,9 @@ Follow these steps to install the development version:
 * Added like/share button options
 
 == Upgrade Notice ==
+
+= 2.2.3 =
+* Bug Fix for readygraph
 
 = 2.2.2 =
 * Facebook permission fix for publish as pages
@@ -976,7 +982,7 @@ Updated to Facebook API 2.2
 	* Click *Add Platform* and select *Website*
 	* Copy the red URL from the *Easy setup section* of the plugin settings page to the field *Site URL*
 	* Press *Save Changes*
-	* Go to *Status & Review* (left menu)
+	* Go to *Status & Review* (left menu) (optional only if the default settings doesn't work or you get a permission error)
 	* Request the following permissions and supply any other information Facebook requests:
 		* *publish_actions* (required to add links)
 		* *user_groups* (required to add links to groups)
