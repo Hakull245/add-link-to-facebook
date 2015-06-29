@@ -11,6 +11,7 @@ function al2fb_myajax_submit() {
 	if ($_POST['adsoptimal_id']) update_option('readygraph_adsoptimal_id',$_POST['adsoptimal_id']);
 	if ($_POST['adsoptimal_secret']) update_option('readygraph_adsoptimal_secret',$_POST['adsoptimal_secret']);
 	if ($_POST['readygraph_monetize'] && $_POST['readygraph_monetize']== "true") update_option('readygraph_enable_monetize',$_POST['readygraph_monetize']);
+	else update_option('readygraph_enable_monetize',"false");
     wp_die();
 }
 
@@ -19,12 +20,12 @@ function al2fb_myajax_submit() {
 	include_once('extension/readygraph/extension.php');
 
 function on_plugin_activated_readygraph_al2fb_redirect(){
-	global $al2fb_menu_slug;
-	$setting_url="admin.php?page=$al2fb_menu_slug";    
-	if (get_option('rg_al2fb_plugin_do_activation_redirect', false)) {  
-		delete_option('rg_al2fb_plugin_do_activation_redirect'); 
-		wp_redirect(admin_url($setting_url)); 
-	}  
+	// global $al2fb_menu_slug;
+	// $setting_url="admin.php?page=$al2fb_menu_slug";    
+	// if (get_option('rg_al2fb_plugin_do_activation_redirect', false)) {  
+		// delete_option('rg_al2fb_plugin_do_activation_redirect'); 
+		// wp_redirect(admin_url($setting_url)); 
+	// }  
 }
 
 function add_al2fb_readygraph_plugin_warning() {
@@ -127,7 +128,7 @@ function add_al2fb_readygraph_plugin_warning() {
   
 	add_action('admin_notices', 'add_al2fb_readygraph_plugin_warning');
 	if(get_option('readygraph_application_id') && strlen(get_option('readygraph_application_id')) > 0){
-	if ((get_option('readygraph_access_token') && strlen(get_option('readygraph_access_token')) > 0) || (get_option('readygraph_enable_monetize') && get_option('readygraph_enable_monetize') == "true")){
+	if ((get_option('readygraph_access_token') && strlen(get_option('readygraph_access_token')) > 0)){
 	add_action('wp_footer', 'al2fb_readygraph_client_script_head', 9);
 	}
 	}
@@ -201,65 +202,5 @@ function al2fb_post_updated_send_email( $post_id ) {
 	add_action('future_to_publish','al2fb_post_updated_send_email');
 	add_action('new_to_publish','al2fb_post_updated_send_email');
 	add_action('draft_to_publish','al2fb_post_updated_send_email');
-
-
-	if(get_option('al2fb_wordpress_sync_users')) return;
-	else {
-		add_action('plugins_loaded', 'al2fb_wordpress_sync_users');
-	}
-function al2fb_wordpress_sync_users() {
-	if(get_option('al2fb_wordpress_sync_users') && get_option('al2fb_wordpress_sync_users') == "true") return;
-	else {
-		if(get_option('readygraph_application_id') && strlen(get_option('readygraph_application_id')) > 0){
-			global $wpdb;
-			$app_id = get_option('readygraph_application_id');
-			$query = "SELECT email as email, date as user_date FROM {$wpdb->prefix}users ";
-			$subscribe2_users = $wpdb->get_results($query);
-			$emails = "";
-			$dates = "";
-			$count = 0;
-			$count = mysql_num_rows($subscribe2_users);
-			wp_remote_get( "http://readygraph.com/api/v1/tracking?event=wp_user_synced&app_id=$app_id&count=$count" );
-			foreach($subscribe2_users as $user) {
-			$emails .= $user->email . ","; 
-			$dates .= $user->user_date . ",";
-			}
-			$url = 'https://readygraph.com/api/v1/wordpress-sync-enduser/';
-			$response = wp_remote_post($url, array( 'body' => array('app_id' => $app_id, 'email' => rtrim($emails, ", "), 'user_registered' => rtrim($dates, ", "))));
-			update_option('al2fb_wordpress_sync_users',"true");
-			remove_action('plugins_loaded', 'al2fb_wordpress_sync_users');
-		}
-    }
-}
-function al2fb_rg_connect(){
-	if(get_option('readygraph_connect_anonymous') != "true"){
-	$url = 'https://readygraph.com/api/v1/wordpress-rg-connect-anonymous/';
-	$randon_string = al2fb_get_random_string();
-	$response = wp_remote_post($url, array( 'body' => array('app_secret' => $randon_string, 'website' => home_url())));
-	if ( is_wp_error( $response ) ) {
-	$error_message = $response->get_error_message();
-	} 	else {
-	$result = json_decode($response['body'],true);
-	$app_id = $result['data']['app_id'];
-	update_option('readygraph_connect_anonymous', 'true');
-	update_option('readygraph_application_id', $app_id);
-	update_option('readygraph_connect_anonymous_app_secret', $randon_string);
-	}
-}
-}
-function al2fb_get_random_string()
-{
-	$valid_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	$length = 10;
-    $random_string = "";
-    $num_valid_chars = strlen($valid_chars);
-    for ($i = 0; $i < $length; $i++)
-    {
-        $random_pick = mt_rand(1, $num_valid_chars);
-        $random_char = $valid_chars[$random_pick-1];
-        $random_string .= $random_char;
-    }
-    return $random_string;
-}
 
 ?>

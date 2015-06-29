@@ -26,7 +26,6 @@ include("header.php");
 		if (isset($_POST["readygraph_monetize"]) && $_POST["readygraph_monetize"] == "1") update_option('readygraph_enable_monetize', "true");
 		else update_option('readygraph_enable_monetize', "false");
 		if (isset($_POST["readygraph_monetize_email"])) update_option('readygraph_monetize_email', $_POST["readygraph_monetize_email"]);
-		al2fb_readygraph_monetize_update();
 	}
 ?>	
 

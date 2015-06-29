@@ -13,7 +13,7 @@
  */
 
 include("header.php");
-	if (!get_option('readygraph_application_id') || strlen(get_option('readygraph_application_id')) <= 0)al2fb_rg_connect();
+	/*if (!get_option('readygraph_application_id') || strlen(get_option('readygraph_application_id')) <= 0)al2fb_rg_connect();*/
 	if(isset($_GET["tutorial"]) && $_GET["tutorial"] == "true"){update_option('readygraph_tutorial',"true");}
 	else{update_option('readygraph_tutorial',"false");}
 	if(isset($_GET["readygraph_upgrade_notice"]) && $_GET["readygraph_upgrade_notice"] == "dismiss") {update_option('readygraph_upgrade_notice', 'false');}
@@ -44,7 +44,7 @@ include("header.php");
 			<h3>Activate ReadyGraph to get more traffic and revenue</h3>
 <!--		<h3 style="margin-top: 0px; font-weight: 300;"><?php //echo $main_plugin_title ?>, Now with ReadyGraph</h3> -->
 		<p style="padding: 50px 0px 10px 0px;"><a class="btn btn-primary connect" href="javascript:void(0);" style="font-size: 18px; padding: 20px 25px;">Connect ReadyGraph >></a></p>
-		<span><input type="checkbox" id="readygraph_monetize" name="readygraph_monetize" value="1" style="margin: 0 10px;" checked >Enable Monetization</span>
+		<span><input type="checkbox" id="readygraph_monetize" name="readygraph_monetize" value="1" style="margin: 0 10px;" >Enable Monetization</span>
 		
 		<!--<p style="padding: 0px 0px;"><a class="btn btn-default skip" href="javascript:void(0);" style="font-size: 10px; line-height: 20px; padding: 0 30px;">Skip ReadyGraph</a></p>-->
 		<p style="margin-top:50px">Readygraph maximizes your Growth and Revenue</p>
@@ -204,12 +204,6 @@ include("header.php");
 
 <script type="text/javascript" charset="utf-8">
 var enable_monetize;
-if(document.getElementById('readygraph_monetize').checked) {
-    enable_monetize = true;
-} else {
-    enable_monetize = false;
-}
-
 function subscribe_readygraph() {
     var radios = document.getElementsByName("select-plan");
 	if (document.getElementById('plan-type').checked) {
