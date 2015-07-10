@@ -1,4 +1,5 @@
 <?php
+	if ( ! defined( 'ABSPATH' ) ) exit;
   // Extension Configuration
 	$al2fb_plugin_slug = basename(dirname(__FILE__));
 	$al2fb_menu_slug = 'readygraph-app';
@@ -19,12 +20,12 @@ function al2fb_myajax_submit() {
 	include_once('extension/readygraph/extension.php');
 
 function on_plugin_activated_readygraph_al2fb_redirect(){
-	// global $al2fb_menu_slug;
-	// $setting_url="admin.php?page=$al2fb_menu_slug";    
-	// if (get_option('rg_al2fb_plugin_do_activation_redirect', false)) {  
-		// delete_option('rg_al2fb_plugin_do_activation_redirect'); 
-		// wp_redirect(admin_url($setting_url)); 
-	// }  
+	global $al2fb_menu_slug;
+	$setting_url="admin.php?page=$al2fb_menu_slug";    
+	if (get_option('rg_al2fb_plugin_do_activation_redirect', false)) {  
+		delete_option('rg_al2fb_plugin_do_activation_redirect'); 
+		wp_redirect(admin_url($setting_url)); 
+	}  
 }
 
 function add_al2fb_readygraph_plugin_warning() {
