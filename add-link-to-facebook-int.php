@@ -51,7 +51,7 @@ if (!class_exists('WPAL2Int')) {
 			$url = apply_filters('al2fb_url', $url);
 			$url .= '?client_id=' . urlencode(get_user_meta($user_ID, c_al2fb_meta_client_id, true));
 			$url .= '&redirect_uri=' . urlencode(WPAL2Int::Redirect_uri());
-			$url .= '&scope=read_stream,publish_pages,manage_pages,user_groups,publish_actions';
+			$url .= '&scope=read_stream,publish_pages,manage_pages,publish_actions';
 			$url .= '&state=' . WPAL2Int::Authorize_secret();
 			return $url;
 		}
@@ -1442,7 +1442,7 @@ if (!class_exists('WPAL2Int')) {
 				$rows = get_user_meta($user_ID, c_al2fb_meta_pile_rows, true);
 				$permissions = '';
 				if (get_option(c_al2fb_option_login_add_links))
-					$permissions .= 'read_stream,publish_stream,manage_pages,user_groups';
+					$permissions .= 'read_stream,publish_stream,manage_pages';
 
 				// Build content
 				if ($appid) {

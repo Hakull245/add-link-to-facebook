@@ -520,7 +520,8 @@ function al2fb_render_admin($al2fb)
 
 				// Get groups
 				try {
-					$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+					//$groups = WPAL2Int::Get_fb_groups_cached($user_ID);
+					$groups = null;
 				}
 				catch (Exception $e) {
 					if ($al2fb->debug)
@@ -534,19 +535,21 @@ function al2fb_render_admin($al2fb)
 ?>
 				<tr valign="top"><th scope="row">
 					<label for="al2fb_group"><?php _e('Add to group:', c_al2fb_text_domain); ?></label>
-				</th><td>
-					<select class="al2fb_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
+				</th><td> 
+				<input id="al2fb_group" class="al2fb_text" name="<?php echo c_al2fb_meta_group; ?>" type="text" value="<?php  echo htmlentities(get_user_meta($user_ID, c_al2fb_meta_group, true), ENT_QUOTES, get_bloginfo('charset')); ?>" />
+				<br /><span class="al2fb_explanation"><?php _e('Add Group ID you want post to be published to. eg. https://www.facebook.com/groups/[532264143508747]', c_al2fb_text_domain); ?></span><br />
+					<!--<select class="al2fb_select" id="al2fb_group" name="<?php echo c_al2fb_meta_group; ?>">
 <?php
-					echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
-					if ($groups && $groups->data)
-						foreach ($groups->data as $group) {
-							echo '<option value="' . $group->id . '"';
-							if ($group->id == $selected_group)
-								echo ' selected';
-							echo '>' . htmlspecialchars($group->name, ENT_QUOTES, $charset) . '</option>';
-						}
+					// echo '<option value=""' . ($selected_group ? '' : ' selected') . '>' . __('None', c_al2fb_text_domain) . '</option>';
+					// if ($groups && $groups->data)
+						// foreach ($groups->data as $group) {
+							// echo '<option value="' . $group->id . '"';
+							// if ($group->id == $selected_group)
+								// echo ' selected';
+							// echo '>' . htmlspecialchars($group->name, ENT_QUOTES, $charset) . '</option>';
+						// }
 ?>
-					</select>
+					</select> -->
 				</td></tr>
 
 				<tr valign="top"><th scope="row">
