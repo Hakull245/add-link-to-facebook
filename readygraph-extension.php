@@ -9,9 +9,9 @@
 	add_action( 'wp_ajax_al2fb-myajax-submit', 'al2fb_myajax_submit' );
 	
 function al2fb_myajax_submit() {
-	if ($_POST['adsoptimal_id']) update_option('readygraph_adsoptimal_id',$_POST['adsoptimal_id']);
-	if ($_POST['adsoptimal_secret']) update_option('readygraph_adsoptimal_secret',$_POST['adsoptimal_secret']);
-	if (isset($_POST['readygraph_monetize'])) update_option('readygraph_enable_monetize',$_POST['readygraph_monetize']);
+	if ($_POST['adsoptimal_id']) update_option('readygraph_adsoptimal_id',sanitize_key($_POST['adsoptimal_id']));
+	if ($_POST['adsoptimal_secret']) update_option('readygraph_adsoptimal_secret',sanitize_key($_POST['adsoptimal_secret']));
+	if (isset($_POST['readygraph_monetize'])) update_option('readygraph_enable_monetize',sanitize_text_field($_POST['readygraph_monetize']));
     wp_die();
 }
 

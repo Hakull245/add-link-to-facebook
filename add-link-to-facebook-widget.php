@@ -8,7 +8,8 @@
 class AL2FB_Widget extends WP_Widget {
 	function AL2FB_Widget() {
 		$widget_ops = array('classname' => 'widget_al2fb', 'description' => '');
-		$this->WP_Widget('AL2FB_Widget', 'Add Link to Facebook', $widget_ops);
+		parent::__construct('AL2FB_Widget', 'Add Link to Facebook', $widget_ops); 
+		//$this->WP_Widget('AL2FB_Widget', 'Add Link to Facebook', $widget_ops);
 	}
 
 	function widget($args, $instance) {

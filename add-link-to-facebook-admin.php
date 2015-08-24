@@ -42,9 +42,10 @@ function al2fb_render_admin($al2fb)
 	if (isset($_REQUEST['tabs']))
 		$config_url .= '&tabs=0';
 	if (isset($_REQUEST['multiple'])) {
-		$count = (isset($_REQUEST['sites']) ? $_REQUEST['sites'] : 1);
-		if (WPAL2Int::Set_multiple($_REQUEST['multiple'], $count))
+		$count = (isset($_REQUEST['sites']) && is_int($_REQUEST['sites']) ? $_REQUEST['sites'] : 1);
+		if (!WPAL2Int::Set_multiple($_REQUEST['multiple'], $count))
 			echo '<div id="message" class="updated fade al2fb_notice"><p>Code accepted (' . $count . ')</p></div>';
+			
 	}
 
 	// Decode picture type
