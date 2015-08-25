@@ -26,10 +26,10 @@ include("header.php");
 		
 		}
 		else{
-			if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', $_POST["readygraph_access_token"]);
-			if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', $_POST["readygraph_refresh_token"]);
-			if (isset($_POST["readygraph_email"])) update_option('readygraph_email', $_POST["readygraph_email"]);
-			if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', $_POST["readygraph_application_id"]);
+			if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', sanitize_key($_POST["readygraph_access_token"]));
+			if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', sanitize_key($_POST["readygraph_refresh_token"]));
+			if (isset($_POST["readygraph_email"])) update_option('readygraph_email', sanitize_email($_POST["readygraph_email"]));
+			if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', sanitize_key($_POST["readygraph_application_id"]));
 			
 			if (isset($_POST["sitedesceditor"])) update_option('readygraph_site_description', $_POST["sitedesceditor"]);
 			if (isset($_POST["site_profile_name"])) update_option('readygraph_site_name', $_POST["site_profile_name"]);
@@ -37,7 +37,7 @@ include("header.php");
 			if (isset($_POST["site_category"])) update_option('readygraph_site_category', $_POST["site_category"]);
 			if (isset($_POST["site_language"])) {update_option('readygraph_site_language', $_POST["site_language"]);al2fb_siteprofile_sync();}
 
-			if (isset($_POST["readygraph_settings"])) update_option('readygraph_settings', $_POST["readygraph_settings"]);
+			if (isset($_POST["readygraph_settings"])) update_option('readygraph_settings', sanitize_text_field($_POST["readygraph_settings"]));
 			if (isset($_POST["readygraph_delay"])) {
 			update_option('readygraph_delay', $_POST["delay"]);
 			$app_id = get_option('readygraph_application_id');
