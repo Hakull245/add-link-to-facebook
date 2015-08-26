@@ -21,10 +21,10 @@ include("header.php");
 	echo '<script>window.location.replace("'.$current_url[0].'");</script>';
 	}
 	else {
-	if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', $_POST["readygraph_access_token"]);
-	if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', $_POST["readygraph_refresh_token"]);
-	if (isset($_POST["readygraph_email"])) update_option('readygraph_email', $_POST["readygraph_email"]);
-	if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', $_POST["readygraph_application_id"]);
+	if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', sanitize_key($_POST["readygraph_access_token"]));
+	if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', sanitize_key($_POST["readygraph_refresh_token"]));
+	if (isset($_POST["readygraph_email"])) update_option('readygraph_email', sanitize_email($_POST["readygraph_email"]));
+	if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', sanitize_key($_POST["readygraph_application_id"]));
 	if (isset($_POST["sitedesceditor"])) update_option('readygraph_site_description', $_POST["sitedesceditor"]);
 	if (isset($_POST["site_profile_name"])) update_option('readygraph_site_name', $_POST["site_profile_name"]);
 	if (isset($_POST["site_profile_url"])) update_option('readygraph_site_url', $_POST["site_profile_url"]);

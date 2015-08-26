@@ -1290,7 +1290,7 @@ if (!class_exists('WPAL2Facebook')) {
 				add_post_meta($post_id, c_al2fb_meta_log, date('c') . ' Save post');
 
 			// Security checks
-			$nonce = (isset($_POST[c_al2fb_nonce_name]) ? $_POST[c_al2fb_nonce_name] : null);
+			$nonce = (isset($_POST[c_al2fb_nonce_name]) ? sanitize_text_field($_POST[c_al2fb_nonce_name]) : null);
 			if (!wp_verify_nonce($nonce, c_al2fb_nonce_action))
 				return $post_id;
 			if (!current_user_can('edit_post', $post_id))

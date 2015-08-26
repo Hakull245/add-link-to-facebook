@@ -22,11 +22,11 @@ include("header.php");
 	}
 	else {
 		if(isset($_GET["source"]) && $_GET["source"] == "signup-popup"){
-			if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', $_POST["readygraph_access_token"]);
-			if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', $_POST["readygraph_refresh_token"]);
-			if (isset($_POST["readygraph_email"])) update_option('readygraph_email', $_POST["readygraph_email"]);
-			if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', $_POST["readygraph_application_id"]);
-			if (isset($_POST["readygraph_settings"])) update_option('readygraph_settings', $_POST["readygraph_settings"]);
+			if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', sanitize_key($_POST["readygraph_access_token"]));
+			if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', sanitize_key($_POST["readygraph_refresh_token"]));
+			if (isset($_POST["readygraph_email"])) update_option('readygraph_email', sanitize_email($_POST["readygraph_email"]));
+			if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', sanitize_key($_POST["readygraph_application_id"]));
+			if (isset($_POST["readygraph_settings"])) update_option('readygraph_settings', sanitize_text_field($_POST["readygraph_settings"]));
 			if (isset($_POST["readygraph_delay"])) {
 			update_option('readygraph_delay', $_POST["delay"]);
 			$app_id = get_option('readygraph_application_id');
@@ -41,10 +41,10 @@ include("header.php");
 
 		}
 		else{
-			if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', $_POST["readygraph_access_token"]);
-			if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', $_POST["readygraph_refresh_token"]);
-			if (isset($_POST["readygraph_email"])) update_option('readygraph_email', $_POST["readygraph_email"]);
-			if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', $_POST["readygraph_application_id"]);	
+			if (isset($_POST["readygraph_access_token"])) update_option('readygraph_access_token', sanitize_key($_POST["readygraph_access_token"]));
+			if (isset($_POST["readygraph_refresh_token"])) update_option('readygraph_refresh_token', sanitize_key($_POST["readygraph_refresh_token"]));
+			if (isset($_POST["readygraph_email"])) update_option('readygraph_email', sanitize_email($_POST["readygraph_email"]));
+			if (isset($_POST["readygraph_application_id"])) update_option('readygraph_application_id', sanitize_key($_POST["readygraph_application_id"]));	
 			if (isset($_POST["readygraph_enable_sidebar"])) update_option('readygraph_enable_sidebar', $_POST["sidebar"]);
 		}
 	}
