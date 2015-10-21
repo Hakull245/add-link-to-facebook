@@ -561,7 +561,7 @@ if (!class_exists('WPAL2Facebook')) {
 				if (empty($_POST[c_al2fb_option_app_share]))
 					$_POST[c_al2fb_option_app_share] = null;
 				else
-					$_POST[c_al2fb_option_app_share] = $user_ID;
+					$_POST[c_al2fb_option_app_share] = (int) $user_ID;
 				if (is_multisite())
 					update_site_option(c_al2fb_option_app_share, $_POST[c_al2fb_option_app_share]);
 				else
